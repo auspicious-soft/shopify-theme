@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1 align="center" style="position: relative;">
   <br>
     <img src="./assets/shoppy-x-ray.svg" alt="logo" width="200">
@@ -158,3 +159,6 @@ Visit our [CONTRIBUTING.md](./CONTRIBUTING.md) for a detailed overview of our pr
 ## License
 
 Skeleton Theme is open-sourced under the [MIT](./LICENSE.md) License.
+=======
+# shopify-theme
+>>>>>>> ff7a1484de600f32f2632c4c690b36bcc077a8e8
