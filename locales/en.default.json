@@ -4,6 +4,14 @@
     "not_found": "Page not found.",
     "back_to_shopping": "Back to shopping"
   },
+  "accessibility": {
+    "close": "Close",
+    "cart_items_count": "{{ count }} items in cart"
+  },
+  "badges": {
+    "sale": "Sale",
+    "sold_out": "Sold out"
+  },
   "blog": {
     "article_comments": "Comments",
     "article_metadata_html": "{{ date }} by {{ author }}",
@@ -17,7 +25,18 @@
     "checkout": "Checkout",
     "title": "Cart",
     "update": "Update",
-    "remove": "Remove"
+    "remove": "Remove",
+    "vendor": "Vendor",
+    "note": "Order note",
+    "note_placeholder": "Add special instructions for your order",
+    "quantity": "Quantity",
+    "subtotal": "Subtotal",
+    "empty": "Your cart is empty",
+    "continue_shopping": "Continue shopping",
+    "view_cart": "View cart",
+    "increase_quantity": "Increase quantity",
+    "decrease_quantity": "Decrease quantity",
+    "item_added": "Item added to your cart"
   },
   "customers": {
     "login": {
@@ -42,11 +61,20 @@
     "password": "Password",
     "enter": "Enter"
   },
+  "products": {
+    "add_to_cart": "Add to cart",
+    "sold_out": "Sold out"
+  },
   "search": {
     "title": "Search",
     "placeholder": "Search articles, pages, or products",
     "submit": "Search",
     "no_results_html": "No results found for {{ terms }}",
-    "results_for_html": "{{ count }} results found for {{ terms }}"
+    "results_for_html": "{{ count }} results found for {{ terms }}",
+    "predictive": {
+      "view_all": "View all results for",
+      "no_results": "No results found",
+      "searching": "Searching..."
+    }
   }
 }

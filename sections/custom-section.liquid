@@ -5,7 +5,7 @@
     </div>
   {% endif %}
 
-  <div class="custom-section__content">
+  <div class="custom-section__content" {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}>
     {% content_for 'blocks' %}
   </div>
 </div>

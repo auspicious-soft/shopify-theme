@@ -17,6 +17,18 @@ html:has(dialog[scroll-lock][open], details[scroll-lock][open]) {
   overflow: hidden;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 img,
 picture,
 video,
@@ -31,7 +43,6 @@ input,
 textarea,
 select {
   font: inherit;
-  border-radius: var(--style-border-radius-inputs);
 }
 
 select {
@@ -92,6 +103,7 @@ body {
  * the entire viewport.
  */
 .shopify-section {
+  padding-block: var(--spacing-sections);
   --content-width: min(
     calc(var(--page-width) - var(--page-margin) * 2),
     calc(100% - var(--page-margin) * 2)

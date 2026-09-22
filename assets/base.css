@@ -1,0 +1,127 @@
+/**
+ * Base typography and color styles for the theme.
+ * Font families and colors come from CSS custom properties set in
+ * snippets/css-variables.liquid, driven by Theme settings > Typography
+ * and Theme settings > Colors, so merchants can restyle the whole
+ * theme from the theme editor without touching code.
+ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading--family);
+  font-style: var(--font-heading--style);
+  font-weight: var(--font-heading--weight);
+  color: var(--color-heading);
+  line-height: 1.2;
+  margin-block: 0 0.5em;
+}
+
+body {
+  font-size: calc(1rem * var(--body-scale) / 100);
+}
+
+h1 {
+  font-size: calc(var(--heading-scale) / 100 * clamp(2.25rem, 1.9rem + 1.5vw, 3.5rem));
+}
+
+h2 {
+  font-size: calc(var(--heading-scale) / 100 * clamp(1.875rem, 1.6rem + 1.1vw, 2.75rem));
+}
+
+h3 {
+  font-size: calc(var(--heading-scale) / 100 * clamp(1.5rem, 1.35rem + 0.6vw, 2rem));
+}
+
+h4 {
+  font-size: calc(var(--heading-scale) / 100 * clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem));
+}
+
+h5 {
+  font-size: calc(var(--heading-scale) / 100 * clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem));
+}
+
+h6 {
+  font-size: calc(var(--heading-scale) / 100 * clamp(1rem, 0.95rem + 0.15vw, 1.0625rem));
+}
+
+a {
+  color: var(--color-link);
+}
+
+button,
+.button,
+input[type="submit"],
+input[type="button"] {
+  background-color: var(--color-button-background);
+  color: var(--color-button-text);
+  border-width: var(--style-border-thickness-buttons);
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--color-button-text) var(--style-border-opacity-buttons), transparent);
+  border-radius: var(--style-border-radius-buttons);
+  box-shadow: var(--style-shadow-buttons);
+  cursor: pointer;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+}
+
+input,
+textarea,
+select {
+  border-width: var(--style-border-thickness-inputs);
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-inputs), transparent);
+  border-radius: var(--style-border-radius-inputs);
+  box-shadow: var(--style-shadow-inputs);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hover-vertical-lift,
+  html[data-hover-elements="vertical-lift"] button,
+  html[data-hover-elements="vertical-lift"] .button {
+    transition: translate 0.2s ease;
+  }
+
+  .hover-vertical-lift:hover,
+  html[data-hover-elements="vertical-lift"] button:hover,
+  html[data-hover-elements="vertical-lift"] .button:hover {
+    translate: 0 -0.25rem;
+  }
+
+  .hover-3d-lift,
+  html[data-hover-elements="3d-lift"] button,
+  html[data-hover-elements="3d-lift"] .button {
+    transition: transform 0.2s ease;
+  }
+
+  .hover-3d-lift:hover,
+  html[data-hover-elements="3d-lift"] button:hover,
+  html[data-hover-elements="3d-lift"] .button:hover {
+    transform: perspective(600px) rotateX(2deg) rotateY(-2deg) translateY(-0.25rem);
+  }
+
+  [data-animate] {
+    opacity: 0;
+    translate: 0 2rem;
+    transition: opacity 0.6s ease, translate 0.6s ease;
+  }
+
+  [data-animate].is-revealed {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+}

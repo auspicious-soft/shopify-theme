@@ -1,4 +1,18 @@
-<footer>
+<footer class="color-{{ section.settings.color_scheme.id }}">
+  {% if settings.brand_headline != blank or settings.brand_description != blank or settings.brand_image != blank %}
+    <div class="footer__brand">
+      {% if settings.brand_image != blank %}
+        {% render 'image', image: settings.brand_image, class: 'footer__brand-image', width: settings.brand_image_width %}
+      {% endif %}
+      {% if settings.brand_headline != blank %}
+        <p class="footer__brand-headline">{{ settings.brand_headline }}</p>
+      {% endif %}
+      {% if settings.brand_description != blank %}
+        <div class="footer__brand-description">{{ settings.brand_description }}</div>
+      {% endif %}
+    </div>
+  {% endif %}
+
   <div class="footer__copyright">
     &copy;
     {{ 'now' | date: '%Y' }}
@@ -8,6 +22,19 @@
   <div class="footer__links">
     {% for link in section.settings.menu.links %}
       {{ link.title | link_to: link.url }}
+    {% endfor %}
+  </div>
+
+  {% liquid
+    assign social_platforms = 'facebook,instagram,youtube,tiktok,twitter,snapchat,pinterest,tumblr,vimeo' | split: ','
+  %}
+  <div class="footer__social">
+    {% for platform in social_platforms %}
+      {% assign setting_key = 'social_' | append: platform | append: '_link' %}
+      {% assign url = settings[setting_key] %}
+      {% if url != blank %}
+        <a class="footer__social-link" href="{{ url }}">{{ platform | capitalize }}</a>
+      {% endif %}
     {% endfor %}
   </div>
 
@@ -23,17 +50,30 @@
 {% stylesheet %}
   footer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 2rem;
+    gap: 1rem;
   }
   footer a {
     text-decoration: none;
     color: var(--color-foreground);
   }
   footer .footer__links,
+  footer .footer__social,
   footer .footer__payment {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
+  }
+  .footer__brand {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .footer__brand-image {
+    width: auto;
   }
 {% endstylesheet %}
 
@@ -51,6 +91,12 @@
       "id": "show_payment_icons",
       "label": "t:labels.show_payment_icons",
       "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
     }
   ]
 }

@@ -5,22 +5,30 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
 {% endcomment %}
 
-<h1>{{ 'collections.title' | t }}</h1>
+<div class="color-{{ section.settings.color_scheme.id }}">
+  <h1>{{ 'collections.title' | t }}</h1>
 
-<div
-  class="collections {{ section.settings.grid_item_width }}"
-  style="--grid-gap: {{ section.settings.grid_gap }}px"
->
-  {% for collection in collections %}
-    <a class="collection-card" href="{{ collection.url }}">
+  <div
+    class="collections {{ section.settings.grid_item_width }}"
+    style="--grid-gap: {{ section.settings.grid_gap }}px"
+  >
+    {% for collection in collections %}
+    <a
+      class="collection-card collection-card--{{ settings.collection_card_style }} hover-{{ settings.animations_hover_elements }} color-{{ settings.collection_card_color_scheme.id }}"
+      href="{{ collection.url }}"
+      style="--image-padding: {{ settings.collection_card_image_padding }}px; --text-align: {{ settings.collection_card_text_alignment }}"
+      {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
+    >
       {% if collection.featured_image %}
-        {% render 'image',
-          class: 'collection-card__image',
-          image: collection.featured_image,
-          width: 600,
-          height: 600,
-          crop: 'center'
-        %}
+        <div class="collection-card__image-wrapper">
+          {% render 'image',
+            class: 'collection-card__image',
+            image: collection.featured_image,
+            width: 600,
+            height: 600,
+            crop: 'center'
+          %}
+        </div>
       {% endif %}
 
       <div class="collection-card__content">
@@ -31,7 +39,8 @@
         {% endif %}
       </div>
     </a>
-  {% endfor %}
+    {% endfor %}
+  </div>
 </div>
 
 {% stylesheet %}
@@ -50,6 +59,23 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+  .collection-card__image-wrapper {
+    padding: var(--image-padding);
+  }
+  .collection-card__content {
+    text-align: var(--text-align);
+  }
+  .collection-card--card {
+    padding: 1rem;
+    background-color: var(--color-background);
+    border-width: var(--style-border-thickness-collection-cards);
+    border-style: solid;
+    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-collection-cards), transparent);
+    border-radius: var(--style-border-radius-collection-cards);
+    box-shadow: var(--style-shadow-collection-cards);
   }
 {% endstylesheet %}
 
@@ -76,6 +102,12 @@
       "step": 5,
       "unit": "px",
       "default": 10
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
     }
   ],
   "presets": [{ "name": "t:general.collections_grid" }]

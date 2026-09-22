@@ -1,0 +1,134 @@
+{% doc %}
+  Renders a variant picker as a set of selectable pills (styled from Theme
+  settings > Variant pills), backed by a visually-hidden native `<select>`
+  so the form still submits the correct variant id with JavaScript
+  disabled.
+
+  Dispatches a bubbling `variant:change` CustomEvent (detail: `{ variant }`,
+  the matching entry from `product.variants`, or `null` when the selected
+  combination doesn't exist) whenever the visible selection changes.
+
+  @param {product} product - The product to render variant options for
+
+  @example
+  {% render 'variant-picker', product: product %}
+{% enddoc %}
+
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+%}
+
+<variant-picker>
+  <select name="id" class="visually-hidden" data-variant-select>
+    {% for variant in product.variants %}
+      <option value="{{ variant.id }}" {% if variant == current_variant %}selected="selected"{% endif %}>
+        {{ variant.title }} - {{ variant.price | money }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <script type="application/json" data-variant-json>
+    {{ product.variants | json }}
+  </script>
+
+  {% for option in product.options_with_values %}
+    {% liquid
+      assign option_index = option.position | minus: 1
+      assign selected_value = current_variant.options[option_index]
+    %}
+    <fieldset class="variant-picker__option">
+      <legend>{{ option.name }}</legend>
+      <div class="variant-pills">
+        {% for value in option.values %}
+          <label class="variant-pills__pill{% unless value.available %} variant-pills__pill--unavailable{% endunless %}">
+            <input
+              type="radio"
+              name="option-{{ option.position }}"
+              value="{{ value | escape }}"
+              class="visually-hidden"
+              {% if value == selected_value %}
+                checked="checked"
+              {% endif %}
+            >
+            <span>{{ value }}</span>
+          </label>
+        {% endfor %}
+      </div>
+    </fieldset>
+  {% endfor %}
+</variant-picker>
+
+{% stylesheet %}
+  .variant-picker__option {
+    border: none;
+    padding: 0;
+    margin: 0 0 1rem;
+  }
+
+  .variant-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .variant-pills__pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    user-select: none;
+    border-width: var(--style-border-thickness-pills);
+    border-style: solid;
+    border-color: color-mix(in srgb, var(--color-foreground) var(--style-border-opacity-pills), transparent);
+    border-radius: var(--style-border-radius-pills);
+    box-shadow: var(--style-shadow-pills);
+  }
+
+  .variant-pills__pill:has(input:checked) {
+    background-color: var(--color-button-background);
+    color: var(--color-button-text);
+  }
+
+  .variant-pills__pill--unavailable {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('variant-picker')) {
+    class VariantPicker extends HTMLElement {
+      connectedCallback() {
+        this.select = this.querySelector('[data-variant-select]');
+        this.variants = JSON.parse(this.querySelector('[data-variant-json]').textContent);
+        this.addEventListener('change', this.onPillChange.bind(this));
+      }
+
+      onPillChange(event) {
+        if (event.target.type !== 'radio') return;
+
+        const fieldsets = Array.from(this.querySelectorAll('.variant-picker__option'));
+        const selectedOptions = fieldsets.map((fieldset) => {
+          const checked = fieldset.querySelector('input:checked');
+          return checked ? checked.value : null;
+        });
+
+        const variant = this.variants.find((variant) =>
+          selectedOptions.every((value, index) => variant.options[index] === value)
+        ) || null;
+
+        if (variant) {
+          this.select.value = variant.id;
+        }
+
+        this.dispatchEvent(
+          new CustomEvent('variant:change', { bubbles: true, detail: { variant } })
+        );
+      }
+    }
+
+    customElements.define('variant-picker', VariantPicker);
+  }
+{% endjavascript %}

@@ -14,9 +14,14 @@
     "header": {
       "type": "header",
       "settings": {}
+    },
+    "cart-panel": {
+      "type": "cart-panel",
+      "settings": {}
     }
   },
   "order": [
-    "header"
-  ],
+    "header",
+    "cart-panel"
+  ]
 }

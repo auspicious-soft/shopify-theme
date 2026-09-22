@@ -1,0 +1,118 @@
+{% doc %}
+  Renders the add-to-cart form for a product: variant picker, quantity
+  input and submit button. Submission behavior follows
+  Theme settings > Cart > Type — a normal full-page submit when set to
+  "page", or an Ajax Cart API request (opening the cart panel on success)
+  for "drawer"/"notification".
+
+  @param {product} product - The product to render the form for
+
+  @example
+  {% render 'product-form', product: product %}
+{% enddoc %}
+
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+%}
+
+<product-form data-cart-type="{{ settings.cart_type }}" data-cart-add-url="{{ routes.cart_add_url }}.js">
+  <div class="product-form__price">
+    {% for variant in product.variants %}
+      <span data-variant-price="{{ variant.id }}" {% unless variant == current_variant %}hidden{% endunless %}>
+        {% render 'price', price: variant.price, compare_at_price: variant.compare_at_price %}
+      </span>
+    {% endfor %}
+  </div>
+
+  {% form 'product', product %}
+    {% render 'variant-picker', product: product %}
+
+    <label for="quantity-{{ product.id }}">{{ 'cart.quantity' | t }}</label>
+    <input type="number" id="quantity-{{ product.id }}" name="quantity" min="1" value="1">
+
+    <button
+      type="submit"
+      data-add-to-cart
+      data-label-available="{{ 'products.add_to_cart' | t }}"
+      data-label-unavailable="{{ 'products.sold_out' | t }}"
+      {% unless current_variant.available %}disabled{% endunless %}
+    >
+      {% if current_variant.available %}
+        {{ 'products.add_to_cart' | t }}
+      {% else %}
+        {{ 'products.sold_out' | t }}
+      {% endif %}
+    </button>
+
+    <div class="product-form__error" role="alert" data-product-form-error hidden></div>
+
+    {{ form | payment_button }}
+  {% endform %}
+</product-form>
+
+{% stylesheet %}
+  .product-form__error {
+    color: color-mix(in srgb, red 70%, var(--color-foreground));
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('product-form')) {
+    class ProductForm extends HTMLElement {
+      connectedCallback() {
+        this.form = this.querySelector('form');
+        this.errorEl = this.querySelector('[data-product-form-error]');
+        this.submitButton = this.querySelector('[data-add-to-cart]');
+
+        this.addEventListener('variant:change', this.onVariantChange.bind(this));
+
+        if (this.dataset.cartType !== 'page') {
+          this.form.addEventListener('submit', this.onSubmit.bind(this));
+        }
+      }
+
+      onVariantChange(event) {
+        const { variant } = event.detail;
+
+        this.querySelectorAll('[data-variant-price]').forEach((el) => {
+          el.hidden = !variant || el.dataset.variantPrice !== String(variant.id);
+        });
+
+        if (this.submitButton) {
+          const available = Boolean(variant && variant.available);
+          this.submitButton.disabled = !available;
+          this.submitButton.textContent = available
+            ? this.submitButton.dataset.labelAvailable
+            : this.submitButton.dataset.labelUnavailable;
+        }
+      }
+
+      async onSubmit(event) {
+        event.preventDefault();
+        this.errorEl.hidden = true;
+
+        try {
+          const response = await fetch(this.dataset.cartAddUrl, {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: new FormData(this.form),
+          });
+          const data = await response.json();
+
+          if (!response.ok) {
+            this.errorEl.textContent = data.description || data.message;
+            this.errorEl.hidden = false;
+            return;
+          }
+
+          document.dispatchEvent(new CustomEvent('cart:item-added', { bubbles: true }));
+        } catch (error) {
+          this.errorEl.textContent = error.message;
+          this.errorEl.hidden = false;
+        }
+      }
+    }
+
+    customElements.define('product-form', ProductForm);
+  }
+{% endjavascript %}

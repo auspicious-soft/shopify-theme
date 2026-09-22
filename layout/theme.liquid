@@ -1,8 +1,16 @@
 <!doctype html>
-<html lang="{{ request.locale.iso_code }}">
+<html lang="{{ request.locale.iso_code }}" data-hover-elements="{{ settings.animations_hover_elements }}">
   <head>
+    {% if settings.favicon != blank %}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {% endif %}
+
     {% # Inlined CSS Variables %}
     {% render 'css-variables' %}
+
+    {% if settings.animations_reveal_on_scroll %}
+      {% render 'scroll-reveal' %}
+    {% endif %}
 
     {% comment %}
       Font preloading:
@@ -10,15 +18,23 @@
       2. Preload only the critical font variant (base weight)
       3. Additional variants load on-demand via @font-face
     {% endcomment %}
-    {% unless settings.type_primary_font.system? %}
+    {% unless settings.type_body_font.system? and settings.type_header_font.system? %}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {% endunless %}
 
-      {% comment %} Preload the base font variant for initial page render {% endcomment %}
-      {{ settings.type_primary_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
+    {% comment %} Preload the base font variant for initial page render {% endcomment %}
+    {% unless settings.type_body_font.system? %}
+      {{ settings.type_body_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
+    {% endunless %}
+    {% unless settings.type_header_font.system? %}
+      {{ settings.type_header_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
     {% endunless %}
 
     {% # Load and preload the critical CSS %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
+
+    {% # Base typography, heading and color styles %}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
 
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}

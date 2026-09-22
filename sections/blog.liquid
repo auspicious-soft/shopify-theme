@@ -5,31 +5,80 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/blog
 {% endcomment %}
 
-<h1>{{ blog.title }}</h1>
+<div class="color-{{ section.settings.color_scheme.id }}">
+  <h1>{{ blog.title }}</h1>
 
-{% paginate blog.articles by 5 %}
-  {% for article in blog.articles %}
-    <div>
-      {% if article.image %}
-        {{ article.image | image_url: width: 1000 | image_tag }}
-      {% endif %}
-      <h2>
-        {{ article.title | link_to: article.url }}
-      </h2>
-      {% assign date = article.published_at | time_tag: format: 'date' %}
-      <p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
-      <p>{{ article.excerpt }}</p>
+  {% paginate blog.articles by 5 %}
+    <div
+      class="blog-cards"
+      style="--gap-x: {{ settings.spacing_grid_horizontal }}px; --gap-y: {{ settings.spacing_grid_vertical }}px"
+    >
+      {% for article in blog.articles %}
+        <div
+          class="blog-card blog-card--{{ settings.blog_card_style }} hover-{{ settings.animations_hover_elements }} color-{{ settings.blog_card_color_scheme.id }}"
+          style="--image-padding: {{ settings.blog_card_image_padding }}px; --text-align: {{ settings.blog_card_text_alignment }}"
+          {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
+        >
+          {% if article.image %}
+            <div class="blog-card__image-wrapper">
+              {% render 'image', class: 'blog-card__image', image: article.image, url: article.url, width: 1000 %}
+            </div>
+          {% endif %}
+          <div class="blog-card__content">
+            <h2 class="blog-card__title">
+              {{ article.title | link_to: article.url }}
+            </h2>
+            {% assign date = article.published_at | time_tag: format: 'date' %}
+            <p class="blog-card__meta">{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
+            <p class="blog-card__excerpt">{{ article.excerpt }}</p>
+          </div>
+        </div>
+      {% endfor %}
     </div>
-  {% endfor %}
 
-  {%- if paginate.pages > 1 -%}
-    {{- paginate | default_pagination -}}
-  {%- endif -%}
-{% endpaginate %}
+    {%- if paginate.pages > 1 -%}
+      {{- paginate | default_pagination -}}
+    {%- endif -%}
+  {% endpaginate %}
+</div>
+
+{% stylesheet %}
+  .blog-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    column-gap: var(--gap-x);
+    row-gap: var(--gap-y);
+  }
+
+  .blog-card__image-wrapper {
+    padding: var(--image-padding);
+  }
+
+  .blog-card__content {
+    text-align: var(--text-align);
+  }
+
+  .blog-card--card {
+    padding: 1rem;
+    background-color: var(--color-background);
+    border-width: var(--style-border-thickness-blog-cards);
+    border-style: solid;
+    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-blog-cards), transparent);
+    border-radius: var(--style-border-radius-blog-cards);
+    box-shadow: var(--style-shadow-blog-cards);
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
   "name": "t:general.blog",
-  "settings": []
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ]
 }
 {% endschema %}

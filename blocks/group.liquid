@@ -12,7 +12,7 @@
 {% enddoc %}
 
 <div
-  class="group {{ block.settings.layout_direction }}"
+  class="group {{ block.settings.layout_direction }}{% if block.settings.boxed %} group--boxed{% endif %}"
   style="
     --padding: {{ block.settings.padding }}px;
     --alignment: {{ block.settings.alignment }};
@@ -41,6 +41,15 @@
     flex-direction: column;
     align-items: var(--alignment);
     padding: var(--padding) 0;
+  }
+
+  .group--boxed {
+    background-color: var(--color-background);
+    border-width: var(--style-border-thickness-text-boxes);
+    border-style: solid;
+    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-text-boxes), transparent);
+    border-radius: var(--style-border-radius-text-boxes);
+    box-shadow: var(--style-shadow-text-boxes);
   }
 {% endstylesheet %}
 
@@ -80,6 +89,12 @@
       "max": 200,
       "step": 2,
       "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "boxed",
+      "label": "t:labels.boxed",
+      "default": false
     }
   ],
   "presets": [

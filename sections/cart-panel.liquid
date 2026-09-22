@@ -1,0 +1,345 @@
+{% comment %}
+  Renders the cart drawer or cart notification, depending on
+  Theme settings > Cart > Type. Rendered sitewide via the header group so
+  it's available for the Ajax cart to open from any page. Renders nothing
+  when the cart type is set to "page" (the header cart icon links straight
+  to the cart page in that mode).
+
+  https://shopify.dev/docs/storefronts/themes/architecture/sections/section-schema
+{% endcomment %}
+
+{% unless settings.cart_type == 'page' %}
+  {% render 'theme-panel' %}
+
+  <cart-panel data-cart-type="{{ settings.cart_type }}" data-cart-item-count="{{ cart.item_count }}">
+    {% if settings.cart_type == 'drawer' %}
+      <theme-panel>
+        <dialog id="cart-panel-dialog" class="cart-panel color-{{ settings.cart_color_scheme.id }}" scroll-lock>
+          <div class="cart-panel__header">
+            <p class="cart-panel__title">{{ 'cart.title' | t }}</p>
+            <button type="button" data-panel-close aria-label="{{ 'accessibility.close' | t }}">&times;</button>
+          </div>
+
+          {% if cart.item_count == 0 %}
+            <div class="cart-panel__empty">
+              <p>{{ 'cart.empty' | t }}</p>
+              <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'cart.continue_shopping' | t }}</a>
+            </div>
+          {% else %}
+            <ul class="cart-panel__items" role="list">
+              {% for item in cart.items %}
+                <li class="cart-panel__item">
+                  {% render 'image', class: 'cart-panel__item-image', image: item.image, url: item.url, width: 160, height: 160, crop: 'center' %}
+                  <div class="cart-panel__item-content">
+                    <a href="{{ item.url }}" class="cart-panel__item-title">{{ item.product.title }}</a>
+                    {% if item.variant.title != 'Default Title' %}
+                      <p class="cart-panel__item-variant">{{ item.variant.title }}</p>
+                    {% endif %}
+                    {% if settings.show_vendor %}
+                      <p class="cart-panel__item-vendor">{{ item.product.vendor }}</p>
+                    {% endif %}
+
+                    <div class="cart-panel__item-quantity">
+                      <button type="button" data-qty-decrease aria-label="{{ 'cart.decrease_quantity' | t }}">&minus;</button>
+                      <input
+                        type="number"
+                        min="0"
+                        value="{{ item.quantity }}"
+                        data-qty-input
+                        data-key="{{ item.key }}"
+                        aria-label="{{ 'cart.quantity' | t }}"
+                      >
+                      <button type="button" data-qty-increase aria-label="{{ 'cart.increase_quantity' | t }}">&plus;</button>
+                    </div>
+
+                    {% render 'price', price: item.final_line_price, compare_at_price: item.original_line_price %}
+                  </div>
+                  <a href="{{ item.url_to_remove }}" data-remove-item="{{ item.key }}" class="cart-panel__item-remove">
+                    {{ 'cart.remove' | t }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+
+            {% if settings.show_cart_note %}
+              <textarea
+                class="cart-panel__note"
+                name="note"
+                data-cart-note
+                placeholder="{{ 'cart.note_placeholder' | t }}"
+              >{{ cart.note }}</textarea>
+            {% endif %}
+
+            {% if settings.cart_drawer_collection != blank and settings.cart_drawer_collection.products.size > 0 %}
+              <div class="cart-panel__recommendations">
+                {% for product in settings.cart_drawer_collection.products limit: 4 %}
+                  <a href="{{ product.url }}" class="cart-panel__recommendation">
+                    {% render 'image', image: product.featured_image, width: 200, height: 200, crop: 'center' %}
+                    <p>{{ product.title }}</p>
+                    {% render 'price', price: product.price %}
+                  </a>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <div class="cart-panel__footer">
+              <div class="cart-panel__subtotal">
+                <span>{{ 'cart.subtotal' | t }}</span>
+                {% render 'price', price: cart.total_price %}
+              </div>
+              <button type="submit" formaction="{{ routes.cart_url }}" formmethod="post" name="checkout" class="button cart-panel__checkout">
+                {{ 'cart.checkout' | t }}
+              </button>
+            </div>
+          {% endif %}
+        </dialog>
+      </theme-panel>
+    {% elsif settings.cart_type == 'notification' %}
+      <theme-panel>
+        <dialog id="cart-panel-toast" class="cart-panel cart-panel--notification color-{{ settings.cart_color_scheme.id }}" data-non-modal role="status">
+          <div class="cart-panel__header">
+            <p class="cart-panel__title">{{ 'cart.item_added' | t }}</p>
+            <button type="button" data-panel-close aria-label="{{ 'accessibility.close' | t }}">&times;</button>
+          </div>
+          <div class="cart-panel__footer">
+            <div class="cart-panel__subtotal">
+              <span>{{ 'cart.subtotal' | t }}</span>
+              {% render 'price', price: cart.total_price %}
+            </div>
+            <a href="{{ routes.cart_url }}" class="button cart-panel__checkout">{{ 'cart.view_cart' | t }}</a>
+          </div>
+        </dialog>
+      </theme-panel>
+    {% endif %}
+  </cart-panel>
+{% endunless %}
+
+{% stylesheet %}
+  .cart-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #cart-panel-dialog {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-end: 0;
+    inset-inline-start: auto;
+    height: 100%;
+    width: min(100%, 28rem);
+    max-width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: var(--page-margin);
+    overflow-y: auto;
+    border-width: var(--style-border-thickness-drawers);
+    border-style: solid;
+    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-drawers), transparent);
+    box-shadow: var(--style-shadow-drawers);
+  }
+
+  #cart-panel-dialog::backdrop {
+    background: rgb(0 0 0 / 40%);
+  }
+
+  .cart-panel--notification {
+    position: fixed;
+    inset-block-start: var(--page-margin);
+    inset-inline-end: var(--page-margin);
+    width: min(100%, 22rem);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: var(--page-margin);
+    border-width: var(--style-border-thickness-popups);
+    border-style: solid;
+    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-popups), transparent);
+    border-radius: var(--style-border-radius-popups);
+    box-shadow: var(--style-shadow-popups);
+  }
+
+  .cart-panel__items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+  }
+
+  .cart-panel__item {
+    display: grid;
+    grid-template-columns: 5rem 1fr auto;
+    gap: 0.75rem;
+  }
+
+  .cart-panel__item-image {
+    width: 5rem;
+  }
+
+  .cart-panel__item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .cart-panel__item-quantity {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .cart-panel__item-quantity input {
+    width: 3rem;
+    text-align: center;
+  }
+
+  .cart-panel__note {
+    width: 100%;
+    min-height: 4rem;
+  }
+
+  .cart-panel__recommendations {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+  }
+
+  .cart-panel__recommendation {
+    flex: 0 0 auto;
+    width: 6rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .cart-panel__footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .cart-panel__subtotal {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+  }
+
+  .cart-panel__checkout {
+    width: 100%;
+    text-align: center;
+  }
+
+  .cart-panel__empty {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('cart-panel')) {
+    class CartPanel extends HTMLElement {
+      connectedCallback() {
+        this.cartType = this.dataset.cartType;
+        this.addEventListener('click', this.onClick.bind(this));
+        this.addEventListener('change', this.onChange.bind(this));
+        document.addEventListener('cart:item-added', () => this.refresh({ open: true }));
+      }
+
+      onClick(event) {
+        const remove = event.target.closest('[data-remove-item]');
+        if (remove) {
+          event.preventDefault();
+          this.updateItem(remove.dataset.removeItem, 0);
+          return;
+        }
+
+        const increase = event.target.closest('[data-qty-increase]');
+        if (increase) {
+          const input = increase.closest('.cart-panel__item').querySelector('[data-qty-input]');
+          input.stepUp();
+          this.updateItem(input.dataset.key, input.value);
+        }
+
+        const decrease = event.target.closest('[data-qty-decrease]');
+        if (decrease) {
+          const input = decrease.closest('.cart-panel__item').querySelector('[data-qty-input]');
+          input.stepDown();
+          this.updateItem(input.dataset.key, input.value);
+        }
+      }
+
+      onChange(event) {
+        const qtyInput = event.target.closest('[data-qty-input]');
+        if (qtyInput) {
+          this.updateItem(qtyInput.dataset.key, qtyInput.value);
+          return;
+        }
+
+        const note = event.target.closest('[data-cart-note]');
+        if (note) {
+          fetch('/cart/update.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ note: note.value }),
+          });
+        }
+      }
+
+      async updateItem(key, quantity) {
+        await fetch('/cart/change.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ id: key, quantity: Number(quantity) }),
+        });
+        this.refresh({ open: this.cartType !== 'page' });
+      }
+
+      async refresh({ open }) {
+        const response = await fetch(`${window.location.pathname}?sections=cart-panel`);
+        const data = await response.json();
+        if (!data['cart-panel']) return;
+
+        const parsed = new DOMParser().parseFromString(data['cart-panel'], 'text/html');
+        const newPanel = parsed.querySelector('cart-panel');
+        if (!newPanel) return;
+
+        this.innerHTML = newPanel.innerHTML;
+
+        document.dispatchEvent(
+          new CustomEvent('cart:updated', {
+            detail: { itemCount: newPanel.dataset.cartItemCount },
+          })
+        );
+
+        if (open) {
+          if (this.cartType === 'drawer') {
+            this.querySelector('#cart-panel-dialog')?.closest('theme-panel')?.open();
+          } else if (this.cartType === 'notification') {
+            const toast = this.querySelector('#cart-panel-toast');
+            const panel = toast?.closest('theme-panel');
+            panel?.open();
+            clearTimeout(this.toastTimer);
+            this.toastTimer = setTimeout(() => panel?.close(), 5000);
+          }
+        }
+      }
+    }
+
+    customElements.define('cart-panel', CartPanel);
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:settings_schema.cart.name",
+  "settings": []
+}
+{% endschema %}

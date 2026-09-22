@@ -1,0 +1,69 @@
+{% doc %}
+  Renders a sale or sold-out badge for a product, positioned and styled
+  from Theme settings > Badges. Renders nothing when the product is
+  available and not discounted.
+
+  The parent element must be `position: relative` for the badge's
+  absolute positioning to work.
+
+  @param {product} product - The product to check for sale/sold-out status
+
+  @example
+  {% render 'badge', product: product %}
+{% enddoc %}
+
+{% liquid
+  assign badge_text = blank
+  assign badge_scheme = blank
+
+  if product.available == false
+    assign badge_text = 'badges.sold_out' | t
+    assign badge_scheme = settings.sold_out_badge_color_scheme
+  elsif product.compare_at_price > product.price
+    assign badge_text = 'badges.sale' | t
+    assign badge_scheme = settings.sale_badge_color_scheme
+  endif
+
+  assign badge_position = settings.badge_position | handleize
+%}
+
+{% if badge_text != blank %}
+  <span
+    class="badge color-{{ badge_scheme.id }} badge--{{ badge_position }}"
+    style="--badge-radius: {{ settings.badge_corner_radius }}px"
+  >
+    {{ badge_text }}
+  </span>
+{% endif %}
+
+{% stylesheet %}
+  .badge {
+    position: absolute;
+    z-index: 1;
+    padding: 0.25em 0.75em;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    border-radius: var(--badge-radius);
+    font-size: 0.8em;
+  }
+
+  .badge--bottom-left {
+    inset-block-end: 0.5em;
+    inset-inline-start: 0.5em;
+  }
+
+  .badge--bottom-right {
+    inset-block-end: 0.5em;
+    inset-inline-end: 0.5em;
+  }
+
+  .badge--top-left {
+    inset-block-start: 0.5em;
+    inset-inline-start: 0.5em;
+  }
+
+  .badge--top-right {
+    inset-block-start: 0.5em;
+    inset-inline-end: 0.5em;
+  }
+{% endstylesheet %}

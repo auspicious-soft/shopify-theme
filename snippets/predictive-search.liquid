@@ -1,0 +1,220 @@
+{% doc %}
+  Renders a search form. When Theme settings > Search behavior >
+  Search suggestions is enabled, progressively enhances the form with a
+  live results dropdown (Shopify's Predictive Search API). When disabled,
+  renders a plain form that submits to the full search results page, with
+  no JavaScript at all.
+
+  @example
+  {% render 'predictive-search' %}
+{% enddoc %}
+
+{% if settings.predictive_search_enabled %}
+  {% render 'theme-panel' %}
+
+  <predictive-search
+    data-url="{{ routes.predictive_search_url }}"
+    data-show-vendor="{{ settings.predictive_search_show_vendor }}"
+    data-show-price="{{ settings.predictive_search_show_price }}"
+    data-no-results="{{ 'search.predictive.no_results' | t }}"
+    data-view-all="{{ 'search.predictive.view_all' | t }}"
+  >
+    <theme-panel>
+      <details id="predictive-search-dropdown" class="predictive-search">
+        <summary class="predictive-search__trigger" data-panel-open="predictive-search-dropdown">
+          {{ 'icon-search.svg' | inline_asset_content }}
+          <span class="visually-hidden">{{ 'search.submit' | t }}</span>
+        </summary>
+
+        <form action="{{ routes.search_url }}" method="get" role="search" class="predictive-search__form">
+          <input
+            type="search"
+            name="q"
+            value="{{ search.terms }}"
+            placeholder="{{ 'search.placeholder' | t }}"
+            autocomplete="off"
+            data-predictive-search-input
+          >
+          <button type="submit">{{ 'search.submit' | t }}</button>
+        </form>
+
+        <div class="predictive-search__results" data-predictive-search-results hidden></div>
+      </details>
+    </theme-panel>
+  </predictive-search>
+{% else %}
+  <form action="{{ routes.search_url }}" method="get" role="search" class="predictive-search__form">
+    <input type="search" name="q" value="{{ search.terms }}" placeholder="{{ 'search.placeholder' | t }}">
+    <button type="submit">{{ 'search.submit' | t }}</button>
+  </form>
+{% endif %}
+
+{% stylesheet %}
+  .predictive-search__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .predictive-search__trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .predictive-search__trigger svg {
+    width: 1.5rem;
+  }
+
+  #predictive-search-dropdown[open] {
+    position: relative;
+  }
+
+  .predictive-search__form {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  #predictive-search-dropdown[open] .predictive-search__form {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: 100%;
+    z-index: 2;
+    width: max(20rem, 100%);
+    background-color: var(--color-background);
+    padding: 0.75rem;
+    border-width: var(--style-border-thickness-popups);
+    border-style: solid;
+    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-popups), transparent);
+    border-radius: var(--style-border-radius-popups);
+    box-shadow: var(--style-shadow-popups);
+  }
+
+  .predictive-search__results {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: calc(100% + 3rem);
+    z-index: 2;
+    width: max(20rem, 100%);
+    max-height: 60vh;
+    overflow-y: auto;
+    background-color: var(--color-background);
+    padding: 0.75rem;
+    border-width: var(--style-border-thickness-popups);
+    border-style: solid;
+    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-popups), transparent);
+    border-radius: var(--style-border-radius-popups);
+    box-shadow: var(--style-shadow-popups);
+  }
+
+  .predictive-search__result {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    padding-block: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .predictive-search__result-image {
+    width: 3rem;
+    flex: 0 0 auto;
+  }
+
+  .predictive-search__view-all {
+    display: block;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('predictive-search')) {
+    class PredictiveSearch extends HTMLElement {
+      connectedCallback() {
+        this.input = this.querySelector('[data-predictive-search-input]');
+        this.results = this.querySelector('[data-predictive-search-results]');
+        this.showVendor = this.dataset.showVendor === 'true';
+        this.showPrice = this.dataset.showPrice === 'true';
+        this.input.addEventListener('input', this.onInput.bind(this));
+      }
+
+      onInput(event) {
+        clearTimeout(this.debounce);
+        const term = event.target.value.trim();
+
+        if (term.length < 2) {
+          this.results.hidden = true;
+          this.results.innerHTML = '';
+          return;
+        }
+
+        this.debounce = setTimeout(() => this.search(term), 200);
+      }
+
+      async search(term) {
+        const url = `${this.dataset.url}?q=${encodeURIComponent(term)}&resources[type]=product,collection,page,article&resources[limit]=5&resources[options][unavailable_products]=last`;
+        const response = await fetch(url, { headers: { Accept: 'application/json' } });
+        const data = await response.json();
+        this.render(term, data.resources ? data.resources.results : {});
+      }
+
+      escapeHtml(value) {
+        return String(value ?? '').replace(/[&<>"']/g, (char) => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;',
+        })[char]);
+      }
+
+      render(term, results) {
+        const products = results.products || [];
+        const others = [...(results.collections || []), ...(results.pages || []), ...(results.articles || [])];
+
+        if (products.length === 0 && others.length === 0) {
+          this.results.innerHTML = `<p>${this.escapeHtml(this.dataset.noResults)}</p>`;
+          this.results.hidden = false;
+          return;
+        }
+
+        const productItems = products
+          .map((product) => {
+            const vendor = this.showVendor && product.vendor ? `<p>${this.escapeHtml(product.vendor)}</p>` : '';
+            const price = this.showPrice ? `<p>${this.escapeHtml(product.price)}</p>` : '';
+            const imageUrl = product.featured_image ? this.escapeHtml(product.featured_image.url) : '';
+            return `
+              <a class="predictive-search__result" href="${this.escapeHtml(product.url)}">
+                <img class="predictive-search__result-image" src="${imageUrl}" alt="" width="60" height="60" loading="lazy">
+                <span>
+                  <p>${this.escapeHtml(product.title)}</p>
+                  ${vendor}
+                  ${price}
+                </span>
+              </a>
+            `;
+          })
+          .join('');
+
+        const otherItems = others
+          .map(
+            (item) =>
+              `<a class="predictive-search__result" href="${this.escapeHtml(item.url)}"><span>${this.escapeHtml(item.title)}</span></a>`
+          )
+          .join('');
+
+        this.results.innerHTML = `
+          ${productItems}
+          ${otherItems}
+          <a class="predictive-search__view-all" href="${this.querySelector('form').action}?q=${encodeURIComponent(term)}">
+            ${this.escapeHtml(this.dataset.viewAll)} "${this.escapeHtml(term)}"
+          </a>
+        `;
+        this.results.hidden = false;
+      }
+    }
+
+    customElements.define('predictive-search', PredictiveSearch);
+  }
+{% endjavascript %}

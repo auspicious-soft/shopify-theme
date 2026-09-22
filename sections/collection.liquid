@@ -5,28 +5,40 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
 {% endcomment %}
 
-<h1>{{ collection.title }}</h1>
+<div class="color-{{ section.settings.color_scheme.id }}">
+  <h1>{{ collection.title }}</h1>
 
-<div class="collection-products">
   {% paginate collection.products by 20 %}
-    {% for product in collection.products %}
-      <div class="collection-product">
-        {% if product.featured_image %}
-          {% render 'image',
-            class: 'collection-product__image',
-            image: product.featured_image,
-            url: product.url,
-            width: 400,
-            height: 400,
-            crop: 'center'
-          %}
-        {% endif %}
-        <div class="collection-product__content">
-          <p>{{ product.title | escape | link_to: product.url }}</p>
-          <p>{{ product.price | money }}</p>
+    <div
+      class="collection-products"
+      style="--gap-x: {{ settings.spacing_grid_horizontal }}px; --gap-y: {{ settings.spacing_grid_vertical }}px"
+    >
+      {% for product in collection.products %}
+        <div
+          class="collection-product collection-product--{{ settings.card_style }} hover-{{ settings.animations_hover_elements }} color-{{ settings.card_color_scheme.id }}"
+          style="--image-padding: {{ settings.card_image_padding }}px; --text-align: {{ settings.card_text_alignment }}"
+          {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
+        >
+          {% if product.featured_image %}
+            <div class="collection-product__image-wrapper">
+              {% render 'image',
+                class: 'collection-product__image',
+                image: product.featured_image,
+                url: product.url,
+                width: 400,
+                height: 400,
+                crop: 'center'
+              %}
+              {% render 'badge', product: product %}
+            </div>
+          {% endif %}
+          <div class="collection-product__content">
+            <p>{{ product.title | escape | link_to: product.url }}</p>
+            {% render 'price', price: product.price, compare_at_price: product.compare_at_price %}
+          </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
 
     {{ paginate | default_pagination }}
   {% endpaginate %}
@@ -35,13 +47,41 @@
 {% stylesheet %}
   .collection-products {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    column-gap: var(--gap-x);
+    row-gap: var(--gap-y);
+  }
+
+  .collection-product__image-wrapper {
+    position: relative;
+    padding: var(--image-padding);
+  }
+
+  .collection-product__content {
+    text-align: var(--text-align);
+  }
+
+  .collection-product--card {
+    padding: 1rem;
+    background-color: var(--color-background);
+    border-width: var(--style-border-thickness-cards);
+    border-style: solid;
+    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-cards), transparent);
+    border-radius: var(--style-border-radius-cards);
+    box-shadow: var(--style-shadow-cards);
   }
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "t:general.collection",
-  "settings": []
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ]
 }
 {% endschema %}

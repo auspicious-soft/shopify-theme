@@ -1,0 +1,55 @@
+{% doc %}
+  Renders a price, formatted according to Theme settings > Currency format,
+  with an optional struck-through compare-at price when the item is on sale.
+
+  @param {number} price - The price to display, in the shop's smallest currency unit
+  @param {number} [compare_at_price] - The compare-at price, if any
+
+  @example
+  {% render 'price', price: product.price %}
+  {% render 'price', price: item.final_price, compare_at_price: item.original_price %}
+{% enddoc %}
+
+{% liquid
+  if settings.currency_code_enabled
+    assign formatted_price = price | money_with_currency
+  else
+    assign formatted_price = price | money
+  endif
+
+  assign on_sale = false
+  if compare_at_price and compare_at_price > price
+    assign on_sale = true
+    if settings.currency_code_enabled
+      assign formatted_compare_at_price = compare_at_price | money_with_currency
+    else
+      assign formatted_compare_at_price = compare_at_price | money
+    endif
+  endif
+%}
+
+<span class="price">
+  {% if on_sale %}
+    <s class="price__compare-at">{{ formatted_compare_at_price }}</s>
+    <span class="price__sale">{{ formatted_price }}</span>
+  {% else %}
+    {{ formatted_price }}
+  {% endif %}
+</span>
+
+{% stylesheet %}
+  .price {
+    display: inline-flex;
+    gap: 0.5em;
+    align-items: baseline;
+  }
+
+  .price__compare-at {
+    color: var(--color-foreground);
+    opacity: 0.6;
+  }
+
+  .price__sale {
+    color: var(--color-foreground);
+  }
+{% endstylesheet %}

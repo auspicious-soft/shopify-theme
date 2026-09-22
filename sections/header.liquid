@@ -1,6 +1,12 @@
-<header>
+<header class="color-{{ section.settings.color_scheme.id }}">
   <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
+    {% if settings.logo != blank %}
+      <a href="{{ routes.root_url }}">
+        {{ settings.logo | image_url: width: settings.logo_width | image_tag: width: settings.logo_width, alt: shop.name }}
+      </a>
+    {% else %}
+      {{ shop.name | link_to: routes.root_url }}
+    {% endif %}
   </h2>
 
   <div class="header__menu">
@@ -10,19 +16,25 @@
   </div>
 
   <div class="header__icons">
+    {% render 'predictive-search' %}
+
     {% if shop.customer_accounts_enabled %}
-      <shopify-account menu="{{ section.settings.customer_account_menu }}">
+      <shopify-account menu="{{ settings.customer_account_menu }}">
         {{ 'icon-account.svg' | inline_asset_content }}
       </shopify-account>
     {% endif %}
 
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
-      {% endif %}
-
-      {{ 'icon-cart.svg' | inline_asset_content }}
-    </a>
+    {% if settings.cart_type == 'drawer' %}
+      <button type="button" data-panel-open="cart-panel-dialog" aria-label="{{ 'cart.title' | t }}">
+        <cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</cart-count>
+        {{ 'icon-cart.svg' | inline_asset_content }}
+      </button>
+    {% else %}
+      <a href="{{ routes.cart_url }}">
+        <cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</cart-count>
+        {{ 'icon-cart.svg' | inline_asset_content }}
+      </a>
+    {% endif %}
   </div>
 </header>
 
@@ -33,19 +45,27 @@
     align-items: center;
     justify-content: space-between;
   }
-  header a {
+  header a,
+  header button {
     position: relative;
     text-decoration: none;
     color: var(--color-foreground);
     display: flex;
     align-items: center;
     justify-content: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
   }
-  header a sup {
+  header cart-count {
     position: absolute;
     left: 100%;
     overflow: hidden;
     max-width: var(--page-margin);
+  }
+  header cart-count[hidden] {
+    display: none;
   }
   header svg {
     width: 2rem;
@@ -53,9 +73,26 @@
   header .header__menu,
   header .header__icons {
     display: flex;
+    align-items: center;
     gap: 1rem;
   }
 {% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('cart-count')) {
+    class CartCount extends HTMLElement {
+      connectedCallback() {
+        document.addEventListener('cart:updated', (event) => {
+          const count = Number(event.detail.itemCount || 0);
+          this.textContent = count;
+          this.hidden = count === 0;
+        });
+      }
+    }
+
+    customElements.define('cart-count', CartCount);
+  }
+{% endjavascript %}
 
 {% schema %}
 {
@@ -67,10 +104,10 @@
       "label": "t:labels.menu"
     },
     {
-      "type": "link_list",
-      "id": "customer_account_menu",
-      "label": "t:labels.customer_account_menu",
-      "default": "customer-account-main-menu"
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
     }
   ]
 }
