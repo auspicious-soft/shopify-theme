@@ -134,10 +134,10 @@
         "settings": {
           "background": "#ffffff",
           "background_gradient": "",
-          "text": "#333333",
+          "text": "#000000",
           "button": "#1a1a1a",
           "button_label": "#ffffff",
-          "secondary_button_label": "#FFFFFF",
+          "secondary_button_label": "#ffffff",
           "shadow": "#121212"
         }
       },
