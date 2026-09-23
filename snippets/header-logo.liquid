@@ -1,46 +1,40 @@
 {% doc %}
   Renders the header's logo slot.
 
-  - Standard style: the theme's logo (Theme settings > Logo), sized by the
-    header's own desktop/mobile logo width settings. When Header settings >
-    Hover logo is set, a second image crossfades in on hover/focus (pure
-    CSS, no JS), sharing the exact same box so it swaps in place rather
-    than resizing.
-  - Logo reveal style: starts hidden and crossfades in once the visitor
-    scrolls past the full-width hero logo block rendered by
-    sections/header.liquid. The crossfade itself is pure CSS
-    (assets/header.css), driven by the `is-scrolled` class that
-    assets/header.js toggles on the header element.
+  Both the default logo and (for the "logo_reveal" header style) the sticky
+  logo are always rendered into the HTML, on every page/template. Which one
+  is visible is left entirely to CSS (e.g. driven by the `.is-scrolled`
+  class assets/header.js toggles on the header element) rather than Liquid
+  conditionals, so the crossfade/swap behavior can be styled directly.
 
-  @param is_logo_reveal {Boolean} - whether the "logo_reveal" style is active
-  @param sticky_logo {Object} - image used for the reveal style's compact logo
+  - Standard style: only the default logo (Theme settings > Logo) renders,
+    sized by the header's own desktop/mobile logo width settings. When
+    Header settings > Hover logo is set, a second image crossfades in on
+    hover/focus (pure CSS, no JS), sharing the exact same box so it swaps in
+    place rather than resizing.
+  - Logo reveal style: the default logo renders as normal, and a second
+    `header__logo--sticky` anchor (using Header settings > Sticky logo) is
+    also rendered alongside it for CSS to show/hide/crossfade as needed.
+
+  @param is_logo_reveal {Boolean} - whether the "logo_reveal" header style is active
+  @param sticky_logo {Object} - image used for the logo_reveal style's compact logo
+  @param default_logo {Object} - the theme's default logo (settings.logo)
   @param hover_logo {Object} - optional, standard style only: image shown on hover/focus
   @param logo_sizes {String} - a precomputed <img sizes> attribute value
 
   @example
-  {% render 'header-logo', is_logo_reveal: false, sticky_logo: settings.logo, hover_logo: section.settings.hover_logo, logo_sizes: logo_sizes %}
+  {% render 'header-logo', is_logo_reveal: false, sticky_logo: section.settings.sticky_logo, default_logo: settings.logo, hover_logo: section.settings.hover_logo, logo_sizes: logo_sizes %}
 {% enddoc %}
 
 <div class="header__logo-wrap">
   <a
     href="{{ routes.root_url }}"
-    class="header__logo{% if is_logo_reveal %} header__logo--sticky{% endif %}{% if hover_logo != blank and is_logo_reveal == false %} header__logo--has-hover{% endif %}"
+    class="header__logo header__logo--default{% if hover_logo != blank and is_logo_reveal == false %} header__logo--has-hover{% endif %}"
     aria-label="{{ shop.name | escape }}"
   >
-   
-    {% if sticky_logo != blank %}
+    {% if default_logo != blank %}
       {{
-        sticky_logo
-        | image_url: width: 400
-        | image_tag: widths: '90,130,180,260,360', sizes: logo_sizes, alt: shop.name, class: 'header__logo-image', loading: 'eager'
-      }}
-    {% else %}
-      <span class="header__logo-text">{{ shop.name }}</span>
-    {% endif %}      
-  
-    {% if settings.logo != blank %}
-      {{
-        settings.logo
+        default_logo
         | image_url: width: 600
         | image_tag:
           widths: '90,130,180,260,360,600',
@@ -50,9 +44,38 @@
           loading: 'eager',
           fetchpriority: 'high'
       }}
+      {% if hover_logo != blank and is_logo_reveal == false %}
+        {{
+          hover_logo
+          | image_url: width: 600
+          | image_tag:
+            widths: '90,130,180,260,360,600',
+            sizes: logo_sizes,
+            alt: shop.name,
+            class: 'header__logo-image header__logo-image--hover',
+            loading: 'eager'
+        }}
+      {% endif %}
     {% else %}
       <span class="header__logo-text header__logo-text--default">{{ shop.name }}</span>
-    {% endif %}     
-      
-  </a>  
+    {% endif %}
+  </a>
+
+  {% if is_logo_reveal %}
+    <a
+      href="{{ routes.root_url }}"
+      class="header__logo header__logo--sticky"
+      aria-label="{{ shop.name | escape }}"
+    >
+      {% if sticky_logo != blank %}
+        {{
+          sticky_logo
+          | image_url: width: 400
+          | image_tag: widths: '90,130,180,260,360', sizes: logo_sizes, alt: shop.name, class: 'header__logo-image', loading: 'eager'
+        }}
+      {% else %}
+        <span class="header__logo-text">{{ shop.name }}</span>
+      {% endif %}
+    </a>
+  {% endif %}
 </div>
