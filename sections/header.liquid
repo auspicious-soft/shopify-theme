@@ -17,7 +17,11 @@
 {% liquid
   assign style = section.settings.header_style
   assign is_logo_reveal = false
-  if style == 'logo_reveal'
+  # The logo-reveal (hero + sticky logo) treatment only makes sense on the
+  # homepage; the header section is shared sitewide, so every other
+  # template always falls back to the standard logo regardless of this
+  # setting.
+  if style == 'logo_reveal' and template.name == 'index'
     assign is_logo_reveal = true
   endif
 
