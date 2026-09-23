@@ -39,13 +39,6 @@
   transform: translateY(-100%);
 }
 
-/* Sits below the announcement bar instead of covering it, when one is
-   present above the header. header.js measures the announcement bar's
-   rendered height (it varies with its own font size/padding settings)
-   and exposes it as --announcement-bar-height on the root element; it's
-   0px when no announcement bar exists. Only needed here (not on plain
-   .header--sticky) because overlay pulls the header out of document flow,
-   where it would otherwise ignore the announcement bar's height. */
 .header--overlay {
   position: absolute;
   inset-inline: 0;
@@ -82,6 +75,44 @@
   .header[data-hide-on-scroll].is-hidden {
     transform: none;
   }
+}
+
+/* ---------- Standard style: color & sticky fixes ----------
+   Scoped strictly to `.header--standard` (chained with `.header` / other
+   state classes for extra specificity) so none of this touches the Logo
+   reveal style's rules above or below. */
+
+/* The base `.header` rule no longer sets `color`, and only `.header--overlay`
+   sets it back — so a plain standard header (no transparency) was left with
+   no text color at all. */
+.header--standard {
+  color: var(--header-text);
+}
+
+/* `.header:hover` above unconditionally swaps in the overlay text/sticky-bg
+   colors on hover, even for a standard header that isn't transparent at
+   all. Restore the normal (var-driven) colors on hover for standard
+   headers; this still resolves to the overlay colors when `.header--overlay`
+   is also present, since that class is the one redefining --header-bg/
+   --header-text, not this rule. */
+.header--standard.header:hover {
+  color: var(--header-text);
+  background-color: var(--header-bg);
+}
+
+/* Once a standard sticky header (no transparency) is scrolled, it should
+   pick up the merchant's configured sticky background color, same as the
+   overlay case already does below. */
+.header--standard.header--sticky.is-scrolled:not(.header--overlay) {
+  background-color: var(--header-sticky-bg);
+}
+
+/* A standard + transparent header keeps `--header-overlay-text` for
+   readability while transparent, but once scrolled to a solid background
+   it should read with the theme's normal foreground color, not stay
+   locked to the overlay color meant for sitting over a hero image. */
+.header--standard.header--overlay.is-scrolled {
+  color: var(--color-foreground);
 }
 
 /* ---------- Layout ---------- */
