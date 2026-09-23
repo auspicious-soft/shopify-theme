@@ -63,7 +63,10 @@
   top:0px;
   background-color: var(--header-sticky-bg);
 }
-
+ .header:hover {
+  color: var(--header-overlay-text);
+  background-color: var(--header-sticky-bg);
+}
 /* Any sticky header gets a hairline "lifted off the page" shadow once
    stuck, regardless of overlay. */
 .header--sticky.is-scrolled {
