@@ -2,7 +2,10 @@
   Renders the header's logo slot.
 
   - Standard style: the theme's logo (Theme settings > Logo), sized by the
-    header's own desktop/mobile logo width settings.
+    header's own desktop/mobile logo width settings. When Header settings >
+    Hover logo is set, a second image crossfades in on hover/focus (pure
+    CSS, no JS), sharing the exact same box so it swaps in place rather
+    than resizing.
   - Logo reveal style: starts hidden and crossfades in once the visitor
     scrolls past the full-width hero logo block rendered by
     sections/header.liquid. The crossfade itself is pure CSS
@@ -11,16 +14,17 @@
 
   @param is_logo_reveal {Boolean} - whether the "logo_reveal" style is active
   @param sticky_logo {Object} - image used for the reveal style's compact logo
+  @param hover_logo {Object} - optional, standard style only: image shown on hover/focus
   @param logo_sizes {String} - a precomputed <img sizes> attribute value
 
   @example
-  {% render 'header-logo', is_logo_reveal: false, sticky_logo: settings.logo, logo_sizes: logo_sizes %}
+  {% render 'header-logo', is_logo_reveal: false, sticky_logo: settings.logo, hover_logo: section.settings.hover_logo, logo_sizes: logo_sizes %}
 {% enddoc %}
 
 <div class="header__logo-wrap">
   <a
     href="{{ routes.root_url }}"
-    class="header__logo{% if is_logo_reveal %} header__logo--sticky{% endif %}"
+    class="header__logo{% if is_logo_reveal %} header__logo--sticky{% endif %}{% if hover_logo != blank and is_logo_reveal == false %} header__logo--has-hover{% endif %}"
     aria-label="{{ shop.name | escape }}"
   >
     {% if is_logo_reveal %}
@@ -42,12 +46,25 @@
             widths: '90,130,180,260,360,600',
             sizes: logo_sizes,
             alt: shop.name,
-            class: 'header__logo-image',
+            class: 'header__logo-image header__logo-image--default',
             loading: 'eager',
             fetchpriority: 'high'
         }}
       {% else %}
-        <span class="header__logo-text">{{ shop.name }}</span>
+        <span class="header__logo-text header__logo-text--default">{{ shop.name }}</span>
+      {% endif %}
+
+      {% if hover_logo != blank %}
+        {{
+          hover_logo
+          | image_url: width: 600
+          | image_tag:
+            widths: '90,130,180,260,360,600',
+            sizes: logo_sizes,
+            alt: shop.name,
+            class: 'header__logo-image header__logo-image--hover',
+            loading: 'eager'
+        }}
       {% endif %}
     {% endif %}
   </a>

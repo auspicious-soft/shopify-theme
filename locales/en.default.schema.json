@@ -91,6 +91,8 @@
     "hero_background_color_info": "Shown behind the image while it loads, and if no image is set",
     "hero_logo": "Hero logo",
     "hero_logo_info": "Falls back to Theme settings > Logo when left blank",
+    "hover_logo": "Hover logo",
+    "hover_logo_info": "Optional. Shown in place of the main logo on hover/focus. Sized the same as the main logo (Desktop/mobile logo width below), so use an image with a similar shape for a clean swap.",
     "horizontal_spacing": "Space between text and button",
     "icon": "Icon",
     "input_corner_radius": "Input corner radius",

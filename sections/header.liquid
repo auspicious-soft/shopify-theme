@@ -169,7 +169,7 @@
         {% render 'header-menu-toggle', section: section %}
       {% endif %}
       {% if logo_zone == 'start' %}
-        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, logo_sizes: logo_sizes %}
+        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, hover_logo: section.settings.hover_logo, logo_sizes: logo_sizes %}
       {% endif %}
       {% if show_horizontal_nav and nav_zone == 'start' %}
         {% render 'header-navigation', section: section %}
@@ -181,7 +181,7 @@
 
     <div class="header__zone header__zone--center">
       {% if logo_zone == 'center' %}
-        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, logo_sizes: logo_sizes %}
+        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, hover_logo: section.settings.hover_logo, logo_sizes: logo_sizes %}
       {% endif %}
       {% if show_horizontal_nav and nav_zone == 'center' %}
         {% render 'header-navigation', section: section %}
@@ -193,7 +193,7 @@
         {% render 'header-menu-toggle', section: section %}
       {% endif %}
       {% if logo_zone == 'end' %}
-        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, logo_sizes: logo_sizes %}
+        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, hover_logo: section.settings.hover_logo, logo_sizes: logo_sizes %}
       {% endif %}
       {% if show_horizontal_nav and nav_zone == 'end' %}
         {% render 'header-navigation', section: section %}
@@ -298,6 +298,13 @@
         { "value": "right", "label": "t:options.alignment.right" }
       ],
       "default": "center"
+    },
+    {
+      "type": "image_picker",
+      "id": "hover_logo",
+      "label": "t:labels.hover_logo",
+      "info": "t:labels.hover_logo_info",
+      "visible_if": "{{ section.settings.header_style == 'standard' }}"
     },
     {
       "type": "link_list",

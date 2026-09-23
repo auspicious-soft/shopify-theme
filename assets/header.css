@@ -38,18 +38,26 @@
   transform: translateY(-100%);
 }
 
+/* Sits below the announcement bar instead of covering it, when one is
+   present above the header. header.js measures the announcement bar's
+   rendered height (it varies with its own font size/padding settings)
+   and exposes it as --announcement-bar-height on the root element; it's
+   0px when no announcement bar exists. Only needed here (not on plain
+   .header--sticky) because overlay pulls the header out of document flow,
+   where it would otherwise ignore the announcement bar's height. */
 .header--overlay {
   position: absolute;
   inset-inline: 0;
-  top: 0;
+  top: var(--announcement-bar-height, 0px);
   --header-bg: transparent;
   --header-text: var(--header-overlay-text, var(--color-foreground));
   background-color: transparent;
 }
 
-/* .header--overlay.header--sticky {
+.header--overlay.header--sticky {
   position: fixed;
-} */
+  top: var(--announcement-bar-height, 0px);
+}
 
 /* Once header.js confirms the page has scrolled (past the top for a
    sticky header, or past the hero block for the logo-reveal style), the
@@ -129,6 +137,43 @@
   max-width: var(--header-logo-width-mobile, 90px);
   height: auto;
   max-height: calc(var(--header-height-mobile, 64px) - 1.25rem);
+}
+
+/* Hover logo (standard style only): the default and hover logos share the
+   same --header-logo-width(-mobile) box above, so swapping between them
+   on hover/focus is a plain opacity crossfade with no resize/jump. */
+.header__logo--has-hover {
+  position: relative;
+}
+
+.header__logo--has-hover .header__logo-image--hover {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.header__logo--has-hover .header__logo-image--default {
+  transition: opacity 0.2s ease;
+}
+
+.header__logo--has-hover:hover .header__logo-image--hover,
+.header__logo--has-hover:focus-visible .header__logo-image--hover {
+  opacity: 1;
+}
+
+.header__logo--has-hover:hover .header__logo-image--default,
+.header__logo--has-hover:focus-visible .header__logo-image--default {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header__logo-image--hover,
+  .header__logo-image--default {
+    transition: none;
+  }
 }
 
 .header__logo-text {
