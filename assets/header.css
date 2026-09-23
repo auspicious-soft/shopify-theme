@@ -67,9 +67,10 @@
    always present whenever `.is-scrolled` can appear (see watch_scroll in
    sections/header.liquid), so this only ever fires for overlay headers. */
 .header--overlay.is-scrolled {
-  --header-bg: var(--header-overlay-text);
+  color: var(--header-overlay-text);
   --header-text: var(--color-foreground);
   top:0px;
+  background-color: var(--header-sticky-bg);
 }
 
 /* Any sticky header gets a hairline "lifted off the page" shadow once
