@@ -162,42 +162,15 @@
 }
 
 /* ---------- Full-width hero logo (logo_reveal style only) ---------- */
-
 .header__hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: var(--header-hero-height, 60vh);
-  overflow: hidden;
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    top: 00px;
+    pointer-events: none;
 }
-
-.header__hero-logo-image {
-  display: block;
-  width: var(--header-hero-logo-width, 320px);
-  max-width: 70vw;
-  height: auto;
-  opacity: calc(1 - var(--header-hero-progress, 0));
-  transform: scale(calc(1 - (0.12 * var(--header-hero-progress, 0))));
-  will-change: opacity, transform;
-}
-
-.header__hero-logo-text {
-  font-size: clamp(2rem, 6vw, 4rem);
-  font-weight: 600;
-  opacity: calc(1 - var(--header-hero-progress, 0));
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .header__hero-logo-image,
-  .header__hero-logo-text {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 /* ---------- Desktop navigation ---------- */
 
 .header__navigation {
