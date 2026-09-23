@@ -37,6 +37,15 @@
       {% else %}
         <span class="header__logo-text">{{ shop.name }}</span>
       {% endif %}
+      {% if deafult_logo != blank %}
+        {{
+          deafult_logo
+          | image_url: width: 400
+          | image_tag: widths: '90,130,180,260,360', sizes: logo_sizes, alt: shop.name, class: 'header__logo-image', loading: 'eager'
+        }}
+      {% else %}
+        <span class="header__logo-text">{{ shop.name }}</span>
+      {% endif %}
     {% else %}
       {% if settings.logo != blank %}
         {{
@@ -52,20 +61,7 @@
         }}
       {% else %}
         <span class="header__logo-text header__logo-text--default">{{ shop.name }}</span>
-      {% endif %}
-
-      {% if hover_logo != blank %}
-        {{
-          hover_logo
-          | image_url: width: 600
-          | image_tag:
-            widths: '90,130,180,260,360,600',
-            sizes: logo_sizes,
-            alt: shop.name,
-            class: 'header__logo-image header__logo-image--hover',
-            loading: 'eager'
-        }}
-      {% endif %}
+      {% endif %}      
     {% endif %}
   </a>
 </div>
