@@ -47,9 +47,9 @@
   background-color: transparent;
 }
 
-.header--overlay.header--sticky {
+/* .header--overlay.header--sticky {
   position: fixed;
-}
+} */
 
 /* Once header.js confirms the page has scrolled (past the top for a
    sticky header, or past the hero block for the logo-reveal style), the
