@@ -86,7 +86,7 @@
     "header": {
       "type": "header",
       "settings": {
-        "header_style": "logo_reveal",
+        "header_style": "standard",
         "logo_position": "center",
         "menu": "",
         "menu_type": "horizontal",
