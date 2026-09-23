@@ -14,7 +14,7 @@
   background-color: var(--header-bg);
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
-.header-overlay{
+.header--overlay{
    color: var(--header-text);
 }
 .header a {
