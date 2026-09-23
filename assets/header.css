@@ -160,7 +160,26 @@
     transform: none;
   }
 }
+.header__hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    top: 00px;
+    pointer-events: none;
+}
 
+img.header__hero-logo-image {
+    width: calc(100% - 32px);
+    max-width: 100%;
+    height: auto;
+    transform: translate3d(0px, 80px, 0) scale(1);
+    transform-origin: top center;
+    transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+    will-change: transform;
+    z-index: -1;
+}
 /* ---------- Desktop navigation ---------- */
 
 .header__navigation {

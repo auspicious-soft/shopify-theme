@@ -203,14 +203,7 @@
       {% endif %}
     </div>
   </div>
-</header>
-
-{% comment %}
-  Markup only: no CSS or settings drive `.header__hero` or
-  `.header__hero-logo-image` in this theme. Style them in your own
-  stylesheet (or add a `{% stylesheet %}` block here).
-{% endcomment %}
-{% if is_logo_reveal %}
+  {% if is_logo_reveal %}
   <div class="header__hero color-{{ section.settings.color_scheme.id }}" id="HeaderHero-{{ section.id }}" data-header-hero>
     {% if hero_logo != blank %}
       {{ hero_logo | image_url: width: 1200 | image_tag: alt: shop.name, class: 'header__hero-logo-image', loading: 'eager', fetchpriority: 'high' }}
@@ -219,6 +212,9 @@
     {% endif %}
   </div>
 {% endif %}
+</header>
+
+
 
 {% render 'theme-panel' %}
 <theme-panel>
