@@ -1,34 +1,143 @@
 {% comment %}
-  Premium site header with a configurable logo position, a horizontal or
-  hamburger-only desktop menu, an optional sticky/overlay treatment, and a
-  slide-in drawer (shared with mobile) for navigation.
+  Site header with two selectable styles:
+
+  - "standard": a normal, static header. Desktop can show a horizontal menu
+    or a hamburger toggle (icon or text), placed left or right.
+  - "logo_reveal": the header bar starts with an empty logo slot; a large,
+    full-width logo block renders as its own "first section" right below
+    the header. Scrolling crossfades the big logo out and reveals a second,
+    compact logo inside the now-sticky header bar.
+
+  Both styles share layout (logo position, icons, drawer, nav styling) and
+  can independently go transparent/overlay on a per-template basis.
 
   CSS lives in assets/header.css and JS in assets/header.js, both loaded
   once from layout/theme.liquid since the header renders on every page.
 {% endcomment %}
 {% liquid
+  assign style = section.settings.header_style
+  assign is_logo_reveal = false
+  if style == 'logo_reveal'
+    assign is_logo_reveal = true
+  endif
+
   assign logo_position = section.settings.logo_position
   assign menu_type = section.settings.menu_type
-  assign enable_sticky = section.settings.enable_sticky
-  assign enable_overlay = section.settings.enable_overlay
+  assign hamburger_position = section.settings.hamburger_position
+
   assign show_horizontal_nav = false
   if menu_type == 'horizontal'
     assign show_horizontal_nav = true
   endif
 
+  # Style 2 is always sticky by definition (that's what lets the big hero
+  # logo hand off to the compact header logo on scroll).
+  assign is_sticky = section.settings.enable_sticky
+  if is_logo_reveal
+    assign is_sticky = true
+  endif
+
+  # Transparent/overlay header is configured per template rather than as a
+  # single global toggle.
+  assign enable_overlay = false
+  case template.name
+    when 'index'
+      assign enable_overlay = section.settings.overlay_on_home
+    when 'product'
+      assign enable_overlay = section.settings.overlay_on_product
+    when 'collection', 'list-collections'
+      assign enable_overlay = section.settings.overlay_on_collection
+    when 'page'
+      assign enable_overlay = section.settings.overlay_on_page
+    when 'blog', 'article'
+      assign enable_overlay = section.settings.overlay_on_blog
+  endcase
+
+  # Assign each header element to a layout zone (start/center/end). Zones
+  # are flex rows, so any combination of logo/nav/toggle sharing a zone
+  # lays out gracefully instead of fighting over one CSS Grid cell.
+  assign logo_zone = 'center'
+  if logo_position == 'left'
+    assign logo_zone = 'start'
+  elsif logo_position == 'right'
+    assign logo_zone = 'end'
+  endif
+
+  assign nav_zone = 'start'
+  if logo_zone == 'start'
+    assign nav_zone = 'center'
+  elsif logo_zone == 'end'
+    assign nav_zone = 'center'
+  endif
+
+  assign actions_zone = 'end'
+  if logo_zone == 'end'
+    assign actions_zone = 'start'
+  endif
+
+  # Liquid's `if` doesn't support parenthesised grouping, so this
+  # combined condition is precomputed here instead.
+  assign watch_scroll = false
+  if is_logo_reveal
+    assign watch_scroll = true
+  elsif is_sticky and enable_overlay
+    assign watch_scroll = true
+  endif
+
+  assign toggle_zone = 'start'
+  if hamburger_position == 'right'
+    assign toggle_zone = 'end'
+  endif
+
+  assign show_hamburger = false
+  if menu_type == 'hamburger'
+    assign show_hamburger = true
+  endif
+
+  # The toggle renders standalone in its own zone, unless that's the same
+  # zone `.header__actions` already occupies, in which case it renders
+  # alongside the icons instead (avoiding a duplicate).
+  assign toggle_shares_actions_zone = false
+  if toggle_zone == actions_zone
+    assign toggle_shares_actions_zone = true
+  endif
+
+  assign show_standalone_toggle_start = false
+  assign show_standalone_toggle_end = false
+  if show_hamburger and toggle_zone == 'start' and toggle_shares_actions_zone == false
+    assign show_standalone_toggle_start = true
+  elsif show_hamburger and toggle_zone == 'end' and toggle_shares_actions_zone == false
+    assign show_standalone_toggle_end = true
+  endif
+
+  assign show_toggle_in_actions_start = false
+  assign show_toggle_in_actions_end = false
+  if show_hamburger and toggle_shares_actions_zone and actions_zone == 'start'
+    assign show_toggle_in_actions_start = true
+  elsif show_hamburger and toggle_shares_actions_zone and actions_zone == 'end'
+    assign show_toggle_in_actions_end = true
+  endif
+
+  assign hero_logo_sizes = '(min-width: 989px) ' | append: section.settings.hero_logo_width | append: 'px, 70vw'
+
   # The `sizes` attribute needs real length values, not a CSS custom
   # property, so it's built from the two configurable logo widths directly.
   assign logo_sizes = '(min-width: 989px) ' | append: section.settings.desktop_logo_width | append: 'px, ' | append: section.settings.mobile_logo_width | append: 'px'
+
+  assign sticky_logo = section.settings.sticky_logo | default: settings.logo
+  assign hero_logo = section.settings.hero_logo | default: settings.logo
 %}
 
 <header
   class="
-    header header--logo-{{ logo_position }} header--menu-{{ menu_type }} full-width color-{{ section.settings.color_scheme.id }}
-    {%- if enable_sticky %} header--sticky{% endif -%}
+    header header--{{ style }} header--logo-{{ logo_position }} header--menu-{{ menu_type }} header--hamburger-{{ hamburger_position }}
+    full-width color-{{ section.settings.color_scheme.id }}
+    {%- if is_sticky %} header--sticky{% endif -%}
     {%- if enable_overlay %} header--overlay{% endif -%}
   "
   id="Header-{{ section.id }}"
-  {% if enable_sticky and enable_overlay %}data-watch-scroll{% endif %}
+  {% if watch_scroll %}data-watch-scroll{% endif %}
+  {% if is_logo_reveal %}data-header-hero-target="HeaderHero-{{ section.id }}"{% endif %}
   style="
     --header-height: {{ section.settings.header_height }}px;
     --header-height-mobile: {{ section.settings.mobile_header_height }}px;
@@ -40,111 +149,75 @@
     --header-nav-font-weight: {{ section.settings.nav_font_weight }};
     --header-nav-item-gap: {{ section.settings.nav_item_spacing }}px;
     --header-nav-hover-color: {{ section.settings.nav_hover_color }};
-    --header-logo-animation-duration: {{ section.settings.logo_animation_speed }}ms;
     --header-drawer-speed: {{ section.settings.drawer_animation_speed }}ms;
+    {% if is_logo_reveal %}
+      --header-logo-reveal-speed: {{ section.settings.logo_reveal_speed }}ms;
+    {% endif %}
     {% if enable_overlay %}
       --header-overlay-text: {{ section.settings.overlay_text_color }};
     {% endif %}
   "
 >
   <div class="header__inner page-width">
-    <div class="header__logo-wrap">
-      <a
-        href="{{ routes.root_url }}"
-        class="header__logo{% if section.settings.logo_animation_enabled %} header__logo--animated{% endif %}"
-        aria-label="{{ shop.name | escape }}"
-      >
-        {% if settings.logo != blank %}
-          {{
-            settings.logo
-            | image_url: width: 600
-            | image_tag:
-              widths: '90,130,180,260,360,600',
-              sizes: logo_sizes,
-              alt: shop.name,
-              class: 'header__logo-image',
-              loading: 'eager',
-              fetchpriority: 'high'
-          }}
-        {% else %}
-          <span class="header__logo-text">{{ shop.name }}</span>
-        {% endif %}
-      </a>
+    <div class="header__zone header__zone--start">
+      {% if show_standalone_toggle_start %}
+        {% render 'header-menu-toggle', section: section %}
+      {% endif %}
+      {% if logo_zone == 'start' %}
+        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, logo_sizes: logo_sizes %}
+      {% endif %}
+      {% if show_horizontal_nav and nav_zone == 'start' %}
+        {% render 'header-navigation', section: section %}
+      {% endif %}
+      {% if actions_zone == 'start' %}
+        {% render 'header-actions', section: section, show_toggle_here: show_toggle_in_actions_start %}
+      {% endif %}
     </div>
 
-    {% if show_horizontal_nav %}
-      <nav class="header__navigation" aria-label="{{ 'accessibility.primary_navigation' | t }}">
-        <ul class="header__menu" role="list">
-          {% for link in section.settings.menu.links %}
-            <li class="header__menu-item{% if link.links != blank %} header__menu-item--has-dropdown{% endif %}">
-              <a
-                href="{{ link.url }}"
-                class="header__menu-link"
-                {% if link.active %}aria-current="page"{% endif %}
-              >
-                {{ link.title }}
-              </a>
-              {% if link.links != blank %}
-                <ul class="header__dropdown" role="list">
-                  {% for child_link in link.links %}
-                    <li class="header__dropdown-item">
-                      <a href="{{ child_link.url }}" class="header__dropdown-link">{{ child_link.title }}</a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      </nav>
-    {% endif %}
-
-    <div class="header__actions">
-      {% if section.settings.show_search %}
-        {% render 'predictive-search' %}
+    <div class="header__zone header__zone--center">
+      {% if logo_zone == 'center' %}
+        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, logo_sizes: logo_sizes %}
       {% endif %}
-
-      {% if section.settings.show_account and shop.customer_accounts_enabled %}
-        <shopify-account menu="{{ settings.customer_account_menu }}" class="header__action header__account">
-          {{ 'icon-account.svg' | inline_asset_content }}
-        </shopify-account>
+      {% if show_horizontal_nav and nav_zone == 'center' %}
+        {% render 'header-navigation', section: section %}
       {% endif %}
+    </div>
 
-      {% if section.settings.show_cart %}
-        {% if settings.cart_type == 'drawer' %}
-          <button
-            type="button"
-            class="header__action header__cart"
-            data-panel-open="cart-panel-dialog"
-            aria-label="{{ 'cart.title' | t }}"
-          >
-            {% if section.settings.show_cart_count %}
-              <cart-count class="header__cart-count" {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</cart-count>
-            {% endif %}
-            {{ 'icon-cart.svg' | inline_asset_content }}
-          </button>
-        {% else %}
-          <a href="{{ routes.cart_url }}" class="header__action header__cart">
-            {% if section.settings.show_cart_count %}
-              <cart-count class="header__cart-count" {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</cart-count>
-            {% endif %}
-            {{ 'icon-cart.svg' | inline_asset_content }}
-          </a>
-        {% endif %}
+    <div class="header__zone header__zone--end">
+      {% if show_standalone_toggle_end %}
+        {% render 'header-menu-toggle', section: section %}
       {% endif %}
-
-      <button
-        type="button"
-        class="header__menu-toggle"
-        data-panel-open="HeaderDrawer-{{ section.id }}"
-        aria-haspopup="dialog"
-        aria-label="{{ 'accessibility.menu' | t }}"
-      >
-        {{ 'icon-menu.svg' | inline_asset_content }}
-      </button>
+      {% if logo_zone == 'end' %}
+        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, logo_sizes: logo_sizes %}
+      {% endif %}
+      {% if show_horizontal_nav and nav_zone == 'end' %}
+        {% render 'header-navigation', section: section %}
+      {% endif %}
+      {% if actions_zone == 'end' %}
+        {% render 'header-actions', section: section, show_toggle_here: show_toggle_in_actions_end %}
+      {% endif %}
     </div>
   </div>
 </header>
+
+{% if is_logo_reveal %}
+  <div
+    class="header__hero color-{{ section.settings.color_scheme.id }}"
+    id="HeaderHero-{{ section.id }}"
+    data-header-hero
+    style="--header-hero-height: {{ section.settings.hero_height }}vh; --header-hero-logo-width: {{ section.settings.hero_logo_width }}px;"
+  >
+    {% if hero_logo != blank %}
+      {{
+        hero_logo
+        | image_url: width: 1200
+        | image_tag: widths: '300,500,700,900,1200', sizes: hero_logo_sizes, alt: shop.name, class: 'header__hero-logo-image', loading: 'eager', fetchpriority: 'high'
+      }}
+    {% else %}
+      <span class="header__hero-logo-text">{{ shop.name }}</span>
+    {% endif %}
+  </div>
+{% endif %}
 
 {% render 'theme-panel' %}
 <theme-panel>
@@ -210,6 +283,16 @@
   "settings": [
     {
       "type": "select",
+      "id": "header_style",
+      "label": "t:labels.header_style",
+      "options": [
+        { "value": "standard", "label": "t:options.header_style.standard" },
+        { "value": "logo_reveal", "label": "t:options.header_style.logo_reveal" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "select",
       "id": "logo_position",
       "label": "t:labels.logo_position",
       "options": [
@@ -236,6 +319,35 @@
       "default": "horizontal"
     },
     {
+      "type": "select",
+      "id": "hamburger_position",
+      "label": "t:labels.hamburger_position",
+      "options": [
+        { "value": "left", "label": "t:options.left_right.left" },
+        { "value": "right", "label": "t:options.left_right.right" }
+      ],
+      "default": "left",
+      "visible_if": "{{ section.settings.menu_type == 'hamburger' }}"
+    },
+    {
+      "type": "select",
+      "id": "hamburger_display",
+      "label": "t:labels.hamburger_display",
+      "options": [
+        { "value": "icon", "label": "t:options.hamburger_display.icon" },
+        { "value": "text", "label": "t:options.hamburger_display.text" }
+      ],
+      "default": "icon",
+      "visible_if": "{{ section.settings.menu_type == 'hamburger' }}"
+    },
+    {
+      "type": "text",
+      "id": "hamburger_text",
+      "label": "t:labels.hamburger_text",
+      "default": "Menu",
+      "visible_if": "{{ section.settings.menu_type == 'hamburger' and section.settings.hamburger_display == 'text' }}"
+    },
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
@@ -243,24 +355,55 @@
     },
     {
       "type": "header",
-      "content": "t:labels.logo_animation"
+      "content": "t:labels.logo_reveal_settings",
+      "info": "t:labels.logo_reveal_settings_info"
     },
     {
-      "type": "checkbox",
-      "id": "logo_animation_enabled",
-      "label": "t:labels.enable",
-      "default": true
+      "type": "image_picker",
+      "id": "hero_logo",
+      "label": "t:labels.hero_logo",
+      "info": "t:labels.hero_logo_info",
+      "visible_if": "{{ section.settings.header_style == 'logo_reveal' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "sticky_logo",
+      "label": "t:labels.sticky_logo",
+      "info": "t:labels.sticky_logo_info",
+      "visible_if": "{{ section.settings.header_style == 'logo_reveal' }}"
     },
     {
       "type": "range",
-      "id": "logo_animation_speed",
-      "label": "t:labels.logo_animation_speed",
-      "min": 200,
-      "max": 2000,
-      "step": 100,
+      "id": "hero_height",
+      "label": "t:labels.hero_height",
+      "min": 30,
+      "max": 95,
+      "step": 5,
+      "unit": "vh",
+      "default": 60,
+      "visible_if": "{{ section.settings.header_style == 'logo_reveal' }}"
+    },
+    {
+      "type": "range",
+      "id": "hero_logo_width",
+      "label": "t:labels.hero_logo_width",
+      "min": 120,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "default": 320,
+      "visible_if": "{{ section.settings.header_style == 'logo_reveal' }}"
+    },
+    {
+      "type": "range",
+      "id": "logo_reveal_speed",
+      "label": "t:labels.logo_reveal_speed",
+      "min": 150,
+      "max": 900,
+      "step": 50,
       "unit": "ms",
-      "default": 900,
-      "visible_if": "{{ section.settings.logo_animation_enabled }}"
+      "default": 400,
+      "visible_if": "{{ section.settings.header_style == 'logo_reveal' }}"
     },
     {
       "type": "header",
@@ -270,20 +413,9 @@
       "type": "checkbox",
       "id": "enable_sticky",
       "label": "t:labels.sticky_header",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_overlay",
-      "label": "t:labels.header_overlay",
-      "default": false
-    },
-    {
-      "type": "color",
-      "id": "overlay_text_color",
-      "label": "t:labels.overlay_text_color",
-      "default": "#ffffff",
-      "visible_if": "{{ section.settings.enable_overlay }}"
+      "info": "t:labels.sticky_header_info",
+      "default": false,
+      "visible_if": "{{ section.settings.header_style == 'standard' }}"
     },
     {
       "type": "range",
@@ -344,6 +476,48 @@
       "step": 4,
       "unit": "px",
       "default": 16
+    },
+    {
+      "type": "header",
+      "content": "t:labels.transparent_header",
+      "info": "t:labels.transparent_header_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay_on_home",
+      "label": "t:labels.overlay_on_home",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay_on_product",
+      "label": "t:labels.overlay_on_product",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay_on_collection",
+      "label": "t:labels.overlay_on_collection",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay_on_page",
+      "label": "t:labels.overlay_on_page",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay_on_blog",
+      "label": "t:labels.overlay_on_blog",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "overlay_text_color",
+      "label": "t:labels.overlay_text_color",
+      "default": "#ffffff",
+      "visible_if": "{{ section.settings.overlay_on_home or section.settings.overlay_on_product or section.settings.overlay_on_collection or section.settings.overlay_on_page or section.settings.overlay_on_blog }}"
     },
     {
       "type": "header",

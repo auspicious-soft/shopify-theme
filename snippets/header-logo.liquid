@@ -1,0 +1,54 @@
+{% doc %}
+  Renders the header's logo slot.
+
+  - Standard style: the theme's logo (Theme settings > Logo), sized by the
+    header's own desktop/mobile logo width settings.
+  - Logo reveal style: starts hidden and crossfades in once the visitor
+    scrolls past the full-width hero logo block rendered by
+    sections/header.liquid. The crossfade itself is pure CSS
+    (assets/header.css), driven by the `is-scrolled` class that
+    assets/header.js toggles on the header element.
+
+  @param is_logo_reveal {Boolean} - whether the "logo_reveal" style is active
+  @param sticky_logo {Object} - image used for the reveal style's compact logo
+  @param logo_sizes {String} - a precomputed <img sizes> attribute value
+
+  @example
+  {% render 'header-logo', is_logo_reveal: false, sticky_logo: settings.logo, logo_sizes: logo_sizes %}
+{% enddoc %}
+
+<div class="header__logo-wrap">
+  <a
+    href="{{ routes.root_url }}"
+    class="header__logo{% if is_logo_reveal %} header__logo--sticky{% endif %}"
+    aria-label="{{ shop.name | escape }}"
+  >
+    {% if is_logo_reveal %}
+      {% if sticky_logo != blank %}
+        {{
+          sticky_logo
+          | image_url: width: 400
+          | image_tag: widths: '90,130,180,260,360', sizes: logo_sizes, alt: shop.name, class: 'header__logo-image', loading: 'eager'
+        }}
+      {% else %}
+        <span class="header__logo-text">{{ shop.name }}</span>
+      {% endif %}
+    {% else %}
+      {% if settings.logo != blank %}
+        {{
+          settings.logo
+          | image_url: width: 600
+          | image_tag:
+            widths: '90,130,180,260,360,600',
+            sizes: logo_sizes,
+            alt: shop.name,
+            class: 'header__logo-image',
+            loading: 'eager',
+            fetchpriority: 'high'
+        }}
+      {% else %}
+        <span class="header__logo-text">{{ shop.name }}</span>
+      {% endif %}
+    {% endif %}
+  </a>
+</div>

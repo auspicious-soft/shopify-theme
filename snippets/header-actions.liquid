@@ -1,0 +1,51 @@
+{% doc %}
+  Renders the header's icon cluster (search, account, cart) plus the
+  hamburger menu toggle when it belongs in this zone. Rendered once, into
+  whichever layout zone (start/center/end) the section computed for
+  actions (see sections/header.liquid).
+
+  @param section {Object} - the header section
+  @param show_toggle_here {Boolean} - whether the menu toggle belongs in this zone
+
+  @example
+  {% render 'header-actions', section: section, show_toggle_here: true %}
+{% enddoc %}
+
+<div class="header__actions">
+  {% if section.settings.show_search %}
+    {% render 'predictive-search' %}
+  {% endif %}
+
+  {% if section.settings.show_account and shop.customer_accounts_enabled %}
+    <shopify-account menu="{{ settings.customer_account_menu }}" class="header__action header__account">
+      {{ 'icon-account.svg' | inline_asset_content }}
+    </shopify-account>
+  {% endif %}
+
+  {% if section.settings.show_cart %}
+    {% if settings.cart_type == 'drawer' %}
+      <button
+        type="button"
+        class="header__action header__cart"
+        data-panel-open="cart-panel-dialog"
+        aria-label="{{ 'cart.title' | t }}"
+      >
+        {% if section.settings.show_cart_count %}
+          <cart-count class="header__cart-count" {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</cart-count>
+        {% endif %}
+        {{ 'icon-cart.svg' | inline_asset_content }}
+      </button>
+    {% else %}
+      <a href="{{ routes.cart_url }}" class="header__action header__cart">
+        {% if section.settings.show_cart_count %}
+          <cart-count class="header__cart-count" {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</cart-count>
+        {% endif %}
+        {{ 'icon-cart.svg' | inline_asset_content }}
+      </a>
+    {% endif %}
+  {% endif %}
+
+  {% if show_toggle_here %}
+    {% render 'header-menu-toggle', section: section %}
+  {% endif %}
+</div>

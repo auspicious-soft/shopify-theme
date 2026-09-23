@@ -1,0 +1,27 @@
+{% doc %}
+  Renders the button that opens the header's navigation drawer, shown
+  whenever Header settings > Desktop menu is set to "Hamburger menu" (and
+  always on mobile, regardless of that setting). Displays either an icon or
+  a text label per Header settings > Hamburger display.
+
+  @param section {Object} - the header section
+
+  @example
+  {% render 'header-menu-toggle', section: section %}
+{% enddoc %}
+
+<button
+  type="button"
+  class="header__menu-toggle{% if section.settings.hamburger_display == 'text' %} header__menu-toggle--text{% endif %}"
+  data-panel-open="HeaderDrawer-{{ section.id }}"
+  aria-haspopup="dialog"
+  {% if section.settings.hamburger_display != 'text' %}
+    aria-label="{{ 'accessibility.menu' | t }}"
+  {% endif %}
+>
+  {% if section.settings.hamburger_display == 'text' %}
+    <span class="header__menu-toggle-text">{{ section.settings.hamburger_text | default: 'Menu' }}</span>
+  {% else %}
+    {{ 'icon-menu.svg' | inline_asset_content }}
+  {% endif %}
+</button>
