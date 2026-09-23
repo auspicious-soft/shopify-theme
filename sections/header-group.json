@@ -115,6 +115,7 @@
         "overlay_on_page": false,
         "overlay_on_blog": false,
         "overlay_text_color": "#000000",
+        "transparent_logo": "shopify://shop_images/White_1.png",
         "show_search": true,
         "show_account": true,
         "show_cart": true,
