@@ -57,15 +57,6 @@
   position: fixed;
   top: var(--announcement-bar-height, 0px);
 }
-
-/* Only an overlay header needs a color swap on scroll: it starts
-   transparent and needs to become solid once stuck. A plain (non-overlay)
-   sticky header was never transparent, so it must keep showing the
-   merchant's chosen color scheme the whole time — it must NOT switch to
-   the sticky background color, or every color scheme would look
-   "broken"/ignored the moment the page is scrolled. `.header--sticky` is
-   always present whenever `.is-scrolled` can appear (see watch_scroll in
-   sections/header.liquid), so this only ever fires for overlay headers. */
 .header--overlay.is-scrolled {
   color: var(--header-overlay-text);
   --header-text: var(--color-foreground);
