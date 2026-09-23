@@ -21,6 +21,16 @@
     endif
   endfor
 
+  # `content_for 'blocks'` can only appear once per Liquid file, so it's
+  # rendered a single time here and reused (marquee even reuses it twice,
+  # for its decorative looping duplicate) as a plain string below.
+  assign rendered_blocks = ''
+  if slide_count > 0 and mode != 'static'
+    capture rendered_blocks
+      content_for 'blocks'
+    endcapture
+  endif
+
   case section.settings.marquee_separator
     when 'none'
       assign separator_char = ''
@@ -97,11 +107,12 @@
             <div class="announcement-bar__marquee">
               <div class="announcement-bar__marquee-track">
                 <div class="announcement-bar__marquee-group">
-                  {% content_for 'blocks' %}
+                  {{ rendered_blocks }}
                 </div>
-                {% # Duplicate, decorative copy that makes the CSS loop seamless regardless of item count or width. %}
+                {% # Decorative, duplicate copy that makes the CSS loop seamless
+                   # regardless of item count or width. %}
                 <div class="announcement-bar__marquee-group" aria-hidden="true" inert>
-                  {% content_for 'blocks' %}
+                  {{ rendered_blocks }}
                 </div>
               </div>
             </div>
@@ -137,7 +148,7 @@
                   style="animation: announcement-bar-slide-{{ section.id }} {{ total_ms }}ms ease-in-out infinite {{ slider_animation_direction }};"
                 {% endif %}
               >
-                {% content_for 'blocks' %}
+                {{ rendered_blocks }}
               </div>
             </div>
 
