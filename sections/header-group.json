@@ -88,10 +88,10 @@
       "settings": {
         "header_style": "logo_reveal",
         "logo_position": "center",
-        "menu": "",
-        "menu_type": "horizontal",
+        "menu": "main-menu",
+        "menu_type": "hamburger",
         "hamburger_position": "left",
-        "hamburger_display": "icon",
+        "hamburger_display": "text",
         "hamburger_text": "Menu",
         "color_scheme": "",
         "hero_logo": "shopify://shop_images/Layer_1.png",
