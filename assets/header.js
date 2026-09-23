@@ -34,7 +34,13 @@
   if (window.__headerScrollBound) return;
   window.__headerScrollBound = true;
 
-  var SCROLL_THRESHOLD = 8;
+  // Any scroll at all counts as "scrolled" for a plain sticky/overlay
+  // header, so `is-scrolled` (and whatever it triggers in header.css)
+  // reacts on the very first scroll instead of waiting for a scroll
+  // distance. This doesn't affect the Logo reveal style, which
+  // intentionally waits until the visitor has scrolled past the full
+  // hero block (see the `hero` branch below).
+  var SCROLL_THRESHOLD = 0;
 
   function updateAnnouncementBarHeight() {
     var bar = document.querySelector('.announcement-bar');
