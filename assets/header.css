@@ -178,7 +178,13 @@
     transition: none;
   }
 }
+.index .header--overlay .header__logo.header__logo--default {
+    opacity: 0;
+}
 
+.index .header--overlay:hover .header__logo.header__logo--default {
+    opacity: 1;
+}
 .header__logo-text {
   font-size: 1.25rem;
   font-weight: 600;
