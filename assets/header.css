@@ -65,10 +65,10 @@
    background color, normal text/icon color (even over an overlay), and a
    hairline shadow to lift it off the page content. */
 .header--sticky.is-scrolled {
-   --header-bg: var(--header-sticky-bg, var(--color-background));
-    --header-text: var(--color-foreground);
-    box-shadow: 0 1px 0 0 color-mix(in srgb, var(--color-border) 60%, transparent);
-    top: 0px;
+  --header-bg: var(--header-sticky-bg, var(--color-background));
+  --header-text: var(--color-foreground);
+  box-shadow: 0 1px 0 0 color-mix(in srgb, var(--color-border) 60%, transparent);
+  top: 0px;
     background: var(--header-bg);
 }
 
