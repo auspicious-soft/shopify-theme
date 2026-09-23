@@ -52,7 +52,7 @@
       ],
       "name": "t:general.announcement_bar",
       "settings": {
-        "layout_mode": "marquee",
+        "layout_mode": "slider",
         "marquee_speed": 20,
         "marquee_direction": "left",
         "marquee_gap": 40,
