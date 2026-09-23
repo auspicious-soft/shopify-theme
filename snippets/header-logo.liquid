@@ -58,7 +58,8 @@
 
   <a
     href="{{ routes.root_url }}"
-    class="header__logo header__logo--default"    
+    class="header__logo header__logo--default"
+    aria-label="{{ shop.name | escape }}"
   >
     {% if settings.logo != blank %}
       {{
