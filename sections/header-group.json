@@ -50,7 +50,6 @@
         "announcement_item_KyfJ8e",
         "announcement_item_g4EMQ8"
       ],
-      "disabled": true,
       "name": "t:general.announcement_bar",
       "settings": {
         "layout_mode": "marquee",
