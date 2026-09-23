@@ -52,7 +52,7 @@
       ],
       "name": "t:general.announcement_bar",
       "settings": {
-        "layout_mode": "slider",
+        "layout_mode": "marquee",
         "marquee_speed": 20,
         "marquee_direction": "left",
         "marquee_gap": 40,
@@ -60,13 +60,13 @@
         "marquee_pause_on_hover": true,
         "marquee_text_alignment": "left",
         "slider_autoplay": true,
-        "slider_duration": 5,
+        "slider_duration": 3,
         "slider_transition_speed": 500,
-        "slider_direction": "down",
+        "slider_direction": "up",
         "slider_pause_on_hover": true,
         "slider_text_alignment": "center",
         "static_text": "Free shipping on orders above $50",
-        "static_enable_button": true,
+        "static_enable_button": false,
         "static_button_text": "Shop now",
         "static_button_url": "shopify://collections",
         "static_text_alignment": "center",
@@ -79,8 +79,8 @@
         "text_color": "#ffffff",
         "font_size": 14,
         "font_weight": "400",
-        "padding_top": 12,
-        "padding_bottom": 12
+        "padding_top": 10,
+        "padding_bottom": 10
       }
     },
     "header": {
