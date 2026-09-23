@@ -59,17 +59,23 @@
   top: var(--announcement-bar-height, 0px);
 }
 
-/* Once header.js confirms the page has scrolled (past the top for a
-   sticky header, or past the hero block for the logo-reveal style), the
-   header switches to its solid "stuck" appearance: the configured sticky
-   background color, normal text/icon color (even over an overlay), and a
-   hairline shadow to lift it off the page content. */
+/* Only an overlay header needs a color swap on scroll: it starts
+   transparent and needs to become solid once stuck. A plain (non-overlay)
+   sticky header was never transparent, so it must keep showing the
+   merchant's chosen color scheme the whole time — it must NOT switch to
+   the sticky background color, or every color scheme would look
+   "broken"/ignored the moment the page is scrolled. `.header--sticky` is
+   always present whenever `.is-scrolled` can appear (see watch_scroll in
+   sections/header.liquid), so this only ever fires for overlay headers. */
+.header--overlay.is-scrolled {
+  --header-bg: var(--header-sticky-bg, var(--color-background));
+  --header-text: var(--color-foreground);
+}
+
+/* Any sticky header gets a hairline "lifted off the page" shadow once
+   stuck, regardless of overlay. */
 .header--sticky.is-scrolled {
-   --header-bg: var(--header-sticky-bg, var(--color-background));
-    --header-text: var(--color-foreground);
-    box-shadow: 0 1px 0 0 color-mix(in srgb, var(--color-border) 60%, transparent);
-    top: 0px;
-    background: var(--header-bg);
+  box-shadow: 0 1px 0 0 color-mix(in srgb, var(--color-border) 60%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
