@@ -90,14 +90,14 @@
     "header": {
       "type": "header",
       "settings": {
-        "header_style": "standard",
+        "header_style": "logo_reveal",
         "logo_position": "center",
         "menu": "main-menu",
         "menu_type": "hamburger",
         "hamburger_position": "left",
         "hamburger_display": "text",
         "hamburger_text": "Menu",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "hero_logo": "shopify://shop_images/Layer_1.png",
         "sticky_logo": "shopify://shop_images/logo.png",
         "logo_reveal_speed": 400,
