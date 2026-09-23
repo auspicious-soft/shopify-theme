@@ -59,12 +59,9 @@ a {
  * outline style for de-emphasized actions. Both read from the same color
  * scheme, so they stay correct inside any `.color-{scheme}` wrapper.
  */
-button,
-.button,
+
 .button--primary,
-.button--secondary,
-input[type="submit"],
-input[type="button"] {
+.button--secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
