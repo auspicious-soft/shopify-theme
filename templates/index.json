@@ -29,9 +29,15 @@
         "button_url": "",
         "button_color_scheme": ""
       }
+    },
+    "hello_world_e8xQDH": {
+      "type": "hello-world",
+      "name": "Hello World Template",
+      "settings": {}
     }
   },
   "order": [
-    "hero_banner_YzGz9c"
+    "hero_banner_YzGz9c",
+    "hello_world_e8xQDH"
   ]
 }
