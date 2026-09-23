@@ -60,9 +60,9 @@
         "marquee_pause_on_hover": true,
         "marquee_text_alignment": "left",
         "slider_autoplay": true,
-        "slider_duration": 5,
+        "slider_duration": 3,
         "slider_transition_speed": 500,
-        "slider_direction": "down",
+        "slider_direction": "up",
         "slider_pause_on_hover": true,
         "slider_text_alignment": "center",
         "static_text": "Free shipping on orders above $50",
@@ -79,8 +79,8 @@
         "text_color": "#ffffff",
         "font_size": 14,
         "font_weight": "400",
-        "padding_top": 12,
-        "padding_bottom": 12
+        "padding_top": 6,
+        "padding_bottom": 6
       }
     },
     "header": {
