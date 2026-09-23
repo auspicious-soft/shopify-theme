@@ -12,10 +12,11 @@
   z-index: 50;
   width: 100%;
   background-color: var(--header-bg);
-  color: var(--header-text);
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
-
+.header-overlay{
+   color: var(--header-text);
+}
 .header a {
   color: inherit;
   text-decoration: none;
