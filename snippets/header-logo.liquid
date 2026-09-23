@@ -61,9 +61,9 @@
     class="header__logo header__logo--default"
     aria-label="{{ shop.name | escape }}"
   >
-    {% if deafult_logo != blank %}
+    {% if settings.logo != blank %}
       {{
-        deafult_logo
+        settings.logo
         | image_url: width: 400
         | image_tag: widths: '90,130,180,260,360', sizes: logo_sizes, alt: shop.name, class: 'header__logo-image', loading: 'eager'
       }}
