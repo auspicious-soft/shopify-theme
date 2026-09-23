@@ -226,7 +226,9 @@
 .header__logo--has-hover:focus-visible .header__logo-image--default {
   opacity: 0;
 }
-
+.index .header--logo_reveal .header__logo--transparent {
+    display: none;
+}
 @media (prefers-reduced-motion: reduce) {
   .header__logo-image--hover,
   .header__logo-image--default {
