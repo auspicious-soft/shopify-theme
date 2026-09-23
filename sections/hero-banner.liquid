@@ -65,7 +65,7 @@
       {% if section.settings.enable_button and section.settings.button_text != blank %}
         <a
           href="{{ section.settings.button_url | default: '#' }}"
-          class="button hero-banner__button color-{{ section.settings.button_color_scheme.id }}"
+          class="button button--{{ section.settings.button_style }} hero-banner__button color-{{ section.settings.button_color_scheme.id }}"
         >
           {{ section.settings.button_text }}
         </a>
@@ -264,6 +264,17 @@
       "type": "url",
       "id": "button_url",
       "label": "t:labels.button_url",
+      "visible_if": "{{ section.settings.enable_button }}"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:labels.button_style",
+      "options": [
+        { "value": "primary", "label": "t:options.button_style.primary" },
+        { "value": "secondary", "label": "t:options.button_style.secondary" }
+      ],
+      "default": "primary",
       "visible_if": "{{ section.settings.enable_button }}"
     },
     {

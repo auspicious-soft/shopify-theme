@@ -61,6 +61,7 @@
     "button_border_color": "Button border color",
     "button_corner_radius": "Button corner radius",
     "button_settings": "Button",
+    "button_style": "Button style",
     "button_text": "Button text",
     "button_text_color": "Button text color",
     "button_url": "Button link",
@@ -162,6 +163,10 @@
       "marquee": "Horizontal marquee",
       "slider": "Vertical slider",
       "static": "Static"
+    },
+    "button_style": {
+      "primary": "Primary",
+      "secondary": "Secondary"
     },
     "direction": {
       "horizontal": "Horizontal",

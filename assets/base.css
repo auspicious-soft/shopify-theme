@@ -52,8 +52,16 @@ a {
   color: var(--color-link);
 }
 
+/**
+ * Buttons come in two variants, matching Dawn's `.button`/`.button--secondary`
+ * convention: primary is solid-filled (the default for any bare <button> or
+ * .button, so existing markup keeps working unchanged); secondary is an
+ * outline style for de-emphasized actions. Both read from the same color
+ * scheme, so they stay correct inside any `.color-{scheme}` wrapper.
+ */
 button,
 .button,
+.button--primary,
 input[type="submit"],
 input[type="button"] {
   background-color: var(--color-button-background);
@@ -63,6 +71,17 @@ input[type="button"] {
   border-color: color-mix(in srgb, var(--color-button-text) var(--style-border-opacity-buttons), transparent);
   border-radius: var(--style-border-radius-buttons);
   box-shadow: var(--style-shadow-buttons);
+  cursor: pointer;
+}
+
+.button--secondary {
+  background-color: transparent;
+  color: var(--color-link);
+  border-width: var(--style-border-thickness-buttons);
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--color-link) var(--style-border-opacity-buttons), transparent);
+  border-radius: var(--style-border-radius-buttons);
+  box-shadow: none;
   cursor: pointer;
 }
 
