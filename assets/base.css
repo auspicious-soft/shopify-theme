@@ -62,6 +62,24 @@ a {
 button,
 .button,
 .button--primary,
+.button--secondary,
+input[type="submit"],
+input[type="button"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 9rem;
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button,
+.button,
+.button--primary,
 input[type="submit"],
 input[type="button"] {
   background-color: var(--color-button-background);
@@ -71,7 +89,6 @@ input[type="button"] {
   border-color: color-mix(in srgb, var(--color-button-text) var(--style-border-opacity-buttons), transparent);
   border-radius: var(--style-border-radius-buttons);
   box-shadow: var(--style-shadow-buttons);
-  cursor: pointer;
 }
 
 .button--secondary {
@@ -82,7 +99,6 @@ input[type="button"] {
   border-color: color-mix(in srgb, var(--color-link) var(--style-border-opacity-buttons), transparent);
   border-radius: var(--style-border-radius-buttons);
   box-shadow: none;
-  cursor: pointer;
 }
 
 hr {
