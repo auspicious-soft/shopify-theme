@@ -106,7 +106,7 @@
         "mobile_logo_width": 90,
         "desktop_padding_inline": 40,
         "mobile_padding_inline": 16,
-        "overlay_on_home": true,
+        "overlay_on_home": false,
         "overlay_on_product": false,
         "overlay_on_collection": false,
         "overlay_on_page": false,
