@@ -121,7 +121,7 @@
         "show_account": true,
         "show_cart": true,
         "show_cart_count": true,
-        "drawer_position": "right",
+        "drawer_position": "left",
         "drawer_animation_speed": 400,
         "nav_font_size": 15,
         "nav_font_weight": "500",
