@@ -114,7 +114,7 @@
         "overlay_on_collection": false,
         "overlay_on_page": false,
         "overlay_on_blog": false,
-        "overlay_text_color": "#000000",
+        "overlay_text_color": "#FFFFFF",
         "show_search": true,
         "show_account": true,
         "show_cart": true,
