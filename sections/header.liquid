@@ -16,13 +16,21 @@
 {% endcomment %}
 {% liquid
   assign style = section.settings.header_style
+  # Header style 2 ("logo_reveal"): the default logo and the compact sticky
+  # logo are both always rendered into the HTML, on every template, and
+  # CSS (assets/header.css, driven by the `.is-scrolled` class assets/
+  # header.js toggles) decides which one is visible.
   assign is_logo_reveal = false
-  # The logo-reveal (hero + sticky logo) treatment only makes sense on the
-  # homepage; the header section is shared sitewide, so every other
-  # template always falls back to the standard logo regardless of this
-  # setting.
-  if style == 'logo_reveal' and template.name == 'index'
+  if style == 'logo_reveal'
     assign is_logo_reveal = true
+  endif
+
+  # The full-width hero logo block is a homepage-only "first section" look
+  # and only makes sense there; every other template just gets the header
+  # bar's default/sticky logos above.
+  assign show_hero = false
+  if is_logo_reveal and template.name == 'index'
+    assign show_hero = true
   endif
 
   assign logo_position = section.settings.logo_position
@@ -34,8 +42,9 @@
     assign show_horizontal_nav = true
   endif
 
-  # Style 2 is always sticky by definition (that's what lets the big hero
-  # logo hand off to the compact header logo on scroll).
+  # Style 2 is always sticky by definition, on every template, so the
+  # default/sticky logo swap has an `.is-scrolled` class to key off of even
+  # on pages without the homepage's hero logo.
   assign sticky_type = section.settings.sticky_header_type
   assign is_sticky = false
   assign hide_on_scroll = false
@@ -145,7 +154,7 @@
   id="Header-{{ section.id }}"
   {% if watch_scroll %}data-watch-scroll{% endif %}
   {% if hide_on_scroll %}data-hide-on-scroll{% endif %}
-  {% if is_logo_reveal %}data-header-hero-target="HeaderHero-{{ section.id }}"{% endif %}
+  {% if show_hero %}data-header-hero-target="HeaderHero-{{ section.id }}"{% endif %}
   style="
     --header-height: {{ section.settings.header_height }}px;
     --header-height-mobile: {{ section.settings.mobile_header_height }}px;
@@ -161,7 +170,7 @@
     {% if watch_scroll %}
       --header-sticky-bg: {{ section.settings.sticky_background_color }};
     {% endif %}
-    {% if is_logo_reveal %}
+    {% if show_hero %}
       --header-logo-reveal-speed: {{ section.settings.logo_reveal_speed }}ms;
     {% endif %}
     {% if enable_overlay %}
@@ -209,7 +218,7 @@
       {% endif %}
     </div>
   </div>
-  {% if is_logo_reveal %}
+  {% if show_hero %}
   <div class="header__hero color-{{ section.settings.color_scheme.id }}" id="HeaderHero-{{ section.id }}" data-header-hero>
     {% if hero_logo != blank %}
       {{ hero_logo | image_url: width: 1200 | image_tag: alt: shop.name, class: 'header__hero-logo-image', loading: 'eager', fetchpriority: 'high' }}
