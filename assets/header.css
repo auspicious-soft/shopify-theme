@@ -213,7 +213,6 @@
 .index .header--logo_reveal.header--overlay .header__logo.header__logo--default {
     opacity: 0;
 }
-
 .index .header--logo_reveal.header--overlay:hover .header__logo.header__logo--default {
     opacity: 1;
 }
