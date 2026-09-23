@@ -11,9 +11,84 @@
   "type": "header",
   "name": "t:general.header",
   "sections": {
+    "announcement_bar_ryDpbn": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_item_aGnJax": {
+          "type": "announcement-item",
+          "settings": {
+            "enabled": true,
+            "text": "Free shipping on orders above $50",
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
+        },
+        "announcement_item_KyfJ8e": {
+          "type": "announcement-item",
+          "settings": {
+            "enabled": true,
+            "text": "New collection available",
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
+        },
+        "announcement_item_g4EMQ8": {
+          "type": "announcement-item",
+          "settings": {
+            "enabled": true,
+            "text": "Get 10% off today",
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "announcement_item_aGnJax",
+        "announcement_item_KyfJ8e",
+        "announcement_item_g4EMQ8"
+      ],
+      "name": "t:general.announcement_bar",
+      "settings": {
+        "layout_mode": "slider",
+        "marquee_speed": 20,
+        "marquee_direction": "left",
+        "marquee_gap": 40,
+        "marquee_separator": "dot",
+        "marquee_pause_on_hover": true,
+        "marquee_text_alignment": "left",
+        "slider_autoplay": true,
+        "slider_duration": 5,
+        "slider_transition_speed": 500,
+        "slider_direction": "down",
+        "slider_pause_on_hover": true,
+        "slider_text_alignment": "center",
+        "static_text": "Free shipping on orders above $50",
+        "static_enable_button": false,
+        "static_button_text": "Shop now",
+        "static_button_url": "",
+        "static_text_alignment": "center",
+        "static_button_background": "#000000",
+        "static_button_text_color": "#ffffff",
+        "static_button_border_color": "#000000",
+        "static_button_border_radius": 4,
+        "static_horizontal_spacing": 24,
+        "background_color": "#111111",
+        "text_color": "#ffffff",
+        "font_size": 14,
+        "font_weight": "400",
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "menu": "",
+        "color_scheme": ""
+      }
     },
     "cart-panel": {
       "type": "cart-panel",
@@ -21,6 +96,7 @@
     }
   },
   "order": [
+    "announcement_bar_ryDpbn",
     "header",
     "cart-panel"
   ]
