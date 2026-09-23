@@ -101,7 +101,7 @@
         "hero_logo": "shopify://shop_images/Layer_1.png",
         "sticky_logo": "shopify://shop_images/logo.png",
         "logo_reveal_speed": 400,
-        "sticky_header_type": "on_scroll_up",
+        "sticky_header_type": "always",
         "sticky_background_color": "#ffffff",
         "header_height": 84,
         "mobile_header_height": 64,
