@@ -90,7 +90,7 @@
     "header": {
       "type": "header",
       "settings": {
-        "header_style": "standard",
+        "header_style": "logo_reveal",
         "logo_position": "center",
         "menu": "main-menu",
         "menu_type": "hamburger",
