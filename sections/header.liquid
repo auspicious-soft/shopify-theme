@@ -121,8 +121,6 @@
     assign show_toggle_in_actions_end = true
   endif
 
-  assign hero_logo_sizes = '(min-width: 989px) ' | append: section.settings.hero_logo_width | append: 'px, 70vw'
-
   # The `sizes` attribute needs real length values, not a CSS custom
   # property, so it's built from the two configurable logo widths directly.
   assign logo_sizes = '(min-width: 989px) ' | append: section.settings.desktop_logo_width | append: 'px, ' | append: section.settings.mobile_logo_width | append: 'px'
@@ -207,19 +205,15 @@
   </div>
 </header>
 
+{% comment %}
+  Markup only: no CSS or settings drive `.header__hero` or
+  `.header__hero-logo-image` in this theme. Style them in your own
+  stylesheet (or add a `{% stylesheet %}` block here).
+{% endcomment %}
 {% if is_logo_reveal %}
-  <div
-    class="header__hero color-{{ section.settings.color_scheme.id }}"
-    id="HeaderHero-{{ section.id }}"
-    data-header-hero
-    style="--header-hero-height: {{ section.settings.hero_height }}vh; --header-hero-logo-width: {{ section.settings.hero_logo_width }}px;"
-  >
+  <div class="header__hero color-{{ section.settings.color_scheme.id }}" id="HeaderHero-{{ section.id }}" data-header-hero>
     {% if hero_logo != blank %}
-      {{
-        hero_logo
-        | image_url: width: 1200
-        | image_tag: widths: '300,500,700,900,1200', sizes: hero_logo_sizes, alt: shop.name, class: 'header__hero-logo-image', loading: 'eager', fetchpriority: 'high'
-      }}
+      {{ hero_logo | image_url: width: 1200 | image_tag: alt: shop.name, class: 'header__hero-logo-image', loading: 'eager', fetchpriority: 'high' }}
     {% else %}
       <span class="header__hero-logo-text">{{ shop.name }}</span>
     {% endif %}
@@ -377,28 +371,6 @@
       "id": "sticky_logo",
       "label": "t:labels.sticky_logo",
       "info": "t:labels.sticky_logo_info",
-      "visible_if": "{{ section.settings.header_style == 'logo_reveal' }}"
-    },
-    {
-      "type": "range",
-      "id": "hero_height",
-      "label": "t:labels.hero_height",
-      "min": 30,
-      "max": 95,
-      "step": 5,
-      "unit": "vh",
-      "default": 60,
-      "visible_if": "{{ section.settings.header_style == 'logo_reveal' }}"
-    },
-    {
-      "type": "range",
-      "id": "hero_logo_width",
-      "label": "t:labels.hero_logo_width",
-      "min": 120,
-      "max": 600,
-      "step": 20,
-      "unit": "px",
-      "default": 320,
       "visible_if": "{{ section.settings.header_style == 'logo_reveal' }}"
     },
     {
