@@ -92,6 +92,10 @@
     --announcement-bar-font-weight: {{ section.settings.font_weight }};
     --announcement-bar-padding-top: {{ section.settings.padding_top }}px;
     --announcement-bar-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --announcement-bar-font-size-mobile: {{ section.settings.mobile_font_size }}px;
+    --announcement-bar-padding-top-mobile: {{ section.settings.mobile_padding_top }}px;
+    --announcement-bar-padding-bottom-mobile: {{ section.settings.mobile_padding_bottom }}px;
+    --announcement-bar-padding-inline-mobile: {{ section.settings.mobile_padding_inline }}px;
     {% case mode %}
       {% when 'marquee' %}
         --announcement-bar-speed: {{ section.settings.marquee_speed }}s;
@@ -379,6 +383,24 @@
     .announcement-bar__static--with-button .announcement-bar__static-content {
       flex-basis: 100%;
       text-align: center !important;
+    }
+
+    /* Mobile-only overrides; desktop keeps using the base
+       --announcement-bar-font-size/padding-top/padding-bottom vars above. */
+    .announcement-bar {
+      font-size: var(--announcement-bar-font-size-mobile, var(--announcement-bar-font-size));
+    }
+
+    .announcement-bar__inner {
+      padding-block: var(--announcement-bar-padding-top-mobile, var(--announcement-bar-padding-top))
+        var(--announcement-bar-padding-bottom-mobile, var(--announcement-bar-padding-bottom));
+    }
+
+    /* Marquee stays edge-to-edge by design (no .page-width there), so the
+       mobile horizontal padding setting only ever applies to the modes
+       that already use .page-width (slider/static). */
+    .announcement-bar__inner.page-width {
+      padding-inline: var(--announcement-bar-padding-inline-mobile, var(--page-margin, 20px));
     }
   }
 
@@ -703,6 +725,51 @@
       "step": 2,
       "unit": "px",
       "default": 12
+    },
+    {
+      "type": "header",
+      "content": "t:labels.mobile_settings",
+      "info": "t:labels.mobile_settings_info"
+    },
+    {
+      "type": "range",
+      "id": "mobile_font_size",
+      "label": "t:labels.mobile_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "t:labels.mobile_padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "t:labels.mobile_padding_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_inline",
+      "label": "t:labels.mobile_padding_inline",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
     }
   ],
   "presets": [

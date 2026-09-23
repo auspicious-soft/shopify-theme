@@ -20,15 +20,41 @@
     when 'middle'
       assign v_align = 'center'
   endcase
+
+  # "Adapt to image" sizes the banner from the image's own aspect ratio
+  # (height: auto + aspect-ratio) instead of a fixed viewport-height preset.
+  assign is_adapt = false
+  if section.settings.height_type == 'adapt'
+    assign is_adapt = true
+  endif
+
+  assign hero_height = '60vh'
+  case section.settings.height_type
+    when 'small'
+      assign hero_height = '40vh'
+    when 'medium'
+      assign hero_height = '60vh'
+    when 'large'
+      assign hero_height = '80vh'
+    when 'fullscreen'
+      assign hero_height = '100svh'
+  endcase
+
+  assign hero_aspect_ratio = section.settings.background_image.aspect_ratio | default: 1.78
 %}
 
 <div
-  class="hero-banner full-width"
+  class="hero-banner full-width{% if is_adapt %} hero-banner--adapt{% endif %}"
   style="
     --hero-banner-bg: {{ section.settings.background_color }};
     --hero-banner-text: {{ section.settings.text_color }};
+    --hero-banner-overlay-color: {{ section.settings.overlay_color }};
     --hero-banner-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
-    --hero-banner-height: {{ section.settings.section_height }}vh;
+    {% if is_adapt %}
+      --hero-banner-aspect-ratio: {{ hero_aspect_ratio }};
+    {% else %}
+      --hero-banner-height: {{ hero_height }};
+    {% endif %}
     --hero-banner-align: {{ h_align }};
     --hero-banner-justify: {{ v_align }};
     --hero-banner-text-align: {{ section.settings.content_position_horizontal }};
@@ -80,10 +106,19 @@
     display: flex;
     width: 100%;
     min-height: 22rem;
-    height: var(--hero-banner-height, 70vh);
+    height: var(--hero-banner-height, 60vh);
     overflow: hidden;
     background-color: var(--hero-banner-bg);
     color: var(--hero-banner-text);
+  }
+
+  /* "Adapt to image": height follows the image's own aspect ratio at the
+     current width instead of a fixed viewport-height preset. Works the
+     same on any screen size since it's driven by width, not a media
+     query; object-fit: cover below still guards against extreme crops. */
+  .hero-banner--adapt {
+    height: auto;
+    aspect-ratio: var(--hero-banner-aspect-ratio, 16 / 9);
   }
 
   .hero-banner__media {
@@ -103,7 +138,11 @@
   .hero-banner__overlay {
     position: absolute;
     inset: 0;
-    background-color: rgb(0 0 0 / var(--hero-banner-overlay-opacity, 0));
+    background-color: color-mix(
+      in srgb,
+      var(--hero-banner-overlay-color, #000000) calc(var(--hero-banner-overlay-opacity, 0) * 100%),
+      transparent
+    );
   }
 
   .hero-banner__inner {
@@ -160,6 +199,12 @@
       "default": "#151515"
     },
     {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "t:labels.overlay_color",
+      "default": "#000000"
+    },
+    {
       "type": "range",
       "id": "overlay_opacity",
       "label": "t:labels.overlay_opacity",
@@ -170,14 +215,17 @@
       "default": 10
     },
     {
-      "type": "range",
-      "id": "section_height",
-      "label": "t:labels.section_height",
-      "min": 40,
-      "max": 100,
-      "step": 5,
-      "unit": "vh",
-      "default": 70
+      "type": "select",
+      "id": "height_type",
+      "label": "t:labels.height_type",
+      "options": [
+        { "value": "adapt", "label": "t:options.height_type.adapt" },
+        { "value": "small", "label": "t:options.height_type.small" },
+        { "value": "medium", "label": "t:options.height_type.medium" },
+        { "value": "large", "label": "t:options.height_type.large" },
+        { "value": "fullscreen", "label": "t:options.height_type.fullscreen" }
+      ],
+      "default": "medium"
     },
     {
       "type": "header",
