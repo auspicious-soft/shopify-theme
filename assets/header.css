@@ -180,6 +180,10 @@ img.header__hero-logo-image {
     will-change: transform;
     z-index: -1;
 }
+header.is-scrolled img.header__hero-logo-image {
+    transform: translate3d(0px, -10px, 0) scale(0.2);
+    opacity: 0;
+}
 /* ---------- Desktop navigation ---------- */
 
 .header__navigation {
