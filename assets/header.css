@@ -194,11 +194,13 @@
 .header__logo--sticky {
   opacity: var(--header-hero-progress, 0);
   transform: translateY(calc((1 - var(--header-hero-progress, 0)) * 0.4rem));
+  display: none;
 }
 
 /* A short transition only smooths out the very last step to fully
    opaque/settled once scroll comes to rest at progress 1. */
 .header--logo_reveal.is-scrolled .header__logo--sticky {
+  display: inline-flex;
   transition: opacity var(--header-logo-reveal-speed, 400ms) ease, transform var(--header-logo-reveal-speed, 400ms) ease;
 }
 
