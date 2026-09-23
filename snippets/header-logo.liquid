@@ -53,8 +53,14 @@
       {% else %}
         <span class="header__logo-text header__logo-text--default">{{ shop.name }}</span>
       {% endif %}      
-    {% endif %}
+    {% endif %}    
+  </a>
 
+  <a
+    href="{{ routes.root_url }}"
+    class="header__logo header__logo--default"
+    aria-label="{{ shop.name | escape }}"
+  >
     {% if deafult_logo != blank %}
       {{
         deafult_logo
