@@ -152,6 +152,8 @@
     "sticky_background_color_info": "Only applies once the header becomes sticky/scrolled while transparent (see Transparent header below) — a header that was already solid keeps its normal color scheme instead",
     "sticky_header": "Sticky header",
     "sticky_header_info": "\"On scroll up\" hides the header while scrolling down and reveals it when scrolling back up. Always on (and always sticky) for the Logo reveal style.",
+    "search_color_scheme": "Search popup color scheme",
+    "search_color_scheme_info": "Used for the search popup instead of the header's own color scheme, so its text stays readable even when the header uses a transparent-only scheme",
     "sticky_logo": "Sticky header logo",
     "sticky_logo_info": "Shown in the header once scrolled past the hero logo. Falls back to Theme settings > Logo when left blank",
     "subheading": "Subheading",

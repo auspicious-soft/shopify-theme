@@ -78,19 +78,52 @@
   height: 1.1rem;
 }
 
-/* ---------- Popup shell ---------- */
+/* ---------- Popup shell ----------
+   The popup opens as a centered overlay (not a dropdown anchored to the
+   trigger icon), with its own dimmed backdrop. The backdrop is a real
+   sibling element of <theme-panel> (not a pseudo-element on the details),
+   so a click on it lands outside <theme-panel> and the existing
+   "click outside to close" handling in theme-panel.liquid closes the
+   popup with no extra JS needed here. */
 
 #predictive-search-dropdown {
   position: relative;
 }
 
+.predictive-search__backdrop {
+  display: none;
+}
+
+predictive-search:has(#predictive-search-dropdown[open]) .predictive-search__backdrop {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background-color: rgb(0 0 0 / 45%);
+  animation: predictive-search-backdrop-in 200ms ease;
+}
+
+@keyframes predictive-search-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* The panel carries its own color scheme class (Header settings > Search
+   popup color scheme), set in the Liquid, so its background/text/border
+   stay readable regardless of the header's own scheme (e.g. a
+   transparent-header scheme whose text color matches its background). */
 #predictive-search-dropdown[open] .predictive-search__panel {
-  position: absolute;
-  inset-inline-end: 0;
-  top: calc(100% + 0.75rem);
-  z-index: 30;
-  width: min(24rem, 90vw);
-  max-height: min(32rem, calc(100vh - var(--announcement-bar-height, 0px) - 6rem));
+  position: fixed;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 60;
+  width: min(28rem, 92vw);
+  max-height: min(34rem, 80vh);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -98,23 +131,27 @@
   color: var(--color-foreground);
   border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
   border-radius: var(--style-border-radius-popups, 12px);
-  box-shadow: 0 12px 32px -14px rgb(0 0 0 / 18%);
+  box-shadow: 0 24px 48px -18px rgb(0 0 0 / 28%);
   animation: predictive-search-in 200ms ease;
 }
 
 @keyframes predictive-search-in {
   from {
     opacity: 0;
-    transform: translateY(-6px);
+    transform: translate(-50%, calc(-50% - 8px)) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   #predictive-search-dropdown[open] .predictive-search__panel {
+    animation: none;
+  }
+
+  predictive-search:has(#predictive-search-dropdown[open]) .predictive-search__backdrop {
     animation: none;
   }
 }
@@ -259,32 +296,14 @@
   background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
 }
 
-/* ---------- Mobile ---------- */
+/* ---------- Mobile ----------
+   Stays centered like desktop, just closer to full-width and taller so
+   there's room to scroll results comfortably without touching the
+   viewport edges. */
 
 @media (max-width: 988.98px) {
   #predictive-search-dropdown[open] .predictive-search__panel {
-    position: fixed;
-    inset-inline: 0.75rem;
-    top: calc(var(--announcement-bar-height, 0px) + var(--header-height-mobile, 64px) + 0.5rem);
-    width: auto;
-    max-height: calc(100vh - var(--announcement-bar-height, 0px) - var(--header-height-mobile, 64px) - 1.5rem);
-    animation: predictive-search-in-mobile 200ms ease;
-  }
-
-  @keyframes predictive-search-in-mobile {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    #predictive-search-dropdown[open] .predictive-search__panel {
-      animation: none;
-    }
+    width: min(30rem, calc(100vw - 1.5rem));
+    max-height: min(38rem, 84vh);
   }
 }

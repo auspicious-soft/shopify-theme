@@ -13,7 +13,7 @@
 
 <div class="header__actions">
   {% if section.settings.show_search %}
-    {% render 'predictive-search' %}
+    {% render 'predictive-search', color_scheme: section.settings.search_color_scheme %}
   {% endif %}
 
   {% if section.settings.show_account and shop.customer_accounts_enabled %}
