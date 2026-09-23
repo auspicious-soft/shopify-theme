@@ -50,7 +50,8 @@
   inset-inline: 0;
   top: var(--announcement-bar-height, 0px);
   --header-bg: transparent;
-  /* --header-text: var(--header-overlay-text, var(--color-foreground)); */
+  --header-text: var(--header-overlay-text, var(--color-foreground));
+  background-color: transparent;
 }
 
 .header--overlay.header--sticky {
@@ -65,12 +66,13 @@
    the sticky background color, or every color scheme would look
    "broken"/ignored the moment the page is scrolled. `.header--sticky` is
    always present whenever `.is-scrolled` can appear (see watch_scroll in
-   sections/header.liquid), so this only ever fires for overlay headers. */
+   sections/header.liquid), so this only ever fires for overlay headers.
+   `top` is intentionally NOT set here: it must keep inheriting from
+   `.header--overlay.header--sticky` above (the announcement-bar-height
+   offset), not reset to 0. */
 .header--overlay.is-scrolled {
-  color: var(--header-overlay-text);
+  --header-bg: var(--header-sticky-bg, var(--color-background));
   --header-text: var(--color-foreground);
-  top:0px;
-  background-color: var(--header-sticky-bg);
 }
 
 /* Any sticky header gets a hairline "lifted off the page" shadow once

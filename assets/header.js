@@ -60,14 +60,21 @@
       var scrollY = window.scrollY;
 
       if (hero) {
+        // The hero logo's own fade/scale still tracks real scroll progress
+        // through the hero (0 to 1) continuously — that part is unchanged.
+        // `is-scrolled` (solid background + shadow) is intentionally NOT
+        // tied to that same progress value: gating it at progress >= 1
+        // meant waiting until the visitor had scrolled past the entire
+        // hero block before the header looked "stuck", which reads as a
+        // multi-scroll delay. It now reacts to the same first-scroll
+        // threshold as any other sticky header.
         var distance = Math.max(hero.offsetHeight, 1);
         var progress = Math.min(1, Math.max(0, scrollY / distance));
         hero.style.setProperty('--header-hero-progress', progress);
         header.style.setProperty('--header-hero-progress', progress);
-        header.classList.toggle('is-scrolled', progress >= 1);
-      } else {
-        header.classList.toggle('is-scrolled', scrollY > SCROLL_THRESHOLD);
       }
+
+      header.classList.toggle('is-scrolled', scrollY > SCROLL_THRESHOLD);
 
       if (hideOnScroll) {
         var scrollingDown = scrollY > lastScrollY;
