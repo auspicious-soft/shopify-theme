@@ -35,6 +35,7 @@
       }
 
       open() {
+        this.panel = this.panel?.isConnected ? this.panel : this.querySelector('dialog, details');
         if (!this.panel) return;
 
         if (this.panel.tagName === 'DIALOG') {
@@ -54,10 +55,11 @@
       }
 
       close() {
+        this.panel = this.panel?.isConnected ? this.panel : this.querySelector('dialog, details');
         if (!this.panel) return;
 
         if (this.panel.tagName === 'DIALOG') {
-          this.panel.close();
+          if (this.panel.open) this.panel.close();
         } else {
           this.panel.open = false;
           this.removeOutsideCloseListeners();

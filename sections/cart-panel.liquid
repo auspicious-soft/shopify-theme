@@ -126,6 +126,11 @@
     inset-block: 0;
     inset-inline-end: 0;
     inset-inline-start: auto;
+    right: 0;
+    left: auto;
+    top: 0;
+    bottom: 0;
+    transform: none;
     height: 100%;
     width: min(100%, 28rem);
     max-width: 100%;
@@ -139,6 +144,7 @@
     border-style: solid;
     border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-drawers), transparent);
     box-shadow: var(--style-shadow-drawers);
+    z-index: 100;
   }
 
   #cart-panel-dialog::backdrop {
