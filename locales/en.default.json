@@ -87,7 +87,9 @@
     "predictive": {
       "view_all": "View all results for",
       "no_results": "No results found",
-      "searching": "Searching..."
+      "searching": "Searching...",
+      "suggestions": "Suggestions",
+      "products": "Products"
     }
   }
 }

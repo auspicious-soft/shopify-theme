@@ -5,9 +5,14 @@
   renders a plain form that submits to the full search results page, with
   no JavaScript at all.
 
+  Styling lives in assets/predictive-search.css (loaded below); only the
+  fetch/render logic stays inline in the javascript tag further down.
+
   @example
   {% render 'predictive-search' %}
 {% enddoc %}
+
+{{ 'predictive-search.css' | asset_url | stylesheet_tag }}
 
 {% if settings.predictive_search_enabled %}
   {% render 'theme-panel' %}
@@ -18,6 +23,8 @@
     data-show-price="{{ settings.predictive_search_show_price }}"
     data-no-results="{{ 'search.predictive.no_results' | t }}"
     data-view-all="{{ 'search.predictive.view_all' | t }}"
+    data-suggestions-label="{{ 'search.predictive.suggestions' | t }}"
+    data-products-label="{{ 'search.predictive.products' | t }}"
   >
     <theme-panel>
       <details id="predictive-search-dropdown" class="predictive-search">
@@ -26,107 +33,37 @@
           <span class="visually-hidden">{{ 'search.submit' | t }}</span>
         </summary>
 
-        <form action="{{ routes.search_url }}" method="get" role="search" class="predictive-search__form">
-          <input
-            type="search"
-            name="q"
-            value="{{ search.terms }}"
-            placeholder="{{ 'search.placeholder' | t }}"
-            autocomplete="off"
-            data-predictive-search-input
-          >
-          <button type="submit">{{ 'search.submit' | t }}</button>
-        </form>
+        <div class="predictive-search__panel">
+          <form action="{{ routes.search_url }}" method="get" role="search" class="predictive-search__form">
+            <input
+              type="search"
+              name="q"
+              value="{{ search.terms }}"
+              placeholder="{{ 'search.placeholder' | t }}"
+              autocomplete="off"
+              class="predictive-search__input"
+              data-predictive-search-input
+            >
+            <button type="submit" class="predictive-search__submit">
+              {{ 'icon-search.svg' | inline_asset_content }}
+              <span class="visually-hidden">{{ 'search.submit' | t }}</span>
+            </button>
+          </form>
 
-        <div class="predictive-search__results" data-predictive-search-results hidden></div>
+          <div class="predictive-search__results" data-predictive-search-results hidden></div>
+        </div>
       </details>
     </theme-panel>
   </predictive-search>
 {% else %}
-  <form action="{{ routes.search_url }}" method="get" role="search" class="predictive-search__form">
-    <input type="search" name="q" value="{{ search.terms }}" placeholder="{{ 'search.placeholder' | t }}">
-    <button type="submit">{{ 'search.submit' | t }}</button>
+  <form action="{{ routes.search_url }}" method="get" role="search" class="predictive-search__form predictive-search__form--static">
+    <input type="search" name="q" value="{{ search.terms }}" placeholder="{{ 'search.placeholder' | t }}" class="predictive-search__input">
+    <button type="submit" class="predictive-search__submit">
+      {{ 'icon-search.svg' | inline_asset_content }}
+      <span class="visually-hidden">{{ 'search.submit' | t }}</span>
+    </button>
   </form>
 {% endif %}
-
-{% stylesheet %}
-  .predictive-search__trigger {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    list-style: none;
-    cursor: pointer;
-  }
-
-  .predictive-search__trigger::-webkit-details-marker {
-    display: none;
-  }
-
-  .predictive-search__trigger svg {
-    width: 1.5rem;
-  }
-
-  #predictive-search-dropdown[open] {
-    position: relative;
-  }
-
-  .predictive-search__form {
-    display: flex;
-    gap: 0.5rem;
-  }
-
-  #predictive-search-dropdown[open] .predictive-search__form {
-    position: absolute;
-    inset-inline-end: 0;
-    inset-block-start: 100%;
-    z-index: 2;
-    width: max(20rem, 100%);
-    background-color: var(--color-background);
-    padding: 0.75rem;
-    border-width: var(--style-border-thickness-popups);
-    border-style: solid;
-    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-popups), transparent);
-    border-radius: var(--style-border-radius-popups);
-    box-shadow: var(--style-shadow-popups);
-  }
-
-  .predictive-search__results {
-    position: absolute;
-    inset-inline-end: 0;
-    inset-block-start: calc(100% + 3rem);
-    z-index: 2;
-    width: max(20rem, 100%);
-    max-height: 60vh;
-    overflow-y: auto;
-    background-color: var(--color-background);
-    padding: 0.75rem;
-    border-width: var(--style-border-thickness-popups);
-    border-style: solid;
-    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-popups), transparent);
-    border-radius: var(--style-border-radius-popups);
-    box-shadow: var(--style-shadow-popups);
-  }
-
-  .predictive-search__result {
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
-    padding-block: 0.5rem;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .predictive-search__result-image {
-    width: 3rem;
-    flex: 0 0 auto;
-  }
-
-  .predictive-search__view-all {
-    display: block;
-    margin-top: 0.5rem;
-    text-align: center;
-  }
-{% endstylesheet %}
 
 {% javascript %}
   if (!customElements.get('predictive-search')) {
@@ -174,42 +111,65 @@
         const others = [...(results.collections || []), ...(results.pages || []), ...(results.articles || [])];
 
         if (products.length === 0 && others.length === 0) {
-          this.results.innerHTML = `<p>${this.escapeHtml(this.dataset.noResults)}</p>`;
+          this.results.innerHTML = `<p class="predictive-search__empty">${this.escapeHtml(this.dataset.noResults)}</p>`;
           this.results.hidden = false;
           return;
         }
 
-        const productItems = products
-          .map((product) => {
-            const vendor = this.showVendor && product.vendor ? `<p>${this.escapeHtml(product.vendor)}</p>` : '';
-            const price = this.showPrice ? `<p>${this.escapeHtml(product.price)}</p>` : '';
-            const imageUrl = product.featured_image ? this.escapeHtml(product.featured_image.url) : '';
-            return `
-              <a class="predictive-search__result" href="${this.escapeHtml(product.url)}">
-                <img class="predictive-search__result-image" src="${imageUrl}" alt="" width="60" height="60" loading="lazy">
-                <span>
-                  <p>${this.escapeHtml(product.title)}</p>
-                  ${vendor}
-                  ${price}
-                </span>
-              </a>
-            `;
-          })
-          .join('');
+        let suggestionsSection = '';
+        if (others.length) {
+          const suggestionItems = others
+            .map(
+              (item) =>
+                `<a class="predictive-search__suggestion" href="${this.escapeHtml(item.url)}">${this.escapeHtml(item.title)}</a>`
+            )
+            .join('');
+          suggestionsSection = `
+            <div class="predictive-search__section">
+              <p class="predictive-search__section-title">${this.escapeHtml(this.dataset.suggestionsLabel)}</p>
+              <div class="predictive-search__suggestions">${suggestionItems}</div>
+            </div>
+          `;
+        }
 
-        const otherItems = others
-          .map(
-            (item) =>
-              `<a class="predictive-search__result" href="${this.escapeHtml(item.url)}"><span>${this.escapeHtml(item.title)}</span></a>`
-          )
-          .join('');
+        let productsSection = '';
+        if (products.length) {
+          const productItems = products
+            .map((product) => {
+              const vendor = this.showVendor && product.vendor ? `<p class="predictive-search__product-vendor">${this.escapeHtml(product.vendor)}</p>` : '';
+              const price = this.showPrice ? `<p class="predictive-search__product-price">${this.escapeHtml(product.price)}</p>` : '';
+              const imageUrl = product.featured_image ? this.escapeHtml(product.featured_image.url) : '';
+              const image = imageUrl
+                ? `<img src="${imageUrl}" alt="" width="72" height="72" loading="lazy">`
+                : '';
+              return `
+                <a class="predictive-search__product" href="${this.escapeHtml(product.url)}">
+                  <span class="predictive-search__product-image">${image}</span>
+                  <span class="predictive-search__product-info">
+                    <p class="predictive-search__product-title">${this.escapeHtml(product.title)}</p>
+                    ${vendor}
+                    ${price}
+                  </span>
+                </a>
+              `;
+            })
+            .join('');
+          productsSection = `
+            <div class="predictive-search__section">
+              <p class="predictive-search__section-title">${this.escapeHtml(this.dataset.productsLabel)}</p>
+              <div class="predictive-search__products">${productItems}</div>
+            </div>
+          `;
+        }
 
         this.results.innerHTML = `
-          ${productItems}
-          ${otherItems}
-          <a class="predictive-search__view-all" href="${this.querySelector('form').action}?q=${encodeURIComponent(term)}">
-            ${this.escapeHtml(this.dataset.viewAll)} "${this.escapeHtml(term)}"
-          </a>
+          ${suggestionsSection}
+          ${productsSection}
+          <div class="predictive-search__footer">
+            <a class="predictive-search__view-all" href="${this.querySelector('form').action}?q=${encodeURIComponent(term)}">
+              ${this.escapeHtml(this.dataset.viewAll)} "${this.escapeHtml(term)}"
+            </a>
+          </div>
         `;
         this.results.hidden = false;
       }

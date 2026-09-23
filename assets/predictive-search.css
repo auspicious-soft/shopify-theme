@@ -1,0 +1,290 @@
+/**
+ * Predictive search popup.
+ * Namespaced under `.predictive-search` / `predictive-search`; only loaded
+ * when the search icon renders (see snippets/predictive-search.liquid).
+ * Structure and data come from that snippet's Liquid + `{% javascript %}` —
+ * this file only styles it.
+ */
+
+.predictive-search__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+.predictive-search__trigger::-webkit-details-marker {
+  display: none;
+}
+
+.predictive-search__trigger svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+/* ---------- Search field row (shared by the popup and the no-JS fallback) ---------- */
+
+.predictive-search__form {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.predictive-search__form--static {
+  padding-block: 0.25rem;
+}
+
+.predictive-search__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.95rem;
+  color: inherit;
+}
+
+.predictive-search__input:focus {
+  outline: none;
+}
+
+.predictive-search__input::placeholder {
+  color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
+}
+
+.predictive-search__submit {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
+  transition: color 0.15s ease;
+}
+
+.predictive-search__submit:hover,
+.predictive-search__submit:focus-visible {
+  color: var(--color-foreground);
+}
+
+.predictive-search__submit svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* ---------- Popup shell ---------- */
+
+#predictive-search-dropdown {
+  position: relative;
+}
+
+#predictive-search-dropdown[open] .predictive-search__panel {
+  position: absolute;
+  inset-inline-end: 0;
+  top: calc(100% + 0.75rem);
+  z-index: 30;
+  width: min(24rem, 90vw);
+  max-height: min(32rem, calc(100vh - var(--announcement-bar-height, 0px) - 6rem));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+  border-radius: var(--style-border-radius-popups, 12px);
+  box-shadow: 0 12px 32px -14px rgb(0 0 0 / 18%);
+  animation: predictive-search-in 200ms ease;
+}
+
+@keyframes predictive-search-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #predictive-search-dropdown[open] .predictive-search__panel {
+    animation: none;
+  }
+}
+
+.predictive-search__panel .predictive-search__form {
+  flex: 0 0 auto;
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+}
+
+/* ---------- Results ---------- */
+
+.predictive-search__results {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding-block: 0.25rem;
+}
+
+.predictive-search__empty {
+  margin: 0;
+  padding: 1.5rem 1.1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
+}
+
+.predictive-search__section + .predictive-search__section {
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
+}
+
+.predictive-search__section-title {
+  margin: 0;
+  padding: 0.85rem 1.1rem 0.35rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-foreground) 55%, transparent);
+}
+
+.predictive-search__suggestions,
+.predictive-search__products {
+  padding-bottom: 0.35rem;
+}
+
+/* ---------- Suggestions ---------- */
+
+.predictive-search__suggestion {
+  display: block;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.15s ease;
+}
+
+.predictive-search__suggestion:hover,
+.predictive-search__suggestion:focus-visible {
+  background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+}
+
+/* ---------- Products ---------- */
+
+.predictive-search__product {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.55rem 1.1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.15s ease;
+}
+
+.predictive-search__product:hover,
+.predictive-search__product:focus-visible {
+  background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+}
+
+.predictive-search__product-image {
+  flex: 0 0 auto;
+  display: block;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: calc(var(--style-border-radius-popups, 12px) * 0.5);
+  overflow: hidden;
+  background-color: color-mix(in srgb, var(--color-foreground) 4%, transparent);
+}
+
+.predictive-search__product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.predictive-search__product-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.predictive-search__product-title {
+  margin: 0;
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.predictive-search__product-vendor {
+  margin: 0;
+  font-size: 0.78rem;
+  color: color-mix(in srgb, var(--color-foreground) 55%, transparent);
+}
+
+.predictive-search__product-price {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+/* ---------- Footer / view all ---------- */
+
+.predictive-search__footer {
+  flex: 0 0 auto;
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+}
+
+.predictive-search__view-all {
+  display: block;
+  padding: 0.8rem 1.1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.15s ease;
+}
+
+.predictive-search__view-all:hover,
+.predictive-search__view-all:focus-visible {
+  background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 988.98px) {
+  #predictive-search-dropdown[open] .predictive-search__panel {
+    position: fixed;
+    inset-inline: 0.75rem;
+    top: calc(var(--announcement-bar-height, 0px) + var(--header-height-mobile, 64px) + 0.5rem);
+    width: auto;
+    max-height: calc(100vh - var(--announcement-bar-height, 0px) - var(--header-height-mobile, 64px) - 1.5rem);
+    animation: predictive-search-in-mobile 200ms ease;
+  }
+
+  @keyframes predictive-search-in-mobile {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #predictive-search-dropdown[open] .predictive-search__panel {
+      animation: none;
+    }
+  }
+}
