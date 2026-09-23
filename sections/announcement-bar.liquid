@@ -63,7 +63,7 @@
 
 <div
   class="
-    announcement-bar announcement-bar--{{ mode }}
+    announcement-bar announcement-bar--{{ mode }} full-width
     {%- if mode == 'marquee' and section.settings.marquee_separator == 'none' %} announcement-bar--no-separator{% endif -%}
   "
   id="AnnouncementBar-{{ section.id }}"
@@ -99,7 +99,7 @@
     {% endcase %}
   "
 >
-  <div class="announcement-bar__inner">
+  <div class="announcement-bar__inner page-width">
     <div class="announcement-bar__content">
       {% case mode %}
         {% when 'marquee' %}
@@ -225,9 +225,10 @@
     padding-block: 0;
   }
 
+  /* Horizontal centering/max-width comes from the shared `.page-width`
+     utility (assets/critical.css); only the bar's own configurable
+     top/bottom padding is set here. */
   .announcement-bar__inner {
-    width: 100%;
-    padding-inline: var(--page-margin, 20px);
     padding-block: var(--announcement-bar-padding-top) var(--announcement-bar-padding-bottom);
   }
 
