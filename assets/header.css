@@ -51,7 +51,6 @@
   top: var(--announcement-bar-height, 0px);
   --header-bg: transparent;
   /* --header-text: var(--header-overlay-text, var(--color-foreground)); */
- background-color: var(--color-foreground);
 }
 
 .header--overlay.header--sticky {
@@ -68,8 +67,9 @@
    always present whenever `.is-scrolled` can appear (see watch_scroll in
    sections/header.liquid), so this only ever fires for overlay headers. */
 .header--overlay.is-scrolled {
-  --header-bg: var(--header-sticky-bg, var(--color-background));
+  --header-bg: var(--header-overlay-text);
   --header-text: var(--color-foreground);
+  top:0px;
 }
 
 /* Any sticky header gets a hairline "lifted off the page" shadow once
