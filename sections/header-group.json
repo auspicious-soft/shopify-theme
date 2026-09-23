@@ -52,7 +52,7 @@
       ],
       "name": "t:general.announcement_bar",
       "settings": {
-        "layout_mode": "slider",
+        "layout_mode": "marquee",
         "marquee_speed": 20,
         "marquee_direction": "left",
         "marquee_gap": 40,
@@ -79,7 +79,7 @@
         "text_color": "#ffffff",
         "font_size": 14,
         "font_weight": "400",
-        "padding_top": 6,
+        "padding_top": 10,
         "padding_bottom": 6
       }
     },
