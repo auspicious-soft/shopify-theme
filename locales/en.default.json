@@ -17,7 +17,9 @@
     "close": "Close",
     "cart_items_count": "{{ count }} items in cart",
     "announcement_bar": "Announcement",
-    "opens_in_new_window": "Opens in a new window"
+    "opens_in_new_window": "Opens in a new window",
+    "menu": "Menu",
+    "primary_navigation": "Primary navigation"
   },
   "badges": {
     "sale": "Sale",

@@ -36,6 +36,10 @@
     {% # Base typography, heading and color styles %}
     {{ 'base.css' | asset_url | stylesheet_tag }}
 
+    {% # Header component: rendered on every page via the header group, so its assets load sitewide %}
+    {{ 'header.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'header.js' | asset_url }}" defer></script>
+
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
 
