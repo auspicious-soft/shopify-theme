@@ -1,6 +1,8 @@
 {
   "general": {
     "404": "Not found",
+    "announcement_bar": "Announcement bar",
+    "announcement_item": "Announcement",
     "article": "Article",
     "block": "Block",
     "blog": "Blog",
@@ -36,25 +38,56 @@
   },
   "labels": {
     "alignment": "Alignment",
+    "announcement_bar_mode": "Layout",
+    "announcement_text": "Announcement text",
+    "appearance": "Appearance",
+    "autoplay": "Auto slide",
     "background": "Background",
+    "background_color": "Background color",
     "boxed": "Boxed",
     "border": "Border",
     "button_background": "Button background",
+    "button_border_color": "Button border color",
+    "button_corner_radius": "Button corner radius",
     "button_text": "Button text",
+    "button_text_color": "Button text color",
+    "button_url": "Button link",
+    "enable": "Enable",
+    "enable_button": "Show button",
+    "font_size": "Font size",
+    "font_weight": "Font weight",
     "foreground": "Foreground",
     "grid_gap": "Grid spacing",
     "grid_item_width": "Grid item width",
     "heading": "Heading",
+    "horizontal_spacing": "Space between text and button",
+    "icon": "Icon",
     "input_corner_radius": "Input corner radius",
+    "item_gap": "Item spacing",
     "layout_direction": "Layout direction",
     "link": "Link",
+    "marquee_alignment_info": "Used as a fallback alignment when the animation is paused or reduced motion is enabled",
+    "marquee_direction": "Direction",
+    "marquee_settings": "Marquee settings",
+    "marquee_speed": "Animation speed",
     "menu": "Menu",
+    "open_in_new_tab": "Open link in new tab",
     "padding": "Padding",
+    "padding_bottom": "Padding bottom",
+    "padding_top": "Padding top",
     "page_margin": "Page margin",
     "page_width": "Page width",
+    "pause_on_hover": "Pause on hover",
+    "separator_style": "Separator style",
     "show_payment_icons": "Show payment icons",
+    "slide_duration": "Slide duration",
+    "slider_direction": "Direction",
+    "slider_settings": "Slider settings",
+    "static_settings": "Static settings",
     "text_style": "Text style",
-    "text": "Text"
+    "text_color": "Text color",
+    "text": "Text",
+    "transition_speed": "Transition speed"
   },
   "options": {
     "alignment": {
@@ -62,9 +95,35 @@
       "center": "Center",
       "right": "Right"
     },
+    "announcement_bar_mode": {
+      "marquee": "Horizontal marquee",
+      "slider": "Vertical slider",
+      "static": "Static"
+    },
     "direction": {
       "horizontal": "Horizontal",
       "vertical": "Vertical"
+    },
+    "font_weight": {
+      "regular": "Regular",
+      "medium": "Medium",
+      "semibold": "Semibold",
+      "bold": "Bold"
+    },
+    "left_right": {
+      "left": "Left",
+      "right": "Right"
+    },
+    "separator_style": {
+      "none": "None",
+      "dot": "Dot (•)",
+      "line": "Line (—)",
+      "slash": "Slash (/)",
+      "pipe": "Pipe (|)"
+    },
+    "up_down": {
+      "up": "Up",
+      "down": "Down"
     },
     "page_width": {
       "narrow": "Narrow",

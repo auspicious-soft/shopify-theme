@@ -1,0 +1,691 @@
+{% comment %}
+  Announcement bar with three merchant-selectable, mutually exclusive
+  display modes: horizontal marquee, vertical slider, and a static
+  text + button layout. Only the selected mode is rendered.
+
+  Marquee and slider modes share the `announcement-item` theme block
+  (blocks/announcement-item.liquid) for their message list. Static mode
+  uses its own section settings instead of blocks, since it only ever
+  shows a single message.
+{% endcomment %}
+{% liquid
+  assign mode = section.settings.layout_mode
+
+  # The `where` filter doesn't support dot-notation nested properties
+  # (block.settings.enabled), so enabled blocks are counted manually.
+  assign slide_count = 0
+  for block in section.blocks
+    if block.settings.enabled != false
+      assign slide_count = slide_count | plus: 1
+    endif
+  endfor
+
+  case section.settings.marquee_separator
+    when 'none'
+      assign separator_char = ''
+    when 'line'
+      assign separator_char = '—'
+    when 'slash'
+      assign separator_char = '/'
+    when 'pipe'
+      assign separator_char = '|'
+    else
+      assign separator_char = '•'
+  endcase
+
+  assign marquee_justify = 'flex-start'
+  case section.settings.marquee_text_alignment
+    when 'center'
+      assign marquee_justify = 'center'
+    when 'right'
+      assign marquee_justify = 'flex-end'
+  endcase
+
+  assign slider_justify = 'center'
+  case section.settings.slider_text_alignment
+    when 'left'
+      assign slider_justify = 'flex-start'
+    when 'right'
+      assign slider_justify = 'flex-end'
+  endcase
+%}
+
+<div
+  class="
+    announcement-bar announcement-bar--{{ mode }}
+    {%- if mode == 'marquee' and section.settings.marquee_separator == 'none' %} announcement-bar--no-separator{% endif -%}
+  "
+  id="AnnouncementBar-{{ section.id }}"
+  role="region"
+  aria-label="{{ 'accessibility.announcement_bar' | t }}"
+  {% if mode == 'marquee' and section.settings.marquee_pause_on_hover %}
+    data-pause-on-hover
+  {% elsif mode == 'slider' and section.settings.slider_pause_on_hover %}
+    data-pause-on-hover
+  {% endif %}
+  style="
+    --announcement-bar-bg: {{ section.settings.background_color }};
+    --announcement-bar-text: {{ section.settings.text_color }};
+    --announcement-bar-font-size: {{ section.settings.font_size }}px;
+    --announcement-bar-font-weight: {{ section.settings.font_weight }};
+    --announcement-bar-padding-top: {{ section.settings.padding_top }}px;
+    --announcement-bar-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {% case mode %}
+      {% when 'marquee' %}
+        --announcement-bar-speed: {{ section.settings.marquee_speed }}s;
+        --announcement-bar-direction: {% if section.settings.marquee_direction == 'right' %}reverse{% else %}normal{% endif %};
+        --announcement-bar-gap: {{ section.settings.marquee_gap }}px;
+        --announcement-bar-justify: {{ marquee_justify }};
+        --announcement-bar-separator-content: '{{ separator_char }}';
+      {% when 'slider' %}
+        --announcement-bar-justify: {{ slider_justify }};
+      {% when 'static' %}
+        --announcement-bar-gap: {{ section.settings.static_horizontal_spacing }}px;
+        --announcement-bar-button-bg: {{ section.settings.static_button_background }};
+        --announcement-bar-button-text: {{ section.settings.static_button_text_color }};
+        --announcement-bar-button-border: {{ section.settings.static_button_border_color }};
+        --announcement-bar-button-radius: {{ section.settings.static_button_border_radius }}px;
+    {% endcase %}
+  "
+>
+  <div class="announcement-bar__inner">
+    <div class="announcement-bar__content">
+      {% case mode %}
+        {% when 'marquee' %}
+          {% if slide_count > 0 %}
+            <div class="announcement-bar__marquee">
+              <div class="announcement-bar__marquee-track">
+                <div class="announcement-bar__marquee-group">
+                  {% content_for 'blocks' %}
+                </div>
+                {% # Duplicate, decorative copy that makes the CSS loop seamless regardless of item count or width. %}
+                <div class="announcement-bar__marquee-group" aria-hidden="true" inert>
+                  {% content_for 'blocks' %}
+                </div>
+              </div>
+            </div>
+          {% elsif request.design_mode %}
+            <p class="announcement-bar__placeholder">Add announcement blocks to display messages here.</p>
+          {% endif %}
+
+        {% when 'slider' %}
+          {% if slide_count > 0 %}
+            {% liquid
+              assign hold_seconds = section.settings.slider_duration
+              assign transition_ms = section.settings.slider_transition_speed
+              assign total_ms = slide_count | times: hold_seconds | times: 1000
+              assign segment_pct = 100.0 | divided_by: slide_count
+              assign transition_pct = transition_ms | times: 100.0 | divided_by: total_ms
+              assign max_transition_pct = segment_pct | times: 0.8
+              if transition_pct > max_transition_pct
+                assign transition_pct = max_transition_pct
+              endif
+              assign should_animate = false
+              if section.settings.slider_autoplay and slide_count > 1
+                assign should_animate = true
+              endif
+              assign slider_animation_direction = 'normal'
+              if section.settings.slider_direction == 'down'
+                assign slider_animation_direction = 'reverse'
+              endif
+            %}
+            <div class="announcement-bar__slider">
+              <div
+                class="announcement-bar__slider-track"
+                {% if should_animate %}
+                  style="animation: announcement-bar-slide-{{ section.id }} {{ total_ms }}ms ease-in-out infinite {{ slider_animation_direction }};"
+                {% endif %}
+              >
+                {% content_for 'blocks' %}
+              </div>
+            </div>
+
+            {% if should_animate %}
+              {% liquid
+                assign slide_index = 0
+                assign last_slide_index = slide_count | minus: 1
+              %}
+              {% style %}
+                @keyframes announcement-bar-slide-{{ section.id }} {
+                  {% for block in section.blocks %}
+                    {% if block.settings.enabled == false %}
+                      {% continue %}
+                    {% endif %}
+                    {% liquid
+                      assign next_index = slide_index | plus: 1
+                      assign start_pct = slide_index | times: segment_pct | round: 4
+                      assign end_pct = next_index | times: segment_pct | round: 4
+                      assign hold_end_pct = end_pct | minus: transition_pct | round: 4
+                      assign current_translate = slide_index | times: -100
+                      if slide_index == last_slide_index
+                        assign next_translate = 0
+                      else
+                        assign next_translate = next_index | times: -100
+                      endif
+                    %}
+                    {{ start_pct }}% { transform: translateY({{ current_translate }}%); }
+                    {{ hold_end_pct }}% { transform: translateY({{ current_translate }}%); }
+                    {{ end_pct }}% { transform: translateY({{ next_translate }}%); }
+                    {% assign slide_index = next_index %}
+                  {% endfor %}
+                }
+              {% endstyle %}
+            {% endif %}
+          {% elsif request.design_mode %}
+            <p class="announcement-bar__placeholder">Add announcement blocks to display messages here.</p>
+          {% endif %}
+
+        {% when 'static' %}
+          <div class="announcement-bar__static{% if section.settings.static_enable_button and section.settings.static_button_url != blank %} announcement-bar__static--with-button{% else %} announcement-bar__static--centered{% endif %}">
+            <div class="announcement-bar__static-content" style="text-align: {% if section.settings.static_enable_button and section.settings.static_button_url != blank %}left{% else %}{{ section.settings.static_text_alignment }}{% endif %};">
+              <span class="announcement-bar__text">{{ section.settings.static_text }}</span>
+            </div>
+            {% if section.settings.static_enable_button and section.settings.static_button_url != blank %}
+              <a
+                href="{{ section.settings.static_button_url }}"
+                class="announcement-bar__button"
+              >
+                {{ section.settings.static_button_text }}
+              </a>
+            {% endif %}
+          </div>
+      {% endcase %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .announcement-bar {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--announcement-bar-bg);
+    color: var(--announcement-bar-text);
+    font-size: var(--announcement-bar-font-size);
+    font-weight: var(--announcement-bar-font-weight);
+  }
+
+  /* Announcement bars sit flush against the edge of the page. The shared
+     `.shopify-section` spacing utility (assets/critical.css) is meant for
+     regular content sections, so it's reset here in favor of the bar's own
+     configurable top/bottom padding. */
+  .shopify-section:has(> .announcement-bar) {
+    padding-block: 0;
+  }
+
+  .announcement-bar__inner {
+    width: 100%;
+    padding-inline: var(--page-margin, 20px);
+    padding-block: var(--announcement-bar-padding-top) var(--announcement-bar-padding-bottom);
+  }
+
+  .announcement-bar__content {
+    width: 100%;
+  }
+
+  .announcement-bar__placeholder {
+    margin: 0;
+    text-align: center;
+    opacity: 0.7;
+  }
+
+  /* ---------- Marquee ---------- */
+  .announcement-bar__marquee {
+    overflow: hidden;
+  }
+
+  .announcement-bar__marquee-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    gap: var(--announcement-bar-gap);
+    animation-name: announcement-bar-marquee;
+    animation-duration: var(--announcement-bar-speed);
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: var(--announcement-bar-direction, normal);
+  }
+
+  .announcement-bar__marquee-group {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: var(--announcement-bar-gap);
+  }
+
+  @keyframes announcement-bar-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .announcement-bar[data-pause-on-hover] .announcement-bar__marquee:hover .announcement-bar__marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* ---------- Vertical slider ---------- */
+  .announcement-bar__slider {
+    position: relative;
+    overflow: hidden;
+    height: 1.7em;
+  }
+
+  .announcement-bar__slider-track {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .announcement-bar[data-pause-on-hover] .announcement-bar__slider:hover .announcement-bar__slider-track {
+    animation-play-state: paused;
+  }
+
+  /* ---------- Static text + button ---------- */
+  .announcement-bar__static {
+    display: flex;
+    align-items: center;
+    gap: var(--announcement-bar-gap);
+  }
+
+  .announcement-bar__static--centered {
+    justify-content: center;
+  }
+
+  .announcement-bar__static--with-button {
+    justify-content: space-between;
+  }
+
+  .announcement-bar__static-content {
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow-wrap: anywhere;
+  }
+
+  /* Also defined in blocks/announcement-item.liquid; repeated here since
+     static mode renders its message directly from section settings rather
+     than through the announcement-item block. */
+  .announcement-bar__text {
+    color: inherit;
+  }
+
+  .announcement-bar__button {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    text-decoration: none;
+    font: inherit;
+    cursor: pointer;
+    background-color: var(--announcement-bar-button-bg);
+    color: var(--announcement-bar-button-text);
+    border: 1px solid var(--announcement-bar-button-border);
+    border-radius: var(--announcement-bar-button-radius);
+    padding: 0.5em 1.25em;
+  }
+
+  .announcement-bar__button:hover,
+  .announcement-bar__button:focus-visible {
+    opacity: 0.85;
+  }
+
+  .announcement-bar__button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 749px) {
+    .announcement-bar__static--with-button {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .announcement-bar__static--with-button .announcement-bar__static-content {
+      flex-basis: 100%;
+      text-align: center !important;
+    }
+  }
+
+  /* Respect the visitor's motion preference: freeze on the first message
+     instead of animating. `!important` is required here because the
+     per-instance animation is otherwise set via an inline `style`
+     attribute, which normally out-ranks an external rule. The marquee's
+     decorative duplicate group is hidden and the track is stretched to
+     the full width so the configured text alignment still applies. */
+  @media (prefers-reduced-motion: reduce) {
+    .announcement-bar__marquee-track,
+    .announcement-bar__slider-track {
+      animation: none !important;
+      transform: none !important;
+    }
+
+    .announcement-bar__marquee-track {
+      width: 100%;
+      justify-content: var(--announcement-bar-justify, flex-start);
+    }
+
+    .announcement-bar__marquee-group:nth-child(2) {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:general.announcement_bar",
+  "blocks": [
+    {
+      "type": "announcement-item"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout_mode",
+      "label": "t:labels.announcement_bar_mode",
+      "options": [
+        { "value": "marquee", "label": "t:options.announcement_bar_mode.marquee" },
+        { "value": "slider", "label": "t:options.announcement_bar_mode.slider" },
+        { "value": "static", "label": "t:options.announcement_bar_mode.static" }
+      ],
+      "default": "marquee"
+    },
+    {
+      "type": "header",
+      "content": "t:labels.marquee_settings"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "t:labels.marquee_speed",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "default": 20,
+      "visible_if": "{{ section.settings.layout_mode == 'marquee' }}"
+    },
+    {
+      "type": "select",
+      "id": "marquee_direction",
+      "label": "t:labels.marquee_direction",
+      "options": [
+        { "value": "left", "label": "t:options.left_right.left" },
+        { "value": "right", "label": "t:options.left_right.right" }
+      ],
+      "default": "left",
+      "visible_if": "{{ section.settings.layout_mode == 'marquee' }}"
+    },
+    {
+      "type": "range",
+      "id": "marquee_gap",
+      "label": "t:labels.item_gap",
+      "min": 8,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "default": 40,
+      "visible_if": "{{ section.settings.layout_mode == 'marquee' }}"
+    },
+    {
+      "type": "select",
+      "id": "marquee_separator",
+      "label": "t:labels.separator_style",
+      "options": [
+        { "value": "none", "label": "t:options.separator_style.none" },
+        { "value": "dot", "label": "t:options.separator_style.dot" },
+        { "value": "line", "label": "t:options.separator_style.line" },
+        { "value": "slash", "label": "t:options.separator_style.slash" },
+        { "value": "pipe", "label": "t:options.separator_style.pipe" }
+      ],
+      "default": "dot",
+      "visible_if": "{{ section.settings.layout_mode == 'marquee' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "marquee_pause_on_hover",
+      "label": "t:labels.pause_on_hover",
+      "default": true,
+      "visible_if": "{{ section.settings.layout_mode == 'marquee' }}"
+    },
+    {
+      "type": "select",
+      "id": "marquee_text_alignment",
+      "label": "t:labels.alignment",
+      "info": "t:labels.marquee_alignment_info",
+      "options": [
+        { "value": "left", "label": "t:options.alignment.left" },
+        { "value": "center", "label": "t:options.alignment.center" },
+        { "value": "right", "label": "t:options.alignment.right" }
+      ],
+      "default": "left",
+      "visible_if": "{{ section.settings.layout_mode == 'marquee' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:labels.slider_settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_autoplay",
+      "label": "t:labels.autoplay",
+      "default": true,
+      "visible_if": "{{ section.settings.layout_mode == 'slider' }}"
+    },
+    {
+      "type": "range",
+      "id": "slider_duration",
+      "label": "t:labels.slide_duration",
+      "min": 2,
+      "max": 15,
+      "step": 1,
+      "unit": "s",
+      "default": 5,
+      "visible_if": "{{ section.settings.layout_mode == 'slider' and section.settings.slider_autoplay }}"
+    },
+    {
+      "type": "range",
+      "id": "slider_transition_speed",
+      "label": "t:labels.transition_speed",
+      "min": 200,
+      "max": 1200,
+      "step": 100,
+      "unit": "ms",
+      "default": 500,
+      "visible_if": "{{ section.settings.layout_mode == 'slider' and section.settings.slider_autoplay }}"
+    },
+    {
+      "type": "select",
+      "id": "slider_direction",
+      "label": "t:labels.slider_direction",
+      "options": [
+        { "value": "up", "label": "t:options.up_down.up" },
+        { "value": "down", "label": "t:options.up_down.down" }
+      ],
+      "default": "up",
+      "visible_if": "{{ section.settings.layout_mode == 'slider' and section.settings.slider_autoplay }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_pause_on_hover",
+      "label": "t:labels.pause_on_hover",
+      "default": true,
+      "visible_if": "{{ section.settings.layout_mode == 'slider' and section.settings.slider_autoplay }}"
+    },
+    {
+      "type": "select",
+      "id": "slider_text_alignment",
+      "label": "t:labels.alignment",
+      "options": [
+        { "value": "left", "label": "t:options.alignment.left" },
+        { "value": "center", "label": "t:options.alignment.center" },
+        { "value": "right", "label": "t:options.alignment.right" }
+      ],
+      "default": "center",
+      "visible_if": "{{ section.settings.layout_mode == 'slider' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:labels.static_settings"
+    },
+    {
+      "type": "text",
+      "id": "static_text",
+      "label": "t:labels.announcement_text",
+      "default": "Free shipping on orders above $50",
+      "visible_if": "{{ section.settings.layout_mode == 'static' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "static_enable_button",
+      "label": "t:labels.enable_button",
+      "default": false,
+      "visible_if": "{{ section.settings.layout_mode == 'static' }}"
+    },
+    {
+      "type": "text",
+      "id": "static_button_text",
+      "label": "t:labels.button_text",
+      "default": "Shop now",
+      "visible_if": "{{ section.settings.layout_mode == 'static' and section.settings.static_enable_button }}"
+    },
+    {
+      "type": "url",
+      "id": "static_button_url",
+      "label": "t:labels.button_url",
+      "visible_if": "{{ section.settings.layout_mode == 'static' and section.settings.static_enable_button }}"
+    },
+    {
+      "type": "select",
+      "id": "static_text_alignment",
+      "label": "t:labels.alignment",
+      "options": [
+        { "value": "left", "label": "t:options.alignment.left" },
+        { "value": "center", "label": "t:options.alignment.center" },
+        { "value": "right", "label": "t:options.alignment.right" }
+      ],
+      "default": "center",
+      "visible_if": "{{ section.settings.layout_mode == 'static' and section.settings.static_enable_button == false }}"
+    },
+    {
+      "type": "color",
+      "id": "static_button_background",
+      "label": "t:labels.button_background",
+      "default": "#000000",
+      "visible_if": "{{ section.settings.layout_mode == 'static' and section.settings.static_enable_button }}"
+    },
+    {
+      "type": "color",
+      "id": "static_button_text_color",
+      "label": "t:labels.button_text_color",
+      "default": "#ffffff",
+      "visible_if": "{{ section.settings.layout_mode == 'static' and section.settings.static_enable_button }}"
+    },
+    {
+      "type": "color",
+      "id": "static_button_border_color",
+      "label": "t:labels.button_border_color",
+      "default": "#000000",
+      "visible_if": "{{ section.settings.layout_mode == 'static' and section.settings.static_enable_button }}"
+    },
+    {
+      "type": "range",
+      "id": "static_button_border_radius",
+      "label": "t:labels.button_corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 4,
+      "visible_if": "{{ section.settings.layout_mode == 'static' and section.settings.static_enable_button }}"
+    },
+    {
+      "type": "range",
+      "id": "static_horizontal_spacing",
+      "label": "t:labels.horizontal_spacing",
+      "min": 8,
+      "max": 80,
+      "step": 8,
+      "unit": "px",
+      "default": 24,
+      "visible_if": "{{ section.settings.layout_mode == 'static' and section.settings.static_enable_button }}"
+    },
+    {
+      "type": "header",
+      "content": "t:labels.appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:labels.background_color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:labels.text_color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "t:labels.font_size",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "t:labels.font_weight",
+      "options": [
+        { "value": "400", "label": "t:options.font_weight.regular" },
+        { "value": "500", "label": "t:options.font_weight.medium" },
+        { "value": "600", "label": "t:options.font_weight.semibold" },
+        { "value": "700", "label": "t:options.font_weight.bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:labels.padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:labels.padding_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.announcement_bar",
+      "settings": {
+        "layout_mode": "marquee",
+        "background_color": "#111111",
+        "text_color": "#ffffff"
+      },
+      "blocks": [
+        { "type": "announcement-item", "settings": { "text": "Free shipping on orders above $50" } },
+        { "type": "announcement-item", "settings": { "text": "New collection available" } },
+        { "type": "announcement-item", "settings": { "text": "Get 10% off today" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
