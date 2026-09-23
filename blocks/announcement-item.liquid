@@ -67,16 +67,29 @@
     white-space: nowrap;
   }
 
-  /* Inside the vertical slider, each item becomes a full-height slot so the
-     track can move by exactly one item per step. */
+  /* Inside the vertical slider, each item becomes a fixed-height slot (the
+     same height the section uses for its per-step translateY, via the
+     shared --announcement-bar-slide-height custom property) so the track
+     can move by exactly one item per step with nothing left showing from
+     its neighbors. Text is kept to a single line so it can never grow
+     taller than that slot. */
   .announcement-bar--slider .announcement-bar__slide {
     display: flex;
     align-items: center;
-    height: 100%;
+    height: var(--announcement-bar-slide-height, 2.4em);
     width: 100%;
     flex-shrink: 0;
-    white-space: normal;
+    overflow: hidden;
     justify-content: var(--announcement-bar-justify, center);
+  }
+
+  .announcement-bar--slider .announcement-bar__slide .announcement-bar__text,
+  .announcement-bar--slider .announcement-bar__slide .announcement-bar__link {
+    min-width: 0;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .announcement-bar__icon {

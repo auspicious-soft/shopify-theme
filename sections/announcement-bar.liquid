@@ -59,6 +59,17 @@
     when 'right'
       assign slider_justify = 'flex-end'
   endcase
+
+  # Repeat the message list enough times that it always spans more than one
+  # viewport width, however few/short the messages are, so no empty
+  # background is ever visible while the track loops. Short lists get
+  # repeated more; long lists are capped so the DOM doesn't bloat.
+  assign marquee_repeat = 2
+  if mode == 'marquee' and slide_count > 0
+    assign marquee_repeat = 16 | divided_by: slide_count
+    assign marquee_repeat = marquee_repeat | at_least: 2 | at_most: 8
+  endif
+  assign marquee_translate_pct = 100.0 | divided_by: marquee_repeat
 %}
 
 <div
@@ -88,8 +99,10 @@
         --announcement-bar-gap: {{ section.settings.marquee_gap }}px;
         --announcement-bar-justify: {{ marquee_justify }};
         --announcement-bar-separator-content: '{{ separator_char }}';
+        --announcement-bar-marquee-translate: -{{ marquee_translate_pct }}%;
       {% when 'slider' %}
         --announcement-bar-justify: {{ slider_justify }};
+        --announcement-bar-slide-height: 2.4em;
       {% when 'static' %}
         --announcement-bar-gap: {{ section.settings.static_horizontal_spacing }}px;
         --announcement-bar-button-bg: {{ section.settings.static_button_background }};
@@ -99,21 +112,22 @@
     {% endcase %}
   "
 >
-  <div class="announcement-bar__inner page-width">
+  <div class="announcement-bar__inner{% unless mode == 'marquee' %} page-width{% endunless %}">
     <div class="announcement-bar__content">
       {% case mode %}
         {% when 'marquee' %}
           {% if slide_count > 0 %}
             <div class="announcement-bar__marquee">
               <div class="announcement-bar__marquee-track">
-                <div class="announcement-bar__marquee-group">
-                  {{ rendered_blocks }}
-                </div>
-                {% # Decorative, duplicate copy that makes the CSS loop seamless
-                   # regardless of item count or width. %}
-                <div class="announcement-bar__marquee-group" aria-hidden="true" inert>
-                  {{ rendered_blocks }}
-                </div>
+                {% for i in (1..marquee_repeat) %}
+                  {% # Only the first copy is real content; the rest are
+                     # decorative repeats so the track always spans more than
+                     # one viewport width and the loop never shows blank
+                     # background, however short the message list is. %}
+                  <div class="announcement-bar__marquee-group"{% unless forloop.first %} aria-hidden="true" inert{% endunless %}>
+                    {{ rendered_blocks }}
+                  </div>
+                {% endfor %}
               </div>
             </div>
           {% elsif request.design_mode %}
@@ -168,16 +182,20 @@
                       assign start_pct = slide_index | times: segment_pct | round: 4
                       assign end_pct = next_index | times: segment_pct | round: 4
                       assign hold_end_pct = end_pct | minus: transition_pct | round: 4
-                      assign current_translate = slide_index | times: -100
-                      if slide_index == last_slide_index
-                        assign next_translate = 0
-                      else
-                        assign next_translate = next_index | times: -100
+
+                      assign current_transform = 'translateY(0)'
+                      if slide_index > 0
+                        assign current_transform = 'translateY(calc(var(--announcement-bar-slide-height, 2.4em) * -' | append: slide_index | append: '))'
+                      endif
+
+                      assign next_transform = 'translateY(0)'
+                      if slide_index != last_slide_index
+                        assign next_transform = 'translateY(calc(var(--announcement-bar-slide-height, 2.4em) * -' | append: next_index | append: '))'
                       endif
                     %}
-                    {{ start_pct }}% { transform: translateY({{ current_translate }}%); }
-                    {{ hold_end_pct }}% { transform: translateY({{ current_translate }}%); }
-                    {{ end_pct }}% { transform: translateY({{ next_translate }}%); }
+                    {{ start_pct }}% { transform: {{ current_transform }}; }
+                    {{ hold_end_pct }}% { transform: {{ current_transform }}; }
+                    {{ end_pct }}% { transform: {{ next_transform }}; }
                     {% assign slide_index = next_index %}
                   {% endfor %}
                 }
@@ -271,7 +289,7 @@
       transform: translateX(0);
     }
     to {
-      transform: translateX(-50%);
+      transform: translateX(var(--announcement-bar-marquee-translate, -50%));
     }
   }
 
@@ -280,16 +298,18 @@
   }
 
   /* ---------- Vertical slider ---------- */
+  /* Fixed to a single explicit height (rather than a percentage chain)
+     shared via a custom property, so the viewport, the track's per-step
+     translateY, and each slide's own height can never drift out of sync. */
   .announcement-bar__slider {
     position: relative;
     overflow: hidden;
-    height: 1.7em;
+    height: var(--announcement-bar-slide-height, 2.4em);
   }
 
   .announcement-bar__slider-track {
     display: flex;
     flex-direction: column;
-    height: 100%;
   }
 
   .announcement-bar[data-pause-on-hover] .announcement-bar__slider:hover .announcement-bar__slider-track {
@@ -380,7 +400,7 @@
       justify-content: var(--announcement-bar-justify, flex-start);
     }
 
-    .announcement-bar__marquee-group:nth-child(2) {
+    .announcement-bar__marquee-group:not(:first-child) {
       display: none;
     }
   }
