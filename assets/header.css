@@ -655,6 +655,9 @@ header.is-scrolled img.header__hero-logo-image {
 }
 
 @media (max-width: 988.98px) {
+  .header__hero {
+    top: 0;
+}
   .header__navigation {
     display: none;
   }
