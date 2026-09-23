@@ -50,7 +50,7 @@
   inset-inline: 0;
   top: var(--announcement-bar-height, 0px);
   --header-bg: transparent;
-  --header-text: var(--header-overlay-text, var(--color-foreground));
+  /* --header-text: var(--header-overlay-text, var(--color-foreground)); */
 }
 
 .header--overlay.header--sticky {
@@ -58,9 +58,14 @@
   top: var(--announcement-bar-height, 0px);
 }
 .header--overlay.is-scrolled {
-  top: 0px;
-  --header-bg: var(--header-sticky-bg);
+  color: var(--header-overlay-text);
   --header-text: var(--color-foreground);
+  top:0px;
+  background-color: var(--header-sticky-bg);
+}
+ .header:hover {
+  color: var(--header-overlay-text);
+  background-color: var(--header-sticky-bg);
 }
 /* Any sticky header gets a hairline "lifted off the page" shadow once
    stuck, regardless of overlay. */
