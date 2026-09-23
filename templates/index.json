@@ -14,9 +14,10 @@
       "name": "t:general.hero_banner",
       "settings": {
         "background_image": "shopify://shop_images/hero_image.png",
-        "background_color": "#FF0000",
+        "background_color": "#ffffff",
+        "overlay_color": "#000000",
         "overlay_opacity": 55,
-        "section_height": 70,
+        "height_type": "adapt",
         "heading": "End of summer sale",
         "subheading": "Up to 40% off",
         "text_color": "#ffffff",
@@ -27,7 +28,8 @@
         "enable_button": true,
         "button_text": "Shop now",
         "button_url": "",
-        "button_color_scheme": ""
+        "button_style": "primary",
+        "button_color_scheme": "scheme-1"
       }
     },
     "hello_world_e8xQDH": {

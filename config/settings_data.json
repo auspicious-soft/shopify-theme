@@ -137,19 +137,19 @@
           "text": "#333333",
           "button": "#1a1a1a",
           "button_label": "#ffffff",
-          "secondary_button_label": "#1a73e8",
+          "secondary_button_label": "#FFFFFF",
           "shadow": "#121212"
         }
       },
       "scheme-2": {
         "settings": {
-          "background": "#FFFFFF",
+          "background": "#ffffff",
           "background_gradient": "",
-          "text": "#FFFFFF",
-          "button": "#FFFFFF",
+          "text": "#ffffff",
+          "button": "#ffffff",
           "button_label": "#000000",
-          "secondary_button_label": "#FFFFFF",
-          "shadow": "#FFFFFF"
+          "secondary_button_label": "#ffffff",
+          "shadow": "#ffffff"
         }
       },
       "scheme-3": {
