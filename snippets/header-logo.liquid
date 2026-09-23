@@ -15,15 +15,22 @@
   - Logo reveal style: the default logo renders as normal, and a second
     `header__logo--sticky` anchor (using Header settings > Sticky logo) is
     also rendered alongside it for CSS to show/hide/crossfade as needed.
+  - Transparent header logo: when Header settings > Transparent header logo
+    is set, a third `header__logo--transparent` anchor is also always
+    rendered alongside the default logo, for CSS to show while the header
+    is transparent (`.header--overlay`) and hide once it's solid/scrolled.
+    Hidden by default (display: none in header.css) so it has no effect
+    unless a header style's CSS explicitly opts into showing it.
 
   @param is_logo_reveal {Boolean} - whether the "logo_reveal" header style is active
   @param sticky_logo {Object} - image used for the logo_reveal style's compact logo
   @param default_logo {Object} - the theme's default logo (settings.logo)
+  @param transparent_logo {Object} - optional: image shown while the header is transparent
   @param hover_logo {Object} - optional, standard style only: image shown on hover/focus
   @param logo_sizes {String} - a precomputed <img sizes> attribute value
 
   @example
-  {% render 'header-logo', is_logo_reveal: false, sticky_logo: section.settings.sticky_logo, default_logo: settings.logo, hover_logo: section.settings.hover_logo, logo_sizes: logo_sizes %}
+  {% render 'header-logo', is_logo_reveal: false, sticky_logo: section.settings.sticky_logo, default_logo: settings.logo, transparent_logo: section.settings.transparent_logo, hover_logo: section.settings.hover_logo, logo_sizes: logo_sizes %}
 {% enddoc %}
 
 <div class="header__logo-wrap">
@@ -76,6 +83,25 @@
       {% else %}
         <span class="header__logo-text">{{ shop.name }}</span>
       {% endif %}
+    </a>
+  {% endif %}
+
+  {% if transparent_logo != blank %}
+    <a
+      href="{{ routes.root_url }}"
+      class="header__logo header__logo--transparent"
+      aria-label="{{ shop.name | escape }}"
+    >
+      {{
+        transparent_logo
+        | image_url: width: 600
+        | image_tag:
+          widths: '90,130,180,260,360,600',
+          sizes: logo_sizes,
+          alt: shop.name,
+          class: 'header__logo-image',
+          loading: 'eager'
+      }}
     </a>
   {% endif %}
 </div>

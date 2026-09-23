@@ -157,6 +157,8 @@
     "subheading": "Subheading",
     "transparent_header": "Transparent header",
     "transparent_header_info": "Choose which templates show a transparent header over the page content instead of a solid background",
+    "transparent_logo": "Transparent header logo",
+    "transparent_logo_info": "Optional. Shown in place of the default logo while the header is transparent (Standard style only); swaps back to the default logo once the header becomes solid. Falls back to the default logo when left blank",
     "text_style": "Text style",
     "text_color": "Text color",
     "text": "Text",

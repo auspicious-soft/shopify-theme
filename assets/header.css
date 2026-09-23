@@ -115,6 +115,29 @@
   color: var(--color-foreground);
 }
 
+/* Transparent header logo (Header settings > Transparent header logo):
+   hidden everywhere by default so setting it has no effect unless a style
+   below explicitly opts in. */
+.header__logo--transparent {
+  display: none;
+}
+
+/* Standard style only: swap to the transparent-header logo while the
+   header is still overlaid/transparent, and back to the normal default
+   logo once it's solid (scrolled, or no longer overlaid). */
+.header--standard.header--overlay .header__logo--default {
+  display: none;
+}
+.header--standard.header--overlay .header__logo--transparent {
+  display: inline-flex;
+}
+.header--standard.header--overlay.is-scrolled .header__logo--default {
+  display: inline-flex;
+}
+.header--standard.header--overlay.is-scrolled .header__logo--transparent {
+  display: none;
+}
+
 /* ---------- Layout ---------- */
 
 .header__inner {

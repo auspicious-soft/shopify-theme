@@ -139,9 +139,10 @@
   assign logo_sizes = '(min-width: 989px) ' | append: section.settings.desktop_logo_width | append: 'px, ' | append: section.settings.mobile_logo_width | append: 'px'
 
   assign default_logo = settings.logo
-  assign sticky_logo = section.settings.sticky_logo 
-  assign hero_logo = section.settings.hero_logo 
-  
+  assign sticky_logo = section.settings.sticky_logo
+  assign hero_logo = section.settings.hero_logo
+  assign transparent_logo = section.settings.transparent_logo
+
 %}
 
 <header
@@ -184,7 +185,7 @@
         {% render 'header-menu-toggle', section: section %}
       {% endif %}
       {% if logo_zone == 'start' %}
-        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, default_logo: default_logo, logo_sizes: logo_sizes %}
+        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, default_logo: default_logo, transparent_logo: transparent_logo, logo_sizes: logo_sizes %}
       {% endif %}
       {% if show_horizontal_nav and nav_zone == 'start' %}
         {% render 'header-navigation', section: section %}
@@ -196,7 +197,7 @@
 
     <div class="header__zone header__zone--center">
       {% if logo_zone == 'center' %}
-        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, default_logo: default_logo, logo_sizes: logo_sizes %}
+        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, default_logo: default_logo, transparent_logo: transparent_logo, logo_sizes: logo_sizes %}
       {% endif %}
       {% if show_horizontal_nav and nav_zone == 'center' %}
         {% render 'header-navigation', section: section %}
@@ -208,7 +209,7 @@
         {% render 'header-menu-toggle', section: section %}
       {% endif %}
       {% if logo_zone == 'end' %}
-        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, default_logo: default_logo, logo_sizes: logo_sizes %}
+        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, default_logo: default_logo, transparent_logo: transparent_logo, logo_sizes: logo_sizes %}
       {% endif %}
       {% if show_horizontal_nav and nav_zone == 'end' %}
         {% render 'header-navigation', section: section %}
@@ -409,7 +410,7 @@
         { "value": "always", "label": "t:options.sticky_header_type.always" },
         { "value": "on_scroll_up", "label": "t:options.sticky_header_type.on_scroll_up" }
       ],
-      "default": "none",
+      "default": "always",
       "visible_if": "{{ section.settings.header_style == 'standard' }}"
     },
     {
@@ -520,6 +521,13 @@
       "id": "overlay_text_color",
       "label": "t:labels.overlay_text_color",
       "default": "#ffffff",
+      "visible_if": "{{ section.settings.overlay_on_home or section.settings.overlay_on_product or section.settings.overlay_on_collection or section.settings.overlay_on_page or section.settings.overlay_on_blog }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "transparent_logo",
+      "label": "t:labels.transparent_logo",
+      "info": "t:labels.transparent_logo_info",
       "visible_if": "{{ section.settings.overlay_on_home or section.settings.overlay_on_product or section.settings.overlay_on_collection or section.settings.overlay_on_page or section.settings.overlay_on_blog }}"
     },
     {
