@@ -28,6 +28,16 @@
   top: 0;
 }
 
+/* "On scroll up": header.js adds/removes `is-hidden` based on scroll
+   direction, once scrolled past the header's own height. */
+.header[data-hide-on-scroll] {
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.header[data-hide-on-scroll].is-hidden {
+  transform: translateY(-100%);
+}
+
 .header--overlay {
   position: absolute;
   inset-inline: 0;
@@ -42,16 +52,24 @@
 }
 
 /* Once header.js confirms the page has scrolled (past the top for a
-   standard overlay header, or past the hero block for the logo-reveal
-   style), the header switches from transparent/empty to its normal solid,
-   fully-branded appearance. */
-.header--overlay.is-scrolled {
-  --header-bg: var(--color-background);
+   sticky header, or past the hero block for the logo-reveal style), the
+   header switches to its solid "stuck" appearance: the configured sticky
+   background color, normal text/icon color (even over an overlay), and a
+   hairline shadow to lift it off the page content. */
+.header--sticky.is-scrolled {
+  --header-bg: var(--header-sticky-bg, var(--color-background));
   --header-text: var(--color-foreground);
+  box-shadow: 0 1px 0 0 color-mix(in srgb, var(--color-border) 60%, transparent);
 }
 
-.header--sticky.is-scrolled {
-  box-shadow: 0 1px 0 0 color-mix(in srgb, var(--color-border) 60%, transparent);
+@media (prefers-reduced-motion: reduce) {
+  .header[data-hide-on-scroll] {
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .header[data-hide-on-scroll].is-hidden {
+    transform: none;
+  }
 }
 
 /* ---------- Layout ---------- */
@@ -107,8 +125,10 @@
 
 .header__logo-image {
   display: block;
-  width: var(--header-logo-width-mobile, 90px);
+  width: auto;
+  max-width: var(--header-logo-width-mobile, 90px);
   height: auto;
+  max-height: calc(var(--header-height-mobile, 64px) - 1.25rem);
 }
 
 .header__logo-text {
@@ -119,20 +139,25 @@
   text-overflow: ellipsis;
 }
 
-/* Logo-reveal style: the header bar's logo starts invisible and crossfades
-   in once `.is-scrolled` is added (see the hero block below). */
+/* Logo-reveal style: the header bar's compact logo tracks the same
+   scroll progress (0 to 1) as the big hero logo below, set by header.js on
+   both elements every scroll tick, so it eases in continuously in step
+   with the hero logo easing out rather than snapping in at a threshold. */
 .header__logo--sticky {
-  opacity: 0;
-  transition: opacity var(--header-logo-reveal-speed, 400ms) ease;
+  opacity: var(--header-hero-progress, 0);
+  transform: translateY(calc((1 - var(--header-hero-progress, 0)) * 0.4rem));
 }
 
+/* A short transition only smooths out the very last step to fully
+   opaque/settled once scroll comes to rest at progress 1. */
 .header--logo_reveal.is-scrolled .header__logo--sticky {
-  opacity: 1;
+  transition: opacity var(--header-logo-reveal-speed, 400ms) ease, transform var(--header-logo-reveal-speed, 400ms) ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .header__logo--sticky {
-    transition: none;
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -512,7 +537,8 @@
   }
 
   .header__logo-image {
-    width: var(--header-logo-width, 130px);
+    max-width: var(--header-logo-width, 130px);
+    max-height: calc(var(--header-height, 84px) - 1.25rem);
   }
 
   .header__navigation {

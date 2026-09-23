@@ -131,8 +131,10 @@
     "slider_direction": "Direction",
     "slider_settings": "Slider settings",
     "static_settings": "Static settings",
+    "sticky_background_color": "Sticky header background",
+    "sticky_background_color_info": "Applied once the header becomes sticky/scrolled",
     "sticky_header": "Sticky header",
-    "sticky_header_info": "Always on for the Logo reveal style",
+    "sticky_header_info": "\"On scroll up\" hides the header while scrolling down and reveals it when scrolling back up. Always on (and always sticky) for the Logo reveal style.",
     "sticky_logo": "Sticky header logo",
     "sticky_logo_info": "Shown in the header once scrolled past the hero logo. Falls back to Theme settings > Logo when left blank",
     "transparent_header": "Transparent header",
@@ -185,6 +187,11 @@
       "line": "Line (—)",
       "slash": "Slash (/)",
       "pipe": "Pipe (|)"
+    },
+    "sticky_header_type": {
+      "none": "None",
+      "always": "Always",
+      "on_scroll_up": "On scroll up"
     },
     "up_down": {
       "up": "Up",

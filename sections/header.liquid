@@ -32,9 +32,16 @@
 
   # Style 2 is always sticky by definition (that's what lets the big hero
   # logo hand off to the compact header logo on scroll).
-  assign is_sticky = section.settings.enable_sticky
+  assign sticky_type = section.settings.sticky_header_type
+  assign is_sticky = false
+  assign hide_on_scroll = false
   if is_logo_reveal
     assign is_sticky = true
+  elsif sticky_type == 'always'
+    assign is_sticky = true
+  elsif sticky_type == 'on_scroll_up'
+    assign is_sticky = true
+    assign hide_on_scroll = true
   endif
 
   # Transparent/overlay header is configured per template rather than as a
@@ -75,14 +82,10 @@
     assign actions_zone = 'start'
   endif
 
-  # Liquid's `if` doesn't support parenthesised grouping, so this
-  # combined condition is precomputed here instead.
-  assign watch_scroll = false
-  if is_logo_reveal
-    assign watch_scroll = true
-  elsif is_sticky and enable_overlay
-    assign watch_scroll = true
-  endif
+  # Any sticky header needs scroll watching: to swap in the sticky
+  # background color/shadow once stuck, to hide/reveal on scroll direction
+  # ("on scroll up"), and/or to drive the logo-reveal crossfade.
+  assign watch_scroll = is_sticky
 
   assign toggle_zone = 'start'
   if hamburger_position == 'right'
@@ -137,6 +140,7 @@
   "
   id="Header-{{ section.id }}"
   {% if watch_scroll %}data-watch-scroll{% endif %}
+  {% if hide_on_scroll %}data-hide-on-scroll{% endif %}
   {% if is_logo_reveal %}data-header-hero-target="HeaderHero-{{ section.id }}"{% endif %}
   style="
     --header-height: {{ section.settings.header_height }}px;
@@ -150,6 +154,9 @@
     --header-nav-item-gap: {{ section.settings.nav_item_spacing }}px;
     --header-nav-hover-color: {{ section.settings.nav_hover_color }};
     --header-drawer-speed: {{ section.settings.drawer_animation_speed }}ms;
+    {% if watch_scroll %}
+      --header-sticky-bg: {{ section.settings.sticky_background_color }};
+    {% endif %}
     {% if is_logo_reveal %}
       --header-logo-reveal-speed: {{ section.settings.logo_reveal_speed }}ms;
     {% endif %}
@@ -410,12 +417,25 @@
       "content": "t:labels.header_options"
     },
     {
-      "type": "checkbox",
-      "id": "enable_sticky",
+      "type": "select",
+      "id": "sticky_header_type",
       "label": "t:labels.sticky_header",
       "info": "t:labels.sticky_header_info",
-      "default": false,
+      "options": [
+        { "value": "none", "label": "t:options.sticky_header_type.none" },
+        { "value": "always", "label": "t:options.sticky_header_type.always" },
+        { "value": "on_scroll_up", "label": "t:options.sticky_header_type.on_scroll_up" }
+      ],
+      "default": "none",
       "visible_if": "{{ section.settings.header_style == 'standard' }}"
+    },
+    {
+      "type": "color",
+      "id": "sticky_background_color",
+      "label": "t:labels.sticky_background_color",
+      "info": "t:labels.sticky_background_color_info",
+      "default": "#ffffff",
+      "visible_if": "{{ section.settings.header_style == 'logo_reveal' or section.settings.sticky_header_type != 'none' }}"
     },
     {
       "type": "range",
