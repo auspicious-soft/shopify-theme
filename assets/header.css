@@ -51,13 +51,12 @@
   top: var(--announcement-bar-height, 0px);
   --header-bg: transparent;
   /* --header-text: var(--header-overlay-text, var(--color-foreground)); */
-  background-color: transparent;
+ background-color: var(--color-foreground);
 }
 
 .header--overlay.header--sticky {
   position: fixed;
   top: var(--announcement-bar-height, 0px);
-  background-color: var(--color-foreground);
 }
 
 /* Only an overlay header needs a color swap on scroll: it starts
