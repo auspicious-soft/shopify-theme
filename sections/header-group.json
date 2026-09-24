@@ -119,6 +119,7 @@
         "account_text": "Account",
         "show_cart": true,
         "show_cart_count": true,
+        "localization_selector": "country",
         "drawer_position": "left",
         "nav_font_size": 15,
         "nav_font_weight": "500",
