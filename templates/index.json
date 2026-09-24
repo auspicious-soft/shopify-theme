@@ -36,10 +36,87 @@
       "type": "hello-world",
       "name": "Hello World Template",
       "settings": {}
+    },
+    "social_marquee_xQATWa": {
+      "type": "social-marquee",
+      "blocks": {
+        "image_bYAbJr": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "new_tab": false,
+            "username": ""
+          }
+        },
+        "image_FLhndX": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "new_tab": false,
+            "username": ""
+          }
+        },
+        "image_hfdixe": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "new_tab": false,
+            "username": ""
+          }
+        },
+        "image_tPnQPM": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "new_tab": false,
+            "username": ""
+          }
+        },
+        "image_8f3Lcc": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "new_tab": false,
+            "username": ""
+          }
+        },
+        "image_aVXd9p": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "new_tab": false,
+            "username": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_bYAbJr",
+        "image_FLhndX",
+        "image_hfdixe",
+        "image_tPnQPM",
+        "image_8f3Lcc",
+        "image_aVXd9p"
+      ],
+      "name": "t:sections.social_marquee.name",
+      "settings": {
+        "heading": "As seen on #yourbrand",
+        "heading_alignment": "left",
+        "speed": 40,
+        "direction": "left",
+        "card_width": 256,
+        "card_width_mobile": 200,
+        "aspect_ratio": "9 / 16",
+        "gap": 16,
+        "corner_radius": 16,
+        "color_scheme": "",
+        "padding_top": 32,
+        "padding_bottom": 48
+      }
     }
   },
   "order": [
     "hero_banner_YzGz9c",
-    "hello_world_e8xQDH"
+    "hello_world_e8xQDH",
+    "social_marquee_xQATWa"
   ]
 }
