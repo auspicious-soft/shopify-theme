@@ -24,9 +24,29 @@
 
 /* ---------- Sticky / overlay ---------- */
 
-.header--sticky {
+/* Shopify wraps the header in a `.shopify-section` exactly as tall as the
+   header, so `position: sticky` on the header itself has no room to stick.
+   The wrapper is made sticky instead (it sticks against the page), with
+   the section spacing removed so no gap sticks along with it. A
+   transparent sticky header uses `position: fixed` instead (below). */
+.shopify-section:has(> .header) {
+  padding-block: 0;
+}
+
+.shopify-section:has(> .header--sticky:not(.header--overlay)) {
   position: sticky;
   top: 0;
+  z-index: 50;
+}
+
+/* "On scroll up": while the header is slid away, its empty wrapper must
+   not block clicks on the page underneath. */
+.shopify-section:has(> .header.is-hidden) {
+  pointer-events: none;
+}
+
+.header--sticky {
+  position: relative;
 }
 
 /* "On scroll up": header.js adds/removes `is-hidden` based on scroll

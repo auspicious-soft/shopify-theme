@@ -167,7 +167,7 @@
     "sticky_background_color": "Sticky header background",
     "sticky_background_color_info": "Only applies once the header becomes sticky/scrolled while transparent (see Transparent header below) — a header that was already solid keeps its normal color scheme instead",
     "sticky_header": "Sticky header",
-    "sticky_header_info": "\"On scroll up\" hides the header while scrolling down and reveals it when scrolling back up. Always on (and always sticky) for the Logo reveal style.",
+    "sticky_header_info": "Applies on every page, for both header styles. \"On scroll up\" hides the header while scrolling down and brings it back when scrolling up.",
     "sticky_logo": "Sticky header logo",
     "sticky_logo_info": "Shown in the header once scrolled past the hero logo. Falls back to Theme settings > Logo when left blank",
     "subheading": "Subheading",

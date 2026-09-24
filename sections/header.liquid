@@ -42,15 +42,12 @@
     assign show_horizontal_nav = true
   endif
 
-  # Style 2 is always sticky by definition, on every template, so the
-  # default/sticky logo swap has an `.is-scrolled` class to key off of even
-  # on pages without the homepage's hero logo.
-  assign sticky_type = section.settings.sticky_header_type
+  # Header settings > Sticky header applies to both header styles, on every
+  # template: "none", "always" or "on_scroll_up" (hide while scrolling down).
+  assign sticky_type = section.settings.sticky_header_type | default: 'always'
   assign is_sticky = false
   assign hide_on_scroll = false
-  if is_logo_reveal
-    assign is_sticky = true
-  elsif sticky_type == 'always'
+  if sticky_type == 'always'
     assign is_sticky = true
   elsif sticky_type == 'on_scroll_up'
     assign is_sticky = true
@@ -96,9 +93,13 @@
   endif
 
   # Any sticky header needs scroll watching: to swap in the sticky
-  # background color/shadow once stuck, to hide/reveal on scroll direction
-  # ("on scroll up"), and/or to drive the logo-reveal crossfade.
+  # background color/shadow once stuck, and to hide/reveal on scroll
+  # direction ("on scroll up"). The Logo reveal style always needs it too,
+  # sticky or not, to drive its hero-logo fade and default/sticky logo swap.
   assign watch_scroll = is_sticky
+  if is_logo_reveal
+    assign watch_scroll = true
+  endif
 
   assign toggle_zone = 'start'
   if hamburger_position == 'right'
@@ -367,8 +368,7 @@
         { "value": "always", "label": "t:options.sticky_header_type.always" },
         { "value": "on_scroll_up", "label": "t:options.sticky_header_type.on_scroll_up" }
       ],
-      "default": "always",
-      "visible_if": "{{ section.settings.header_style == 'standard' }}"
+      "default": "always"
     },
     {
       "type": "color",
