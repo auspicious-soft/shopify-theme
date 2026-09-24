@@ -18,6 +18,7 @@
           "type": "brand",
           "settings": {
             "column_width": 30,
+            "image": "shopify://shop_images/White_1.png",
             "image_width": 140,
             "show_shop_name": true,
             "headline": "",
