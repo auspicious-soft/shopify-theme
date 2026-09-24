@@ -23,6 +23,7 @@
   class="product product--media-{{ section.settings.media_size }} product--gallery-{{ section.settings.gallery_layout }} color-{{ section.settings.color_scheme.id }}"
   data-section-id="{{ section.id }}"
   data-product-url="{{ product.url }}"
+  data-product-handle="{{ product.handle | escape }}"
   data-label-unavailable="{{ 'products.unavailable' | t | escape }}"
   style="
     --section-padding-top: {{ section.settings.padding_top }}px;
@@ -221,6 +222,21 @@
         this.onClick = this.onClick.bind(this);
         this.addEventListener('change', this.onChange);
         this.addEventListener('click', this.onClick);
+
+        this.rememberViewed();
+      }
+
+      // Feeds the Recently viewed section (sections/recently-viewed.liquid):
+      // newest first, no duplicates, capped at 20.
+      rememberViewed() {
+        const handle = this.dataset.productHandle;
+        if (!handle) return;
+        try {
+          const key = 'theme:recently-viewed';
+          const list = JSON.parse(window.localStorage.getItem(key) || '[]').filter((item) => item !== handle);
+          list.unshift(handle);
+          window.localStorage.setItem(key, JSON.stringify(list.slice(0, 20)));
+        } catch (error) {}
       }
 
       onChange(event) {

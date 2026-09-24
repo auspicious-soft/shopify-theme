@@ -393,6 +393,36 @@
           "name": "Divider"
         }
       }
+    },
+    "product_list": {
+      "products_to_show": "Products to show",
+      "layout": "Layout",
+      "layout_grid": "Grid",
+      "layout_slider": "Slider"
+    },
+    "related_products": {
+      "name": "You may also like",
+      "info": "Recommendations are picked automatically by Shopify and improve over time as your store gets orders. Customize them with the Search & Discovery app.",
+      "intent": "Recommendation type",
+      "intent_info": "\"Pairs well with\" shows complementary products you set up in the Search & Discovery app",
+      "intent_related": "Related products",
+      "intent_complementary": "Pairs well with"
+    },
+    "recommended_products": {
+      "name": "Recommended products",
+      "products": "Products",
+      "product_list": "Products",
+      "product_list_info": "Hand-pick products. Takes priority over the collection",
+      "collection": "Collection",
+      "collection_info": "Used when no products are picked above",
+      "show_view_all": "Show \"View all\" link",
+      "show_view_all_info": "Links to the selected collection"
+    },
+    "recently_viewed": {
+      "name": "Recently viewed",
+      "card_name": "Recently viewed card",
+      "info": "Shows the products each shopper viewed most recently, saved in their own browser. Hidden until they have viewed a product (the current product is left out).",
+      "show_clear": "Show \"Clear\" link"
     }
   },
   "settings_schema": {

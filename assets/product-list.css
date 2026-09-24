@@ -1,0 +1,252 @@
+/**
+ * Product list sections (snippets/product-list.liquid): "You may also like"
+ * and "Recommended products". Header + product cards as a grid or a
+ * swipeable slider. Cards themselves live in assets/product-card.css.
+ */
+
+.product-list {
+  --list-gap: calc(var(--spacing-grid-horizontal, 8px) * 2);
+  display: block;
+  padding-block: var(--section-padding-top, 48px) var(--section-padding-bottom, 48px);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* ---------- Header ---------- */
+
+.product-list__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.product-list__header--center {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.product-list__titles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.product-list__heading {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.product-list__subheading {
+  max-width: 38rem;
+  margin: 0;
+  font-size: 0.95rem;
+  color: color-mix(in srgb, var(--color-foreground) 68%, transparent);
+}
+
+.product-list__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.product-list__view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-list__view-all span {
+  background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat;
+  padding-bottom: 0.1rem;
+  transition: background-size 0.3s ease;
+}
+
+.product-list__view-all:hover span {
+  background-size: 0 1px;
+  background-position: right bottom;
+}
+
+.product-list__view-all svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  transform: rotate(-90deg);
+  transition: transform 0.3s ease;
+}
+
+.product-list__view-all:hover svg {
+  transform: rotate(-90deg) translateY(0.2rem);
+}
+
+.product-list__arrows {
+  display: none;
+  gap: 0.5rem;
+}
+
+.product-list__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 22%, transparent);
+  border-radius: 50%;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  cursor: pointer;
+  translate: none;
+  transform: none;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.product-list__arrow:hover:not([disabled]),
+.product-list__arrow:focus-visible {
+  background-color: var(--color-foreground);
+  border-color: var(--color-foreground);
+  color: var(--color-background);
+}
+
+.product-list__arrow[disabled] {
+  cursor: default;
+  opacity: 0.3;
+}
+
+.product-list__arrow svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.product-list__arrow--prev svg {
+  transform: rotate(90deg);
+}
+
+.product-list__arrow--next svg {
+  transform: rotate(-90deg);
+}
+
+@media (min-width: 990px) {
+  .product-list--slider .product-list__arrows {
+    display: inline-flex;
+  }
+
+  .product-list--no-scroll .product-list__arrows {
+    display: none;
+  }
+}
+
+/* ---------- Grid ---------- */
+
+.product-list__track {
+  display: grid;
+  grid-template-columns: repeat(var(--list-columns-mobile, 2), minmax(0, 1fr));
+  gap: calc(var(--spacing-grid-vertical, 8px) * 4) var(--list-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 750px) {
+  .product-list__track {
+    grid-template-columns: repeat(min(var(--list-columns, 4), 3), minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 990px) {
+  .product-list__track {
+    grid-template-columns: repeat(var(--list-columns, 4), minmax(0, 1fr));
+  }
+}
+
+/* ---------- Slider ---------- */
+
+.product-list--slider .product-list__track {
+  display: flex;
+  gap: var(--list-gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.product-list--slider .product-list__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile: show a peek of the next card so it's obvious the row swipes. */
+.product-list--slider .product-list__item {
+  flex: 0 0 calc((100% - var(--list-gap) * var(--list-columns-mobile)) / (var(--list-columns-mobile) + 0.3));
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 750px) {
+  .product-list--slider .product-list__item {
+    flex-basis: calc((100% - var(--list-gap) * 2) / 3);
+  }
+}
+
+@media (min-width: 990px) {
+  .product-list--slider .product-list__item {
+    flex-basis: calc((100% - var(--list-gap) * (var(--list-columns) - 1)) / var(--list-columns));
+  }
+}
+
+/* Recently viewed "Clear" link. */
+.product-list__clear {
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+  color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
+  font: inherit;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  cursor: pointer;
+  translate: none;
+  transform: none;
+}
+
+.product-list__clear:hover,
+.product-list__clear:focus-visible {
+  color: var(--color-foreground);
+}
+
+/* Wrappers that fill themselves in after load. */
+related-products,
+recently-viewed {
+  display: block;
+}
+
+related-products[hidden],
+recently-viewed[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-list--slider .product-list__track {
+    scroll-behavior: auto;
+  }
+
+  .product-list__view-all span,
+  .product-list__view-all svg,
+  .product-list__arrow {
+    transition: none;
+  }
+}

@@ -103,7 +103,8 @@
     "load_more": "Load more",
     "pagination": "Pagination",
     "previous_page": "Previous page",
-    "next_page": "Next page"
+    "next_page": "Next page",
+    "view_all": "View all"
   },
   "gift_card": {
     "add_to_apple_wallet": "Add to Apple Wallet",
@@ -139,7 +140,11 @@
     "out_of_stock": "Out of stock",
     "low_stock": "Only {{ count }} left in stock",
     "share": "Share",
-    "link_copied": "Link copied"
+    "link_copied": "Link copied",
+    "scroll_previous": "Scroll to previous products",
+    "scroll_next": "Scroll to next products",
+    "placeholder_title": "Product title",
+    "clear_history": "Clear"
   },
   "search": {
     "title": "Search",

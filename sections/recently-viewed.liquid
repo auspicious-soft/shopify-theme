@@ -1,0 +1,232 @@
+{% comment %}
+  "Recently viewed": the products this shopper looked at most recently.
+
+  Product pages record each viewed product's handle in localStorage
+  (`theme:recently-viewed`, see <product-page> in sections/product.liquid).
+  This section reads that list, skips the product currently being viewed,
+  and fetches each card from sections/recently-viewed-card.liquid, so the
+  cards match every other product card. It stays hidden until there's
+  something to show (in the theme editor it shows placeholder cards).
+{% endcomment %}
+
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+{{ 'product-list.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign no_products = '' | split: ','
+  assign current_handle = ''
+  if template.name == 'product'
+    assign current_handle = product.handle
+  endif
+
+  assign placeholder_count = 0
+  if request.design_mode
+    assign placeholder_count = section.settings.products_to_show
+  endif
+-%}
+
+<recently-viewed
+  data-current-handle="{{ current_handle | escape }}"
+  data-limit="{{ section.settings.products_to_show }}"
+  {% unless request.design_mode %}hidden{% endunless %}
+>
+  {% render 'product-list',
+    section: section,
+    products: no_products,
+    placeholder_count: placeholder_count,
+    show_clear: section.settings.show_clear
+  %}
+</recently-viewed>
+
+{% javascript %}
+  if (!customElements.get('recently-viewed')) {
+    const STORAGE_KEY = 'theme:recently-viewed';
+
+    class RecentlyViewed extends HTMLElement {
+      connectedCallback() {
+        this.onClick = this.onClick.bind(this);
+        this.addEventListener('click', this.onClick);
+        this.load();
+      }
+
+      disconnectedCallback() {
+        this.removeEventListener('click', this.onClick);
+      }
+
+      readHandles() {
+        try {
+          const list = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '[]');
+          return Array.isArray(list) ? list : [];
+        } catch (error) {
+          return [];
+        }
+      }
+
+      writeHandles(list) {
+        try {
+          if (list.length) window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+          else window.localStorage.removeItem(STORAGE_KEY);
+        } catch (error) {}
+      }
+
+      async load() {
+        const limit = Number(this.dataset.limit) || 4;
+        const current = this.dataset.currentHandle;
+        const handles = this.readHandles().filter((handle) => handle && handle !== current).slice(0, limit);
+        if (!handles.length) return;
+
+        const root = window.Shopify?.routes?.root || '/';
+        const results = await Promise.all(
+          handles.map(async (handle) => {
+            try {
+              const response = await fetch(`${root}products/${encodeURIComponent(handle)}?section_id=recently-viewed-card`);
+              if (!response.ok) return { handle, html: null, gone: response.status === 404 };
+              const doc = new DOMParser().parseFromString(await response.text(), 'text/html');
+              return { handle, html: doc.querySelector('[data-recently-viewed-card]')?.innerHTML || null };
+            } catch (error) {
+              return { handle, html: null };
+            }
+          })
+        );
+
+        // Forget products that no longer exist.
+        const gone = results.filter((result) => result.gone).map((result) => result.handle);
+        if (gone.length) this.writeHandles(this.readHandles().filter((handle) => !gone.includes(handle)));
+
+        const cards = results.filter((result) => result.html);
+        const track = this.querySelector('[data-slider-track]');
+        if (!cards.length || !track) return;
+
+        track.innerHTML = cards.map((card) => `<li class="product-list__item">${card.html}</li>`).join('');
+        track.querySelectorAll('[data-animate]').forEach((el) => el.classList.add('is-revealed'));
+        this.hidden = false;
+        this.querySelector('product-slider')?.update?.();
+      }
+
+      onClick(event) {
+        if (!event.target.closest('[data-recently-viewed-clear]')) return;
+        this.writeHandles([]);
+        this.hidden = true;
+      }
+    }
+
+    customElements.define('recently-viewed', RecentlyViewed);
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:sections.recently_viewed.name",
+  "class": "section-recently-viewed",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.recently_viewed.info"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:labels.heading",
+      "default": "Recently viewed"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:labels.subheading"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:labels.alignment",
+      "options": [
+        { "value": "left", "label": "t:options.alignment.left" },
+        { "value": "center", "label": "t:options.alignment.center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_clear",
+      "label": "t:sections.recently_viewed.show_clear",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.layout"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "t:sections.product_list.products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.product_list.layout",
+      "options": [
+        { "value": "grid", "label": "t:sections.product_list.layout_grid" },
+        { "value": "slider", "label": "t:sections.product_list.layout_slider" }
+      ],
+      "default": "slider"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "t:sections.all.columns_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "t:sections.all.columns_mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:labels.padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:labels.padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.recently_viewed.name"
+    }
+  ]
+}
+{% endschema %}

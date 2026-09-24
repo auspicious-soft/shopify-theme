@@ -1,0 +1,154 @@
+{% doc %}
+  Shared layout for product list sections (sections/related-products.liquid,
+  sections/recommended-products.liquid): a header (heading, subheading,
+  optional "View all" link, slider arrows) above product cards
+  (snippets/product-card.liquid) laid out as a grid or a swipeable slider.
+
+  Reads the section's heading, subheading, heading_alignment, layout,
+  columns_desktop, columns_mobile, products_to_show, color_scheme and
+  padding settings. Styles live in assets/product-list.css; the slider
+  arrows are driven by the <product-slider> element below.
+
+  @param {object} section - The section rendering the list
+  @param {product[]} products - Products to show (capped at products_to_show)
+  @param {string} [view_all_url] - Adds a "View all" link when set
+  @param {number} [placeholder_count] - Placeholder cards to show when there are no products (theme editor onboarding)
+  @param {boolean} [show_clear] - Adds a "Clear" button (Recently viewed history)
+
+  @example
+  {% render 'product-list', section: section, products: recommendations.products %}
+{% enddoc %}
+
+{%- liquid
+  assign layout = section.settings.layout | default: 'grid'
+  assign columns = section.settings.columns_desktop | default: 4
+  assign columns_mobile = section.settings.columns_mobile | default: 2 | plus: 0
+  assign limit = section.settings.products_to_show | default: 4
+  assign card_sizes = '(min-width: 990px) calc(100vw / ' | append: columns | append: '), calc(100vw / ' | append: columns_mobile | append: ')'
+  assign placeholder_count = placeholder_count | default: 0
+-%}
+
+<product-slider
+  class="product-list product-list--{{ layout }} color-{{ section.settings.color_scheme.id }}"
+  style="
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --list-columns: {{ columns }};
+    --list-columns-mobile: {{ columns_mobile }};
+  "
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank or section.settings.subheading != blank or view_all_url != blank or show_clear or layout == 'slider' -%}
+      <div class="product-list__header product-list__header--{{ section.settings.heading_alignment | default: 'left' }}">
+        <div class="product-list__titles">
+          {% if section.settings.heading != blank %}
+            <h2 class="product-list__heading">{{ section.settings.heading | escape }}</h2>
+          {% endif %}
+          {% if section.settings.subheading != blank %}
+            <p class="product-list__subheading">{{ section.settings.subheading | escape }}</p>
+          {% endif %}
+        </div>
+
+        <div class="product-list__actions">
+          {% if show_clear %}
+            <button type="button" class="product-list__clear" data-recently-viewed-clear>{{ 'products.clear_history' | t }}</button>
+          {% endif %}
+          {% if view_all_url != blank %}
+            <a href="{{ view_all_url }}" class="product-list__view-all">
+              <span>{{ 'collections.view_all' | t }}</span>
+              {{ 'icon-chevron.svg' | inline_asset_content }}
+            </a>
+          {% endif %}
+          {% if layout == 'slider' %}
+            <div class="product-list__arrows">
+              <button type="button" class="product-list__arrow product-list__arrow--prev" data-slider-prev aria-label="{{ 'products.scroll_previous' | t }}" disabled>
+                {{ 'icon-chevron.svg' | inline_asset_content }}
+              </button>
+              <button type="button" class="product-list__arrow product-list__arrow--next" data-slider-next aria-label="{{ 'products.scroll_next' | t }}">
+                {{ 'icon-chevron.svg' | inline_asset_content }}
+              </button>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <ul class="product-list__track" role="list" data-slider-track>
+      {% for product in products limit: limit %}
+        <li class="product-list__item">
+          {% render 'product-card', product: product, sizes: card_sizes %}
+        </li>
+      {% endfor %}
+
+      {% if products.size == 0 and placeholder_count > 0 %}
+        {% for i in (1..placeholder_count) %}
+          {%- assign placeholder_name = i | minus: 1 | modulo: 6 | plus: 1 | prepend: 'product-' -%}
+          <li class="product-list__item">
+            <div class="product-card product-card--{{ settings.card_style }} color-{{ settings.card_color_scheme.id }}">
+              <div class="product-card__media">
+                <div class="product-card__media-frame" style="--card-ratio: 4 / 5;">
+                  {{ placeholder_name | placeholder_svg_tag: 'product-card__image product-card__placeholder' }}
+                </div>
+              </div>
+              <div class="product-card__content">
+                <h3 class="product-card__title">{{ 'products.placeholder_title' | t }}</h3>
+                <div class="product-card__price">{{ 1999 | money }}</div>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      {% endif %}
+    </ul>
+  </div>
+</product-slider>
+
+{% javascript %}
+  if (!customElements.get('product-slider')) {
+    class ProductSlider extends HTMLElement {
+      connectedCallback() {
+        this.track = this.querySelector('[data-slider-track]');
+        this.prev = this.querySelector('[data-slider-prev]');
+        this.next = this.querySelector('[data-slider-next]');
+        if (!this.track || !this.prev || !this.next) return;
+
+        this.update = this.update.bind(this);
+        this.onClick = this.onClick.bind(this);
+        this.track.addEventListener('scroll', this.update, { passive: true });
+        this.addEventListener('click', this.onClick);
+        this.resizeObserver = new ResizeObserver(this.update);
+        this.resizeObserver.observe(this.track);
+        this.update();
+      }
+
+      disconnectedCallback() {
+        this.resizeObserver?.disconnect();
+      }
+
+      onClick(event) {
+        if (event.target.closest('[data-slider-prev]')) this.step(-1);
+        else if (event.target.closest('[data-slider-next]')) this.step(1);
+      }
+
+      // Move by one "page" of cards, snapping to whole cards.
+      step(direction) {
+        const item = this.track.querySelector('.product-list__item');
+        const gap = parseFloat(getComputedStyle(this.track).columnGap) || 0;
+        const itemWidth = item ? item.getBoundingClientRect().width + gap : this.track.clientWidth;
+        const perPage = Math.max(1, Math.floor((this.track.clientWidth + gap) / itemWidth));
+        const sign = document.dir === 'rtl' ? -1 : 1;
+        this.track.scrollBy({ left: direction * sign * perPage * itemWidth, behavior: 'smooth' });
+      }
+
+      update() {
+        if (!this.track || !this.prev || !this.next) return;
+        const max = this.track.scrollWidth - this.track.clientWidth;
+        const position = Math.abs(this.track.scrollLeft);
+        this.prev.disabled = position <= 2;
+        this.next.disabled = position >= max - 2;
+        this.classList.toggle('product-list--no-scroll', max <= 2);
+      }
+    }
+
+    customElements.define('product-slider', ProductSlider);
+  }
+{% endjavascript %}

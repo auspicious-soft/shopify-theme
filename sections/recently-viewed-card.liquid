@@ -1,0 +1,21 @@
+{% comment %}
+  Helper for sections/recently-viewed.liquid, not meant to be added in the
+  theme editor (it has no presets). The Recently viewed script requests it
+  per product with `/products/{handle}?section_id=recently-viewed-card`,
+  where `product` is that product, and lifts the card out of the response.
+  Rendering the real product-card snippet server-side keeps these cards
+  identical to every other card in the theme.
+{% endcomment %}
+
+{% if product %}
+  <div data-recently-viewed-card data-handle="{{ product.handle }}">
+    {% render 'product-card', product: product, sizes: '(min-width: 990px) 25vw, 50vw' %}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.recently_viewed.card_name",
+  "settings": []
+}
+{% endschema %}
