@@ -124,7 +124,8 @@
 
           {%- if heading != blank -%}
             {%- assign heading_tag = section.settings.heading_tag | default: 'h2' -%}
-            <{{ heading_tag }} class="promo-banner__heading{% if section.settings.heading_uppercase %} promo-banner__heading--uppercase{% endif %}">
+            {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
+            <{{ heading_tag }} class="{{ heading_class }} promo-banner__heading{% if section.settings.heading_uppercase %} promo-banner__heading--uppercase{% endif %}">
               {{- heading | escape -}}
             </{{ heading_tag }}>
           {%- endif -%}
@@ -421,6 +422,21 @@
       "id": "heading_tag",
       "label": "t:labels.heading_tag",
       "info": "t:labels.heading_tag_info",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "heading_class",
+      "label": "t:labels.heading_class",
+      "info": "t:labels.heading_class_info",
       "options": [
         { "value": "h1", "label": "H1" },
         { "value": "h2", "label": "H2" },

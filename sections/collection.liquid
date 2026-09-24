@@ -22,6 +22,7 @@
 {%- liquid
   assign section_id = section.id
   assign heading_tag = section.settings.heading_tag | default: 'h1'
+  assign heading_class = section.settings.heading_class | default: heading_tag
   assign columns = section.settings.columns_desktop
   assign columns_mobile = section.settings.columns_mobile | plus: 0
   assign card_sizes = '(min-width: 990px) calc((100vw - 20rem) / ' | append: columns | append: '), calc(100vw / ' | append: columns_mobile | append: ')'
@@ -84,7 +85,7 @@
         </div>
       {% endif %}
       <div class="collection-banner__content page-width">
-        <{{ heading_tag }} class="collection-banner__title">{{ collection.title | escape }}</{{ heading_tag }}>
+        <{{ heading_tag }} class="{{ heading_class }} collection-banner__title">{{ collection.title | escape }}</{{ heading_tag }}>
         {% if section.settings.show_description and collection.description != blank %}
           <div class="collection-banner__description">{{ collection.description }}</div>
         {% endif %}
@@ -605,6 +606,21 @@
       "id": "heading_tag",
       "label": "t:labels.heading_tag",
       "info": "t:labels.heading_tag_info",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "heading_class",
+      "label": "t:labels.heading_class",
+      "info": "t:labels.heading_class_info",
       "options": [
         { "value": "h1", "label": "H1" },
         { "value": "h2", "label": "H2" },

@@ -6,12 +6,20 @@
  * theme from the theme editor without touching code.
  */
 
+/* `.h1`–`.h6` give any element a heading size, independent of its tag
+   (e.g. an <h1> for SEO that looks like an h3). */
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
   font-family: var(--font-heading--family);
   font-style: var(--font-heading--style);
   font-weight: var(--font-heading--weight);
@@ -24,27 +32,33 @@ body {
   font-size: calc(1rem * var(--body-scale) / 100);
 }
 
-h1 {
+h1,
+.h1 {
   font-size: calc(var(--heading-scale) / 100 * clamp(2.25rem, 1.9rem + 1.5vw, 3.5rem));
 }
 
-h2 {
+h2,
+.h2 {
   font-size: calc(var(--heading-scale) / 100 * clamp(1.875rem, 1.6rem + 1.1vw, 2.75rem));
 }
 
-h3 {
+h3,
+.h3 {
   font-size: calc(var(--heading-scale) / 100 * clamp(1.5rem, 1.35rem + 0.6vw, 2rem));
 }
 
-h4 {
+h4,
+.h4 {
   font-size: calc(var(--heading-scale) / 100 * clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem));
 }
 
-h5 {
+h5,
+.h5 {
   font-size: calc(var(--heading-scale) / 100 * clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem));
 }
 
-h6 {
+h6,
+.h6 {
   font-size: calc(var(--heading-scale) / 100 * clamp(1rem, 0.95rem + 0.15vw, 1.0625rem));
 }
 

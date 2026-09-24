@@ -31,7 +31,8 @@
     {% if section.settings.show_heading %}
       <div class="collection-list-page__header collection-list-page__header--{{ section.settings.heading_alignment }}">
         {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
-        <{{ heading_tag }} class="collection-list-page__heading">
+        {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
+        <{{ heading_tag }} class="{{ heading_class }} collection-list-page__heading">
           {%- if section.settings.heading != blank -%}
             {{- section.settings.heading | escape -}}
           {%- else -%}
@@ -140,6 +141,21 @@
       "id": "heading_tag",
       "label": "t:labels.heading_tag",
       "info": "t:labels.heading_tag_info",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "heading_class",
+      "label": "t:labels.heading_class",
+      "info": "t:labels.heading_class_info",
       "options": [
         { "value": "h1", "label": "H1" },
         { "value": "h2", "label": "H2" },
