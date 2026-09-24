@@ -13,7 +13,10 @@
       "type": "hero-banner",
       "name": "t:general.hero_banner",
       "settings": {
+        "media_type": "video",
         "background_image": "shopify://shop_images/hero_image.png",
+        "video": "shopify://files/videos/YTSave_YouTube_Demo-Background-Sample-Video_Media_K4TOrB7at0Y_001_1080p.mp4",
+        "video_url": "",
         "background_color": "#ffffff",
         "overlay_color": "#000000",
         "overlay_opacity": 5,
@@ -57,6 +60,8 @@
       "name": "t:sections.collection_banner.name",
       "settings": {
         "collection": "",
+        "media_type": "image",
+        "video_url": "",
         "height": "fullscreen",
         "mobile_height": "medium",
         "width": "full",
@@ -92,6 +97,8 @@
           "type": "collection",
           "settings": {
             "collection": "",
+            "media_type": "image",
+            "video_url": "",
             "subheading": "Male",
             "heading": "Shop the latest drops",
             "text": "",
@@ -103,6 +110,8 @@
           "type": "collection",
           "settings": {
             "collection": "",
+            "media_type": "image",
+            "video_url": "",
             "subheading": "Female",
             "heading": "Discover new silhouettes",
             "text": "",
