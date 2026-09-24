@@ -32,10 +32,111 @@
         "button_color_scheme": "scheme-1"
       }
     },
-    "hello_world_e8xQDH": {
-      "type": "hello-world",
-      "name": "Hello World Template",
-      "settings": {}
+    "collections_3gxUDK": {
+      "type": "collections",
+      "name": "t:general.collections_grid",
+      "settings": {
+        "show_heading": true,
+        "heading": "",
+        "subheading": "",
+        "heading_alignment": "left",
+        "collection_list": [],
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 64
+      }
+    },
+    "collection_banner_xDbcQT": {
+      "type": "collection-banner",
+      "name": "t:sections.collection_banner.name",
+      "settings": {
+        "collection": "",
+        "height": "medium",
+        "mobile_height": "medium",
+        "width": "page",
+        "corner_radius": 0,
+        "zoom_on_hover": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "subheading": "New items",
+        "heading": "Long shirts",
+        "heading_size": "medium",
+        "heading_uppercase": true,
+        "text": "",
+        "text_color": "#ffffff",
+        "content_position_horizontal": "left",
+        "content_position_vertical": "top",
+        "content_width": 520,
+        "button_label": "View products",
+        "button_link": "",
+        "button_style": "primary",
+        "button_size": "small",
+        "button_color_scheme": "",
+        "full_link": true,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "collection_banners_hjwTkc": {
+      "type": "collection-banners",
+      "blocks": {
+        "collection_kahEbC": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "subheading": "Male",
+            "heading": "Shop the latest drops",
+            "text": "",
+            "button_label": "Explore male",
+            "link": ""
+          }
+        },
+        "collection_fGPGma": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "subheading": "Female",
+            "heading": "Discover new silhouettes",
+            "text": "",
+            "button_label": "Explore female",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_kahEbC",
+        "collection_fGPGma"
+      ],
+      "name": "t:sections.collection_banners.name",
+      "settings": {
+        "heading": "Shop by gender",
+        "subheading": "",
+        "heading_alignment": "left",
+        "columns_desktop": 2,
+        "columns_mobile": "1",
+        "mobile_layout": "stack",
+        "width": "page",
+        "gap": 12,
+        "image_ratio": "landscape",
+        "corner_radius": 0,
+        "zoom_on_hover": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 15,
+        "heading_size": "medium",
+        "heading_uppercase": true,
+        "text_color": "#ffffff",
+        "content_position_horizontal": "left",
+        "content_position_vertical": "split",
+        "button_style": "primary",
+        "button_size": "small",
+        "button_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 32,
+        "padding_bottom": 48
+      }
     },
     "social_marquee_xQATWa": {
       "type": "social-marquee",
@@ -116,7 +217,9 @@
   },
   "order": [
     "hero_banner_YzGz9c",
-    "hello_world_e8xQDH",
+    "collections_3gxUDK",
+    "collection_banner_xDbcQT",
+    "collection_banners_hjwTkc",
     "social_marquee_xQATWa"
   ]
 }
