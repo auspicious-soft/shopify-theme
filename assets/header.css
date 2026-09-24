@@ -668,7 +668,9 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
   padding: 0 0.25em;
   border-radius: 999px;
   background-color: var(--header-nav-hover-color);
-  color: var(--header-bg);
+  /* The color scheme's solid background, not --header-bg: that is
+     `transparent` on a transparent header, which hid the number. */
+  color: var(--color-background);
   font-size: 0.65rem;
   line-height: 14px;
   text-align: center;
