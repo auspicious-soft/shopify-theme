@@ -12,6 +12,10 @@
 {% enddoc %}
 
 <div class="header__actions">
+  {% if section.settings.localization_selector != 'none' %}
+    {% render 'header-localization', section: section %}
+  {% endif %}
+
   {% if section.settings.show_search %}
     {% render 'predictive-search', color_scheme: section.settings.search_color_scheme %}
   {% endif %}

@@ -546,7 +546,7 @@
       "label": "t:labels.search_color_scheme",
       "info": "t:labels.search_color_scheme_info",
       "default": "scheme-1",
-      "visible_if": "{{ section.settings.show_search }}"
+      "visible_if": "{{ section.settings.show_search or section.settings.localization_selector != 'none' }}"
     },
     {
       "type": "checkbox",
@@ -584,6 +584,23 @@
       "label": "t:labels.show_cart_count",
       "default": true,
       "visible_if": "{{ section.settings.show_cart }}"
+    },
+    {
+      "type": "header",
+      "content": "t:labels.localization_settings",
+      "info": "t:labels.localization_settings_info"
+    },
+    {
+      "type": "select",
+      "id": "localization_selector",
+      "label": "t:labels.localization_selector",
+      "options": [
+        { "value": "none", "label": "t:options.localization_selector.none" },
+        { "value": "country", "label": "t:options.localization_selector.country" },
+        { "value": "language", "label": "t:options.localization_selector.language" },
+        { "value": "both", "label": "t:options.localization_selector.both" }
+      ],
+      "default": "none"
     },
     {
       "type": "header",

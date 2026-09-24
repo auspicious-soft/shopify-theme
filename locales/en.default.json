@@ -21,6 +21,12 @@
     "menu": "Menu",
     "primary_navigation": "Primary navigation"
   },
+  "localization": {
+    "title": "Country/region and language",
+    "language": "Language",
+    "country": "Country/region",
+    "update": "Update"
+  },
   "badges": {
     "sale": "Sale",
     "sold_out": "Sold out"

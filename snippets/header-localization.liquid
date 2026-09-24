@@ -1,0 +1,144 @@
+{% doc %}
+  Renders the header's country/currency and language selector: a trigger
+  showing the current country's flag and "Country (CUR $)" label, which
+  opens a small dropdown popup holding a Language and/or a Country/region
+  select. Each select submits Shopify's localization form as soon as it
+  changes. Header settings > Country/language selector > Show selector
+  picks country, language, or both; the whole thing renders nothing when
+  set to Hidden (or the store has only one option of each enabled kind).
+  The popup shares Header settings > Popup color scheme with search.
+
+  Open/close and click-outside/Escape handling come from theme-panel.liquid.
+  Styling lives in assets/header-localization.css (loaded below).
+
+  @param section {Object} - the header section
+
+  @example
+  {% render 'header-localization', section: section %}
+{% enddoc %}
+
+{% liquid
+  assign selector = section.settings.localization_selector
+
+  assign show_country = false
+  if selector == 'country' or selector == 'both'
+    if localization.available_countries.size > 1
+      assign show_country = true
+    endif
+  endif
+
+  assign show_language = false
+  if selector == 'language' or selector == 'both'
+    if localization.available_languages.size > 1
+      assign show_language = true
+    endif
+  endif
+%}
+
+{% if show_country or show_language %}
+  {{ 'header-localization.css' | asset_url | stylesheet_tag }}
+  {% render 'theme-panel' %}
+
+  {% capture panel_id %}HeaderLocalization-{{ section.id }}{% endcapture %}
+
+  <header-localization class="header-localization">
+    <theme-panel>
+      <details id="{{ panel_id }}" class="header-localization__details">
+        <summary
+          class="header-localization__trigger"
+          data-panel-open="{{ panel_id }}"
+          aria-label="{{ 'localization.title' | t }}"
+        >
+          {% if show_country %}
+            <span class="header-localization__flag">
+              {{- localization.country | image_url: width: 32 | image_tag: width: 16, height: 16, alt: '', loading: 'lazy' -}}
+            </span>
+            <span class="header-localization__label">
+              {{- localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol -}})
+            </span>
+          {% else %}
+            <span class="header-localization__label">{{ localization.language.endonym_name | capitalize }}</span>
+          {% endif %}
+          <span class="header-localization__chevron">{{ 'icon-chevron.svg' | inline_asset_content }}</span>
+        </summary>
+
+        <div class="header-localization__panel color-{{ section.settings.search_color_scheme.id }}">
+          {% form 'localization', class: 'header-localization__form' %}
+            {% if show_language %}
+              <div class="header-localization__field">
+                <label class="header-localization__heading" for="{{ panel_id }}-language">
+                  {{- 'localization.language' | t -}}
+                </label>
+                <div class="header-localization__select-wrapper">
+                  <select
+                    id="{{ panel_id }}-language"
+                    name="language_code"
+                    class="header-localization__select"
+                    data-header-localization-select
+                  >
+                    {% for language in localization.available_languages %}
+                      <option
+                        value="{{ language.iso_code }}"
+                        {% if language.iso_code == localization.language.iso_code %}selected{% endif %}
+                      >
+                        {{ language.endonym_name | capitalize }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                  {{ 'icon-chevron.svg' | inline_asset_content }}
+                </div>
+              </div>
+            {% endif %}
+
+            {% if show_country %}
+              <div class="header-localization__field">
+                <label class="header-localization__heading" for="{{ panel_id }}-country">
+                  {{- 'localization.country' | t -}}
+                </label>
+                <div class="header-localization__select-wrapper">
+                  <select
+                    id="{{ panel_id }}-country"
+                    name="country_code"
+                    class="header-localization__select"
+                    data-header-localization-select
+                  >
+                    {% for country in localization.available_countries %}
+                      <option
+                        value="{{ country.iso_code }}"
+                        {% if country.iso_code == localization.country.iso_code %}selected{% endif %}
+                      >
+                        {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                      </option>
+                    {% endfor %}
+                  </select>
+                  {{ 'icon-chevron.svg' | inline_asset_content }}
+                </div>
+              </div>
+            {% endif %}
+
+            <noscript>
+              <button type="submit" class="header-localization__submit">{{ 'localization.update' | t }}</button>
+            </noscript>
+          {% endform %}
+        </div>
+      </details>
+    </theme-panel>
+  </header-localization>
+{% endif %}
+
+{% javascript %}
+  if (!customElements.get('header-localization')) {
+    class HeaderLocalization extends HTMLElement {
+      connectedCallback() {
+        this.form = this.querySelector('form');
+        if (!this.form) return;
+
+        this.querySelectorAll('[data-header-localization-select]').forEach((select) => {
+          select.addEventListener('change', () => this.form.submit());
+        });
+      }
+    }
+
+    customElements.define('header-localization', HeaderLocalization);
+  }
+{% endjavascript %}

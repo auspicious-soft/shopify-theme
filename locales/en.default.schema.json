@@ -142,6 +142,9 @@
     "show_account": "Account icon",
     "account_display": "Account button",
     "account_text": "Account button text",
+    "localization_settings": "Country/language selector",
+    "localization_settings_info": "Only shown when the store has more than one country or language enabled in Settings > Markets / Languages",
+    "localization_selector": "Show selector",
     "show_cart": "Cart icon",
     "show_cart_count": "Cart item count",
     "show_payment_icons": "Show payment icons",
@@ -154,8 +157,8 @@
     "sticky_background_color_info": "Only applies once the header becomes sticky/scrolled while transparent (see Transparent header below) — a header that was already solid keeps its normal color scheme instead",
     "sticky_header": "Sticky header",
     "sticky_header_info": "\"On scroll up\" hides the header while scrolling down and reveals it when scrolling back up. Always on (and always sticky) for the Logo reveal style.",
-    "search_color_scheme": "Search popup color scheme",
-    "search_color_scheme_info": "Used for the search popup instead of the header's own color scheme, so its text stays readable even when the header uses a transparent-only scheme",
+    "search_color_scheme": "Popup color scheme",
+    "search_color_scheme_info": "Used for the search and country/language popups instead of the header's own color scheme, so their text stays readable even when the header uses a transparent-only scheme",
     "sticky_logo": "Sticky header logo",
     "sticky_logo_info": "Shown in the header once scrolled past the hero logo. Falls back to Theme settings > Logo when left blank",
     "subheading": "Subheading",
@@ -207,6 +210,12 @@
     "account_display": {
       "icon": "Icon",
       "text": "Text"
+    },
+    "localization_selector": {
+      "none": "Hidden",
+      "country": "Country/region only",
+      "language": "Language only",
+      "both": "Country/region and language"
     },
     "header_style": {
       "standard": "Standard",

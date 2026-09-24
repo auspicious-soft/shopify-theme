@@ -1,0 +1,189 @@
+/**
+ * Header country/currency + language selector.
+ * Namespaced under `.header-localization`; only loaded when the selector
+ * renders (see snippets/header-localization.liquid). The trigger inherits
+ * the header's own text color (so it follows the transparent/hover/
+ * scrolled states like the other header icons); the popup carries its own
+ * color scheme (Header settings > Popup color scheme, shared with search).
+ */
+
+.header-localization__details {
+  position: relative;
+}
+
+/* ---------- Trigger ---------- */
+
+.header-localization__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  cursor: pointer;
+  color: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.header-localization__trigger::-webkit-details-marker {
+  display: none;
+}
+
+.header-localization__flag {
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 1.1rem;
+  height: 0.8rem;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.header-localization__flag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header-localization__chevron {
+  display: inline-flex;
+}
+
+.header-localization__chevron svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+.header-localization__details[open] .header-localization__chevron svg {
+  transform: rotate(180deg);
+}
+
+/* ---------- Popup ---------- */
+
+.header-localization__details[open] .header-localization__panel {
+  position: absolute;
+  inset-block-start: calc(100% + 1rem);
+  inset-inline-end: 0;
+  z-index: 60;
+  width: max(100%, 17rem);
+  max-width: calc(100vw - 2rem);
+  padding: 1.25rem;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+  box-shadow: 0 18px 40px -18px rgb(0 0 0 / 30%);
+  animation: header-localization-in 200ms ease;
+}
+
+@keyframes header-localization-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-localization__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header-localization__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.header-localization__heading {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
+}
+
+/* Native <select> (keeps keyboard/screen-reader/mobile picker behavior),
+   restyled as a plain row with the theme's chevron on the right. */
+.header-localization__select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.header-localization__select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0 1.5rem 0 0;
+  font: inherit;
+  font-size: 0.85rem;
+  color: inherit;
+  cursor: pointer;
+}
+
+.header-localization__select:focus {
+  outline: none;
+}
+
+.header-localization__select:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+
+.header-localization__select option {
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+}
+
+.header-localization__select-wrapper svg {
+  position: absolute;
+  inset-inline-end: 0;
+  width: 0.9rem;
+  height: 0.9rem;
+  pointer-events: none;
+}
+
+.header-localization__submit {
+  align-self: flex-start;
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-localization__details[open] .header-localization__panel {
+    animation: none;
+  }
+
+  .header-localization__chevron svg {
+    transition: none;
+  }
+}
+
+/* ---------- Mobile ----------
+   Flag + chevron only, to leave room for the other header icons; the
+   popup still shows the full labels. */
+
+@media (max-width: 749.98px) {
+  .header-localization__trigger:has(.header-localization__flag) .header-localization__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .header-localization__trigger {
+    gap: 0.3rem;
+  }
+}
