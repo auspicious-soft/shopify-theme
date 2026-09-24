@@ -58,6 +58,7 @@
         "newsletter"
       ],
       "settings": {
+        "footer_width": "full",
         "mobile_menu_style": "accordion",
         "column_gap": 48,
         "copyright_text": "",
@@ -67,8 +68,7 @@
         "show_divider": true,
         "color_scheme": "scheme-4",
         "padding_top": 64,
-        "padding_bottom": 24,
-        "footer_width": "page"
+        "padding_bottom": 24
       }
     }
   },
