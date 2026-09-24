@@ -99,7 +99,8 @@
         "collection_kahEbC": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "automated-collection",
+            "image": "shopify://shop_images/Image_52.png",
             "media_type": "image",
             "video_url": "",
             "subheading": "Male",
@@ -112,7 +113,8 @@
         "collection_fGPGma": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "frontpage",
+            "image": "shopify://shop_images/Image_53.png",
             "media_type": "image",
             "video_url": "",
             "subheading": "Female",
