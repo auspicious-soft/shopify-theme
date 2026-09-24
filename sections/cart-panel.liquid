@@ -5,108 +5,175 @@
   when the cart type is set to "page" (the header cart icon links straight
   to the cart page in that mode).
 
-  https://shopify.dev/docs/storefronts/themes/architecture/sections/section-schema
+  Drawer layout: header (title + count, close), optional free shipping bar
+  (snippets/cart-free-shipping.liquid), scrolling line items
+  (snippets/cart-drawer-item.liquid) + optional order note, and a footer
+  form with discounts, subtotal and checkout. When empty, it shows a
+  message and, if Theme settings > Cart > Collection is set, a few products.
+
+  The <dialog> itself is never replaced: after every change only its
+  `[data-cart-contents]` wrapper is swapped for freshly rendered markup
+  (Section Rendering API), so an open drawer stays open with no flicker.
+  Styles live in assets/cart-panel.css.
 {% endcomment %}
 
 {% unless settings.cart_type == 'page' %}
+  {{ 'cart-panel.css' | asset_url | stylesheet_tag }}
   {% render 'theme-panel' %}
 
-  <cart-panel data-cart-type="{{ settings.cart_type }}" data-cart-item-count="{{ cart.item_count }}">
+  <cart-panel
+    data-cart-type="{{ settings.cart_type }}"
+    data-section-id="{{ section.id }}"
+    data-cart-item-count="{{ cart.item_count }}"
+  >
     {% if settings.cart_type == 'drawer' %}
       <theme-panel>
-        <dialog id="cart-panel-dialog" class="cart-panel color-{{ settings.cart_color_scheme.id }}" scroll-lock>
-          <div class="cart-panel__header">
-            <p class="cart-panel__title">{{ 'cart.title' | t }}</p>
-            <button type="button" data-panel-close aria-label="{{ 'accessibility.close' | t }}">&times;</button>
-          </div>
-
-          {% if cart.item_count == 0 %}
-            <div class="cart-panel__empty">
-              <p>{{ 'cart.empty' | t }}</p>
-              <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'cart.continue_shopping' | t }}</a>
-            </div>
-          {% else %}
-            <ul class="cart-panel__items" role="list">
-              {% for item in cart.items %}
-                <li class="cart-panel__item">
-                  {% render 'image', class: 'cart-panel__item-image', image: item.image, url: item.url, width: 160, height: 160, crop: 'center' %}
-                  <div class="cart-panel__item-content">
-                    <a href="{{ item.url }}" class="cart-panel__item-title">{{ item.product.title }}</a>
-                    {% if item.variant.title != 'Default Title' %}
-                      <p class="cart-panel__item-variant">{{ item.variant.title }}</p>
-                    {% endif %}
-                    {% if settings.show_vendor %}
-                      <p class="cart-panel__item-vendor">{{ item.product.vendor }}</p>
-                    {% endif %}
-
-                    <div class="cart-panel__item-quantity">
-                      <button type="button" data-qty-decrease aria-label="{{ 'cart.decrease_quantity' | t }}">&minus;</button>
-                      <input
-                        type="number"
-                        min="0"
-                        value="{{ item.quantity }}"
-                        data-qty-input
-                        data-key="{{ item.key }}"
-                        aria-label="{{ 'cart.quantity' | t }}"
-                      >
-                      <button type="button" data-qty-increase aria-label="{{ 'cart.increase_quantity' | t }}">&plus;</button>
-                    </div>
-
-                    {% render 'price', price: item.final_line_price, compare_at_price: item.original_line_price %}
-                  </div>
-                  <a href="{{ item.url_to_remove }}" data-remove-item="{{ item.key }}" class="cart-panel__item-remove">
-                    {{ 'cart.remove' | t }}
-                  </a>
-                </li>
-              {% endfor %}
-            </ul>
-
-            {% if settings.show_cart_note %}
-              <textarea
-                class="cart-panel__note"
-                name="note"
-                data-cart-note
-                placeholder="{{ 'cart.note_placeholder' | t }}"
-              >{{ cart.note }}</textarea>
-            {% endif %}
-
-            {% if settings.cart_drawer_collection != blank and settings.cart_drawer_collection.products.size > 0 %}
-              <div class="cart-panel__recommendations">
-                {% for product in settings.cart_drawer_collection.products limit: 4 %}
-                  <a href="{{ product.url }}" class="cart-panel__recommendation">
-                    {% render 'image', image: product.featured_image, width: 200, height: 200, crop: 'center' %}
-                    <p>{{ product.title }}</p>
-                    {% render 'price', price: product.price %}
-                  </a>
-                {% endfor %}
-              </div>
-            {% endif %}
-
-            <div class="cart-panel__footer">
-              <div class="cart-panel__subtotal">
-                <span>{{ 'cart.subtotal' | t }}</span>
-                {% render 'price', price: cart.total_price %}
-              </div>
-              <button type="submit" formaction="{{ routes.cart_url }}" formmethod="post" name="checkout" class="button cart-panel__checkout">
-                {{ 'cart.checkout' | t }}
+        <dialog
+          id="cart-panel-dialog"
+          class="cart-drawer color-{{ settings.cart_color_scheme.id }}"
+          aria-labelledby="CartDrawerTitle"
+          scroll-lock
+        >
+          <div class="cart-drawer__inner" data-cart-contents>
+            <div class="cart-drawer__header">
+              <h2 id="CartDrawerTitle" class="cart-drawer__title">
+                {{ 'cart.title' | t }}
+                {%- if cart.item_count > 0 %}
+                  <span class="cart-drawer__count">({{ cart.item_count }})</span>
+                {%- endif -%}
+              </h2>
+              <button
+                type="button"
+                class="cart-drawer__close"
+                data-panel-close
+                aria-label="{{ 'accessibility.close' | t }}"
+              >
+                {{ 'icon-close.svg' | inline_asset_content }}
               </button>
             </div>
-          {% endif %}
+
+            {% render 'cart-free-shipping' %}
+
+            {% if cart.item_count == 0 %}
+              <div class="cart-drawer__body cart-drawer__body--empty">
+                <div class="cart-drawer__empty">
+                  <span class="cart-drawer__empty-icon">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+                  <p class="cart-drawer__empty-title">{{ 'cart.empty' | t }}</p>
+                  <a href="{{ routes.all_products_collection_url }}" class="button button--primary cart-drawer__empty-button">
+                    {{- 'cart.continue_shopping' | t -}}
+                  </a>
+                </div>
+
+                {% assign recommendations = settings.cart_drawer_collection %}
+                {% if recommendations != blank and recommendations.products_count > 0 %}
+                  <div class="cart-drawer__recommendations">
+                    <p class="cart-drawer__section-title">{{ 'cart.recommendations' | t }}</p>
+                    <ul class="cart-drawer__recommendation-list" role="list">
+                      {% for product in recommendations.products limit: 4 %}
+                        <li>
+                          <a href="{{ product.url }}" class="cart-drawer__recommendation">
+                            <span class="cart-drawer__recommendation-media">
+                              {%- if product.featured_image -%}
+                                {{
+                                  product.featured_image
+                                  | image_url: width: 400
+                                  | image_tag: loading: 'lazy', widths: '200, 300, 400', sizes: '(min-width: 30rem) 12rem, 45vw', alt: product.featured_image.alt
+                                }}
+                              {%- else -%}
+                                {{ 'product-1' | placeholder_svg_tag }}
+                              {%- endif -%}
+                            </span>
+                            <span class="cart-drawer__recommendation-title">{{ product.title }}</span>
+                            {% render 'price', price: product.price %}
+                          </a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                {% endif %}
+              </div>
+            {% else %}
+              <div class="cart-drawer__body">
+                <ul class="cart-drawer__items" role="list">
+                  {% for item in cart.items %}
+                    {% render 'cart-drawer-item', item: item, index: forloop.index %}
+                  {% endfor %}
+                </ul>
+
+                {% if settings.show_cart_note %}
+                  <details class="cart-drawer__note"{% if cart.note != blank %} open{% endif %}>
+                    <summary class="cart-drawer__note-summary">
+                      <span>{{ 'cart.note' | t }}</span>
+                      <span class="cart-drawer__note-icon" aria-hidden="true"></span>
+                    </summary>
+                    <label for="CartDrawerNote" class="visually-hidden">{{ 'cart.note' | t }}</label>
+                    <textarea
+                      id="CartDrawerNote"
+                      class="cart-drawer__note-input"
+                      name="note"
+                      form="CartDrawerForm"
+                      rows="3"
+                      data-cart-note
+                      placeholder="{{ 'cart.note_placeholder' | t }}"
+                    >{{ cart.note }}</textarea>
+                  </details>
+                {% endif %}
+              </div>
+
+              <form action="{{ routes.cart_url }}" method="post" id="CartDrawerForm" class="cart-drawer__footer">
+                {% if cart.cart_level_discount_applications != empty %}
+                  <ul class="cart-drawer__discounts" role="list">
+                    {% for discount in cart.cart_level_discount_applications %}
+                      <li>
+                        <span>{{ discount.title }}</span>
+                        <span>−{{ discount.total_allocated_amount | money }}</span>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
+                <div class="cart-drawer__subtotal">
+                  <span>{{ 'cart.subtotal' | t }}</span>
+                  {% render 'price', price: cart.total_price %}
+                </div>
+                <p class="cart-drawer__taxes">{{ 'cart.taxes_and_shipping' | t }}</p>
+
+                <button type="submit" name="checkout" class="button button--primary cart-drawer__checkout">
+                  {{- 'cart.checkout' | t -}}
+                </button>
+                <a href="{{ routes.cart_url }}" class="cart-drawer__view-cart">{{ 'cart.view_cart' | t }}</a>
+              </form>
+            {% endif %}
+          </div>
         </dialog>
       </theme-panel>
     {% elsif settings.cart_type == 'notification' %}
       <theme-panel>
-        <dialog id="cart-panel-toast" class="cart-panel cart-panel--notification color-{{ settings.cart_color_scheme.id }}" data-non-modal role="status">
-          <div class="cart-panel__header">
-            <p class="cart-panel__title">{{ 'cart.item_added' | t }}</p>
-            <button type="button" data-panel-close aria-label="{{ 'accessibility.close' | t }}">&times;</button>
-          </div>
-          <div class="cart-panel__footer">
-            <div class="cart-panel__subtotal">
+        <dialog
+          id="cart-panel-toast"
+          class="cart-notification color-{{ settings.cart_color_scheme.id }}"
+          data-non-modal
+          role="status"
+        >
+          <div class="cart-notification__inner" data-cart-contents>
+            <div class="cart-notification__header">
+              <p class="cart-notification__title">{{ 'cart.item_added' | t }}</p>
+              <button
+                type="button"
+                class="cart-drawer__close"
+                data-panel-close
+                aria-label="{{ 'accessibility.close' | t }}"
+              >
+                {{ 'icon-close.svg' | inline_asset_content }}
+              </button>
+            </div>
+            <div class="cart-drawer__subtotal">
               <span>{{ 'cart.subtotal' | t }}</span>
               {% render 'price', price: cart.total_price %}
             </div>
-            <a href="{{ routes.cart_url }}" class="button cart-panel__checkout">{{ 'cart.view_cart' | t }}</a>
+            <a href="{{ routes.cart_url }}" class="button button--primary cart-drawer__checkout">
+              {{- 'cart.view_cart' | t }} ({{ cart.item_count }})
+            </a>
           </div>
         </dialog>
       </theme-panel>
@@ -114,227 +181,212 @@
   </cart-panel>
 {% endunless %}
 
-{% stylesheet %}
-  .cart-panel__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  #cart-panel-dialog[open] {
-    position: fixed;
-    inset-block: 0;
-    inset-inline-end: 0;
-    inset-inline-start: auto;
-    right: 0;
-    left: auto;
-    top: 0;
-    bottom: 0;
-    transform: none;
-    height: 100%;
-    width: min(100%, 28rem);
-    max-width: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: var(--page-margin);
-    overflow-y: auto;
-    border-width: var(--style-border-thickness-drawers);
-    border-style: solid;
-    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-drawers), transparent);
-    box-shadow: var(--style-shadow-drawers);
-    z-index: 100;
-  }
-
-  #cart-panel-dialog::backdrop {
-    background: rgb(0 0 0 / 40%);
-  }
-
-  .cart-panel--notification[open] {
-    position: fixed;
-    inset-block-start: var(--page-margin);
-    inset-inline-end: var(--page-margin);
-    width: min(100%, 22rem);
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: var(--page-margin);
-    border-width: var(--style-border-thickness-popups);
-    border-style: solid;
-    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-popups), transparent);
-    border-radius: var(--style-border-radius-popups);
-    box-shadow: var(--style-shadow-popups);
-  }
-
-  .cart-panel__items {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    overflow-y: auto;
-  }
-
-  .cart-panel__item {
-    display: grid;
-    grid-template-columns: 5rem 1fr auto;
-    gap: 0.75rem;
-  }
-
-  .cart-panel__item-image {
-    width: 5rem;
-  }
-
-  .cart-panel__item-content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .cart-panel__item-quantity {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .cart-panel__item-quantity input {
-    width: 3rem;
-    text-align: center;
-  }
-
-  .cart-panel__note {
-    width: 100%;
-    min-height: 4rem;
-  }
-
-  .cart-panel__recommendations {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-  }
-
-  .cart-panel__recommendation {
-    flex: 0 0 auto;
-    width: 6rem;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .cart-panel__footer {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .cart-panel__subtotal {
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-  }
-
-  .cart-panel__checkout {
-    width: 100%;
-    text-align: center;
-  }
-
-  .cart-panel__empty {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-{% endstylesheet %}
-
 {% javascript %}
   if (!customElements.get('cart-panel')) {
     class CartPanel extends HTMLElement {
       connectedCallback() {
         this.cartType = this.dataset.cartType;
-        this.addEventListener('click', this.onClick.bind(this));
-        this.addEventListener('change', this.onChange.bind(this));
-        document.addEventListener('cart:item-added', () => this.refresh({ open: true }));
+        this.sectionId = this.dataset.sectionId;
+
+        this.onClick = this.onClick.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onInput = this.onInput.bind(this);
+        this.onItemAdded = () => this.refresh({ open: true });
+
+        this.addEventListener('click', this.onClick);
+        this.addEventListener('change', this.onChange);
+        this.addEventListener('input', this.onInput);
+        document.addEventListener('cart:item-added', this.onItemAdded);
+
+        this.updateShippingBar();
+      }
+
+      disconnectedCallback() {
+        this.removeEventListener('click', this.onClick);
+        this.removeEventListener('change', this.onChange);
+        this.removeEventListener('input', this.onInput);
+        document.removeEventListener('cart:item-added', this.onItemAdded);
+      }
+
+      get routesRoot() {
+        return window.Shopify?.routes?.root || '/';
       }
 
       onClick(event) {
-        const remove = event.target.closest('[data-remove-item]');
-        if (remove) {
-          event.preventDefault();
-          this.updateItem(remove.dataset.removeItem, 0);
-          return;
-        }
+        const item = event.target.closest('[data-cart-item]');
+        if (!item) return;
 
-        const increase = event.target.closest('[data-qty-increase]');
-        if (increase) {
-          const input = increase.closest('.cart-panel__item').querySelector('[data-qty-input]');
-          input.stepUp();
-          this.updateItem(input.dataset.key, input.value);
-        }
+        const input = item.querySelector('[data-qty-input]');
 
-        const decrease = event.target.closest('[data-qty-decrease]');
-        if (decrease) {
-          const input = decrease.closest('.cart-panel__item').querySelector('[data-qty-input]');
-          input.stepDown();
-          this.updateItem(input.dataset.key, input.value);
+        if (event.target.closest('[data-remove-item]')) {
+          this.updateItem(item, 0);
+        } else if (event.target.closest('[data-qty-increase]')) {
+          input.value = Number(input.value) + 1;
+          this.updateItem(item, input.value);
+        } else if (event.target.closest('[data-qty-decrease]')) {
+          input.value = Math.max(0, Number(input.value) - 1);
+          this.updateItem(item, input.value);
         }
       }
 
       onChange(event) {
-        const qtyInput = event.target.closest('[data-qty-input]');
-        if (qtyInput) {
-          this.updateItem(qtyInput.dataset.key, qtyInput.value);
-          return;
+        const input = event.target.closest('[data-qty-input]');
+        if (input) {
+          this.updateItem(input.closest('[data-cart-item]'), Math.max(0, Number(input.value) || 0));
         }
+      }
 
+      // The note saves as the customer types (debounced); it also posts with
+      // the checkout form via its `form` attribute.
+      onInput(event) {
         const note = event.target.closest('[data-cart-note]');
-        if (note) {
-          fetch('/cart/update.js', {
+        if (!note) return;
+
+        clearTimeout(this.noteTimer);
+        this.noteTimer = setTimeout(() => {
+          fetch(`${this.routesRoot}cart/update.js`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({ note: note.value }),
           });
+        }, 400);
+      }
+
+      async updateItem(item, quantity) {
+        if (!item) return;
+
+        const error = item.querySelector('[data-item-error]');
+        if (error) error.hidden = true;
+        item.classList.add('is-loading');
+
+        try {
+          const response = await fetch(`${this.routesRoot}cart/change.js`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({
+              id: item.dataset.key,
+              quantity: Number(quantity),
+              sections: [this.sectionId],
+              sections_url: window.location.pathname,
+            }),
+          });
+          const data = await response.json();
+
+          if (!response.ok) {
+            // e.g. not enough stock: keep the row, restore its quantity.
+            item.classList.remove('is-loading');
+            const input = item.querySelector('[data-qty-input]');
+            if (input) input.value = item.dataset.quantity;
+            if (error) {
+              error.textContent = data.description || data.message || '';
+              error.hidden = false;
+            }
+            return;
+          }
+
+          this.renderContents(data.sections?.[this.sectionId]);
+        } catch (err) {
+          item.classList.remove('is-loading');
         }
       }
 
-      async updateItem(key, quantity) {
-        await fetch('/cart/change.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ id: key, quantity: Number(quantity) }),
-        });
-        this.refresh({ open: this.cartType !== 'page' });
+      async refresh({ open }) {
+        try {
+          const response = await fetch(`${window.location.pathname}?sections=${this.sectionId}`);
+          const data = await response.json();
+          this.renderContents(data[this.sectionId]);
+        } catch (err) {
+          return;
+        }
+        if (open) this.open();
       }
 
-      async refresh({ open }) {
-        const response = await fetch(`${window.location.pathname}?sections=cart-panel`);
-        const data = await response.json();
-        if (!data['cart-panel']) return;
+      renderContents(html) {
+        if (!html) return;
 
-        const parsed = new DOMParser().parseFromString(data['cart-panel'], 'text/html');
-        const newPanel = parsed.querySelector('cart-panel');
-        if (!newPanel) return;
+        const fresh = new DOMParser().parseFromString(html, 'text/html').querySelector('cart-panel');
+        if (!fresh) return;
 
-        this.innerHTML = newPanel.innerHTML;
+        // Remember what had focus so keyboard users don't get dropped.
+        const active = document.activeElement;
+        let focusKey = null;
+        let focusSelector = null;
+        if (active && this.contains(active)) {
+          focusKey = active.closest('[data-cart-item]')?.dataset.key || null;
+          focusSelector = ['data-qty-input', 'data-qty-increase', 'data-qty-decrease', 'data-remove-item']
+            .map((attr) => (active.hasAttribute(attr) ? `[${attr}]` : null))
+            .find(Boolean);
+        }
 
-        document.dispatchEvent(
-          new CustomEvent('cart:updated', {
-            detail: { itemCount: newPanel.dataset.cartItemCount },
-          })
-        );
+        const current = this.querySelector('[data-cart-contents]');
+        const next = fresh.querySelector('[data-cart-contents]');
+        if (current && next) {
+          current.replaceWith(next);
+        } else {
+          this.innerHTML = fresh.innerHTML;
+        }
 
-        if (open) {
-          if (this.cartType === 'drawer') {
-            this.querySelector('#cart-panel-dialog')?.closest('theme-panel')?.open();
-          } else if (this.cartType === 'notification') {
-            const toast = this.querySelector('#cart-panel-toast');
-            const panel = toast?.closest('theme-panel');
-            panel?.open();
-            clearTimeout(this.toastTimer);
-            this.toastTimer = setTimeout(() => panel?.close(), 5000);
-          }
+        this.dataset.cartItemCount = fresh.dataset.cartItemCount;
+        this.updateCounts(fresh.dataset.cartItemCount);
+        this.updateShippingBar();
+
+        if (focusKey) {
+          const row = this.querySelector(`[data-cart-item][data-key="${CSS.escape(focusKey)}"]`);
+          const target = (row && focusSelector && row.querySelector(focusSelector)) || this.querySelector('.cart-drawer__close');
+          target?.focus({ preventScroll: true });
+        }
+      }
+
+      // Header cart badge(s): <cart-count> in snippets/header-actions.liquid.
+      updateCounts(count) {
+        document.querySelectorAll('cart-count').forEach((badge) => {
+          badge.textContent = count;
+          badge.hidden = Number(count) === 0;
+        });
+        document.dispatchEvent(new CustomEvent('cart:updated', { detail: { itemCount: count } }));
+      }
+
+      // Liquid renders the bar in the store's default currency; rescale it
+      // when the shopper is browsing in another currency (Shopify Markets).
+      updateShippingBar() {
+        const bar = this.querySelector('[data-free-shipping]');
+        const rate = Number(window.Shopify?.currency?.rate || 1);
+        if (!bar || rate === 1) return;
+
+        const threshold = Math.round(Number(bar.dataset.threshold) * rate);
+        const total = Number(bar.dataset.total);
+        if (!threshold) return;
+
+        const remaining = Math.max(0, threshold - total);
+        const progress = Math.min(100, Math.floor((total * 100) / threshold));
+
+        let amount = (remaining / 100).toFixed(2);
+        try {
+          amount = new Intl.NumberFormat(document.documentElement.lang || undefined, {
+            style: 'currency',
+            currency: window.Shopify.currency.active,
+          }).format(remaining / 100);
+        } catch (err) {}
+
+        const message = bar.querySelector('[data-free-shipping-message]');
+        if (message) {
+          message.innerHTML = remaining > 0
+            ? bar.dataset.messageRemaining.replace('__AMOUNT__', amount)
+            : bar.dataset.messageUnlocked;
+        }
+        bar.classList.toggle('cart-shipping--unlocked', remaining === 0);
+        bar.querySelector('[data-free-shipping-fill]')?.style.setProperty('--progress', `${progress}%`);
+        bar.querySelector('[data-free-shipping-track]')?.setAttribute('aria-valuenow', progress);
+      }
+
+      open() {
+        if (this.cartType === 'drawer') {
+          this.querySelector('#cart-panel-dialog')?.closest('theme-panel')?.open();
+        } else if (this.cartType === 'notification') {
+          const panel = this.querySelector('#cart-panel-toast')?.closest('theme-panel');
+          panel?.open();
+          clearTimeout(this.toastTimer);
+          this.toastTimer = setTimeout(() => panel?.close(), 5000);
         }
       }
     }

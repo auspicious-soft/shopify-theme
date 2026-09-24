@@ -1467,6 +1467,20 @@
         "info": "t:settings_schema.cart.settings.cart_drawer.collection.info"
       },
       {
+        "type": "checkbox",
+        "id": "free_shipping_bar_enabled",
+        "label": "t:settings_schema.cart.settings.cart_drawer.free_shipping_bar.label",
+        "default": false
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "t:settings_schema.cart.settings.cart_drawer.free_shipping_threshold.label",
+        "info": "t:settings_schema.cart.settings.cart_drawer.free_shipping_threshold.info",
+        "default": 100,
+        "visible_if": "{{ settings.free_shipping_bar_enabled }}"
+      },
+      {
         "type": "color_scheme",
         "id": "cart_color_scheme",
         "label": "t:sections.all.colors.label",

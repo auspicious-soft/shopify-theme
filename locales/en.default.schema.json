@@ -646,6 +646,13 @@
           "collection": {
             "label": "Collection",
             "info": "Shown when cart drawer is empty"
+          },
+          "free_shipping_bar": {
+            "label": "Free shipping bar"
+          },
+          "free_shipping_threshold": {
+            "label": "Free shipping threshold",
+            "info": "Order subtotal needed for free shipping, in your store's default currency. Converted automatically for other currencies. Make sure it matches your shipping rates in Settings > Shipping and delivery."
           }
         }
       }

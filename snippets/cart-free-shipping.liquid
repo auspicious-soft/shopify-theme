@@ -1,0 +1,62 @@
+{% doc %}
+  Renders the cart drawer's free shipping progress bar: a message saying
+  how much more the customer needs to spend (or that they've unlocked free
+  shipping) above a progress track. Driven by Theme settings > Cart >
+  Free shipping bar / Free shipping threshold; renders nothing when turned
+  off or when the threshold isn't set.
+
+  The threshold is entered in the store's default currency. Liquid renders
+  it as-is; for shoppers browsing in another currency (Shopify Markets),
+  the cart-panel script rescales it with `Shopify.currency.rate` and
+  rewrites the message/progress on load and after every cart update.
+
+  @example
+  {% render 'cart-free-shipping' %}
+{% enddoc %}
+
+{%- liquid
+  assign threshold = settings.free_shipping_threshold | times: 100 | round
+-%}
+
+{%- if settings.free_shipping_bar_enabled and threshold > 0 -%}
+  {%- liquid
+    assign remaining = threshold | minus: cart.total_price
+    if remaining < 0
+      assign remaining = 0
+    endif
+
+    assign progress = cart.total_price | times: 100 | divided_by: threshold
+    if progress > 100
+      assign progress = 100
+    endif
+
+    assign remaining_formatted = remaining | money
+  -%}
+  <div
+    class="cart-shipping{% if remaining == 0 %} cart-shipping--unlocked{% endif %}"
+    data-free-shipping
+    data-threshold="{{ threshold }}"
+    data-total="{{ cart.total_price }}"
+    data-message-remaining="{{ 'cart.free_shipping.remaining_html' | t: amount: '__AMOUNT__' | escape }}"
+    data-message-unlocked="{{ 'cart.free_shipping.unlocked' | t | escape }}"
+  >
+    <p class="cart-shipping__message" data-free-shipping-message>
+      {%- if remaining > 0 -%}
+        {{ 'cart.free_shipping.remaining_html' | t: amount: remaining_formatted }}
+      {%- else -%}
+        {{ 'cart.free_shipping.unlocked' | t }}
+      {%- endif -%}
+    </p>
+    <div
+      class="cart-shipping__track"
+      role="progressbar"
+      aria-label="{{ 'cart.free_shipping.progress' | t }}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="{{ progress }}"
+      data-free-shipping-track
+    >
+      <span class="cart-shipping__fill" style="--progress: {{ progress }}%;" data-free-shipping-fill></span>
+    </div>
+  </div>
+{%- endif -%}
