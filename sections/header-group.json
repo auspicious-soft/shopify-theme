@@ -119,7 +119,7 @@
         "show_search": true,
         "search_color_scheme": "",
         "show_account": true,
-        "account_display": "text",
+        "account_display": "icon",
         "account_text": "Account",
         "show_cart": true,
         "show_cart_count": true,
