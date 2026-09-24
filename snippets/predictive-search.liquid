@@ -57,6 +57,14 @@
               {{ 'icon-search.svg' | inline_asset_content }}
               <span class="visually-hidden">{{ 'search.submit' | t }}</span>
             </button>
+            <button
+              type="button"
+              class="predictive-search__close"
+              data-panel-close
+              aria-label="{{ 'accessibility.close' | t }}"
+            >
+              {{ 'icon-close.svg' | inline_asset_content }}
+            </button>
           </form>
 
           <div class="predictive-search__results" data-predictive-search-results hidden></div>
