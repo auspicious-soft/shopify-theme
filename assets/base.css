@@ -97,7 +97,8 @@ input[type="button"] {
   color: var(--color-button-text);
   border-width: var(--style-border-thickness-buttons);
   border-style: solid;
-  border-color: color-mix(in srgb, var(--color-button-text) var(--style-border-opacity-buttons), transparent);
+  /* Border matches the fill, so the primary button reads as one solid shape. */
+  border-color: color-mix(in srgb, var(--color-button-background) var(--style-border-opacity-buttons), transparent);
   border-radius: var(--style-border-radius-buttons);
   box-shadow: var(--style-shadow-buttons);
 }
