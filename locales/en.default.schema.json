@@ -583,6 +583,10 @@
         "predictive_search_show_price": {
           "label": "Product price",
           "info": "Shown when search suggestions enabled"
+        },
+        "predictive_search_reset_text": {
+          "label": "Clear search text",
+          "info": "Replaces the browser's clear (X) icon inside the search field once something is typed; clicking it clears the field. Leave blank to keep the browser's X icon."
         }
       }
     },

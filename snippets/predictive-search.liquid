@@ -50,9 +50,20 @@
               value="{{ search.terms }}"
               placeholder="{{ 'search.placeholder' | t }}"
               autocomplete="off"
-              class="predictive-search__input"
+              class="predictive-search__input{% if settings.predictive_search_reset_text != blank %} predictive-search__input--custom-reset{% endif %}"
               data-predictive-search-input
             >
+            {% comment %}
+              Replaces the browser's built-in search-field clear (X) with the
+              merchant's text label; only shown while the field has a value
+              (via `data-has-value` on <predictive-search>). Left blank, the
+              native X stays instead.
+            {% endcomment %}
+            {% if settings.predictive_search_reset_text != blank %}
+              <button type="button" class="predictive-search__reset" data-predictive-search-reset>
+                {{ settings.predictive_search_reset_text | escape }}
+              </button>
+            {% endif %}
             <button type="submit" class="predictive-search__submit">
               {{ 'icon-search.svg' | inline_asset_content }}
               <span class="visually-hidden">{{ 'search.submit' | t }}</span>
@@ -63,7 +74,7 @@
               data-panel-close
               aria-label="{{ 'accessibility.close' | t }}"
             >
-              Reset
+              {{ 'icon-close.svg' | inline_asset_content }}
             </button>
           </form>
 
@@ -90,11 +101,28 @@
         this.results = this.querySelector('[data-predictive-search-results]');
         this.showVendor = this.dataset.showVendor === 'true';
         this.showPrice = this.dataset.showPrice === 'true';
+        this.resetButton = this.querySelector('[data-predictive-search-reset]');
         this.input.addEventListener('input', this.onInput.bind(this));
+        this.resetButton?.addEventListener('click', this.onReset.bind(this));
+        this.toggleHasValue();
+      }
+
+      toggleHasValue() {
+        this.toggleAttribute('data-has-value', this.input.value.length > 0);
+      }
+
+      onReset() {
+        clearTimeout(this.debounce);
+        this.input.value = '';
+        this.results.hidden = true;
+        this.results.innerHTML = '';
+        this.toggleHasValue();
+        this.input.focus();
       }
 
       onInput(event) {
         clearTimeout(this.debounce);
+        this.toggleHasValue();
         const term = event.target.value.trim();
 
         if (term.length < 2) {
