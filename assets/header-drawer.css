@@ -362,6 +362,18 @@
   padding: 0;
 }
 
+/* The component's internal `.account-button` (shadow DOM) is sized from
+   --shopify-account-avatar-size, which forces a square min-height around
+   the slotted text/icon row. Only its public hooks can reach it: the size
+   variable and the `signed-out-avatar` part. */
+.header__drawer-account {
+  --shopify-account-avatar-size: auto;
+}
+
+.header__drawer-account::part(signed-out-avatar) {
+  min-height: auto;
+}
+
 .header__drawer-account svg {
   width: 1.25rem;
   height: 1.25rem;
