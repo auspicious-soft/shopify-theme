@@ -129,10 +129,11 @@
     outline-offset: 2px;
   }
 
-  /* Separator rendered between marquee items only; the character itself is
-     supplied by the section as a CSS custom property so this stylesheet
-     stays reusable and unaware of the merchant's chosen style. */
-  .announcement-bar--marquee .announcement-bar__item:not(:last-child)::after {
+  /* Separator after every marquee item, including the last one in a group,
+     so the pattern continues unbroken where one repeated group meets the
+     next. The character itself is supplied by the section as a CSS custom
+     property so this stylesheet stays unaware of the merchant's choice. */
+  .announcement-bar--marquee .announcement-bar__item::after {
     content: var(--announcement-bar-separator-content, '\2022');
     margin-inline-start: 0.75em;
     opacity: 0.6;

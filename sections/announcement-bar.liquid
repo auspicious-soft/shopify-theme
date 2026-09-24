@@ -269,11 +269,16 @@
     overflow: hidden;
   }
 
+  /* No gap on the track itself: each group carries its own trailing gap
+     (padding below), so all repeated groups are exactly the same width and
+     the track is exactly N group widths. Sliding by 100% / N then lands the
+     second group precisely where the first began, so the loop restart is
+     invisible. (A track `gap` adds only N - 1 gaps, which made every loop
+     jump by a fraction of a gap.) */
   .announcement-bar__marquee-track {
     display: flex;
     align-items: center;
     width: max-content;
-    gap: var(--announcement-bar-gap);
     animation-name: announcement-bar-marquee;
     animation-duration: var(--announcement-bar-speed);
     animation-timing-function: linear;
@@ -286,6 +291,7 @@
     align-items: center;
     flex-shrink: 0;
     gap: var(--announcement-bar-gap);
+    padding-inline-end: var(--announcement-bar-gap);
   }
 
   @keyframes announcement-bar-marquee {
@@ -424,6 +430,16 @@
 
     .announcement-bar__marquee-group:not(:first-child) {
       display: none;
+    }
+
+    /* Only one group shows here, so drop its loop-only trailing gap and the
+       separator after its last message. */
+    .announcement-bar__marquee-group {
+      padding-inline-end: 0;
+    }
+
+    .announcement-bar--marquee .announcement-bar__marquee-group .announcement-bar__item:last-child::after {
+      content: none;
     }
   }
 {% endstylesheet %}
