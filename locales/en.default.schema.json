@@ -489,6 +489,22 @@
       "full_link": "Make whole banner clickable",
       "section_color_scheme": "Section color scheme"
     },
+    "logo_marquee": {
+      "name": "Logo marquee",
+      "header_logos": "Logos",
+      "logo_height": "Logo height on desktop",
+      "logo_height_mobile": "Logo height on mobile",
+      "logo_opacity": "Logo opacity",
+      "logo_opacity_info": "Linked logos go fully visible on hover",
+      "grayscale": "Show logos in grayscale",
+      "grayscale_info": "Linked logos show their color on hover",
+      "show_dividers": "Show dividers between logos",
+      "fade_edges": "Fade the left and right edges",
+      "block_name": "Logo",
+      "logo": "Logo image",
+      "alt": "Brand name",
+      "alt_info": "Used as the image's alt text, and shown as text when there is no image"
+    },
     "collection_banners": {
       "name": "Collection banners",
       "block_name": "Collection",
