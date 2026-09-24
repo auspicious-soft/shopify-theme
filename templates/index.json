@@ -60,7 +60,9 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
-        "collection": "",
+        "collection": "hydrogen",
+        "image": "shopify://shop_images/Banner_2_9a71e6ed-6bac-405d-9534-73d91e01f56f_4000x1562_crop_center_jpg.png",
+        "mobile_image": "shopify://shop_images/image_10.png",
         "media_type": "image",
         "video_url": "",
         "height": "fullscreen",
