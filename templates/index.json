@@ -15,6 +15,7 @@
       "settings": {
         "media_type": "video",
         "background_image": "shopify://shop_images/hero_image.png",
+        "mobile_image": "shopify://shop_images/iPhone_13_14_-_1.png",
         "video": "shopify://files/videos/YTSave_YouTube_Demo-Background-Sample-Video_Media_K4TOrB7at0Y_001_1080p.mp4",
         "video_url": "",
         "background_color": "#ffffff",
