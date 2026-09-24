@@ -11,6 +11,7 @@
   "current": {
     "logo": "shopify://shop_images/Link_margin.png",
     "logo_width": 140,
+    "menu_drawer_color_scheme": "scheme-1",
     "type_header_font": "assistant_n7",
     "heading_scale": 100,
     "type_body_font": "assistant_n4",
@@ -127,7 +128,6 @@
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "cart_color_scheme": "scheme-1",
-    "menu_drawer_color_scheme": "scheme-2",
     "customer_account_menu": "customer-account-main-menu",
     "content_for_index": [],
     "color_schemes": {
