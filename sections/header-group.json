@@ -119,6 +119,8 @@
         "show_search": true,
         "search_color_scheme": "",
         "show_account": true,
+        "account_display": "text",
+        "account_text": "Account",
         "show_cart": true,
         "show_cart_count": true,
         "drawer_position": "left",
