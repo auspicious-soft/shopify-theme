@@ -1,0 +1,78 @@
+{% doc %}
+  Quick add control for a product card. Single-variant products get a real
+  add-to-cart form (Ajax when Theme settings > Cart > Type is drawer or
+  notification, opening the cart; a normal submit for "page"). Products
+  with options link to the product page instead ("Choose options"), and
+  sold-out products show a disabled button.
+
+  @param {product} product - The product
+  @param {variant} variant - The variant to add (selected or first available)
+
+  @example
+  {% render 'product-card-quick-add', product: product, variant: product.selected_or_first_available_variant %}
+{% enddoc %}
+
+{%- if product.available == false -%}
+  <button type="button" class="product-card__quick-add-button" disabled>
+    {{- 'products.sold_out' | t -}}
+  </button>
+{%- elsif product.has_only_default_variant -%}
+  <quick-add-form data-cart-type="{{ settings.cart_type }}">
+    <form action="{{ routes.cart_add_url }}" method="post" class="product-card__quick-add-form">
+      <input type="hidden" name="id" value="{{ variant.id }}">
+      <input type="hidden" name="quantity" value="1">
+      <button type="submit" class="product-card__quick-add-button">
+        <span class="product-card__quick-add-label">{{ 'products.add_to_cart' | t }}</span>
+        <span class="product-card__spinner" aria-hidden="true"></span>
+      </button>
+    </form>
+  </quick-add-form>
+{%- else -%}
+  <a href="{{ product.url }}" class="product-card__quick-add-button">
+    {{- 'products.choose_options' | t -}}
+  </a>
+{%- endif -%}
+
+{% javascript %}
+  if (!customElements.get('quick-add-form')) {
+    class QuickAddForm extends HTMLElement {
+      connectedCallback() {
+        this.form = this.querySelector('form');
+        this.button = this.querySelector('button[type="submit"]');
+        if (!this.form || this.dataset.cartType === 'page') return;
+
+        this.onSubmit = this.onSubmit.bind(this);
+        this.form.addEventListener('submit', this.onSubmit);
+      }
+
+      async onSubmit(event) {
+        event.preventDefault();
+        if (this.button.classList.contains('is-loading')) return;
+
+        this.button.classList.add('is-loading');
+        this.button.setAttribute('aria-busy', 'true');
+
+        try {
+          const root = window.Shopify?.routes?.root || '/';
+          const response = await fetch(`${root}cart/add.js`, {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: new FormData(this.form),
+          });
+
+          if (response.ok) {
+            document.dispatchEvent(new CustomEvent('cart:item-added', { bubbles: true }));
+          } else {
+            // Fall back to the cart page, which shows Shopify's own error.
+            this.form.submit();
+          }
+        } finally {
+          this.button.classList.remove('is-loading');
+          this.button.removeAttribute('aria-busy');
+        }
+      }
+    }
+
+    customElements.define('quick-add-form', QuickAddForm);
+  }
+{% endjavascript %}

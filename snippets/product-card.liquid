@@ -1,0 +1,172 @@
+{% doc %}
+  Renders a product card. Everything it shows comes from Theme settings >
+  Product cards: style (standard/card), image ratio + fit, second image on
+  hover, vendor, rating, color swatches, quick add (none / on image hover /
+  button under the content), text alignment, image padding, color scheme,
+  border and shadow. Styles live in assets/product-card.css (load it once in
+  the section that renders cards).
+
+  The whole card is clickable through the title link's stretched ::after;
+  swatches and quick add sit above it so they stay usable.
+
+  @param {product} product - The product to render
+  @param {string} [sizes] - `sizes` attribute for the card images
+  @param {boolean} [eager] - Load the image eagerly (above-the-fold cards)
+  @param {string} [heading_tag] - Title tag, defaults to h3
+
+  @example
+  {% render 'product-card', product: product, sizes: '(min-width: 990px) 25vw, 50vw' %}
+{% enddoc %}
+
+{%- liquid
+  assign heading_tag = heading_tag | default: 'h3'
+  assign image_sizes = sizes | default: '(min-width: 990px) 25vw, 50vw'
+  assign featured = product.featured_media
+
+  case settings.card_image_ratio
+    when 'square'
+      assign ratio = '1 / 1'
+    when 'portrait'
+      assign ratio = '4 / 5'
+    when 'tall'
+      assign ratio = '2 / 3'
+    when 'landscape'
+      assign ratio = '4 / 3'
+    else
+      assign ratio = featured.preview_image.aspect_ratio | default: 1
+  endcase
+
+  assign secondary = nil
+  if settings.card_show_secondary_image and product.media.size > 1
+    assign secondary = product.media[1]
+  endif
+
+  assign loading = 'lazy'
+  if eager
+    assign loading = 'eager'
+  endif
+
+  assign quick_add = settings.card_quick_add | default: 'none'
+  assign card_variant = product.selected_or_first_available_variant
+-%}
+
+<div
+  class="product-card product-card--{{ settings.card_style }} product-card--quick-add-{{ quick_add }} product-card--align-{{ settings.card_text_alignment }} hover-{{ settings.animations_hover_elements }} color-{{ settings.card_color_scheme.id }}"
+  style="--card-ratio: {{ ratio }}; --card-image-padding: {{ settings.card_image_padding }}px; --card-text-align: {{ settings.card_text_alignment }};"
+  {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
+>
+  <div class="product-card__media product-card__media--{{ settings.card_image_fit | default: 'cover' }}{% if secondary %} product-card__media--has-secondary{% endif %}">
+    <div class="product-card__media-frame">
+      {%- if featured -%}
+        {{
+          featured.preview_image
+          | image_url: width: 1000
+          | image_tag:
+            class: 'product-card__image product-card__image--primary',
+            loading: loading,
+            widths: '240, 360, 480, 640, 800, 1000',
+            sizes: image_sizes,
+            alt: featured.preview_image.alt
+        }}
+        {%- if secondary -%}
+          {{
+            secondary.preview_image
+            | image_url: width: 1000
+            | image_tag:
+              class: 'product-card__image product-card__image--secondary',
+              loading: 'lazy',
+              widths: '240, 360, 480, 640, 800, 1000',
+              sizes: image_sizes,
+              alt: ''
+          }}
+        {%- endif -%}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'product-card__image product-card__placeholder' }}
+      {%- endif -%}
+    </div>
+
+    {% render 'badge', product: product %}
+
+    {% if quick_add == 'overlay' %}
+      <div class="product-card__quick-add product-card__quick-add--overlay">
+        {% render 'product-card-quick-add', product: product, variant: card_variant %}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="product-card__content">
+    {% if settings.card_show_vendor and product.vendor != blank %}
+      <p class="product-card__vendor">{{ product.vendor }}</p>
+    {% endif %}
+
+    <{{ heading_tag }} class="product-card__title">
+      <a href="{{ product.url }}" class="product-card__link">{{ product.title | escape }}</a>
+    </{{ heading_tag }}>
+
+    {% if settings.card_show_rating and product.metafields.reviews.rating.value != blank %}
+      {%- liquid
+        assign rating = product.metafields.reviews.rating.value
+        assign rating_max = rating.scale_max | default: 5
+        assign rating_percent = rating.rating | times: 100.0 | divided_by: rating_max
+      -%}
+      <div class="product-card__rating" role="img" aria-label="{{ 'products.rating' | t: rating: rating.rating, max: rating_max }}">
+        <span class="rating-stars" style="--rating-percent: {{ rating_percent }}%;" aria-hidden="true"></span>
+        {% if product.metafields.reviews.rating_count.value > 0 %}
+          <span class="product-card__rating-count">({{ product.metafields.reviews.rating_count.value }})</span>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="product-card__price">
+      {%- if product.price_varies -%}
+        <span class="product-card__price-from">{{ 'products.price_from' | t }}</span>
+      {%- endif -%}
+      {% render 'price', price: product.price, compare_at_price: product.compare_at_price %}
+    </div>
+
+    {% if settings.card_show_swatches %}
+      {%- liquid
+        assign swatch_option = nil
+        for option in product.options_with_values
+          assign option_name = option.name | downcase
+          if option_name == 'color' or option_name == 'colour'
+            assign swatch_option = option
+            break
+          endif
+        endfor
+      -%}
+      {% if swatch_option and swatch_option.values.size > 1 %}
+        <ul class="product-card__swatches" role="list" aria-label="{{ swatch_option.name | escape }}">
+          {% for value in swatch_option.values limit: 5 %}
+            {%- liquid
+              assign swatch_color = value.swatch.color | default: value
+              assign swatch_url = product.url
+              if value.variant
+                assign swatch_url = value.variant.url
+              endif
+            -%}
+            <li>
+              <a
+                href="{{ swatch_url }}"
+                class="product-card__swatch"
+                style="--swatch-color: {{ swatch_color | downcase | escape }};{% if value.swatch.image %} --swatch-image: url('{{ value.swatch.image | image_url: width: 60 }}');{% endif %}"
+                title="{{ value | escape }}"
+              >
+                <span class="visually-hidden">{{ value | escape }}</span>
+              </a>
+            </li>
+          {% endfor %}
+          {% if swatch_option.values.size > 5 %}
+            <li class="product-card__swatch-more">+{{ swatch_option.values.size | minus: 5 }}</li>
+          {% endif %}
+        </ul>
+      {% endif %}
+    {% endif %}
+
+    {% if quick_add == 'button' %}
+      <div class="product-card__quick-add product-card__quick-add--button">
+        {% render 'product-card-quick-add', product: product, variant: card_variant %}
+      </div>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,79 @@
+{% doc %}
+  Renders a collection card. Driven by Theme settings > Collection cards:
+  layout (text below the image, or overlaid on it), image ratio, product
+  count, description, style (standard/card), text alignment, image padding,
+  color scheme, border and shadow. Styles live in
+  assets/collection-card.css.
+
+  @param {collection} collection - The collection to render
+  @param {string} [sizes] - `sizes` attribute for the image
+  @param {boolean} [eager] - Load the image eagerly
+
+  @example
+  {% render 'collection-card', collection: collection %}
+{% enddoc %}
+
+{%- liquid
+  assign image_sizes = sizes | default: '(min-width: 990px) 33vw, 50vw'
+  assign card_image = collection.featured_image | default: collection.products.first.featured_media.preview_image
+  assign layout = settings.collection_card_layout | default: 'below'
+
+  case settings.collection_card_image_ratio
+    when 'portrait'
+      assign ratio = '4 / 5'
+    when 'landscape'
+      assign ratio = '4 / 3'
+    when 'adapt'
+      assign ratio = card_image.aspect_ratio | default: 1
+    else
+      assign ratio = '1 / 1'
+  endcase
+
+  assign loading = 'lazy'
+  if eager
+    assign loading = 'eager'
+  endif
+-%}
+
+<a
+  href="{{ collection.url }}"
+  class="collection-card collection-card--{{ settings.collection_card_style }} collection-card--{{ layout }} collection-card--align-{{ settings.collection_card_text_alignment }} hover-{{ settings.animations_hover_elements }} color-{{ settings.collection_card_color_scheme.id }}"
+  style="--card-ratio: {{ ratio }}; --card-image-padding: {{ settings.collection_card_image_padding }}px;"
+  {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
+>
+  <div class="collection-card__media">
+    <div class="collection-card__media-frame">
+      {%- if card_image -%}
+        {{
+          card_image
+          | image_url: width: 1200
+          | image_tag:
+            class: 'collection-card__image',
+            loading: loading,
+            widths: '300, 450, 600, 800, 1000, 1200',
+            sizes: image_sizes,
+            alt: collection.title
+        }}
+      {%- else -%}
+        {{ 'collection-1' | placeholder_svg_tag: 'collection-card__image collection-card__placeholder' }}
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="collection-card__content">
+    <h3 class="collection-card__title">
+      <span>{{ collection.title | escape }}</span>
+      <span class="collection-card__arrow" aria-hidden="true">{{ 'icon-chevron.svg' | inline_asset_content }}</span>
+    </h3>
+
+    {% if settings.collection_card_show_count %}
+      <p class="collection-card__count">
+        {{- 'collections.product_count' | t: count: collection.all_products_count -}}
+      </p>
+    {% endif %}
+
+    {% if settings.collection_card_show_description and collection.description != blank %}
+      <p class="collection-card__description">{{ collection.description | strip_html | truncatewords: 16 }}</p>
+    {% endif %}
+  </div>
+</a>

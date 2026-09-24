@@ -1,0 +1,362 @@
+/**
+ * Product card (snippets/product-card.liquid) and the shared rating stars.
+ * Loaded once by each section that renders product cards. Every value
+ * comes from Theme settings > Product cards via the card's inline custom
+ * properties and the theme's --style-*-cards variables.
+ */
+
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  height: 100%;
+  color: var(--color-foreground);
+  text-align: var(--card-text-align, left);
+}
+
+/* "Card" style: boxed, using the card border/shadow/radius settings. */
+.product-card--card {
+  padding: 0.75rem 0.75rem 1rem;
+  background-color: var(--color-background);
+  border-width: var(--style-border-thickness-cards);
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-cards), transparent);
+  border-radius: var(--style-border-radius-cards);
+  box-shadow: var(--style-shadow-cards);
+}
+
+/* ---------- Media ---------- */
+
+.product-card__media {
+  position: relative;
+  padding: var(--card-image-padding, 0);
+}
+
+.product-card__media-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--card-ratio, 4 / 5);
+  background-color: color-mix(in srgb, var(--color-foreground) 4%, transparent);
+  border-radius: var(--style-border-radius-media, 0);
+}
+
+.product-card--card .product-card__media-frame {
+  border-radius: calc(var(--style-border-radius-cards) * 0.6);
+}
+
+.product-card__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    opacity 0.5s ease,
+    transform 0.8s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.product-card__media--contain .product-card__image {
+  object-fit: contain;
+}
+
+.product-card__image--secondary {
+  opacity: 0;
+}
+
+/* Hover: crossfade to the second image when there is one, otherwise a
+   slow, subtle zoom. */
+@media (hover: hover) {
+  .product-card:hover .product-card__media--has-secondary .product-card__image--primary {
+    opacity: 0;
+  }
+
+  .product-card:hover .product-card__media--has-secondary .product-card__image--secondary {
+    opacity: 1;
+  }
+
+  .product-card:hover .product-card__media:not(.product-card__media--has-secondary) .product-card__image {
+    transform: scale(1.04);
+  }
+}
+
+/* ---------- Content ---------- */
+
+.product-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1 1 auto;
+}
+
+.product-card__vendor {
+  margin: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
+}
+
+.product-card__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.product-card__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Stretch the title link over the whole card. */
+.product-card__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.product-card__link:focus-visible {
+  outline: none;
+}
+
+.product-card__link:focus-visible::after {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .product-card:hover .product-card__link {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}
+
+.product-card__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.product-card--align-center .product-card__price,
+.product-card--align-center .product-card__swatches,
+.product-card--align-center .product-card__rating {
+  justify-content: center;
+}
+
+.product-card--align-right .product-card__price,
+.product-card--align-right .product-card__swatches,
+.product-card--align-right .product-card__rating {
+  justify-content: flex-end;
+}
+
+.product-card__price-from {
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
+}
+
+/* ---------- Rating (also used on the product page) ---------- */
+
+.product-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+}
+
+.rating-stars {
+  --star-size: 0.85rem;
+  position: relative;
+  display: inline-block;
+  width: calc(var(--star-size) * 5);
+  height: var(--star-size);
+  background: color-mix(in srgb, var(--color-foreground) 20%, transparent);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 1.5l2.6 5.5 6 .8-4.4 4.1 1.1 5.9L10 15l-5.3 2.8 1.1-5.9L1.4 7.8l6-.8z'/%3E%3C/svg%3E") left / var(--star-size) repeat-x;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 1.5l2.6 5.5 6 .8-4.4 4.1 1.1 5.9L10 15l-5.3 2.8 1.1-5.9L1.4 7.8l6-.8z'/%3E%3C/svg%3E") left / var(--star-size) repeat-x;
+}
+
+.rating-stars::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: var(--rating-percent, 0%);
+  background: var(--color-foreground);
+}
+
+.product-card__rating-count {
+  color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
+}
+
+/* ---------- Swatches ---------- */
+
+.product-card__swatches {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-card__swatch {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: var(--swatch-color, transparent);
+  background-image: var(--swatch-image, none);
+  background-size: cover;
+  background-position: center;
+  box-shadow:
+    0 0 0 1px var(--color-background),
+    0 0 0 2px color-mix(in srgb, var(--color-foreground) 18%, transparent);
+  transition: box-shadow 0.15s ease;
+}
+
+.product-card__swatch:hover,
+.product-card__swatch:focus-visible {
+  box-shadow:
+    0 0 0 1px var(--color-background),
+    0 0 0 2px var(--color-foreground);
+}
+
+.product-card__swatch-more {
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
+}
+
+/* ---------- Quick add ---------- */
+
+.product-card__quick-add {
+  position: relative;
+  z-index: 2;
+}
+
+.product-card__quick-add-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.6rem 1rem;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 20%, transparent);
+  border-radius: var(--style-border-radius-buttons, 0);
+  box-shadow: none;
+  translate: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.product-card__quick-add-button:hover:not([disabled]),
+.product-card__quick-add-button:focus-visible {
+  background-color: var(--color-button-background);
+  color: var(--color-button-text);
+  border-color: var(--color-button-background);
+}
+
+.product-card__quick-add-button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.product-card__quick-add--button {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+/* Overlay: slides up over the bottom of the image on hover/focus. Always
+   visible on touch screens, where there is no hover. */
+.product-card__quick-add--overlay {
+  position: absolute;
+  inset-inline: calc(var(--card-image-padding, 0px) + 0.6rem);
+  inset-block-end: calc(var(--card-image-padding, 0px) + 0.6rem);
+}
+
+@media (hover: hover) {
+  .product-card__quick-add--overlay {
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .product-card:hover .product-card__quick-add--overlay,
+  .product-card:focus-within .product-card__quick-add--overlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (hover: none) {
+  .product-card__quick-add--overlay .product-card__quick-add-button {
+    min-height: 2.25rem;
+    font-size: 0.75rem;
+  }
+}
+
+.product-card__quick-add--overlay .product-card__quick-add-button {
+  background-color: color-mix(in srgb, var(--color-background) 92%, transparent);
+  backdrop-filter: blur(6px);
+  border-color: transparent;
+}
+
+.product-card__spinner {
+  display: none;
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 1.5px solid currentColor;
+  border-inline-end-color: transparent;
+  border-radius: 50%;
+  animation: product-card-spin 0.7s linear infinite;
+}
+
+.product-card__quick-add-button.is-loading .product-card__quick-add-label {
+  visibility: hidden;
+}
+
+.product-card__quick-add-button.is-loading .product-card__spinner {
+  display: block;
+}
+
+@keyframes product-card-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Badges sit above the stretched link. */
+.product-card .badge {
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card__image,
+  .product-card__quick-add--overlay,
+  .product-card__quick-add-button {
+    transition: none;
+  }
+
+  .product-card:hover .product-card__image {
+    transform: none;
+  }
+}

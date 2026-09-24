@@ -1,86 +1,773 @@
 {% comment %}
-  This section is used in the collection template to render collection page
-  listing all products within a collection.
+  Collection page (templates/collection.json).
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
+  - Banner: minimal (title + description) or over the collection image.
+  - Toolbar: filter toggle, product count, sort.
+  - Filters (Shopify storefront filtering, `collection.filters`): a
+    sidebar on desktop or an off-canvas drawer (always a drawer below
+    990px), with active-filter chips and "clear all".
+  - Grid of product cards (snippets/product-card.liquid), N columns on
+    desktop / 1-2 on mobile.
+  - Pagination: numbered pages or a "Load more" button.
+
+  Filtering, sorting and paging update the page in place with the Section
+  Rendering API (`?section_id=`) and push the URL to history, so links are
+  shareable and Back works. Without JS every control still works as a
+  normal link/form. Styles live in assets/collection.css.
 {% endcomment %}
 
-<div class="color-{{ section.settings.color_scheme.id }}">
-  <h1>{{ collection.title }}</h1>
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+{{ 'collection.css' | asset_url | stylesheet_tag }}
 
-  {% paginate collection.products by 20 %}
-    <div
-      class="collection-products"
-      style="--gap-x: {{ settings.spacing_grid_horizontal }}px; --gap-y: {{ settings.spacing_grid_vertical }}px"
-    >
-      {% for product in collection.products %}
-        <div
-          class="collection-product collection-product--{{ settings.card_style }} hover-{{ settings.animations_hover_elements }} color-{{ settings.card_color_scheme.id }}"
-          style="--image-padding: {{ settings.card_image_padding }}px; --text-align: {{ settings.card_text_alignment }}"
-          {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
-        >
-          {% if product.featured_image %}
-            <div class="collection-product__image-wrapper">
-              {% render 'image',
-                class: 'collection-product__image',
-                image: product.featured_image,
-                url: product.url,
-                width: 400,
-                height: 400,
-                crop: 'center'
-              %}
-              {% render 'badge', product: product %}
+{%- liquid
+  assign section_id = section.id
+  assign columns = section.settings.columns_desktop
+  assign columns_mobile = section.settings.columns_mobile | plus: 0
+  assign card_sizes = '(min-width: 990px) calc((100vw - 20rem) / ' | append: columns | append: '), calc(100vw / ' | append: columns_mobile | append: ')'
+
+  assign filtering = false
+  if section.settings.enable_filtering and collection.filters.size > 0
+    assign filtering = true
+  endif
+  assign filter_layout = section.settings.filter_layout
+  assign sorting = section.settings.enable_sorting
+
+  assign active_filter_count = 0
+  for filter in collection.filters
+    if filter.type == 'price_range'
+      if filter.min_value.value != nil or filter.max_value.value != nil
+        assign active_filter_count = active_filter_count | plus: 1
+      endif
+    else
+      assign active_filter_count = active_filter_count | plus: filter.active_values.size
+    endif
+  endfor
+
+  assign banner_image = nil
+  if section.settings.banner_style == 'image'
+    assign banner_image = collection.image
+  endif
+
+  assign clear_url = collection.url
+  if collection.sort_by != blank
+    assign clear_url = collection.url | append: '?sort_by=' | append: collection.sort_by
+  endif
+-%}
+
+<collection-page
+  class="collection color-{{ section.settings.color_scheme.id }}"
+  data-section-id="{{ section_id }}"
+  style="
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --grid-columns: {{ columns }};
+    --grid-columns-mobile: {{ columns_mobile }};
+    --banner-overlay: {{ section.settings.banner_overlay | divided_by: 100.0 }};
+  "
+>
+  {% if section.settings.show_banner %}
+    <div class="collection-banner collection-banner--{% if banner_image %}image collection-banner--{{ section.settings.banner_height }}{% else %}minimal{% endif %} collection-banner--{{ section.settings.banner_alignment }}">
+      {% if banner_image %}
+        <div class="collection-banner__media">
+          {{
+            banner_image
+            | image_url: width: 2400
+            | image_tag:
+              class: 'collection-banner__image',
+              loading: 'eager',
+              fetchpriority: 'high',
+              widths: '750, 1100, 1500, 1800, 2400',
+              sizes: '100vw',
+              alt: collection.title
+          }}
+        </div>
+      {% endif %}
+      <div class="collection-banner__content page-width">
+        <h1 class="collection-banner__title">{{ collection.title | escape }}</h1>
+        {% if section.settings.show_description and collection.description != blank %}
+          <div class="collection-banner__description">{{ collection.description }}</div>
+        {% endif %}
+      </div>
+    </div>
+  {% else %}
+    <h1 class="visually-hidden">{{ collection.title | escape }}</h1>
+  {% endif %}
+
+  <div class="collection__container page-width">
+    {% paginate collection.products by section.settings.products_per_page %}
+      <div class="collection__toolbar">
+        {% if filtering %}
+          <button
+            type="button"
+            class="collection__filter-toggle{% if filter_layout == 'sidebar' %} collection__filter-toggle--mobile{% endif %}"
+            aria-controls="Facets-{{ section_id }}"
+            aria-expanded="false"
+            data-facets-open
+          >
+            <span class="collection__filter-icon" aria-hidden="true"><span></span><span></span></span>
+            <span>{{ 'collections.filter' | t }}</span>
+            <span id="FilterCount-{{ section_id }}" class="collection__filter-count" data-results-part>
+              {%- if active_filter_count > 0 -%}({{ active_filter_count }}){%- endif -%}
+            </span>
+          </button>
+        {% endif %}
+
+        {% if section.settings.show_count %}
+          <p id="ProductCount-{{ section_id }}" class="collection__count" data-results-part>
+            {{- 'collections.results_count' | t: count: collection.products_count -}}
+          </p>
+        {% endif %}
+
+        {% if sorting %}
+          <div class="collection__sort">
+            <label for="SortBy-{{ section_id }}" class="collection__sort-label">{{ 'collections.sort_by' | t }}</label>
+            <div class="collection__select">
+              <select id="SortBy-{{ section_id }}" name="sort_by" form="FacetsForm-{{ section_id }}" data-facets-input>
+                {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+                {% for option in collection.sort_options %}
+                  <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected{% endif %}>
+                    {{- option.name | escape -}}
+                  </option>
+                {% endfor %}
+              </select>
+              {{ 'icon-chevron.svg' | inline_asset_content }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="collection__layout{% if filtering and filter_layout == 'sidebar' %} collection__layout--sidebar{% endif %}">
+        {% if filtering %}
+          <aside
+            id="Facets-{{ section_id }}"
+            class="facets facets--{{ filter_layout }}"
+            aria-labelledby="FacetsHeading-{{ section_id }}"
+            data-facets
+          >
+            <div class="facets__backdrop" data-facets-close></div>
+            <div class="facets__panel">
+              <div class="facets__header">
+                <h2 id="FacetsHeading-{{ section_id }}" class="facets__heading">{{ 'collections.filters' | t }}</h2>
+                <button type="button" class="facets__close" data-facets-close aria-label="{{ 'accessibility.close' | t }}">
+                  {{ 'icon-close.svg' | inline_asset_content }}
+                </button>
+              </div>
+
+              <form
+                id="FacetsForm-{{ section_id }}"
+                class="facets__form"
+                action="{{ collection.url }}"
+                method="get"
+                data-facets-form
+                data-results-part
+              >
+                {% unless sorting %}
+                  <input type="hidden" name="sort_by" value="{{ collection.sort_by | escape }}">
+                {% endunless %}
+
+                {% for filter in collection.filters %}
+                  {%- liquid
+                    assign group_id = 'FacetGroup-' | append: section_id | append: '-' | append: forloop.index
+                    assign group_active = filter.active_values.size
+                    if filter.type == 'price_range'
+                      assign group_active = 0
+                      if filter.min_value.value != nil or filter.max_value.value != nil
+                        assign group_active = 1
+                      endif
+                    endif
+                  -%}
+                  <details id="{{ group_id }}" class="facets__group"{% if group_active > 0 or forloop.index <= 3 %} open{% endif %}>
+                    <summary class="facets__summary">
+                      <span>
+                        {{- filter.label | escape -}}
+                        {%- if group_active > 0 and filter.type != 'price_range' %}
+                          <span class="facets__summary-count">({{ group_active }})</span>
+                        {%- endif -%}
+                      </span>
+                      <span class="facets__plus" aria-hidden="true"></span>
+                    </summary>
+
+                    {% if filter.type == 'price_range' %}
+                      {%- liquid
+                        assign range_max = filter.range_max | divided_by: 100.0 | ceil
+                        assign min_display = ''
+                        assign max_display = ''
+                        if filter.min_value.value != nil
+                          assign min_display = filter.min_value.value | divided_by: 100.0
+                        endif
+                        if filter.max_value.value != nil
+                          assign max_display = filter.max_value.value | divided_by: 100.0
+                        endif
+                      -%}
+                      <div class="facets__price">
+                        <div class="facets__price-field">
+                          <label for="{{ group_id }}-min" class="facets__price-label">{{ 'collections.price_from' | t }}</label>
+                          <div class="facets__price-input">
+                            <span aria-hidden="true">{{ cart.currency.symbol }}</span>
+                            <input
+                              id="{{ group_id }}-min"
+                              type="number"
+                              inputmode="decimal"
+                              name="{{ filter.min_value.param_name }}"
+                              value="{{ min_display }}"
+                              placeholder="0"
+                              min="0"
+                              max="{{ range_max }}"
+                              step="any"
+                              data-facets-price
+                            >
+                          </div>
+                        </div>
+                        <span class="facets__price-sep" aria-hidden="true">–</span>
+                        <div class="facets__price-field">
+                          <label for="{{ group_id }}-max" class="facets__price-label">{{ 'collections.price_to' | t }}</label>
+                          <div class="facets__price-input">
+                            <span aria-hidden="true">{{ cart.currency.symbol }}</span>
+                            <input
+                              id="{{ group_id }}-max"
+                              type="number"
+                              inputmode="decimal"
+                              name="{{ filter.max_value.param_name }}"
+                              value="{{ max_display }}"
+                              placeholder="{{ range_max }}"
+                              min="0"
+                              max="{{ range_max }}"
+                              step="any"
+                              data-facets-price
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    {% else %}
+                      <ul class="facets__list" role="list">
+                        {% for value in filter.values %}
+                          {%- liquid
+                            assign option_id = group_id | append: '-' | append: forloop.index
+                            assign is_disabled = false
+                            if value.count == 0 and value.active == false
+                              assign is_disabled = true
+                            endif
+                          -%}
+                          <li>
+                            <label for="{{ option_id }}" class="facets__option{% if is_disabled %} is-disabled{% endif %}">
+                              <input
+                                id="{{ option_id }}"
+                                type="checkbox"
+                                name="{{ value.param_name }}"
+                                value="{{ value.value | escape }}"
+                                class="facets__checkbox"
+                                data-facets-input
+                                {% if value.active %}checked{% endif %}
+                                {% if is_disabled %}disabled{% endif %}
+                              >
+                              {% if value.swatch.color or value.swatch.image %}
+                                <span
+                                  class="facets__swatch"
+                                  style="{% if value.swatch.color %}--swatch-color: {{ value.swatch.color }};{% endif %}{% if value.swatch.image %} --swatch-image: url('{{ value.swatch.image | image_url: width: 60 }}');{% endif %}"
+                                  aria-hidden="true"
+                                ></span>
+                              {% else %}
+                                <span class="facets__box" aria-hidden="true"></span>
+                              {% endif %}
+                              <span class="facets__option-label">{{ value.label | escape }}</span>
+                              <span class="facets__option-count">({{ value.count }})</span>
+                            </label>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </details>
+                {% endfor %}
+
+                <noscript>
+                  <button type="submit" class="button button--primary facets__apply">{{ 'collections.apply' | t }}</button>
+                </noscript>
+              </form>
+
+              <div id="FacetsFooter-{{ section_id }}" class="facets__footer" data-results-part>
+                <a href="{{ clear_url }}" class="button button--secondary facets__footer-button" data-facets-link>
+                  {{- 'collections.clear_all' | t -}}
+                </a>
+                <button type="button" class="button button--primary facets__footer-button" data-facets-close>
+                  {{- 'collections.view_results' | t: count: collection.products_count -}}
+                </button>
+              </div>
+            </div>
+          </aside>
+        {% elsif sorting %}
+          <form id="FacetsForm-{{ section_id }}" action="{{ collection.url }}" method="get" data-facets-form hidden></form>
+        {% endif %}
+
+        <div id="CollectionResults-{{ section_id }}" class="collection__results" data-results-part>
+          {% if active_filter_count > 0 %}
+            <div class="facets__active">
+              {% for filter in collection.filters %}
+                {% if filter.type == 'price_range' %}
+                  {% if filter.min_value.value != nil or filter.max_value.value != nil %}
+                    <a href="{{ filter.url_to_remove }}" class="facets__chip" data-facets-link>
+                      <span>
+                        {{- filter.min_value.value | default: 0 | money -}}
+                        –
+                        {%- if filter.max_value.value != nil %} {{ filter.max_value.value | money }}{% else %} {{ filter.range_max | money }}{% endif -%}
+                      </span>
+                      {{ 'icon-close.svg' | inline_asset_content }}
+                      <span class="visually-hidden">{{ 'collections.remove_filter' | t }}</span>
+                    </a>
+                  {% endif %}
+                {% else %}
+                  {% for value in filter.active_values %}
+                    <a href="{{ value.url_to_remove }}" class="facets__chip" data-facets-link>
+                      <span>{{ filter.label | escape }}: {{ value.label | escape }}</span>
+                      {{ 'icon-close.svg' | inline_asset_content }}
+                      <span class="visually-hidden">{{ 'collections.remove_filter' | t }}</span>
+                    </a>
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+              <a href="{{ clear_url }}" class="facets__clear" data-facets-link>{{ 'collections.clear_all' | t }}</a>
             </div>
           {% endif %}
-          <div class="collection-product__content">
-            <p>{{ product.title | escape | link_to: product.url }}</p>
-            {% render 'price', price: product.price, compare_at_price: product.compare_at_price %}
-          </div>
+
+          {% if collection.products.size > 0 %}
+            <ul class="collection__grid" role="list" data-collection-grid>
+              {% for product in collection.products %}
+                <li class="collection__item">
+                  {%- liquid
+                    assign eager = false
+                    if paginate.current_page == 1 and forloop.index <= columns
+                      assign eager = true
+                    endif
+                  -%}
+                  {% render 'product-card', product: product, sizes: card_sizes, eager: eager, heading_tag: 'h2' %}
+                </li>
+              {% endfor %}
+            </ul>
+
+            {% if paginate.pages > 1 %}
+              {% if section.settings.pagination_type == 'load_more' %}
+                {%- liquid
+                  assign shown = paginate.current_offset | plus: collection.products.size
+                  assign shown_percent = shown | times: 100 | divided_by: paginate.items
+                -%}
+                <div class="collection__load-more" data-load-more-wrapper>
+                  <p class="collection__progress-text">{{ 'collections.showing' | t: shown: shown, total: paginate.items }}</p>
+                  <div class="collection__progress" aria-hidden="true">
+                    <span style="width: {{ shown_percent }}%;"></span>
+                  </div>
+                  {% if paginate.next %}
+                    <a href="{{ paginate.next.url }}" class="button button--secondary collection__load-more-button" data-load-more>
+                      {{- 'collections.load_more' | t -}}
+                    </a>
+                  {% endif %}
+                </div>
+              {% else %}
+                <nav class="pagination" aria-label="{{ 'collections.pagination' | t }}">
+                  {% if paginate.previous %}
+                    <a href="{{ paginate.previous.url }}" class="pagination__item pagination__arrow pagination__arrow--prev" data-facets-link aria-label="{{ 'collections.previous_page' | t }}">
+                      {{ 'icon-chevron.svg' | inline_asset_content }}
+                    </a>
+                  {% endif %}
+                  {% for part in paginate.parts %}
+                    {% if part.is_link %}
+                      <a href="{{ part.url }}" class="pagination__item" data-facets-link>{{ part.title }}</a>
+                    {% elsif part.title == paginate.current_page %}
+                      <span class="pagination__item pagination__item--current" aria-current="page">{{ part.title }}</span>
+                    {% else %}
+                      <span class="pagination__item pagination__item--gap">{{ part.title }}</span>
+                    {% endif %}
+                  {% endfor %}
+                  {% if paginate.next %}
+                    <a href="{{ paginate.next.url }}" class="pagination__item pagination__arrow pagination__arrow--next" data-facets-link aria-label="{{ 'collections.next_page' | t }}">
+                      {{ 'icon-chevron.svg' | inline_asset_content }}
+                    </a>
+                  {% endif %}
+                </nav>
+              {% endif %}
+            {% endif %}
+          {% else %}
+            <div class="collection__empty">
+              {% if active_filter_count > 0 %}
+                <p>{{ 'collections.no_results' | t }}</p>
+                <a href="{{ clear_url }}" class="button button--secondary" data-facets-link>{{ 'collections.clear_all' | t }}</a>
+              {% else %}
+                <p>{{ 'collections.empty_collection' | t }}</p>
+                <a href="{{ routes.all_products_collection_url }}" class="button button--primary">{{ 'cart.continue_shopping' | t }}</a>
+              {% endif %}
+            </div>
+          {% endif %}
         </div>
-      {% endfor %}
-    </div>
+      </div>
+    {% endpaginate %}
+  </div>
+</collection-page>
 
-    {{ paginate | default_pagination }}
-  {% endpaginate %}
-</div>
+{% javascript %}
+  if (!customElements.get('collection-page')) {
+    class CollectionPage extends HTMLElement {
+      connectedCallback() {
+        this.sectionId = this.dataset.sectionId;
 
-{% stylesheet %}
-  .collection-products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    column-gap: var(--gap-x);
-    row-gap: var(--gap-y);
+        this.onChange = this.onChange.bind(this);
+        this.onInput = this.onInput.bind(this);
+        this.onClick = this.onClick.bind(this);
+        this.onKeydown = this.onKeydown.bind(this);
+        this.onPopState = () => this.load(window.location.href, { push: false });
+
+        this.addEventListener('change', this.onChange);
+        this.addEventListener('input', this.onInput);
+        this.addEventListener('click', this.onClick);
+        this.addEventListener('keydown', this.onKeydown);
+        window.addEventListener('popstate', this.onPopState);
+      }
+
+      disconnectedCallback() {
+        window.removeEventListener('popstate', this.onPopState);
+        document.documentElement.classList.remove('facets-open');
+      }
+
+      get form() {
+        return document.getElementById(`FacetsForm-${this.sectionId}`);
+      }
+
+      get facets() {
+        return this.querySelector('[data-facets]');
+      }
+
+      // Checkboxes and sort apply immediately; price inputs wait until the
+      // shopper stops typing (or leaves the field).
+      onChange(event) {
+        if (event.target.matches('[data-facets-price]')) {
+          clearTimeout(this.priceTimer);
+          this.submitForm();
+        } else if (event.target.matches('[data-facets-input]')) {
+          this.submitForm();
+        }
+      }
+
+      onInput(event) {
+        if (!event.target.matches('[data-facets-price]')) return;
+        clearTimeout(this.priceTimer);
+        this.priceTimer = setTimeout(() => this.submitForm(), 800);
+      }
+
+      onClick(event) {
+        const link = event.target.closest('[data-facets-link]');
+        if (link) {
+          event.preventDefault();
+          this.load(link.href, { scroll: link.closest('.pagination') !== null });
+          return;
+        }
+
+        const loadMore = event.target.closest('[data-load-more]');
+        if (loadMore) {
+          event.preventDefault();
+          this.loadMore(loadMore);
+          return;
+        }
+
+        if (event.target.closest('[data-facets-open]')) {
+          this.openFacets();
+        } else if (event.target.closest('[data-facets-close]')) {
+          this.closeFacets();
+        }
+      }
+
+      onKeydown(event) {
+        if (event.key === 'Escape' && this.facets?.classList.contains('is-open')) {
+          this.closeFacets();
+        }
+      }
+
+      openFacets() {
+        const facets = this.facets;
+        if (!facets) return;
+        facets.classList.add('is-open');
+        document.documentElement.classList.add('facets-open');
+        this.querySelector('[data-facets-open]')?.setAttribute('aria-expanded', 'true');
+        facets.querySelector('.facets__close')?.focus({ preventScroll: true });
+      }
+
+      closeFacets() {
+        const facets = this.facets;
+        if (!facets?.classList.contains('is-open')) return;
+        facets.classList.remove('is-open');
+        document.documentElement.classList.remove('facets-open');
+        const toggle = this.querySelector('[data-facets-open]');
+        toggle?.setAttribute('aria-expanded', 'false');
+        toggle?.focus({ preventScroll: true });
+      }
+
+      buildUrl() {
+        const params = new URLSearchParams();
+        if (this.form) {
+          for (const [key, value] of new FormData(this.form)) {
+            if (value !== '') params.append(key, value);
+          }
+        }
+        const query = params.toString();
+        return `${window.location.pathname}${query ? `?${query}` : ''}`;
+      }
+
+      submitForm() {
+        this.load(this.buildUrl());
+      }
+
+      async fetchSection(url) {
+        const target = new URL(url, window.location.origin);
+        target.searchParams.set('section_id', this.sectionId);
+        const response = await fetch(target.toString());
+        const html = await response.text();
+        return new DOMParser().parseFromString(html, 'text/html');
+      }
+
+      async load(url, { push = true, scroll = false } = {}) {
+        this.classList.add('is-loading');
+        try {
+          const doc = await this.fetchSection(url);
+          this.replaceParts(doc);
+          if (push) window.history.pushState({}, '', url);
+          if (scroll) this.querySelector('.collection__toolbar')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch (error) {
+          window.location.href = url;
+        } finally {
+          this.classList.remove('is-loading');
+        }
+      }
+
+      // Swap every [data-results-part] for its fresh counterpart, keeping
+      // the shopper's open/closed filter groups and keyboard focus.
+      replaceParts(doc) {
+        const openGroups = new Set(
+          [...this.querySelectorAll('.facets__group')].map((group) => (group.open ? group.id : null)).filter(Boolean)
+        );
+        const closedGroups = new Set(
+          [...this.querySelectorAll('.facets__group')].map((group) => (group.open ? null : group.id)).filter(Boolean)
+        );
+        const focusedId = document.activeElement && this.contains(document.activeElement) ? document.activeElement.id : null;
+
+        this.querySelectorAll('[data-results-part]').forEach((part) => {
+          const fresh = doc.getElementById(part.id);
+          if (fresh) part.replaceWith(fresh);
+        });
+
+        this.querySelectorAll('.facets__group').forEach((group) => {
+          if (openGroups.has(group.id)) group.open = true;
+          if (closedGroups.has(group.id)) group.open = false;
+        });
+
+        if (focusedId) document.getElementById(focusedId)?.focus({ preventScroll: true });
+        this.revealNew();
+      }
+
+      async loadMore(button) {
+        const wrapper = button.closest('[data-load-more-wrapper]');
+        button.classList.add('is-loading');
+        button.setAttribute('aria-busy', 'true');
+
+        try {
+          const doc = await this.fetchSection(button.href);
+          const grid = this.querySelector('[data-collection-grid]');
+          const freshGrid = doc.querySelector('[data-collection-grid]');
+          if (grid && freshGrid) {
+            const firstNew = freshGrid.firstElementChild;
+            grid.append(...freshGrid.children);
+            firstNew?.querySelector('a')?.focus({ preventScroll: true });
+          }
+          const freshWrapper = doc.querySelector('[data-load-more-wrapper]');
+          if (wrapper) {
+            if (freshWrapper) wrapper.replaceWith(freshWrapper);
+            else wrapper.remove();
+          }
+          this.revealNew();
+        } catch (error) {
+          window.location.href = button.href;
+        }
+      }
+
+      // Cards inserted after load skip the scroll-reveal observer, so show
+      // them straight away.
+      revealNew() {
+        this.querySelectorAll('[data-animate]:not(.is-revealed)').forEach((el) => el.classList.add('is-revealed'));
+      }
+    }
+
+    customElements.define('collection-page', CollectionPage);
   }
-
-  .collection-product__image-wrapper {
-    position: relative;
-    padding: var(--image-padding);
-  }
-
-  .collection-product__content {
-    text-align: var(--text-align);
-  }
-
-  .collection-product--card {
-    padding: 1rem;
-    background-color: var(--color-background);
-    border-width: var(--style-border-thickness-cards);
-    border-style: solid;
-    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-cards), transparent);
-    border-radius: var(--style-border-radius-cards);
-    box-shadow: var(--style-shadow-cards);
-  }
-{% endstylesheet %}
+{% endjavascript %}
 
 {% schema %}
 {
   "name": "t:general.collection",
   "settings": [
     {
+      "type": "header",
+      "content": "t:sections.collection.banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_banner",
+      "label": "t:sections.collection.show_banner",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "banner_style",
+      "label": "t:sections.collection.banner_style",
+      "info": "t:sections.collection.banner_style_info",
+      "options": [
+        { "value": "minimal", "label": "t:sections.collection.banner_style_minimal" },
+        { "value": "image", "label": "t:sections.collection.banner_style_image" }
+      ],
+      "default": "minimal",
+      "visible_if": "{{ section.settings.show_banner }}"
+    },
+    {
+      "type": "select",
+      "id": "banner_height",
+      "label": "t:sections.collection.banner_height",
+      "options": [
+        { "value": "small", "label": "t:options.size.small" },
+        { "value": "medium", "label": "t:sections.all.medium" },
+        { "value": "large", "label": "t:options.size.large" }
+      ],
+      "default": "medium",
+      "visible_if": "{{ section.settings.show_banner and section.settings.banner_style == 'image' }}"
+    },
+    {
+      "type": "range",
+      "id": "banner_overlay",
+      "label": "t:labels.overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 30,
+      "visible_if": "{{ section.settings.show_banner and section.settings.banner_style == 'image' }}"
+    },
+    {
+      "type": "select",
+      "id": "banner_alignment",
+      "label": "t:labels.alignment",
+      "options": [
+        { "value": "left", "label": "t:options.alignment.left" },
+        { "value": "center", "label": "t:options.alignment.center" }
+      ],
+      "default": "left",
+      "visible_if": "{{ section.settings.show_banner }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "t:sections.collection.show_description",
+      "default": true,
+      "visible_if": "{{ section.settings.show_banner }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.collection.product_grid"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "t:sections.collection.products_per_page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "t:sections.all.columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "t:sections.all.columns_mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "t:sections.collection.show_count",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "pagination_type",
+      "label": "t:sections.collection.pagination_type",
+      "options": [
+        { "value": "numbers", "label": "t:sections.collection.pagination_numbers" },
+        { "value": "load_more", "label": "t:sections.collection.pagination_load_more" }
+      ],
+      "default": "numbers"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.collection.filtering"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "t:sections.collection.enable_filtering",
+      "info": "t:sections.collection.enable_filtering_info",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "filter_layout",
+      "label": "t:sections.collection.filter_layout",
+      "info": "t:sections.collection.filter_layout_info",
+      "options": [
+        { "value": "sidebar", "label": "t:sections.collection.filter_layout_sidebar" },
+        { "value": "drawer", "label": "t:sections.collection.filter_layout_drawer" }
+      ],
+      "default": "sidebar",
+      "visible_if": "{{ section.settings.enable_filtering }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "t:sections.collection.enable_sorting",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.label"
+    },
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:labels.padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:labels.padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
     }
   ]
 }
