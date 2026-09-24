@@ -213,6 +213,86 @@
         "padding_top": 32,
         "padding_bottom": 48
       }
+    },
+    "logo_marquee_UQFWAQ": {
+      "type": "logo-marquee",
+      "blocks": {
+        "logo_VbUwU7": {
+          "type": "logo",
+          "settings": {
+            "alt": "",
+            "link": "",
+            "new_tab": true
+          }
+        },
+        "logo_QqwFiE": {
+          "type": "logo",
+          "settings": {
+            "alt": "",
+            "link": "",
+            "new_tab": true
+          }
+        },
+        "logo_zN3zhX": {
+          "type": "logo",
+          "settings": {
+            "alt": "",
+            "link": "",
+            "new_tab": true
+          }
+        },
+        "logo_EccJhj": {
+          "type": "logo",
+          "settings": {
+            "alt": "",
+            "link": "",
+            "new_tab": true
+          }
+        },
+        "logo_wz7gAw": {
+          "type": "logo",
+          "settings": {
+            "alt": "",
+            "link": "",
+            "new_tab": true
+          }
+        },
+        "logo_bqxHbb": {
+          "type": "logo",
+          "settings": {
+            "alt": "",
+            "link": "",
+            "new_tab": true
+          }
+        }
+      },
+      "block_order": [
+        "logo_VbUwU7",
+        "logo_QqwFiE",
+        "logo_zN3zhX",
+        "logo_EccJhj",
+        "logo_wz7gAw",
+        "logo_bqxHbb"
+      ],
+      "name": "t:sections.logo_marquee.name",
+      "settings": {
+        "heading": "As featured in",
+        "heading_alignment": "center",
+        "speed": 40,
+        "direction": "left",
+        "pause_on_hover": false,
+        "logo_height": 48,
+        "logo_height_mobile": 32,
+        "gap": 64,
+        "logo_opacity": 100,
+        "grayscale": false,
+        "show_dividers": true,
+        "fade_edges": true,
+        "width": "full",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
@@ -220,6 +300,7 @@
     "collections_3gxUDK",
     "collection_banner_xDbcQT",
     "collection_banners_hjwTkc",
-    "social_marquee_xQATWa"
+    "social_marquee_xQATWa",
+    "logo_marquee_UQFWAQ"
   ]
 }
