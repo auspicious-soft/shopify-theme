@@ -33,7 +33,8 @@
 >
   {%- if section.settings.heading != blank -%}
     <div class="page-width logo-marquee__header logo-marquee__header--{{ section.settings.heading_alignment }}">
-      <h2 class="logo-marquee__heading">{{ section.settings.heading | escape }}</h2>
+      {%- assign heading_tag = section.settings.heading_tag | default: 'h2' -%}
+      <{{ heading_tag }} class="logo-marquee__heading">{{ section.settings.heading | escape }}</{{ heading_tag }}>
     </div>
   {%- endif -%}
 
@@ -117,7 +118,6 @@
 
   .logo-marquee__heading {
     margin: 0;
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
@@ -352,6 +352,21 @@
       "id": "heading",
       "label": "t:labels.heading",
       "default": "As featured in"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:labels.heading_tag",
+      "info": "t:labels.heading_tag_info",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
     },
     {
       "type": "select",

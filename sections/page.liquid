@@ -6,7 +6,8 @@
 {% endcomment %}
 
 <div class="page-width">
-  <h1>{{ page.title }}</h1>
+  {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
+  <{{ heading_tag }}>{{ page.title }}</{{ heading_tag }}>
 
   {{ page.content }}
 </div>
@@ -15,6 +16,22 @@
 {% schema %}
 {
   "name": "t:general.page",
-  "settings": []
+  "settings": [
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:labels.heading_tag",
+      "info": "t:labels.heading_tag_info",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h1"
+    }
+  ]
 }
 {% endschema %}

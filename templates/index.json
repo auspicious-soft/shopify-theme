@@ -62,7 +62,7 @@
         "overlay_opacity": 20,
         "subheading": "New items",
         "heading": "Long shirts",
-        "heading_size": "medium",
+        "heading_tag": "h2",
         "heading_uppercase": true,
         "text": "",
         "text_color": "#ffffff",

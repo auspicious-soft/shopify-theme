@@ -6,7 +6,8 @@
 {% endcomment %}
 
 <div class="page-width color-{{ section.settings.color_scheme.id }}">
-  <h1>{{ 'search.title' | t }}</h1>
+  {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
+  <{{ heading_tag }}>{{ 'search.title' | t }}</{{ heading_tag }}>
 
   <form action="{{ routes.search_url }}" method="get" role="search">
     <input
@@ -68,6 +69,21 @@
 {
   "name": "t:general.search",
   "settings": [
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:labels.heading_tag",
+      "info": "t:labels.heading_tag_info",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h1"
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",

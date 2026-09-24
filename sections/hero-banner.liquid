@@ -81,7 +81,8 @@
   <div class="hero-banner__inner page-width">
     <div class="hero-banner__content">
       {% if section.settings.heading != blank %}
-        <h2 class="hero-banner__heading">{{ section.settings.heading }}</h2>
+        {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
+        <{{ heading_tag }} class="hero-banner__heading">{{ section.settings.heading }}</{{ heading_tag }}>
       {% endif %}
 
       {% if section.settings.subheading != blank %}
@@ -236,6 +237,21 @@
       "id": "heading",
       "label": "t:labels.heading",
       "default": "End of summer sale"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:labels.heading_tag",
+      "info": "t:labels.heading_tag_info",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h1"
     },
     {
       "type": "text",

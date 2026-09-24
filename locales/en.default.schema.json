@@ -86,6 +86,8 @@
     "header_options": "Header options",
     "header_style": "Header style",
     "heading": "Heading",
+    "heading_tag": "Heading tag",
+    "heading_tag_info": "Sets the heading level (for SEO) and its size. Use H1 for only one heading per page.",
     "height_type": "Height",
     "hero_background_color_info": "Shown behind the image while it loads, and if no image is set",
     "hero_logo": "Hero logo",

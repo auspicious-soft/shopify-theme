@@ -19,7 +19,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "size": "medium"
+            "heading_tag": "h1"
           }
         },
         "rating": {

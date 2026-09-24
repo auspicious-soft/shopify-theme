@@ -43,7 +43,8 @@
       <div class="product-list__header product-list__header--{{ section.settings.heading_alignment | default: 'left' }}">
         <div class="product-list__titles">
           {% if section.settings.heading != blank %}
-            <h2 class="product-list__heading">{{ section.settings.heading | escape }}</h2>
+            {%- assign heading_tag = section.settings.heading_tag | default: 'h2' -%}
+            <{{ heading_tag }} class="product-list__heading">{{ section.settings.heading | escape }}</{{ heading_tag }}>
           {% endif %}
           {% if section.settings.subheading != blank %}
             <p class="product-list__subheading">{{ section.settings.subheading | escape }}</p>

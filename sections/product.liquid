@@ -52,9 +52,10 @@
             {% endif %}
 
           {% when 'title' %}
-            <h1 class="product__title product__title--{{ block.settings.size }}" {{ block.shopify_attributes }}>
+            {%- assign heading_tag = block.settings.heading_tag | default: 'h1' -%}
+            <{{ heading_tag }} class="product__title" {{ block.shopify_attributes }}>
               {{- product.title | escape -}}
-            </h1>
+            </{{ heading_tag }}>
 
           {% when 'rating' %}
             {% if product.metafields.reviews.rating.value != blank %}
@@ -477,14 +478,18 @@
       "settings": [
         {
           "type": "select",
-          "id": "size",
-          "label": "t:sections.product.blocks.title.size",
+          "id": "heading_tag",
+          "label": "t:labels.heading_tag",
+          "info": "t:labels.heading_tag_info",
           "options": [
-            { "value": "small", "label": "t:options.size.small" },
-            { "value": "medium", "label": "t:sections.all.medium" },
-            { "value": "large", "label": "t:options.size.large" }
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" }
           ],
-          "default": "medium"
+          "default": "h1"
         }
       ]
     },

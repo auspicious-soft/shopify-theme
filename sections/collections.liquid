@@ -30,13 +30,14 @@
   <div class="page-width">
     {% if section.settings.show_heading %}
       <div class="collection-list-page__header collection-list-page__header--{{ section.settings.heading_alignment }}">
-        <h1 class="collection-list-page__heading">
+        {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
+        <{{ heading_tag }} class="collection-list-page__heading">
           {%- if section.settings.heading != blank -%}
             {{- section.settings.heading | escape -}}
           {%- else -%}
             {{- 'collections.title' | t -}}
           {%- endif -%}
-        </h1>
+        </{{ heading_tag }}>
         {% if section.settings.subheading != blank %}
           <div class="collection-list-page__subheading">{{ section.settings.subheading }}</div>
         {% endif %}
@@ -78,7 +79,6 @@
 
   .collection-list-page__heading {
     margin: 0;
-    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
     line-height: 1.1;
   }
 
@@ -134,6 +134,21 @@
       "label": "t:labels.heading",
       "info": "t:sections.collections.heading_info",
       "visible_if": "{{ section.settings.show_heading }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:labels.heading_tag",
+      "info": "t:labels.heading_tag_info",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h1"
     },
     {
       "type": "richtext",

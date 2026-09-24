@@ -123,9 +123,10 @@
           {%- endif -%}
 
           {%- if heading != blank -%}
-            <h2 class="promo-banner__heading promo-banner__heading--{{ section.settings.heading_size }}{% if section.settings.heading_uppercase %} promo-banner__heading--uppercase{% endif %}">
+            {%- assign heading_tag = section.settings.heading_tag | default: 'h2' -%}
+            <{{ heading_tag }} class="promo-banner__heading{% if section.settings.heading_uppercase %} promo-banner__heading--uppercase{% endif %}">
               {{- heading | escape -}}
-            </h2>
+            </{{ heading_tag }}>
           {%- endif -%}
 
           {%- if section.settings.text != blank -%}
@@ -270,18 +271,6 @@
     margin: 0;
     color: inherit;
     line-height: 1.1;
-  }
-
-  .promo-banner__heading--small {
-    font-size: clamp(1.25rem, 2vw, 1.75rem);
-  }
-
-  .promo-banner__heading--medium {
-    font-size: clamp(1.6rem, 3vw, 2.5rem);
-  }
-
-  .promo-banner__heading--large {
-    font-size: clamp(2rem, 5vw, 4rem);
   }
 
   .promo-banner__heading--uppercase {
@@ -429,14 +418,18 @@
     },
     {
       "type": "select",
-      "id": "heading_size",
-      "label": "t:sections.collection_banner.heading_size",
+      "id": "heading_tag",
+      "label": "t:labels.heading_tag",
+      "info": "t:labels.heading_tag_info",
       "options": [
-        { "value": "small", "label": "t:sections.collection_banner.size_small" },
-        { "value": "medium", "label": "t:sections.collection_banner.size_medium" },
-        { "value": "large", "label": "t:sections.collection_banner.size_large" }
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
       ],
-      "default": "medium"
+      "default": "h2"
     },
     {
       "type": "checkbox",
