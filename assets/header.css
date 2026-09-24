@@ -704,4 +704,16 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
   .header .header__menu-toggle--desktop-only {
     display: none;
   }
+
+  /* Mobile header bar: search + cart only. The account link and the
+     country/language selector move into the menu drawer's footer
+     (snippets/header-drawer.liquid). */
+  .header__actions .header-localization,
+  .header__actions .header__account {
+    display: none;
+  }
+
+  .header__actions > * {
+    flex-shrink: 0;
+  }
 }

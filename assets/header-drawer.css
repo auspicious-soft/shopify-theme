@@ -330,8 +330,25 @@
 
 .header__drawer-footer {
   flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   padding: 1rem var(--page-margin, 20px);
   border-top: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+}
+
+/* Slotted into <shopify-account>'s signed-out avatar slot, so it survives
+   the component upgrading (unslotted content gets replaced). */
+.header__drawer-account-avatar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: inherit;
+}
+
+.header__drawer-account-avatar svg {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .header__drawer-account {

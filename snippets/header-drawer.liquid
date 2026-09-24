@@ -195,12 +195,36 @@
       </nav>
     </header-drawer-menu>
 
-    {% if shop.customer_accounts_enabled and section.settings.show_account %}
+    {%- liquid
+      assign show_drawer_account = false
+      if shop.customer_accounts_enabled and section.settings.show_account
+        assign show_drawer_account = true
+      endif
+
+      assign show_drawer_localization = false
+      if section.settings.localization_selector != 'none'
+        assign show_drawer_localization = true
+      endif
+    -%}
+
+    {% if show_drawer_account or show_drawer_localization %}
+      {% comment %}
+        On mobile the header bar keeps only search + cart; the account link
+        and country/language selector live here instead (assets/header.css
+        hides their header copies below 989px).
+      {% endcomment %}
       <div class="header__drawer-footer">
-        <shopify-account menu="{{ settings.customer_account_menu }}" class="header__drawer-account">
-          {{ 'icon-account.svg' | inline_asset_content }}
-          <span>{{ 'customers.login.title' | t }}</span>
-        </shopify-account>
+        {% if show_drawer_localization %}
+          {% render 'header-localization', section: section, placement: 'drawer' %}
+        {% endif %}
+        {% if show_drawer_account %}
+          <shopify-account menu="{{ settings.customer_account_menu }}" class="header__drawer-account">
+            <span slot="signed-out-avatar" class="header__drawer-account-avatar">
+              {{ 'icon-account.svg' | inline_asset_content }}
+              <span>{{ 'customers.login.title' | t }}</span>
+            </span>
+          </shopify-account>
+        {% endif %}
       </div>
     {% endif %}
   </dialog>

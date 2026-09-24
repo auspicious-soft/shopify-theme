@@ -171,6 +171,18 @@
   }
 }
 
+/* ---------- Drawer placement ----------
+   Inline selects in the menu drawer footer (no trigger/popup); inherits
+   the drawer's color scheme. */
+
+.header-localization--drawer {
+  display: block;
+}
+
+.header-localization--drawer .header-localization__form {
+  gap: 1rem;
+}
+
 /* ---------- Mobile ----------
    Flag + chevron only, to leave room for the other header icons; the
    popup still shows the full labels. */
