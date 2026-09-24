@@ -26,6 +26,8 @@
     --logo-height-mobile: {{ section.settings.logo_height_mobile }}px;
     --logo-gap: {{ section.settings.gap }}px;
     --logo-gap-mobile: {{ section.settings.gap | times: 0.6 | round }}px;
+    --logo-items: {{ section.settings.items_desktop }};
+    --logo-items-mobile: {{ section.settings.items_mobile }};
     --logo-opacity: {{ section.settings.logo_opacity | divided_by: 100.0 }};
   "
 >
@@ -120,7 +122,10 @@
     letter-spacing: 0.04em;
   }
 
+  /* The viewport is the size container, so each logo slot can be a share of
+     the visible strip: (width - gaps between logos) / logos shown. */
   .logo-marquee__viewport {
+    container-type: inline-size;
     overflow: hidden;
   }
 
@@ -169,8 +174,18 @@
   }
 
   .logo-marquee__item {
+    --items: var(--logo-items-mobile);
+    --gap: var(--logo-gap-mobile);
     position: relative;
-    flex: 0 0 auto;
+    flex: 0 0 calc((100cqw - var(--gap) * (var(--items) - 1)) / var(--items));
+    min-width: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .logo-marquee__item {
+      --items: var(--logo-items);
+      --gap: var(--logo-gap);
+    }
   }
 
   /* Thin line halfway between logos. */
@@ -194,6 +209,8 @@
   .logo-marquee__logo {
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
     height: var(--logo-height-mobile);
     color: inherit;
     text-decoration: none;
@@ -221,14 +238,12 @@
 
   .logo-marquee__image {
     display: block;
-    width: auto;
+    width: 100%;
     height: 100%;
-    max-width: none;
     object-fit: contain;
   }
 
   .logo-marquee__placeholder {
-    width: calc(var(--logo-height) * 2.5);
     fill: currentColor;
   }
 
@@ -238,6 +253,8 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   @media screen and (min-width: 750px) {
@@ -380,6 +397,25 @@
     {
       "type": "header",
       "content": "t:sections.logo_marquee.header_logos"
+    },
+    {
+      "type": "range",
+      "id": "items_desktop",
+      "label": "t:sections.logo_marquee.items_desktop",
+      "info": "t:sections.logo_marquee.items_info",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "items_mobile",
+      "label": "t:sections.logo_marquee.items_mobile",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3
     },
     {
       "type": "range",

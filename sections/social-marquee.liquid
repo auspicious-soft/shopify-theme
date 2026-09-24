@@ -13,7 +13,7 @@
 
 {%- liquid
   assign item_count = section.blocks.size
-  assign image_sizes = '(min-width: 750px) ' | append: section.settings.card_width | append: 'px, ' | append: section.settings.card_width_mobile | append: 'px'
+  assign image_sizes = '(min-width: 750px) calc(100vw / ' | append: section.settings.items_desktop | append: '), calc(100vw / ' | append: section.settings.items_mobile | append: ')'
   assign placeholder_count = 0
   if item_count == 0
     assign placeholder_count = 6
@@ -27,8 +27,8 @@
   style="
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
-    --social-marquee-width: {{ section.settings.card_width }}px;
-    --social-marquee-width-mobile: {{ section.settings.card_width_mobile }}px;
+    --social-marquee-items: {{ section.settings.items_desktop }};
+    --social-marquee-items-mobile: {{ section.settings.items_mobile }};
     --social-marquee-gap: {{ section.settings.gap }}px;
     --social-marquee-radius: {{ section.settings.corner_radius }}px;
     --social-marquee-ratio: {{ section.settings.aspect_ratio }};
@@ -131,7 +131,10 @@
     letter-spacing: 0.04em;
   }
 
+  /* The viewport is the size container, so an item can be sized as a
+     share of the visible strip: (width - gaps between items) / items shown. */
   .social-marquee__viewport {
+    container-type: inline-size;
     overflow: hidden;
     cursor: grab;
     touch-action: pan-y;
@@ -165,12 +168,13 @@
   }
 
   .social-marquee__item {
-    flex: 0 0 var(--social-marquee-width-mobile);
+    --items: var(--social-marquee-items-mobile);
+    flex: 0 0 calc((100cqw - var(--social-marquee-gap) * (var(--items) - 1)) / var(--items));
   }
 
   @media screen and (min-width: 750px) {
     .social-marquee__item {
-      flex-basis: var(--social-marquee-width);
+      --items: var(--social-marquee-items);
     }
   }
 
@@ -436,23 +440,22 @@
     },
     {
       "type": "range",
-      "id": "card_width",
-      "label": "t:sections.social_marquee.card_width",
-      "min": 160,
-      "max": 480,
-      "step": 8,
-      "unit": "px",
-      "default": 256
+      "id": "items_desktop",
+      "label": "t:sections.social_marquee.items_desktop",
+      "info": "t:sections.social_marquee.items_info",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 5
     },
     {
       "type": "range",
-      "id": "card_width_mobile",
-      "label": "t:sections.social_marquee.card_width_mobile",
-      "min": 120,
-      "max": 360,
-      "step": 8,
-      "unit": "px",
-      "default": 200
+      "id": "items_mobile",
+      "label": "t:sections.social_marquee.items_mobile",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
     },
     {
       "type": "select",
