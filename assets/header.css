@@ -418,6 +418,12 @@ header.is-scrolled img.header__hero-logo-image {
   height: 1.4rem;
 }
 
+.header__account-avatar {
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+}
+
 .header__menu-toggle--text,
 .header__account--text {
   font-size: var(--header-nav-font-size, 15px);

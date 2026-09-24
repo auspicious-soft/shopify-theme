@@ -21,11 +21,13 @@
       menu="{{ settings.customer_account_menu }}"
       class="header__action header__account{% if section.settings.account_display == 'text' %} header__account--text{% endif %}"
     >
-      {% if section.settings.account_display == 'text' %}
-        <span class="header__account-text">{{ section.settings.account_text | default: 'Account' | escape }}</span>
-      {% else %}
-        {{ 'icon-account.svg' | inline_asset_content }}
-      {% endif %}
+      <span slot="signed-out-avatar" class="header__account-avatar">
+        {% if section.settings.account_display == 'text' %}
+          <span class="header__account-text">{{ section.settings.account_text | default: 'Account' | escape }}</span>
+        {% else %}
+          {{ 'icon-account.svg' | inline_asset_content }}
+        {% endif %}
+      </span>
     </shopify-account>
   {% endif %}
 
