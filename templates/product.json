@@ -98,7 +98,7 @@
         "share"
       ],
       "settings": {
-        "gallery_layout": "carousel",
+        "gallery_layout": "grid",
         "media_size": "medium",
         "media_ratio": "adapt",
         "enable_zoom": true,
