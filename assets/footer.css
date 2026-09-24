@@ -5,6 +5,11 @@
  * is "Accordion".
  */
 
+/* The footer's own background fills the section, so drop the section's outer spacing. */
+.shopify-section.section-footer {
+  padding-block: 0;
+}
+
 .footer {
   display: block;
   padding-block: var(--footer-padding-top, 64px) var(--footer-padding-bottom, 24px);

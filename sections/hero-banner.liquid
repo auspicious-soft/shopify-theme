@@ -44,7 +44,7 @@
 %}
 
 <div
-  class="hero-banner full-width{% if is_adapt %} hero-banner--adapt{% endif %}"
+  class="hero-banner{% if is_adapt %} hero-banner--adapt{% endif %}"
   style="
     --hero-banner-bg: {{ section.settings.background_color }};
     --hero-banner-text: {{ section.settings.text_color }};

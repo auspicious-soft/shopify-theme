@@ -1,11 +1,11 @@
-<div class="custom-section full-width">
+<div class="custom-section">
   {% if section.settings.background_image %}
     <div class="custom-section__background">
       {{ section.settings.background_image | image_url: width: 2000 | image_tag }}
     </div>
   {% endif %}
 
-  <div class="custom-section__content" {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}>
+  <div class="custom-section__content page-width" {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}>
     {% content_for 'blocks' %}
   </div>
 </div>
@@ -30,13 +30,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-  .custom-section__content {
-    display: grid;
-    grid-template-columns: var(--content-grid);
-  }
-  .custom-section__content > * {
-    grid-column: 2;
   }
 {% endstylesheet %}
 

@@ -7,7 +7,7 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/cart
 {% endcomment %}
 
-<div class="cart color-{{ section.settings.color_scheme.id }}">
+<div class="cart page-width color-{{ section.settings.color_scheme.id }}">
   <h1>{{ 'cart.title' | t }}</h1>
 
   {% if cart.item_count == 0 %}

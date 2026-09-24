@@ -5,7 +5,7 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/search
 {% endcomment %}
 
-<div class="color-{{ section.settings.color_scheme.id }}">
+<div class="page-width color-{{ section.settings.color_scheme.id }}">
   <h1>{{ 'search.title' | t }}</h1>
 
   <form action="{{ routes.search_url }}" method="get" role="search">

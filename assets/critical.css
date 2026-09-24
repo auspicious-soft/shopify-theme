@@ -92,49 +92,16 @@ body {
 /** Section layout utilities */
 
 /**
- * Setup a grid that enables both full-width and constrained layouts
- * depending on the class of the child elements.
- *
- * By default, a minimum content margin is set on the left and right
- * sides of the section and the content is centered in the viewport to
- * not exceed the maximum page width.
- *
- * When a child element is given the `full-width` class, it will span
- * the entire viewport.
+ * Sections span the full viewport. A section's outer element carries its
+ * background edge to edge; wrap the content in `.page-width` to center it.
  */
 .shopify-section {
   padding-block: var(--spacing-sections);
-  --content-width: min(
-    calc(var(--page-width) - var(--page-margin) * 2),
-    calc(100% - var(--page-margin) * 2)
-  );
-  --content-margin: minmax(var(--page-margin), 1fr);
-  --content-grid: var(--content-margin) var(--content-width) var(--content-margin);
-
   /* This is required to make <img> elements work as background images */
   position: relative;
-  grid-template-columns: var(--content-grid);
-  display: grid;
-  width: 100%;
 }
 
-/* Child elements, by default, are constrained to the central column of the grid. */
-.shopify-section > * {
-  grid-column: 2;
-}
-
-/* Child elements that use the full-width utility class span the entire viewport. */
-.shopify-section > .full-width {
-  grid-column: 1 / -1;
-}
-
-/**
- * Utility class for constraining and centering content to the theme's page
- * width. Pairs with `full-width`: give the section's outer element
- * `full-width` for an edge-to-edge background, then give an inner wrapper
- * `page-width` to center its content at the same width as regular sections
- * (e.g. an announcement bar or any other full-bleed banner).
- */
+/* Centers content at the theme's page width, with the page margin on each side. */
 .page-width {
   width: 100%;
   max-width: var(--page-width);

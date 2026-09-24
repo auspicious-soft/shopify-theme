@@ -6,7 +6,7 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/article
 {% endcomment %}
 
-<div class="color-{{ section.settings.color_scheme.id }}">
+<div class="page-width color-{{ section.settings.color_scheme.id }}">
   {% if article.image %}
     {% render 'image', image: article.image, width: 1000 %}
   {% endif %}
