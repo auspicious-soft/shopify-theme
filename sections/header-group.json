@@ -109,7 +109,7 @@
         "header_style": "logo_reveal",
         "logo_position": "center",
         "menu": "main-menu",
-        "menu_type": "hamburger",
+        "menu_type": "horizontal",
         "hamburger_position": "left",
         "hamburger_display": "text",
         "hamburger_text": "Menu",
