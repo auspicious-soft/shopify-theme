@@ -18,10 +18,11 @@
           "type": "brand",
           "settings": {
             "column_width": 30,
+            "image": "shopify://shop_images/White_1.png",
             "image_width": 140,
             "show_shop_name": true,
             "headline": "",
-            "text": "",
+            "text": "<p>We ara a lorem ipsum dolor sit amet, consectetur adipiscing elit, Ut enim ad minim veniam, quis nostrud equip consectetur adipiscing ex ea commodo dolor consequat...</p>",
             "show_social": true
           }
         },
@@ -31,13 +32,6 @@
             "column_width": 20,
             "heading": "",
             "menu": "footer"
-          }
-        },
-        "social_etLRzQ": {
-          "type": "social",
-          "settings": {
-            "column_width": 20,
-            "heading": "Follow us"
           }
         },
         "newsletter": {
@@ -54,10 +48,10 @@
       "block_order": [
         "brand",
         "menu_main",
-        "social_etLRzQ",
         "newsletter"
       ],
       "settings": {
+        "footer_width": "full",
         "mobile_menu_style": "accordion",
         "column_gap": 48,
         "copyright_text": "",
@@ -67,8 +61,7 @@
         "show_divider": true,
         "color_scheme": "scheme-4",
         "padding_top": 64,
-        "padding_bottom": 24,
-        "footer_width": "page"
+        "padding_bottom": 24
       }
     }
   },
