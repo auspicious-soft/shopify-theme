@@ -683,6 +683,15 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
   background-color: var(--color-background);
 }
 
+/* Once the transparent header turns solid (scrolled/sticky, hovered, or
+   search open), the badge goes back to the normal header colors. */
+.header--overlay.is-scrolled .header__cart-count,
+.header--overlay:hover .header__cart-count,
+.header--overlay:has(.predictive-search[open]) .header__cart-count {
+  color: var(--color-background);
+  background-color: var(--header-nav-hover-color);
+}
+
 .header__cart-count[hidden] {
   display: none;
 }
