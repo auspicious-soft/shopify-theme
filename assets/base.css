@@ -97,10 +97,14 @@ input[type="button"] {
   color: var(--color-button-text);
   border-width: var(--style-border-thickness-buttons);
   border-style: solid;
-  /* Border matches the fill, so the primary button reads as one solid shape. */
-  border-color: color-mix(in srgb, var(--color-button-background) var(--style-border-opacity-buttons), transparent);
+  border-color: color-mix(in srgb, var(--color-button-text) var(--style-border-opacity-buttons), transparent);
   border-radius: var(--style-border-radius-buttons);
   box-shadow: var(--style-shadow-buttons);
+}
+
+/* The primary button's border matches its fill, so it reads as one solid shape. */
+.button--primary {
+  border-color: color-mix(in srgb, var(--color-button-background) var(--style-border-opacity-buttons), transparent);
 }
 
 .button--secondary {
