@@ -11,6 +11,7 @@
   "current": {
     "logo": "shopify://shop_images/Link_margin.png",
     "logo_width": 140,
+    "popup_color_scheme": "",
     "menu_drawer_color_scheme": "scheme-1",
     "type_header_font": "assistant_n7",
     "heading_scale": 100,
