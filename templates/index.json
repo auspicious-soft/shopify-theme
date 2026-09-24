@@ -53,9 +53,9 @@
       "name": "t:sections.collection_banner.name",
       "settings": {
         "collection": "",
-        "height": "medium",
+        "height": "fullscreen",
         "mobile_height": "medium",
-        "width": "page",
+        "width": "full",
         "corner_radius": 0,
         "zoom_on_hover": true,
         "overlay_color": "#000000",
@@ -74,7 +74,7 @@
         "button_style": "primary",
         "button_size": "small",
         "button_color_scheme": "",
-        "full_link": true,
+        "full_link": false,
         "color_scheme": "",
         "padding_top": 0,
         "padding_bottom": 0
@@ -91,7 +91,7 @@
             "heading": "Shop the latest drops",
             "text": "",
             "button_label": "Explore male",
-            "link": ""
+            "link": "shopify://collections/all"
           }
         },
         "collection_fGPGma": {
@@ -128,7 +128,7 @@
         "heading_size": "medium",
         "heading_uppercase": true,
         "text_color": "#ffffff",
-        "content_position_horizontal": "left",
+        "content_position_horizontal": "center",
         "content_position_vertical": "split",
         "button_style": "primary",
         "button_size": "small",
