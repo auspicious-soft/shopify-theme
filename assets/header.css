@@ -676,6 +676,13 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
   text-align: center;
 }
 
+/* Transparent header: colors swapped, a solid badge with the hover color
+   as the number, so it stands out over the hero image. */
+.header--overlay .header__cart-count {
+  color: var(--header-nav-hover-color);
+  background-color: var(--color-background);
+}
+
 .header__cart-count[hidden] {
   display: none;
 }
