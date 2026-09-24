@@ -163,7 +163,9 @@
     "text_style": "Text style",
     "text_color": "Text color",
     "text": "Text",
-    "transition_speed": "Transition speed"
+    "transition_speed": "Transition speed",
+    "desktop_submenu_type": "Submenu type",
+    "desktop_submenu_type_info": "Mega menu shows 2nd-level links as column headings with their 3rd-level links beneath. Add a Mega menu promo block to show an image and title on the right."
   },
   "options": {
     "alignment": {
@@ -260,6 +262,10 @@
       "title": "Title",
       "subtitle": "Subtitle",
       "normal": "Normal text"
+    },
+    "desktop_submenu_type": {
+      "dropdown": "Dropdown",
+      "mega": "Mega menu"
     }
   },
   "sections": {
@@ -358,8 +364,8 @@
           "info": "Used by all popups (search, country/language selector) instead of the header's own color scheme, so their text stays readable even over a transparent header"
         },
         "menu_drawer_color_scheme": {
-          "label": "Menu drawer color scheme",
-          "info": "Used by the slide-out navigation menu, independent from the header's color scheme"
+          "label": "Menu color scheme",
+          "info": "Used by the menu drawer and the desktop dropdown / mega menus, independent from the header's color scheme"
         }
       }
     },
@@ -654,6 +660,20 @@
           "label": "Menu"
         }
       }
+    }
+  },
+  "blocks": {
+    "mega_menu_promo": {
+      "name": "Mega menu promo",
+      "info": "Adds an image and/or title with link to one mega menu. Only shown when Navigation > Submenu type is Mega menu.",
+      "menu_item": "Menu item",
+      "menu_item_info": "Title of the top-level menu item to show this in, e.g. All Products",
+      "show_image": "Show image",
+      "image": "Image",
+      "show_title": "Show title",
+      "title": "Title",
+      "link": "Link",
+      "link_info": "Makes the image and title clickable"
     }
   }
 }

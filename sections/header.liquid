@@ -523,6 +523,18 @@
       "info": "t:labels.navigation_settings_info"
     },
     {
+      "type": "select",
+      "id": "desktop_submenu_type",
+      "label": "t:labels.desktop_submenu_type",
+      "info": "t:labels.desktop_submenu_type_info",
+      "options": [
+        { "value": "dropdown", "label": "t:options.desktop_submenu_type.dropdown" },
+        { "value": "mega", "label": "t:options.desktop_submenu_type.mega" }
+      ],
+      "default": "dropdown",
+      "visible_if": "{{ section.settings.menu_type == 'horizontal' }}"
+    },
+    {
       "type": "range",
       "id": "nav_font_size",
       "label": "t:labels.font_size",
@@ -563,6 +575,55 @@
       "label": "t:labels.nav_hover_color",
       "default": "#000000",
       "visible_if": "{{ section.settings.menu_type == 'horizontal' }}"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mega_menu_promo",
+      "name": "t:blocks.mega_menu_promo.name",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:blocks.mega_menu_promo.info"
+        },
+        {
+          "type": "text",
+          "id": "menu_item",
+          "label": "t:blocks.mega_menu_promo.menu_item",
+          "info": "t:blocks.mega_menu_promo.menu_item_info"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_image",
+          "label": "t:blocks.mega_menu_promo.show_image",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:blocks.mega_menu_promo.image",
+          "visible_if": "{{ block.settings.show_image }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_title",
+          "label": "t:blocks.mega_menu_promo.show_title",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:blocks.mega_menu_promo.title",
+          "visible_if": "{{ block.settings.show_title }}"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:blocks.mega_menu_promo.link",
+          "info": "t:blocks.mega_menu_promo.link_info"
+        }
+      ]
     }
   ]
 }
