@@ -54,8 +54,20 @@
       assign mobile_height = '65vh'
   endcase
 
+  assign show_video = false
+  if section.settings.media_type == 'video'
+    assign show_video = true
+  endif
+
   assign ratio = image.aspect_ratio | default: 1.78
   assign mobile_ratio = mobile_image.aspect_ratio | default: 0.8
+  if show_video and section.settings.video != blank
+    assign ratio = section.settings.video.aspect_ratio | default: ratio
+    assign mobile_ratio = section.settings.video.aspect_ratio | default: mobile_ratio
+  endif
+  if show_video and section.settings.mobile_video != blank
+    assign mobile_ratio = section.settings.mobile_video.aspect_ratio | default: mobile_ratio
+  endif
 -%}
 
 <div
@@ -84,30 +96,16 @@
       "
     >
       <div class="promo-banner__media">
-        {%- if image != blank -%}
-          {{
-            image
-            | image_url: width: 3000
-            | image_tag:
-              class: 'promo-banner__image promo-banner__image--desktop',
-              widths: '750, 1100, 1500, 2000, 2500, 3000',
-              sizes: '100vw',
-              loading: 'lazy',
-              alt: heading
-          }}
-          {{
-            mobile_image
-            | image_url: width: 1500
-            | image_tag:
-              class: 'promo-banner__image promo-banner__image--mobile',
-              widths: '375, 550, 750, 1100, 1500',
-              sizes: '100vw',
-              loading: 'lazy',
-              alt: heading
-          }}
-        {%- else -%}
-          {{ 'lifestyle-2' | placeholder_svg_tag: 'promo-banner__image promo-banner__placeholder' }}
-        {%- endif -%}
+        {% render 'banner-media',
+          image: image,
+          mobile_image: section.settings.mobile_image,
+          show_video: show_video,
+          video: section.settings.video,
+          mobile_video: section.settings.mobile_video,
+          video_url: section.settings.video_url,
+          alt: heading,
+          placeholder: 'lifestyle-2'
+        %}
       </div>
 
       <div class="promo-banner__overlay" aria-hidden="true"></div>
@@ -199,30 +197,14 @@
     background-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
   }
 
-  .promo-banner__image {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .promo-banner .banner-media__image,
+  .promo-banner .banner-media__video {
     transition: transform 1.2s cubic-bezier(0.2, 0.6, 0.2, 1);
   }
 
-  .promo-banner__image--desktop {
-    display: none;
-  }
-
-  @media screen and (min-width: 750px) {
-    .promo-banner__image--desktop {
-      display: block;
-    }
-
-    .promo-banner__image--mobile {
-      display: none;
-    }
-  }
-
   @media (hover: hover) {
-    .promo-banner--zoom:hover .promo-banner__image {
+    .promo-banner--zoom:hover .banner-media__image,
+    .promo-banner--zoom:hover .banner-media__video {
       transform: scale(1.04);
     }
   }
@@ -300,7 +282,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .promo-banner__image {
+    .promo-banner .banner-media__image,
+    .promo-banner .banner-media__video {
       transition: none;
     }
   }
@@ -332,6 +315,38 @@
       "id": "mobile_image",
       "label": "t:sections.collection_banner.mobile_image",
       "info": "t:sections.collection_banner.mobile_image_info"
+    },
+    {
+      "type": "select",
+      "id": "media_type",
+      "label": "t:labels.media_type",
+      "options": [
+        { "value": "image", "label": "t:options.media_type.image" },
+        { "value": "video", "label": "t:options.media_type.video" }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:labels.video",
+      "info": "t:labels.video_info",
+      "visible_if": "{{ section.settings.media_type == 'video' }}"
+    },
+    {
+      "type": "video",
+      "id": "mobile_video",
+      "label": "t:labels.mobile_video",
+      "info": "t:labels.mobile_video_info",
+      "visible_if": "{{ section.settings.media_type == 'video' }}"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": ["youtube","vimeo"],
+      "label": "t:labels.video_url",
+      "info": "t:labels.video_url_info",
+      "visible_if": "{{ section.settings.media_type == 'video' }}"
     },
     {
       "type": "select",
@@ -438,12 +453,12 @@
       "label": "t:labels.heading_class",
       "info": "t:labels.heading_class_info",
       "options": [
-        { "value": "h1", "label": "H1" },
-        { "value": "h2", "label": "H2" },
-        { "value": "h3", "label": "H3" },
-        { "value": "h4", "label": "H4" },
-        { "value": "h5", "label": "H5" },
-        { "value": "h6", "label": "H6" }
+        { "value": "h6", "label": "t:options.heading_size.extra_small" },
+        { "value": "h5", "label": "t:options.heading_size.small" },
+        { "value": "h4", "label": "t:options.heading_size.medium" },
+        { "value": "h3", "label": "t:options.heading_size.large" },
+        { "value": "h2", "label": "t:options.heading_size.extra_large" },
+        { "value": "h1", "label": "t:options.heading_size.huge" }
       ],
       "default": "h2"
     },

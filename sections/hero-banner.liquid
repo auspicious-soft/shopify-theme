@@ -40,7 +40,19 @@
       assign hero_height = '100svh'
   endcase
 
+  assign show_video = false
+  if section.settings.media_type == 'video'
+    assign show_video = true
+  endif
+
   assign hero_aspect_ratio = section.settings.background_image.aspect_ratio | default: 1.78
+  if show_video and section.settings.video != blank
+    assign hero_aspect_ratio = section.settings.video.aspect_ratio | default: hero_aspect_ratio
+  endif
+  assign hero_aspect_ratio_mobile = section.settings.mobile_image.aspect_ratio | default: hero_aspect_ratio
+  if show_video and section.settings.mobile_video != blank
+    assign hero_aspect_ratio_mobile = section.settings.mobile_video.aspect_ratio | default: hero_aspect_ratio_mobile
+  endif
 %}
 
 <div
@@ -52,6 +64,7 @@
     --hero-banner-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
     {% if is_adapt %}
       --hero-banner-aspect-ratio: {{ hero_aspect_ratio }};
+      --hero-banner-aspect-ratio-mobile: {{ hero_aspect_ratio_mobile }};
     {% else %}
       --hero-banner-height: {{ hero_height }};
     {% endif %}
@@ -62,21 +75,19 @@
     --hero-banner-padding-bottom: {{ section.settings.padding_bottom }}px;
   "
 >
-  {% if section.settings.background_image != blank %}
-    <div class="hero-banner__media">
-      {{
-        section.settings.background_image
-        | image_url: width: 2000
-        | image_tag:
-          widths: '750,1000,1500,2000,2560,3200',
-          sizes: '100vw',
-          alt: section.settings.heading | default: shop.name,
-          loading: 'eager',
-          fetchpriority: 'high'
-      }}
-    </div>
-    <div class="hero-banner__overlay"></div>
-  {% endif %}
+  <div class="hero-banner__media">
+    {% render 'banner-media',
+      image: section.settings.background_image,
+      mobile_image: section.settings.mobile_image,
+      show_video: show_video,
+      video: section.settings.video,
+      mobile_video: section.settings.mobile_video,
+      video_url: section.settings.video_url,
+      alt: section.settings.heading,
+      eager: true
+    %}
+  </div>
+  <div class="hero-banner__overlay"></div>
 
   <div class="hero-banner__inner page-width">
     <div class="hero-banner__content">
@@ -123,18 +134,15 @@
     aspect-ratio: var(--hero-banner-aspect-ratio, 16 / 9);
   }
 
+  @media screen and (max-width: 749px) {
+    .hero-banner--adapt {
+      aspect-ratio: var(--hero-banner-aspect-ratio-mobile, var(--hero-banner-aspect-ratio, 16 / 9));
+    }
+  }
+
   .hero-banner__media {
     position: absolute;
     inset: 0;
-  }
-
-  .hero-banner__media img {
-    display: block;
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 
   .hero-banner__overlay {
@@ -189,9 +197,52 @@
   "name": "t:general.hero_banner",
   "settings": [
     {
+      "type": "header",
+      "content": "t:labels.media"
+    },
+    {
+      "type": "select",
+      "id": "media_type",
+      "label": "t:labels.media_type",
+      "options": [
+        { "value": "image", "label": "t:options.media_type.image" },
+        { "value": "video", "label": "t:options.media_type.video" }
+      ],
+      "default": "image"
+    },
+    {
       "type": "image_picker",
       "id": "background_image",
-      "label": "t:labels.background_image"
+      "label": "t:labels.background_image",
+      "info": "t:labels.background_image_video_info"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "t:labels.mobile_image",
+      "info": "t:labels.mobile_image_info"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:labels.video",
+      "info": "t:labels.video_info",
+      "visible_if": "{{ section.settings.media_type == 'video' }}"
+    },
+    {
+      "type": "video",
+      "id": "mobile_video",
+      "label": "t:labels.mobile_video",
+      "info": "t:labels.mobile_video_info",
+      "visible_if": "{{ section.settings.media_type == 'video' }}"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": ["youtube","vimeo"],
+      "label": "t:labels.video_url",
+      "info": "t:labels.video_url_info",
+      "visible_if": "{{ section.settings.media_type == 'video' }}"
     },
     {
       "type": "color",
@@ -260,12 +311,12 @@
       "label": "t:labels.heading_class",
       "info": "t:labels.heading_class_info",
       "options": [
-        { "value": "h1", "label": "H1" },
-        { "value": "h2", "label": "H2" },
-        { "value": "h3", "label": "H3" },
-        { "value": "h4", "label": "H4" },
-        { "value": "h5", "label": "H5" },
-        { "value": "h6", "label": "H6" }
+        { "value": "h6", "label": "t:options.heading_size.extra_small" },
+        { "value": "h5", "label": "t:options.heading_size.small" },
+        { "value": "h4", "label": "t:options.heading_size.medium" },
+        { "value": "h3", "label": "t:options.heading_size.large" },
+        { "value": "h2", "label": "t:options.heading_size.extra_large" },
+        { "value": "h1", "label": "t:options.heading_size.huge" }
       ],
       "default": "h1"
     },

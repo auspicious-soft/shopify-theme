@@ -89,6 +89,18 @@
           assign heading = block.settings.heading | default: collection.title
           assign link = block.settings.link | default: collection.url
           assign tile_ratio = image.aspect_ratio | default: 0.8
+          assign show_video = false
+          if block.settings.media_type == 'video'
+            assign show_video = true
+            if block.settings.video != blank
+              assign tile_ratio = block.settings.video.aspect_ratio | default: tile_ratio
+            endif
+          endif
+          assign placeholder_name = 'lifestyle-1'
+          assign odd = forloop.index | modulo: 2
+          if odd == 0
+            assign placeholder_name = 'lifestyle-2'
+          endif
         -%}
         <li
           class="collection-tile{% if section.settings.zoom_on_hover %} collection-tile--zoom{% endif %}"
@@ -96,27 +108,17 @@
           {{ block.shopify_attributes }}
         >
           <div class="collection-tile__media">
-            {%- if image != blank -%}
-              {{
-                image
-                | image_url: width: 1800
-                | image_tag:
-                  class: 'collection-tile__image',
-                  widths: '375, 550, 750, 1100, 1500, 1800',
-                  sizes: image_sizes,
-                  loading: 'lazy',
-                  alt: heading
-              }}
-            {%- else -%}
-              {%- liquid
-                assign placeholder_name = 'lifestyle-1'
-                assign odd = forloop.index | modulo: 2
-                if odd == 0
-                  assign placeholder_name = 'lifestyle-2'
-                endif
-              -%}
-              {{ placeholder_name | placeholder_svg_tag: 'collection-tile__image collection-tile__placeholder' }}
-            {%- endif -%}
+            {% render 'banner-media',
+              image: image,
+              mobile_image: block.settings.mobile_image,
+              show_video: show_video,
+              video: block.settings.video,
+              mobile_video: block.settings.mobile_video,
+              video_url: block.settings.video_url,
+              alt: heading,
+              sizes: image_sizes,
+              placeholder: placeholder_name
+            %}
           </div>
 
           <div class="collection-tile__overlay" aria-hidden="true"></div>
@@ -252,16 +254,14 @@
     background-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
   }
 
-  .collection-tile__image {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .collection-tile .banner-media__image,
+  .collection-tile .banner-media__video {
     transition: transform 1s cubic-bezier(0.2, 0.6, 0.2, 1);
   }
 
   @media (hover: hover) {
-    .collection-tile--zoom:hover .collection-tile__image {
+    .collection-tile--zoom:hover .banner-media__image,
+    .collection-tile--zoom:hover .banner-media__video {
       transform: scale(1.05);
     }
   }
@@ -342,7 +342,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .collection-tile__image {
+    .collection-tile .banner-media__image,
+    .collection-tile .banner-media__video {
       transition: none;
     }
   }
@@ -381,12 +382,12 @@
       "label": "t:labels.heading_class",
       "info": "t:labels.heading_class_info",
       "options": [
-        { "value": "h1", "label": "H1" },
-        { "value": "h2", "label": "H2" },
-        { "value": "h3", "label": "H3" },
-        { "value": "h4", "label": "H4" },
-        { "value": "h5", "label": "H5" },
-        { "value": "h6", "label": "H6" }
+        { "value": "h6", "label": "t:options.heading_size.extra_small" },
+        { "value": "h5", "label": "t:options.heading_size.small" },
+        { "value": "h4", "label": "t:options.heading_size.medium" },
+        { "value": "h3", "label": "t:options.heading_size.large" },
+        { "value": "h2", "label": "t:options.heading_size.extra_large" },
+        { "value": "h1", "label": "t:options.heading_size.huge" }
       ],
       "default": "h2"
     },
@@ -635,6 +636,44 @@
           "id": "image",
           "label": "t:sections.collection_banner.image",
           "info": "t:sections.collection_banner.image_info"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "t:labels.mobile_image",
+          "info": "t:labels.mobile_image_info"
+        },
+        {
+          "type": "select",
+          "id": "media_type",
+          "label": "t:labels.media_type",
+          "options": [
+            { "value": "image", "label": "t:options.media_type.image" },
+            { "value": "video", "label": "t:options.media_type.video" }
+          ],
+          "default": "image"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "t:labels.video",
+          "info": "t:labels.video_info",
+          "visible_if": "{{ block.settings.media_type == 'video' }}"
+        },
+        {
+          "type": "video",
+          "id": "mobile_video",
+          "label": "t:labels.mobile_video",
+          "info": "t:labels.mobile_video_info",
+          "visible_if": "{{ block.settings.media_type == 'video' }}"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "accept": ["youtube","vimeo"],
+          "label": "t:labels.video_url",
+          "info": "t:labels.video_url_info",
+          "visible_if": "{{ block.settings.media_type == 'video' }}"
         },
         {
           "type": "text",

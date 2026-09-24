@@ -48,6 +48,17 @@
   },
   "labels": {
     "alignment": "Alignment",
+    "media": "Media",
+    "media_type": "Media type",
+    "mobile_image": "Mobile image",
+    "mobile_image_info": "Optional, shown on screens under 750px",
+    "background_image_video_info": "With a video, shown while it loads and to visitors who prefer reduced motion",
+    "video": "Video",
+    "video_info": "Upload an MP4. Plays muted and on a loop, without controls",
+    "mobile_video": "Mobile video",
+    "mobile_video_info": "Optional, shown on screens under 750px",
+    "video_url": "YouTube or Vimeo link",
+    "video_url_info": "Used when no video is uploaded above",
     "announcement_bar_mode": "Layout",
     "announcement_text": "Announcement text",
     "appearance": "Appearance",
@@ -195,6 +206,18 @@
       "medium": "Medium",
       "semibold": "Semibold",
       "bold": "Bold"
+    },
+    "heading_size": {
+      "extra_small": "Extra small",
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large",
+      "extra_large": "Extra large",
+      "huge": "Huge"
+    },
+    "media_type": {
+      "image": "Image",
+      "video": "Video"
     },
     "height_type": {
       "adapt": "Adapt to image",
