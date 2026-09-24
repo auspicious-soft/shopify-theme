@@ -1,0 +1,280 @@
+{% doc %}
+  Renders the header's slide-out navigation drawer (used by the hamburger
+  desktop menu and always on mobile). Full viewport height (100dvh).
+
+  Submenus follow Header settings > Menu drawer > Submenu style:
+  - "accordion": nested items expand in place under their parent, with a
+    plus/minus icon (native <details>, no JS needed to open/close).
+  - "slide": like Dawn, a parent opens its children as a panel sliding in
+    over the menu, with a back button naming the parent. Supports the
+    full 3 levels of a Shopify menu.
+
+  Open/close, Escape and backdrop handling come from theme-panel.liquid;
+  the `header-drawer-menu` element below only drives the slide panels and
+  resets every submenu once the drawer has closed. Styles live in
+  assets/header-drawer.css.
+
+  @param section {Object} - the header section
+
+  @example
+  {% render 'header-drawer', section: section %}
+{% enddoc %}
+
+{%- liquid
+  assign submenu_style = section.settings.drawer_submenu_style | default: 'accordion'
+  assign drawer_id = 'HeaderDrawer-' | append: section.id
+-%}
+
+{{ 'header-drawer.css' | asset_url | stylesheet_tag }}
+{% render 'theme-panel' %}
+
+<theme-panel>
+  <dialog
+    id="{{ drawer_id }}"
+    class="header__drawer header__drawer--{{ section.settings.drawer_position }} color-{{ settings.menu_drawer_color_scheme.id }}"
+    aria-label="{{ 'accessibility.menu' | t }}"
+    scroll-lock
+  >
+    <div class="header__drawer-header">
+      <a href="{{ routes.root_url }}" class="header__drawer-logo" aria-label="{{ shop.name | escape }}">
+        {% if settings.logo != blank %}
+          {{ settings.logo | image_url: width: 200 | image_tag: width: 140, alt: shop.name, loading: 'lazy' }}
+        {% else %}
+          <span>{{ shop.name }}</span>
+        {% endif %}
+      </a>
+      <button type="button" class="header__drawer-close" data-panel-close aria-label="{{ 'accessibility.close' | t }}">
+        {{ 'icon-close.svg' | inline_asset_content }}
+      </button>
+    </div>
+
+    <header-drawer-menu class="header__drawer-nav header__drawer-nav--{{ submenu_style }}">
+      <nav aria-label="{{ 'accessibility.primary_navigation' | t }}">
+        <ul class="header__drawer-menu" role="list">
+          {% for link in section.settings.menu.links %}
+            {% assign link_index = forloop.index %}
+            <li class="header__drawer-item">
+              {% if link.links == blank %}
+                <a
+                  href="{{ link.url }}"
+                  class="header__drawer-link"
+                  {% if link.current %}aria-current="page"{% endif %}
+                >
+                  {{- link.title -}}
+                </a>
+
+              {% elsif submenu_style == 'slide' %}
+                {% capture panel_id %}{{ drawer_id }}-{{ link_index }}{% endcapture %}
+                <button
+                  type="button"
+                  class="header__drawer-link header__drawer-toggle"
+                  aria-expanded="false"
+                  aria-controls="{{ panel_id }}"
+                  data-submenu-open
+                >
+                  <span>{{ link.title }}</span>
+                  {{ 'icon-chevron.svg' | inline_asset_content }}
+                </button>
+                <div id="{{ panel_id }}" class="header__drawer-panel" data-submenu-panel>
+                  <button type="button" class="header__drawer-back" data-submenu-back>
+                    {{ 'icon-chevron.svg' | inline_asset_content }}
+                    <span>{{ link.title }}</span>
+                  </button>
+                  <ul class="header__drawer-menu" role="list">
+                    {% for child_link in link.links %}
+                      <li class="header__drawer-item">
+                        {% if child_link.links == blank %}
+                          <a
+                            href="{{ child_link.url }}"
+                            class="header__drawer-link"
+                            {% if child_link.current %}aria-current="page"{% endif %}
+                          >
+                            {{- child_link.title -}}
+                          </a>
+                        {% else %}
+                          {% capture child_panel_id %}{{ panel_id }}-{{ forloop.index }}{% endcapture %}
+                          <button
+                            type="button"
+                            class="header__drawer-link header__drawer-toggle"
+                            aria-expanded="false"
+                            aria-controls="{{ child_panel_id }}"
+                            data-submenu-open
+                          >
+                            <span>{{ child_link.title }}</span>
+                            {{ 'icon-chevron.svg' | inline_asset_content }}
+                          </button>
+                          <div id="{{ child_panel_id }}" class="header__drawer-panel" data-submenu-panel>
+                            <button type="button" class="header__drawer-back" data-submenu-back>
+                              {{ 'icon-chevron.svg' | inline_asset_content }}
+                              <span>{{ child_link.title }}</span>
+                            </button>
+                            <ul class="header__drawer-menu" role="list">
+                              {% for grandchild_link in child_link.links %}
+                                <li class="header__drawer-item">
+                                  <a
+                                    href="{{ grandchild_link.url }}"
+                                    class="header__drawer-link"
+                                    {% if grandchild_link.current %}aria-current="page"{% endif %}
+                                  >
+                                    {{- grandchild_link.title -}}
+                                  </a>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          </div>
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+
+              {% else %}
+                <details class="header__drawer-details">
+                  <summary class="header__drawer-link header__drawer-summary">
+                    <span>{{ link.title }}</span>
+                    <span class="header__drawer-plus" aria-hidden="true"></span>
+                  </summary>
+                  <ul class="header__drawer-submenu" role="list">
+                    {% for child_link in link.links %}
+                      <li>
+                        {% if child_link.links == blank %}
+                          <a
+                            href="{{ child_link.url }}"
+                            class="header__drawer-link"
+                            {% if child_link.current %}aria-current="page"{% endif %}
+                          >
+                            {{- child_link.title -}}
+                          </a>
+                        {% else %}
+                          <details class="header__drawer-details">
+                            <summary class="header__drawer-link header__drawer-summary">
+                              <span>{{ child_link.title }}</span>
+                              <span class="header__drawer-plus" aria-hidden="true"></span>
+                            </summary>
+                            <ul class="header__drawer-submenu" role="list">
+                              {% for grandchild_link in child_link.links %}
+                                <li>
+                                  <a
+                                    href="{{ grandchild_link.url }}"
+                                    class="header__drawer-link"
+                                    {% if grandchild_link.current %}aria-current="page"{% endif %}
+                                  >
+                                    {{- grandchild_link.title -}}
+                                  </a>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          </details>
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </details>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </header-drawer-menu>
+
+    {% if shop.customer_accounts_enabled and section.settings.show_account %}
+      <div class="header__drawer-footer">
+        <shopify-account menu="{{ settings.customer_account_menu }}" class="header__drawer-account">
+          {{ 'icon-account.svg' | inline_asset_content }}
+          <span>{{ 'customers.login.title' | t }}</span>
+        </shopify-account>
+      </div>
+    {% endif %}
+  </dialog>
+</theme-panel>
+
+{% javascript %}
+  if (!customElements.get('header-drawer-menu')) {
+    class HeaderDrawerMenu extends HTMLElement {
+      connectedCallback() {
+        this.onClick = this.onClick.bind(this);
+        this.reset = this.reset.bind(this);
+        this.addEventListener('click', this.onClick);
+
+        // The dialog can close via the close button, the backdrop or the
+        // Escape key; its native `close` event covers all three.
+        this.dialog = this.closest('dialog');
+        this.dialog?.addEventListener('close', this.reset);
+      }
+
+      disconnectedCallback() {
+        this.removeEventListener('click', this.onClick);
+        this.dialog?.removeEventListener('close', this.reset);
+      }
+
+      onClick(event) {
+        const opener = event.target.closest('[data-submenu-open]');
+        if (opener && this.contains(opener)) {
+          this.openItem(opener.closest('.header__drawer-item'));
+          return;
+        }
+
+        const back = event.target.closest('[data-submenu-back]');
+        if (back && this.contains(back)) {
+          this.closeItem(back.closest('.header__drawer-item'));
+        }
+      }
+
+      // The scroll container a submenu panel slides over: its parent panel,
+      // or this element for top-level items.
+      containerOf(item) {
+        return item.parentElement.closest('[data-submenu-panel]') || this;
+      }
+
+      // Everything in the container that the open panel now covers, made
+      // inert so keyboard focus can't wander behind it.
+      coveredBy(item) {
+        const container = this.containerOf(item);
+        const siblings = [...item.parentElement.children].filter((el) => el !== item);
+        const toggle = item.querySelector(':scope > [data-submenu-open]');
+        const back = container.querySelector(':scope > [data-submenu-back]');
+        return [...siblings, toggle, back].filter(Boolean);
+      }
+
+      openItem(item) {
+        if (!item) return;
+        const container = this.containerOf(item);
+        container.scrollTop = 0;
+        container.classList.add('has-open-submenu');
+        item.classList.add('is-open');
+        item.querySelector(':scope > [data-submenu-open]')?.setAttribute('aria-expanded', 'true');
+        this.coveredBy(item).forEach((el) => (el.inert = true));
+        item.querySelector(':scope > [data-submenu-panel] > [data-submenu-back]')?.focus({ preventScroll: true });
+      }
+
+      closeItem(item) {
+        if (!item) return;
+        const container = this.containerOf(item);
+        const toggle = item.querySelector(':scope > [data-submenu-open]');
+        this.coveredBy(item).forEach((el) => (el.inert = false));
+        item.classList.remove('is-open');
+        container.classList.remove('has-open-submenu');
+        toggle?.setAttribute('aria-expanded', 'false');
+        toggle?.focus({ preventScroll: true });
+      }
+
+      // Wait for the drawer's own slide-out (400ms, assets/header-drawer.css)
+      // so submenus don't visibly snap shut while it's still on screen.
+      reset() {
+        clearTimeout(this.resetTimer);
+        this.resetTimer = setTimeout(() => {
+          this.querySelectorAll('.header__drawer-item.is-open').forEach((item) => {
+            item.classList.remove('is-open');
+            item.querySelector(':scope > [data-submenu-open]')?.setAttribute('aria-expanded', 'false');
+          });
+          this.querySelectorAll('.has-open-submenu').forEach((el) => el.classList.remove('has-open-submenu'));
+          this.classList.remove('has-open-submenu');
+          this.querySelectorAll('[inert]').forEach((el) => (el.inert = false));
+          this.querySelectorAll('details[open]').forEach((details) => (details.open = false));
+        }, 400);
+      }
+    }
+
+    customElements.define('header-drawer-menu', HeaderDrawerMenu);
+  }
+{% endjavascript %}

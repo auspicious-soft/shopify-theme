@@ -1,0 +1,341 @@
+/**
+ * Header navigation drawer (snippets/header-drawer.liquid).
+ * Namespaced under `.header__drawer`. Carries its own color scheme
+ * (Theme settings > Colors > Menu drawer color scheme); the submenu style
+ * (accordion or slide) comes from Header settings > Menu drawer.
+ */
+
+/* ---------- Drawer shell ---------- */
+
+.header__drawer {
+  position: fixed;
+  inset-block: 0;
+  width: min(100%, 26rem);
+  max-width: 100%;
+  /* Full viewport height; dvh tracks mobile browser toolbars showing/
+     hiding. The UA's default dialog max-height would otherwise cap it. */
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  interpolate-size: allow-keywords;
+  transition:
+    transform 400ms ease,
+    overlay 400ms ease allow-discrete,
+    display 400ms ease allow-discrete;
+}
+
+.header__drawer--right {
+  inset-inline-end: 0;
+  inset-inline-start: auto;
+  transform: translateX(100%);
+}
+
+.header__drawer--left {
+  inset-inline-start: 0;
+  inset-inline-end: auto;
+  transform: translateX(-100%);
+}
+
+.header__drawer[open] {
+  transform: translateX(0);
+}
+
+@starting-style {
+  .header__drawer--right[open] {
+    transform: translateX(100%);
+  }
+
+  .header__drawer--left[open] {
+    transform: translateX(-100%);
+  }
+}
+
+.header__drawer::backdrop {
+  background-color: rgb(0 0 0 / 0%);
+  transition: background-color 400ms ease allow-discrete;
+}
+
+.header__drawer[open]::backdrop {
+  background-color: rgb(0 0 0 / 40%);
+}
+
+@starting-style {
+  .header__drawer[open]::backdrop {
+    background-color: rgb(0 0 0 / 0%);
+  }
+}
+
+.header__drawer-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: var(--page-margin, 20px);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+}
+
+.header__drawer-logo img {
+  display: block;
+  width: 7rem;
+  height: auto;
+}
+
+.header__drawer-close {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  display: inline-flex;
+}
+
+.header__drawer-close svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* ---------- Menu (shared by both submenu styles) ---------- */
+
+.header__drawer-nav {
+  position: relative;
+  display: block;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0.5rem var(--page-margin, 20px) 1.5rem;
+}
+
+.header__drawer-menu,
+.header__drawer-submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header__drawer-item {
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
+}
+
+/* Links, slide toggles and accordion summaries all share one row style. */
+.header__drawer-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.85rem 0;
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  text-align: start;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.header__drawer-link[aria-current='page'] {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+/* ---------- Style 1: accordion (plus/minus) ---------- */
+
+.header__drawer-summary {
+  list-style: none;
+}
+
+.header__drawer-summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Plus/minus drawn with two bars: the vertical one rotates flat into the
+   horizontal one to form the minus when open. */
+.header__drawer-plus {
+  position: relative;
+  flex: 0 0 auto;
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.header__drawer-plus::before,
+.header__drawer-plus::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 50%;
+  height: 1px;
+  background-color: currentColor;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+.header__drawer-plus::after {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.header__drawer-details[open] > .header__drawer-summary .header__drawer-plus::after {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.header__drawer-submenu {
+  padding: 0 0 0.75rem 1rem;
+}
+
+.header__drawer-submenu .header__drawer-link {
+  padding-block: 0.6rem;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.header__drawer-submenu .header__drawer-submenu {
+  padding-bottom: 0.25rem;
+}
+
+/* Smooth open/close where supported (::details-content + interpolate-size
+   on the drawer); other browsers simply toggle instantly. */
+.header__drawer-details::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size 0.3s ease,
+    content-visibility 0.3s ease allow-discrete;
+}
+
+.header__drawer-details[open]::details-content {
+  block-size: auto;
+}
+
+/* ---------- Style 2: slide (Dawn-like) ---------- */
+
+.header__drawer-toggle svg,
+.header__drawer-back svg {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+}
+
+.header__drawer-toggle svg {
+  transform: rotate(-90deg);
+}
+
+.header__drawer-back svg {
+  transform: rotate(90deg);
+}
+
+/* Each submenu is a full panel laid over its parent list (the nav, or the
+   parent panel for 3rd-level items), sliding in from the inline end. */
+.header__drawer-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0.5rem var(--page-margin, 20px) 1.5rem;
+  background-color: var(--color-background);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition:
+    transform 0.35s ease,
+    visibility 0s linear 0.35s;
+}
+
+.header__drawer-item.is-open > .header__drawer-panel {
+  transform: translateX(0);
+  visibility: visible;
+  transition:
+    transform 0.35s ease,
+    visibility 0s linear 0s;
+}
+
+/* The container under an open panel stops scrolling so the panel (which
+   is positioned against it) stays put. */
+.header__drawer-nav.has-open-submenu,
+.header__drawer-panel.has-open-submenu {
+  overflow-y: hidden;
+}
+
+.header__drawer-back {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.85rem 0;
+  margin-bottom: 0.25rem;
+  background: none;
+  border: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: start;
+  color: inherit;
+  cursor: pointer;
+}
+
+[dir='rtl'] .header__drawer-panel {
+  transform: translateX(-100%);
+}
+
+[dir='rtl'] .header__drawer-item.is-open > .header__drawer-panel {
+  transform: translateX(0);
+}
+
+[dir='rtl'] .header__drawer-toggle svg {
+  transform: rotate(90deg);
+}
+
+[dir='rtl'] .header__drawer-back svg {
+  transform: rotate(-90deg);
+}
+
+/* ---------- Footer ---------- */
+
+.header__drawer-footer {
+  flex: 0 0 auto;
+  padding: 1rem var(--page-margin, 20px);
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+}
+
+.header__drawer-account {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0;
+}
+
+.header__drawer-account svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .header__drawer,
+  .header__drawer-panel,
+  .header__drawer-item.is-open > .header__drawer-panel,
+  .header__drawer-details::details-content,
+  .header__drawer-plus::before,
+  .header__drawer-plus::after {
+    transition: none;
+  }
+}

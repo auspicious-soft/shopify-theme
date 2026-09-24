@@ -120,6 +120,7 @@
         "show_cart_count": true,
         "localization_selector": "country",
         "drawer_position": "left",
+        "drawer_submenu_style": "accordion",
         "nav_font_size": 15,
         "nav_font_weight": "500",
         "nav_item_spacing": 32,

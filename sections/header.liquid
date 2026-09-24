@@ -227,63 +227,7 @@
 
 
 
-{% render 'theme-panel' %}
-<theme-panel>
-  <dialog
-    id="HeaderDrawer-{{ section.id }}"
-    class="header__drawer header__drawer--{{ section.settings.drawer_position }} color-{{ settings.menu_drawer_color_scheme.id }}"
-    aria-label="{{ 'accessibility.menu' | t }}"
-    scroll-lock
-  >
-    <div class="header__drawer-header">
-      <a href="{{ routes.root_url }}" class="header__drawer-logo" aria-label="{{ shop.name | escape }}">
-        {% if settings.logo != blank %}
-          {{ settings.logo | image_url: width: 200 | image_tag: width: 140, alt: shop.name, loading: 'lazy' }}
-        {% else %}
-          <span>{{ shop.name }}</span>
-        {% endif %}
-      </a>
-      <button type="button" class="header__drawer-close" data-panel-close aria-label="{{ 'accessibility.close' | t }}">
-        {{ 'icon-close.svg' | inline_asset_content }}
-      </button>
-    </div>
-
-    <nav class="header__drawer-nav" aria-label="{{ 'accessibility.primary_navigation' | t }}">
-      <ul class="header__drawer-menu" role="list">
-        {% for link in section.settings.menu.links %}
-          <li class="header__drawer-item">
-            {% if link.links != blank %}
-              <details class="header__drawer-details">
-                <summary class="header__drawer-summary">
-                  <span>{{ link.title }}</span>
-                  {{ 'icon-chevron.svg' | inline_asset_content }}
-                </summary>
-                <ul class="header__drawer-submenu" role="list">
-                  {% for child_link in link.links %}
-                    <li>
-                      <a href="{{ child_link.url }}" class="header__drawer-link">{{ child_link.title }}</a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              </details>
-            {% else %}
-              <a href="{{ link.url }}" class="header__drawer-link">{{ link.title }}</a>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
-    </nav>
-
-    {% if shop.customer_accounts_enabled and section.settings.show_account %}
-      <div class="header__drawer-footer">
-        <shopify-account menu="{{ settings.customer_account_menu }}" class="header__drawer-account">
-          {{ 'icon-account.svg' | inline_asset_content }}
-          <span>{{ 'customers.login.title' | t }}</span>
-        </shopify-account>
-      </div>
-    {% endif %}
-  </dialog>
-</theme-panel>
+{% render 'header-drawer', section: section %}
 
 {% schema %}
 {
@@ -562,6 +506,16 @@
         { "value": "right", "label": "t:options.left_right.right" }
       ],
       "default": "right"
+    },
+    {
+      "type": "select",
+      "id": "drawer_submenu_style",
+      "label": "t:labels.drawer_submenu_style",
+      "options": [
+        { "value": "accordion", "label": "t:options.drawer_submenu_style.accordion" },
+        { "value": "slide", "label": "t:options.drawer_submenu_style.slide" }
+      ],
+      "default": "accordion"
     },
     {
       "type": "header",

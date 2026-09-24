@@ -71,6 +71,7 @@
     "desktop_logo_width": "Desktop logo width",
     "drawer_position": "Drawer position",
     "drawer_settings": "Menu drawer",
+    "drawer_submenu_style": "Submenu style",
     "enable": "Enable",
     "enable_button": "Show button",
     "font_size": "Font size",
@@ -203,6 +204,10 @@
     "account_display": {
       "icon": "Icon",
       "text": "Text"
+    },
+    "drawer_submenu_style": {
+      "accordion": "Dropdown (plus/minus)",
+      "slide": "Slide"
     },
     "localization_selector": {
       "none": "Hidden",
