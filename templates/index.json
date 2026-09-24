@@ -202,7 +202,7 @@
       "settings": {
         "heading": "As seen on #yourbrand",
         "heading_alignment": "left",
-        "speed": 40,
+        "speed": 110,
         "direction": "left",
         "card_width": 256,
         "card_width_mobile": 200,
