@@ -13,10 +13,11 @@
   using its own color scheme (independent from the header's) so it stays
   readable even when the header itself uses a transparent-only scheme.
 
-  @param color_scheme {Object} - color scheme for the popup only (defaults to Header settings > Search popup color scheme)
+  The popup's color scheme is Theme settings > Colors > Popup color scheme,
+  shared by every popup in the theme.
 
   @example
-  {% render 'predictive-search', color_scheme: section.settings.search_color_scheme %}
+  {% render 'predictive-search' %}
 {% enddoc %}
 
 {{ 'predictive-search.css' | asset_url | stylesheet_tag }}
@@ -42,7 +43,7 @@
           <span class="visually-hidden">{{ 'search.submit' | t }}</span>
         </summary>
 
-        <div class="predictive-search__panel color-{{ color_scheme.id }}">
+        <div class="predictive-search__panel color-{{ settings.popup_color_scheme.id }}">
           <form action="{{ routes.search_url }}" method="get" role="search" class="predictive-search__form">
             <input
               type="search"

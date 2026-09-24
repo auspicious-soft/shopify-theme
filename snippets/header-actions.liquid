@@ -17,7 +17,7 @@
   {% endif %}
 
   {% if section.settings.show_search %}
-    {% render 'predictive-search', color_scheme: section.settings.search_color_scheme %}
+    {% render 'predictive-search' %}
   {% endif %}
 
   {% if section.settings.show_account and shop.customer_accounts_enabled %}

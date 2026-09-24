@@ -231,7 +231,7 @@
 <theme-panel>
   <dialog
     id="HeaderDrawer-{{ section.id }}"
-    class="header__drawer header__drawer--{{ section.settings.drawer_position }} color-{{ section.settings.color_scheme.id }}"
+    class="header__drawer header__drawer--{{ section.settings.drawer_position }} color-{{ settings.menu_drawer_color_scheme.id }}"
     aria-label="{{ 'accessibility.menu' | t }}"
     scroll-lock
   >
@@ -494,14 +494,6 @@
       "id": "show_search",
       "label": "t:labels.show_search",
       "default": true
-    },
-    {
-      "type": "color_scheme",
-      "id": "search_color_scheme",
-      "label": "t:labels.search_color_scheme",
-      "info": "t:labels.search_color_scheme_info",
-      "default": "scheme-1",
-      "visible_if": "{{ section.settings.show_search or section.settings.localization_selector != 'none' }}"
     },
     {
       "type": "checkbox",

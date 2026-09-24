@@ -98,6 +98,20 @@
           "on_secondary_button": "secondary_button_label",
           "secondary_button_border": "secondary_button_label"
         }
+      },
+      {
+        "type": "color_scheme",
+        "id": "popup_color_scheme",
+        "default": "scheme-1",
+        "label": "t:settings_schema.colors.settings.popup_color_scheme.label",
+        "info": "t:settings_schema.colors.settings.popup_color_scheme.info"
+      },
+      {
+        "type": "color_scheme",
+        "id": "menu_drawer_color_scheme",
+        "default": "scheme-1",
+        "label": "t:settings_schema.colors.settings.menu_drawer_color_scheme.label",
+        "info": "t:settings_schema.colors.settings.menu_drawer_color_scheme.info"
       }
     ]
   },

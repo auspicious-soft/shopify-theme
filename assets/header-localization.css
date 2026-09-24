@@ -4,7 +4,7 @@
  * renders (see snippets/header-localization.liquid). The trigger inherits
  * the header's own text color (so it follows the transparent/hover/
  * scrolled states like the other header icons); the popup carries its own
- * color scheme (Header settings > Popup color scheme, shared with search).
+ * color scheme (Theme settings > Colors > Popup color scheme).
  */
 
 .header-localization__details {
@@ -128,6 +128,8 @@
   font-size: 0.85rem;
   color: inherit;
   cursor: pointer;
+  padding: 5px;
+  outline: 1px solid currentColor;
 }
 
 .header-localization__select:focus {
@@ -136,7 +138,7 @@
 
 .header-localization__select:focus-visible {
   outline: 1px solid currentColor;
-  outline-offset: 4px;
+  /* outline-offset: 4px; */
 }
 
 .header-localization__select option {

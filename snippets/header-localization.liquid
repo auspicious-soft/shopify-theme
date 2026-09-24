@@ -6,7 +6,8 @@
   changes. Header settings > Country/language selector > Show selector
   picks country, language, or both; the whole thing renders nothing when
   set to Hidden (or the store has only one option of each enabled kind).
-  The popup shares Header settings > Popup color scheme with search.
+  The popup uses Theme settings > Colors > Popup color scheme, shared by
+  every popup in the theme.
 
   Open/close and click-outside/Escape handling come from theme-panel.liquid.
   Styling lives in assets/header-localization.css (loaded below).
@@ -62,7 +63,7 @@
           <span class="header-localization__chevron">{{ 'icon-chevron.svg' | inline_asset_content }}</span>
         </summary>
 
-        <div class="header-localization__panel color-{{ section.settings.search_color_scheme.id }}">
+        <div class="header-localization__panel color-{{ settings.popup_color_scheme.id }}">
           {% form 'localization', class: 'header-localization__form' %}
             {% if show_language %}
               <div class="header-localization__field">

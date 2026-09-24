@@ -113,7 +113,6 @@
         "overlay_text_color": "#000000",
         "transparent_logo": "shopify://shop_images/White_1.png",
         "show_search": true,
-        "search_color_scheme": "",
         "show_account": true,
         "account_display": "icon",
         "account_text": "Account",
