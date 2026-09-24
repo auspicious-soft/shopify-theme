@@ -140,6 +140,8 @@
     "pause_on_hover": "Pause on hover",
     "separator_style": "Separator style",
     "show_account": "Account icon",
+    "account_display": "Account button",
+    "account_text": "Account button text",
     "show_cart": "Cart icon",
     "show_cart_count": "Cart item count",
     "show_payment_icons": "Show payment icons",
@@ -199,6 +201,10 @@
       "fullscreen": "Fullscreen"
     },
     "hamburger_display": {
+      "icon": "Icon",
+      "text": "Text"
+    },
+    "account_display": {
       "icon": "Icon",
       "text": "Text"
     },

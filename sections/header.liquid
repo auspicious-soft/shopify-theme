@@ -555,6 +555,24 @@
       "default": true
     },
     {
+      "type": "select",
+      "id": "account_display",
+      "label": "t:labels.account_display",
+      "options": [
+        { "value": "icon", "label": "t:options.account_display.icon" },
+        { "value": "text", "label": "t:options.account_display.text" }
+      ],
+      "default": "icon",
+      "visible_if": "{{ section.settings.show_account }}"
+    },
+    {
+      "type": "text",
+      "id": "account_text",
+      "label": "t:labels.account_text",
+      "default": "Account",
+      "visible_if": "{{ section.settings.show_account and section.settings.account_display == 'text' }}"
+    },
+    {
       "type": "checkbox",
       "id": "show_cart",
       "label": "t:labels.show_cart",

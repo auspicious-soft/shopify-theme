@@ -418,7 +418,8 @@ header.is-scrolled img.header__hero-logo-image {
   height: 1.4rem;
 }
 
-.header__menu-toggle--text {
+.header__menu-toggle--text,
+.header__account--text {
   font-size: var(--header-nav-font-size, 15px);
   font-weight: var(--header-nav-font-weight, 500);
   letter-spacing: 0.02em;
