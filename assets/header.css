@@ -57,7 +57,12 @@
   top:0px;
   background-color: var(--header-sticky-bg);
 }
- .header:hover {
+/* An open predictive search popup (snippets/predictive-search.liquid)
+   holds the header in its hover look for as long as it's open. Each
+   `:has(.predictive-search[open])` below sits beside its `:hover`
+   counterpart with the same specificity, so the cascade is identical. */
+ .header:hover,
+ .header:has(.predictive-search[open]) {
   color: var(--header-overlay-text);
   background-color: var(--header-sticky-bg);
 }
@@ -95,7 +100,8 @@
    headers; this still resolves to the overlay colors when `.header--overlay`
    is also present, since that class is the one redefining --header-bg/
    --header-text, not this rule. */
-.header--standard.header:hover {
+.header--standard.header:hover,
+.header--standard.header:has(.predictive-search[open]) {
   color: var(--header-text);
   background-color: var(--header-bg);
 }
@@ -238,7 +244,8 @@
 .index .header--logo_reveal.header--overlay .header__logo.header__logo--default {
     opacity: 0;
 }
-.index .header--logo_reveal.header--overlay:hover .header__logo.header__logo--default {
+.index .header--logo_reveal.header--overlay:hover .header__logo.header__logo--default,
+.index .header--logo_reveal.header--overlay:has(.predictive-search[open]) .header__logo.header__logo--default {
     opacity: 1;
 }
 .index .header--logo_reveal.header--overlay.is-scrolled .header__logo.header__logo--default {
