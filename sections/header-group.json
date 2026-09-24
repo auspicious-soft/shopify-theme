@@ -95,7 +95,7 @@
           "settings": {
             "menu_item": "Catalog",
             "show_image": true,
-            "image": "shopify://shop_images/Main_d624f226-0a89-4fe1-b333-0d1548b43c06.jpg",
+            "image": "shopify://shop_images/Main.jpg",
             "show_title": true,
             "title": "Snowboard",
             "link": "shopify://products/the-collection-snowboard-hydrogen"
