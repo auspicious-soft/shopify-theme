@@ -33,13 +33,6 @@
             "menu": "footer"
           }
         },
-        "social_etLRzQ": {
-          "type": "social",
-          "settings": {
-            "column_width": 20,
-            "heading": "Follow us"
-          }
-        },
         "newsletter": {
           "type": "newsletter",
           "settings": {
@@ -54,7 +47,6 @@
       "block_order": [
         "brand",
         "menu_main",
-        "social_etLRzQ",
         "newsletter"
       ],
       "settings": {
