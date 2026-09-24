@@ -1,0 +1,563 @@
+{% comment %}
+  "Social marquee": a full-width strip of images (e.g. customer / Instagram
+  story shots) that scrolls on its own, like "As seen on #yourbrand".
+
+  - The strip moves continuously (right to left by default).
+  - Hovering shows an open hand; press and drag to move the strip by hand.
+  - Dragging once stops the automatic movement (the cursor stays a closed
+    hand). Drag again to start it moving again.
+  - A plain click (no drag) follows the image's link.
+
+  Each image is a block, so merchants can add, remove and reorder them.
+{% endcomment %}
+
+{%- liquid
+  assign item_count = section.blocks.size
+  assign image_sizes = '(min-width: 750px) ' | append: section.settings.card_width | append: 'px, ' | append: section.settings.card_width_mobile | append: 'px'
+  assign placeholder_count = 0
+  if item_count == 0
+    assign placeholder_count = 6
+  endif
+-%}
+
+<social-marquee
+  class="social-marquee color-{{ section.settings.color_scheme.id }}"
+  data-speed="{{ section.settings.speed }}"
+  data-direction="{{ section.settings.direction }}"
+  style="
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --social-marquee-width: {{ section.settings.card_width }}px;
+    --social-marquee-width-mobile: {{ section.settings.card_width_mobile }}px;
+    --social-marquee-gap: {{ section.settings.gap }}px;
+    --social-marquee-radius: {{ section.settings.corner_radius }}px;
+    --social-marquee-ratio: {{ section.settings.aspect_ratio }};
+  "
+>
+  {%- if section.settings.heading != blank -%}
+    <div class="page-width social-marquee__header social-marquee__header--{{ section.settings.heading_alignment }}">
+      <h2 class="social-marquee__heading">{{ section.settings.heading | escape }}</h2>
+    </div>
+  {%- endif -%}
+
+  <div class="social-marquee__viewport" data-marquee-viewport>
+    <div class="social-marquee__track" data-marquee-track>
+      <ul class="social-marquee__group" role="list" data-marquee-group>
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign image = block.settings.image
+            assign link = block.settings.link
+            assign alt = block.settings.username | default: image.alt | escape
+          -%}
+          <li class="social-marquee__item" {{ block.shopify_attributes }}>
+            {%- if link != blank -%}
+              <a
+                href="{{ link }}"
+                class="social-marquee__card"
+                draggable="false"
+                {% if block.settings.new_tab %}
+                  target="_blank" rel="noopener"
+                {% endif %}
+              >
+            {%- else -%}
+              <div class="social-marquee__card">
+            {%- endif -%}
+
+            {%- if image != blank -%}
+              {{
+                image
+                | image_url: width: 900
+                | image_tag:
+                  class: 'social-marquee__image',
+                  loading: 'lazy',
+                  draggable: 'false',
+                  alt: alt,
+                  widths: '300, 450, 600, 900',
+                  sizes: image_sizes
+              }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'social-marquee__image social-marquee__placeholder' }}
+            {%- endif -%}
+
+            {%- if block.settings.username != blank -%}
+              <span class="social-marquee__username">{{ block.settings.username | escape }}</span>
+            {%- endif -%}
+
+            {%- if link != blank -%}
+              </a>
+            {%- else -%}
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+
+        {%- for i in (1..placeholder_count) -%}
+          <li class="social-marquee__item">
+            <div class="social-marquee__card">
+              {%- liquid
+                assign placeholder_name = 'lifestyle-1'
+                assign odd = forloop.index | modulo: 2
+                if odd == 0
+                  assign placeholder_name = 'lifestyle-2'
+                endif
+              -%}
+              {{ placeholder_name | placeholder_svg_tag: 'social-marquee__image social-marquee__placeholder' }}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</social-marquee>
+
+{% stylesheet %}
+  .social-marquee {
+    display: block;
+    padding-block: var(--section-padding-top) var(--section-padding-bottom);
+    overflow: hidden;
+  }
+
+  .social-marquee__header {
+    margin-block-end: 1.25rem;
+  }
+
+  .social-marquee__header--center {
+    text-align: center;
+  }
+
+  .social-marquee__heading {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .social-marquee__viewport {
+    overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Closed hand while dragging, and while the strip is stopped. */
+  .social-marquee__viewport.is-dragging,
+  .social-marquee.is-paused .social-marquee__viewport {
+    cursor: grabbing;
+  }
+
+  .social-marquee__viewport.is-dragging a {
+    pointer-events: none;
+  }
+
+  .social-marquee__track {
+    position: relative;
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .social-marquee__group {
+    display: flex;
+    gap: var(--social-marquee-gap);
+    padding: 0 var(--social-marquee-gap) 0 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .social-marquee__item {
+    flex: 0 0 var(--social-marquee-width-mobile);
+  }
+
+  @media screen and (min-width: 750px) {
+    .social-marquee__item {
+      flex-basis: var(--social-marquee-width);
+    }
+  }
+
+  .social-marquee__card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: var(--social-marquee-ratio);
+    border-radius: var(--social-marquee-radius);
+    background: rgb(0 0 0 / 0.06);
+    color: inherit;
+    -webkit-user-drag: none;
+  }
+
+  .social-marquee__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    transition: transform 0.6s ease;
+  }
+
+  .social-marquee__placeholder {
+    background: rgb(0 0 0 / 0.06);
+  }
+
+  @media (hover: hover) {
+    .social-marquee__viewport:not(.is-dragging) a.social-marquee__card:hover .social-marquee__image {
+      transform: scale(1.03);
+    }
+  }
+
+  .social-marquee__username {
+    position: absolute;
+    inset: 0 0 auto;
+    padding: 0.75rem 0.875rem 1.5rem;
+    font-size: 0.8125rem;
+    color: #fff;
+    background: linear-gradient(to bottom, rgb(0 0 0 / 0.45), transparent);
+    pointer-events: none;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('social-marquee')) {
+    const DRAG_THRESHOLD = 5;
+
+    class SocialMarquee extends HTMLElement {
+      connectedCallback() {
+        this.viewport = this.querySelector('[data-marquee-viewport]');
+        this.track = this.querySelector('[data-marquee-track]');
+        this.group = this.querySelector('[data-marquee-group]');
+        if (!this.viewport || !this.track || !this.group) return;
+
+        this.speed = Number(this.dataset.speed) || 40; // px per second
+        this.sign = this.dataset.direction === 'right' ? 1 : -1;
+        this.position = 0;
+        this.paused = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        this.classList.toggle('is-paused', this.paused);
+        this.drag = null;
+        this.suppressClick = false;
+
+        this.onPointerDown = this.onPointerDown.bind(this);
+        this.onPointerMove = this.onPointerMove.bind(this);
+        this.onPointerUp = this.onPointerUp.bind(this);
+        this.onClick = this.onClick.bind(this);
+        this.onBlockSelect = this.onBlockSelect.bind(this);
+        this.onBlockDeselect = this.onBlockDeselect.bind(this);
+        this.tick = this.tick.bind(this);
+
+        this.viewport.addEventListener('pointerdown', this.onPointerDown);
+        this.viewport.addEventListener('pointermove', this.onPointerMove);
+        this.viewport.addEventListener('pointerup', this.onPointerUp);
+        this.viewport.addEventListener('pointercancel', this.onPointerUp);
+        this.viewport.addEventListener('click', this.onClick, true);
+        this.viewport.addEventListener('dragstart', (event) => event.preventDefault());
+        this.addEventListener('shopify:block:select', this.onBlockSelect);
+        this.addEventListener('shopify:block:deselect', this.onBlockDeselect);
+
+        this.resizeObserver = new ResizeObserver(() => this.fill());
+        this.resizeObserver.observe(this.viewport);
+        this.resizeObserver.observe(this.group);
+        this.fill();
+
+        this.lastTime = null;
+        this.frame = requestAnimationFrame(this.tick);
+      }
+
+      disconnectedCallback() {
+        cancelAnimationFrame(this.frame);
+        this.resizeObserver?.disconnect();
+      }
+
+      /** Clone the image group until the strip is wide enough to loop without gaps. */
+      fill() {
+        this.loopWidth = this.group.offsetWidth;
+        if (!this.loopWidth) return;
+
+        const needed = Math.ceil(this.viewport.offsetWidth / this.loopWidth) + 1;
+        const clones = this.track.querySelectorAll('[data-marquee-clone]');
+        if (clones.length === needed) return;
+
+        clones.forEach((clone) => clone.remove());
+        for (let i = 0; i < needed; i++) {
+          const clone = this.group.cloneNode(true);
+          clone.removeAttribute('data-marquee-group');
+          clone.setAttribute('data-marquee-clone', '');
+          clone.setAttribute('aria-hidden', 'true');
+          clone.querySelectorAll('[data-shopify-editor-block]').forEach((el) => el.removeAttribute('data-shopify-editor-block'));
+          clone.querySelectorAll('a').forEach((link) => link.setAttribute('tabindex', '-1'));
+          this.track.appendChild(clone);
+        }
+        this.render();
+      }
+
+      /** Keep the position inside one loop so the strip repeats seamlessly. */
+      wrap(value) {
+        if (!this.loopWidth) return 0;
+        return (((value % this.loopWidth) - this.loopWidth) % this.loopWidth);
+      }
+
+      render() {
+        this.position = this.wrap(this.position);
+        this.track.style.transform = `translate3d(${this.position}px, 0, 0)`;
+      }
+
+      tick(time) {
+        if (this.lastTime !== null && !this.paused && !this.drag) {
+          const delta = Math.min(time - this.lastTime, 100) / 1000;
+          this.position += this.sign * this.speed * delta;
+          this.render();
+        }
+        this.lastTime = time;
+        this.frame = requestAnimationFrame(this.tick);
+      }
+
+      onPointerDown(event) {
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+        this.drag = {
+          id: event.pointerId,
+          startX: event.clientX,
+          startPosition: this.position,
+          moved: false,
+        };
+      }
+
+      onPointerMove(event) {
+        if (!this.drag || event.pointerId !== this.drag.id) return;
+        const dx = event.clientX - this.drag.startX;
+
+        if (!this.drag.moved) {
+          if (Math.abs(dx) < DRAG_THRESHOLD) return;
+          this.drag.moved = true;
+          this.viewport.classList.add('is-dragging');
+          this.viewport.setPointerCapture(event.pointerId);
+        }
+
+        this.position = this.drag.startPosition + dx;
+        this.render();
+      }
+
+      onPointerUp(event) {
+        if (!this.drag || event.pointerId !== this.drag.id) return;
+        const { moved } = this.drag;
+        this.drag = null;
+        this.viewport.classList.remove('is-dragging');
+        if (this.viewport.hasPointerCapture(event.pointerId)) this.viewport.releasePointerCapture(event.pointerId);
+
+        if (moved && event.type === 'pointerup') {
+          // Each drag toggles the automatic movement: first stops it, next starts it again.
+          this.paused = !this.paused;
+          this.classList.toggle('is-paused', this.paused);
+          this.suppressClick = true;
+          setTimeout(() => (this.suppressClick = false), 0);
+        }
+      }
+
+      /** Don't follow a link at the end of a drag. */
+      onClick(event) {
+        if (!this.suppressClick) return;
+        event.preventDefault();
+        event.stopPropagation();
+        this.suppressClick = false;
+      }
+
+      onBlockSelect(event) {
+        this.editorPaused = true;
+        this.wasPaused = this.paused;
+        this.paused = true;
+        const item = event.target.closest('.social-marquee__item');
+        if (item) {
+          this.position = -item.offsetLeft + (this.viewport.offsetWidth - item.offsetWidth) / 2;
+          this.render();
+        }
+      }
+
+      onBlockDeselect() {
+        if (!this.editorPaused) return;
+        this.editorPaused = false;
+        this.paused = this.wasPaused;
+      }
+    }
+
+    customElements.define('social-marquee', SocialMarquee);
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:sections.social_marquee.name",
+  "class": "section-social-marquee",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.social_marquee.info"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:labels.heading",
+      "default": "As seen on #yourbrand"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:labels.alignment",
+      "options": [
+        { "value": "left", "label": "t:options.alignment.left" },
+        { "value": "center", "label": "t:options.alignment.center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:labels.marquee_settings"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "t:labels.marquee_speed",
+      "min": 10,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 40,
+      "info": "t:sections.social_marquee.speed_info"
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "t:labels.marquee_direction",
+      "options": [
+        { "value": "left", "label": "t:sections.social_marquee.direction_left" },
+        { "value": "right", "label": "t:sections.social_marquee.direction_right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.layout"
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "label": "t:sections.social_marquee.card_width",
+      "min": 160,
+      "max": 480,
+      "step": 8,
+      "unit": "px",
+      "default": 256
+    },
+    {
+      "type": "range",
+      "id": "card_width_mobile",
+      "label": "t:sections.social_marquee.card_width_mobile",
+      "min": 120,
+      "max": 360,
+      "step": 8,
+      "unit": "px",
+      "default": 200
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "t:sections.social_marquee.aspect_ratio",
+      "options": [
+        { "value": "9 / 16", "label": "t:sections.social_marquee.ratio_story" },
+        { "value": "4 / 5", "label": "t:sections.social_marquee.ratio_portrait" },
+        { "value": "1 / 1", "label": "t:sections.social_marquee.ratio_square" }
+      ],
+      "default": "9 / 16"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:labels.item_gap",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:sections.social_marquee.corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:labels.padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:labels.padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "t:sections.social_marquee.block_name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.social_marquee.image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:labels.link"
+        },
+        {
+          "type": "checkbox",
+          "id": "new_tab",
+          "label": "t:labels.open_in_new_tab",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "username",
+          "label": "t:sections.social_marquee.username",
+          "info": "t:sections.social_marquee.username_info"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.social_marquee.name",
+      "blocks": [
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

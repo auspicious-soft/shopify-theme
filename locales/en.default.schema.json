@@ -424,6 +424,24 @@
       "info": "Shows the products each shopper viewed most recently, saved in their own browser. Hidden until they have viewed a product (the current product is left out).",
       "show_clear": "Show \"Clear\" link"
     },
+    "social_marquee": {
+      "name": "Social image marquee",
+      "info": "Images scroll on their own. Shoppers can drag the strip; one drag stops the movement and the next drag starts it again.",
+      "speed_info": "Pixels moved per second",
+      "direction_left": "Right to left",
+      "direction_right": "Left to right",
+      "card_width": "Image width on desktop",
+      "card_width_mobile": "Image width on mobile",
+      "aspect_ratio": "Image shape",
+      "ratio_story": "Story (9:16)",
+      "ratio_portrait": "Portrait (4:5)",
+      "ratio_square": "Square (1:1)",
+      "corner_radius": "Corner radius",
+      "block_name": "Image",
+      "image": "Image",
+      "username": "Username",
+      "username_info": "Optional, shown over the top of the image"
+    },
     "footer": {
       "mobile_menu_style": "Mobile menu style",
       "mobile_accordion": "Accordion",
