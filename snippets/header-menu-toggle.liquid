@@ -5,6 +5,7 @@
   a text label per Header settings > Hamburger display.
 
   @param section {Object} - the header section
+  @param [modifier] {String} - extra class, e.g. header__menu-toggle--mobile-only / --desktop-only
 
   @example
   {% render 'header-menu-toggle', section: section %}
@@ -12,7 +13,7 @@
 
 <button
   type="button"
-  class="header__menu-toggle{% if section.settings.hamburger_display == 'text' %} header__menu-toggle--text{% endif %}"
+  class="header__menu-toggle{% if section.settings.hamburger_display == 'text' %} header__menu-toggle--text{% endif %}{% if modifier != blank %} {{ modifier }}{% endif %}"
   data-panel-open="HeaderDrawer-{{ section.id }}"
   aria-haspopup="dialog"
   {% if section.settings.hamburger_display != 'text' %}

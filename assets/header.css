@@ -680,7 +680,8 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
 
   /* On desktop, the toggle is mobile-only unless the merchant chose the
      hamburger menu type (handled above). */
-  .header--menu-horizontal .header__menu-toggle {
+  .header--menu-horizontal .header__menu-toggle,
+  .header .header__menu-toggle--mobile-only {
     display: none;
   }
 }
@@ -693,7 +694,14 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
     display: none;
   }
 
-  .header--menu-horizontal .header__menu-toggle {
+  /* Mobile: one toggle, always at the far left (first in the start zone,
+     see sections/header.liquid). Hamburger position is desktop-only. */
+  .header--menu-horizontal .header__menu-toggle,
+  .header .header__menu-toggle--mobile-only {
     display: inline-flex;
+  }
+
+  .header .header__menu-toggle--desktop-only {
+    display: none;
   }
 }

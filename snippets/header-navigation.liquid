@@ -44,30 +44,6 @@
 
         {% if link.links != blank %}
           {% if submenu_type == 'mega' %}
-            {%- liquid
-              assign promo = nil
-              assign link_title = link.title | strip | downcase
-              for block in section.blocks
-                if block.type == 'mega_menu_promo'
-                  assign block_item = block.settings.menu_item | strip | downcase
-                  if block_item == link_title or block_item == link.handle
-                    assign promo = block
-                    break
-                  endif
-                endif
-              endfor
-
-              assign show_promo_image = false
-              assign show_promo_title = false
-              if promo
-                if promo.settings.show_image and promo.settings.image != blank
-                  assign show_promo_image = true
-                endif
-                if promo.settings.show_title and promo.settings.title != blank
-                  assign show_promo_title = true
-                endif
-              endif
-            -%}
             <div class="header__mega color-{{ menu_scheme }}">
               <div class="header__mega-inner page-width">
                 <ul class="header__mega-columns" role="list">
@@ -99,37 +75,7 @@
                   {% endfor %}
                 </ul>
 
-                {% if show_promo_image or show_promo_title %}
-                  {%- liquid
-                    assign promo_url = promo.settings.link
-                    assign promo_tag = 'div'
-                    if promo_url != blank
-                      assign promo_tag = 'a'
-                    endif
-                  -%}
-                  <{{ promo_tag }}
-                    class="header__mega-promo"
-                    {% if promo_url != blank %}href="{{ promo_url }}"{% endif %}
-                    {{ promo.shopify_attributes }}
-                  >
-                    {% if show_promo_image %}
-                      <span class="header__mega-promo-image">
-                        {{
-                          promo.settings.image
-                          | image_url: width: 800
-                          | image_tag:
-                            loading: 'lazy',
-                            widths: '300, 400, 600, 800',
-                            sizes: '(min-width: 989px) 20rem, 100vw',
-                            alt: promo.settings.image.alt
-                        }}
-                      </span>
-                    {% endif %}
-                    {% if show_promo_title %}
-                      <span class="header__mega-promo-title">{{ promo.settings.title | escape }}</span>
-                    {% endif %}
-                  </{{ promo_tag }}>
-                {% endif %}
+                {% render 'header-mega-promo', section: section, link: link %}
               </div>
             </div>
 

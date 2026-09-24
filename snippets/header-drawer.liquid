@@ -9,6 +9,10 @@
     over the menu, with a back button naming the parent. Supports the
     full 3 levels of a Shopify menu.
 
+  With the horizontal mega menu on desktop, each top-level item's "Mega
+  menu promo" block (snippets/header-mega-promo.liquid) also appears at the
+  end of its submenu here, in either style.
+
   Open/close, Escape and backdrop handling come from theme-panel.liquid;
   the `header-drawer-menu` element below only drives the slide panels and
   resets every submenu once the drawer has closed. Styles live in
@@ -23,6 +27,14 @@
 {%- liquid
   assign submenu_style = section.settings.drawer_submenu_style | default: 'accordion'
   assign drawer_id = 'HeaderDrawer-' | append: section.id
+
+  # Mega menu promos (image/title blocks) also show in the drawer, at the
+  # end of their top-level item's submenu, whenever the desktop menu is the
+  # horizontal mega menu.
+  assign show_promos = false
+  if section.settings.menu_type == 'horizontal' and section.settings.desktop_submenu_type == 'mega'
+    assign show_promos = true
+  endif
 -%}
 
 {{ 'header-drawer.css' | asset_url | stylesheet_tag }}
@@ -126,6 +138,9 @@
                       </li>
                     {% endfor %}
                   </ul>
+                  {% if show_promos %}
+                    {% render 'header-mega-promo', section: section, link: link, modifier: 'header__mega-promo--drawer', sizes: '(min-width: 26rem) 24rem, 90vw' %}
+                  {% endif %}
                 </div>
 
               {% else %}
@@ -169,6 +184,9 @@
                       </li>
                     {% endfor %}
                   </ul>
+                  {% if show_promos %}
+                    {% render 'header-mega-promo', section: section, link: link, modifier: 'header__mega-promo--drawer', sizes: '(min-width: 26rem) 24rem, 90vw' %}
+                  {% endif %}
                 </details>
               {% endif %}
             </li>

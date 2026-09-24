@@ -105,14 +105,16 @@
     assign toggle_zone = 'end'
   endif
 
+  # Desktop toggle: only for the hamburger menu type, placed per Header
+  # settings > Hamburger position (a desktop-only setting).
   assign show_hamburger = false
   if menu_type == 'hamburger'
     assign show_hamburger = true
   endif
 
-  # The toggle renders standalone in its own zone, unless that's the same
-  # zone `.header__actions` already occupies, in which case it renders
-  # alongside the icons instead (avoiding a duplicate).
+  # The desktop toggle renders standalone in its own zone, unless that's
+  # the same zone `.header__actions` already occupies, in which case it
+  # renders alongside the icons instead (avoiding a duplicate).
   assign toggle_shares_actions_zone = false
   if toggle_zone == actions_zone
     assign toggle_shares_actions_zone = true
@@ -132,6 +134,19 @@
     assign show_toggle_in_actions_start = true
   elsif show_hamburger and toggle_shares_actions_zone and actions_zone == 'end'
     assign show_toggle_in_actions_end = true
+  endif
+
+  # Mobile toggle: always first in the start zone (far left), for every
+  # menu type — with the horizontal menu (dropdown or mega) it's the only
+  # way into the navigation on mobile. When the desktop toggle already sits
+  # exactly there, that one element serves both; otherwise a separate
+  # mobile-only toggle renders there and the desktop one is desktop-only.
+  assign show_mobile_toggle = true
+  assign desktop_toggle_class = ''
+  if show_standalone_toggle_start
+    assign show_mobile_toggle = false
+  elsif show_hamburger
+    assign desktop_toggle_class = 'header__menu-toggle--desktop-only'
   endif
 
   # The `sizes` attribute needs real length values, not a CSS custom
@@ -176,6 +191,9 @@
 >
   <div class="header__inner page-width">
     <div class="header__zone header__zone--start">
+      {% if show_mobile_toggle %}
+        {% render 'header-menu-toggle', section: section, modifier: 'header__menu-toggle--mobile-only' %}
+      {% endif %}
       {% if show_standalone_toggle_start %}
         {% render 'header-menu-toggle', section: section %}
       {% endif %}
@@ -186,7 +204,7 @@
         {% render 'header-navigation', section: section %}
       {% endif %}
       {% if actions_zone == 'start' %}
-        {% render 'header-actions', section: section, show_toggle_here: show_toggle_in_actions_start %}
+        {% render 'header-actions', section: section, show_toggle_here: show_toggle_in_actions_start, toggle_class: desktop_toggle_class %}
       {% endif %}
     </div>
 
@@ -201,7 +219,7 @@
 
     <div class="header__zone header__zone--end">
       {% if show_standalone_toggle_end %}
-        {% render 'header-menu-toggle', section: section %}
+        {% render 'header-menu-toggle', section: section, modifier: desktop_toggle_class %}
       {% endif %}
       {% if logo_zone == 'end' %}
         {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, default_logo: default_logo, transparent_logo: transparent_logo, logo_sizes: logo_sizes %}
@@ -210,7 +228,7 @@
         {% render 'header-navigation', section: section %}
       {% endif %}
       {% if actions_zone == 'end' %}
-        {% render 'header-actions', section: section, show_toggle_here: show_toggle_in_actions_end %}
+        {% render 'header-actions', section: section, show_toggle_here: show_toggle_in_actions_end, toggle_class: desktop_toggle_class %}
       {% endif %}
     </div>
   </div>

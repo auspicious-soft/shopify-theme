@@ -6,6 +6,7 @@
 
   @param section {Object} - the header section
   @param show_toggle_here {Boolean} - whether the menu toggle belongs in this zone
+  @param [toggle_class] {String} - extra class for that toggle (e.g. desktop-only)
 
   @example
   {% render 'header-actions', section: section, show_toggle_here: true %}
@@ -59,6 +60,6 @@
   {% endif %}
 
   {% if show_toggle_here %}
-    {% render 'header-menu-toggle', section: section %}
+    {% render 'header-menu-toggle', section: section, modifier: toggle_class %}
   {% endif %}
 </div>

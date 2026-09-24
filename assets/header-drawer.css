@@ -303,6 +303,29 @@
   transform: rotate(-90deg);
 }
 
+/* ---------- Mega menu promo (horizontal mega menu only) ----------
+   Base look (image ratio, zoom, title) comes from assets/header.css; the
+   drawer only needs full width, spacing, and plain link colors since it
+   sits outside <header>. */
+
+.header__mega-promo--drawer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Slide: after the panel's list. */
+.header__drawer-panel > .header__mega-promo--drawer {
+  margin-top: 1.5rem;
+}
+
+/* Accordion: inside the open item, lined up with its sub-links. */
+.header__drawer-details > .header__mega-promo--drawer {
+  margin: 0.25rem 0 1.25rem 1rem;
+}
+
 /* ---------- Footer ---------- */
 
 .header__drawer-footer {
