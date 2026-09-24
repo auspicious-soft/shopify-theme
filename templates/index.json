@@ -13,7 +13,11 @@
       "type": "hero-banner",
       "name": "t:general.hero_banner",
       "settings": {
+        "media_type": "image",
         "background_image": "shopify://shop_images/hero_image.png",
+        "mobile_image": "shopify://shop_images/iPhone_13_14_-_1.png",
+        "video": "shopify://files/videos/YTSave_YouTube_Demo-Background-Sample-Video_Media_K4TOrB7at0Y_001_1080p.mp4",
+        "video_url": "",
         "background_color": "#ffffff",
         "overlay_color": "#000000",
         "overlay_opacity": 5,
@@ -56,7 +60,11 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
-        "collection": "",
+        "collection": "hydrogen",
+        "image": "shopify://shop_images/Banner_2_9a71e6ed-6bac-405d-9534-73d91e01f56f_4000x1562_crop_center_jpg.png",
+        "mobile_image": "shopify://shop_images/image_10.png",
+        "media_type": "image",
+        "video_url": "",
         "height": "fullscreen",
         "mobile_height": "medium",
         "width": "full",
@@ -91,7 +99,10 @@
         "collection_kahEbC": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "automated-collection",
+            "image": "shopify://shop_images/Image_52.png",
+            "media_type": "image",
+            "video_url": "",
             "subheading": "Male",
             "heading": "Shop the latest drops",
             "text": "",
@@ -102,7 +113,10 @@
         "collection_fGPGma": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "frontpage",
+            "image": "shopify://shop_images/Image_53.png",
+            "media_type": "image",
+            "video_url": "",
             "subheading": "Female",
             "heading": "Discover new silhouettes",
             "text": "",
@@ -145,12 +159,87 @@
         "padding_bottom": 48
       }
     },
+    "collection_banner_TdeRTb": {
+      "type": "collection-banner",
+      "name": "t:sections.collection_banner.name",
+      "settings": {
+        "collection": "hydrogen",
+        "image": "shopify://shop_images/Banner_6-08_4000x1562_crop_center_jpg.png",
+        "mobile_image": "shopify://shop_images/iPhone_13_14_-_3.png",
+        "media_type": "image",
+        "video_url": "",
+        "height": "medium",
+        "mobile_height": "medium",
+        "width": "full",
+        "corner_radius": 0,
+        "zoom_on_hover": false,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "subheading": "New items",
+        "heading": "Long shirts",
+        "heading_tag": "h2",
+        "heading_class": "h2",
+        "heading_uppercase": true,
+        "text": "",
+        "text_color": "#ffffff",
+        "content_position_horizontal": "left",
+        "content_position_vertical": "top",
+        "content_width": 520,
+        "button_label": "View products",
+        "button_link": "",
+        "button_style": "primary",
+        "button_size": "small",
+        "button_color_scheme": "",
+        "full_link": true,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "collection_banner_RdywzW": {
+      "type": "collection-banner",
+      "name": "t:sections.collection_banner.name",
+      "settings": {
+        "collection": "automated-collection",
+        "image": "shopify://shop_images/Banner_5_4000x1562_crop_center_jpg.png",
+        "mobile_image": "shopify://shop_images/image_10_1.png",
+        "media_type": "image",
+        "video_url": "",
+        "height": "medium",
+        "mobile_height": "medium",
+        "width": "full",
+        "corner_radius": 0,
+        "zoom_on_hover": false,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "subheading": "New items",
+        "heading": "Long shirts",
+        "heading_tag": "h2",
+        "heading_class": "h2",
+        "heading_uppercase": true,
+        "text": "",
+        "text_color": "#ffffff",
+        "content_position_horizontal": "left",
+        "content_position_vertical": "top",
+        "content_width": 520,
+        "button_label": "View products",
+        "button_link": "",
+        "button_style": "primary",
+        "button_size": "small",
+        "button_color_scheme": "",
+        "full_link": true,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "social_marquee_xQATWa": {
       "type": "social-marquee",
       "blocks": {
         "image_bYAbJr": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/image_1.png",
             "link": "",
             "new_tab": false,
             "username": ""
@@ -159,6 +248,7 @@
         "image_FLhndX": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/image_2.png",
             "link": "",
             "new_tab": false,
             "username": ""
@@ -167,6 +257,7 @@
         "image_hfdixe": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/image_1.png",
             "link": "",
             "new_tab": false,
             "username": ""
@@ -175,6 +266,7 @@
         "image_tPnQPM": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/image_4.png",
             "link": "",
             "new_tab": false,
             "username": ""
@@ -183,6 +275,7 @@
         "image_8f3Lcc": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/image_5.png",
             "link": "",
             "new_tab": false,
             "username": ""
@@ -191,6 +284,7 @@
         "image_aVXd9p": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/image_3.png",
             "link": "",
             "new_tab": false,
             "username": ""
@@ -283,6 +377,7 @@
         "logo_wz7gAw",
         "logo_bqxHbb"
       ],
+      "disabled": true,
       "name": "t:sections.logo_marquee.name",
       "settings": {
         "heading": "As featured in",
@@ -313,6 +408,8 @@
     "collections_3gxUDK",
     "collection_banner_xDbcQT",
     "collection_banners_hjwTkc",
+    "collection_banner_TdeRTb",
+    "collection_banner_RdywzW",
     "social_marquee_xQATWa",
     "logo_marquee_UQFWAQ"
   ]
