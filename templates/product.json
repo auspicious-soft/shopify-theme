@@ -11,7 +11,101 @@
   "sections": {
     "main": {
       "type": "product",
-      "settings": {}
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "size": "medium"
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_saving": true,
+            "show_tax_note": true
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "pills",
+            "show_swatches": true
+          }
+        },
+        "inventory": {
+          "type": "inventory",
+          "settings": {
+            "low_threshold": 5
+          }
+        },
+        "quantity": {
+          "type": "quantity",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "tab_details": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Materials & care",
+            "content": "<p>Share materials, fit and care instructions here.</p>",
+            "open": false
+          }
+        },
+        "tab_shipping": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping & returns",
+            "content": "<p>Share your shipping times and return policy here.</p>",
+            "open": false
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "rating",
+        "price",
+        "variant_picker",
+        "inventory",
+        "quantity",
+        "buy_buttons",
+        "description",
+        "tab_details",
+        "tab_shipping",
+        "share"
+      ],
+      "settings": {
+        "gallery_layout": "thumbnails",
+        "media_size": "medium",
+        "media_ratio": "adapt",
+        "enable_zoom": true,
+        "video_loop": false,
+        "sticky_info": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 64
+      }
     }
   },
   "order": [

@@ -75,7 +75,35 @@
     }
   },
   "collections": {
-    "title": "Collections"
+    "title": "Collections",
+    "product_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    },
+    "empty": "There are no collections yet",
+    "filter": "Filter",
+    "filters": "Filters",
+    "results_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    },
+    "sort_by": "Sort by",
+    "price_from": "From",
+    "price_to": "To",
+    "apply": "Apply",
+    "clear_all": "Clear all",
+    "view_results": {
+      "one": "View {{ count }} result",
+      "other": "View {{ count }} results"
+    },
+    "remove_filter": "Remove filter",
+    "no_results": "No products match these filters.",
+    "empty_collection": "This collection is empty.",
+    "showing": "Showing {{ shown }} of {{ total }} products",
+    "load_more": "Load more",
+    "pagination": "Pagination",
+    "previous_page": "Previous page",
+    "next_page": "Next page"
   },
   "gift_card": {
     "add_to_apple_wallet": "Add to Apple Wallet",
@@ -91,7 +119,27 @@
   },
   "products": {
     "add_to_cart": "Add to cart",
-    "sold_out": "Sold out"
+    "sold_out": "Sold out",
+    "price_from": "From",
+    "choose_options": "Choose options",
+    "unavailable": "Unavailable",
+    "rating": "{{ rating }} out of {{ max }} stars",
+    "zoom": "Open image {{ index }} in full screen",
+    "zoom_dialog": "Image zoom",
+    "previous_media": "Previous image",
+    "next_media": "Next image",
+    "of": "of",
+    "show_media": "Show image {{ index }}",
+    "save_percent": "Save {{ percent }}%",
+    "tax_included": "Tax included.",
+    "tax_excluded": "Tax excluded.",
+    "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
+    "sku": "SKU",
+    "in_stock": "In stock",
+    "out_of_stock": "Out of stock",
+    "low_stock": "Only {{ count }} left in stock",
+    "share": "Share",
+    "link_copied": "Link copied"
   },
   "search": {
     "title": "Search",

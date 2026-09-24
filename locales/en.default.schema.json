@@ -272,6 +272,126 @@
     "all": {
       "colors": {
         "label": "Color scheme"
+      },
+      "layout": "Layout",
+      "columns_desktop": "Columns on desktop",
+      "columns_mobile": "Columns on mobile",
+      "medium": "Medium",
+      "ratio_adapt": "Adapt to image",
+      "ratio_square": "Square (1:1)",
+      "ratio_portrait": "Portrait (4:5)",
+      "ratio_tall": "Tall (2:3)",
+      "ratio_landscape": "Landscape (4:3)"
+    },
+    "collections": {
+      "show_heading": "Show heading",
+      "heading_info": "Leave blank to use \"Collections\"",
+      "collection_list": "Collections",
+      "collection_list_info": "Leave empty to show every collection in the store"
+    },
+    "collection": {
+      "banner": "Banner",
+      "show_banner": "Show banner",
+      "banner_style": "Banner style",
+      "banner_style_info": "\"On image\" uses the collection image and falls back to minimal when there is none",
+      "banner_style_minimal": "Minimal",
+      "banner_style_image": "On image",
+      "banner_height": "Banner height",
+      "show_description": "Show collection description",
+      "product_grid": "Product grid",
+      "products_per_page": "Products per page",
+      "show_count": "Show product count",
+      "pagination_type": "Pagination",
+      "pagination_numbers": "Page numbers",
+      "pagination_load_more": "Load more button",
+      "filtering": "Filtering and sorting",
+      "enable_filtering": "Enable filtering",
+      "enable_filtering_info": "Customize filters with the Search & Discovery app",
+      "filter_layout": "Filter layout",
+      "filter_layout_info": "Filters always open in a drawer on mobile",
+      "filter_layout_sidebar": "Sidebar",
+      "filter_layout_drawer": "Drawer",
+      "enable_sorting": "Enable sorting"
+    },
+    "product": {
+      "media": "Media",
+      "gallery_layout": "Gallery layout",
+      "gallery_thumbnails": "Thumbnails below",
+      "gallery_thumbnails_left": "Thumbnails on the left",
+      "gallery_carousel": "Carousel",
+      "gallery_grid": "Grid (2 columns)",
+      "gallery_stacked": "Stacked",
+      "media_size": "Media width on desktop",
+      "media_ratio": "Media ratio",
+      "enable_zoom": "Enable full-screen image zoom",
+      "video_loop": "Loop and mute videos",
+      "info": "Product info",
+      "sticky_info": "Keep product info visible while scrolling",
+      "blocks": {
+        "text": {
+          "name": "Text",
+          "style_body": "Body",
+          "style_subtle": "Subtle",
+          "style_uppercase": "Uppercase label"
+        },
+        "vendor": {
+          "name": "Vendor"
+        },
+        "title": {
+          "name": "Title",
+          "size": "Size"
+        },
+        "rating": {
+          "name": "Rating",
+          "info": "Shows stars from a product reviews app that saves ratings to the standard reviews.rating metafield"
+        },
+        "price": {
+          "name": "Price",
+          "show_saving": "Show saving percentage",
+          "show_tax_note": "Show tax and shipping note"
+        },
+        "sku": {
+          "name": "SKU"
+        },
+        "inventory": {
+          "name": "Stock status",
+          "low_threshold": "Low stock threshold",
+          "low_threshold_info": "Shows \"Only X left\" at or below this quantity (for tracked inventory)"
+        },
+        "variant_picker": {
+          "name": "Variant picker",
+          "picker_type": "Style",
+          "pills": "Pills",
+          "dropdown": "Dropdown",
+          "show_swatches": "Show color swatches",
+          "show_swatches_info": "For options named Color or Colour"
+        },
+        "quantity": {
+          "name": "Quantity selector"
+        },
+        "buy_buttons": {
+          "name": "Buy buttons",
+          "show_dynamic_checkout": "Show dynamic checkout buttons",
+          "show_dynamic_checkout_info": "Lets customers check out directly with a payment method like Shop Pay or PayPal"
+        },
+        "description": {
+          "name": "Description"
+        },
+        "collapsible_tab": {
+          "name": "Collapsible tab",
+          "content": "Content",
+          "page": "Content from page",
+          "open": "Open by default"
+        },
+        "share": {
+          "name": "Share"
+        },
+        "custom_liquid": {
+          "name": "Custom Liquid"
+        },
+        "divider": {
+          "name": "Divider"
+        }
       }
     }
   },
@@ -457,7 +577,24 @@
             "label": "Card"
           },
           "label": "Style"
-        }
+        },
+        "header_image": "Image",
+        "image_ratio": "Image ratio",
+        "image_fit": "Image fit",
+        "image_fit_cover": "Fill (crop)",
+        "image_fit_contain": "Fit (no crop)",
+        "show_secondary_image": "Show second image on hover",
+        "header_content": "Content",
+        "show_vendor": "Show vendor",
+        "show_rating": "Show product rating",
+        "show_rating_info": "Requires a product reviews app that saves ratings to the standard reviews.rating metafield",
+        "show_swatches": "Show color swatches",
+        "show_swatches_info": "For products with a Color option. Uses the swatch set on each option value, or the value name as a color",
+        "quick_add": "Quick add",
+        "quick_add_info": "Single-variant products are added straight to the cart; products with options link to the product page",
+        "quick_add_none": "None",
+        "quick_add_overlay": "On image hover",
+        "quick_add_button": "Button below content"
       }
     },
     "collection_cards": {
@@ -471,7 +608,14 @@
             "label": "Card"
           },
           "label": "Style"
-        }
+        },
+        "header_layout": "Layout",
+        "layout": "Text position",
+        "layout_below": "Below image",
+        "layout_overlay": "On image",
+        "image_ratio": "Image ratio",
+        "show_count": "Show product count",
+        "show_description": "Show description"
       }
     },
     "blog_cards": {

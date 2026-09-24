@@ -1,60 +1,56 @@
 {% doc %}
-  Renders the add-to-cart form for a product: variant picker, quantity
-  input and submit button. Submission behavior follows
-  Theme settings > Cart > Type — a normal full-page submit when set to
-  "page", or an Ajax Cart API request (opening the cart panel on success)
-  for "drawer"/"notification".
+  Renders the product page buy buttons (Product section > Buy buttons
+  block): the product form holding the selected variant id, the add to cart
+  button and, optionally, Shopify's dynamic checkout buttons.
 
-  @param {product} product - The product to render the form for
+  The variant picker and quantity blocks live elsewhere in the info column
+  and join this form through the `form` attribute (form id =
+  `form_id`). Submission follows Theme settings > Cart > Type: a normal
+  submit for "page", otherwise an Ajax Cart API request that opens the cart
+  drawer/notification.
+
+  @param {product} product - The product
+  @param {variant} variant - The selected (or first available) variant
+  @param {string} form_id - The product form id
+  @param {object} block - The buy buttons block (show_dynamic_checkout)
+  @param {string} section_id - The section id, for unique element ids
 
   @example
-  {% render 'product-form', product: product %}
+  {% render 'product-form', product: product, variant: current_variant, form_id: form_id, block: block, section_id: section.id %}
 {% enddoc %}
 
-{% liquid
-  assign current_variant = product.selected_or_first_available_variant
-%}
+<product-form class="product-form" data-cart-type="{{ settings.cart_type }}" {{ block.shopify_attributes }}>
+  {% form 'product', product, id: form_id, class: 'product-form__form', novalidate: 'novalidate' %}
+    <input type="hidden" name="id" value="{{ variant.id }}" data-variant-id-input>
 
-<product-form data-cart-type="{{ settings.cart_type }}" data-cart-add-url="{{ routes.cart_add_url }}.js">
-  <div class="product-form__price">
-    {% for variant in product.variants %}
-      <span data-variant-price="{{ variant.id }}" {% unless variant == current_variant %}hidden{% endunless %}>
-        {% render 'price', price: variant.price, compare_at_price: variant.compare_at_price %}
-      </span>
-    {% endfor %}
-  </div>
+    <div class="product-form__buttons">
+      <button
+        id="AddToCart-{{ section_id }}"
+        type="submit"
+        name="add"
+        class="button button--primary product-form__submit"
+        data-add-to-cart
+        data-product-part
+        {% unless variant.available %}disabled{% endunless %}
+      >
+        <span class="product-form__submit-label">
+          {%- if variant.available -%}
+            {{ 'products.add_to_cart' | t }}
+          {%- else -%}
+            {{ 'products.sold_out' | t }}
+          {%- endif -%}
+        </span>
+        <span class="product-form__spinner" aria-hidden="true"></span>
+      </button>
 
-  {% form 'product', product %}
-    {% render 'variant-picker', product: product %}
-
-    <label for="quantity-{{ product.id }}">{{ 'cart.quantity' | t }}</label>
-    <input type="number" id="quantity-{{ product.id }}" name="quantity" min="1" value="1">
-
-    <button
-      type="submit"
-      data-add-to-cart
-      data-label-available="{{ 'products.add_to_cart' | t }}"
-      data-label-unavailable="{{ 'products.sold_out' | t }}"
-      {% unless current_variant.available %}disabled{% endunless %}
-    >
-      {% if current_variant.available %}
-        {{ 'products.add_to_cart' | t }}
-      {% else %}
-        {{ 'products.sold_out' | t }}
+      {% if block.settings.show_dynamic_checkout %}
+        <div class="product-form__dynamic">{{ form | payment_button }}</div>
       {% endif %}
-    </button>
+    </div>
 
-    <div class="product-form__error" role="alert" data-product-form-error hidden></div>
-
-    {{ form | payment_button }}
+    <p class="product-form__error" role="alert" data-product-form-error hidden></p>
   {% endform %}
 </product-form>
-
-{% stylesheet %}
-  .product-form__error {
-    color: color-mix(in srgb, red 70%, var(--color-foreground));
-  }
-{% endstylesheet %}
 
 {% javascript %}
   if (!customElements.get('product-form')) {
@@ -62,37 +58,30 @@
       connectedCallback() {
         this.form = this.querySelector('form');
         this.errorEl = this.querySelector('[data-product-form-error]');
-        this.submitButton = this.querySelector('[data-add-to-cart]');
+        if (!this.form || this.dataset.cartType === 'page') return;
 
-        this.addEventListener('variant:change', this.onVariantChange.bind(this));
-
-        if (this.dataset.cartType !== 'page') {
-          this.form.addEventListener('submit', this.onSubmit.bind(this));
-        }
+        this.onSubmit = this.onSubmit.bind(this);
+        this.form.addEventListener('submit', this.onSubmit);
       }
 
-      onVariantChange(event) {
-        const { variant } = event.detail;
-
-        this.querySelectorAll('[data-variant-price]').forEach((el) => {
-          el.hidden = !variant || el.dataset.variantPrice !== String(variant.id);
-        });
-
-        if (this.submitButton) {
-          const available = Boolean(variant && variant.available);
-          this.submitButton.disabled = !available;
-          this.submitButton.textContent = available
-            ? this.submitButton.dataset.labelAvailable
-            : this.submitButton.dataset.labelUnavailable;
-        }
+      // The button is re-rendered on every variant change, so look it up
+      // fresh each time.
+      get submitButton() {
+        return this.querySelector('[data-add-to-cart]');
       }
 
       async onSubmit(event) {
         event.preventDefault();
+        const button = this.submitButton;
+        if (!button || button.disabled || button.classList.contains('is-loading')) return;
+
         this.errorEl.hidden = true;
+        button.classList.add('is-loading');
+        button.setAttribute('aria-busy', 'true');
 
         try {
-          const response = await fetch(this.dataset.cartAddUrl, {
+          const root = window.Shopify?.routes?.root || '/';
+          const response = await fetch(`${root}cart/add.js`, {
             method: 'POST',
             headers: { Accept: 'application/json' },
             body: new FormData(this.form),
@@ -100,15 +89,19 @@
           const data = await response.json();
 
           if (!response.ok) {
-            this.errorEl.textContent = data.description || data.message;
+            this.errorEl.textContent = data.description || data.message || '';
             this.errorEl.hidden = false;
             return;
           }
 
-          document.dispatchEvent(new CustomEvent('cart:item-added', { bubbles: true }));
+          document.dispatchEvent(new CustomEvent('cart:item-added', { bubbles: true, detail: { item: data } }));
         } catch (error) {
           this.errorEl.textContent = error.message;
           this.errorEl.hidden = false;
+        } finally {
+          const current = this.submitButton;
+          current?.classList.remove('is-loading');
+          current?.removeAttribute('aria-busy');
         }
       }
     }

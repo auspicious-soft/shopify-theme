@@ -555,6 +555,105 @@
       },
       {
         "type": "header",
+        "content": "t:settings_schema.cards.settings.header_image"
+      },
+      {
+        "type": "select",
+        "id": "card_image_ratio",
+        "label": "t:settings_schema.cards.settings.image_ratio",
+        "options": [
+          {
+            "value": "adapt",
+            "label": "t:sections.all.ratio_adapt"
+          },
+          {
+            "value": "square",
+            "label": "t:sections.all.ratio_square"
+          },
+          {
+            "value": "portrait",
+            "label": "t:sections.all.ratio_portrait"
+          },
+          {
+            "value": "tall",
+            "label": "t:sections.all.ratio_tall"
+          },
+          {
+            "value": "landscape",
+            "label": "t:sections.all.ratio_landscape"
+          }
+        ],
+        "default": "portrait"
+      },
+      {
+        "type": "select",
+        "id": "card_image_fit",
+        "label": "t:settings_schema.cards.settings.image_fit",
+        "options": [
+          {
+            "value": "cover",
+            "label": "t:settings_schema.cards.settings.image_fit_cover"
+          },
+          {
+            "value": "contain",
+            "label": "t:settings_schema.cards.settings.image_fit_contain"
+          }
+        ],
+        "default": "cover"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_secondary_image",
+        "label": "t:settings_schema.cards.settings.show_secondary_image",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.cards.settings.header_content"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_vendor",
+        "label": "t:settings_schema.cards.settings.show_vendor",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_rating",
+        "label": "t:settings_schema.cards.settings.show_rating",
+        "info": "t:settings_schema.cards.settings.show_rating_info",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_swatches",
+        "label": "t:settings_schema.cards.settings.show_swatches",
+        "info": "t:settings_schema.cards.settings.show_swatches_info",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "card_quick_add",
+        "label": "t:settings_schema.cards.settings.quick_add",
+        "info": "t:settings_schema.cards.settings.quick_add_info",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:settings_schema.cards.settings.quick_add_none"
+          },
+          {
+            "value": "overlay",
+            "label": "t:settings_schema.cards.settings.quick_add_overlay"
+          },
+          {
+            "value": "button",
+            "label": "t:settings_schema.cards.settings.quick_add_button"
+          }
+        ],
+        "default": "overlay"
+      },
+      {
+        "type": "header",
         "content": "t:settings_schema.global.settings.header__border.content"
       },
       {
@@ -687,6 +786,62 @@
         "id": "collection_card_color_scheme",
         "label": "t:sections.all.colors.label",
         "default": "scheme-2"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.collection_cards.settings.header_layout"
+      },
+      {
+        "type": "select",
+        "id": "collection_card_layout",
+        "label": "t:settings_schema.collection_cards.settings.layout",
+        "options": [
+          {
+            "value": "below",
+            "label": "t:settings_schema.collection_cards.settings.layout_below"
+          },
+          {
+            "value": "overlay",
+            "label": "t:settings_schema.collection_cards.settings.layout_overlay"
+          }
+        ],
+        "default": "below"
+      },
+      {
+        "type": "select",
+        "id": "collection_card_image_ratio",
+        "label": "t:settings_schema.collection_cards.settings.image_ratio",
+        "options": [
+          {
+            "value": "adapt",
+            "label": "t:sections.all.ratio_adapt"
+          },
+          {
+            "value": "square",
+            "label": "t:sections.all.ratio_square"
+          },
+          {
+            "value": "portrait",
+            "label": "t:sections.all.ratio_portrait"
+          },
+          {
+            "value": "landscape",
+            "label": "t:sections.all.ratio_landscape"
+          }
+        ],
+        "default": "square"
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_card_show_count",
+        "label": "t:settings_schema.collection_cards.settings.show_count",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_card_show_description",
+        "label": "t:settings_schema.collection_cards.settings.show_description",
+        "default": false
       },
       {
         "type": "header",

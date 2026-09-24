@@ -65,12 +65,8 @@
     endif
   endfor
 
-  assign has_model = false
   assign image_count = 0
   for media in product.media
-    if media.media_type == 'model'
-      assign has_model = true
-    endif
     if media.media_type == 'image'
       assign image_count = image_count | plus: 1
     endif
@@ -232,12 +228,6 @@
   {% endif %}
 </product-gallery>
 
-{% if has_model %}
-  <script type="application/json" id="ProductModelsJSON-{{ section.id }}">
-    {{ product.media | where: 'media_type', 'model' | json }}
-  </script>
-{% endif %}
-
 {% javascript %}
   if (!customElements.get('product-gallery')) {
     class ProductGallery extends HTMLElement {
@@ -255,7 +245,9 @@
 
         const start = Number(this.dataset.startIndex || 0);
         this.activeIndex = start;
-        if (start > 0) requestAnimationFrame(() => this.goTo(start, 'instant'));
+        // Sync slides/thumbs/counter once layout is known (grid and stacked
+        // layouts show every slide on desktop, so none should stay aria-hidden).
+        requestAnimationFrame(() => (start > 0 ? this.goTo(start, 'instant') : this.setActive(0)));
 
         if (this.querySelector('model-viewer')) this.loadModelViewer();
       }
