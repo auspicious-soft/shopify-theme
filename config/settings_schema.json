@@ -548,10 +548,15 @@
         "label": "t:settings_schema.global.settings.text_alignment.label"
       },
       {
+        "type": "header",
+        "content": "t:settings_schema.cards.settings.header_colors"
+      },
+      {
         "type": "color_scheme",
         "id": "card_color_scheme",
-        "label": "t:sections.all.colors.label",
-        "default": "scheme-2"
+        "label": "t:settings_schema.cards.settings.color_scheme",
+        "default": "scheme-2",
+        "info": "t:settings_schema.cards.settings.color_scheme_info"
       },
       {
         "type": "header",
@@ -782,10 +787,15 @@
         "label": "t:settings_schema.global.settings.text_alignment.label"
       },
       {
+        "type": "header",
+        "content": "t:settings_schema.collection_cards.settings.header_colors"
+      },
+      {
         "type": "color_scheme",
         "id": "collection_card_color_scheme",
-        "label": "t:sections.all.colors.label",
-        "default": "scheme-2"
+        "label": "t:settings_schema.collection_cards.settings.color_scheme",
+        "default": "scheme-2",
+        "info": "t:settings_schema.collection_cards.settings.color_scheme_info"
       },
       {
         "type": "header",

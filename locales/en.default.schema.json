@@ -594,7 +594,10 @@
         "quick_add_info": "Single-variant products are added straight to the cart; products with options link to the product page",
         "quick_add_none": "None",
         "quick_add_overlay": "On image hover",
-        "quick_add_button": "Button below content"
+        "quick_add_button": "Button below content",
+        "header_colors": "Colors",
+        "color_scheme": "Card color scheme",
+        "color_scheme_info": "Background, text, price and quick add button colors for every product card (collection pages, search and product lists)"
       }
     },
     "collection_cards": {
@@ -615,7 +618,10 @@
         "layout_overlay": "On image",
         "image_ratio": "Image ratio",
         "show_count": "Show product count",
-        "show_description": "Show description"
+        "show_description": "Show description",
+        "header_colors": "Colors",
+        "color_scheme": "Card color scheme",
+        "color_scheme_info": "Background and text colors for every collection card. With text on the image, the text stays white for contrast"
       }
     },
     "blog_cards": {
