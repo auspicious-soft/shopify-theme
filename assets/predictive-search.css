@@ -95,11 +95,19 @@
   transition: color 0.15s ease;
 }
 
+/* Whole-pixel size (not 1.1rem = 17.6px) so the rotation center sits on
+   a pixel boundary, and kept on its own compositing layer at all times so
+   the browser doesn't re-snap it to the pixel grid as the rotation starts
+   and ends. Both caused a visible jump on hover. */
 .predictive-search__close svg {
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  transform-origin: 50% 50%;
+  transform: rotate(0deg) translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
   transition: transform 0.3s ease;
-  transform: rotate(0deg);
 }
 
 .predictive-search__close:hover,
@@ -109,7 +117,7 @@
 
 .predictive-search__close:hover svg,
 .predictive-search__close:focus-visible svg {
-  transform: rotate(90deg);
+  transform: rotate(90deg) translateZ(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
