@@ -631,17 +631,18 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
 }
 
 .header__cart-count {
-  position: absolute;
-  top: -0.4em;
-  inset-inline-end: -0.6em;
-  min-width: 1.1em;
-  padding: 0 0.25em;
-  border-radius: 999px;
-  background-color: var(--header-text);
-  color: var(--header-bg);
-  font-size: 0.65rem;
-  line-height: 1.6;
-  text-align: center;
+    position: absolute;
+    top: -.4em;
+    inset-inline-end: -.6em;
+    width: 14px;
+    height: 14px;
+    padding: 0 .25em;
+    border-radius: 999px;
+    background-color: var(--header-nav-hover-color);
+    color: var(--header-bg);
+    font-size: .65rem;
+    line-height: normal;
+    text-align: center;
 }
 
 .header__cart-count[hidden] {
