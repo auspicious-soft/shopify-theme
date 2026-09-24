@@ -33,6 +33,13 @@
             "menu": "footer"
           }
         },
+        "social_etLRzQ": {
+          "type": "social",
+          "settings": {
+            "column_width": 20,
+            "heading": "Follow us"
+          }
+        },
         "newsletter": {
           "type": "newsletter",
           "settings": {
@@ -47,6 +54,7 @@
       "block_order": [
         "brand",
         "menu_main",
+        "social_etLRzQ",
         "newsletter"
       ],
       "settings": {
@@ -57,7 +65,7 @@
         "show_policies": true,
         "show_payment_icons": true,
         "show_divider": true,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "padding_top": 64,
         "padding_bottom": 24,
         "footer_width": "page"
