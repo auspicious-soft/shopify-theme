@@ -89,6 +89,22 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "mega_menu_promo_eeJ4AX": {
+          "type": "mega_menu_promo",
+          "settings": {
+            "menu_item": "Catalog",
+            "show_image": true,
+            "image": "shopify://shop_images/Main_d624f226-0a89-4fe1-b333-0d1548b43c06.jpg",
+            "show_title": true,
+            "title": "Snowboard",
+            "link": "shopify://products/the-collection-snowboard-hydrogen"
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_promo_eeJ4AX"
+      ],
       "settings": {
         "header_style": "logo_reveal",
         "logo_position": "center",
