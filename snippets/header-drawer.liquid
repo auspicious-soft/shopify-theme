@@ -219,9 +219,18 @@
         {% endif %}
         {% if show_drawer_account %}
           <shopify-account menu="{{ settings.customer_account_menu }}" class="header__drawer-account">
+            {% comment %}
+              Follows Header settings > Account button: "Text" shows the
+              merchant's Account button text on its own (as in the header);
+              "Icon" keeps the icon plus the "Log in" label.
+            {% endcomment %}
             <span slot="signed-out-avatar" class="header__drawer-account-avatar">
-              {{ 'icon-account.svg' | inline_asset_content }}
-              <span>{{ 'customers.login.title' | t }}</span>
+              {% if section.settings.account_display == 'text' %}
+                <span>{{ section.settings.account_text | default: 'Account' | escape }}</span>
+              {% else %}
+                {{ 'icon-account.svg' | inline_asset_content }}
+                <span>{{ 'customers.login.title' | t }}</span>
+              {% endif %}
             </span>
           </shopify-account>
         {% endif %}

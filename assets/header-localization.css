@@ -172,15 +172,35 @@
 }
 
 /* ---------- Drawer placement ----------
-   Inline selects in the menu drawer footer (no trigger/popup); inherits
-   the drawer's color scheme. */
+   Same trigger + popup as the header, in the menu drawer's footer. The
+   trigger sits at the bottom of the drawer, so the popup opens upward and
+   lines up with its start edge. */
 
 .header-localization--drawer {
   display: block;
 }
 
-.header-localization--drawer .header-localization__form {
-  gap: 1rem;
+.header-localization--drawer .header-localization__details {
+  display: inline-block;
+}
+
+.header-localization--drawer .header-localization__details[open] .header-localization__panel {
+  inset-block-start: auto;
+  inset-block-end: calc(100% + 0.75rem);
+  inset-inline-start: 0;
+  inset-inline-end: auto;
+  animation-name: header-localization-in-up;
+}
+
+@keyframes header-localization-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ---------- Mobile ----------
@@ -188,7 +208,7 @@
    popup still shows the full labels. */
 
 @media (max-width: 749.98px) {
-  .header-localization__trigger:has(.header-localization__flag) .header-localization__label {
+  .header-localization--header .header-localization__trigger:has(.header-localization__flag) .header-localization__label {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -197,7 +217,7 @@
     white-space: nowrap;
   }
 
-  .header-localization__trigger {
+  .header-localization--header .header-localization__trigger {
     gap: 0.3rem;
   }
 }

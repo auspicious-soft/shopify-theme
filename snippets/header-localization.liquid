@@ -12,12 +12,12 @@
   Open/close and click-outside/Escape handling come from theme-panel.liquid.
   Styling lives in assets/header-localization.css (loaded below).
 
-  With `placement: 'drawer'` it renders just the selects, inline (no
-  trigger/popup), for the menu drawer's footer, which is where the selector
-  lives on mobile (the header copy is hidden below 989px).
+  With `placement: 'drawer'` the same trigger + popup renders in the menu
+  drawer's footer (where the selector lives on mobile; the header copy is
+  hidden below 989px), with the popup opening upward.
 
   @param section {Object} - the header section
-  @param [placement] {String} - 'header' (default, trigger + popup) or 'drawer' (inline selects)
+  @param [placement] {String} - 'header' (default) or 'drawer' (popup opens upward, full label on mobile)
 
   @example
   {% render 'header-localization', section: section %}
@@ -114,14 +114,9 @@
   {% endform %}
   {% endcapture %}
 
-  {% if placement == 'drawer' %}
-    <header-localization class="header-localization header-localization--drawer">
-      {{ localization_form }}
-    </header-localization>
-  {% else %}
   {% render 'theme-panel' %}
 
-  <header-localization class="header-localization">
+  <header-localization class="header-localization header-localization--{{ placement }}">
     <theme-panel>
       <details id="{{ panel_id }}" class="header-localization__details">
         <summary
@@ -148,7 +143,6 @@
       </details>
     </theme-panel>
   </header-localization>
-  {% endif %}
 {% endif %}
 
 {% javascript %}
