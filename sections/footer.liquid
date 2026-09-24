@@ -29,7 +29,7 @@
     --footer-column-gap: {{ section.settings.column_gap }}px;
   "
 >
-  <footer class="footer__inner page-width">
+  <footer class="footer__inner {% if section.settings.footer_width == 'full' %}footer__inner--full{% else %}page-width{% endif %}">
     {% if section.blocks.size > 0 %}
       <div class="footer__columns">
         {% for block in section.blocks %}
@@ -228,6 +228,17 @@
   "name": "t:general.footer",
   "class": "section-footer",
   "settings": [
+    {
+      "type": "select",
+      "id": "footer_width",
+      "label": "t:sections.footer.footer_width",
+      "info": "t:sections.footer.footer_width_info",
+      "options": [
+        { "value": "page", "label": "t:sections.footer.footer_width_page" },
+        { "value": "full", "label": "t:sections.footer.footer_width_full" }
+      ],
+      "default": "page"
+    },
     {
       "type": "select",
       "id": "mobile_menu_style",

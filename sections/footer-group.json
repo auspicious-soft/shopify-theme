@@ -59,7 +59,8 @@
         "show_divider": true,
         "color_scheme": "scheme-1",
         "padding_top": 64,
-        "padding_bottom": 24
+        "padding_bottom": 24,
+        "footer_width": "page"
       }
     }
   },

@@ -17,6 +17,13 @@
   text-decoration: none;
 }
 
+/* Footer > Footer width: "Full width" runs the content edge to edge
+   instead of the .page-width column, keeping comfortable side padding. */
+.footer__inner--full {
+  width: 100%;
+  padding-inline: clamp(var(--page-margin, 20px), 3vw, 3rem);
+}
+
 /* ---------- Columns ---------- */
 
 .footer__columns {

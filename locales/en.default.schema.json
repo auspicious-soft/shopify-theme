@@ -463,7 +463,11 @@
         "social": {
           "name": "Social icons"
         }
-      }
+      },
+      "footer_width": "Footer width",
+      "footer_width_info": "Container lines the footer up with your page content; full width stretches it edge to edge",
+      "footer_width_page": "Container (page width)",
+      "footer_width_full": "Full width"
     }
   },
   "settings_schema": {
