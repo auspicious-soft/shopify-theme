@@ -159,6 +159,76 @@
         "padding_bottom": 48
       }
     },
+    "collection_banner_TdeRTb": {
+      "type": "collection-banner",
+      "name": "t:sections.collection_banner.name",
+      "settings": {
+        "collection": "hydrogen",
+        "image": "shopify://shop_images/Banner_6-08_4000x1562_crop_center_jpg.png",
+        "mobile_image": "shopify://shop_images/iPhone_13_14_-_3.png",
+        "media_type": "image",
+        "height": "medium",
+        "mobile_height": "medium",
+        "width": "page",
+        "corner_radius": 0,
+        "zoom_on_hover": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "subheading": "New items",
+        "heading": "Long shirts",
+        "heading_tag": "h2",
+        "heading_class": "h2",
+        "heading_uppercase": true,
+        "text": "",
+        "text_color": "#ffffff",
+        "content_position_horizontal": "left",
+        "content_position_vertical": "top",
+        "content_width": 520,
+        "button_label": "View products",
+        "button_link": "",
+        "button_style": "primary",
+        "button_size": "small",
+        "button_color_scheme": "",
+        "full_link": true,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "collection_banner_RdywzW": {
+      "type": "collection-banner",
+      "name": "t:sections.collection_banner.name",
+      "settings": {
+        "collection": "",
+        "media_type": "image",
+        "height": "medium",
+        "mobile_height": "medium",
+        "width": "page",
+        "corner_radius": 0,
+        "zoom_on_hover": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "subheading": "New items",
+        "heading": "Long shirts",
+        "heading_tag": "h2",
+        "heading_class": "h2",
+        "heading_uppercase": true,
+        "text": "",
+        "text_color": "#ffffff",
+        "content_position_horizontal": "left",
+        "content_position_vertical": "top",
+        "content_width": 520,
+        "button_label": "View products",
+        "button_link": "",
+        "button_style": "primary",
+        "button_size": "small",
+        "button_color_scheme": "",
+        "full_link": true,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "social_marquee_xQATWa": {
       "type": "social-marquee",
       "blocks": {
@@ -297,6 +367,7 @@
         "logo_wz7gAw",
         "logo_bqxHbb"
       ],
+      "disabled": true,
       "name": "t:sections.logo_marquee.name",
       "settings": {
         "heading": "As featured in",
@@ -327,6 +398,8 @@
     "collections_3gxUDK",
     "collection_banner_xDbcQT",
     "collection_banners_hjwTkc",
+    "collection_banner_TdeRTb",
+    "collection_banner_RdywzW",
     "social_marquee_xQATWa",
     "logo_marquee_UQFWAQ"
   ]
