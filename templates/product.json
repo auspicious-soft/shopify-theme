@@ -65,6 +65,7 @@
           "settings": {
             "heading": "Materials & care",
             "content": "<p>Share materials, fit and care instructions here.</p>",
+            "page": "",
             "open": false
           }
         },
@@ -73,6 +74,7 @@
           "settings": {
             "heading": "Shipping & returns",
             "content": "<p>Share your shipping times and return policy here.</p>",
+            "page": "",
             "open": false
           }
         },
@@ -96,7 +98,7 @@
         "share"
       ],
       "settings": {
-        "gallery_layout": "thumbnails",
+        "gallery_layout": "stacked",
         "media_size": "medium",
         "media_ratio": "adapt",
         "enable_zoom": true,

@@ -14,8 +14,9 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "menu": "",
-        "show_payment_icons": true
+        "menu": "footer",
+        "show_payment_icons": true,
+        "color_scheme": ""
       }
     }
   },
