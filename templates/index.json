@@ -19,6 +19,7 @@
         "overlay_opacity": 5,
         "height_type": "fullscreen",
         "heading": "End of summer sale",
+        "heading_tag": "h2",
         "subheading": "Up to 40% off",
         "text_color": "#ffffff",
         "content_position_horizontal": "center",
@@ -38,6 +39,7 @@
       "settings": {
         "show_heading": true,
         "heading": "",
+        "heading_tag": "h1",
         "subheading": "",
         "heading_alignment": "left",
         "collection_list": [],
@@ -113,6 +115,7 @@
       "name": "t:sections.collection_banners.name",
       "settings": {
         "heading": "Shop by gender",
+        "heading_tag": "h2",
         "subheading": "",
         "heading_alignment": "left",
         "columns_desktop": 2,
@@ -201,6 +204,7 @@
       "name": "t:sections.social_marquee.name",
       "settings": {
         "heading": "As seen on #yourbrand",
+        "heading_tag": "h2",
         "heading_alignment": "left",
         "speed": 110,
         "direction": "left",
@@ -277,10 +281,13 @@
       "name": "t:sections.logo_marquee.name",
       "settings": {
         "heading": "As featured in",
+        "heading_tag": "h2",
         "heading_alignment": "center",
         "speed": 40,
         "direction": "left",
         "pause_on_hover": false,
+        "items_desktop": 6,
+        "items_mobile": 3,
         "logo_height": 48,
         "logo_height_mobile": 32,
         "gap": 64,
