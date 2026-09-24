@@ -159,5 +159,24 @@
       "suggestions": "Suggestions",
       "products": "Products"
     }
+  },
+  "general": {
+    "payment_methods": "Payment methods",
+    "newsletter": {
+      "email_label": "Email address",
+      "subscribe": "Subscribe",
+      "success": "Thanks for subscribing!"
+    },
+    "social": {
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "tiktok": "TikTok",
+      "youtube": "YouTube",
+      "twitter": "X (Twitter)",
+      "pinterest": "Pinterest",
+      "snapchat": "Snapchat",
+      "tumblr": "Tumblr",
+      "vimeo": "Vimeo"
+    }
   }
 }

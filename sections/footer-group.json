@@ -13,10 +13,53 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "brand": {
+          "type": "brand",
+          "settings": {
+            "column_width": 30,
+            "image_width": 140,
+            "show_shop_name": true,
+            "headline": "",
+            "text": "",
+            "show_social": true
+          }
+        },
+        "menu_main": {
+          "type": "menu",
+          "settings": {
+            "column_width": 20,
+            "heading": "",
+            "menu": "footer"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "column_width": 35,
+            "heading": "Join our newsletter",
+            "text": "<p>Be the first to hear about new arrivals and exclusive offers.</p>",
+            "button_label": "",
+            "show_social": false
+          }
+        }
+      },
+      "block_order": [
+        "brand",
+        "menu_main",
+        "newsletter"
+      ],
       "settings": {
-        "menu": "footer",
+        "mobile_menu_style": "accordion",
+        "column_gap": 48,
+        "copyright_text": "",
+        "show_powered_by": false,
+        "show_policies": true,
         "show_payment_icons": true,
-        "color_scheme": ""
+        "show_divider": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 24
       }
     }
   },

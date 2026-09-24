@@ -423,6 +423,47 @@
       "card_name": "Recently viewed card",
       "info": "Shows the products each shopper viewed most recently, saved in their own browser. Hidden until they have viewed a product (the current product is left out).",
       "show_clear": "Show \"Clear\" link"
+    },
+    "footer": {
+      "mobile_menu_style": "Mobile menu style",
+      "mobile_accordion": "Accordion",
+      "mobile_simple": "Simple list",
+      "column_gap": "Space between columns",
+      "bottom_bar": "Bottom bar",
+      "copyright_text": "Copyright text",
+      "copyright_text_info": "Leave blank for \"© year Store name\". Use [year] to insert the current year",
+      "show_powered_by": "Show \"Powered by Shopify\"",
+      "show_policies": "Show policy links",
+      "show_divider": "Show divider line",
+      "column_width": "Column width on desktop",
+      "column_width_info": "Share of the row this column takes. Columns wrap to a new row once they add up to more than 100%",
+      "show_social": "Show social icons",
+      "show_social_info": "Add your social profile links in Theme settings > Social media",
+      "blocks": {
+        "brand": {
+          "name": "Brand information",
+          "info": "Blank fields use Theme settings > Brand information",
+          "image": "Logo",
+          "image_width": "Logo width",
+          "show_shop_name": "Show store name when there is no logo",
+          "headline": "Headline"
+        },
+        "menu": {
+          "name": "Menu",
+          "heading_info": "Leave blank to use the menu name"
+        },
+        "text": {
+          "name": "Text"
+        },
+        "newsletter": {
+          "name": "Newsletter",
+          "info": "Sign-ups are added to Customers in your Shopify admin with the \"newsletter\" tag",
+          "button_label_info": "Leave blank to show an arrow only"
+        },
+        "social": {
+          "name": "Social icons"
+        }
+      }
     }
   },
   "settings_schema": {
