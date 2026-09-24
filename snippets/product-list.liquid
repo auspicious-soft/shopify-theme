@@ -6,7 +6,8 @@
 
   Reads the section's heading, subheading, heading_alignment, layout,
   columns_desktop, columns_mobile, products_to_show, color_scheme and
-  padding settings. Styles live in assets/product-list.css; the slider
+  padding settings, plus the optional card_image_slider, card_size_options
+  and size_option_name card settings. Styles live in assets/product-list.css; the slider
   arrows are driven by the <product-slider> element below.
 
   @param {object} section - The section rendering the list
@@ -76,7 +77,13 @@
     <ul class="product-list__track" role="list" data-slider-track>
       {% for product in products limit: limit %}
         <li class="product-list__item">
-          {% render 'product-card', product: product, sizes: card_sizes %}
+          {% render 'product-card',
+            product: product,
+            sizes: card_sizes,
+            image_slider: section.settings.card_image_slider,
+            size_options: section.settings.card_size_options,
+            size_option_name: section.settings.size_option_name
+          %}
         </li>
       {% endfor %}
 

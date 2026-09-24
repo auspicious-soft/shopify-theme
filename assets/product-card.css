@@ -360,3 +360,167 @@
     transform: none;
   }
 }
+
+/* ---------- Image slider (product-card `image_slider` param) ---------- */
+
+.product-card__slider {
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+
+.product-card__slides {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.product-card__slides::-webkit-scrollbar {
+  display: none;
+}
+
+.product-card__slide {
+  position: relative;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+.product-card__slide-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--color-background) 85%, transparent);
+  color: var(--color-foreground);
+  box-shadow: none;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: opacity 0.2s ease;
+}
+
+.product-card__slide-arrow svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.product-card__slide-arrow--prev {
+  inset-inline-start: 0.4rem;
+}
+
+.product-card__slide-arrow--next {
+  inset-inline-end: 0.4rem;
+}
+
+.product-card__slide-arrow--prev svg {
+  transform: rotate(90deg);
+}
+
+.product-card__slide-arrow--next svg {
+  transform: rotate(-90deg);
+}
+
+.product-card__slide-arrow:disabled {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* Arrows on hover with a mouse; on touch screens the images swipe instead. */
+@media (hover: hover) {
+  .product-card__slide-arrow {
+    opacity: 0;
+  }
+
+  .product-card:hover .product-card__slide-arrow,
+  .product-card__slide-arrow:focus-visible {
+    opacity: 1;
+  }
+}
+
+@media (hover: none) {
+  .product-card__slide-arrow {
+    display: none;
+  }
+}
+
+/* ---------- Size buttons (product-card `size_options` param) ---------- */
+
+.product-card__sizes {
+  position: absolute;
+  inset-inline: calc(var(--card-image-padding, 0px) + 0.5rem);
+  inset-block-end: calc(var(--card-image-padding, 0px) + 0.5rem);
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-card__sizes--above-quick-add {
+  inset-block-end: calc(var(--card-image-padding, 0px) + 3.4rem);
+}
+
+.product-card__size {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.9rem;
+  height: 1.9rem;
+  padding: 0 0.4rem;
+  font-size: 0.7rem;
+  line-height: 1;
+  text-decoration: none;
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 15%, transparent);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.product-card__size:hover,
+.product-card__size:focus-visible {
+  background-color: var(--color-foreground);
+  color: var(--color-background);
+}
+
+.product-card__size--unavailable {
+  color: color-mix(in srgb, var(--color-foreground) 40%, transparent);
+  text-decoration: line-through;
+}
+
+@media (hover: hover) {
+  .product-card__sizes--hover {
+    opacity: 0;
+    transform: translateY(0.4rem);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .product-card:hover .product-card__sizes--hover,
+  .product-card:focus-within .product-card__sizes--hover {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* No hover on touch screens, so "on hover" sizes stay hidden there. */
+@media (hover: none) {
+  .product-card__sizes--hover {
+    display: none;
+  }
+}

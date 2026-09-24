@@ -13,6 +13,9 @@
   @param {string} [sizes] - `sizes` attribute for the card images
   @param {boolean} [eager] - Load the image eagerly (above-the-fold cards)
   @param {string} [heading_tag] - Title tag, defaults to h3
+  @param {boolean} [image_slider] - Show every product image with prev/next arrows (and swipe on touch) instead of the hover image
+  @param {string} [size_options] - Size buttons on the image: 'none' (default), 'hover' or 'always'
+  @param {string} [size_option_name] - Name of the option to show as size buttons, defaults to "Size"
 
   @example
   {% render 'product-card', product: product, sizes: '(min-width: 990px) 25vw, 50vw' %}
@@ -36,9 +39,27 @@
       assign ratio = featured.preview_image.aspect_ratio | default: 1
   endcase
 
+  assign use_slider = false
+  if image_slider and product.media.size > 1
+    assign use_slider = true
+  endif
+
   assign secondary = nil
-  if settings.card_show_secondary_image and product.media.size > 1
+  if settings.card_show_secondary_image and product.media.size > 1 and use_slider == false
     assign secondary = product.media[1]
+  endif
+
+  assign size_mode = size_options | default: 'none'
+  assign size_option = nil
+  if size_mode != 'none'
+    assign wanted_size_name = size_option_name | default: 'Size' | downcase | strip
+    for option in product.options_with_values
+      assign option_name = option.name | downcase | strip
+      if option_name == wanted_size_name
+        assign size_option = option
+        break
+      endif
+    endfor
   endif
 
   assign loading = 'lazy'
@@ -55,7 +76,39 @@
   style="--card-ratio: {{ ratio }}; --card-image-padding: {{ settings.card_image_padding }}px; --card-text-align: {{ settings.card_text_alignment }};"
   {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
 >
-  <div class="product-card__media product-card__media--{{ settings.card_image_fit | default: 'cover' }}{% if secondary %} product-card__media--has-secondary{% endif %}">
+  <div class="product-card__media product-card__media--{{ settings.card_image_fit | default: 'cover' }}{% if secondary %} product-card__media--has-secondary{% endif %}{% if use_slider %} product-card__media--slider{% endif %}">
+    {%- if use_slider -%}
+      <card-image-slider class="product-card__slider">
+        <div class="product-card__media-frame product-card__slides" data-card-slides>
+          {%- for media in product.media limit: 8 -%}
+            <a
+              href="{{ product.url }}"
+              class="product-card__slide"
+              tabindex="-1"
+              aria-hidden="true"
+              draggable="false"
+            >
+              {{
+                media.preview_image
+                | image_url: width: 1000
+                | image_tag:
+                  class: 'product-card__image',
+                  loading: loading,
+                  widths: '240, 360, 480, 640, 800, 1000',
+                  sizes: image_sizes,
+                  alt: media.preview_image.alt
+              }}
+            </a>
+          {%- endfor -%}
+        </div>
+        <button type="button" class="product-card__slide-arrow product-card__slide-arrow--prev" data-card-prev aria-label="{{ 'products.scroll_previous' | t }}" disabled>
+          {{ 'icon-chevron.svg' | inline_asset_content }}
+        </button>
+        <button type="button" class="product-card__slide-arrow product-card__slide-arrow--next" data-card-next aria-label="{{ 'products.scroll_next' | t }}">
+          {{ 'icon-chevron.svg' | inline_asset_content }}
+        </button>
+      </card-image-slider>
+    {%- else -%}
     <div class="product-card__media-frame">
       {%- if featured -%}
         {{
@@ -84,8 +137,35 @@
         {{ 'product-1' | placeholder_svg_tag: 'product-card__image product-card__placeholder' }}
       {%- endif -%}
     </div>
+    {%- endif -%}
 
     {% render 'badge', product: product %}
+
+    {% if size_option and size_option.values.size > 0 %}
+      <ul
+        class="product-card__sizes product-card__sizes--{{ size_mode }}{% if quick_add == 'overlay' %} product-card__sizes--above-quick-add{% endif %}"
+        role="list"
+        aria-label="{{ size_option.name | escape }}"
+      >
+        {% for value in size_option.values %}
+          {%- liquid
+            assign size_url = product.url
+            if value.variant
+              assign size_url = value.variant.url
+            endif
+          -%}
+          <li>
+            <a
+              href="{{ size_url }}"
+              class="product-card__size{% if value.available == false %} product-card__size--unavailable{% endif %}"
+              title="{{ value | escape }}"
+            >
+              {{- value | escape -}}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
 
     {% if quick_add == 'overlay' %}
       <div class="product-card__quick-add product-card__quick-add--overlay">
@@ -170,3 +250,41 @@
     {% endif %}
   </div>
 </div>
+
+{% javascript %}
+  if (!customElements.get('card-image-slider')) {
+    class CardImageSlider extends HTMLElement {
+      connectedCallback() {
+        this.slides = this.querySelector('[data-card-slides]');
+        this.prev = this.querySelector('[data-card-prev]');
+        this.next = this.querySelector('[data-card-next]');
+        if (!this.slides) return;
+
+        this.update = this.update.bind(this);
+        this.onClick = this.onClick.bind(this);
+        this.slides.addEventListener('scroll', this.update, { passive: true });
+        this.addEventListener('click', this.onClick);
+        this.update();
+      }
+
+      onClick(event) {
+        const arrow = event.target.closest('[data-card-prev], [data-card-next]');
+        if (!arrow) return;
+        event.preventDefault();
+        event.stopPropagation();
+        const direction = arrow.hasAttribute('data-card-next') ? 1 : -1;
+        const sign = document.dir === 'rtl' ? -1 : 1;
+        this.slides.scrollBy({ left: direction * sign * this.slides.clientWidth, behavior: 'smooth' });
+      }
+
+      update() {
+        const max = this.slides.scrollWidth - this.slides.clientWidth;
+        const position = Math.abs(this.slides.scrollLeft);
+        if (this.prev) this.prev.disabled = position <= 2;
+        if (this.next) this.next.disabled = position >= max - 2;
+      }
+    }
+
+    customElements.define('card-image-slider', CardImageSlider);
+  }
+{% endjavascript %}

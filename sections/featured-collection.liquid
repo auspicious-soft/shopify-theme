@@ -1,0 +1,195 @@
+{% comment %}
+  "Featured collection": products from one collection (e.g. "Sale") as a
+  slider or grid of product cards, with an optional "View all" link.
+
+  On top of Theme settings > Product cards, this section can turn on:
+  - an image slider on each card (prev/next arrows, swipe on touch)
+  - size buttons on the card image (always, or on hover)
+  Shows placeholder cards in the theme editor until a collection is chosen.
+{% endcomment %}
+
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+{{ 'product-list.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign collection = section.settings.collection
+  assign products = collection.products
+  assign view_all_url = blank
+
+  if section.settings.show_view_all and collection != blank and collection.products_count > section.settings.products_to_show
+    assign view_all_url = collection.url
+  endif
+
+  assign placeholder_count = 0
+  if collection == blank or collection.products_count == 0
+    assign products = '' | split: ','
+    if request.design_mode
+      assign placeholder_count = section.settings.products_to_show
+    endif
+  endif
+-%}
+
+{% if collection.products_count > 0 or placeholder_count > 0 %}
+  {% render 'product-list',
+    section: section,
+    products: products,
+    view_all_url: view_all_url,
+    placeholder_count: placeholder_count
+  %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.featured_collection.name",
+  "class": "section-featured-collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:labels.heading",
+      "default": "Sale"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:labels.subheading"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:labels.alignment",
+      "options": [
+        { "value": "left", "label": "t:options.alignment.left" },
+        { "value": "center", "label": "t:options.alignment.center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured_collection.products"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.featured_collection.collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "t:sections.product_list.products_to_show",
+      "min": 2,
+      "max": 24,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "t:sections.featured_collection.show_view_all",
+      "info": "t:sections.featured_collection.show_view_all_info",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.product_list.layout",
+      "options": [
+        { "value": "grid", "label": "t:sections.product_list.layout_grid" },
+        { "value": "slider", "label": "t:sections.product_list.layout_slider" }
+      ],
+      "default": "slider"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "t:sections.all.columns_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "t:sections.all.columns_mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured_collection.cards"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.featured_collection.cards_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "card_image_slider",
+      "label": "t:sections.featured_collection.card_image_slider",
+      "info": "t:sections.featured_collection.card_image_slider_info",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "card_size_options",
+      "label": "t:sections.featured_collection.card_size_options",
+      "options": [
+        { "value": "none", "label": "t:sections.featured_collection.sizes_none" },
+        { "value": "hover", "label": "t:sections.featured_collection.sizes_hover" },
+        { "value": "always", "label": "t:sections.featured_collection.sizes_always" }
+      ],
+      "default": "hover"
+    },
+    {
+      "type": "text",
+      "id": "size_option_name",
+      "label": "t:sections.featured_collection.size_option_name",
+      "info": "t:sections.featured_collection.size_option_name_info",
+      "default": "Size"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:labels.padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:labels.padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.featured_collection.name"
+    }
+  ]
+}
+{% endschema %}
