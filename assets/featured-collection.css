@@ -9,13 +9,32 @@
 
 /* Wider side padding, the same as the Collection banner's text
    (assets/collection-banner.css), so the products line up with it. */
-.fc > .page-width {
-  padding-inline: clamp(1.25rem, 4vw, 3rem);
+.fc {
+  --fc-side: clamp(1.25rem, 4vw, 3rem);
 }
 
-/* Products width > Full width: the cards run edge to edge, no side padding. */
+.fc > .page-width {
+  padding-inline: var(--fc-side);
+}
+
+/* Products width > Full width: the products run to the screen edges.
+   --fc-inset is where the heading's content starts, so the carousel can
+   line its first card up with the heading. */
 .fc > .fc__products.page-width--full {
+  --fc-inset: max(var(--fc-side), calc((100% - var(--page-width)) / 2 + var(--fc-side)));
   padding-inline: 0;
+}
+
+.fc--width-full > .fc__products.page-width--full {
+  --fc-inset: var(--fc-side);
+}
+
+/* Carousel: the first card starts in line with the heading and the row
+   bleeds off the right edge; snapping keeps cards aligned to the heading,
+   and the last card ends in line with it. */
+.fc--slider .fc__products.page-width--full .fc__track {
+  padding-inline: var(--fc-inset);
+  scroll-padding-inline: var(--fc-inset);
 }
 
 /* ---------- Header ---------- */

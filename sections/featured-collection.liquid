@@ -72,7 +72,7 @@
 
 {% if collection.products_count > 0 or placeholder_count > 0 %}
   <featured-collection
-    class="fc fc--{{ layout }} color-{{ section.settings.color_scheme.id }}"
+    class="fc fc--{{ layout }}{% if section.settings.width == 'full' %} fc--width-full{% endif %} color-{{ section.settings.color_scheme.id }}"
     style="
       --section-padding-top: {{ section.settings.padding_top }}px;
       --section-padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -137,13 +137,15 @@
         <div class="fc__arrows fc__arrows--sides">{{ arrow_buttons }}</div>
       {%- endif -%}
       </div>
+    </div>
 
-      {%- if layout == 'slider' and section.settings.show_progress -%}
+    {%- if layout == 'slider' and section.settings.show_progress -%}
+      <div class="{{ container_class }}">
         <div class="fc__progress" aria-hidden="true">
           <span class="fc__progress-bar" data-fc-progress></span>
         </div>
-      {%- endif -%}
-    </div>
+      </div>
+    {%- endif -%}
 
     {%- if view_all_url != blank and section.settings.view_all_style == 'button' -%}
         <div class="{{ container_class }} fc__footer">
