@@ -375,10 +375,18 @@
 
 /* ---------- Info ---------- */
 
+/* A little inner spacing so the title, price and swatches never touch the
+   card's edge (or get clipped by a carousel's scroll area). */
 .product-card__info {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding-inline: 0.5rem;
+}
+
+/* The boxed "Card" style already has its own inner padding. */
+.product-card--card .product-card__info {
+  padding-inline: 0;
 }
 
 .product-card__row {
@@ -452,9 +460,10 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
   margin: 0;
-  padding: 0;
+  /* Room for the selected swatch's ring (outline 2px outside the swatch). */
+  padding: 3px;
   list-style: none;
 }
 
