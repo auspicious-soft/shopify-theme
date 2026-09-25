@@ -13,6 +13,11 @@
   padding-inline: clamp(1.25rem, 4vw, 3rem);
 }
 
+/* Products width > Full width: the cards run edge to edge, no side padding. */
+.fc > .fc__products.page-width--full {
+  padding-inline: 0;
+}
+
 /* ---------- Header ---------- */
 
 .fc__header {
