@@ -31,6 +31,10 @@
         "note": "",
         "color_scheme": "scheme-4",
         "width": "page",
+        "show_divider": true,
+        "divider_width": "page",
+        "divider_thickness": 1,
+        "divider_opacity": 20,
         "padding_top": 56,
         "padding_bottom": 56
       }
@@ -41,7 +45,7 @@
         "brand": {
           "type": "brand",
           "settings": {
-            "column_width": 30,
+            "column_width": 40,
             "image": "shopify://shop_images/White_1.png",
             "image_width": 140,
             "show_shop_name": true,
@@ -54,25 +58,32 @@
           "type": "menu",
           "settings": {
             "column_width": 20,
-            "heading": "",
+            "heading": "About",
             "menu": "footer"
           }
         },
-        "newsletter": {
-          "type": "newsletter",
+        "menu_Dir3tk": {
+          "type": "menu",
           "settings": {
-            "column_width": 35,
-            "heading": "Join our newsletter",
-            "text": "<p>Be the first to hear about new arrivals and exclusive offers.</p>",
-            "button_label": "",
-            "show_social": false
+            "column_width": 20,
+            "heading": "Support",
+            "menu": "footer-menu-copy"
+          }
+        },
+        "menu_KMbPB4": {
+          "type": "menu",
+          "settings": {
+            "column_width": 20,
+            "heading": "Faq",
+            "menu": "footer-menu-2"
           }
         }
       },
       "block_order": [
         "brand",
         "menu_main",
-        "newsletter"
+        "menu_Dir3tk",
+        "menu_KMbPB4"
       ],
       "settings": {
         "footer_width": "full",
