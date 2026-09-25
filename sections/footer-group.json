@@ -67,7 +67,7 @@
           "settings": {
             "column_width": 20,
             "heading": "Support",
-            "menu": "footer"
+            "menu": "footer-menu-copy"
           }
         },
         "menu_KMbPB4": {
@@ -75,7 +75,7 @@
           "settings": {
             "column_width": 20,
             "heading": "Faq",
-            "menu": "footer"
+            "menu": "footer-menu-2"
           }
         }
       },
