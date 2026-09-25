@@ -1,0 +1,26 @@
+/* Styles for sections/blog.liquid. */
+
+.blog-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  column-gap: var(--gap-x);
+  row-gap: var(--gap-y);
+}
+
+.blog-card__image-wrapper {
+  padding: var(--image-padding);
+}
+
+.blog-card__content {
+  text-align: var(--text-align);
+}
+
+.blog-card--card {
+  padding: 1rem;
+  background-color: var(--color-background);
+  border-width: var(--style-border-thickness-blog-cards);
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-blog-cards), transparent);
+  border-radius: var(--style-border-radius-blog-cards);
+  box-shadow: var(--style-shadow-blog-cards);
+}

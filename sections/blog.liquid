@@ -5,6 +5,8 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/blog
 {% endcomment %}
 
+{{ 'blog.css' | asset_url | stylesheet_tag }}
+
 <div class="page-width color-{{ section.settings.color_scheme.id }}">
   {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
   {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
@@ -43,33 +45,6 @@
     {%- endif -%}
   {% endpaginate %}
 </div>
-
-{% stylesheet %}
-  .blog-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    column-gap: var(--gap-x);
-    row-gap: var(--gap-y);
-  }
-
-  .blog-card__image-wrapper {
-    padding: var(--image-padding);
-  }
-
-  .blog-card__content {
-    text-align: var(--text-align);
-  }
-
-  .blog-card--card {
-    padding: 1rem;
-    background-color: var(--color-background);
-    border-width: var(--style-border-thickness-blog-cards);
-    border-style: solid;
-    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-blog-cards), transparent);
-    border-radius: var(--style-border-radius-blog-cards);
-    box-shadow: var(--style-shadow-blog-cards);
-  }
-{% endstylesheet %}
 
 {% schema %}
 {

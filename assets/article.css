@@ -1,0 +1,11 @@
+/* Styles for sections/article.liquid. */
+
+.article__comment {
+  padding: 1rem;
+  margin-block-end: 1rem;
+  border-width: var(--style-border-thickness-text-boxes);
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-text-boxes), transparent);
+  border-radius: var(--style-border-radius-text-boxes);
+  box-shadow: var(--style-shadow-text-boxes);
+}

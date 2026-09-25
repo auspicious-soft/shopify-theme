@@ -6,6 +6,8 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/article
 {% endcomment %}
 
+{{ 'article.css' | asset_url | stylesheet_tag }}
+
 <div class="page-width color-{{ section.settings.color_scheme.id }}">
   {% if article.image %}
     {% render 'image', image: article.image, width: 1000 %}
@@ -63,18 +65,6 @@
     {% endform %}
   {% endif %}
 </div>
-
-{% stylesheet %}
-  .article__comment {
-    padding: 1rem;
-    margin-block-end: 1rem;
-    border-width: var(--style-border-thickness-text-boxes);
-    border-style: solid;
-    border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-text-boxes), transparent);
-    border-radius: var(--style-border-radius-text-boxes);
-    box-shadow: var(--style-shadow-text-boxes);
-  }
-{% endstylesheet %}
 
 {% schema %}
 {

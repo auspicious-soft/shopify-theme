@@ -35,35 +35,3 @@
     {{ badge_text }}
   </span>
 {% endif %}
-
-{% stylesheet %}
-  .badge {
-    position: absolute;
-    z-index: 1;
-    padding: 0.25em 0.75em;
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    border-radius: var(--badge-radius);
-    font-size: 0.8em;
-  }
-
-  .badge--bottom-left {
-    inset-block-end: 0.5em;
-    inset-inline-start: 0.5em;
-  }
-
-  .badge--bottom-right {
-    inset-block-end: 0.5em;
-    inset-inline-end: 0.5em;
-  }
-
-  .badge--top-left {
-    inset-block-start: 0.5em;
-    inset-inline-start: 0.5em;
-  }
-
-  .badge--top-right {
-    inset-block-start: 0.5em;
-    inset-inline-end: 0.5em;
-  }
-{% endstylesheet %}

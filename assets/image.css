@@ -1,0 +1,19 @@
+/* Styles for snippets/image.liquid. */
+
+.image {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  border-width: var(--style-border-thickness-media);
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--color-border) var(--style-border-opacity-media), transparent);
+  border-radius: var(--style-border-radius-media);
+  box-shadow: var(--style-shadow-media);
+}
+
+.image > img {
+  width: 100%;
+  height: auto;
+}

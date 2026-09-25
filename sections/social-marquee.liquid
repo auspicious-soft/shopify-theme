@@ -11,6 +11,8 @@
   Each image is a block, so merchants can add, remove and reorder them.
 {% endcomment %}
 
+{{ 'social-marquee.css' | asset_url | stylesheet_tag }}
+
 {%- liquid
   assign item_count = section.blocks.size
   assign image_sizes = '(min-width: 750px) calc(100vw / ' | append: section.settings.items_desktop | append: '), calc(100vw / ' | append: section.settings.items_mobile | append: ')'
@@ -111,116 +113,6 @@
     </div>
   </div>
 </social-marquee>
-
-{% stylesheet %}
-  .social-marquee {
-    display: block;
-    padding-block: var(--section-padding-top) var(--section-padding-bottom);
-    overflow: hidden;
-  }
-
-  .social-marquee__header {
-    margin-block-end: 1.25rem;
-  }
-
-  .social-marquee__header--center {
-    text-align: center;
-  }
-
-  .social-marquee__heading {
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  /* The viewport is the size container, so an item can be sized as a
-     share of the visible strip: (width - gaps between items) / items shown. */
-  .social-marquee__viewport {
-    container-type: inline-size;
-    overflow: hidden;
-    cursor: grab;
-    touch-action: pan-y;
-    user-select: none;
-    -webkit-user-select: none;
-  }
-
-  /* Closed hand while dragging, and while the strip is stopped. */
-  .social-marquee__viewport.is-dragging,
-  .social-marquee.is-paused .social-marquee__viewport {
-    cursor: grabbing;
-  }
-
-  .social-marquee__viewport.is-dragging a {
-    pointer-events: none;
-  }
-
-  .social-marquee__track {
-    position: relative;
-    display: flex;
-    width: max-content;
-    will-change: transform;
-  }
-
-  .social-marquee__group {
-    display: flex;
-    gap: var(--social-marquee-gap);
-    padding: 0 var(--social-marquee-gap) 0 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  .social-marquee__item {
-    --items: var(--social-marquee-items-mobile);
-    flex: 0 0 calc((100cqw - var(--social-marquee-gap) * (var(--items) - 1)) / var(--items));
-  }
-
-  @media screen and (min-width: 750px) {
-    .social-marquee__item {
-      --items: var(--social-marquee-items);
-    }
-  }
-
-  .social-marquee__card {
-    position: relative;
-    display: block;
-    overflow: hidden;
-    aspect-ratio: var(--social-marquee-ratio);
-    border-radius: var(--social-marquee-radius);
-    background: rgb(0 0 0 / 0.06);
-    color: inherit;
-    -webkit-user-drag: none;
-  }
-
-  .social-marquee__image {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    pointer-events: none;
-    -webkit-user-drag: none;
-    transition: transform 0.6s ease;
-  }
-
-  .social-marquee__placeholder {
-    background: rgb(0 0 0 / 0.06);
-  }
-
-  @media (hover: hover) {
-    .social-marquee__viewport:not(.is-dragging) a.social-marquee__card:hover .social-marquee__image {
-      transform: scale(1.03);
-    }
-  }
-
-  .social-marquee__username {
-    position: absolute;
-    inset: 0 0 auto;
-    padding: 0.75rem 0.875rem 1.5rem;
-    font-size: 0.8125rem;
-    color: #fff;
-    background: linear-gradient(to bottom, rgb(0 0 0 / 0.45), transparent);
-    pointer-events: none;
-  }
-{% endstylesheet %}
 
 {% javascript %}
   if (!customElements.get('social-marquee')) {

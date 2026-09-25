@@ -1,0 +1,16 @@
+/* Styles for snippets/price.liquid. */
+
+.price {
+  display: inline-flex;
+  gap: 0.5em;
+  align-items: baseline;
+}
+
+.price__compare-at {
+  color: var(--color-foreground);
+  opacity: 0.6;
+}
+
+.price__sale {
+  color: var(--color-foreground);
+}

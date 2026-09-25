@@ -1,0 +1,26 @@
+/* Styles for sections/cart.liquid. */
+
+.cart__items {
+  width: 100%;
+}
+
+.cart__empty {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.cart__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cart__subtotal {
+  display: flex;
+  gap: 0.5rem;
+  font-weight: bold;
+}

@@ -1,0 +1,185 @@
+/* Styles for sections/featured-collection.liquid. */
+
+.fc {
+  display: block;
+  padding-block: var(--section-padding-top) var(--section-padding-bottom);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* ---------- Header ---------- */
+
+.fc__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-end: 1.5rem;
+}
+
+.fc__header--center {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.fc__titles {
+  min-width: 0;
+}
+
+.fc__heading {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.fc__subheading {
+  margin: 0.35rem 0 0;
+  color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+}
+
+.fc__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.fc__view-all-link {
+  color: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.fc__arrows {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.fc__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  margin: 0;
+  color: var(--color-foreground);
+  background: none;
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 20%, transparent);
+  border-radius: 999px;
+  box-shadow: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.fc__arrow svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.fc__arrow--prev svg {
+  transform: rotate(90deg);
+}
+
+.fc__arrow--next svg {
+  transform: rotate(-90deg);
+}
+
+.fc__arrow:hover:not(:disabled) {
+  background-color: var(--color-foreground);
+  color: var(--color-background);
+}
+
+.fc__arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.fc.is-static .fc__arrows,
+.fc.is-static .fc__progress {
+  display: none;
+}
+
+/* ---------- Track: grid or carousel ---------- */
+
+.fc__track {
+  --columns: var(--fc-columns-mobile);
+  --gap: var(--fc-gap-mobile);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media screen and (min-width: 750px) {
+  .fc__track {
+    --columns: var(--fc-columns);
+    --gap: var(--fc-gap);
+  }
+}
+
+.fc--grid .fc__track {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  gap: calc(var(--gap) * 2) var(--gap);
+}
+
+.fc--slider .fc__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - var(--gap) * (var(--columns) - 1)) / var(--columns));
+  gap: var(--gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.fc--slider .fc__track::-webkit-scrollbar {
+  display: none;
+}
+
+.fc--slider .fc__item {
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+/* ---------- Progress bar ---------- */
+
+.fc__progress {
+  position: relative;
+  height: 2px;
+  margin-block-start: 1.5rem;
+  overflow: hidden;
+  background-color: color-mix(in srgb, var(--color-foreground) 12%, transparent);
+}
+
+.fc__progress-bar {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: var(--fc-progress-size, 25%);
+  background-color: var(--color-foreground);
+  transform: translateX(var(--fc-progress-offset, 0%));
+  transition: transform 0.15s linear;
+}
+
+/* ---------- Footer button ---------- */
+
+.fc__footer {
+  display: flex;
+  justify-content: center;
+  margin-block-start: 2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fc__progress-bar {
+    transition: none;
+  }
+}

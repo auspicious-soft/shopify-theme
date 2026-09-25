@@ -4,6 +4,9 @@
   typography (h2), global .button styling and color scheme system instead
   of introducing one-off design tokens.
 {% endcomment %}
+
+{{ 'hero-banner.css' | asset_url | stylesheet_tag }}
+{{ 'banner-media.css' | asset_url | stylesheet_tag }}
 {% liquid
   assign h_align = 'center'
   case section.settings.content_position_horizontal
@@ -112,85 +115,6 @@
     </div>
   </div>
 </div>
-
-{% stylesheet %}
-  .hero-banner {
-    position: relative;
-    display: flex;
-    width: 100%;
-    min-height: 22rem;
-    height: var(--hero-banner-height, 60vh);
-    overflow: hidden;
-    background-color: var(--hero-banner-bg);
-    color: var(--hero-banner-text);
-  }
-
-  /* "Adapt to image": height follows the image's own aspect ratio at the
-     current width instead of a fixed viewport-height preset. Works the
-     same on any screen size since it's driven by width, not a media
-     query; object-fit: cover below still guards against extreme crops. */
-  .hero-banner--adapt {
-    height: auto;
-    aspect-ratio: var(--hero-banner-aspect-ratio, 16 / 9);
-  }
-
-  @media screen and (max-width: 749px) {
-    .hero-banner--adapt {
-      aspect-ratio: var(--hero-banner-aspect-ratio-mobile, var(--hero-banner-aspect-ratio, 16 / 9));
-    }
-  }
-
-  .hero-banner__media {
-    position: absolute;
-    inset: 0;
-  }
-
-  .hero-banner__overlay {
-    position: absolute;
-    inset: 0;
-    background-color: color-mix(
-      in srgb,
-      var(--hero-banner-overlay-color, #000000) calc(var(--hero-banner-overlay-opacity, 0) * 100%),
-      transparent
-    );
-  }
-
-  .hero-banner__inner {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex: 1;
-    align-items: var(--hero-banner-justify, flex-end);
-    justify-content: var(--hero-banner-align, center);
-    padding-block: var(--hero-banner-padding-top, 0) var(--hero-banner-padding-bottom, 0);
-  }
-
-  .hero-banner__content {
-    display: flex;
-    flex-direction: column;
-    align-items: var(--hero-banner-align, center);
-    gap: 1.25rem;
-    max-width: 40rem;
-    text-align: var(--hero-banner-text-align, center);
-  }
-
-  .hero-banner__heading {
-    margin: 0;
-    color: inherit;
-  }
-
-  .hero-banner__subheading {
-    margin: 0;
-    color: inherit;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-size: 0.9rem;
-  }
-
-  .hero-banner__button {
-    margin-top: 0.5rem;
-  }
-{% endstylesheet %}
 
 {% schema %}
 {

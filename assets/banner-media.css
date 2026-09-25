@@ -1,0 +1,68 @@
+/* Styles for snippets/banner-media.liquid. */
+
+.banner-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.banner-media__image,
+.banner-media__video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The video sits above its poster image. */
+.banner-media__video {
+  z-index: 1;
+}
+
+.banner-media__image--mobile,
+.banner-media__video--mobile {
+  display: none;
+}
+
+@media screen and (max-width: 749px) {
+  .banner-media__image--mobile,
+  .banner-media__video--mobile {
+    display: block;
+  }
+
+  .banner-media__image--desktop:has(+ .banner-media__image--mobile),
+  .banner-media__video--desktop:has(+ .banner-media__video--mobile) {
+    display: none;
+  }
+}
+
+/* YouTube / Vimeo: a 16:9 iframe scaled to cover the banner like
+   object-fit: cover, centered, with clicks passing through to the page. */
+.banner-media__embed {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  container-type: size;
+  pointer-events: none;
+}
+
+.banner-media__embed iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100cqw, 177.78cqh);
+  height: max(100cqh, 56.25cqw);
+  border: 0;
+  transform: translate(-50%, -50%);
+}
+
+/* Reduced motion: keep the still image, drop the video. */
+@media (prefers-reduced-motion: reduce) {
+  .banner-media__video,
+  .banner-media__embed {
+    display: none !important;
+  }
+}
