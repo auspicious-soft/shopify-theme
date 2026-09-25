@@ -23,10 +23,11 @@
 }
 
 /* Footer > Footer width: "Full width" runs the content edge to edge
-   instead of the .page-width column, keeping comfortable side padding. */
+   instead of the .page-width column, with the same side spacing as every
+   other section (Theme settings > Layout > Page margin). */
 .footer__inner--full {
   width: 100%;
-  padding-inline: clamp(var(--page-margin, 20px), 3vw, 3rem);
+  padding-inline: var(--page-margin);
 }
 
 /* ---------- Columns ---------- */

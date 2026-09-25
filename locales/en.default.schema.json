@@ -725,6 +725,13 @@
         "page_width": {
           "label": "Page width"
         },
+        "page_margin": {
+          "label": "Page margin (desktop)",
+          "info": "Space between the screen edge and the content. Used by every section, full width or not, so everything lines up"
+        },
+        "page_margin_mobile": {
+          "label": "Page margin (mobile)"
+        },
         "spacing_sections": {
           "label": "Space between template sections"
         },

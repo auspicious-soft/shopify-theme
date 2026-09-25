@@ -175,6 +175,27 @@
       },
       {
         "type": "range",
+        "id": "page_margin",
+        "min": 0,
+        "max": 80,
+        "step": 4,
+        "default": 32,
+        "unit": "px",
+        "label": "t:settings_schema.layout.settings.page_margin.label",
+        "info": "t:settings_schema.layout.settings.page_margin.info"
+      },
+      {
+        "type": "range",
+        "id": "page_margin_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "default": 20,
+        "unit": "px",
+        "label": "t:settings_schema.layout.settings.page_margin_mobile.label"
+      },
+      {
+        "type": "range",
         "id": "spacing_sections",
         "min": 0,
         "max": 100,

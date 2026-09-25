@@ -22,7 +22,7 @@
     --body-scale: {{ settings.body_scale }};
 
     --page-width: {{ settings.page_width | divided_by: 16.0 }}rem;
-    --page-margin: 20px;
+    --page-margin: {{ settings.page_margin_mobile | default: 20 }}px;
     --spacing-sections: {{ settings.spacing_sections }}px;
     --spacing-grid-horizontal: {{ settings.spacing_grid_horizontal }}px;
     --spacing-grid-vertical: {{ settings.spacing_grid_vertical }}px;
@@ -96,4 +96,10 @@
       --color-border: {{ scheme.settings.text | color_mix: scheme.settings.background, 15 }};
     }
   {% endfor %}
+
+  @media screen and (min-width: 750px) {
+    :root {
+      --page-margin: {{ settings.page_margin | default: 32 }}px;
+    }
+  }
 {% endstyle %}
