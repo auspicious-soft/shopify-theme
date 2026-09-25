@@ -86,7 +86,7 @@
         "menu_KMbPB4"
       ],
       "settings": {
-        "footer_width": "full",
+        "footer_width": "page",
         "mobile_menu_style": "accordion",
         "column_gap": 48,
         "copyright_text": "",
