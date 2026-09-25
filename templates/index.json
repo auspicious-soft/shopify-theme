@@ -172,7 +172,7 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
-        "collection": "hydrogen",
+        "collection": "hoodies",
         "image": "shopify://shop_images/Banner_6-08_4000x1562_crop_center_jpg.png",
         "mobile_image": "shopify://shop_images/iPhone_13_14_-_3.png",
         "media_type": "image",
