@@ -44,6 +44,7 @@
     </div>
   {%- endif -%}
 
+  {%- if section.settings.width == 'page' -%}<div class="page-width">{%- endif -%}
   <div class="social-marquee__viewport" data-marquee-viewport>
     <div class="social-marquee__track" data-marquee-track>
       <ul class="social-marquee__group" role="list" data-marquee-group>
@@ -112,6 +113,7 @@
       </ul>
     </div>
   </div>
+  {%- if section.settings.width == 'page' -%}</div>{%- endif -%}
 </social-marquee>
 
 {% javascript %}
@@ -421,6 +423,16 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "full"
     },
     {
       "type": "range",

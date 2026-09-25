@@ -9,7 +9,7 @@
     </div>
   {% endif %}
 
-  <div class="custom-section__content page-width" {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}>
+  <div class="custom-section__content page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}" {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}>
     {% content_for 'blocks' %}
   </div>
 </div>
@@ -23,6 +23,16 @@
       "type": "image_picker",
       "id": "background_image",
       "label": "t:labels.background"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "page"
     }
   ],
   "presets": [

@@ -37,7 +37,7 @@
     --list-columns-mobile: {{ columns_mobile }};
   "
 >
-  <div class="page-width">
+  <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
     {%- if section.settings.heading != blank or section.settings.subheading != blank or view_all_url != blank or show_clear or layout == 'slider' -%}
       <div class="product-list__header product-list__header--{{ section.settings.heading_alignment | default: 'left' }}">
         <div class="product-list__titles">

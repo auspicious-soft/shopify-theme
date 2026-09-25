@@ -199,7 +199,7 @@
     {% endif %}
   "
 >
-  <div class="header__inner page-width">
+  <div class="header__inner page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
     <div class="header__zone header__zone--start">
       {% if show_mobile_toggle %}
         {% render 'header-menu-toggle', section: section, modifier: 'header__menu-toggle--mobile-only' %}
@@ -326,6 +326,16 @@
       "label": "t:labels.hamburger_text",
       "default": "Menu",
       "visible_if": "{{ section.settings.menu_type == 'hamburger' and section.settings.hamburger_display == 'text' }}"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "page"
     },
     {
       "type": "color_scheme",

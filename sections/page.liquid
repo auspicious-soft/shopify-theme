@@ -5,7 +5,7 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/page
 {% endcomment %}
 
-<div class="page-width">
+<div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
   {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
   {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
   <{{ heading_tag }} class="{{ heading_class }}">{{ page.title }}</{{ heading_tag }}>
@@ -47,6 +47,16 @@
         { "value": "h1", "label": "t:options.heading_size.huge" }
       ],
       "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "page"
     }
   ]
 }

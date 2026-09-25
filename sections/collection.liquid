@@ -84,7 +84,7 @@
           }}
         </div>
       {% endif %}
-      <div class="collection-banner__content page-width">
+      <div class="collection-banner__content page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
         <{{ heading_tag }} class="{{ heading_class }} collection-banner__title">{{ collection.title | escape }}</{{ heading_tag }}>
         {% if section.settings.show_description and collection.description != blank %}
           <div class="collection-banner__description">{{ collection.description }}</div>
@@ -95,7 +95,7 @@
     <{{ heading_tag }} class="visually-hidden">{{ collection.title | escape }}</{{ heading_tag }}>
   {% endif %}
 
-  <div class="collection__container page-width">
+  <div class="collection__container page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
     {% paginate collection.products by section.settings.products_per_page %}
       <div class="collection__toolbar">
         {% if filtering %}
@@ -780,6 +780,16 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "page"
     },
     {
       "type": "range",

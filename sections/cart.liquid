@@ -9,7 +9,7 @@
 
 {{ 'cart.css' | asset_url | stylesheet_tag }}
 
-<div class="cart page-width color-{{ section.settings.color_scheme.id }}">
+<div class="cart page-width{% if section.settings.width == 'full' %} page-width--full{% endif %} color-{{ section.settings.color_scheme.id }}">
   {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
   {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
   <{{ heading_tag }} class="{{ heading_class }}">{{ 'cart.title' | t }}</{{ heading_tag }}>
@@ -99,6 +99,16 @@
         { "value": "h1", "label": "t:options.heading_size.huge" }
       ],
       "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "page"
     },
     {
       "type": "color_scheme",

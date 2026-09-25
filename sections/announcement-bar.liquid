@@ -119,7 +119,7 @@
     {% endcase %}
   "
 >
-  <div class="announcement-bar__inner{% unless mode == 'marquee' %} page-width{% endunless %}">
+  <div class="announcement-bar__inner{% unless mode == 'marquee' %} page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}{% endunless %}">
     <div class="announcement-bar__content">
       {% case mode %}
         {% when 'marquee' %}
@@ -508,6 +508,16 @@
         { "value": "700", "label": "t:options.font_weight.bold" }
       ],
       "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "page"
     },
     {
       "type": "range",

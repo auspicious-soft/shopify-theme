@@ -97,6 +97,7 @@
     "header_options": "Header options",
     "header_style": "Header style",
     "heading": "Heading",
+    "section_width": "Width",
     "heading_tag": "Heading tag",
     "heading_tag_info": "The heading level, for SEO and screen readers. Use H1 for only one heading per page.",
     "heading_class": "Heading size",
@@ -183,6 +184,10 @@
     "desktop_submenu_type_info": "Mega menu shows 2nd-level links as column headings with their 3rd-level links beneath. Add a Mega menu promo block to show an image and title on the right."
   },
   "options": {
+    "section_width": {
+      "full": "Full width",
+      "page": "Page width"
+    },
     "alignment": {
       "left": "Left",
       "center": "Center",
@@ -502,9 +507,6 @@
       "mobile_image_info": "Optional, shown on screens under 750px",
       "height": "Desktop height",
       "mobile_height": "Mobile height",
-      "width": "Width",
-      "width_full": "Full width",
-      "width_page": "Page width",
       "corner_radius": "Corner radius",
       "zoom_on_hover": "Zoom image on hover",
       "heading_info": "Leave empty to use the collection title",

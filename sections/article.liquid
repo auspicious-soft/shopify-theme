@@ -8,7 +8,7 @@
 
 {{ 'article.css' | asset_url | stylesheet_tag }}
 
-<div class="page-width color-{{ section.settings.color_scheme.id }}">
+<div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %} color-{{ section.settings.color_scheme.id }}">
   {% if article.image %}
     {% render 'image', image: article.image, width: 1000 %}
   {% endif %}
@@ -99,6 +99,16 @@
         { "value": "h1", "label": "t:options.heading_size.huge" }
       ],
       "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "page"
     },
     {
       "type": "color_scheme",

@@ -108,3 +108,8 @@ body {
   margin-inline: auto;
   padding-inline: var(--page-margin);
 }
+
+/* Section setting Width > Full width: same side margins, no max width. */
+.page-width--full {
+  max-width: none;
+}

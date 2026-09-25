@@ -28,7 +28,7 @@
     --grid-columns-mobile: {{ columns_mobile }};
   "
 >
-  <div class="page-width">
+  <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
     {% if section.settings.show_heading %}
       <div class="collection-list-page__header collection-list-page__header--{{ section.settings.heading_alignment }}">
         {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
@@ -158,6 +158,16 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "page"
     },
     {
       "type": "range",

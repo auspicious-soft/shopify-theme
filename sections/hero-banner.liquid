@@ -58,6 +58,7 @@
   endif
 %}
 
+{%- if section.settings.width == 'page' -%}<div class="page-width">{%- endif -%}
 <div
   class="hero-banner{% if is_adapt %} hero-banner--adapt{% endif %}"
   style="
@@ -115,6 +116,7 @@
     </div>
   </div>
 </div>
+{%- if section.settings.width == 'page' -%}</div>{%- endif -%}
 
 {% schema %}
 {
@@ -277,6 +279,16 @@
         { "value": "bottom", "label": "t:options.vertical_position.bottom" }
       ],
       "default": "bottom"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "full"
     },
     {
       "type": "range",

@@ -72,7 +72,7 @@
       --fc-gap-mobile: {{ section.settings.gap | times: 0.6 | round }}px;
     "
   >
-    <div class="page-width">
+    <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
       {%- if section.settings.heading != blank or section.settings.subheading != blank or arrows == 'top' or section.settings.view_all_style == 'link' -%}
         <div class="fc__header fc__header--{{ section.settings.heading_alignment }}">
           <div class="fc__titles">
@@ -411,6 +411,16 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "page"
     },
     {
       "type": "range",
