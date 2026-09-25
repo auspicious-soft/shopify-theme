@@ -7,6 +7,12 @@
   color: var(--color-foreground);
 }
 
+/* Wider side padding, the same as the Collection banner's text
+   (assets/collection-banner.css), so the products line up with it. */
+.fc > .page-width {
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
 /* ---------- Header ---------- */
 
 .fc__header {
