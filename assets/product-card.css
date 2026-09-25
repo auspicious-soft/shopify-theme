@@ -180,6 +180,34 @@
   }
 }
 
+/* ---------- Overlay behind the size grid ----------
+   A soft gradient rising from the bottom of the image, shown together with
+   the size grid (on hover, or when "+" is tapped on touch screens) so the
+   sizes stand out on any photo. Sits above the images, below the badge,
+   arrows and grid. */
+
+.product-card--quick-hover .product-card__media:has(.product-card__quick)::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.35), rgb(0 0 0 / 0.12) 45%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+@media (hover: hover) {
+  .product-card--quick-hover:hover .product-card__media::after,
+  .product-card--quick-hover:has(:focus-visible) .product-card__media::after {
+    opacity: 1;
+  }
+}
+
+.product-card--quick-hover.is-quick-open .product-card__media::after {
+  opacity: 1;
+}
+
 /* ---------- Touch screens: "+" button opens the size grid ---------- */
 
 .product-card__quick-toggle {
@@ -571,7 +599,8 @@
 @media (prefers-reduced-motion: reduce) {
   .product-card__quick,
   .product-card__arrow,
-  .product-card__quick-toggle svg {
+  .product-card__quick-toggle svg,
+  .product-card__media::after {
     transition: none !important;
   }
 }
