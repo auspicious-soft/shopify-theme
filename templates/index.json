@@ -432,7 +432,7 @@
         "button_style": "primary",
         "success_message": "",
         "note": "",
-        "color_scheme": "",
+        "color_scheme": "scheme-4",
         "width": "page",
         "padding_top": 56,
         "padding_bottom": 56
