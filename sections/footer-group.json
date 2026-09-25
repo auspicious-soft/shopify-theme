@@ -45,7 +45,7 @@
         "brand": {
           "type": "brand",
           "settings": {
-            "column_width": 30,
+            "column_width": 40,
             "image": "shopify://shop_images/White_1.png",
             "image_width": 140,
             "show_shop_name": true,
@@ -65,7 +65,7 @@
         "menu_Dir3tk": {
           "type": "menu",
           "settings": {
-            "column_width": 15,
+            "column_width": 20,
             "heading": "Support",
             "menu": "footer"
           }
@@ -73,7 +73,7 @@
         "menu_KMbPB4": {
           "type": "menu",
           "settings": {
-            "column_width": 15,
+            "column_width": 20,
             "heading": "Faq",
             "menu": "footer"
           }
