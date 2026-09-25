@@ -11,7 +11,11 @@
   "sections": {
     "main": {
       "type": "search",
-      "settings": {}
+      "settings": {
+        "heading_tag": "h1",
+        "heading_class": "h3",
+        "color_scheme": ""
+      }
     }
   },
   "order": [
