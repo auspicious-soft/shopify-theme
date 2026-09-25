@@ -61,11 +61,29 @@
             "heading": "About",
             "menu": "footer"
           }
+        },
+        "menu_Dir3tk": {
+          "type": "menu",
+          "settings": {
+            "column_width": 15,
+            "heading": "Support",
+            "menu": "footer"
+          }
+        },
+        "menu_KMbPB4": {
+          "type": "menu",
+          "settings": {
+            "column_width": 15,
+            "heading": "Faq",
+            "menu": "footer"
+          }
         }
       },
       "block_order": [
         "brand",
-        "menu_main"
+        "menu_main",
+        "menu_Dir3tk",
+        "menu_KMbPB4"
       ],
       "settings": {
         "footer_width": "full",
