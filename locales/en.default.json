@@ -135,6 +135,7 @@
     "save_amount": "Save {{ amount }}",
     "added_to_cart": "Added",
     "add_size_to_cart": "Add size {{ size }} to cart",
+    "choose_size": "Choose a size",
     "tax_included": "Tax included.",
     "tax_excluded": "Tax excluded.",
     "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout.",

@@ -4,13 +4,13 @@
   viewed products). Everything it shows comes from Theme settings >
   Product cards.
 
-  - Image slider: every product image. Drag with the mouse, swipe on touch
-    screens, or use the prev/next arrows on hover (optional). Each image
-    links to the product; a drag never opens the link.
+  - Image slider: every product image, prev/next arrows on hover (touch
+    screens swipe instead). Each image links to the product.
   - Sale badge: "Save €53", "Save 20%" or "Sale", updated per variant.
   - Color swatches: picking a color shows that color's image, price and
     badge, and which of its sizes are in stock.
-  - Quick add (on hover, always, or hidden):
+  - Quick add (on hover, always, or hidden). On touch screens "on hover"
+    becomes a "+" button on the image that opens the size grid:
       * a grid of sizes; clicking one adds the chosen color + size to cart
       * products with options but no size: "Add to cart" for the chosen variant
       * products without options: "Add to cart"
@@ -116,7 +116,7 @@
 {%- endcapture -%}
 
 <product-card
-  class="product-card product-card--{{ settings.card_style }} product-card--quick-{{ mode }}{% if settings.card_quick_add_touch %} product-card--quick-touch{% endif %} product-card--info-{{ layout }} product-card--align-{{ settings.card_text_alignment }} hover-{{ settings.animations_hover_elements }} color-{{ settings.card_color_scheme.id }}"
+  class="product-card product-card--{{ settings.card_style }} product-card--quick-{{ mode }} product-card--info-{{ layout }} product-card--align-{{ settings.card_text_alignment }} hover-{{ settings.animations_hover_elements }} color-{{ settings.card_color_scheme.id }}"
   data-color-index="{{ color_index }}"
   data-size-index="{{ size_index }}"
   data-selected="{{ current.options | json | escape }}"
@@ -126,7 +126,7 @@
   {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
 >
   <div class="product-card__media product-card__media--{{ fit }}">
-    <div class="product-card__slides{% if use_slider and product.media.size > 1 %} product-card__slides--draggable{% endif %}" data-card-slides>
+    <div class="product-card__slides" data-card-slides>
       {%- for media in media_list limit: 10 -%}
         {%- liquid
           assign slide_loading = 'lazy'
@@ -161,7 +161,7 @@
       {%- endfor -%}
     </div>
 
-    {%- if use_slider and settings.card_image_arrows and product.media.size > 1 -%}
+    {%- if use_slider and product.media.size > 1 -%}
       <button type="button" class="product-card__arrow product-card__arrow--prev" data-card-prev aria-label="{{ 'products.previous_media' | t }}" disabled>
         {{ 'icon-chevron.svg' | inline_asset_content }}
       </button>
@@ -180,6 +180,23 @@
     >
       {{- badge_for_current | strip -}}
     </span>
+
+    {%- if mode == 'hover' and product.available -%}
+      {%- comment -%}
+        Touch screens have no hover: this "+" opens the size grid for this
+        card (or adds straight to cart when there are no sizes to pick).
+        Hidden with a mouse, where the grid shows on hover instead.
+      {%- endcomment -%}
+      <button
+        type="button"
+        class="product-card__quick-toggle"
+        data-card-quick-toggle="{% if size_option %}open{% else %}add{% endif %}"
+        {% if size_option %}aria-expanded="false"{% endif %}
+        aria-label="{% if size_option %}{{ 'products.choose_size' | t }}{% else %}{{ 'products.add_to_cart' | t }}{% endif %}"
+      >
+        {{ 'icon-plus.svg' | inline_asset_content }}
+      </button>
+    {%- endif -%}
 
     {%- if mode != 'none' and product.available -%}
       <div class="product-card__quick">
@@ -338,18 +355,6 @@
         this.addEventListener('submit', this.onSubmit);
         this.slides?.addEventListener('scroll', this.updateArrows, { passive: true });
 
-        // Mouse drag to change image (touch screens already swipe natively).
-        if (this.slides?.classList.contains('product-card__slides--draggable')) {
-          this.onPointerDown = this.onPointerDown.bind(this);
-          this.onPointerMove = this.onPointerMove.bind(this);
-          this.onPointerUp = this.onPointerUp.bind(this);
-          this.slides.addEventListener('pointerdown', this.onPointerDown);
-          this.slides.addEventListener('pointermove', this.onPointerMove);
-          this.slides.addEventListener('pointerup', this.onPointerUp);
-          this.slides.addEventListener('pointercancel', this.onPointerUp);
-          this.slides.addEventListener('dragstart', (event) => event.preventDefault());
-        }
-
         this.updateArrows();
         this.updateAvailability();
       }
@@ -360,53 +365,8 @@
         this.slides?.removeEventListener('scroll', this.updateArrows);
       }
 
-      onPointerDown(event) {
-        if (event.pointerType !== 'mouse' || event.button !== 0) return;
-        this.drag = { id: event.pointerId, startX: event.clientX, startScroll: this.slides.scrollLeft, moved: false };
-      }
-
-      onPointerMove(event) {
-        if (!this.drag || event.pointerId !== this.drag.id) return;
-        const dx = event.clientX - this.drag.startX;
-        if (!this.drag.moved) {
-          if (Math.abs(dx) < 5) return;
-          this.drag.moved = true;
-          // Snapping fights a hand-driven scroll, so it's off while dragging.
-          this.slides.classList.add('is-dragging');
-          this.slides.setPointerCapture(event.pointerId);
-        }
-        this.slides.scrollLeft = this.drag.startScroll - dx;
-      }
-
-      onPointerUp(event) {
-        if (!this.drag || event.pointerId !== this.drag.id) return;
-        const { moved, startX, startScroll } = this.drag;
-        this.drag = null;
-        if (!moved) return;
-
-        if (this.slides.hasPointerCapture(event.pointerId)) this.slides.releasePointerCapture(event.pointerId);
-        this.slides.classList.remove('is-dragging');
-
-        // Settle on the next/previous image once dragged a little, like a swipe.
-        const width = this.slides.clientWidth;
-        const startIndex = Math.round(Math.abs(startScroll) / width);
-        const dx = event.clientX - startX;
-        const threshold = Math.min(60, width * 0.15);
-        let index = startIndex;
-        if (Math.abs(dx) > threshold) index += (dx < 0 ? 1 : -1) * (document.dir === 'rtl' ? -1 : 1);
-        this.showSlide(Math.max(0, Math.min(index, this.slides.children.length - 1)));
-
-        // The click that ends a drag must not open the product.
-        this.suppressClick = true;
-        setTimeout(() => (this.suppressClick = false), 0);
-      }
 
       onClick(event) {
-        if (this.suppressClick && event.target.closest('.product-card__slide')) {
-          event.preventDefault();
-          this.suppressClick = false;
-          return;
-        }
         const target = event.target;
         const arrow = target.closest('[data-card-prev], [data-card-next]');
         if (arrow) {
@@ -434,7 +394,40 @@
         if (addCurrent) {
           event.preventDefault();
           this.add(this.findVariant(), addCurrent);
+          return;
         }
+
+        // Touch screens: "+" opens the size grid, or adds straight to cart
+        // when the product has no size to choose.
+        const toggle = target.closest('[data-card-quick-toggle]');
+        if (toggle) {
+          event.preventDefault();
+          if (toggle.dataset.cardQuickToggle === 'add') this.add(this.findVariant(), toggle);
+          else this.setQuickOpen(!this.classList.contains('is-quick-open'));
+        }
+      }
+
+      setQuickOpen(open) {
+        this.classList.toggle('is-quick-open', open);
+        this.querySelector('[data-card-quick-toggle="open"]')?.setAttribute('aria-expanded', String(open));
+        if (open) {
+          // Only one card's size grid open at a time.
+          document.querySelectorAll('product-card.is-quick-open').forEach((card) => {
+            if (card !== this) card.setQuickOpen(false);
+          });
+          ProductCard.listenForOutsideTaps();
+        }
+      }
+
+      /** One shared listener: a tap outside an open card closes its size grid. */
+      static listenForOutsideTaps() {
+        if (ProductCard.outsideListener) return;
+        ProductCard.outsideListener = (event) => {
+          document.querySelectorAll('product-card.is-quick-open').forEach((card) => {
+            if (!card.contains(event.target)) card.setQuickOpen(false);
+          });
+        };
+        document.addEventListener('pointerdown', ProductCard.outsideListener, { passive: true });
       }
 
       /** Single-variant products use a real form (works without JS); add it over Ajax here. */
@@ -539,6 +532,8 @@
           document.dispatchEvent(new CustomEvent('cart:item-added', { bubbles: true }));
           button.classList.add('is-added');
           setTimeout(() => button.classList.remove('is-added'), 1500);
+          // Touch screens: close the size grid once the size is in the cart.
+          if (this.classList.contains('is-quick-open')) setTimeout(() => this.setQuickOpen(false), 600);
         } catch (error) {
           window.location.href = productPage;
         } finally {

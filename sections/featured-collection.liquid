@@ -36,7 +36,6 @@
     endif
   endif
 
-
   assign peek = 0
   if layout == 'slider' and section.settings.mobile_peek
     assign peek = 0.2
@@ -44,7 +43,7 @@
 
   # Carousel arrows go beside the heading (top) or on the carousel's sides.
   assign arrows = ''
-  if layout == 'slider' and section.settings.show_arrows
+  if layout == 'slider'
     assign arrows = section.settings.arrow_position | default: 'top'
   endif
 
@@ -339,13 +338,6 @@
       "default": 16
     },
     {
-      "type": "checkbox",
-      "id": "show_arrows",
-      "label": "t:sections.featured_collection.show_arrows",
-      "default": true,
-      "visible_if": "{{ section.settings.layout == 'slider' }}"
-    },
-    {
       "type": "select",
       "id": "arrow_position",
       "label": "t:sections.featured_collection.arrow_position",
@@ -354,7 +346,7 @@
         { "value": "sides", "label": "t:sections.featured_collection.arrow_sides" }
       ],
       "default": "top",
-      "visible_if": "{{ section.settings.layout == 'slider' and section.settings.show_arrows }}"
+      "visible_if": "{{ section.settings.layout == 'slider' }}"
     },
     {
       "type": "checkbox",
