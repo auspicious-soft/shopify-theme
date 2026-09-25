@@ -523,6 +523,28 @@
       "full_link": "Make whole banner clickable",
       "section_color_scheme": "Section color scheme"
     },
+    "newsletter": {
+      "name": "Newsletter",
+      "title": "Title",
+      "subtitle": "Subtitle",
+      "description": "Description",
+      "form": "Sign-up form",
+      "form_position": "Form position",
+      "form_position_info": "On mobile the form always sits below the text",
+      "form_right": "Right of the text",
+      "form_below": "Below the text",
+      "form_width": "Form max width",
+      "field_style": "Field style",
+      "field_boxed": "Boxed (field and button)",
+      "field_underline": "Underline (text button with arrow)",
+      "placeholder": "Email placeholder",
+      "placeholder_info": "Leave empty for \"Email address\"",
+      "button_label_info": "Leave empty to show only an arrow",
+      "success_message": "Success message",
+      "success_message_info": "Leave empty for \"Thanks for subscribing!\"",
+      "note": "Note under the form",
+      "note_info": "Optional, e.g. a privacy line with a link"
+    },
     "logo_marquee": {
       "name": "Logo marquee",
       "header_logos": "Logos",

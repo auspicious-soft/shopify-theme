@@ -1,0 +1,211 @@
+/* Styles for sections/newsletter.liquid. */
+
+.newsletter {
+  padding-block: var(--section-padding-top) var(--section-padding-bottom);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* ---------- Layout: form below the text (and always on mobile) ---------- */
+
+.newsletter__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.newsletter--align-center .newsletter__inner {
+  align-items: center;
+  text-align: center;
+}
+
+.newsletter__form-wrap {
+  width: 100%;
+  max-width: var(--newsletter-form-width, 460px);
+}
+
+/* ---------- Layout: form to the right of the text (desktop) ---------- */
+
+@media screen and (min-width: 750px) {
+  .newsletter--form-right .newsletter__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, var(--newsletter-form-width, 460px));
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    text-align: start;
+  }
+
+  .newsletter--form-right .newsletter__form-wrap {
+    max-width: none;
+  }
+}
+
+/* ---------- Text ---------- */
+
+.newsletter__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 40rem;
+}
+
+.newsletter__heading {
+  margin: 0;
+}
+
+.newsletter__subheading {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.newsletter__description {
+  color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
+}
+
+.newsletter__description > *,
+.newsletter__note > * {
+  margin: 0;
+}
+
+.newsletter__description > * + * {
+  margin-top: 0.6rem;
+}
+
+/* ---------- Form: boxed (input + button side by side) ---------- */
+
+.newsletter__field {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.newsletter__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.85rem 1rem;
+  font: inherit;
+  font-size: 0.95rem;
+  color: inherit;
+  background-color: var(--color-background);
+  border-width: var(--style-border-thickness-inputs, 1px);
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--color-foreground) 30%, transparent);
+  border-radius: var(--style-border-radius-inputs, 0);
+  box-shadow: none;
+}
+
+.newsletter__input::placeholder {
+  color: color-mix(in srgb, var(--color-foreground) 55%, transparent);
+}
+
+.newsletter__input:focus-visible {
+  outline: 2px solid var(--color-foreground);
+  outline-offset: 1px;
+}
+
+.newsletter__button {
+  flex: 0 0 auto;
+  min-width: 0;
+  gap: 0.5rem;
+}
+
+.newsletter__button svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* ---------- Form: underline (like the footer) ---------- */
+
+.newsletter--field-underline .newsletter__field {
+  gap: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-foreground) 40%, transparent);
+  transition: border-color 0.2s ease;
+}
+
+.newsletter--field-underline .newsletter__field:focus-within {
+  border-color: var(--color-foreground);
+}
+
+.newsletter--field-underline .newsletter__input {
+  padding-inline: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.newsletter--field-underline .newsletter__input:focus-visible {
+  outline: none;
+}
+
+.newsletter__submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0 0.5rem 0.75rem;
+  margin: 0;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: inherit;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.newsletter__submit svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  transition: transform 0.25s ease;
+}
+
+.newsletter__submit:hover svg,
+.newsletter__submit:focus-visible svg {
+  transform: translateX(0.25rem);
+}
+
+/* ---------- Messages and note ---------- */
+
+.newsletter__message {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+}
+
+.newsletter__message--success {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 20%, transparent);
+}
+
+.newsletter__message--error {
+  color: #c0392b;
+}
+
+.newsletter__note {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
+}
+
+.newsletter__note a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* Very narrow screens: the boxed button goes under the email field. */
+@media screen and (max-width: 419px) {
+  .newsletter--field-boxed .newsletter__field {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .newsletter__submit svg {
+    transition: none;
+  }
+}

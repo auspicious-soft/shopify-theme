@@ -1,0 +1,293 @@
+{% comment %}
+  "Newsletter": a title, subtitle and description with an email sign-up
+  form, either to the right of the text or below it (always below on
+  mobile). Signing up creates/updates a customer with the "newsletter" tag
+  and email marketing consent (Shopify's customer form).
+
+  Styles live in assets/newsletter.css.
+{% endcomment %}
+
+{{ 'newsletter.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign form_id = 'Newsletter-' | append: section.id
+  assign position = section.settings.form_position | default: 'right'
+  assign heading_tag = section.settings.heading_tag | default: 'h2'
+  assign heading_class = section.settings.heading_class | default: heading_tag
+  assign placeholder = 'general.newsletter.email_label' | t
+  if section.settings.placeholder != blank
+    assign placeholder = section.settings.placeholder
+  endif
+  assign success_message = 'general.newsletter.success' | t
+  if section.settings.success_message != blank
+    assign success_message = section.settings.success_message
+  endif
+  assign button_label = section.settings.button_label
+-%}
+
+<div
+  class="newsletter newsletter--form-{{ position }} newsletter--align-{{ section.settings.alignment }} newsletter--field-{{ section.settings.field_style }} color-{{ section.settings.color_scheme.id }}"
+  style="
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --newsletter-form-width: {{ section.settings.form_width }}px;
+  "
+>
+  <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+    <div class="newsletter__inner">
+      {%- if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank -%}
+        <div class="newsletter__text">
+          {%- if section.settings.heading != blank -%}
+            <{{ heading_tag }} class="{{ heading_class }} newsletter__heading">{{ section.settings.heading | escape }}</{{ heading_tag }}>
+          {%- endif -%}
+          {%- if section.settings.subheading != blank -%}
+            <p class="newsletter__subheading">{{ section.settings.subheading | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.description != blank -%}
+            <div class="newsletter__description rte">{{ section.settings.description }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="newsletter__form-wrap">
+        {% form 'customer', id: form_id, class: 'newsletter__form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {%- if form.posted_successfully? -%}
+            <p class="newsletter__message newsletter__message--success" role="status" tabindex="-1" autofocus>
+              {{- success_message | escape -}}
+            </p>
+          {%- else -%}
+            <div class="newsletter__field">
+              <label for="{{ form_id }}-email" class="visually-hidden">{{ 'general.newsletter.email_label' | t }}</label>
+              <input
+                id="{{ form_id }}-email"
+                type="email"
+                name="contact[email]"
+                class="newsletter__input"
+                placeholder="{{ placeholder | escape }}"
+                autocomplete="email"
+                autocorrect="off"
+                autocapitalize="off"
+                required
+                {% if form.errors %}
+                  aria-invalid="true" aria-describedby="{{ form_id }}-error"
+                {% endif %}
+              >
+              <button
+                type="submit"
+                class="{% if section.settings.field_style == 'underline' %}newsletter__submit{% else %}button button--{{ section.settings.button_style }} newsletter__button{% endif %}"
+                name="commit"
+              >
+                {%- if button_label != blank -%}
+                  <span>{{ button_label | escape }}</span>
+                {%- else -%}
+                  <span class="visually-hidden">{{ 'general.newsletter.subscribe' | t }}</span>
+                {%- endif -%}
+                {%- if section.settings.field_style == 'underline' or button_label == blank -%}
+                  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--icon-stroke-width, 1.25)" d="M4 10h12m0 0-4.5-4.5M16 10l-4.5 4.5"/></svg>
+                {%- endif -%}
+              </button>
+            </div>
+            {%- if form.errors -%}
+              <p id="{{ form_id }}-error" class="newsletter__message newsletter__message--error" role="alert">
+                {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}
+              </p>
+            {%- endif -%}
+          {%- endif -%}
+        {% endform %}
+
+        {%- if section.settings.note != blank -%}
+          <div class="newsletter__note rte">{{ section.settings.note }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.newsletter.name",
+  "class": "section-newsletter",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:labels.content_settings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.newsletter.title",
+      "default": "Join our newsletter"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:labels.heading_tag",
+      "info": "t:labels.heading_tag_info",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "heading_class",
+      "label": "t:labels.heading_class",
+      "info": "t:labels.heading_class_info",
+      "options": [
+        { "value": "h6", "label": "t:options.heading_size.extra_small" },
+        { "value": "h5", "label": "t:options.heading_size.small" },
+        { "value": "h4", "label": "t:options.heading_size.medium" },
+        { "value": "h3", "label": "t:options.heading_size.large" },
+        { "value": "h2", "label": "t:options.heading_size.extra_large" },
+        { "value": "h1", "label": "t:options.heading_size.huge" }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.newsletter.subtitle",
+      "default": "Be the first to know about new drops and offers"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.newsletter.description",
+      "default": "<p>Sign up for 10% off your first order, plus early access to new collections.</p>"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.newsletter.form"
+    },
+    {
+      "type": "select",
+      "id": "form_position",
+      "label": "t:sections.newsletter.form_position",
+      "info": "t:sections.newsletter.form_position_info",
+      "options": [
+        { "value": "right", "label": "t:sections.newsletter.form_right" },
+        { "value": "below", "label": "t:sections.newsletter.form_below" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:labels.alignment",
+      "options": [
+        { "value": "left", "label": "t:options.alignment.left" },
+        { "value": "center", "label": "t:options.alignment.center" }
+      ],
+      "default": "left",
+      "visible_if": "{{ section.settings.form_position == 'below' }}"
+    },
+    {
+      "type": "range",
+      "id": "form_width",
+      "label": "t:sections.newsletter.form_width",
+      "min": 280,
+      "max": 720,
+      "step": 20,
+      "unit": "px",
+      "default": 460
+    },
+    {
+      "type": "select",
+      "id": "field_style",
+      "label": "t:sections.newsletter.field_style",
+      "options": [
+        { "value": "boxed", "label": "t:sections.newsletter.field_boxed" },
+        { "value": "underline", "label": "t:sections.newsletter.field_underline" }
+      ],
+      "default": "boxed"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "t:sections.newsletter.placeholder",
+      "info": "t:sections.newsletter.placeholder_info"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:labels.button_text",
+      "info": "t:sections.newsletter.button_label_info",
+      "default": "Subscribe"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:labels.button_style",
+      "options": [
+        { "value": "primary", "label": "t:options.button_style.primary" },
+        { "value": "secondary", "label": "t:options.button_style.secondary" }
+      ],
+      "default": "primary",
+      "visible_if": "{{ section.settings.field_style == 'boxed' }}"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "t:sections.newsletter.success_message",
+      "info": "t:sections.newsletter.success_message_info"
+    },
+    {
+      "type": "richtext",
+      "id": "note",
+      "label": "t:sections.newsletter.note",
+      "info": "t:sections.newsletter.note_info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "page"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:labels.padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:labels.padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.newsletter.name"
+    }
+  ]
+}
+{% endschema %}
