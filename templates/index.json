@@ -34,7 +34,7 @@
         "padding_bottom": 100,
         "enable_button": true,
         "button_text": "Shop now",
-        "button_url": "",
+        "button_url": "shopify://collections/all",
         "button_style": "primary",
         "button_color_scheme": "scheme-1"
       }
