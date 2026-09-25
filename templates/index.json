@@ -29,6 +29,7 @@
         "text_color": "#ffffff",
         "content_position_horizontal": "center",
         "content_position_vertical": "bottom",
+        "width": "full",
         "padding_top": 0,
         "padding_bottom": 100,
         "enable_button": true,
@@ -61,6 +62,7 @@
         "view_all_label": "View all",
         "view_all_button_style": "secondary",
         "color_scheme": "",
+        "width": "full",
         "padding_top": 48,
         "padding_bottom": 48
       }
@@ -322,6 +324,7 @@
         "gap": 16,
         "corner_radius": 16,
         "color_scheme": "",
+        "width": "full",
         "padding_top": 32,
         "padding_bottom": 48
       }
