@@ -54,7 +54,7 @@
         "columns_mobile": "2",
         "mobile_peek": true,
         "gap": 16,
-        "show_arrows": true,
+        "show_arrows": false,
         "show_progress": true,
         "show_view_all": true,
         "view_all_style": "button",
