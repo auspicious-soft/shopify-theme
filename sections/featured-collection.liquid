@@ -190,14 +190,13 @@
         else if (event.target.closest('[data-fc-next]')) this.step(1);
       }
 
-      /** Move by the number of whole cards currently in view. */
+      /** Move by one product per arrow click. */
       step(direction) {
         const item = this.track.querySelector('.fc__item');
         const gap = parseFloat(getComputedStyle(this.track).columnGap) || 0;
         const itemWidth = item ? item.getBoundingClientRect().width + gap : this.track.clientWidth;
-        const perPage = Math.max(1, Math.floor((this.track.clientWidth + gap) / itemWidth));
         const sign = document.dir === 'rtl' ? -1 : 1;
-        this.track.scrollBy({ left: direction * sign * perPage * itemWidth, behavior: 'smooth' });
+        this.track.scrollBy({ left: direction * sign * itemWidth, behavior: 'smooth' });
       }
 
       update() {
