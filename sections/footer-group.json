@@ -58,7 +58,7 @@
           "type": "menu",
           "settings": {
             "column_width": 20,
-            "heading": "",
+            "heading": "About",
             "menu": "footer"
           }
         }
