@@ -11,7 +11,10 @@
   "sections": {
     "main": {
       "type": "page",
-      "settings": {}
+      "settings": {
+        "heading_tag": "h1",
+        "heading_class": "h2"
+      }
     }
   },
   "order": [

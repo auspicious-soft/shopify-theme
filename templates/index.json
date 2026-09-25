@@ -47,33 +47,19 @@
         "heading_class": "h4",
         "subheading": "",
         "heading_alignment": "left",
-        "collection": "automated-collection",
+        "collection": "sale",
         "products_to_show": 8,
         "layout": "slider",
         "columns_desktop": 4,
         "columns_mobile": "2",
         "mobile_peek": true,
         "gap": 16,
-        "show_arrows": false,
+        "arrow_position": "top",
         "show_progress": true,
         "show_view_all": true,
         "view_all_style": "button",
         "view_all_label": "View all",
         "view_all_button_style": "secondary",
-        "image_ratio": "portrait",
-        "image_fit": "contain",
-        "image_background": "#f5f4f4",
-        "image_radius": 0,
-        "card_image_slider": true,
-        "badge_style": "amount",
-        "info_layout": "inline",
-        "show_vendor": false,
-        "sale_price_color": "#d42c4b",
-        "show_swatches": true,
-        "color_option_name": "Color",
-        "quick_add": "hover",
-        "quick_add_touch": false,
-        "size_option_name": "Size",
         "color_scheme": "",
         "padding_top": 48,
         "padding_bottom": 48
@@ -83,7 +69,7 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
-        "collection": "hydrogen",
+        "collection": "long-sleeves",
         "image": "shopify://shop_images/Banner_2_9a71e6ed-6bac-405d-9534-73d91e01f56f_4000x1562_crop_center_jpg.png",
         "mobile_image": "shopify://shop_images/image_10.png",
         "media_type": "image",
@@ -122,28 +108,28 @@
         "collection_kahEbC": {
           "type": "collection",
           "settings": {
-            "collection": "automated-collection",
+            "collection": "men",
             "image": "shopify://shop_images/Image_52.png",
             "media_type": "image",
             "video_url": "",
-            "subheading": "Male",
+            "subheading": "Men's",
             "heading": "Shop the latest drops",
             "text": "",
-            "button_label": "Explore male",
-            "link": "shopify://collections/all"
+            "button_label": "Explore Men's",
+            "link": ""
           }
         },
         "collection_fGPGma": {
           "type": "collection",
           "settings": {
-            "collection": "frontpage",
+            "collection": "womens",
             "image": "shopify://shop_images/Image_53.png",
             "media_type": "image",
             "video_url": "",
-            "subheading": "Female",
+            "subheading": "Women's",
             "heading": "Discover new silhouettes",
             "text": "",
-            "button_label": "Explore female",
+            "button_label": "Explore Women's",
             "link": ""
           }
         }
@@ -186,7 +172,7 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
-        "collection": "hydrogen",
+        "collection": "hoodies",
         "image": "shopify://shop_images/Banner_6-08_4000x1562_crop_center_jpg.png",
         "mobile_image": "shopify://shop_images/iPhone_13_14_-_3.png",
         "media_type": "image",
@@ -223,7 +209,7 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
-        "collection": "automated-collection",
+        "collection": "accesories",
         "image": "shopify://shop_images/Banner_5_4000x1562_crop_center_jpg.png",
         "mobile_image": "shopify://shop_images/image_10_1.png",
         "media_type": "image",
