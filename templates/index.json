@@ -108,14 +108,14 @@
         "collection_kahEbC": {
           "type": "collection",
           "settings": {
-            "collection": "automated-collection",
+            "collection": "men",
             "image": "shopify://shop_images/Image_52.png",
             "media_type": "image",
             "video_url": "",
-            "subheading": "Male",
+            "subheading": "Men's",
             "heading": "Shop the latest drops",
             "text": "",
-            "button_label": "Explore male",
+            "button_label": "Explore Men's",
             "link": "shopify://collections/all"
           }
         },
