@@ -543,7 +543,14 @@
       "success_message": "Success message",
       "success_message_info": "Leave empty for \"Thanks for subscribing!\"",
       "note": "Note under the form",
-      "note_info": "Optional, e.g. a privacy line with a link"
+      "note_info": "Optional, e.g. a privacy line with a link",
+      "divider": "Divider",
+      "show_divider": "Show divider at the bottom",
+      "divider_width": "Divider width",
+      "divider_page": "Same as the content",
+      "divider_full": "Full screen width",
+      "divider_thickness": "Thickness",
+      "divider_opacity": "Opacity"
     },
     "logo_marquee": {
       "name": "Logo marquee",

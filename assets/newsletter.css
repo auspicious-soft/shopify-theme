@@ -1,9 +1,32 @@
 /* Styles for sections/newsletter.liquid. */
 
 .newsletter {
+  position: relative;
   padding-block: var(--section-padding-top) var(--section-padding-bottom);
   background-color: var(--color-background);
   color: var(--color-foreground);
+}
+
+/* ---------- Divider along the bottom edge ---------- */
+
+.newsletter--divider::after {
+  content: '';
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  height: var(--newsletter-divider-thickness, 1px);
+  background-color: color-mix(in srgb, var(--color-foreground) var(--newsletter-divider-opacity, 20%), transparent);
+  pointer-events: none;
+}
+
+/* "Same as the content": lines up with the page-width edges. */
+.newsletter--divider-page::after {
+  inset-inline: max(var(--page-margin), calc((100% - var(--page-width)) / 2 + var(--page-margin)));
+}
+
+/* ...and with the section set to Width > Full width, just the page margin. */
+.newsletter--divider-page:has(.page-width--full)::after {
+  inset-inline: var(--page-margin);
 }
 
 /* ---------- Layout: form below the text (and always on mobile) ---------- */

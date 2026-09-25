@@ -4,6 +4,9 @@
   mobile). Signing up creates/updates a customer with the "newsletter" tag
   and email marketing consent (Shopify's customer form).
 
+  Optional divider line along the bottom edge, as wide as the content or
+  the whole screen.
+
   Styles live in assets/newsletter.css.
 {% endcomment %}
 
@@ -26,11 +29,13 @@
 -%}
 
 <div
-  class="newsletter newsletter--form-{{ position }} newsletter--align-{{ section.settings.alignment }} newsletter--field-{{ section.settings.field_style }} color-{{ section.settings.color_scheme.id }}"
+  class="newsletter newsletter--form-{{ position }} newsletter--align-{{ section.settings.alignment }} newsletter--field-{{ section.settings.field_style }}{% if section.settings.show_divider %} newsletter--divider newsletter--divider-{{ section.settings.divider_width }}{% endif %} color-{{ section.settings.color_scheme.id }}"
   style="
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
     --newsletter-form-width: {{ section.settings.form_width }}px;
+    --newsletter-divider-thickness: {{ section.settings.divider_thickness }}px;
+    --newsletter-divider-opacity: {{ section.settings.divider_opacity }}%;
   "
 >
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
@@ -262,6 +267,49 @@
         { "value": "page", "label": "t:options.section_width.page" }
       ],
       "default": "page"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.newsletter.divider"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "t:sections.newsletter.show_divider",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "divider_width",
+      "label": "t:sections.newsletter.divider_width",
+      "options": [
+        { "value": "page", "label": "t:sections.newsletter.divider_page" },
+        { "value": "full", "label": "t:sections.newsletter.divider_full" }
+      ],
+      "default": "page",
+      "visible_if": "{{ section.settings.show_divider }}"
+    },
+    {
+      "type": "range",
+      "id": "divider_thickness",
+      "label": "t:sections.newsletter.divider_thickness",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 1,
+      "visible_if": "{{ section.settings.show_divider }}"
+    },
+    {
+      "type": "range",
+      "id": "divider_opacity",
+      "label": "t:sections.newsletter.divider_opacity",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 20,
+      "visible_if": "{{ section.settings.show_divider }}"
     },
     {
       "type": "range",
