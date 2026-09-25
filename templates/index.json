@@ -63,6 +63,7 @@
         "view_all_button_style": "secondary",
         "color_scheme": "",
         "width": "full",
+        "products_width": "full",
         "padding_top": 48,
         "padding_bottom": 48
       }
