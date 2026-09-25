@@ -1,21 +1,28 @@
 {% doc %}
-  Renders a product card. Everything it shows comes from Theme settings >
-  Product cards: style (standard/card), image ratio + fit, second image on
-  hover, vendor, rating, color swatches, quick add (none / on image hover /
-  button under the content), text alignment, image padding, color scheme,
-  border and shadow. Styles live in assets/product-card.css (load it once in
-  the section that renders cards).
+  The theme's one product card, used everywhere products are listed
+  (collection pages, featured collection, recommended / related / recently
+  viewed products). Everything it shows comes from Theme settings >
+  Product cards.
 
-  The whole card is clickable through the title link's stretched ::after;
-  swatches and quick add sit above it so they stay usable.
+  - Image slider: every product image, prev/next arrows on hover, swipe on
+    touch screens. Each image links to the product.
+  - Sale badge: "Save €53", "Save 20%" or "Sale", updated per variant.
+  - Color swatches: picking a color shows that color's image, price and
+    badge, and which of its sizes are in stock.
+  - Quick add (on hover, always, or hidden):
+      * a grid of sizes; clicking one adds the chosen color + size to cart
+      * products with options but no size: "Add to cart" for the chosen variant
+      * products without options: "Add to cart"
+    Adding opens the cart drawer through the theme's `cart:item-added`
+    event, or goes to the cart page when Theme settings > Cart is "page".
+
+  Styles live in assets/product-card.css; load it once in the section that
+  renders cards.
 
   @param {product} product - The product to render
-  @param {string} [sizes] - `sizes` attribute for the card images
-  @param {boolean} [eager] - Load the image eagerly (above-the-fold cards)
+  @param {string} [sizes] - `sizes` attribute for the images
+  @param {boolean} [eager] - Load the first image eagerly (above-the-fold cards)
   @param {string} [heading_tag] - Title tag, defaults to h3
-  @param {boolean} [image_slider] - Show every product image with prev/next arrows (and swipe on touch) instead of the hover image
-  @param {string} [size_options] - Size buttons on the image: 'none' (default), 'hover' or 'always'
-  @param {string} [size_option_name] - Name of the option to show as size buttons, defaults to "Size"
 
   @example
   {% render 'product-card', product: product, sizes: '(min-width: 990px) 25vw, 50vw' %}
@@ -23,8 +30,22 @@
 
 {%- liquid
   assign heading_tag = heading_tag | default: 'h3'
+  assign current = product.selected_or_first_available_variant
   assign image_sizes = sizes | default: '(min-width: 990px) 25vw, 50vw'
-  assign featured = product.featured_media
+  assign fit = settings.card_image_fit | default: 'cover'
+  assign badge_mode = settings.card_badge_style | default: 'amount'
+  assign layout = settings.card_info_layout | default: 'inline'
+  assign use_slider = settings.card_image_slider
+  assign use_swatches = settings.card_show_swatches
+
+  # Older saved values ("overlay" / "button") map onto the current options.
+  assign mode = settings.card_quick_add | default: 'hover'
+  case mode
+    when 'overlay'
+      assign mode = 'hover'
+    when 'button'
+      assign mode = 'always'
+  endcase
 
   case settings.card_image_ratio
     when 'square'
@@ -36,154 +57,187 @@
     when 'landscape'
       assign ratio = '4 / 3'
     else
-      assign ratio = featured.preview_image.aspect_ratio | default: 1
+      assign ratio = product.featured_media.preview_image.aspect_ratio | default: 0.8
   endcase
-
-  assign use_slider = false
-  if image_slider and product.media.size > 1
-    assign use_slider = true
-  endif
-
-  assign secondary = nil
-  if settings.card_show_secondary_image and product.media.size > 1 and use_slider == false
-    assign secondary = product.media[1]
-  endif
-
-  assign size_mode = size_options | default: 'none'
-  assign size_option = nil
-  if size_mode != 'none'
-    assign wanted_size_name = size_option_name | default: 'Size' | downcase | strip
-    for option in product.options_with_values
-      assign option_name = option.name | downcase | strip
-      if option_name == wanted_size_name
-        assign size_option = option
-        break
-      endif
-    endfor
-  endif
 
   assign loading = 'lazy'
   if eager
     assign loading = 'eager'
   endif
 
-  assign quick_add = settings.card_quick_add | default: 'none'
-  assign card_variant = product.selected_or_first_available_variant
+  # Find the color and size options by name (case-insensitive).
+  assign color_name = settings.card_color_option_name | default: 'Color' | downcase | strip
+  assign size_name = settings.card_size_option_name | default: 'Size' | downcase | strip
+  assign color_option = nil
+  assign size_option = nil
+  for option in product.options_with_values
+    assign option_name = option.name | downcase | strip
+    if option_name == color_name
+      assign color_option = option
+    elsif color_name == 'color' and option_name == 'colour'
+      assign color_option = option
+    endif
+    if option_name == size_name
+      assign size_option = option
+    endif
+  endfor
+
+  assign color_index = -1
+  if color_option
+    assign color_index = color_option.position | minus: 1
+  endif
+  assign size_index = -1
+  if size_option
+    assign size_index = size_option.position | minus: 1
+  endif
+
+  assign media_list = product.media
+  if use_slider == false
+    assign media_list = product.media | slice: 0, 1
+  endif
 -%}
 
-<div
-  class="product-card product-card--{{ settings.card_style }} product-card--quick-add-{{ quick_add }} product-card--align-{{ settings.card_text_alignment }} hover-{{ settings.animations_hover_elements }} color-{{ settings.card_color_scheme.id }}"
-  style="--card-ratio: {{ ratio }}; --card-image-padding: {{ settings.card_image_padding }}px; --card-text-align: {{ settings.card_text_alignment }};"
+{%- capture badge_for_current -%}
+  {%- if current.available == false -%}
+    {{ 'badges.sold_out' | t }}
+  {%- elsif current.compare_at_price > current.price -%}
+    {%- case badge_mode -%}
+      {%- when 'text' -%}
+        {{ 'badges.sale' | t }}
+      {%- when 'percent' -%}
+        {%- assign percent = current.compare_at_price | minus: current.price | times: 100.0 | divided_by: current.compare_at_price | round -%}
+        {{ 'products.save_percent' | t: percent: percent }}
+      {%- else -%}
+        {%- assign saved = current.compare_at_price | minus: current.price | money_without_trailing_zeros -%}
+        {{ 'products.save_amount' | t: amount: saved }}
+    {%- endcase -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+<product-card
+  class="product-card product-card--{{ settings.card_style }} product-card--quick-{{ mode }}{% if settings.card_quick_add_touch %} product-card--quick-touch{% endif %} product-card--info-{{ layout }} product-card--align-{{ settings.card_text_alignment }} hover-{{ settings.animations_hover_elements }} color-{{ settings.card_color_scheme.id }}"
+  data-color-index="{{ color_index }}"
+  data-size-index="{{ size_index }}"
+  data-selected="{{ current.options | json | escape }}"
+  data-cart-type="{{ settings.cart_type }}"
+  data-product-url="{{ product.url }}"
+  style="--card-ratio: {{ ratio }}; --card-image-padding: {{ settings.card_image_padding }}px; --card-image-bg: {{ settings.card_image_background }}; --card-sale-color: {{ settings.card_sale_price_color }};"
   {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
 >
-  <div class="product-card__media product-card__media--{{ settings.card_image_fit | default: 'cover' }}{% if secondary %} product-card__media--has-secondary{% endif %}{% if use_slider %} product-card__media--slider{% endif %}">
-    {%- if use_slider -%}
-      <card-image-slider class="product-card__slider">
-        <div class="product-card__media-frame product-card__slides" data-card-slides>
-          {%- for media in product.media limit: 8 -%}
-            <a
-              href="{{ product.url }}"
-              class="product-card__slide"
-              tabindex="-1"
-              aria-hidden="true"
-              draggable="false"
-            >
-              {{
-                media.preview_image
-                | image_url: width: 1000
-                | image_tag:
-                  class: 'product-card__image',
-                  loading: loading,
-                  widths: '240, 360, 480, 640, 800, 1000',
-                  sizes: image_sizes,
-                  alt: media.preview_image.alt
-              }}
-            </a>
-          {%- endfor -%}
-        </div>
-        <button type="button" class="product-card__slide-arrow product-card__slide-arrow--prev" data-card-prev aria-label="{{ 'products.scroll_previous' | t }}" disabled>
-          {{ 'icon-chevron.svg' | inline_asset_content }}
-        </button>
-        <button type="button" class="product-card__slide-arrow product-card__slide-arrow--next" data-card-next aria-label="{{ 'products.scroll_next' | t }}">
-          {{ 'icon-chevron.svg' | inline_asset_content }}
-        </button>
-      </card-image-slider>
-    {%- else -%}
-    <div class="product-card__media-frame">
-      {%- if featured -%}
-        {{
-          featured.preview_image
-          | image_url: width: 1000
-          | image_tag:
-            class: 'product-card__image product-card__image--primary',
-            loading: loading,
-            widths: '240, 360, 480, 640, 800, 1000',
-            sizes: image_sizes,
-            alt: featured.preview_image.alt
-        }}
-        {%- if secondary -%}
+  <div class="product-card__media product-card__media--{{ fit }}">
+    <div class="product-card__slides" data-card-slides>
+      {%- for media in media_list limit: 10 -%}
+        {%- liquid
+          assign slide_loading = 'lazy'
+          if forloop.first
+            assign slide_loading = loading
+          endif
+          assign slide_alt = media.preview_image.alt | default: product.title
+        -%}
+        <a
+          href="{{ product.url }}"
+          class="product-card__slide"
+          draggable="false"
+          {% unless forloop.first %}
+            tabindex="-1" aria-hidden="true"
+          {% endunless %}
+        >
           {{
-            secondary.preview_image
+            media.preview_image
             | image_url: width: 1000
             | image_tag:
-              class: 'product-card__image product-card__image--secondary',
-              loading: 'lazy',
+              class: 'product-card__image',
+              loading: slide_loading,
               widths: '240, 360, 480, 640, 800, 1000',
               sizes: image_sizes,
-              alt: ''
+              alt: slide_alt
           }}
-        {%- endif -%}
+        </a>
       {%- else -%}
-        {{ 'product-1' | placeholder_svg_tag: 'product-card__image product-card__placeholder' }}
-      {%- endif -%}
+        <a href="{{ product.url }}" class="product-card__slide" draggable="false">
+          {{ 'product-1' | placeholder_svg_tag: 'product-card__image product-card__placeholder' }}
+        </a>
+      {%- endfor -%}
     </div>
+
+    {%- if use_slider and product.media.size > 1 -%}
+      <button type="button" class="product-card__arrow product-card__arrow--prev" data-card-prev aria-label="{{ 'products.previous_media' | t }}" disabled>
+        {{ 'icon-chevron.svg' | inline_asset_content }}
+      </button>
+      <button type="button" class="product-card__arrow product-card__arrow--next" data-card-next aria-label="{{ 'products.next_media' | t }}">
+        {{ 'icon-chevron.svg' | inline_asset_content }}
+      </button>
     {%- endif -%}
 
-    {% render 'badge', product: product %}
+    <span
+      class="badge product-card__badge color-{% if current.available %}{{ settings.sale_badge_color_scheme.id }}{% else %}{{ settings.sold_out_badge_color_scheme.id }}{% endif %} badge--{{ settings.badge_position | handleize }}"
+      style="--badge-radius: {{ settings.badge_corner_radius }}px;"
+      data-sale-scheme="color-{{ settings.sale_badge_color_scheme.id }}"
+      data-sold-out-scheme="color-{{ settings.sold_out_badge_color_scheme.id }}"
+      data-card-badge
+      {% if badge_for_current == blank %}hidden{% endif %}
+    >
+      {{- badge_for_current | strip -}}
+    </span>
 
-    {% if size_option and size_option.values.size > 0 %}
-      <ul
-        class="product-card__sizes product-card__sizes--{{ size_mode }}{% if quick_add == 'overlay' %} product-card__sizes--above-quick-add{% endif %}"
-        role="list"
-        aria-label="{{ size_option.name | escape }}"
-      >
-        {% for value in size_option.values %}
-          {%- liquid
-            assign size_url = product.url
-            if value.variant
-              assign size_url = value.variant.url
-            endif
-          -%}
-          <li>
-            <a
-              href="{{ size_url }}"
-              class="product-card__size{% if value.available == false %} product-card__size--unavailable{% endif %}"
-              title="{{ value | escape }}"
-            >
-              {{- value | escape -}}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-
-    {% if quick_add == 'overlay' %}
-      <div class="product-card__quick-add product-card__quick-add--overlay">
-        {% render 'product-card-quick-add', product: product, variant: card_variant %}
+    {%- if mode != 'none' and product.available -%}
+      <div class="product-card__quick">
+        {%- if product.has_only_default_variant -%}
+          <form action="{{ routes.cart_add_url }}" method="post" class="product-card__quick-form">
+            <input type="hidden" name="id" value="{{ current.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="product-card__add" data-card-add>
+              <span class="product-card__add-label">{{ 'products.add_to_cart' | t }}</span>
+              <span class="product-card__add-done">{{ 'products.added_to_cart' | t }}</span>
+            </button>
+          </form>
+        {%- elsif size_option -%}
+          <ul class="product-card__sizes" role="list" aria-label="{{ size_option.name | escape }}">
+            {%- for value in size_option.values -%}
+              <li>
+                <button
+                  type="button"
+                  class="product-card__size"
+                  data-card-size="{{ value | escape }}"
+                  aria-label="{{ 'products.add_size_to_cart' | t: size: value }}"
+                >
+                  {{- value | escape -}}
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- else -%}
+          <button type="button" class="product-card__add" data-card-add-current>
+            <span class="product-card__add-label">{{ 'products.add_to_cart' | t }}</span>
+            <span class="product-card__add-done">{{ 'products.added_to_cart' | t }}</span>
+          </button>
+        {%- endif -%}
       </div>
-    {% endif %}
+    {%- endif -%}
   </div>
 
-  <div class="product-card__content">
-    {% if settings.card_show_vendor and product.vendor != blank %}
-      <p class="product-card__vendor">{{ product.vendor }}</p>
-    {% endif %}
+  <div class="product-card__info">
+    <div class="product-card__row">
+      <div class="product-card__titles">
+        {%- if settings.card_show_vendor and product.vendor != blank -%}
+          <p class="product-card__vendor">{{ product.vendor | escape }}</p>
+        {%- endif -%}
+        <{{ heading_tag }} class="product-card__title">
+          <a href="{{ product.url }}" class="product-card__link" data-card-link>{{ product.title | escape }}</a>
+        </{{ heading_tag }}>
+      </div>
 
-    <{{ heading_tag }} class="product-card__title">
-      <a href="{{ product.url }}" class="product-card__link">{{ product.title | escape }}</a>
-    </{{ heading_tag }}>
+      <div class="product-card__price" data-card-price>
+        {%- if current.compare_at_price > current.price -%}
+          <s class="product-card__compare">{{ current.compare_at_price | money }}</s>
+          <span class="product-card__amount product-card__amount--sale">{{ current.price | money }}</span>
+        {%- else -%}
+          <span class="product-card__amount">{{ current.price | money }}</span>
+        {%- endif -%}
+      </div>
+    </div>
 
-    {% if settings.card_show_rating and product.metafields.reviews.rating.value != blank %}
+    {%- if settings.card_show_rating and product.metafields.reviews.rating.value != blank -%}
       {%- liquid
         assign rating = product.metafields.reviews.rating.value
         assign rating_max = rating.scale_max | default: 5
@@ -191,100 +245,270 @@
       -%}
       <div class="product-card__rating" role="img" aria-label="{{ 'products.rating' | t: rating: rating.rating, max: rating_max }}">
         <span class="rating-stars" style="--rating-percent: {{ rating_percent }}%;" aria-hidden="true"></span>
-        {% if product.metafields.reviews.rating_count.value > 0 %}
+        {%- if product.metafields.reviews.rating_count.value > 0 -%}
           <span class="product-card__rating-count">({{ product.metafields.reviews.rating_count.value }})</span>
-        {% endif %}
+        {%- endif -%}
       </div>
-    {% endif %}
+    {%- endif -%}
 
-    <div class="product-card__price">
-      {%- if product.price_varies -%}
-        <span class="product-card__price-from">{{ 'products.price_from' | t }}</span>
-      {%- endif -%}
-      {% render 'price', price: product.price, compare_at_price: product.compare_at_price %}
-    </div>
-
-    {% if settings.card_show_swatches %}
-      {%- liquid
-        assign swatch_option = nil
-        for option in product.options_with_values
-          assign option_name = option.name | downcase
-          if option_name == 'color' or option_name == 'colour'
-            assign swatch_option = option
-            break
-          endif
-        endfor
-      -%}
-      {% if swatch_option and swatch_option.values.size > 1 %}
-        <ul class="product-card__swatches" role="list" aria-label="{{ swatch_option.name | escape }}">
-          {% for value in swatch_option.values limit: 5 %}
-            {%- liquid
-              assign swatch_color = value.swatch.color | default: value
-              assign swatch_url = product.url
-              if value.variant
-                assign swatch_url = value.variant.url
-              endif
-            -%}
-            <li>
-              <a
-                href="{{ swatch_url }}"
-                class="product-card__swatch"
-                style="--swatch-color: {{ swatch_color | downcase | escape }};{% if value.swatch.image %} --swatch-image: url('{{ value.swatch.image | image_url: width: 60 }}');{% endif %}"
-                title="{{ value | escape }}"
-              >
-                <span class="visually-hidden">{{ value | escape }}</span>
-              </a>
-            </li>
-          {% endfor %}
-          {% if swatch_option.values.size > 5 %}
-            <li class="product-card__swatch-more">+{{ swatch_option.values.size | minus: 5 }}</li>
-          {% endif %}
-        </ul>
-      {% endif %}
-    {% endif %}
-
-    {% if quick_add == 'button' %}
-      <div class="product-card__quick-add product-card__quick-add--button">
-        {% render 'product-card-quick-add', product: product, variant: card_variant %}
-      </div>
-    {% endif %}
+    {%- if use_swatches and color_option and color_option.values.size > 1 -%}
+      <ul class="product-card__swatches" role="list" aria-label="{{ color_option.name | escape }}">
+        {%- for value in color_option.values limit: 8 -%}
+          {%- assign swatch_color = value.swatch.color | default: value -%}
+          <li>
+            <button
+              type="button"
+              class="product-card__swatch"
+              data-card-color="{{ value | escape }}"
+              aria-pressed="{{ value.selected }}"
+              title="{{ value | escape }}"
+              style="--swatch-color: {{ swatch_color | downcase | escape }};{% if value.swatch.image %} --swatch-image: url('{{ value.swatch.image | image_url: width: 60 }}');{% endif %}"
+            >
+              <span class="visually-hidden">{{ value | escape }}</span>
+            </button>
+          </li>
+        {%- endfor -%}
+        {%- if color_option.values.size > 8 -%}
+          <li class="product-card__swatch-more">+{{ color_option.values.size | minus: 8 }}</li>
+        {%- endif -%}
+      </ul>
+    {%- endif -%}
   </div>
-</div>
+
+  <script type="application/json" data-card-variants>
+    [
+      {%- for variant in product.variants -%}
+        {%- liquid
+          assign variant_badge = ''
+          if variant.available == false
+            assign variant_badge = 'badges.sold_out' | t
+          elsif variant.compare_at_price > variant.price
+            case badge_mode
+              when 'text'
+                assign variant_badge = 'badges.sale' | t
+              when 'percent'
+                assign variant_percent = variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round
+                assign variant_badge = 'products.save_percent' | t: percent: variant_percent
+              else
+                assign variant_saved = variant.compare_at_price | minus: variant.price | money_without_trailing_zeros
+                assign variant_badge = 'products.save_amount' | t: amount: variant_saved
+            endcase
+          endif
+          assign variant_media = 0
+          if variant.featured_media
+            assign variant_media = variant.featured_media.position
+          endif
+        -%}
+        {
+          "id": {{ variant.id }},
+          "options": {{ variant.options | json }},
+          "available": {{ variant.available | json }},
+          "price": {{ variant.price | money | json }},
+          "compare": {% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money | json }}{% else %}null{% endif %},
+          "badge": {{ variant_badge | json }},
+          "media": {{ variant_media }}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  </script>
+</product-card>
 
 {% javascript %}
-  if (!customElements.get('card-image-slider')) {
-    class CardImageSlider extends HTMLElement {
+  if (!customElements.get('product-card')) {
+    class ProductCard extends HTMLElement {
       connectedCallback() {
+        try {
+          this.variants = JSON.parse(this.querySelector('[data-card-variants]')?.textContent || '[]');
+          this.selected = JSON.parse(this.dataset.selected || '[]');
+        } catch (error) {
+          this.variants = [];
+          this.selected = [];
+        }
+        this.colorIndex = Number(this.dataset.colorIndex);
+        this.sizeIndex = Number(this.dataset.sizeIndex);
         this.slides = this.querySelector('[data-card-slides]');
         this.prev = this.querySelector('[data-card-prev]');
         this.next = this.querySelector('[data-card-next]');
-        if (!this.slides) return;
 
-        this.update = this.update.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.slides.addEventListener('scroll', this.update, { passive: true });
+        this.onSubmit = this.onSubmit.bind(this);
+        this.updateArrows = this.updateArrows.bind(this);
         this.addEventListener('click', this.onClick);
-        this.update();
+        this.addEventListener('submit', this.onSubmit);
+        this.slides?.addEventListener('scroll', this.updateArrows, { passive: true });
+
+        this.updateArrows();
+        this.updateAvailability();
+      }
+
+      disconnectedCallback() {
+        this.removeEventListener('click', this.onClick);
+        this.removeEventListener('submit', this.onSubmit);
+        this.slides?.removeEventListener('scroll', this.updateArrows);
       }
 
       onClick(event) {
-        const arrow = event.target.closest('[data-card-prev], [data-card-next]');
-        if (!arrow) return;
+        const target = event.target;
+        const arrow = target.closest('[data-card-prev], [data-card-next]');
+        if (arrow) {
+          event.preventDefault();
+          this.step(arrow.hasAttribute('data-card-next') ? 1 : -1);
+          return;
+        }
+
+        const swatch = target.closest('[data-card-color]');
+        if (swatch) {
+          event.preventDefault();
+          this.selectColor(swatch.dataset.cardColor);
+          return;
+        }
+
+        const size = target.closest('[data-card-size]');
+        if (size) {
+          event.preventDefault();
+          if (size.getAttribute('aria-disabled') === 'true') return;
+          this.add(this.findVariant({ [this.sizeIndex]: size.dataset.cardSize }), size);
+          return;
+        }
+
+        const addCurrent = target.closest('[data-card-add-current]');
+        if (addCurrent) {
+          event.preventDefault();
+          this.add(this.findVariant(), addCurrent);
+        }
+      }
+
+      /** Single-variant products use a real form (works without JS); add it over Ajax here. */
+      onSubmit(event) {
+        const form = event.target.closest('.product-card__quick-form');
+        if (!form) return;
         event.preventDefault();
-        event.stopPropagation();
-        const direction = arrow.hasAttribute('data-card-next') ? 1 : -1;
+        const id = Number(new FormData(form).get('id'));
+        this.add(this.variants.find((variant) => variant.id === id) || { id, available: true }, form.querySelector('[data-card-add]'));
+      }
+
+      /** The variant matching the current selection, with some options overridden. */
+      findVariant(overrides = {}) {
+        const wanted = this.selected.map((value, index) => (index in overrides ? overrides[index] : value));
+        return this.variants.find((variant) => variant.options.every((value, index) => value === wanted[index]));
+      }
+
+      selectColor(color) {
+        if (this.colorIndex < 0) return;
+        this.selected[this.colorIndex] = color;
+
+        // Keep the other options if that combination exists in this color,
+        // otherwise switch to the first available variant of the color.
+        let variant = this.findVariant();
+        if (!variant || !variant.available) {
+          variant =
+            this.variants.find((v) => v.options[this.colorIndex] === color && v.available) ||
+            this.variants.find((v) => v.options[this.colorIndex] === color);
+          if (variant) this.selected = [...variant.options];
+        }
+
+        this.querySelectorAll('[data-card-color]').forEach((swatch) => {
+          swatch.setAttribute('aria-pressed', String(swatch.dataset.cardColor === color));
+        });
+
+        if (variant) {
+          this.renderVariant(variant);
+          if (variant.media > 0) this.showSlide(variant.media - 1);
+        }
+        this.updateAvailability();
+      }
+
+      renderVariant(variant) {
+        const price = this.querySelector('[data-card-price]');
+        if (price) {
+          price.innerHTML = variant.compare
+            ? `<s class="product-card__compare">${variant.compare}</s><span class="product-card__amount product-card__amount--sale">${variant.price}</span>`
+            : `<span class="product-card__amount">${variant.price}</span>`;
+        }
+
+        const badge = this.querySelector('[data-card-badge]');
+        if (badge) {
+          badge.textContent = variant.badge;
+          badge.hidden = !variant.badge;
+          badge.classList.remove(badge.dataset.saleScheme, badge.dataset.soldOutScheme);
+          badge.classList.add(variant.available ? badge.dataset.saleScheme : badge.dataset.soldOutScheme);
+        }
+
+        const url = `${this.dataset.productUrl}${this.dataset.productUrl.includes('?') ? '&' : '?'}variant=${variant.id}`;
+        this.querySelectorAll('[data-card-link], .product-card__slide').forEach((link) => link.setAttribute('href', url));
+      }
+
+      /** Grey out sizes (or the add button) that aren't in stock for the chosen color. */
+      updateAvailability() {
+        this.querySelectorAll('[data-card-size]').forEach((button) => {
+          const variant = this.findVariant({ [this.sizeIndex]: button.dataset.cardSize });
+          button.setAttribute('aria-disabled', String(!(variant && variant.available)));
+        });
+
+        const addCurrent = this.querySelector('[data-card-add-current]');
+        if (addCurrent) {
+          const variant = this.findVariant();
+          addCurrent.disabled = !(variant && variant.available);
+        }
+      }
+
+      async add(variant, button) {
+        if (!variant || variant.available === false || !button) return;
+        button.classList.add('is-loading');
+        button.setAttribute('aria-busy', 'true');
+
+        const root = window.Shopify?.routes?.root || '/';
+        const productPage = `${this.dataset.productUrl}?variant=${variant.id}`;
+        try {
+          const response = await fetch(`${root}cart/add.js`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ items: [{ id: variant.id, quantity: 1 }] }),
+          });
+
+          if (!response.ok) {
+            // Let the product page explain the problem (e.g. not enough stock).
+            window.location.href = productPage;
+            return;
+          }
+
+          if (this.dataset.cartType === 'page') {
+            window.location.href = `${root}cart`;
+            return;
+          }
+
+          document.dispatchEvent(new CustomEvent('cart:item-added', { bubbles: true }));
+          button.classList.add('is-added');
+          setTimeout(() => button.classList.remove('is-added'), 1500);
+        } catch (error) {
+          window.location.href = productPage;
+        } finally {
+          button.classList.remove('is-loading');
+          button.removeAttribute('aria-busy');
+        }
+      }
+
+      step(direction) {
+        if (!this.slides) return;
         const sign = document.dir === 'rtl' ? -1 : 1;
         this.slides.scrollBy({ left: direction * sign * this.slides.clientWidth, behavior: 'smooth' });
       }
 
-      update() {
+      showSlide(index) {
+        const slide = this.slides?.children[index];
+        if (!slide) return;
+        this.slides.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
+      }
+
+      updateArrows() {
+        if (!this.slides || !this.prev || !this.next) return;
         const max = this.slides.scrollWidth - this.slides.clientWidth;
         const position = Math.abs(this.slides.scrollLeft);
-        if (this.prev) this.prev.disabled = position <= 2;
-        if (this.next) this.next.disabled = position >= max - 2;
+        this.prev.disabled = position <= 2;
+        this.next.disabled = position >= max - 2;
       }
     }
 
-    customElements.define('card-image-slider', CardImageSlider);
+    customElements.define('product-card', ProductCard);
   }
 {% endjavascript %}

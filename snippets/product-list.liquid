@@ -6,8 +6,7 @@
 
   Reads the section's heading, subheading, heading_alignment, layout,
   columns_desktop, columns_mobile, products_to_show, color_scheme and
-  padding settings, plus the optional card_image_slider, card_size_options
-  and size_option_name card settings. Styles live in assets/product-list.css; the slider
+  padding settings. Styles live in assets/product-list.css; the slider
   arrows are driven by the <product-slider> element below.
 
   @param {object} section - The section rendering the list
@@ -79,13 +78,7 @@
     <ul class="product-list__track" role="list" data-slider-track>
       {% for product in products limit: limit %}
         <li class="product-list__item">
-          {% render 'product-card',
-            product: product,
-            sizes: card_sizes,
-            image_slider: section.settings.card_image_slider,
-            size_options: section.settings.card_size_options,
-            size_option_name: section.settings.size_option_name
-          %}
+          {% render 'product-card', product: product, sizes: card_sizes %}
         </li>
       {% endfor %}
 
@@ -93,15 +86,15 @@
         {% for i in (1..placeholder_count) %}
           {%- assign placeholder_name = i | minus: 1 | modulo: 6 | plus: 1 | prepend: 'product-' -%}
           <li class="product-list__item">
-            <div class="product-card product-card--{{ settings.card_style }} color-{{ settings.card_color_scheme.id }}">
+            <div class="product-card product-card--{{ settings.card_style }} product-card--info-{{ settings.card_info_layout }} color-{{ settings.card_color_scheme.id }}" style="--card-image-bg: {{ settings.card_image_background }};">
               <div class="product-card__media">
-                <div class="product-card__media-frame" style="--card-ratio: 4 / 5;">
-                  {{ placeholder_name | placeholder_svg_tag: 'product-card__image product-card__placeholder' }}
-                </div>
+                {{ placeholder_name | placeholder_svg_tag: 'product-card__image product-card__placeholder' }}
               </div>
-              <div class="product-card__content">
-                <h3 class="product-card__title">{{ 'products.placeholder_title' | t }}</h3>
-                <div class="product-card__price">{{ 1999 | money }}</div>
+              <div class="product-card__info">
+                <div class="product-card__row">
+                  <h3 class="product-card__title">{{ 'products.placeholder_title' | t }}</h3>
+                  <div class="product-card__price"><span class="product-card__amount">{{ 1999 | money }}</span></div>
+                </div>
               </div>
             </div>
           </li>

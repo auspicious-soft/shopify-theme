@@ -1,4 +1,4 @@
-/* Styles for snippets/badge.liquid. */
+/* Sale / sold-out badge (used by snippets/product-card.liquid). Position and colors come from Theme settings > Badges. */
 
 .badge {
   position: absolute;

@@ -1,8 +1,7 @@
 {% comment %}
   "Featured collection": products from one collection as a carousel or a
-  grid, using the quick-shop product card (snippets/product-card-quick-shop.liquid):
-  image slider, color swatches, and a size grid on hover that adds the
-  chosen color + size straight to the cart.
+  grid, using the theme's product card (snippets/product-card.liquid; its
+  design is set in Theme settings > Product cards).
 
   - Carousel: prev/next arrows, swipe/scroll, optional progress bar.
   - Grid: fixed columns.
@@ -13,7 +12,7 @@
 {% endcomment %}
 
 {{ 'featured-collection.css' | asset_url | stylesheet_tag }}
-{{ 'product-card-quick-shop.css' | asset_url | stylesheet_tag }}
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign collection = section.settings.collection
@@ -37,16 +36,6 @@
     endif
   endif
 
-  case section.settings.image_ratio
-    when 'square'
-      assign image_ratio = '1 / 1'
-    when 'tall'
-      assign image_ratio = '2 / 3'
-    when 'landscape'
-      assign image_ratio = '4 / 3'
-    else
-      assign image_ratio = '4 / 5'
-  endcase
 
   assign peek = 0
   if layout == 'slider' and section.settings.mobile_peek
@@ -67,9 +56,6 @@
       --fc-columns-mobile: {{ columns_mobile | plus: peek }};
       --fc-gap: {{ section.settings.gap }}px;
       --fc-gap-mobile: {{ section.settings.gap | times: 0.6 | round }}px;
-      --qs-image-bg: {{ section.settings.image_background }};
-      --qs-sale-color: {{ section.settings.sale_price_color }};
-      --qs-radius: {{ section.settings.image_radius }}px;
     "
   >
     <div class="page-width">
@@ -105,36 +91,21 @@
       <ul class="fc__track" role="list" data-fc-track>
         {%- for product in collection.products limit: limit -%}
           <li class="fc__item">
-            {% render 'product-card-quick-shop',
-              product: product,
-              sizes: card_sizes,
-              eager: false,
-              image_ratio: image_ratio,
-              image_fit: section.settings.image_fit,
-              image_slider: section.settings.card_image_slider,
-              show_swatches: section.settings.show_swatches,
-              color_option_name: section.settings.color_option_name,
-              quick_add: section.settings.quick_add,
-              quick_add_touch: section.settings.quick_add_touch,
-              size_option_name: section.settings.size_option_name,
-              badge_style: section.settings.badge_style,
-              info_layout: section.settings.info_layout,
-              show_vendor: section.settings.show_vendor
-            %}
+            {% render 'product-card', product: product, sizes: card_sizes %}
           </li>
         {%- endfor -%}
 
         {%- for i in (1..placeholder_count) -%}
           {%- assign placeholder_name = i | minus: 1 | modulo: 6 | plus: 1 | prepend: 'product-' -%}
           <li class="fc__item">
-            <div class="qs-card qs-card--info-{{ section.settings.info_layout }}" style="--qs-ratio: {{ image_ratio }};">
-              <div class="qs-card__media">
-                {{ placeholder_name | placeholder_svg_tag: 'qs-card__image qs-card__placeholder' }}
+            <div class="product-card product-card--{{ settings.card_style }} product-card--info-{{ settings.card_info_layout }} color-{{ settings.card_color_scheme.id }}" style="--card-image-bg: {{ settings.card_image_background }};">
+              <div class="product-card__media">
+                {{ placeholder_name | placeholder_svg_tag: 'product-card__image product-card__placeholder' }}
               </div>
-              <div class="qs-card__info">
-                <div class="qs-card__row">
-                  <h3 class="qs-card__title">{{ 'products.placeholder_title' | t }}</h3>
-                  <div class="qs-card__price"><span class="qs-card__amount">{{ 1999 | money }}</span></div>
+              <div class="product-card__info">
+                <div class="product-card__row">
+                  <h3 class="product-card__title">{{ 'products.placeholder_title' | t }}</h3>
+                  <div class="product-card__price"><span class="product-card__amount">{{ 1999 | money }}</span></div>
                 </div>
               </div>
             </div>
@@ -407,129 +378,8 @@
       "content": "t:sections.featured_collection.cards"
     },
     {
-      "type": "select",
-      "id": "image_ratio",
-      "label": "t:sections.collection_banners.image_ratio",
-      "options": [
-        { "value": "portrait", "label": "t:sections.collection_banners.ratio_portrait" },
-        { "value": "tall", "label": "t:sections.collection_banners.ratio_tall" },
-        { "value": "square", "label": "t:sections.collection_banners.ratio_square" },
-        { "value": "landscape", "label": "t:sections.collection_banners.ratio_landscape" }
-      ],
-      "default": "portrait"
-    },
-    {
-      "type": "select",
-      "id": "image_fit",
-      "label": "t:sections.featured_collection.image_fit",
-      "options": [
-        { "value": "cover", "label": "t:sections.featured_collection.image_fit_cover" },
-        { "value": "contain", "label": "t:sections.featured_collection.image_fit_contain" }
-      ],
-      "default": "contain"
-    },
-    {
-      "type": "color",
-      "id": "image_background",
-      "label": "t:sections.featured_collection.image_background",
-      "default": "#f5f4f4"
-    },
-    {
-      "type": "range",
-      "id": "image_radius",
-      "label": "t:sections.collection_banner.corner_radius",
-      "min": 0,
-      "max": 24,
-      "step": 2,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "checkbox",
-      "id": "card_image_slider",
-      "label": "t:sections.featured_collection.card_image_slider",
-      "info": "t:sections.featured_collection.card_image_slider_info",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "badge_style",
-      "label": "t:sections.featured_collection.badge_style",
-      "info": "t:sections.featured_collection.badge_style_info",
-      "options": [
-        { "value": "amount", "label": "t:sections.featured_collection.badge_amount" },
-        { "value": "percent", "label": "t:sections.featured_collection.badge_percent" },
-        { "value": "text", "label": "t:sections.featured_collection.badge_text" }
-      ],
-      "default": "amount"
-    },
-    {
-      "type": "select",
-      "id": "info_layout",
-      "label": "t:sections.featured_collection.info_layout",
-      "options": [
-        { "value": "inline", "label": "t:sections.featured_collection.info_inline" },
-        { "value": "stacked", "label": "t:sections.featured_collection.info_stacked" }
-      ],
-      "default": "inline"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_vendor",
-      "label": "t:sections.featured_collection.show_vendor",
-      "default": false
-    },
-    {
-      "type": "color",
-      "id": "sale_price_color",
-      "label": "t:sections.featured_collection.sale_price_color",
-      "default": "#d42c4b"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.featured_collection.variants"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_swatches",
-      "label": "t:sections.featured_collection.show_swatches",
-      "info": "t:sections.featured_collection.show_swatches_info",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "color_option_name",
-      "label": "t:sections.featured_collection.color_option_name",
-      "default": "Color",
-      "visible_if": "{{ section.settings.show_swatches }}"
-    },
-    {
-      "type": "select",
-      "id": "quick_add",
-      "label": "t:sections.featured_collection.quick_add",
-      "info": "t:sections.featured_collection.quick_add_info",
-      "options": [
-        { "value": "hover", "label": "t:sections.featured_collection.sizes_hover" },
-        { "value": "always", "label": "t:sections.featured_collection.sizes_always" },
-        { "value": "none", "label": "t:sections.featured_collection.sizes_none" }
-      ],
-      "default": "hover"
-    },
-    {
-      "type": "checkbox",
-      "id": "quick_add_touch",
-      "label": "t:sections.featured_collection.quick_add_touch",
-      "info": "t:sections.featured_collection.quick_add_touch_info",
-      "default": false,
-      "visible_if": "{{ section.settings.quick_add == 'hover' }}"
-    },
-    {
-      "type": "text",
-      "id": "size_option_name",
-      "label": "t:sections.featured_collection.size_option_name",
-      "info": "t:sections.featured_collection.size_option_name_info",
-      "default": "Size",
-      "visible_if": "{{ section.settings.quick_add != 'none' }}"
+      "type": "paragraph",
+      "content": "t:sections.featured_collection.cards_info"
     },
     {
       "type": "header",

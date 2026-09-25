@@ -559,6 +559,12 @@
         "info": "t:settings_schema.cards.settings.color_scheme_info"
       },
       {
+        "type": "color",
+        "id": "card_sale_price_color",
+        "label": "t:settings_schema.cards.settings.sale_price_color",
+        "default": "#d42c4b"
+      },
+      {
         "type": "header",
         "content": "t:settings_schema.cards.settings.header_image"
       },
@@ -607,14 +613,58 @@
         "default": "cover"
       },
       {
+        "type": "color",
+        "id": "card_image_background",
+        "label": "t:settings_schema.cards.settings.image_background",
+        "default": "#f5f4f4"
+      },
+      {
         "type": "checkbox",
-        "id": "card_show_secondary_image",
-        "label": "t:settings_schema.cards.settings.show_secondary_image",
+        "id": "card_image_slider",
+        "label": "t:settings_schema.cards.settings.image_slider",
+        "info": "t:settings_schema.cards.settings.image_slider_info",
         "default": true
       },
       {
         "type": "header",
         "content": "t:settings_schema.cards.settings.header_content"
+      },
+      {
+        "type": "select",
+        "id": "card_info_layout",
+        "label": "t:settings_schema.cards.settings.info_layout",
+        "options": [
+          {
+            "value": "inline",
+            "label": "t:settings_schema.cards.settings.info_inline"
+          },
+          {
+            "value": "stacked",
+            "label": "t:settings_schema.cards.settings.info_stacked"
+          }
+        ],
+        "default": "inline"
+      },
+      {
+        "type": "select",
+        "id": "card_badge_style",
+        "label": "t:settings_schema.cards.settings.badge_style",
+        "info": "t:settings_schema.cards.settings.badge_style_info",
+        "options": [
+          {
+            "value": "amount",
+            "label": "t:settings_schema.cards.settings.badge_amount"
+          },
+          {
+            "value": "percent",
+            "label": "t:settings_schema.cards.settings.badge_percent"
+          },
+          {
+            "value": "text",
+            "label": "t:settings_schema.cards.settings.badge_text"
+          }
+        ],
+        "default": "amount"
       },
       {
         "type": "checkbox",
@@ -637,25 +687,48 @@
         "default": true
       },
       {
+        "type": "text",
+        "id": "card_color_option_name",
+        "label": "t:settings_schema.cards.settings.color_option_name",
+        "default": "Color",
+        "visible_if": "{{ settings.card_show_swatches }}"
+      },
+      {
         "type": "select",
         "id": "card_quick_add",
         "label": "t:settings_schema.cards.settings.quick_add",
         "info": "t:settings_schema.cards.settings.quick_add_info",
         "options": [
           {
+            "value": "hover",
+            "label": "t:settings_schema.cards.settings.quick_add_hover"
+          },
+          {
+            "value": "always",
+            "label": "t:settings_schema.cards.settings.quick_add_always"
+          },
+          {
             "value": "none",
             "label": "t:settings_schema.cards.settings.quick_add_none"
-          },
-          {
-            "value": "overlay",
-            "label": "t:settings_schema.cards.settings.quick_add_overlay"
-          },
-          {
-            "value": "button",
-            "label": "t:settings_schema.cards.settings.quick_add_button"
           }
         ],
-        "default": "overlay"
+        "default": "hover"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_quick_add_touch",
+        "label": "t:settings_schema.cards.settings.quick_add_touch",
+        "info": "t:settings_schema.cards.settings.quick_add_touch_info",
+        "default": false,
+        "visible_if": "{{ settings.card_quick_add == 'hover' }}"
+      },
+      {
+        "type": "text",
+        "id": "card_size_option_name",
+        "label": "t:settings_schema.cards.settings.size_option_name",
+        "info": "t:settings_schema.cards.settings.size_option_name_info",
+        "default": "Size",
+        "visible_if": "{{ settings.card_quick_add != 'none' }}"
       },
       {
         "type": "header",
