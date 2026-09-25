@@ -413,6 +413,30 @@
         "padding_top": 40,
         "padding_bottom": 40
       }
+    },
+    "newsletter_JUgFeQ": {
+      "type": "newsletter",
+      "name": "t:sections.newsletter.name",
+      "settings": {
+        "heading": "Join our newsletter",
+        "heading_tag": "h2",
+        "heading_class": "h3",
+        "subheading": "Be the first to know about new drops and offers",
+        "description": "<p>Sign up for 10% off your first order, plus early access to new collections.</p>",
+        "form_position": "below",
+        "alignment": "center",
+        "form_width": 460,
+        "field_style": "boxed",
+        "placeholder": "",
+        "button_label": "Subscribe",
+        "button_style": "primary",
+        "success_message": "",
+        "note": "",
+        "color_scheme": "",
+        "width": "page",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
@@ -423,6 +447,7 @@
     "collection_banner_TdeRTb",
     "collection_banner_RdywzW",
     "social_marquee_xQATWa",
-    "logo_marquee_UQFWAQ"
+    "logo_marquee_UQFWAQ",
+    "newsletter_JUgFeQ"
   ]
 }
