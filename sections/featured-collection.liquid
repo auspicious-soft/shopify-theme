@@ -47,6 +47,16 @@
     assign arrows = section.settings.arrow_position | default: 'top'
   endif
 
+  # Heading and "View all" follow Width; the products follow Products width.
+  assign container_class = 'page-width'
+  if section.settings.width == 'full'
+    assign container_class = 'page-width page-width--full'
+  endif
+  assign products_class = 'page-width'
+  if section.settings.products_width == 'full'
+    assign products_class = 'page-width page-width--full'
+  endif
+
   assign heading_tag = section.settings.heading_tag | default: 'h2'
   assign heading_class = section.settings.heading_class | default: heading_tag
 -%}
@@ -72,7 +82,7 @@
       --fc-gap-mobile: {{ section.settings.gap | times: 0.6 | round }}px;
     "
   >
-    <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+    <div class="{{ container_class }}">
       {%- if section.settings.heading != blank or section.settings.subheading != blank or arrows == 'top' or section.settings.view_all_style == 'link' -%}
         <div class="fc__header fc__header--{{ section.settings.heading_alignment }}">
           <div class="fc__titles">
@@ -94,7 +104,9 @@
           </div>
         </div>
       {%- endif -%}
+    </div>
 
+    <div class="{{ products_class }} fc__products">
       <div class="fc__carousel">
       <ul class="fc__track" role="list" data-fc-track>
         {%- for product in collection.products limit: limit -%}
@@ -131,9 +143,10 @@
           <span class="fc__progress-bar" data-fc-progress></span>
         </div>
       {%- endif -%}
+    </div>
 
-      {%- if view_all_url != blank and section.settings.view_all_style == 'button' -%}
-        <div class="fc__footer">
+    {%- if view_all_url != blank and section.settings.view_all_style == 'button' -%}
+        <div class="{{ container_class }} fc__footer">
           <a
             href="{{ view_all_url }}"
             class="button button--{{ section.settings.view_all_button_style }} fc__view-all-button"
@@ -142,7 +155,6 @@
           </a>
         </div>
       {%- endif -%}
-    </div>
   </featured-collection>
 {% endif %}
 
@@ -416,6 +428,17 @@
       "type": "select",
       "id": "width",
       "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "page"
+    },
+    {
+      "type": "select",
+      "id": "products_width",
+      "label": "t:sections.featured_collection.products_width",
+      "info": "t:sections.featured_collection.products_width_info",
       "options": [
         { "value": "full", "label": "t:options.section_width.full" },
         { "value": "page", "label": "t:options.section_width.page" }

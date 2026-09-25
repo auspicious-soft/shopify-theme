@@ -484,6 +484,8 @@
       "columns_mobile": "Products per row on mobile",
       "mobile_peek": "Show part of the next product on mobile",
       "mobile_peek_info": "Hints that the carousel can be swiped",
+      "products_width": "Products width",
+      "products_width_info": "Width of the product carousel or grid. Width above sets the heading and View all button",
       "arrow_position": "Arrow position",
       "arrow_top": "Top, beside the heading",
       "arrow_sides": "Sides of the carousel",
