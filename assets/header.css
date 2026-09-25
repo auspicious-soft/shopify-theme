@@ -777,9 +777,11 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
 
   /* Mobile header bar: search + cart only. The account link and the
      country/language selector move into the menu drawer's footer
-     (snippets/header-drawer.liquid). */
-  .header__actions .header-localization,
-  .header__actions .header__account {
+     (snippets/header-drawer.liquid). `.header` raises specificity above the
+     icon-box rule (`.header__actions .header__action:not(...)`), which
+     would otherwise show the account icon again. */
+  .header .header__actions .header-localization,
+  .header .header__actions .header__account {
     display: none;
   }
 
