@@ -178,6 +178,13 @@
   display: flex;
   gap: var(--list-gap);
   overflow-x: auto;
+  /* No vertical scrolling: cards that are still hidden by the scroll-reveal
+     animation (pushed down 2rem) or lifted on hover would otherwise make the
+     row taller and scrollable up/down. The padding keeps room for the hover
+     lift; the negative margin keeps the section spacing unchanged. */
+  overflow-y: hidden;
+  padding-block: 0.5rem;
+  margin-block: -0.5rem;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
