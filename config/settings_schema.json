@@ -626,6 +626,14 @@
         "default": true
       },
       {
+        "type": "checkbox",
+        "id": "card_image_arrows",
+        "label": "t:settings_schema.cards.settings.image_arrows",
+        "info": "t:settings_schema.cards.settings.image_arrows_info",
+        "default": true,
+        "visible_if": "{{ settings.card_image_slider }}"
+      },
+      {
         "type": "header",
         "content": "t:settings_schema.cards.settings.header_content"
       },

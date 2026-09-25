@@ -42,9 +42,24 @@
     assign peek = 0.2
   endif
 
+  # Carousel arrows go beside the heading (top) or on the carousel's sides.
+  assign arrows = ''
+  if layout == 'slider' and section.settings.show_arrows
+    assign arrows = section.settings.arrow_position | default: 'top'
+  endif
+
   assign heading_tag = section.settings.heading_tag | default: 'h2'
   assign heading_class = section.settings.heading_class | default: heading_tag
 -%}
+
+{%- capture arrow_buttons -%}
+  <button type="button" class="fc__arrow fc__arrow--prev" data-fc-prev aria-label="{{ 'products.scroll_previous' | t }}" disabled>
+    {{ 'icon-chevron.svg' | inline_asset_content }}
+  </button>
+  <button type="button" class="fc__arrow fc__arrow--next" data-fc-next aria-label="{{ 'products.scroll_next' | t }}">
+    {{ 'icon-chevron.svg' | inline_asset_content }}
+  </button>
+{%- endcapture -%}
 
 {% if collection.products_count > 0 or placeholder_count > 0 %}
   <featured-collection
@@ -59,7 +74,7 @@
     "
   >
     <div class="page-width">
-      {%- if section.settings.heading != blank or section.settings.subheading != blank or layout == 'slider' or section.settings.view_all_style == 'link' -%}
+      {%- if section.settings.heading != blank or section.settings.subheading != blank or arrows == 'top' or section.settings.view_all_style == 'link' -%}
         <div class="fc__header fc__header--{{ section.settings.heading_alignment }}">
           <div class="fc__titles">
             {%- if section.settings.heading != blank -%}
@@ -74,20 +89,14 @@
             {%- if view_all_url != blank and section.settings.view_all_style == 'link' -%}
               <a href="{{ view_all_url }}" class="fc__view-all-link">{{ view_all_label | escape }}</a>
             {%- endif -%}
-            {%- if layout == 'slider' and section.settings.show_arrows -%}
-              <div class="fc__arrows">
-                <button type="button" class="fc__arrow fc__arrow--prev" data-fc-prev aria-label="{{ 'products.scroll_previous' | t }}" disabled>
-                  {{ 'icon-chevron.svg' | inline_asset_content }}
-                </button>
-                <button type="button" class="fc__arrow fc__arrow--next" data-fc-next aria-label="{{ 'products.scroll_next' | t }}">
-                  {{ 'icon-chevron.svg' | inline_asset_content }}
-                </button>
-              </div>
+            {%- if arrows == 'top' -%}
+              <div class="fc__arrows">{{ arrow_buttons }}</div>
             {%- endif -%}
           </div>
         </div>
       {%- endif -%}
 
+      <div class="fc__carousel">
       <ul class="fc__track" role="list" data-fc-track>
         {%- for product in collection.products limit: limit -%}
           <li class="fc__item">
@@ -112,6 +121,11 @@
           </li>
         {%- endfor -%}
       </ul>
+
+      {%- if arrows == 'sides' -%}
+        <div class="fc__arrows fc__arrows--sides">{{ arrow_buttons }}</div>
+      {%- endif -%}
+      </div>
 
       {%- if layout == 'slider' and section.settings.show_progress -%}
         <div class="fc__progress" aria-hidden="true">
@@ -177,6 +191,10 @@
         const max = this.track.scrollWidth - this.track.clientWidth;
         const position = Math.abs(this.track.scrollLeft);
         this.classList.toggle('is-static', max <= 2);
+
+        // Side arrows sit at the middle of the product images, not the whole card.
+        const media = this.track.querySelector('.product-card__media');
+        if (media) this.style.setProperty('--fc-arrow-top', `${media.offsetTop + media.offsetHeight / 2}px`);
         if (this.prev) this.prev.disabled = position <= 2;
         if (this.next) this.next.disabled = position >= max - 2;
 
@@ -326,6 +344,17 @@
       "label": "t:sections.featured_collection.show_arrows",
       "default": true,
       "visible_if": "{{ section.settings.layout == 'slider' }}"
+    },
+    {
+      "type": "select",
+      "id": "arrow_position",
+      "label": "t:sections.featured_collection.arrow_position",
+      "options": [
+        { "value": "top", "label": "t:sections.featured_collection.arrow_top" },
+        { "value": "sides", "label": "t:sections.featured_collection.arrow_sides" }
+      ],
+      "default": "top",
+      "visible_if": "{{ section.settings.layout == 'slider' and section.settings.show_arrows }}"
     },
     {
       "type": "checkbox",

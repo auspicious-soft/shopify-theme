@@ -26,6 +26,7 @@
 }
 
 .product-card__slides {
+  position: relative;
   display: flex;
   height: 100%;
   overflow-x: auto;
@@ -33,6 +34,23 @@
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   overscroll-behavior-x: contain;
+}
+
+/* More than one image: drag with the mouse to browse (see <product-card>). */
+@media (hover: hover) {
+  .product-card__slides--draggable {
+    cursor: grab;
+  }
+}
+
+.product-card__slides.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.product-card__slides.is-dragging .product-card__slide {
+  pointer-events: none;
 }
 
 .product-card__slides::-webkit-scrollbar {
