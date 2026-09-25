@@ -1,0 +1,56 @@
+{% doc %}
+  Outputs the inline CSS custom properties (`--swatch-color`, and
+  `--swatch-image` when there is one) for a color option value, used by the
+  product card and the product page variant picker.
+
+  Where the color comes from, first match wins:
+  1. Shopify's own swatch (the value is linked to the category's color
+     metafield in the admin): its color and/or image.
+  2. Theme settings > Swatches > Swatch colors: one "Name: value" per line,
+     where value is a color (#556b2f, rgb(...), navy), an image URL, or the
+     name of an image uploaded to Content > Files (e.g. leopard.png).
+     Names match case-insensitively. This covers products imported without
+     a category, whose options can't use Shopify's swatches.
+  3. The value's own name as a CSS color (works for "Red", "Navy", ...).
+
+  @param {object} value - A product option value (product_option_value)
+  @param {number} [image_width] - Width for swatch images, defaults to 100
+
+  @example
+  <span style="{% render 'swatch-style', value: value %}"></span>
+{% enddoc %}
+
+{%- liquid
+  assign width = image_width | default: 100
+  assign swatch_color = value.swatch.color
+  assign swatch_image = ''
+  if value.swatch.image
+    assign swatch_image = value.swatch.image | image_url: width: width
+  endif
+
+  if swatch_color == blank and swatch_image == blank
+    assign value_name = value.name | default: value | downcase | strip
+    assign lines = settings.swatch_colors | newline_to_br | split: '<br />'
+    for line in lines
+      assign line_key = line | split: ':' | first
+      assign line_name = line_key | downcase | strip
+      if line_name == value_name and line_name != blank
+        # Everything after the name and its first ":" (so URLs keep "https:").
+        assign mapped = line | remove_first: line_key | remove_first: ':' | strip
+        if mapped contains '//'
+          assign swatch_image = mapped
+        elsif mapped contains '.png' or mapped contains '.jpg' or mapped contains '.jpeg' or mapped contains '.webp' or mapped contains '.svg'
+          assign swatch_image = mapped | file_url
+        else
+          assign swatch_color = mapped
+        endif
+        break
+      endif
+    endfor
+  endif
+
+  if swatch_color == blank and swatch_image == blank
+    assign swatch_color = value.name | default: value | downcase | strip
+  endif
+-%}
+--swatch-color: {{ swatch_color | escape }};{% if swatch_image != blank %} --swatch-image: url('{{ swatch_image }}');{% endif %}

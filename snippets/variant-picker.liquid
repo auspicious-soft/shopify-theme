@@ -73,11 +73,10 @@
               {% if option.selected_value == value %}checked{% endif %}
             >
             {% if is_swatch %}
-              {%- assign swatch_color = value.swatch.color | default: value -%}
               <label
                 for="{{ value_id }}"
                 class="variant-picker__swatch{% unless value.available %} is-unavailable{% endunless %}"
-                style="--swatch-color: {{ swatch_color | downcase | escape }};{% if value.swatch.image %} --swatch-image: url('{{ value.swatch.image | image_url: width: 100 }}');{% endif %}"
+                style="{% render 'swatch-style', value: value %}"
                 title="{{ value | escape }}"
               >
                 <span class="visually-hidden">

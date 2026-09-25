@@ -773,6 +773,16 @@
     "inputs": {
       "name": "Inputs"
     },
+    "swatches": {
+      "name": "Swatches",
+      "settings": {
+        "info": "Color swatches normally come from the product category (Admin > product > Color option > Connect). Products imported without a category can't use those, so list their colors here instead. Shopify's own swatches still win where they're set.",
+        "swatch_colors": {
+          "label": "Swatch colors",
+          "info": "One per line: Name: value. The value is a color (#556b2f, rgb(85 107 47), navy), an image URL, or an image uploaded to Content > Files (leopard.png). Names match the option value, ignoring upper/lower case."
+        }
+      }
+    },
     "cards": {
       "name": "Product cards",
       "settings": {

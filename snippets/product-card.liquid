@@ -272,7 +272,6 @@
     {%- if use_swatches and color_option and color_option.values.size > 1 -%}
       <ul class="product-card__swatches" role="list" aria-label="{{ color_option.name | escape }}">
         {%- for value in color_option.values limit: 8 -%}
-          {%- assign swatch_color = value.swatch.color | default: value -%}
           <li>
             <button
               type="button"
@@ -280,7 +279,7 @@
               data-card-color="{{ value | escape }}"
               aria-pressed="{{ value.selected }}"
               title="{{ value | escape }}"
-              style="--swatch-color: {{ swatch_color | downcase | escape }};{% if value.swatch.image %} --swatch-image: url('{{ value.swatch.image | image_url: width: 60 }}');{% endif %}"
+              style="{% render 'swatch-style', value: value, image_width: 60 %}"
             >
               <span class="visually-hidden">{{ value | escape }}</span>
             </button>

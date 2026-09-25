@@ -803,6 +803,22 @@
     ]
   },
   {
+    "name": "t:settings_schema.swatches.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.swatches.settings.info"
+      },
+      {
+        "type": "textarea",
+        "id": "swatch_colors",
+        "label": "t:settings_schema.swatches.settings.swatch_colors.label",
+        "info": "t:settings_schema.swatches.settings.swatch_colors.info",
+        "default": "Black: #000000\nWhite: #ffffff\nOff White: #f4f1ea\nCream: #f3ecdc\nBeige: #d9c7a7\nCamel: #c19a6b\nBrown: #6b4423\nChocolate: #4a2c1d\nGrey: #9e9e9e\nHeather Grey: #b6b6b6\nCharcoal: #36454f\nNavy: #1f2a44\nBlue: #2f5fa7\nLight Blue: #a9c7e8\nGreen: #2e7d32\nOlive: #6b6b2f\nOlive Green: #556b2f\nEmerald: #2e6b4f\nForest Green: #2d4a2b\nBurgundy: #6d1f2c\nMaroon: #5c1a1b\nRed: #c62828\nPink: #f4a6b8\nPurple: #6a3d9a\nYellow: #f2c94c\nOrange: #e67e22\nKhaki: #b8a27a\nSand: #d8c3a0\nStone: #b9ae9c"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.collection_cards.name",
     "settings": [
       {
