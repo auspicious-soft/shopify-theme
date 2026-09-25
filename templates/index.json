@@ -122,14 +122,14 @@
         "collection_fGPGma": {
           "type": "collection",
           "settings": {
-            "collection": "frontpage",
+            "collection": "womens",
             "image": "shopify://shop_images/Image_53.png",
             "media_type": "image",
             "video_url": "",
-            "subheading": "Female",
+            "subheading": "Women's",
             "heading": "Discover new silhouettes",
             "text": "",
-            "button_label": "Explore female",
+            "button_label": "Explore Women's",
             "link": ""
           }
         }
