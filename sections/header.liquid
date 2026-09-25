@@ -159,6 +159,15 @@
   assign hero_logo = section.settings.hero_logo
   assign transparent_logo = section.settings.transparent_logo
 
+  # The sticky / transparent logo swaps are a home-page look. Every other
+  # page shows only the default logo (Theme settings > Logo).
+  assign logo_swaps = is_logo_reveal
+  unless template.name == 'index'
+    assign logo_swaps = false
+    assign sticky_logo = nil
+    assign transparent_logo = nil
+  endunless
+
 %}
 
 <header
@@ -199,7 +208,7 @@
         {% render 'header-menu-toggle', section: section %}
       {% endif %}
       {% if logo_zone == 'start' %}
-        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, default_logo: default_logo, transparent_logo: transparent_logo, logo_sizes: logo_sizes %}
+        {% render 'header-logo', is_logo_reveal: logo_swaps, sticky_logo: sticky_logo, default_logo: default_logo, transparent_logo: transparent_logo, logo_sizes: logo_sizes %}
       {% endif %}
       {% if show_horizontal_nav and nav_zone == 'start' %}
         {% render 'header-navigation', section: section %}
@@ -211,7 +220,7 @@
 
     <div class="header__zone header__zone--center">
       {% if logo_zone == 'center' %}
-        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, default_logo: default_logo, transparent_logo: transparent_logo, logo_sizes: logo_sizes %}
+        {% render 'header-logo', is_logo_reveal: logo_swaps, sticky_logo: sticky_logo, default_logo: default_logo, transparent_logo: transparent_logo, logo_sizes: logo_sizes %}
       {% endif %}
       {% if show_horizontal_nav and nav_zone == 'center' %}
         {% render 'header-navigation', section: section %}
@@ -223,7 +232,7 @@
         {% render 'header-menu-toggle', section: section, modifier: desktop_toggle_class %}
       {% endif %}
       {% if logo_zone == 'end' %}
-        {% render 'header-logo', is_logo_reveal: is_logo_reveal, sticky_logo: sticky_logo, default_logo: default_logo, transparent_logo: transparent_logo, logo_sizes: logo_sizes %}
+        {% render 'header-logo', is_logo_reveal: logo_swaps, sticky_logo: sticky_logo, default_logo: default_logo, transparent_logo: transparent_logo, logo_sizes: logo_sizes %}
       {% endif %}
       {% if show_horizontal_nav and nav_zone == 'end' %}
         {% render 'header-navigation', section: section %}
