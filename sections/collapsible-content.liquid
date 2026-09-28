@@ -71,7 +71,9 @@
             {{ block.shopify_attributes }}
           >
             <summary class="collapsible__summary">
-              {%- if block.settings.icon_image != blank -%}
+              {%- if section.settings.show_icons == false -%}
+                {%- comment -%} Icons hidden (section setting); rows keep their icon choice. {%- endcomment -%}
+              {%- elsif block.settings.icon_image != blank -%}
                 <span class="collapsible__icon collapsible__icon--image">
                   {{
                     block.settings.icon_image
@@ -236,6 +238,13 @@
       "default": "plus"
     },
     {
+      "type": "checkbox",
+      "id": "show_icons",
+      "label": "t:sections.collapsible.show_icons",
+      "info": "t:sections.collapsible.show_icons_info",
+      "default": true
+    },
+    {
       "type": "range",
       "id": "icon_size",
       "label": "t:sections.collapsible.icon_size",
@@ -243,7 +252,8 @@
       "max": 48,
       "step": 2,
       "unit": "px",
-      "default": 22
+      "default": 22,
+      "visible_if": "{{ section.settings.show_icons }}"
     },
     {
       "type": "range",

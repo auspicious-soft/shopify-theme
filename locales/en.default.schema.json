@@ -543,6 +543,8 @@
       "expand_icon": "Expand icon",
       "expand_plus": "Plus / minus",
       "expand_chevron": "Chevron",
+      "show_icons": "Show icons",
+      "show_icons_info": "Hides every row icon when off. Each row keeps its icon choice for when you turn this back on",
       "icon_size": "Icon size",
       "content_width": "Max width",
       "block_name": "Collapsible row",
