@@ -118,6 +118,10 @@
     "password": "Password",
     "enter": "Enter"
   },
+  "video": {
+    "play": "Play video",
+    "play_named": "Play video: {{ title }}"
+  },
   "slideshow": {
     "label": "Slideshow",
     "carousel": "Carousel",

@@ -1,0 +1,235 @@
+/* Styles for sections/video.liquid (Click to play: assets/video.js). */
+
+.video-section {
+  padding-block: var(--section-padding-top) var(--section-padding-bottom);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* ---------- Heading area (above the video) ---------- */
+
+.video-section__header {
+  margin-block-end: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.video-section__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 44rem;
+}
+
+.video-section--align-center .video-section__header .video-section__content {
+  align-items: center;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.video-section__subheading {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.video-section__heading {
+  margin: 0;
+  color: inherit;
+}
+
+.video-section__description {
+  line-height: 1.7;
+}
+
+.video-section__description > * {
+  margin: 0;
+}
+
+.video-section__button {
+  margin-top: 0.4rem;
+}
+
+/* ---------- Video frame ---------- */
+
+.video-section__frame-wrap {
+  max-width: var(--video-max-width, 2000px);
+  margin-inline: auto;
+}
+
+.video-section__frame {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: var(--video-ratio, 16 / 9);
+  border-radius: var(--video-radius, 0);
+  background-color: #000;
+  isolation: isolate;
+}
+
+/* ---------- Click to play ---------- */
+
+.video-section__cover,
+.video-section__player {
+  position: absolute;
+  inset: 0;
+}
+
+.video-section__cover-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.video-section__placeholder {
+  background-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+}
+
+@media (hover: hover) {
+  video-player:hover .video-section__cover-image {
+    transform: scale(1.03);
+  }
+}
+
+.video-section__player > video,
+.video-section__player > iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: contain;
+  background-color: #000;
+}
+
+/* Once playing, the player comes forward and the cover and button go. */
+video-player.is-playing .video-section__player {
+  z-index: 2;
+}
+
+video-player.is-playing .video-section__cover,
+video-player.is-playing .video-section__play {
+  display: none;
+}
+
+.video-section__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  box-shadow: none;
+  transform: translate(-50%, -50%);
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.video-section__play svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-inline-start: 0.15rem;
+}
+
+.video-section__play:hover,
+.video-section__play:focus-visible {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.video-section__play:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+/* Filled circle */
+.video-section__play--circle {
+  width: clamp(3.75rem, 8vw, 5.5rem);
+  height: clamp(3.75rem, 8vw, 5.5rem);
+  color: #111;
+  background-color: rgb(255 255 255 / 0.92);
+  border: none;
+  border-radius: 999px;
+}
+
+/* Outline circle */
+.video-section__play--outline {
+  width: clamp(3.75rem, 8vw, 5.5rem);
+  height: clamp(3.75rem, 8vw, 5.5rem);
+  color: #fff;
+  background-color: rgb(255 255 255 / 0.12);
+  border: 1.5px solid rgb(255 255 255 / 0.85);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.video-section__play--outline:hover {
+  color: #111;
+  background-color: #fff;
+}
+
+/* Icon with "Play video" text */
+.video-section__play--text {
+  padding: 0.85rem 1.4rem;
+  color: #111;
+  background-color: rgb(255 255 255 / 0.92);
+  border: none;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.video-section__play--text svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* ---------- Background mode ---------- */
+
+.video-section__background {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.video-section__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: color-mix(in srgb, var(--video-overlay, #000) var(--video-overlay-opacity, 30%), transparent);
+  pointer-events: none;
+}
+
+.video-section__over {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: var(--video-justify, center);
+  justify-content: var(--video-align, center);
+  padding-block: clamp(1.5rem, 5vw, 4rem);
+  color: var(--video-text, #fff);
+}
+
+.video-section__over .video-section__content {
+  align-items: var(--video-align, center);
+  text-align: var(--video-text-align, center);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-section__cover-image,
+  .video-section__play {
+    transition: none;
+  }
+}
