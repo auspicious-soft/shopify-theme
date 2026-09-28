@@ -541,6 +541,8 @@
       "play_circle": "Filled circle",
       "play_outline": "Outline circle",
       "play_text": "Icon with text",
+      "show_controls": "Show video controls",
+      "show_controls_info": "Play bar, volume and full screen. When hidden, clicking the video pauses and resumes it. Vimeo only hides them on paid Vimeo plans",
       "loop": "Loop video",
       "aspect_ratio": "Aspect ratio",
       "ratio_16_9": "Widescreen (16:9)",

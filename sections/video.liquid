@@ -127,7 +127,7 @@
   <div class="{% if section.settings.width == 'page' %}page-width{% endif %}">
     <div class="video-section__frame-wrap">
       {%- if mode == 'player' -%}
-        <video-player class="video-section__frame">
+        <video-player class="video-section__frame" data-controls="{{ section.settings.show_controls }}">
           <div class="video-section__player" data-video-frame></div>
 
           <div class="video-section__cover">
@@ -205,11 +205,17 @@
                 {%- liquid
                   if video_url.type == 'youtube'
                     assign embed_src = 'https://www.youtube-nocookie.com/embed/' | append: video_url.id | append: '?autoplay=1&rel=0&playsinline=1&modestbranding=1'
+                    unless section.settings.show_controls
+                      assign embed_src = embed_src | append: '&controls=0'
+                    endunless
                     if section.settings.loop
                       assign embed_src = embed_src | append: '&loop=1&playlist=' | append: video_url.id
                     endif
                   else
                     assign embed_src = 'https://player.vimeo.com/video/' | append: video_url.id | append: '?autoplay=1&dnt=1'
+                    unless section.settings.show_controls
+                      assign embed_src = embed_src | append: '&controls=0'
+                    endunless
                     if section.settings.loop
                       assign embed_src = embed_src | append: '&loop=1'
                     endif
@@ -300,6 +306,14 @@
         { "value": "text", "label": "t:sections.video.play_text" }
       ],
       "default": "circle",
+      "visible_if": "{{ section.settings.mode == 'player' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_controls",
+      "label": "t:sections.video.show_controls",
+      "info": "t:sections.video.show_controls_info",
+      "default": true,
       "visible_if": "{{ section.settings.mode == 'player' }}"
     },
     {

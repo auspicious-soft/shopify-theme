@@ -104,6 +104,11 @@
   background-color: #000;
 }
 
+/* Controls hidden: the video itself is the pause / play toggle. */
+video-player[data-controls='false'] .video-section__player > video {
+  cursor: pointer;
+}
+
 /* Once playing, the player comes forward and the cover and button go. */
 video-player.is-playing .video-section__player {
   z-index: 2;
