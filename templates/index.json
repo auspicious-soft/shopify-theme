@@ -640,7 +640,7 @@
         "show_controls": true,
         "loop": false,
         "background_loop": true,
-        "aspect_ratio": "21-9",
+        "aspect_ratio": "16-9",
         "max_width": 2000,
         "corner_radius": 0,
         "width": "page",
@@ -796,7 +796,7 @@
       ],
       "name": "t:sections.featured_product.name",
       "settings": {
-        "product": "alia-knit-trouser",
+        "product": "long-sleeve-shirt",
         "gallery_layout": "carousel",
         "media_size": "medium",
         "media_position": "left",
