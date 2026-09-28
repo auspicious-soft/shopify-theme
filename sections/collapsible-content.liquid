@@ -1,0 +1,402 @@
+{% comment %}
+  "Collapsible content": an accordion for FAQs, shipping and returns info,
+  product care and so on. Each row (block) has a heading with an optional
+  icon (from the theme's icon set, or an uploaded image) and its content
+  (rich text and/or a page's content), and can start open.
+
+  - One row open at a time (native <details name="..."> grouping) or many.
+  - Layout: heading above the rows, or heading on the left and rows on the
+    right. Rows as lines or cards; plus/minus or chevron expand icon.
+  - Works without JavaScript (<details> / <summary>).
+
+  Styles live in assets/collapsible-content.css; icons come from
+  snippets/icon-library.liquid.
+{% endcomment %}
+
+{{ 'collapsible-content.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign group = 'Collapsible-' | append: section.id
+  assign heading_tag = section.settings.heading_tag | default: 'h2'
+  assign heading_class = section.settings.heading_class | default: heading_tag
+  assign has_header = false
+  if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank
+    assign has_header = true
+  endif
+-%}
+
+<div
+  class="collapsible collapsible--layout-{{ section.settings.layout }} collapsible--rows-{{ section.settings.row_style }} collapsible--expand-{{ section.settings.expand_icon }} collapsible--align-{{ section.settings.heading_alignment }} color-{{ section.settings.color_scheme.id }}"
+  style="
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --collapsible-width: {{ section.settings.content_width }}px;
+    --collapsible-icon-size: {{ section.settings.icon_size }}px;
+    --collapsible-radius: {{ section.settings.corner_radius }}px;
+  "
+>
+  <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+    <div class="collapsible__layout{% unless has_header %} collapsible__layout--no-header{% endunless %}">
+      {%- if has_header -%}
+        <div class="collapsible__header">
+          {%- if section.settings.subheading != blank -%}
+            <p class="collapsible__subheading">{{ section.settings.subheading | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <{{ heading_tag }} class="{{ heading_class }} collapsible__heading">{{ section.settings.heading }}</{{ heading_tag }}>
+          {%- endif -%}
+          {%- if section.settings.description != blank -%}
+            <div class="collapsible__description rte">{{ section.settings.description }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="collapsible__rows">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign open = false
+            if block.settings.open
+              assign open = true
+            endif
+          -%}
+          <details
+            class="collapsible__row{% if section.settings.row_style == 'cards' %} color-{{ section.settings.card_color_scheme.id }}{% endif %}"
+            id="Collapsible-{{ block.id }}"
+            {% if section.settings.one_at_a_time %}
+              name="{{ group }}"
+            {% endif %}
+            {% if open %}
+              open
+            {% endif %}
+            {{ block.shopify_attributes }}
+          >
+            <summary class="collapsible__summary">
+              {%- if block.settings.icon_image != blank -%}
+                <span class="collapsible__icon collapsible__icon--image">
+                  {{
+                    block.settings.icon_image
+                    | image_url: width: 96
+                    | image_tag: loading: 'lazy', alt: '', widths: '48, 96', sizes: '48px'
+                  }}
+                </span>
+              {%- elsif block.settings.icon != 'none' -%}
+                <span class="collapsible__icon">{% render 'icon-library', icon: block.settings.icon %}</span>
+              {%- endif -%}
+              <span class="collapsible__title">{{ block.settings.heading | default: block.settings.page.title | escape }}</span>
+              <span class="collapsible__toggle" aria-hidden="true"></span>
+            </summary>
+
+            <div class="collapsible__content">
+              <div class="collapsible__content-inner rte">
+                {{- block.settings.content -}}
+                {%- if block.settings.page != blank -%}
+                  {{ block.settings.page.content }}
+                {%- endif -%}
+              </div>
+            </div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.collapsible.name",
+  "class": "section-collapsible-content",
+  "max_blocks": 30,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:labels.content_settings"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:labels.subheading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:labels.heading",
+      "default": "Frequently asked questions"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:labels.heading_tag",
+      "info": "t:labels.heading_tag_info",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "heading_class",
+      "label": "t:labels.heading_class",
+      "info": "t:labels.heading_class_info",
+      "options": [
+        { "value": "h6", "label": "t:options.heading_size.extra_small" },
+        { "value": "h5", "label": "t:options.heading_size.small" },
+        { "value": "h4", "label": "t:options.heading_size.medium" },
+        { "value": "h3", "label": "t:options.heading_size.large" },
+        { "value": "h2", "label": "t:options.heading_size.extra_large" },
+        { "value": "h1", "label": "t:options.heading_size.huge" }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.newsletter.description"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.multicolumn.heading_alignment",
+      "options": [
+        { "value": "left", "label": "t:options.alignment.left" },
+        { "value": "center", "label": "t:options.alignment.center" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.image_with_text.layout",
+      "options": [
+        { "value": "stacked", "label": "t:sections.collapsible.layout_stacked" },
+        { "value": "side", "label": "t:sections.collapsible.layout_side" }
+      ],
+      "default": "stacked"
+    },
+    {
+      "type": "checkbox",
+      "id": "one_at_a_time",
+      "label": "t:sections.collapsible.one_at_a_time",
+      "info": "t:sections.collapsible.one_at_a_time_info",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "row_style",
+      "label": "t:sections.collapsible.row_style",
+      "options": [
+        { "value": "lines", "label": "t:sections.collapsible.row_lines" },
+        { "value": "cards", "label": "t:sections.collapsible.row_cards" }
+      ],
+      "default": "lines"
+    },
+    {
+      "type": "select",
+      "id": "expand_icon",
+      "label": "t:sections.collapsible.expand_icon",
+      "options": [
+        { "value": "plus", "label": "t:sections.collapsible.expand_plus" },
+        { "value": "chevron", "label": "t:sections.collapsible.expand_chevron" }
+      ],
+      "default": "plus"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "t:sections.collapsible.icon_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "t:sections.collapsible.content_width",
+      "min": 480,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "default": 860
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:sections.collection_banner.corner_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ section.settings.row_style == 'cards' }}"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "page"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.collection_banner.section_color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "card_color_scheme",
+      "label": "t:sections.image_with_text.content_color_scheme",
+      "default": "scheme-1",
+      "visible_if": "{{ section.settings.row_style == 'cards' }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:labels.padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:labels.padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "t:sections.collapsible.block_name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:labels.heading",
+          "info": "t:sections.collapsible.row_heading_info",
+          "default": "Collapsible row"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:labels.icon",
+          "options": [
+            { "value": "none", "label": "t:sections.collapsible.icons.none" },
+            { "value": "truck", "label": "t:sections.collapsible.icons.truck" },
+            { "value": "return", "label": "t:sections.collapsible.icons.return" },
+            { "value": "lock", "label": "t:sections.collapsible.icons.lock" },
+            { "value": "credit_card", "label": "t:sections.collapsible.icons.credit_card" },
+            { "value": "box", "label": "t:sections.collapsible.icons.box" },
+            { "value": "gift", "label": "t:sections.collapsible.icons.gift" },
+            { "value": "leaf", "label": "t:sections.collapsible.icons.leaf" },
+            { "value": "recycle", "label": "t:sections.collapsible.icons.recycle" },
+            { "value": "star", "label": "t:sections.collapsible.icons.star" },
+            { "value": "heart", "label": "t:sections.collapsible.icons.heart" },
+            { "value": "check", "label": "t:sections.collapsible.icons.check" },
+            { "value": "question", "label": "t:sections.collapsible.icons.question" },
+            { "value": "chat", "label": "t:sections.collapsible.icons.chat" },
+            { "value": "phone", "label": "t:sections.collapsible.icons.phone" },
+            { "value": "mail", "label": "t:sections.collapsible.icons.mail" },
+            { "value": "clock", "label": "t:sections.collapsible.icons.clock" },
+            { "value": "calendar", "label": "t:sections.collapsible.icons.calendar" },
+            { "value": "ruler", "label": "t:sections.collapsible.icons.ruler" },
+            { "value": "shirt", "label": "t:sections.collapsible.icons.shirt" },
+            { "value": "washing", "label": "t:sections.collapsible.icons.washing" },
+            { "value": "globe", "label": "t:sections.collapsible.icons.globe" },
+            { "value": "map_pin", "label": "t:sections.collapsible.icons.map_pin" },
+            { "value": "sparkle", "label": "t:sections.collapsible.icons.sparkle" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "t:sections.collapsible.icon_image",
+          "info": "t:sections.collapsible.icon_image_info"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:sections.collapsible.row_content",
+          "default": "<p>Use this text to share information about your brand or answer a common question.</p>"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "t:sections.collapsible.row_page",
+          "info": "t:sections.collapsible.row_page_info"
+        },
+        {
+          "type": "checkbox",
+          "id": "open",
+          "label": "t:sections.collapsible.row_open",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.collapsible.name",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "heading": "How long does shipping take?",
+            "icon": "truck",
+            "content": "<p>Orders ship within 1–2 business days. Standard delivery takes 3–5 business days, and express delivery 1–2.</p>",
+            "open": true
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "heading": "What is your return policy?",
+            "icon": "return",
+            "content": "<p>Not the right fit? Return unworn items within 30 days for a full refund. Returns are free.</p>"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "heading": "How do I find my size?",
+            "icon": "ruler",
+            "content": "<p>Each product page has a size guide. If you're between sizes, we recommend sizing up.</p>"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "heading": "Is checkout secure?",
+            "icon": "lock",
+            "content": "<p>Yes. Payments are encrypted and processed securely. We accept all major cards, Shop Pay and PayPal.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
