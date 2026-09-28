@@ -637,6 +637,7 @@
         "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "mode": "player",
         "play_button_style": "circle",
+        "show_controls": false,
         "loop": false,
         "aspect_ratio": "16-9",
         "max_width": 2000,
