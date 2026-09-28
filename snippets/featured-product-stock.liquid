@@ -1,0 +1,43 @@
+{% doc %}
+  Stock status for one variant in sections/featured-product.liquid, matching
+  the product page's inventory block: in stock, low stock ("Only 3 left") or
+  out of stock. Outputs the status line, or with `as_json` a
+  {"state", "text"} object for the section's per-variant JSON.
+
+  @param {variant} variant - The variant
+  @param {number} [low_threshold] - At or below this many, show low stock (default 5)
+  @param {boolean} [as_json] - Output JSON instead of HTML
+  @param {object} [block] - The inventory block (for the editor attributes)
+
+  @example
+  {% render 'featured-product-stock', variant: current_variant, low_threshold: 5, block: block %}
+{% enddoc %}
+
+{%- liquid
+  assign threshold = low_threshold | default: 5
+  assign stock_state = 'in'
+  assign stock_count = variant.inventory_quantity
+  if variant.available == false
+    assign stock_state = 'out'
+  elsif variant.inventory_management == 'shopify' and variant.inventory_policy == 'deny' and stock_count <= threshold and stock_count > 0
+    assign stock_state = 'low'
+  endif
+
+  case stock_state
+    when 'out'
+      assign stock_text = 'products.out_of_stock' | t
+    when 'low'
+      assign stock_text = 'products.low_stock' | t: count: stock_count
+    else
+      assign stock_text = 'products.in_stock' | t
+  endcase
+-%}
+
+{%- if as_json -%}
+  {"state": {{ stock_state | json }}, "text": {{ stock_text | json }}}
+{%- else -%}
+  <p class="product__inventory product__inventory--{{ stock_state }}" data-featured-stock {{ block.shopify_attributes }}>
+    <span class="product__inventory-dot" aria-hidden="true"></span>
+    <span data-featured-stock-text>{{ stock_text }}</span>
+  </p>
+{%- endif -%}
