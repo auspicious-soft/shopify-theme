@@ -30,6 +30,15 @@
   if section.settings.success_message != blank
     assign success_message = section.settings.success_message
   endif
+  assign success_heading = 'contact.form.success_heading' | t
+  if section.settings.success_heading != blank
+    assign success_heading = section.settings.success_heading
+  endif
+  assign replace_form = false
+  if section.settings.success_display == 'replace'
+    assign replace_form = true
+  endif
+
   assign extra_label = 'contact.form.order_number' | t
   if section.settings.extra_field == 'subject'
     assign extra_label = 'contact.form.subject' | t
@@ -64,9 +73,22 @@
       <div class="contact__form-wrap">
         {% form 'contact', id: form_id, class: 'contact__form' %}
           {%- if form.posted_successfully? -%}
-            <div class="contact__message contact__message--success" role="status" tabindex="-1" autofocus>
+            <div
+              class="contact__message contact__message--success contact__message--{{ section.settings.success_style | default: 'highlight' }}{% if replace_form %} contact__message--replace{% endif %}"
+              role="status"
+              tabindex="-1"
+              autofocus
+            >
               {% render 'icon-library', icon: 'check', class: 'contact__message-icon' %}
-              <p>{{ success_message | escape }}</p>
+              <div class="contact__message-body">
+                {%- if success_heading != blank -%}
+                  <p class="contact__message-heading">{{ success_heading | escape }}</p>
+                {%- endif -%}
+                <p>{{ success_message | escape }}</p>
+                {%- if replace_form -%}
+                  <a href="{{ request.path }}" class="contact__message-link">{{ 'contact.form.send_another' | t }}</a>
+                {%- endif -%}
+              </div>
             </div>
           {%- elsif form.errors -%}
             <div class="contact__message contact__message--error" role="alert" tabindex="-1" autofocus>
@@ -85,6 +107,8 @@
             </div>
           {%- endif -%}
 
+          {%- comment -%} "Replace the form": after sending, only the message shows. {%- endcomment -%}
+          {%- unless form.posted_successfully? and replace_form -%}
           <div class="contact__fields">
             <div class="contact__field{% if section.settings.show_phone %} contact__field--half{% endif %}">
               <label class="contact__label" for="{{ form_id }}-name">{{ 'contact.form.name' | t }}</label>
@@ -174,6 +198,7 @@
           <button type="submit" class="button button--{{ section.settings.button_style }} contact__submit">
             {{- button_label | escape -}}
           </button>
+          {%- endunless -%}
         {% endform %}
       </div>
 
@@ -362,10 +387,44 @@
       "default": "primary"
     },
     {
+      "type": "header",
+      "content": "t:sections.contact_form.header_success"
+    },
+    {
+      "type": "select",
+      "id": "success_display",
+      "label": "t:sections.contact_form.success_display",
+      "options": [
+        { "value": "replace", "label": "t:sections.contact_form.success_replace" },
+        { "value": "above", "label": "t:sections.contact_form.success_above" }
+      ],
+      "default": "replace"
+    },
+    {
+      "type": "text",
+      "id": "success_heading",
+      "label": "t:sections.contact_form.success_heading",
+      "info": "t:sections.contact_form.success_heading_info"
+    },
+    {
       "type": "text",
       "id": "success_message",
       "label": "t:sections.newsletter.success_message",
       "info": "t:sections.contact_form.success_message_info"
+    },
+    {
+      "type": "select",
+      "id": "success_style",
+      "label": "t:sections.contact_form.success_style",
+      "options": [
+        { "value": "highlight", "label": "t:sections.contact_form.success_highlight" },
+        { "value": "plain", "label": "t:sections.contact_form.success_plain" }
+      ],
+      "default": "highlight"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.contact_form.header_more"
     },
     {
       "type": "richtext",

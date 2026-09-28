@@ -128,6 +128,8 @@
       "message": "Message",
       "send": "Send message",
       "success": "Thanks for contacting us. We'll get back to you as soon as possible.",
+      "success_heading": "Message sent",
+      "send_another": "Send another message",
       "error_heading": "Please check the following:"
     }
   },

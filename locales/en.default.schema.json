@@ -545,7 +545,17 @@
       "info_none": "Hidden",
       "info_card": "Show contact details in a card",
       "info_card_info": "Gives the contact details a light background and padding",
-      "block_name": "Contact detail"
+      "block_name": "Contact detail",
+      "header_success": "After sending",
+      "success_display": "Show",
+      "success_replace": "The message instead of the form",
+      "success_above": "The message above the form",
+      "success_heading": "Success heading",
+      "success_heading_info": "Leave empty for \"Message sent\"",
+      "success_style": "Message style",
+      "success_highlight": "Highlighted (green)",
+      "success_plain": "Plain (color scheme)",
+      "header_more": "Note under the form"
     },
     "featured_product": {
       "name": "Featured product",
