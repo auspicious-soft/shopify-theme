@@ -725,6 +725,7 @@
         "layout": "stacked",
         "one_at_a_time": true,
         "row_style": "lines",
+        "row_heading_size": "h1",
         "expand_icon": "plus",
         "icon_size": 22,
         "content_width": 860,
