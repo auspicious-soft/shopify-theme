@@ -72,7 +72,7 @@
         "button_style": "primary",
         "success_message": "",
         "privacy_note": "",
-        "info_position": "below",
+        "info_position": "left",
         "form_width": 680,
         "corner_radius": 0,
         "width": "page",
