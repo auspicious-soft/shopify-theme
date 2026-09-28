@@ -1,0 +1,296 @@
+/* Styles for sections/contact-form.liquid. */
+
+.contact {
+  padding-block: var(--section-padding-top) var(--section-padding-bottom);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* ---------- Heading area ---------- */
+
+.contact__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 44rem;
+  margin-block-end: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.contact--align-center .contact__header {
+  align-items: center;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.contact__subheading {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
+}
+
+.contact__heading {
+  margin: 0;
+}
+
+.contact__description {
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
+}
+
+.contact__description > * {
+  margin: 0;
+}
+
+/* ---------- Layout: form + contact details ---------- */
+
+.contact__layout {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 5vw, 3rem);
+}
+
+.contact--info-none .contact__form-wrap,
+.contact--info-below .contact__form-wrap {
+  width: 100%;
+  max-width: var(--contact-form-width, 680px);
+}
+
+.contact--align-center.contact--info-none .contact__form-wrap,
+.contact--align-center.contact--info-below .contact__form-wrap {
+  margin-inline: auto;
+}
+
+@media screen and (min-width: 990px) {
+  .contact--info-right .contact__layout,
+  .contact--info-left .contact__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+    gap: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .contact--info-left .contact__layout {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+
+  .contact--info-left .contact__info {
+    order: -1;
+  }
+
+  /* Details below the form: a row of columns. */
+  .contact--info-below .contact__info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  }
+}
+
+/* ---------- Form ---------- */
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact__fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .contact__field--half {
+    flex-basis: calc(50% - 0.5rem);
+  }
+}
+
+.contact__label {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.contact__required {
+  color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
+}
+
+.contact__input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font: inherit;
+  font-size: 0.95rem;
+  color: inherit;
+  background-color: var(--color-background);
+  border-width: var(--style-border-thickness-inputs, 1px);
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--color-foreground) 25%, transparent);
+  border-radius: var(--style-border-radius-inputs, var(--contact-radius, 0));
+  box-shadow: none;
+  transition: border-color 0.2s ease;
+}
+
+.contact__input::placeholder {
+  color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
+}
+
+.contact__input:hover {
+  border-color: color-mix(in srgb, var(--color-foreground) 45%, transparent);
+}
+
+.contact__input:focus-visible {
+  outline: 2px solid var(--color-foreground);
+  outline-offset: 1px;
+  border-color: var(--color-foreground);
+}
+
+.contact__input[aria-invalid='true'] {
+  border-color: #c0392b;
+}
+
+.contact__textarea {
+  min-height: 9rem;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.contact__field-error {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #c0392b;
+}
+
+.contact__privacy {
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
+}
+
+.contact__privacy > * {
+  margin: 0;
+}
+
+.contact__privacy a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.contact__submit {
+  align-self: flex-start;
+}
+
+/* ---------- Success / error messages ---------- */
+
+.contact__message {
+  padding: 1rem 1.25rem;
+  border: 1px solid;
+  border-radius: var(--contact-radius, 0);
+}
+
+.contact__message p,
+.contact__message ul {
+  margin: 0;
+}
+
+.contact__message ul {
+  margin-top: 0.4rem;
+  padding-inline-start: 1.25rem;
+}
+
+.contact__message a {
+  color: inherit;
+}
+
+.contact__message--success {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #1e7a45;
+  background-color: color-mix(in srgb, #1e7a45 8%, transparent);
+  border-color: color-mix(in srgb, #1e7a45 35%, transparent);
+}
+
+.contact__message-icon {
+  flex-shrink: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.contact__message--error {
+  color: #a3261b;
+  background-color: color-mix(in srgb, #c0392b 7%, transparent);
+  border-color: color-mix(in srgb, #c0392b 35%, transparent);
+}
+
+/* ---------- Contact details ---------- */
+
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* A light tint of the text color, so the card shows on any scheme. */
+.contact--info-card .contact__info {
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  background-color: color-mix(in srgb, var(--color-foreground) 5%, var(--color-background));
+  color: var(--color-foreground);
+  border-radius: var(--contact-radius, 0);
+}
+
+.contact__info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+}
+
+.contact__info-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.contact__info-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.contact__info-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.contact__info-title {
+  margin: 0;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.contact__info-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--color-foreground) 80%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.contact__info-text > * {
+  margin: 0;
+}
+
+.contact__info-text a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}

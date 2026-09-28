@@ -1,0 +1,104 @@
+{
+  "sections": {
+    "main": {
+      "type": "page",
+      "settings": {
+        "heading_tag": "h1",
+        "heading_class": "h2"
+      }
+    },
+    "contact_form": {
+      "type": "contact-form",
+      "blocks": {
+        "email": {
+          "type": "info",
+          "settings": {
+            "icon": "mail",
+            "title": "Email",
+            "text": "<p><a href=\"mailto:hello@yourstore.com\">hello@yourstore.com</a></p>"
+          }
+        },
+        "phone": {
+          "type": "info",
+          "settings": {
+            "icon": "phone",
+            "title": "Phone",
+            "text": "<p>+1 (555) 123-4567</p>"
+          }
+        },
+        "hours": {
+          "type": "info",
+          "settings": {
+            "icon": "clock",
+            "title": "Opening hours",
+            "text": "<p>Monday – Friday, 9am – 6pm<br>Saturday, 10am – 4pm</p>"
+          }
+        },
+        "address": {
+          "type": "info",
+          "settings": {
+            "icon": "map_pin",
+            "title": "Visit us",
+            "text": "<p>123 Main Street<br>New York, NY 10001</p>"
+          }
+        }
+      },
+      "block_order": ["email", "phone", "hours", "address"],
+      "settings": {
+        "heading": "Get in touch",
+        "heading_tag": "h2",
+        "heading_class": "h3",
+        "description": "<p>Questions about an order, sizing or anything else? Send us a message and we'll reply within one business day.</p>",
+        "heading_alignment": "left",
+        "show_phone": true,
+        "extra_field": "order_number",
+        "info_position": "right",
+        "info_card": true,
+        "padding_top": 24,
+        "padding_bottom": 56
+      }
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "shipping": {
+          "type": "row",
+          "settings": {
+            "heading": "Where is my order?",
+            "icon": "truck",
+            "content": "<p>You'll get an email with a tracking link as soon as your order ships. Orders usually ship within 1–2 business days.</p>"
+          }
+        },
+        "returns": {
+          "type": "row",
+          "settings": {
+            "heading": "How do I return an item?",
+            "icon": "return",
+            "content": "<p>Return unworn items within 30 days. Include your order number in the message above and we'll send you a return label.</p>"
+          }
+        },
+        "exchange": {
+          "type": "row",
+          "settings": {
+            "heading": "Can I change or cancel my order?",
+            "icon": "clock",
+            "content": "<p>Contact us within 12 hours of ordering and we'll do our best to update or cancel it before it ships.</p>"
+          }
+        }
+      },
+      "block_order": ["shipping", "returns", "exchange"],
+      "settings": {
+        "heading": "Before you write",
+        "heading_tag": "h2",
+        "heading_class": "h4",
+        "heading_alignment": "left",
+        "layout": "side",
+        "one_at_a_time": true,
+        "row_style": "lines",
+        "padding_top": 24,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": ["main", "contact_form", "faq"]
+}

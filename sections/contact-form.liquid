@@ -1,0 +1,650 @@
+{% comment %}
+  "Contact form": Shopify's contact form (messages are emailed to the store's
+  sender email, Settings > Notifications) with name, email, optional phone,
+  optional order number / subject, and message. Shows a success message
+  after sending and field errors when something is missing.
+
+  Optional contact details panel beside the form (left or right) or below
+  it, built from blocks: icon (snippets/icon-library.liquid) + title + text,
+  e.g. email, phone, address, opening hours.
+
+  Styles live in assets/contact-form.css.
+{% endcomment %}
+
+{{ 'contact-form.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign form_id = 'ContactForm-' | append: section.id
+  assign heading_tag = section.settings.heading_tag | default: 'h2'
+  assign heading_class = section.settings.heading_class | default: heading_tag
+  assign info_position = section.settings.info_position
+  if section.blocks.size == 0
+    assign info_position = 'none'
+  endif
+
+  assign button_label = 'contact.form.send' | t
+  if section.settings.button_label != blank
+    assign button_label = section.settings.button_label
+  endif
+  assign success_message = 'contact.form.success' | t
+  if section.settings.success_message != blank
+    assign success_message = section.settings.success_message
+  endif
+  assign extra_label = 'contact.form.order_number' | t
+  if section.settings.extra_field == 'subject'
+    assign extra_label = 'contact.form.subject' | t
+  endif
+-%}
+
+<div
+  class="contact contact--info-{{ info_position }} contact--align-{{ section.settings.heading_alignment }}{% if section.settings.info_card %} contact--info-card{% endif %} color-{{ section.settings.color_scheme.id }}"
+  style="
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --contact-form-width: {{ section.settings.form_width }}px;
+    --contact-radius: {{ section.settings.corner_radius }}px;
+  "
+>
+  <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+    {%- if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank -%}
+      <div class="contact__header">
+        {%- if section.settings.subheading != blank -%}
+          <p class="contact__subheading">{{ section.settings.subheading | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <{{ heading_tag }} class="{{ heading_class }} contact__heading">{{ section.settings.heading }}</{{ heading_tag }}>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="contact__description rte">{{ section.settings.description }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="contact__layout">
+      <div class="contact__form-wrap">
+        {% form 'contact', id: form_id, class: 'contact__form' %}
+          {%- if form.posted_successfully? -%}
+            <div class="contact__message contact__message--success" role="status" tabindex="-1" autofocus>
+              {% render 'icon-library', icon: 'check', class: 'contact__message-icon' %}
+              <p>{{ success_message | escape }}</p>
+            </div>
+          {%- elsif form.errors -%}
+            <div class="contact__message contact__message--error" role="alert" tabindex="-1" autofocus>
+              <p>{{ 'contact.form.error_heading' | t }}</p>
+              <ul>
+                {%- for field in form.errors -%}
+                  <li>
+                    {%- if field == 'form' -%}
+                      {{ form.errors.messages[field] }}
+                    {%- else -%}
+                      <a href="#{{ form_id }}-{{ field }}">{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}</a>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div class="contact__fields">
+            <div class="contact__field{% if section.settings.show_phone %} contact__field--half{% endif %}">
+              <label class="contact__label" for="{{ form_id }}-name">{{ 'contact.form.name' | t }}</label>
+              <input
+                class="contact__input"
+                type="text"
+                id="{{ form_id }}-name"
+                name="contact[{{ 'contact.form.name' | t }}]"
+                value="{{ form.name }}"
+                autocomplete="name"
+              >
+            </div>
+
+            {%- if section.settings.show_phone -%}
+              <div class="contact__field contact__field--half">
+                <label class="contact__label" for="{{ form_id }}-phone">{{ 'contact.form.phone' | t }}</label>
+                <input
+                  class="contact__input"
+                  type="tel"
+                  id="{{ form_id }}-phone"
+                  name="contact[{{ 'contact.form.phone' | t }}]"
+                  value="{{ form.phone }}"
+                  autocomplete="tel"
+                  pattern="[0-9\-\+\s\(\)]*"
+                >
+              </div>
+            {%- endif -%}
+
+            <div class="contact__field">
+              <label class="contact__label" for="{{ form_id }}-email">
+                {{- 'contact.form.email' | t }} <span class="contact__required" aria-hidden="true">*</span>
+              </label>
+              <input
+                class="contact__input"
+                type="email"
+                id="{{ form_id }}-email"
+                name="contact[email]"
+                value="{% if form.email != blank %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                autocomplete="email"
+                autocapitalize="off"
+                spellcheck="false"
+                required
+                aria-required="true"
+                {% if form.errors contains 'email' %}
+                  aria-invalid="true" aria-describedby="{{ form_id }}-email-error"
+                {% endif %}
+              >
+              {%- if form.errors contains 'email' -%}
+                <p id="{{ form_id }}-email-error" class="contact__field-error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+              {%- endif -%}
+            </div>
+
+            {%- if section.settings.extra_field != 'none' -%}
+              <div class="contact__field">
+                <label class="contact__label" for="{{ form_id }}-extra">{{ extra_label }}</label>
+                <input
+                  class="contact__input"
+                  type="text"
+                  id="{{ form_id }}-extra"
+                  name="contact[{{ extra_label }}]"
+                >
+              </div>
+            {%- endif -%}
+
+            <div class="contact__field">
+              <label class="contact__label" for="{{ form_id }}-body">
+                {{- 'contact.form.message' | t }} <span class="contact__required" aria-hidden="true">*</span>
+              </label>
+              <textarea
+                class="contact__input contact__textarea"
+                id="{{ form_id }}-body"
+                name="contact[body]"
+                rows="6"
+                required
+                aria-required="true"
+                {% if form.errors contains 'body' %}
+                  aria-invalid="true"
+                {% endif %}
+              >{{ form.body }}</textarea>
+            </div>
+          </div>
+
+          {%- if section.settings.privacy_note != blank -%}
+            <div class="contact__privacy rte">{{ section.settings.privacy_note }}</div>
+          {%- endif -%}
+
+          <button type="submit" class="button button--{{ section.settings.button_style }} contact__submit">
+            {{- button_label | escape -}}
+          </button>
+        {% endform %}
+      </div>
+
+      {%- if info_position != 'none' -%}
+        <div class="contact__info{% if section.settings.info_card %} color-{{ section.settings.info_color_scheme.id }}{% endif %}">
+          {%- for block in section.blocks -%}
+            <div class="contact__info-item" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != 'none' -%}
+                <span class="contact__info-icon">{% render 'icon-library', icon: block.settings.icon %}</span>
+              {%- endif -%}
+              <div class="contact__info-body">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="contact__info-title">{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="contact__info-text rte">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.contact_form.name",
+  "class": "section-contact-form",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:labels.content_settings"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:labels.subheading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:labels.heading",
+      "default": "Get in touch"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:labels.heading_tag",
+      "info": "t:labels.heading_tag_info",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "heading_class",
+      "label": "t:labels.heading_class",
+      "info": "t:labels.heading_class_info",
+      "options": [
+        {
+          "value": "h6",
+          "label": "t:options.heading_size.extra_small"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.heading_size.small"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.heading_size.medium"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.heading_size.large"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.heading_size.extra_large"
+        },
+        {
+          "value": "h1",
+          "label": "t:options.heading_size.huge"
+        }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.newsletter.description",
+      "default": "<p>Questions about an order, sizing or anything else? Send us a message and we'll reply within one business day.</p>"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.multicolumn.heading_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:options.alignment.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.alignment.center"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.contact_form.header_form"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone",
+      "label": "t:sections.contact_form.show_phone",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "extra_field",
+      "label": "t:sections.contact_form.extra_field",
+      "options": [
+        {
+          "value": "order_number",
+          "label": "t:sections.contact_form.extra_order_number"
+        },
+        {
+          "value": "subject",
+          "label": "t:sections.contact_form.extra_subject"
+        },
+        {
+          "value": "none",
+          "label": "t:sections.contact_form.extra_none"
+        }
+      ],
+      "default": "order_number"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:labels.button_text",
+      "info": "t:sections.contact_form.button_label_info"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:labels.button_style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:options.button_style.primary"
+        },
+        {
+          "value": "secondary",
+          "label": "t:options.button_style.secondary"
+        }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "t:sections.newsletter.success_message",
+      "info": "t:sections.contact_form.success_message_info"
+    },
+    {
+      "type": "richtext",
+      "id": "privacy_note",
+      "label": "t:sections.newsletter.note",
+      "info": "t:sections.newsletter.note_info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.layout"
+    },
+    {
+      "type": "select",
+      "id": "info_position",
+      "label": "t:sections.contact_form.info_position",
+      "info": "t:sections.contact_form.info_position_info",
+      "options": [
+        {
+          "value": "right",
+          "label": "t:sections.contact_form.info_right"
+        },
+        {
+          "value": "left",
+          "label": "t:sections.contact_form.info_left"
+        },
+        {
+          "value": "below",
+          "label": "t:sections.contact_form.info_below"
+        },
+        {
+          "value": "none",
+          "label": "t:sections.contact_form.info_none"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "form_width",
+      "label": "t:sections.newsletter.form_width",
+      "min": 400,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 680
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:sections.collection_banner.corner_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        {
+          "value": "full",
+          "label": "t:options.section_width.full"
+        },
+        {
+          "value": "page",
+          "label": "t:options.section_width.page"
+        }
+      ],
+      "default": "page"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.collection_banner.section_color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "info_card",
+      "label": "t:sections.contact_form.info_card",
+      "info": "t:sections.contact_form.info_card_info",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "info_color_scheme",
+      "label": "t:sections.image_with_text.content_color_scheme",
+      "default": "scheme-1",
+      "visible_if": "{{ section.settings.info_card }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:labels.padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:labels.padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "info",
+      "name": "t:sections.contact_form.block_name",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:labels.icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.collapsible.icons.none"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.collapsible.icons.truck"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.collapsible.icons.return"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.collapsible.icons.lock"
+            },
+            {
+              "value": "credit_card",
+              "label": "t:sections.collapsible.icons.credit_card"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.collapsible.icons.box"
+            },
+            {
+              "value": "gift",
+              "label": "t:sections.collapsible.icons.gift"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.collapsible.icons.leaf"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.collapsible.icons.recycle"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.collapsible.icons.star"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.collapsible.icons.heart"
+            },
+            {
+              "value": "check",
+              "label": "t:sections.collapsible.icons.check"
+            },
+            {
+              "value": "question",
+              "label": "t:sections.collapsible.icons.question"
+            },
+            {
+              "value": "chat",
+              "label": "t:sections.collapsible.icons.chat"
+            },
+            {
+              "value": "phone",
+              "label": "t:sections.collapsible.icons.phone"
+            },
+            {
+              "value": "mail",
+              "label": "t:sections.collapsible.icons.mail"
+            },
+            {
+              "value": "clock",
+              "label": "t:sections.collapsible.icons.clock"
+            },
+            {
+              "value": "calendar",
+              "label": "t:sections.collapsible.icons.calendar"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.collapsible.icons.ruler"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.collapsible.icons.shirt"
+            },
+            {
+              "value": "washing",
+              "label": "t:sections.collapsible.icons.washing"
+            },
+            {
+              "value": "globe",
+              "label": "t:sections.collapsible.icons.globe"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.collapsible.icons.map_pin"
+            },
+            {
+              "value": "sparkle",
+              "label": "t:sections.collapsible.icons.sparkle"
+            }
+          ],
+          "default": "mail"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.newsletter.title",
+          "default": "Email"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:labels.text",
+          "default": "<p>hello@yourstore.com</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.contact_form.name",
+      "blocks": [
+        {
+          "type": "info",
+          "settings": {
+            "icon": "mail",
+            "title": "Email",
+            "text": "<p><a href=\"mailto:hello@yourstore.com\">hello@yourstore.com</a></p>"
+          }
+        },
+        {
+          "type": "info",
+          "settings": {
+            "icon": "phone",
+            "title": "Phone",
+            "text": "<p>+1 (555) 123-4567</p>"
+          }
+        },
+        {
+          "type": "info",
+          "settings": {
+            "icon": "clock",
+            "title": "Opening hours",
+            "text": "<p>Monday – Friday, 9am – 6pm<br>Saturday, 10am – 4pm</p>"
+          }
+        },
+        {
+          "type": "info",
+          "settings": {
+            "icon": "map_pin",
+            "title": "Visit us",
+            "text": "<p>123 Main Street<br>New York, NY 10001</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
