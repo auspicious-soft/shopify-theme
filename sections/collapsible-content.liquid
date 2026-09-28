@@ -26,7 +26,7 @@
 -%}
 
 <div
-  class="collapsible collapsible--layout-{{ section.settings.layout }} collapsible--rows-{{ section.settings.row_style }} collapsible--expand-{{ section.settings.expand_icon }} collapsible--align-{{ section.settings.heading_alignment }} color-{{ section.settings.color_scheme.id }}"
+  class="collapsible collapsible--layout-{{ section.settings.layout }} collapsible--rows-{{ section.settings.row_style }} collapsible--expand-{{ section.settings.expand_icon }} collapsible--align-{{ section.settings.heading_alignment }} collapsible--content-{{ section.settings.row_content_size }} color-{{ section.settings.color_scheme.id }}"
   style="
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -212,6 +212,18 @@
         { "value": "h1", "label": "t:options.heading_size.huge" }
       ],
       "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "row_content_size",
+      "label": "t:sections.collapsible.row_content_size",
+      "options": [
+        { "value": "small", "label": "t:sections.collection_banner.size_small" },
+        { "value": "medium", "label": "t:sections.collection_banner.size_medium" },
+        { "value": "large", "label": "t:sections.collection_banner.size_large" },
+        { "value": "xlarge", "label": "t:sections.collapsible.size_xlarge" }
+      ],
+      "default": "medium"
     },
     {
       "type": "select",

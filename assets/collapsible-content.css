@@ -229,6 +229,23 @@
   padding-inline-start: calc(var(--collapsible-icon-size, 22px) + 0.9rem);
 }
 
+/* Row content size (section setting). Medium is the body text size. */
+.collapsible--content-small .collapsible__content-inner {
+  font-size: 0.875rem;
+}
+
+.collapsible--content-medium .collapsible__content-inner {
+  font-size: 1rem;
+}
+
+.collapsible--content-large .collapsible__content-inner {
+  font-size: 1.125rem;
+}
+
+.collapsible--content-xlarge .collapsible__content-inner {
+  font-size: 1.3rem;
+}
+
 .collapsible__content-inner > * {
   margin: 0;
 }

@@ -538,6 +538,8 @@
       "row_cards": "Cards",
       "row_heading_size": "Row heading size",
       "row_heading_default": "Default",
+      "row_content_size": "Row content size",
+      "size_xlarge": "Extra large",
       "expand_icon": "Expand icon",
       "expand_plus": "Plus / minus",
       "expand_chevron": "Chevron",
