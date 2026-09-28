@@ -3,8 +3,10 @@
   subheading, heading, text and button over it (e.g. "New items / Long
   shirts / View products").
 
-  Optional parallax (Collection banner > Parallax effect): the image stays
-  fixed on screen while the page and the text scroll over it (pure CSS).
+  Optional parallax (Collection banner > Parallax effect): while the banner
+  comes into view the image stays fixed and the text scrolls over it; once
+  the banner is fully on screen the image scrolls away with it
+  (assets/collection-banner.js).
 
   Pick a collection and the banner fills itself in: its image, title and
   link are used wherever the matching setting is left empty. Separate
@@ -13,6 +15,8 @@
 {% endcomment %}
 
 {{ 'collection-banner.css' | asset_url | stylesheet_tag }}
+{%- comment -%} Always loaded (not only with parallax on) so ticking Parallax in the theme editor works without a page reload. {%- endcomment -%}
+<script src="{{ 'collection-banner.js' | asset_url }}" defer></script>
 {{ 'banner-media.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
@@ -101,7 +105,11 @@
         --promo-content-width: {{ section.settings.content_width }}px;
       "
     >
-      <div class="promo-banner__media">
+      {%- if section.settings.parallax -%}
+        <parallax-media class="promo-banner__media">
+      {%- else -%}
+        <div class="promo-banner__media">
+      {%- endif -%}
         {% render 'banner-media',
           image: image,
           mobile_image: section.settings.mobile_image,
@@ -112,7 +120,11 @@
           alt: heading,
           placeholder: 'lifestyle-2'
         %}
-      </div>
+      {%- if section.settings.parallax -%}
+        </parallax-media>
+      {%- else -%}
+        </div>
+      {%- endif -%}
 
       <div class="promo-banner__overlay" aria-hidden="true"></div>
 

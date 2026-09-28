@@ -50,17 +50,12 @@
   background-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
 }
 
-/* Parallax: the image stays fixed on screen while the page and the text
-   scroll over it, like a fixed background. The image fills the screen
-   (position: fixed) and the banner's clip-path shows only the part of it
-   behind the banner. Pure CSS, so it's as smooth as normal scrolling. */
-.promo-banner--parallax {
-  clip-path: inset(0 round var(--promo-radius, 0));
-}
-
+/* Parallax: while the banner comes into view the image is held still
+   (assets/collection-banner.js shifts it) and the text scrolls over it;
+   once the banner is fully on screen the image scrolls away with it. The
+   banner's overflow: hidden crops the image. */
 .promo-banner--parallax .promo-banner__media {
-  position: fixed;
-  inset: 0;
+  will-change: transform;
 }
 
 .promo-banner--parallax .banner-media__image,
