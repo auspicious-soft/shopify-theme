@@ -640,7 +640,7 @@
         "show_controls": true,
         "loop": false,
         "background_loop": true,
-        "aspect_ratio": "16-9",
+        "aspect_ratio": "21-9",
         "max_width": 2000,
         "corner_radius": 0,
         "width": "page",
@@ -663,6 +663,78 @@
         "padding_top": 56,
         "padding_bottom": 56
       }
+    },
+    "collapsible_content_LNyBUz": {
+      "type": "collapsible-content",
+      "blocks": {
+        "row_8Vethx": {
+          "type": "row",
+          "settings": {
+            "heading": "How long does shipping take?",
+            "icon": "truck",
+            "content": "<p>Orders ship within 1–2 business days. Standard delivery takes 3–5 business days, and express delivery 1–2.</p>",
+            "page": "",
+            "open": true
+          }
+        },
+        "row_aV4kQ7": {
+          "type": "row",
+          "settings": {
+            "heading": "What is your return policy?",
+            "icon": "return",
+            "content": "<p>Not the right fit? Return unworn items within 30 days for a full refund. Returns are free.</p>",
+            "page": "",
+            "open": false
+          }
+        },
+        "row_ExgTaE": {
+          "type": "row",
+          "settings": {
+            "heading": "How do I find my size?",
+            "icon": "ruler",
+            "content": "<p>Each product page has a size guide. If you're between sizes, we recommend sizing up.</p>",
+            "page": "",
+            "open": false
+          }
+        },
+        "row_DXkXar": {
+          "type": "row",
+          "settings": {
+            "heading": "Is checkout secure?",
+            "icon": "lock",
+            "content": "<p>Yes. Payments are encrypted and processed securely. We accept all major cards, Shop Pay and PayPal.</p>",
+            "page": "",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "row_8Vethx",
+        "row_aV4kQ7",
+        "row_ExgTaE",
+        "row_DXkXar"
+      ],
+      "name": "t:sections.collapsible.name",
+      "settings": {
+        "subheading": "",
+        "heading": "Frequently asked questions",
+        "heading_tag": "h2",
+        "heading_class": "h3",
+        "description": "",
+        "heading_alignment": "center",
+        "layout": "stacked",
+        "one_at_a_time": true,
+        "row_style": "lines",
+        "expand_icon": "plus",
+        "icon_size": 22,
+        "content_width": 860,
+        "corner_radius": 0,
+        "width": "page",
+        "color_scheme": "",
+        "card_color_scheme": "",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
@@ -677,6 +749,7 @@
     "rich_text_nnxbkF",
     "image_with_text_d9tUGx",
     "multicolumn_Jn7mQR",
-    "video_BxDwVW"
+    "video_BxDwVW",
+    "collapsible_content_LNyBUz"
   ]
 }
