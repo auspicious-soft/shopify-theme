@@ -494,6 +494,75 @@
         "padding_top": 64,
         "padding_bottom": 64
       }
+    },
+    "image_with_text_d9tUGx": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption_98GYcg": {
+          "type": "caption",
+          "settings": {
+            "caption": "New collection",
+            "style": "uppercase",
+            "size": "small"
+          }
+        },
+        "heading_GjrnHP": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image with text",
+            "heading_tag": "h2",
+            "heading_class": "h2",
+            "uppercase": false
+          }
+        },
+        "text_4FDrew": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "size": "medium"
+          }
+        },
+        "buttons_FUEK4t": {
+          "type": "buttons",
+          "settings": {
+            "button_label": "Shop now",
+            "button_link": "",
+            "button_style": "primary",
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_2": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "caption_98GYcg",
+        "heading_GjrnHP",
+        "text_4FDrew",
+        "buttons_FUEK4t"
+      ],
+      "name": "t:sections.image_with_text.name",
+      "settings": {
+        "media_type": "image",
+        "image": "shopify://shop_images/Banner_5_4000x1562_crop_center_jpg_5be9f9c0-8dc9-42a5-a96c-c78801967442.png",
+        "mobile_image": "shopify://shop_images/image_10_1_100938d8-3505-403b-bdf5-f4ad9519196a.png",
+        "image_ratio": "portrait",
+        "corner_radius": 0,
+        "layout": "side",
+        "image_position": "left",
+        "image_width": "medium",
+        "content_position": "middle",
+        "alignment": "left",
+        "mobile_alignment": "left",
+        "mobile_image_position": "first",
+        "content_width": 520,
+        "gap": 48,
+        "width": "page",
+        "color_scheme": "",
+        "content_card": false,
+        "content_color_scheme": "",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
@@ -505,6 +574,7 @@
     "collection_banner_RdywzW",
     "social_marquee_xQATWa",
     "slideshow_7jb3gg",
-    "rich_text_nnxbkF"
+    "rich_text_nnxbkF",
+    "image_with_text_d9tUGx"
   ]
 }
