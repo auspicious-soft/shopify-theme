@@ -512,7 +512,7 @@
       "corner_radius": "Corner radius",
       "zoom_on_hover": "Zoom image on hover",
       "parallax": "Parallax effect",
-      "parallax_info": "While the banner comes into view the image stays still and the text scrolls over it. Once the banner is fully on screen, the image scrolls away with it. Zoom on hover is off while this is on",
+      "parallax_info": "The text is sticky inside the banner: it stays on screen while the banner image scrolls past, then leaves with the end of the banner. The text starts at the top of the banner",
       "heading_info": "Leave empty to use the collection title",
       "heading_size": "Heading size",
       "heading_uppercase": "Uppercase heading",

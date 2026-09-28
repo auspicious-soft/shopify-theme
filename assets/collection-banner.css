@@ -50,22 +50,26 @@
   background-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
 }
 
-/* Parallax: while the banner comes into view the image is held still
-   (assets/collection-banner.js shifts it) and the text scrolls over it;
-   once the banner is fully on screen the image scrolls away with it. The
-   banner's overflow: hidden crops the image. */
-.promo-banner--parallax .promo-banner__media {
-  will-change: transform;
+/* Parallax (sticky text): the text rests at the bottom of the banner and is
+   sticky to the bottom of the screen. While the end of the banner is still
+   below the screen, it's pulled up to stay on screen (it can't rise above
+   the top of the banner), so it holds still while the banner image scrolls
+   past behind it, then leaves with the end of the banner. Pure CSS. The
+   banner uses overflow: clip instead of hidden, because sticky doesn't
+   work inside an overflow: hidden box. */
+.promo-banner--parallax {
+  overflow: clip;
 }
 
-.promo-banner--parallax .banner-media__image,
-.promo-banner--parallax .banner-media__video {
-  transition: none;
+.promo-banner--parallax .promo-banner__inner {
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: var(--promo-align);
 }
 
-.promo-banner--parallax.promo-banner--zoom:hover .banner-media__image,
-.promo-banner--parallax.promo-banner--zoom:hover .banner-media__video {
-  transform: none;
+.promo-banner--parallax .promo-banner__content {
+  position: sticky;
+  bottom: clamp(1.25rem, 4vw, 3rem);
 }
 
 .promo-banner .banner-media__image,
