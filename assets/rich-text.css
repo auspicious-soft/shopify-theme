@@ -1,0 +1,199 @@
+/* Styles for sections/rich-text.liquid. */
+
+.rich-text {
+  padding-block: var(--section-padding-top) var(--section-padding-bottom);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* ---------- Content column: width and where it sits ---------- */
+
+.rich-text__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rich-text-gap, 20px);
+  width: 100%;
+  max-width: var(--rich-text-width, 760px);
+  margin-inline: auto;
+}
+
+@media screen and (min-width: 750px) {
+  .rich-text--position-left .rich-text__content {
+    margin-inline: 0 auto;
+  }
+
+  .rich-text--position-right .rich-text__content {
+    margin-inline: auto 0;
+  }
+}
+
+/* ---------- Alignment (mobile first, then desktop) ---------- */
+
+.rich-text--mobile-align-left .rich-text__content {
+  align-items: flex-start;
+  text-align: start;
+}
+
+.rich-text--mobile-align-center .rich-text__content {
+  align-items: center;
+  text-align: center;
+}
+
+.rich-text--mobile-align-right .rich-text__content {
+  align-items: flex-end;
+  text-align: end;
+}
+
+@media screen and (min-width: 750px) {
+  .rich-text--align-left .rich-text__content {
+    align-items: flex-start;
+    text-align: start;
+  }
+
+  .rich-text--align-center .rich-text__content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .rich-text--align-right .rich-text__content {
+    align-items: flex-end;
+    text-align: end;
+  }
+}
+
+/* ---------- Caption ---------- */
+
+.rich-text__caption {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
+}
+
+.rich-text__caption--uppercase {
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.rich-text__caption--small {
+  font-size: 0.75rem;
+}
+
+.rich-text__caption--medium {
+  font-size: 0.9rem;
+}
+
+.rich-text__caption--large {
+  font-size: 1.1rem;
+}
+
+.rich-text__caption--subtitle.rich-text__caption--small {
+  font-size: 0.95rem;
+}
+
+.rich-text__caption--subtitle.rich-text__caption--medium {
+  font-size: 1.1rem;
+}
+
+.rich-text__caption--subtitle.rich-text__caption--large {
+  font-size: 1.3rem;
+}
+
+/* ---------- Heading ---------- */
+
+.rich-text__heading {
+  margin: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+.rich-text__heading--uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.rich-text__heading a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+/* ---------- Text ---------- */
+
+.rich-text__text {
+  width: 100%;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
+}
+
+.rich-text__text--small {
+  font-size: 0.9rem;
+}
+
+.rich-text__text--medium {
+  font-size: 1rem;
+}
+
+.rich-text__text--large {
+  font-size: 1.2rem;
+}
+
+.rich-text__text > * {
+  margin: 0;
+}
+
+.rich-text__text > * + * {
+  margin-top: 0.9em;
+}
+
+.rich-text__text ul,
+.rich-text__text ol {
+  padding-inline-start: 1.25em;
+  text-align: start;
+}
+
+.rich-text--mobile-align-center .rich-text__text ul,
+.rich-text--mobile-align-center .rich-text__text ol {
+  display: inline-block;
+}
+
+.rich-text__text a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* ---------- Buttons ---------- */
+
+.rich-text__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.rich-text--mobile-align-center .rich-text__buttons {
+  justify-content: center;
+}
+
+.rich-text--mobile-align-right .rich-text__buttons {
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 750px) {
+  .rich-text--align-left .rich-text__buttons {
+    justify-content: flex-start;
+  }
+
+  .rich-text--align-center .rich-text__buttons {
+    justify-content: center;
+  }
+
+  .rich-text--align-right .rich-text__buttons {
+    justify-content: flex-end;
+  }
+}
+
+.rich-text__button[aria-disabled='true'] {
+  cursor: default;
+  opacity: 0.6;
+}

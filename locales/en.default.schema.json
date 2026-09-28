@@ -527,6 +527,22 @@
       "full_link": "Make whole banner clickable",
       "section_color_scheme": "Section color scheme"
     },
+    "rich_text": {
+      "name": "Rich text",
+      "alignment": "Text alignment",
+      "mobile_alignment": "Text alignment on mobile",
+      "position": "Content position",
+      "position_info": "Where the text sits across the page on desktop",
+      "block_spacing": "Space between blocks",
+      "caption_style": "Caption style",
+      "caption_uppercase": "Small uppercase label",
+      "caption_subtitle": "Subtitle",
+      "text_size": "Text size",
+      "blocks": {
+        "caption": "Caption",
+        "buttons": "Buttons"
+      }
+    },
     "slideshow": {
       "name": "Slideshow",
       "header_layout": "Layout",
