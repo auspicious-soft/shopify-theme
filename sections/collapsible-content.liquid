@@ -82,7 +82,7 @@
               {%- elsif block.settings.icon != 'none' -%}
                 <span class="collapsible__icon">{% render 'icon-library', icon: block.settings.icon %}</span>
               {%- endif -%}
-              <span class="collapsible__title">{{ block.settings.heading | default: block.settings.page.title | escape }}</span>
+              <span class="collapsible__title{% if section.settings.row_heading_size != 'default' %} {{ section.settings.row_heading_size }}{% endif %}">{{ block.settings.heading | default: block.settings.page.title | escape }}</span>
               <span class="collapsible__toggle" aria-hidden="true"></span>
             </summary>
 
@@ -197,6 +197,21 @@
         { "value": "cards", "label": "t:sections.collapsible.row_cards" }
       ],
       "default": "lines"
+    },
+    {
+      "type": "select",
+      "id": "row_heading_size",
+      "label": "t:sections.collapsible.row_heading_size",
+      "options": [
+        { "value": "default", "label": "t:sections.collapsible.row_heading_default" },
+        { "value": "h6", "label": "t:options.heading_size.extra_small" },
+        { "value": "h5", "label": "t:options.heading_size.small" },
+        { "value": "h4", "label": "t:options.heading_size.medium" },
+        { "value": "h3", "label": "t:options.heading_size.large" },
+        { "value": "h2", "label": "t:options.heading_size.extra_large" },
+        { "value": "h1", "label": "t:options.heading_size.huge" }
+      ],
+      "default": "default"
     },
     {
       "type": "select",

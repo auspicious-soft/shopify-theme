@@ -536,6 +536,8 @@
       "row_style": "Row style",
       "row_lines": "Lines",
       "row_cards": "Cards",
+      "row_heading_size": "Row heading size",
+      "row_heading_default": "Default",
       "expand_icon": "Expand icon",
       "expand_plus": "Plus / minus",
       "expand_chevron": "Chevron",

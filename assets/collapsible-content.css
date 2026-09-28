@@ -130,6 +130,10 @@
 .collapsible__title {
   flex: 1 1 auto;
   min-width: 0;
+  /* With Row heading size set, the .h1-.h6 class sets the size and heading
+     font; keep its heading margin off so rows stay evenly spaced. */
+  margin: 0;
+  line-height: 1.3;
 }
 
 /* Icon before the heading (icon set or uploaded image). */
