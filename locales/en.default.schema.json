@@ -527,6 +527,18 @@
       "full_link": "Make whole banner clickable",
       "section_color_scheme": "Section color scheme"
     },
+    "featured_product": {
+      "name": "Featured product",
+      "product": "Product",
+      "media_position": "Image position",
+      "link_title": "Link title to the product page",
+      "truncate": "Show a short description",
+      "truncate_info": "Shows the start of the description as plain text",
+      "words": "Number of words",
+      "view_details": "View full details",
+      "view_details_label": "Link text",
+      "view_details_label_info": "Leave empty for \"View full details\""
+    },
     "collapsible": {
       "name": "Collapsible content",
       "layout_stacked": "Heading above rows",
