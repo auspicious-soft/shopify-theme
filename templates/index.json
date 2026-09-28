@@ -628,6 +628,39 @@
         "padding_top": 56,
         "padding_bottom": 56
       }
+    },
+    "video_BxDwVW": {
+      "type": "video",
+      "name": "t:sections.video.name",
+      "settings": {
+        "video": "shopify://files/videos/YTSave_YouTube_Demo-Background-Sample-Video_Media_K4TOrB7at0Y_001_1080p.mp4",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "mode": "player",
+        "play_button_style": "circle",
+        "loop": false,
+        "aspect_ratio": "16-9",
+        "max_width": 2000,
+        "corner_radius": 0,
+        "width": "page",
+        "content_position": "above",
+        "subheading": "",
+        "heading": "Watch the story",
+        "heading_tag": "h2",
+        "heading_class": "h3",
+        "description": "",
+        "heading_alignment": "center",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "content_position_horizontal": "center",
+        "content_position_vertical": "middle",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "color_scheme": "",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
@@ -641,6 +674,7 @@
     "slideshow_7jb3gg",
     "rich_text_nnxbkF",
     "image_with_text_d9tUGx",
-    "multicolumn_Jn7mQR"
+    "multicolumn_Jn7mQR",
+    "video_BxDwVW"
   ]
 }
