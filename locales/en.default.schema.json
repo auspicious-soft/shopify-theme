@@ -527,6 +527,25 @@
       "full_link": "Make whole banner clickable",
       "section_color_scheme": "Section color scheme"
     },
+    "image_with_text": {
+      "name": "Image with text",
+      "layout": "Layout",
+      "layout_info": "Overlap places the text in a card over the edge of the image",
+      "layout_side": "Side by side",
+      "layout_overlap": "Overlap",
+      "image_position": "Image position",
+      "image_width": "Image width",
+      "width_small": "Small (1/3)",
+      "width_medium": "Medium (1/2)",
+      "width_large": "Large (2/3)",
+      "mobile_image_position": "On mobile",
+      "mobile_image_first": "Image first",
+      "mobile_image_last": "Text first",
+      "gap": "Space between image and text",
+      "content_card": "Show text in a card",
+      "content_card_info": "Gives the text its own background and padding. Always on for the Overlap layout",
+      "content_color_scheme": "Card color scheme"
+    },
     "rich_text": {
       "name": "Rich text",
       "alignment": "Text alignment",

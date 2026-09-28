@@ -1,0 +1,278 @@
+/* Styles for sections/image-with-text.liquid. */
+
+.image-with-text {
+  padding-block: var(--section-padding-top) var(--section-padding-bottom);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* ---------- Grid: stacked on mobile, side by side on desktop ---------- */
+
+.image-with-text__grid {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--iwt-gap, 48px) * 0.6);
+}
+
+.image-with-text--mobile-last .image-with-text__media {
+  order: 2;
+}
+
+@media screen and (min-width: 750px) {
+  .image-with-text__grid {
+    display: grid;
+    grid-template-columns: var(--iwt-image-fr, 1fr) var(--iwt-content-fr, 1fr);
+    align-items: stretch;
+    gap: var(--iwt-gap, 48px);
+  }
+
+  .image-with-text--mobile-last .image-with-text__media {
+    order: 0;
+  }
+
+  /* Image on the right: swap the columns. */
+  .image-with-text--image-right .image-with-text__grid {
+    grid-template-columns: var(--iwt-content-fr, 1fr) var(--iwt-image-fr, 1fr);
+  }
+
+  .image-with-text--image-right .image-with-text__media {
+    order: 2;
+  }
+}
+
+/* ---------- Media ---------- */
+
+.image-with-text__media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--iwt-ratio, 4 / 5);
+  border-radius: var(--iwt-radius, 0);
+  background-color: color-mix(in srgb, var(--color-foreground) 6%, transparent);
+}
+
+/* ---------- Content ---------- */
+
+.image-with-text__content-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: var(--iwt-justify, center);
+}
+
+.image-with-text__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  width: 100%;
+  max-width: var(--iwt-content-width, 520px);
+}
+
+/* Content card (setting, and always in the overlap layout). */
+.image-with-text--card .image-with-text__content {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  border-radius: var(--iwt-radius, 0);
+}
+
+/* Overlap layout: the content card sits over the edge of the image. */
+.image-with-text--layout-overlap .image-with-text__content-wrap {
+  position: relative;
+  z-index: 1;
+  padding-inline: 1rem;
+  margin-block-start: -4rem;
+}
+
+.image-with-text--layout-overlap.image-with-text--mobile-last .image-with-text__content-wrap {
+  margin-block: 0 -4rem;
+}
+
+@media screen and (min-width: 750px) {
+  .image-with-text--layout-overlap .image-with-text__grid {
+    gap: 0;
+  }
+
+  .image-with-text--layout-overlap .image-with-text__content-wrap,
+  .image-with-text--layout-overlap.image-with-text--mobile-last .image-with-text__content-wrap {
+    padding-inline: 0;
+    margin-block: 0;
+    margin-inline-start: calc(clamp(3rem, 8vw, 7rem) * -1);
+  }
+
+  .image-with-text--layout-overlap.image-with-text--image-right .image-with-text__content-wrap {
+    margin-inline: 0 calc(clamp(3rem, 8vw, 7rem) * -1);
+    align-items: flex-end;
+  }
+}
+
+/* ---------- Alignment (mobile first, then desktop) ---------- */
+
+.image-with-text--mobile-align-left .image-with-text__content {
+  align-items: flex-start;
+  text-align: start;
+}
+
+.image-with-text--mobile-align-center .image-with-text__content {
+  align-items: center;
+  text-align: center;
+}
+
+.image-with-text--mobile-align-right .image-with-text__content {
+  align-items: flex-end;
+  text-align: end;
+}
+
+.image-with-text--mobile-align-center .image-with-text__content-wrap {
+  align-items: center;
+}
+
+.image-with-text--mobile-align-right .image-with-text__content-wrap {
+  align-items: flex-end;
+}
+
+@media screen and (min-width: 750px) {
+  .image-with-text--align-left .image-with-text__content {
+    align-items: flex-start;
+    text-align: start;
+  }
+
+  .image-with-text--align-center .image-with-text__content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .image-with-text--align-right .image-with-text__content {
+    align-items: flex-end;
+    text-align: end;
+  }
+
+  .image-with-text--layout-side .image-with-text__content-wrap {
+    align-items: flex-start;
+  }
+
+  .image-with-text--layout-side.image-with-text--align-center .image-with-text__content-wrap {
+    align-items: center;
+  }
+
+  .image-with-text--layout-side.image-with-text--align-right .image-with-text__content-wrap {
+    align-items: flex-end;
+  }
+}
+
+/* ---------- Blocks ---------- */
+
+.image-with-text__caption {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
+}
+
+.image-with-text__caption--uppercase {
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.image-with-text__caption--small {
+  font-size: 0.75rem;
+}
+
+.image-with-text__caption--medium {
+  font-size: 0.9rem;
+}
+
+.image-with-text__caption--large {
+  font-size: 1.1rem;
+}
+
+.image-with-text__caption--subtitle.image-with-text__caption--small {
+  font-size: 0.95rem;
+}
+
+.image-with-text__caption--subtitle.image-with-text__caption--medium {
+  font-size: 1.1rem;
+}
+
+.image-with-text__caption--subtitle.image-with-text__caption--large {
+  font-size: 1.3rem;
+}
+
+.image-with-text__heading {
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.image-with-text__heading--uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.image-with-text__heading a,
+.image-with-text__text a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.image-with-text__text {
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
+}
+
+.image-with-text__text--small {
+  font-size: 0.9rem;
+}
+
+.image-with-text__text--medium {
+  font-size: 1rem;
+}
+
+.image-with-text__text--large {
+  font-size: 1.2rem;
+}
+
+.image-with-text__text > * {
+  margin: 0;
+}
+
+.image-with-text__text > * + * {
+  margin-top: 0.9em;
+}
+
+.image-with-text__text ul,
+.image-with-text__text ol {
+  padding-inline-start: 1.25em;
+  text-align: start;
+}
+
+.image-with-text__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.4rem;
+}
+
+.image-with-text--mobile-align-center .image-with-text__buttons {
+  justify-content: center;
+}
+
+.image-with-text--mobile-align-right .image-with-text__buttons {
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 750px) {
+  .image-with-text--align-left .image-with-text__buttons {
+    justify-content: flex-start;
+  }
+
+  .image-with-text--align-center .image-with-text__buttons {
+    justify-content: center;
+  }
+
+  .image-with-text--align-right .image-with-text__buttons {
+    justify-content: flex-end;
+  }
+}
+
+.image-with-text__button[aria-disabled='true'] {
+  cursor: default;
+  opacity: 0.6;
+}
