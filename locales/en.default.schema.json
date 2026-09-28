@@ -564,7 +564,9 @@
       "button_label_2": "Second button text",
       "button_link_2": "Second button link",
       "full_link": "Make whole slide clickable",
-      "full_link_info": "Uses the first button link"
+      "full_link_info": "Uses the first button link",
+      "slide_color_scheme": "Color scheme",
+      "slide_color_scheme_info": "Text and button colors for this slide, and the background behind the image. Pick a scheme with light text for dark images"
     },
     "newsletter": {
       "name": "Newsletter",

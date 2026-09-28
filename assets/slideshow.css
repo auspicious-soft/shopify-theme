@@ -61,7 +61,10 @@
   display: flex;
   height: 100%;
   overflow: hidden;
-  color: var(--slide-text, #fff);
+  /* The slide's color scheme: text and buttons, and the background shown
+     behind the image (or on a slide without one). */
+  color: var(--color-foreground);
+  background-color: var(--color-background);
   isolation: isolate;
 }
 

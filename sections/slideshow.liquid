@@ -10,6 +10,9 @@
   - Height presets (or adapt to the first image), separate mobile height,
     full or page width.
 
+  Each slide has its own color scheme (text, buttons, and the background
+  behind the image).
+
   Styles: assets/slideshow.css. Behavior: assets/slideshow.js (<slide-show>).
 {% endcomment %}
 
@@ -139,7 +142,7 @@
             endif
           -%}
           <div
-            class="slideshow__slide{% if forloop.first %} is-active{% endif %}"
+            class="slideshow__slide{% if forloop.first %} is-active{% endif %} color-{{ block.settings.color_scheme.id }}"
             data-slide
             role="group"
             aria-roledescription="{{ 'slideshow.slide' | t }}"
@@ -148,7 +151,6 @@
               aria-hidden="true" inert
             {% endunless %}
             style="
-              --slide-text: {{ block.settings.text_color }};
               --slide-overlay: {{ block.settings.overlay_color }};
               --slide-overlay-opacity: {{ block.settings.overlay_opacity }}%;
               --slide-align: {{ h_align }};
@@ -194,7 +196,7 @@
                     {%- if block.settings.button_label != blank -%}
                       <a
                         href="{{ block.settings.button_link | default: '#' }}"
-                        class="button button--{{ section.settings.button_style }} slideshow__button color-{{ section.settings.button_color_scheme.id }}"
+                        class="button button--{{ section.settings.button_style }} slideshow__button"
                       >
                         {{- block.settings.button_label | escape -}}
                       </a>
@@ -202,7 +204,7 @@
                     {%- if block.settings.button_label_2 != blank -%}
                       <a
                         href="{{ block.settings.button_link_2 | default: '#' }}"
-                        class="button button--{{ section.settings.button_style_2 }} slideshow__button color-{{ section.settings.button_color_scheme.id }}"
+                        class="button button--{{ section.settings.button_style_2 }} slideshow__button"
                       >
                         {{- block.settings.button_label_2 | escape -}}
                       </a>
@@ -500,12 +502,6 @@
       "default": "secondary"
     },
     {
-      "type": "color_scheme",
-      "id": "button_color_scheme",
-      "label": "t:sections.collection_banner.button_color_scheme",
-      "default": "scheme-1"
-    },
-    {
       "type": "text",
       "id": "accessibility_label",
       "label": "t:sections.slideshow.accessibility_label",
@@ -635,10 +631,11 @@
           "default": "bottom"
         },
         {
-          "type": "color",
-          "id": "text_color",
-          "label": "t:labels.text_color",
-          "default": "#ffffff"
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "t:sections.slideshow.slide_color_scheme",
+          "info": "t:sections.slideshow.slide_color_scheme_info",
+          "default": "scheme-4"
         },
         {
           "type": "color",
