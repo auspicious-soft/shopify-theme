@@ -78,7 +78,7 @@
         "media_type": "image",
         "video_url": "",
         "height": "fullscreen",
-        "mobile_height": "medium",
+        "mobile_height": "large",
         "width": "full",
         "corner_radius": 0,
         "zoom_on_hover": true,
