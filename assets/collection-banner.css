@@ -50,6 +50,21 @@
   background-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
 }
 
+/* Parallax: the image is taller than the banner (by the strength, above and
+   below) so the script can slide it without ever showing a gap. The text
+   isn't moved, so it stays put while the image scrolls behind it. */
+.promo-banner--parallax .promo-banner__media {
+  inset-block: calc(var(--promo-parallax, 20%) * -1);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-banner--parallax .promo-banner__media {
+    inset-block: 0;
+    transform: none !important;
+  }
+}
+
 .promo-banner .banner-media__image,
 .promo-banner .banner-media__video {
   transition: transform 1.2s cubic-bezier(0.2, 0.6, 0.2, 1);
