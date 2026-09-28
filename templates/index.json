@@ -340,6 +340,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/Banner_2_4000x1562_crop_center_jpg_87e2c381-72c7-40a2-a788-dd3c0581a1cc.png",
+            "mobile_image": "shopify://shop_images/image_10_de1cc1cc-73d1-4638-883b-3afa2bcdf922.png",
             "media_type": "image",
             "video_url": "",
             "subheading": "New season",
