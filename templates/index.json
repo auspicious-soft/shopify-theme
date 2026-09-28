@@ -638,7 +638,7 @@
         "mode": "player",
         "play_button_style": "circle",
         "show_controls": true,
-        "loop": true,
+        "loop": false,
         "background_loop": true,
         "aspect_ratio": "16-9",
         "max_width": 2000,
