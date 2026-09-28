@@ -1,0 +1,502 @@
+/* Styles for sections/slideshow.liquid (behavior: assets/slideshow.js). */
+
+.slideshow-section {
+  padding-block: var(--section-padding-top) var(--section-padding-bottom);
+  background-color: var(--color-background);
+}
+
+.slideshow {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--slideshow-radius, 0);
+  outline: none;
+}
+
+.slideshow:focus-visible {
+  outline: 2px solid var(--slideshow-controls, #fff);
+  outline-offset: -4px;
+}
+
+/* ---------- Track and slides ---------- */
+
+.slideshow__track {
+  position: relative;
+  height: var(--slideshow-height-mobile, 70vh);
+  min-height: 20rem;
+  touch-action: pan-y;
+}
+
+@media screen and (min-width: 750px) {
+  .slideshow__track {
+    height: var(--slideshow-height, 80vh);
+    min-height: 24rem;
+  }
+}
+
+/* "Adapt to image": height follows the first slide's image shape. */
+.slideshow--mobile-adapt .slideshow__track {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: var(--slideshow-ratio-mobile, 0.8);
+}
+
+@media screen and (min-width: 750px) {
+  .slideshow--mobile-adapt .slideshow__track {
+    height: var(--slideshow-height, 80vh);
+    min-height: 24rem;
+    aspect-ratio: auto;
+  }
+
+  .slideshow--height-adapt .slideshow__track,
+  .slideshow--height-adapt.slideshow--mobile-adapt .slideshow__track {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: var(--slideshow-ratio, 1.78);
+  }
+}
+
+.slideshow__slide {
+  position: relative;
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  color: var(--slide-text, #fff);
+  isolation: isolate;
+}
+
+/* Slide transition: the slides sit in a row and the track moves along it. */
+.slideshow--slide .slideshow__track {
+  display: flex;
+  transform: translate3d(calc(var(--slide-index, 0) * -100%), 0, 0);
+  transition: transform var(--slideshow-speed, 800ms) cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+[dir='rtl'] .slideshow--slide .slideshow__track {
+  transform: translate3d(calc(var(--slide-index, 0) * 100%), 0, 0);
+}
+
+.slideshow--slide .slideshow__slide {
+  flex: 0 0 100%;
+}
+
+/* Fade transition: the slides are stacked and cross-fade. */
+.slideshow--fade .slideshow__track {
+  display: grid;
+}
+
+.slideshow--fade .slideshow__slide {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--slideshow-speed, 800ms) ease,
+    visibility 0s linear var(--slideshow-speed, 800ms);
+}
+
+.slideshow--fade .slideshow__slide.is-active {
+  z-index: 1;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--slideshow-speed, 800ms) ease;
+}
+
+/* ---------- Media, overlay, whole-slide link ---------- */
+
+.slideshow__media,
+.slideshow__overlay,
+.slideshow__link {
+  position: absolute;
+  inset: 0;
+}
+
+.slideshow__media {
+  z-index: -2;
+  background-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+}
+
+.slideshow__overlay {
+  z-index: -1;
+  background-color: color-mix(in srgb, var(--slide-overlay, #000) var(--slide-overlay-opacity, 25%), transparent);
+  pointer-events: none;
+}
+
+.slideshow__link {
+  z-index: 1;
+}
+
+/* Slow zoom on the active slide's image. */
+.slideshow--zoom .slideshow__media {
+  transform: scale(1.01);
+  transition: transform 0.6s ease;
+}
+
+.slideshow--zoom .slideshow__slide.is-active .slideshow__media {
+  animation: slideshow-zoom calc(var(--slideshow-duration, 6s) + 2s) ease-out forwards;
+}
+
+@keyframes slideshow-zoom {
+  from {
+    transform: scale(1.01);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+/* ---------- Content ---------- */
+
+.slideshow__inner {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: var(--slide-justify, center);
+  justify-content: var(--slide-align, flex-start);
+  padding-block: clamp(2rem, 6vw, 5rem);
+  pointer-events: none;
+}
+
+/* Keep bottom content clear of the pagination / bottom arrows. */
+.slideshow:not(.slideshow--pagination-none) .slideshow__inner,
+.slideshow--arrows-bottom .slideshow__inner {
+  padding-block-end: calc(clamp(2rem, 6vw, 5rem) + 2.5rem);
+}
+
+.slideshow__content {
+  display: flex;
+  flex-direction: column;
+  align-items: var(--slide-align, flex-start);
+  gap: 0.9rem;
+  max-width: var(--slideshow-content-width, 560px);
+  text-align: var(--slide-text-align, left);
+}
+
+.slideshow__content a {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+/* Content rises in when its slide becomes active. */
+.slideshow__content > * {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.slideshow__slide.is-active .slideshow__content > * {
+  opacity: 1;
+  transform: none;
+}
+
+.slideshow__slide.is-active .slideshow__content > :nth-child(1) {
+  transition-delay: 0.25s;
+}
+
+.slideshow__slide.is-active .slideshow__content > :nth-child(2) {
+  transition-delay: 0.35s;
+}
+
+.slideshow__slide.is-active .slideshow__content > :nth-child(3) {
+  transition-delay: 0.45s;
+}
+
+.slideshow__slide.is-active .slideshow__content > :nth-child(4) {
+  transition-delay: 0.55s;
+}
+
+.slideshow__subheading {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.slideshow__heading {
+  margin: 0;
+  color: inherit;
+  line-height: 1.05;
+}
+
+.slideshow__heading--uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.slideshow__text > * {
+  margin: 0;
+}
+
+.slideshow__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: var(--slide-align, flex-start);
+  gap: 0.75rem;
+  margin-top: 0.4rem;
+}
+
+/* ---------- Arrows ---------- */
+
+.slideshow__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  margin: 0;
+  color: var(--slideshow-controls, #fff);
+  background-color: color-mix(in srgb, var(--slideshow-controls, #fff) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--slideshow-controls, #fff) 45%, transparent);
+  border-radius: 999px;
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  pointer-events: auto;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.slideshow__arrow svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.slideshow__arrow--prev svg {
+  transform: rotate(90deg);
+}
+
+.slideshow__arrow--next svg {
+  transform: rotate(-90deg);
+}
+
+[dir='rtl'] .slideshow__arrow svg {
+  scale: -1 1;
+}
+
+.slideshow__arrow:hover,
+.slideshow__arrow:focus-visible {
+  background-color: var(--slideshow-controls, #fff);
+  color: #000;
+}
+
+.slideshow__arrows--sides {
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  padding-inline: clamp(0.75rem, 2vw, 1.5rem);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.slideshow__arrows--bottom {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Touch screens swipe instead; side arrows only with a mouse. */
+@media (hover: none) {
+  .slideshow__arrows--sides {
+    display: none;
+  }
+}
+
+/* With side arrows showing, keep the slide text clear of them. */
+@media (hover: hover) {
+  .slideshow--arrows-sides .slideshow__inner {
+    padding-inline: max(var(--page-margin), calc(clamp(0.75rem, 2vw, 1.5rem) + 2.75rem + 1.25rem));
+  }
+}
+
+/* ---------- Controls row (pagination + bottom arrows) ---------- */
+
+.slideshow__controls {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: clamp(1rem, 3vw, 2rem);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  color: var(--slideshow-controls, #fff);
+  pointer-events: none;
+}
+
+.slideshow--pagination-left .slideshow__controls {
+  justify-content: flex-start;
+}
+
+.slideshow--pagination-right .slideshow__controls {
+  justify-content: flex-end;
+}
+
+.slideshow__pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  pointer-events: auto;
+}
+
+.slideshow__page {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+/* Bigger tap target than the visible mark. */
+.slideshow__page::after {
+  content: '';
+  position: absolute;
+  inset: -0.6rem -0.3rem;
+}
+
+/* Dots */
+.slideshow__pagination--dots .slideshow__page {
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  transition:
+    width 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.slideshow__pagination--dots .slideshow__page.is-active {
+  width: 1.6rem;
+  background-color: currentColor;
+}
+
+/* Numbers */
+.slideshow__pagination--numbers {
+  gap: 1rem;
+}
+
+.slideshow__pagination--numbers .slideshow__page {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  opacity: 0.55;
+  padding-block-end: 0.3rem;
+  border-bottom: 1px solid transparent;
+  transition:
+    opacity 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.slideshow__pagination--numbers .slideshow__page:hover,
+.slideshow__pagination--numbers .slideshow__page.is-active {
+  opacity: 1;
+}
+
+.slideshow__pagination--numbers .slideshow__page.is-active {
+  border-color: currentColor;
+}
+
+/* Fraction */
+.slideshow__pagination--fraction {
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+
+.slideshow__fraction-sep {
+  opacity: 0.55;
+}
+
+/* Bars: segments that fill up while the slide is showing. */
+.slideshow__pagination--bars {
+  gap: 0.4rem;
+}
+
+.slideshow__pagination--bars .slideshow__page {
+  width: clamp(1.75rem, 5vw, 3rem);
+  height: 2px;
+  overflow: hidden;
+  background-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+
+.slideshow__bar-fill {
+  position: absolute;
+  inset: 0;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+[dir='rtl'] .slideshow__bar-fill {
+  transform-origin: right;
+}
+
+.slideshow__page.is-done .slideshow__bar-fill {
+  transform: scaleX(1);
+}
+
+.slideshow__page.is-active .slideshow__bar-fill {
+  transform: scaleX(var(--slide-progress, 0));
+}
+
+/* Without autoplay the active bar is simply full. */
+.slideshow:not([data-autoplay='true']) .slideshow__page.is-active .slideshow__bar-fill {
+  transform: scaleX(1);
+}
+
+/* Progress line: one bar showing how far through the whole show we are. */
+.slideshow__pagination--progress {
+  position: relative;
+  width: clamp(8rem, 25vw, 16rem);
+  height: 2px;
+  overflow: hidden;
+  background-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+
+.slideshow__progress-fill {
+  position: absolute;
+  inset: 0;
+  background-color: currentColor;
+  transform-origin: left;
+  transform: scaleX(calc((var(--slide-index, 0) + var(--slide-progress, 0)) / var(--slide-count, 1)));
+}
+
+.slideshow:not([data-autoplay='true']) .slideshow__progress-fill {
+  transform: scaleX(calc((var(--slide-index, 0) + 1) / var(--slide-count, 1)));
+}
+
+[dir='rtl'] .slideshow__progress-fill {
+  transform-origin: right;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .slideshow--slide .slideshow__track,
+  .slideshow--fade .slideshow__slide,
+  .slideshow__content > *,
+  .slideshow__pagination--dots .slideshow__page {
+    transition: none !important;
+  }
+
+  .slideshow--zoom .slideshow__slide.is-active .slideshow__media {
+    animation: none;
+  }
+}
