@@ -1,10 +1,20 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "page",
       "settings": {
         "heading_tag": "h1",
-        "heading_class": "h2"
+        "heading_class": "h2",
+        "width": "page"
       }
     },
     "contact_form": {
@@ -43,17 +53,32 @@
           }
         }
       },
-      "block_order": ["email", "phone", "hours", "address"],
+      "block_order": [
+        "email",
+        "phone",
+        "hours",
+        "address"
+      ],
       "settings": {
+        "subheading": "",
         "heading": "Get in touch",
         "heading_tag": "h2",
         "heading_class": "h3",
         "description": "<p>Questions about an order, sizing or anything else? Send us a message and we'll reply within one business day.</p>",
-        "heading_alignment": "left",
+        "heading_alignment": "center",
         "show_phone": true,
         "extra_field": "order_number",
-        "info_position": "right",
+        "button_label": "",
+        "button_style": "primary",
+        "success_message": "",
+        "privacy_note": "",
+        "info_position": "below",
+        "form_width": 680,
+        "corner_radius": 0,
+        "width": "page",
+        "color_scheme": "",
         "info_card": true,
+        "info_color_scheme": "",
         "padding_top": 24,
         "padding_bottom": 56
       }
@@ -66,7 +91,9 @@
           "settings": {
             "heading": "Where is my order?",
             "icon": "truck",
-            "content": "<p>You'll get an email with a tracking link as soon as your order ships. Orders usually ship within 1–2 business days.</p>"
+            "content": "<p>You'll get an email with a tracking link as soon as your order ships. Orders usually ship within 1–2 business days.</p>",
+            "page": "",
+            "open": false
           }
         },
         "returns": {
@@ -74,7 +101,9 @@
           "settings": {
             "heading": "How do I return an item?",
             "icon": "return",
-            "content": "<p>Return unworn items within 30 days. Include your order number in the message above and we'll send you a return label.</p>"
+            "content": "<p>Return unworn items within 30 days. Include your order number in the message above and we'll send you a return label.</p>",
+            "page": "",
+            "open": false
           }
         },
         "exchange": {
@@ -82,23 +111,45 @@
           "settings": {
             "heading": "Can I change or cancel my order?",
             "icon": "clock",
-            "content": "<p>Contact us within 12 hours of ordering and we'll do our best to update or cancel it before it ships.</p>"
+            "content": "<p>Contact us within 12 hours of ordering and we'll do our best to update or cancel it before it ships.</p>",
+            "page": "",
+            "open": false
           }
         }
       },
-      "block_order": ["shipping", "returns", "exchange"],
+      "block_order": [
+        "shipping",
+        "returns",
+        "exchange"
+      ],
       "settings": {
+        "subheading": "",
         "heading": "Before you write",
         "heading_tag": "h2",
         "heading_class": "h4",
+        "description": "",
         "heading_alignment": "left",
         "layout": "side",
         "one_at_a_time": true,
         "row_style": "lines",
+        "row_heading_size": "default",
+        "row_content_size": "medium",
+        "expand_icon": "plus",
+        "show_icons": true,
+        "icon_size": 22,
+        "content_width": 860,
+        "corner_radius": 0,
+        "width": "page",
+        "color_scheme": "",
+        "card_color_scheme": "",
         "padding_top": 24,
         "padding_bottom": 72
       }
     }
   },
-  "order": ["main", "contact_form", "faq"]
+  "order": [
+    "main",
+    "contact_form",
+    "faq"
+  ]
 }
