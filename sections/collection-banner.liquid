@@ -3,8 +3,8 @@
   subheading, heading, text and button over it (e.g. "New items / Long
   shirts / View products").
 
-  Optional parallax: the image moves more slowly than the page while the
-  text stays put (Collection banner > Parallax effect).
+  Optional parallax (Collection banner > Parallax effect): the text stays
+  fixed on screen while the image scrolls past behind it.
 
   Pick a collection and the banner fills itself in: its image, title and
   link are used wherever the matching setting is left empty. Separate
@@ -101,14 +101,9 @@
         --promo-justify: {{ v_align }};
         --promo-text-align: {{ section.settings.content_position_horizontal }};
         --promo-content-width: {{ section.settings.content_width }}px;
-        --promo-parallax: {{ section.settings.parallax_strength }}%;
       "
     >
-      {%- if section.settings.parallax -%}
-        <parallax-media class="promo-banner__media" data-strength="{{ section.settings.parallax_strength }}">
-      {%- else -%}
-        <div class="promo-banner__media">
-      {%- endif -%}
+      <div class="promo-banner__media">
         {% render 'banner-media',
           image: image,
           mobile_image: section.settings.mobile_image,
@@ -119,11 +114,7 @@
           alt: heading,
           placeholder: 'lifestyle-2'
         %}
-      {%- if section.settings.parallax -%}
-        </parallax-media>
-      {%- else -%}
-        </div>
-      {%- endif -%}
+      </div>
 
       <div class="promo-banner__overlay" aria-hidden="true"></div>
 
@@ -131,7 +122,11 @@
         <a href="{{ link }}" class="promo-banner__link" tabindex="-1" aria-hidden="true"></a>
       {%- endif -%}
 
-      <div class="promo-banner__inner">
+      {%- if section.settings.parallax -%}
+        <banner-fixed-text class="promo-banner__inner">
+      {%- else -%}
+        <div class="promo-banner__inner">
+      {%- endif -%}
         <div class="promo-banner__content">
           {%- if section.settings.subheading != blank -%}
             <p class="promo-banner__subheading">{{ section.settings.subheading | escape }}</p>
@@ -158,7 +153,11 @@
             </a>
           {%- endif -%}
         </div>
-      </div>
+      {%- if section.settings.parallax -%}
+        </banner-fixed-text>
+      {%- else -%}
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </div>
@@ -279,17 +278,6 @@
       "label": "t:sections.collection_banner.parallax",
       "info": "t:sections.collection_banner.parallax_info",
       "default": false
-    },
-    {
-      "type": "range",
-      "id": "parallax_strength",
-      "label": "t:sections.collection_banner.parallax_strength",
-      "min": 5,
-      "max": 40,
-      "step": 5,
-      "unit": "%",
-      "default": 20,
-      "visible_if": "{{ section.settings.parallax }}"
     },
     {
       "type": "color",

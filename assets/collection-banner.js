@@ -1,24 +1,31 @@
 /**
- * Parallax for sections/collection-banner.liquid (Collection banner >
- * Parallax effect): the banner image moves more slowly than the page while
- * the text stays put.
+ * Fixed text effect for sections/collection-banner.liquid (Collection banner
+ * > Parallax effect): while the page scrolls, the banner's text stays fixed
+ * on screen and the image scrolls past behind it. When the end of the
+ * banner reaches the text, the text leaves together with the banner.
  *
- * <parallax-media data-strength="20"> wraps the banner image. It's taller
- * than the banner by the strength (in % of the banner height, above and
- * below, see assets/collection-banner.css) and slides between those limits
- * as the banner passes through the viewport. Each element starts itself
- * when it's added to the page, so it also works after the theme editor
- * re-renders the section. Off for visitors who prefer reduced motion.
+ * <banner-fixed-text> is the banner's content wrapper. On each scroll frame
+ * it's shifted down by exactly how far the banner has scrolled above the
+ * top of the screen (or below a sticky header), capped so the text never
+ * goes past the banner's bottom padding. Each element starts itself when
+ * it's added to the page, so it also works after the theme editor
+ * re-renders the section.
  */
-if (!customElements.get('parallax-media')) {
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+if (!customElements.get('banner-fixed-text')) {
   const active = new Set();
   let ticking = false;
 
+  /** Bottom edge of a sticky header that's currently on screen, else 0. */
+  const stickyHeaderBottom = () => {
+    const header = document.querySelector('.header--sticky:not(.is-hidden)');
+    if (!header) return 0;
+    return Math.max(0, header.getBoundingClientRect().bottom);
+  };
+
   const update = () => {
     ticking = false;
-    const viewport = window.innerHeight;
-    active.forEach((element) => element.update(viewport));
+    const top = stickyHeaderBottom();
+    active.forEach((element) => element.update(top));
   };
 
   const requestUpdate = () => {
@@ -30,9 +37,10 @@ if (!customElements.get('parallax-media')) {
   window.addEventListener('scroll', requestUpdate, { passive: true });
   window.addEventListener('resize', requestUpdate, { passive: true });
 
-  class ParallaxMedia extends HTMLElement {
+  class BannerFixedText extends HTMLElement {
     connectedCallback() {
       this.banner = this.parentElement;
+      this.content = this.firstElementChild;
       active.add(this);
       requestUpdate();
     }
@@ -41,21 +49,33 @@ if (!customElements.get('parallax-media')) {
       active.delete(this);
     }
 
-    update(viewport) {
-      if (reduceMotion.matches || !this.banner) {
-        this.style.transform = '';
-        return;
-      }
-      const rect = this.banner.getBoundingClientRect();
-      if (rect.bottom < 0 || rect.top > viewport) return;
+    update(screenTop) {
+      if (!this.banner || !this.content) return;
+      const banner = this.banner.getBoundingClientRect();
+      if (banner.bottom < 0 || banner.top > window.innerHeight) return;
 
-      // -1 as the banner leaves at the top, 1 as it enters at the bottom.
-      const progress = (rect.top + rect.height / 2 - viewport / 2) / (viewport / 2 + rect.height / 2);
-      const strength = (Number(this.dataset.strength) || 0) / 100;
-      const offset = -progress * strength * rect.height;
-      this.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
+      const style = getComputedStyle(this);
+      const paddingTop = parseFloat(style.paddingTop) || 0;
+      const paddingBottom = parseFloat(style.paddingBottom) || 0;
+      const contentTop = this.content.offsetTop;
+      const contentBottom = contentTop + this.content.offsetHeight;
+      // Room the text has to move down (to the bottom padding) or up (to the top padding).
+      const maxShift = Math.max(0, banner.height - paddingBottom - contentBottom);
+      const minShift = -Math.max(0, contentTop - paddingTop);
+
+      let shift = 0;
+      if (banner.top < screenTop) {
+        // Banner scrolled up past the top of the screen: hold the text in place.
+        shift = Math.min(screenTop - banner.top, maxShift);
+      } else if (banner.bottom > window.innerHeight) {
+        // Banner still entering from the bottom: text low in the banner is
+        // held at the bottom edge of the screen until the banner is in view.
+        shift = Math.max(window.innerHeight - banner.bottom, minShift);
+      }
+
+      this.style.transform = shift ? `translate3d(0, ${shift.toFixed(1)}px, 0)` : '';
     }
   }
 
-  customElements.define('parallax-media', ParallaxMedia);
+  customElements.define('banner-fixed-text', BannerFixedText);
 }
