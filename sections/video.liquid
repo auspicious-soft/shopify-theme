@@ -4,8 +4,8 @@
 
   - Click to play: a cover image with a play button. The player only loads
     when clicked (fast pages), then plays with sound and controls.
-  - Background: plays muted, looping and without controls, like a moving
-    banner, with optional text and a button over it.
+  - Background: plays muted and without controls, like a moving banner
+    (looping by default, or once), with optional text and a button over it.
 
   Heading, subheading, description and a button can sit above the video
   (either mode) or over it (Background mode). Aspect ratio, full or page
@@ -241,6 +241,7 @@
               video: video,
               video_url: video_url,
               alt: video_title,
+              loop: section.settings.background_loop,
               placeholder: 'hero-apparel-1'
             %}
           </div>
@@ -322,6 +323,14 @@
       "label": "t:sections.video.loop",
       "default": false,
       "visible_if": "{{ section.settings.mode == 'player' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "background_loop",
+      "label": "t:sections.video.loop",
+      "info": "t:sections.video.background_loop_info",
+      "default": true,
+      "visible_if": "{{ section.settings.mode == 'background' }}"
     },
     {
       "type": "select",

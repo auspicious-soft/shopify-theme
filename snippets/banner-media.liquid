@@ -5,7 +5,7 @@
 
   Video can be a Shopify-hosted file (with an optional mobile file) or a
   YouTube / Vimeo link; the hosted file wins when both are set. Videos play
-  muted, looped and inline with no controls. The image is kept underneath
+  muted, inline, with no controls, looping unless `loop: false` is passed. The image is kept underneath
   as the poster while the video loads, and is shown instead of the video
   for visitors who prefer reduced motion.
 
@@ -24,6 +24,7 @@
   @param {string} [sizes] - `sizes` for the desktop image, defaults to 100vw
   @param {boolean} [eager] - Load eagerly with high priority (first banner on the page)
   @param {string} [placeholder] - Placeholder SVG name when nothing is set, e.g. 'lifestyle-1'
+  @param {boolean} [loop] - Loop the video, defaults to true; false plays it once and stops on its last frame
 
   @example
   {% render 'banner-media',
@@ -38,6 +39,10 @@
 
 {%- liquid
   assign image_sizes = sizes | default: '100vw'
+  assign loop_video = true
+  if loop == false
+    assign loop_video = false
+  endif
   assign loading = 'lazy'
   assign priority = 'auto'
   if eager
@@ -101,38 +106,75 @@
   {%- endif -%}
 
   {%- if has_hosted -%}
-    {{
-      video
-      | video_tag:
-        class: 'banner-media__video banner-media__video--desktop',
-        autoplay: true,
-        loop: true,
-        muted: true,
-        playsinline: true,
-        controls: false,
-        preload: 'metadata',
-        image_size: '1600x'
-    }}
-    {%- if mobile_video != blank -%}
+    {%- comment -%} Two versions of each tag: video_tag has no "no loop" value. {%- endcomment -%}
+    {%- if loop_video -%}
       {{
-        mobile_video
+        video
         | video_tag:
-          class: 'banner-media__video banner-media__video--mobile',
+          class: 'banner-media__video banner-media__video--desktop',
           autoplay: true,
           loop: true,
           muted: true,
           playsinline: true,
           controls: false,
           preload: 'metadata',
-          image_size: '900x'
+          image_size: '1600x'
       }}
+    {%- else -%}
+      {{
+        video
+        | video_tag:
+          class: 'banner-media__video banner-media__video--desktop',
+          autoplay: true,
+          muted: true,
+          playsinline: true,
+          controls: false,
+          preload: 'metadata',
+          image_size: '1600x'
+      }}
+    {%- endif -%}
+    {%- if mobile_video != blank -%}
+      {%- if loop_video -%}
+        {{
+          mobile_video
+          | video_tag:
+            class: 'banner-media__video banner-media__video--mobile',
+            autoplay: true,
+            loop: true,
+            muted: true,
+            playsinline: true,
+            controls: false,
+            preload: 'metadata',
+            image_size: '900x'
+        }}
+      {%- else -%}
+        {{
+          mobile_video
+          | video_tag:
+            class: 'banner-media__video banner-media__video--mobile',
+            autoplay: true,
+            muted: true,
+            playsinline: true,
+            controls: false,
+            preload: 'metadata',
+            image_size: '900x'
+        }}
+      {%- endif -%}
     {%- endif -%}
   {%- elsif has_external -%}
     {%- liquid
       if video_url.type == 'youtube'
-        assign embed_src = 'https://www.youtube-nocookie.com/embed/' | append: video_url.id | append: '?autoplay=1&mute=1&loop=1&playlist=' | append: video_url.id | append: '&controls=0&playsinline=1&rel=0&modestbranding=1&disablekb=1&iv_load_policy=3'
+        assign embed_src = 'https://www.youtube-nocookie.com/embed/' | append: video_url.id | append: '?autoplay=1&mute=1&controls=0&playsinline=1&rel=0&modestbranding=1&disablekb=1&iv_load_policy=3'
+        if loop_video
+          assign embed_src = embed_src | append: '&loop=1&playlist=' | append: video_url.id
+        endif
       else
-        assign embed_src = 'https://player.vimeo.com/video/' | append: video_url.id | append: '?background=1&autoplay=1&loop=1&muted=1&dnt=1'
+        assign embed_src = 'https://player.vimeo.com/video/' | append: video_url.id | append: '?background=1&autoplay=1&muted=1&dnt=1'
+        if loop_video
+          assign embed_src = embed_src | append: '&loop=1'
+        else
+          assign embed_src = embed_src | append: '&loop=0'
+        endif
       endif
     -%}
     <div class="banner-media__embed">
