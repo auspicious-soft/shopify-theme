@@ -414,7 +414,7 @@
         "image_zoom": true,
         "autoplay": true,
         "autoplay_speed": 6,
-        "pause_on_hover": true,
+        "pause_on_hover": false,
         "pagination_type": "bars",
         "pagination_position": "center",
         "show_arrows": true,
