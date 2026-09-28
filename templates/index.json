@@ -545,6 +545,7 @@
         "media_type": "image",
         "image": "shopify://shop_images/Banner_5_4000x1562_crop_center_jpg_5be9f9c0-8dc9-42a5-a96c-c78801967442.png",
         "mobile_image": "shopify://shop_images/image_10_1_100938d8-3505-403b-bdf5-f4ad9519196a.png",
+        "video_url": "",
         "image_ratio": "portrait",
         "corner_radius": 0,
         "layout": "side",
@@ -563,6 +564,70 @@
         "padding_top": 56,
         "padding_bottom": 56
       }
+    },
+    "multicolumn_Jn7mQR": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_EfMA8k": {
+          "type": "column",
+          "settings": {
+            "title": "Free shipping",
+            "text": "<p>On all orders over $100, delivered to your door in 3–5 days.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_KXePcH": {
+          "type": "column",
+          "settings": {
+            "title": "30-day returns",
+            "text": "<p>Not the right fit? Send it back within 30 days for a full refund.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_d9MFn4": {
+          "type": "column",
+          "settings": {
+            "title": "Secure checkout",
+            "text": "<p>Pay safely with all major cards, Shop Pay and PayPal.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_EfMA8k",
+        "column_KXePcH",
+        "column_d9MFn4"
+      ],
+      "name": "t:sections.multicolumn.name",
+      "settings": {
+        "subheading": "",
+        "heading": "Why shop with us",
+        "heading_tag": "h2",
+        "heading_class": "h3",
+        "description": "",
+        "heading_alignment": "center",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "mobile_layout": "grid",
+        "column_alignment": "center",
+        "gap": 32,
+        "width": "page",
+        "image_ratio": "adapt",
+        "image_width": "full",
+        "corner_radius": 0,
+        "show_placeholders": true,
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "color_scheme": "",
+        "card": false,
+        "card_color_scheme": "",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
@@ -575,6 +640,7 @@
     "social_marquee_xQATWa",
     "slideshow_7jb3gg",
     "rich_text_nnxbkF",
-    "image_with_text_d9tUGx"
+    "image_with_text_d9tUGx",
+    "multicolumn_Jn7mQR"
   ]
 }
