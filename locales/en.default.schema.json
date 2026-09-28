@@ -527,6 +527,27 @@
       "full_link": "Make whole banner clickable",
       "section_color_scheme": "Section color scheme"
     },
+    "multicolumn": {
+      "name": "Multicolumn",
+      "heading_alignment": "Heading alignment",
+      "mobile_grid": "Grid",
+      "column_alignment": "Column alignment",
+      "ratio_circle": "Circle",
+      "image_width": "Image size",
+      "image_width_info": "Smaller sizes suit icons and logos",
+      "image_full": "Full column width",
+      "image_half": "Half of the column",
+      "image_third": "A third of the column",
+      "show_placeholders": "Show placeholder images",
+      "show_placeholders_info": "Shows a placeholder where a column has no image. Leave off for text-only columns",
+      "card": "Show columns as cards",
+      "card_info": "Gives each column its own background and padding",
+      "block_name": "Column",
+      "image": "Image or icon",
+      "image_info": "Optional. Use a small image or icon with a smaller Image size",
+      "link_label": "Link text",
+      "link_label_info": "Shown as a text link with an arrow. Leave empty to make the whole column clickable instead"
+    },
     "image_with_text": {
       "name": "Image with text",
       "layout": "Layout",
