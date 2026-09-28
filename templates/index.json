@@ -360,6 +360,7 @@
         "slide_ja9g3x": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/Banner_6-08_4000x1562_crop_center_jpg_fc44f822-bc67-48c2-a609-66e6bd86e023.png",
             "media_type": "image",
             "video_url": "",
             "subheading": "Just landed",
@@ -380,6 +381,7 @@
         "slide_JYfBbB": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/Banner_5_4000x1562_crop_center_jpg_5be9f9c0-8dc9-42a5-a96c-c78801967442.png",
             "media_type": "image",
             "video_url": "",
             "subheading": "Limited time",
