@@ -13,6 +13,8 @@
 {% endcomment %}
 
 {{ 'collection-banner.css' | asset_url | stylesheet_tag }}
+{%- comment -%} Always loaded (not only with parallax on) so ticking Parallax in the theme editor works without a page reload. {%- endcomment -%}
+<script src="{{ 'collection-banner.js' | asset_url }}" defer></script>
 {{ 'banner-media.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
@@ -86,7 +88,6 @@
   <div class="{% if section.settings.width == 'page' %}page-width{% endif %}">
     <div
       class="promo-banner promo-banner--{{ section.settings.height }} promo-banner--mobile-{{ section.settings.mobile_height }}{% if section.settings.zoom_on_hover %} promo-banner--zoom{% endif %}{% if section.settings.parallax %} promo-banner--parallax{% endif %}"
-      {% if section.settings.parallax %}data-parallax="{{ section.settings.parallax_strength }}"{% endif %}
       style="
         --promo-height: {{ height }};
         --promo-height-mobile: {{ mobile_height }};
@@ -103,7 +104,11 @@
         --promo-parallax: {{ section.settings.parallax_strength }}%;
       "
     >
-      <div class="promo-banner__media">
+      {%- if section.settings.parallax -%}
+        <parallax-media class="promo-banner__media" data-strength="{{ section.settings.parallax_strength }}">
+      {%- else -%}
+        <div class="promo-banner__media">
+      {%- endif -%}
         {% render 'banner-media',
           image: image,
           mobile_image: section.settings.mobile_image,
@@ -114,7 +119,11 @@
           alt: heading,
           placeholder: 'lifestyle-2'
         %}
-      </div>
+      {%- if section.settings.parallax -%}
+        </parallax-media>
+      {%- else -%}
+        </div>
+      {%- endif -%}
 
       <div class="promo-banner__overlay" aria-hidden="true"></div>
 
@@ -153,54 +162,6 @@
     </div>
   </div>
 </div>
-
-{% javascript %}
-  // Parallax (Collection banner > Parallax effect): the image moves more
-  // slowly than the page while the text stays put in the banner. One shared
-  // scroll listener for every banner on the page; off for reduced motion.
-  if (!window.promoBannerParallax) {
-    window.promoBannerParallax = true;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let banners = [];
-    let ticking = false;
-
-    const update = () => {
-      ticking = false;
-      if (reduceMotion.matches) return;
-      const viewport = window.innerHeight;
-      banners.forEach((banner) => {
-        const rect = banner.getBoundingClientRect();
-        if (rect.bottom < 0 || rect.top > viewport) return;
-        // -1 when the banner is centred at the top edge, 1 at the bottom edge.
-        const progress = (rect.top + rect.height / 2 - viewport / 2) / (viewport / 2 + rect.height / 2);
-        const strength = (Number(banner.dataset.parallax) || 0) / 100;
-        const offset = -progress * strength * rect.height;
-        banner.querySelector('.promo-banner__media').style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
-      });
-    };
-
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(update);
-    };
-
-    const scan = () => {
-      banners = [...document.querySelectorAll('.promo-banner[data-parallax]')];
-      document.querySelectorAll('.promo-banner:not([data-parallax]) .promo-banner__media').forEach((media) => {
-        media.style.transform = '';
-      });
-      update();
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    document.addEventListener('shopify:section:load', scan);
-    document.addEventListener('shopify:section:unload', () => setTimeout(scan));
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', scan);
-    else scan();
-  }
-{% endjavascript %}
 
 {% schema %}
 {
