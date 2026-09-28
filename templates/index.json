@@ -728,6 +728,7 @@
         "row_heading_size": "h4",
         "row_content_size": "large",
         "expand_icon": "plus",
+        "show_icons": true,
         "icon_size": 22,
         "content_width": 860,
         "corner_radius": 0,
@@ -736,6 +737,76 @@
         "card_color_scheme": "",
         "padding_top": 56,
         "padding_bottom": 56
+      }
+    },
+    "featured_product_tUwAFc": {
+      "type": "featured-product",
+      "blocks": {
+        "vendor_QafzMK": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title_qgM7GD": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2",
+            "heading_class": "h2",
+            "link_title": true
+          }
+        },
+        "price_TNzRiV": {
+          "type": "price",
+          "settings": {
+            "show_saving": true,
+            "show_tax_note": true
+          }
+        },
+        "variant_picker_GpRqxM": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "pills",
+            "show_swatches": true
+          }
+        },
+        "quantity_Wi3QfC": {
+          "type": "quantity",
+          "settings": {}
+        },
+        "buy_buttons_4LHFwa": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true
+          }
+        },
+        "view_details_p8FXUH": {
+          "type": "view_details",
+          "settings": {
+            "label": ""
+          }
+        }
+      },
+      "block_order": [
+        "vendor_QafzMK",
+        "title_qgM7GD",
+        "price_TNzRiV",
+        "variant_picker_GpRqxM",
+        "quantity_Wi3QfC",
+        "buy_buttons_4LHFwa",
+        "view_details_p8FXUH"
+      ],
+      "name": "t:sections.featured_product.name",
+      "settings": {
+        "product": "alia-knit-trouser",
+        "gallery_layout": "carousel",
+        "media_size": "medium",
+        "media_position": "left",
+        "media_ratio": "adapt",
+        "enable_zoom": true,
+        "video_loop": false,
+        "color_scheme": "",
+        "width": "page",
+        "padding_top": 32,
+        "padding_bottom": 64
       }
     }
   },
@@ -752,6 +823,7 @@
     "image_with_text_d9tUGx",
     "multicolumn_Jn7mQR",
     "video_BxDwVW",
-    "collapsible_content_LNyBUz"
+    "collapsible_content_LNyBUz",
+    "featured_product_tUwAFc"
   ]
 }
