@@ -11,7 +11,28 @@
   "sections": {
     "main": {
       "type": "collection",
-      "settings": {}
+      "settings": {
+        "heading_tag": "h1",
+        "heading_class": "h1",
+        "show_banner": true,
+        "banner_style": "image",
+        "banner_height": "large",
+        "banner_overlay": 10,
+        "banner_alignment": "left",
+        "show_description": true,
+        "products_per_page": 16,
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "show_count": true,
+        "pagination_type": "numbers",
+        "enable_filtering": true,
+        "filter_layout": "sidebar",
+        "enable_sorting": true,
+        "color_scheme": "",
+        "width": "page",
+        "padding_top": 0,
+        "padding_bottom": 64
+      }
     }
   },
   "order": [
