@@ -15,6 +15,7 @@
 {% endcomment %}
 
 {{ 'footer.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'footer.js' | asset_url }}" defer></script>
 
 {%- liquid
   assign mobile_style = section.settings.mobile_menu_style
@@ -193,35 +194,6 @@
     </div>
   </footer>
 </site-footer>
-
-{% javascript %}
-  if (!customElements.get('site-footer')) {
-    class SiteFooter extends HTMLElement {
-      connectedCallback() {
-        this.media = window.matchMedia('(min-width: 750px)');
-        this.sync = this.sync.bind(this);
-        this.media.addEventListener('change', this.sync);
-        this.sync();
-      }
-
-      disconnectedCallback() {
-        this.media?.removeEventListener('change', this.sync);
-      }
-
-      // Desktop, and "simple" on mobile: every menu open. Accordion on
-      // mobile: start closed and let the shopper open them.
-      sync() {
-        const openAll = this.media.matches || this.dataset.mobileStyle !== 'accordion';
-        this.querySelectorAll('[data-footer-accordion]').forEach((details) => {
-          details.open = openAll;
-        });
-        this.classList.toggle('footer--accordion', !openAll);
-      }
-    }
-
-    customElements.define('site-footer', SiteFooter);
-  }
-{% endjavascript %}
 
 {% schema %}
 {
