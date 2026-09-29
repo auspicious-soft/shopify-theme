@@ -20,7 +20,7 @@
         "banner_overlay": 10,
         "banner_alignment": "left",
         "show_description": true,
-        "products_per_page": 16,
+        "products_per_page": 15,
         "columns_desktop": 3,
         "columns_mobile": "2",
         "show_count": true,
