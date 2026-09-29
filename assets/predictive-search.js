@@ -1,0 +1,130 @@
+// Behavior for snippets/predictive-search.liquid.
+
+if (!customElements.get('predictive-search')) {
+  class PredictiveSearch extends HTMLElement {
+    connectedCallback() {
+      this.input = this.querySelector('[data-predictive-search-input]');
+      this.results = this.querySelector('[data-predictive-search-results]');
+      this.showVendor = this.dataset.showVendor === 'true';
+      this.showPrice = this.dataset.showPrice === 'true';
+      this.resetButton = this.querySelector('[data-predictive-search-reset]');
+      this.input.addEventListener('input', this.onInput.bind(this));
+      this.resetButton?.addEventListener('click', this.onReset.bind(this));
+      this.toggleHasValue();
+    }
+
+    toggleHasValue() {
+      this.toggleAttribute('data-has-value', this.input.value.length > 0);
+    }
+
+    onReset() {
+      clearTimeout(this.debounce);
+      this.input.value = '';
+      this.results.hidden = true;
+      this.results.innerHTML = '';
+      this.toggleHasValue();
+      this.input.focus();
+    }
+
+    onInput(event) {
+      clearTimeout(this.debounce);
+      this.toggleHasValue();
+      const term = event.target.value.trim();
+
+      if (term.length < 2) {
+        this.results.hidden = true;
+        this.results.innerHTML = '';
+        return;
+      }
+
+      this.debounce = setTimeout(() => this.search(term), 200);
+    }
+
+    async search(term) {
+      const url = `${this.dataset.url}?q=${encodeURIComponent(term)}&resources[type]=product,collection,page,article&resources[limit]=5&resources[options][unavailable_products]=last`;
+      const response = await fetch(url, { headers: { Accept: 'application/json' } });
+      const data = await response.json();
+      this.render(term, data.resources ? data.resources.results : {});
+    }
+
+    escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+      })[char]);
+    }
+
+    render(term, results) {
+      const products = results.products || [];
+      const others = [...(results.collections || []), ...(results.pages || []), ...(results.articles || [])];
+
+      if (products.length === 0 && others.length === 0) {
+        this.results.innerHTML = `<p class="predictive-search__empty">${this.escapeHtml(this.dataset.noResults)}</p>`;
+        this.results.hidden = false;
+        return;
+      }
+
+      let suggestionsSection = '';
+      if (others.length) {
+        const suggestionItems = others
+          .map(
+            (item) =>
+              `<a class="predictive-search__suggestion" href="${this.escapeHtml(item.url)}">${this.escapeHtml(item.title)}</a>`
+          )
+          .join('');
+        suggestionsSection = `
+          <div class="predictive-search__section">
+            <p class="predictive-search__section-title">${this.escapeHtml(this.dataset.suggestionsLabel)}</p>
+            <div class="predictive-search__suggestions">${suggestionItems}</div>
+          </div>
+        `;
+      }
+
+      let productsSection = '';
+      if (products.length) {
+        const productItems = products
+          .map((product) => {
+            const vendor = this.showVendor && product.vendor ? `<p class="predictive-search__product-vendor">${this.escapeHtml(product.vendor)}</p>` : '';
+            const price = this.showPrice ? `<p class="predictive-search__product-price">${this.escapeHtml(product.price)}</p>` : '';
+            const imageUrl = product.featured_image ? this.escapeHtml(product.featured_image.url) : '';
+            const image = imageUrl
+              ? `<img src="${imageUrl}" alt="" width="72" height="72" loading="lazy">`
+              : '';
+            return `
+              <a class="predictive-search__product" href="${this.escapeHtml(product.url)}">
+                <span class="predictive-search__product-image">${image}</span>
+                <span class="predictive-search__product-info">
+                  <p class="predictive-search__product-title">${this.escapeHtml(product.title)}</p>
+                  ${vendor}
+                  ${price}
+                </span>
+              </a>
+            `;
+          })
+          .join('');
+        productsSection = `
+          <div class="predictive-search__section">
+            <p class="predictive-search__section-title">${this.escapeHtml(this.dataset.productsLabel)}</p>
+            <div class="predictive-search__products">${productItems}</div>
+          </div>
+        `;
+      }
+
+      this.results.innerHTML = `
+        ${suggestionsSection}
+        ${productsSection}
+        <div class="predictive-search__footer">
+          <a class="predictive-search__view-all" href="${this.querySelector('form').action}?q=${encodeURIComponent(term)}">
+            ${this.escapeHtml(this.dataset.viewAll)} "${this.escapeHtml(term)}"
+          </a>
+        </div>
+      `;
+      this.results.hidden = false;
+    }
+  }
+
+  customElements.define('predictive-search', PredictiveSearch);
+}

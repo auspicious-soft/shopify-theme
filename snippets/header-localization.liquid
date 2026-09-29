@@ -44,6 +44,7 @@
 
 {% if show_country or show_language %}
   {{ 'header-localization.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'header-localization.js' | asset_url }}" defer></script>
 
   {%- liquid
     assign placement = placement | default: 'header'
@@ -144,20 +145,3 @@
     </theme-panel>
   </header-localization>
 {% endif %}
-
-{% javascript %}
-  if (!customElements.get('header-localization')) {
-    class HeaderLocalization extends HTMLElement {
-      connectedCallback() {
-        this.form = this.querySelector('form');
-        if (!this.form) return;
-
-        this.querySelectorAll('[data-header-localization-select]').forEach((select) => {
-          select.addEventListener('change', () => this.form.submit());
-        });
-      }
-    }
-
-    customElements.define('header-localization', HeaderLocalization);
-  }
-{% endjavascript %}
