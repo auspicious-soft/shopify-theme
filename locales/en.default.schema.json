@@ -499,7 +499,7 @@
       "cards_info": "The card design (image, badge, swatches, sizes, quick add) is set in Theme settings > Product cards, so every product card in the store matches"
     },
     "collection_banner": {
-      "name": "Collection banner",
+      "name": "Image banner",
       "collection": "Collection",
       "collection_info": "Fills in the image, heading and link when those are left empty",
       "header_image": "Image",
@@ -804,8 +804,8 @@
       "alt_info": "Used as the image's alt text, and shown as text when there is no image"
     },
     "collection_banners": {
-      "name": "Collection banners",
-      "block_name": "Collection",
+      "name": "Image banners",
+      "block_name": "Image",
       "mobile_layout": "Mobile layout",
       "mobile_stack": "Stacked",
       "mobile_slider": "Swipe slider",
