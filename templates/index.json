@@ -96,7 +96,7 @@
         "content_position_vertical": "top",
         "content_width": 520,
         "button_label": "View products",
-        "button_link": "",
+        "button_link": "shopify://collections/long-sleeves",
         "button_style": "primary",
         "button_size": "small",
         "button_color_scheme": "",
