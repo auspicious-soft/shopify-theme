@@ -96,7 +96,7 @@
         "content_position_vertical": "top",
         "content_width": 520,
         "button_label": "View products",
-        "button_link": "",
+        "button_link": "shopify://collections/long-sleeves",
         "button_style": "primary",
         "button_size": "small",
         "button_color_scheme": "",
@@ -112,7 +112,7 @@
         "collection_kahEbC": {
           "type": "collection",
           "settings": {
-            "collection": "men",
+            "collection": "",
             "image": "shopify://shop_images/Image_52.png",
             "media_type": "image",
             "video_url": "",
@@ -120,13 +120,13 @@
             "heading": "Shop the latest drops",
             "text": "",
             "button_label": "Explore Men's",
-            "link": ""
+            "link": "shopify://collections/men"
           }
         },
         "collection_fGPGma": {
           "type": "collection",
           "settings": {
-            "collection": "womens",
+            "collection": "",
             "image": "shopify://shop_images/Image_53.png",
             "media_type": "image",
             "video_url": "",
@@ -134,7 +134,7 @@
             "heading": "Discover new silhouettes",
             "text": "",
             "button_label": "Explore Women's",
-            "link": ""
+            "link": "shopify://collections/womens"
           }
         }
       },
