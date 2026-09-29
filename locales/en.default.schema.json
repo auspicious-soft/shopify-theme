@@ -511,6 +511,7 @@
       "mobile_height": "Mobile height",
       "corner_radius": "Corner radius",
       "zoom_on_hover": "Zoom image on hover",
+      "full_link_info": "When off, only the button is a link",
       "parallax": "Parallax effect",
       "parallax_info": "The text is sticky inside the banner: it stays on screen while the banner image scrolls past, then leaves with the end of the banner. The text starts at the top of the banner",
       "heading_info": "Leave empty to use the collection title",

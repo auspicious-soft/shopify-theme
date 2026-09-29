@@ -126,7 +126,7 @@
 
           <div class="collection-tile__overlay" aria-hidden="true"></div>
 
-          {%- if link != blank -%}
+          {%- if section.settings.full_link and link != blank -%}
             <a href="{{ link }}" class="collection-tile__link" tabindex="-1" aria-hidden="true"></a>
           {%- endif -%}
 
@@ -300,6 +300,13 @@
       "id": "zoom_on_hover",
       "label": "t:sections.collection_banner.zoom_on_hover",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "full_link",
+      "label": "t:sections.collection_banner.full_link",
+      "info": "t:sections.collection_banner.full_link_info",
+      "default": false
     },
     {
       "type": "color",
