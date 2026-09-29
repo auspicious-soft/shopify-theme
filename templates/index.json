@@ -120,7 +120,7 @@
             "heading": "Shop the latest drops",
             "text": "",
             "button_label": "Explore Men's",
-            "link": "shopify://collections/men"
+            "link": "shopify://collections/mens"
           }
         },
         "collection_fGPGma": {
@@ -157,7 +157,6 @@
         "image_ratio": "landscape",
         "corner_radius": 0,
         "zoom_on_hover": true,
-        "full_link": false,
         "overlay_color": "#000000",
         "overlay_opacity": 15,
         "heading_size": "medium",
@@ -168,6 +167,7 @@
         "button_style": "primary",
         "button_size": "small",
         "button_color_scheme": "",
+        "full_link": false,
         "color_scheme": "",
         "padding_top": 32,
         "padding_bottom": 48
