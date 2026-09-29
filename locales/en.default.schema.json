@@ -332,6 +332,7 @@
       "show_description": "Show collection description",
       "product_grid": "Product grid",
       "products_per_page": "Products per page",
+      "products_per_page_info": "For full rows, use a multiple of the columns: e.g. 12, 15 or 18 for 3 columns, 16 or 20 for 4",
       "show_count": "Show product count",
       "pagination_type": "Pagination",
       "pagination_numbers": "Page numbers",
