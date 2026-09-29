@@ -141,7 +141,7 @@
 .fc__arrows--sides {
   position: absolute;
   inset-inline: 0;
-  top: var(--fc-arrow-top, 40%);
+  top: var(--slider-arrow-top, 40%);
   z-index: 4;
   display: flex;
   justify-content: space-between;
@@ -239,9 +239,9 @@
   position: absolute;
   inset-block: 0;
   inset-inline-start: 0;
-  width: var(--fc-progress-size, 25%);
+  width: var(--slider-progress-size, 25%);
   background-color: var(--color-foreground);
-  transform: translateX(var(--fc-progress-offset, 0%));
+  transform: translateX(var(--slider-progress-offset, 0%));
   transition: transform 0.15s linear;
 }
 

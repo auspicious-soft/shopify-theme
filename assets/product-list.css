@@ -144,7 +144,7 @@
     display: inline-flex;
   }
 
-  .product-list--no-scroll .product-list__arrows {
+  .product-list.is-static .product-list__arrows {
     display: none;
   }
 }

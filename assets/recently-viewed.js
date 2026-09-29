@@ -61,7 +61,7 @@ if (!customElements.get('recently-viewed')) {
       track.innerHTML = cards.map((card) => `<li class="product-list__item">${card.html}</li>`).join('');
       track.querySelectorAll('[data-animate]').forEach((el) => el.classList.add('is-revealed'));
       this.hidden = false;
-      this.querySelector('product-slider')?.update?.();
+      this.querySelector('slider-component')?.update?.();
     }
 
     onClick(event) {
