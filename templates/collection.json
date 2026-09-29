@@ -16,7 +16,7 @@
         "heading_class": "h1",
         "show_banner": true,
         "banner_style": "image",
-        "banner_height": "medium",
+        "banner_height": "large",
         "banner_overlay": 30,
         "banner_alignment": "left",
         "show_description": true,
