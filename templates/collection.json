@@ -21,7 +21,7 @@
         "banner_alignment": "left",
         "show_description": true,
         "products_per_page": 16,
-        "columns_desktop": 4,
+        "columns_desktop": 3,
         "columns_mobile": "2",
         "show_count": true,
         "pagination_type": "numbers",
