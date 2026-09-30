@@ -235,6 +235,64 @@
     ]
   },
   {
+    "name": "t:settings_schema.breadcrumbs.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.breadcrumbs.info"
+      },
+      {
+        "type": "checkbox",
+        "id": "breadcrumbs_show_mobile",
+        "label": "t:settings_schema.breadcrumbs.show_mobile",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "breadcrumbs_separator",
+        "label": "t:settings_schema.breadcrumbs.separator",
+        "options": [
+          {
+            "value": "chevron",
+            "label": "t:settings_schema.breadcrumbs.separator_chevron"
+          },
+          {
+            "value": "slash",
+            "label": "t:options.separator_style.slash"
+          },
+          {
+            "value": "dot",
+            "label": "t:options.separator_style.dot"
+          },
+          {
+            "value": "pipe",
+            "label": "t:options.separator_style.pipe"
+          }
+        ],
+        "default": "chevron"
+      },
+      {
+        "type": "checkbox",
+        "id": "breadcrumbs_home_icon",
+        "label": "t:settings_schema.breadcrumbs.home_icon",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "breadcrumbs_product_collection",
+        "label": "t:settings_schema.breadcrumbs.product_collection",
+        "info": "t:settings_schema.breadcrumbs.product_collection_info",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "breadcrumbs_collections_link",
+        "label": "t:settings_schema.breadcrumbs.collections_link",
+        "default": false
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.animations.name",
     "settings": [
       {

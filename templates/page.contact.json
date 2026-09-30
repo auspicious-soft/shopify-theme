@@ -9,10 +9,6 @@
  */
 {
   "sections": {
-    "breadcrumbs": {
-      "type": "breadcrumbs",
-      "settings": {}
-    },
     "main": {
       "type": "page",
       "disabled": true,
@@ -153,7 +149,6 @@
     }
   },
   "order": [
-    "breadcrumbs",
     "main",
     "contact_form",
     "faq"

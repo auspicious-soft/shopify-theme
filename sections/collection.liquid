@@ -89,6 +89,7 @@
       {% endif %}
       <div class="collection-banner__content page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
         <{{ heading_tag }} class="{{ heading_class }} collection-banner__title">{{ collection.title | escape }}</{{ heading_tag }}>
+        {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'collection-banner__breadcrumbs' %}{%- endif -%}
         {% if section.settings.show_description and collection.description != blank %}
           <div class="collection-banner__description">{{ collection.description }}</div>
         {% endif %}
@@ -96,6 +97,9 @@
     </div>
   {% else %}
     <{{ heading_tag }} class="visually-hidden">{{ collection.title | escape }}</{{ heading_tag }}>
+    {%- if section.settings.show_breadcrumbs -%}
+      <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %} collection__breadcrumbs">{% render 'breadcrumbs' %}</div>
+    {%- endif -%}
   {% endif %}
 
   <div class="collection__container page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
@@ -390,6 +394,13 @@
 {
   "name": "t:general.collection",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "t:sections.breadcrumbs.show",
+      "info": "t:sections.breadcrumbs.show_info",
+      "default": true
+    },
     {
       "type": "select",
       "id": "heading_tag",

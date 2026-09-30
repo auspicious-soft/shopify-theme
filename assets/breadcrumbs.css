@@ -1,13 +1,12 @@
-/* Styles for sections/breadcrumbs.liquid and snippets/breadcrumbs.liquid. */
+/* Styles for snippets/breadcrumbs.liquid. Colors follow the surrounding
+   text (currentColor), so the trail works on plain pages and over images. */
 
-.breadcrumbs-section {
-  padding-block: var(--section-padding-top) var(--section-padding-bottom);
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+.breadcrumbs {
+  min-width: 0;
 }
 
 @media screen and (max-width: 749px) {
-  .breadcrumbs-section--hide-mobile {
+  .breadcrumbs--hide-mobile {
     display: none;
   }
 }
@@ -24,14 +23,6 @@
   list-style: none;
 }
 
-.breadcrumbs-section--medium .breadcrumbs__list {
-  font-size: 0.9rem;
-}
-
-.breadcrumbs-section--center .breadcrumbs__list {
-  justify-content: center;
-}
-
 .breadcrumbs__item {
   display: inline-flex;
   align-items: center;
@@ -42,7 +33,7 @@
 .breadcrumbs__item + .breadcrumbs__item::before {
   display: inline-block;
   margin-inline: 0.6em;
-  color: color-mix(in srgb, var(--color-foreground) 45%, transparent);
+  opacity: 0.5;
 }
 
 .breadcrumbs--slash .breadcrumbs__item + .breadcrumbs__item::before {
@@ -58,7 +49,7 @@
   content: '|';
 }
 
-/* Chevron: a small rotated square border, so it follows the text color. */
+/* Chevron: a small rotated border square, so it follows the text color. */
 .breadcrumbs--chevron .breadcrumbs__item + .breadcrumbs__item::before {
   content: '';
   width: 0.4em;
@@ -76,13 +67,14 @@
 .breadcrumbs__link {
   display: inline-flex;
   align-items: center;
-  color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
+  color: inherit;
   text-decoration: none;
-  transition: color 0.2s ease;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
 }
 
 .breadcrumbs__link:hover {
-  color: var(--color-foreground);
+  opacity: 1;
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
@@ -99,5 +91,32 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  color: var(--color-foreground);
+}
+
+/* ---------- Placement in each page's main section ---------- */
+
+/* Collection: under the title in the banner, or above the products. */
+.collection-banner__breadcrumbs {
+  margin-top: 0.25rem;
+}
+
+.collection__breadcrumbs {
+  padding-top: 1.25rem;
+}
+
+/* Product: above the image gallery. */
+.product__breadcrumbs {
+  margin-bottom: 1rem;
+}
+
+/* Blog, article, collection list: inside their title area. */
+.blog__breadcrumbs,
+.article__breadcrumbs,
+.collection-list-page__breadcrumbs {
+  margin-bottom: 0.25rem;
+}
+
+/* Page, search, cart, 404: under the page title. */
+.page-breadcrumbs {
+  margin-block: 0.5rem 1.75rem;
 }

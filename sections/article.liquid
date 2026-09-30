@@ -30,6 +30,7 @@
 -%}
 
 {%- capture article_header -%}
+  {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'article__breadcrumbs' %}{%- endif -%}
   {%- if section.settings.show_back_link -%}
     <a href="{{ blog.url }}" class="article__back">
       {{- 'icon-chevron.svg' | inline_asset_content -}}
@@ -315,6 +316,13 @@
   "name": "t:general.article",
   "class": "section-article",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "t:sections.breadcrumbs.show",
+      "info": "t:sections.breadcrumbs.show_info",
+      "default": true
+    },
     {
       "type": "header",
       "content": "t:sections.article.header_image"

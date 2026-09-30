@@ -49,6 +49,9 @@
   "
 >
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+    {%- if section.settings.show_heading == false -%}
+      {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'collection-list-page__breadcrumbs' %}{%- endif -%}
+    {%- endif -%}
     {%- if section.settings.show_heading -%}
       <div class="collection-list-page__header collection-list-page__header--{{ section.settings.heading_alignment }}">
         <{{ heading_tag }} class="{{ heading_class }} collection-list-page__heading">
@@ -58,6 +61,7 @@
             {{- 'collections.title' | t -}}
           {%- endif -%}
         </{{ heading_tag }}>
+        {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'collection-list-page__breadcrumbs' %}{%- endif -%}
         {%- if section.settings.subheading != blank -%}
           <div class="collection-list-page__subheading">{{ section.settings.subheading }}</div>
         {%- endif -%}
@@ -218,6 +222,13 @@
 {
   "name": "t:general.collections_grid",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "t:sections.breadcrumbs.show",
+      "info": "t:sections.breadcrumbs.show_info",
+      "default": true
+    },
     {
       "type": "checkbox",
       "id": "show_heading",

@@ -9,17 +9,12 @@
  */
 {
   "sections": {
-    "breadcrumbs": {
-      "type": "breadcrumbs",
-      "settings": {}
-    },
     "main": {
       "type": "cart",
       "settings": {}
     }
   },
   "order": [
-    "breadcrumbs",
     "main"
   ]
 }

@@ -1,30 +1,35 @@
 {% doc %}
   Breadcrumb trail for the current page (Home / … / current page), plus
   schema.org BreadcrumbList structured data so search engines can show the
-  path in results. Rendered by sections/breadcrumbs.liquid; styles live in
-  assets/breadcrumbs.css.
+  path in results. Rendered inside each page's main section (under the
+  title; above the gallery on product pages) when that section's "Show
+  breadcrumbs" setting is on. Separator, home icon, mobile visibility and
+  the extra collection steps come from Theme settings > Breadcrumbs.
+  Loads its own styles (assets/breadcrumbs.css).
 
   Trails:
   - Product: Home / Collection / Product. The collection is the one in the
     URL (/collections/x/products/y), else the product's first collection
-    when `product_collection` is on.
+    when Theme settings > Breadcrumbs allows it.
   - Collection: Home / (Collections) / Collection / (Tag)
   - Collection list: Home / Collections
   - Blog: Home / Blog / (Tag)      Article: Home / Blog / Article
-  - Page, Search, Cart, 404: Home / Page name
+  - Page, 404: Home / Page name
 
   Renders nothing on the home page.
 
-  @param {string} [separator] - chevron (default), slash, dot or pipe
-  @param {boolean} [product_collection] - Add a collection to product trails when the URL has none
-  @param {boolean} [collections_link] - Add "Collections" before a collection
-  @param {boolean} [home_icon] - Show a house icon instead of the word "Home"
+  @param {string} [class] - Extra class for spacing in the host section
 
   @example
-  {% render 'breadcrumbs', separator: 'slash', product_collection: true %}
+  {% render 'breadcrumbs', class: 'page__breadcrumbs' %}
 {% enddoc %}
 
 {%- liquid
+  assign separator = settings.breadcrumbs_separator | default: 'chevron'
+  assign product_collection = settings.breadcrumbs_product_collection
+  assign collections_link = settings.breadcrumbs_collections_link
+  assign home_icon = settings.breadcrumbs_home_icon
+
   # Names and URLs are built as two parallel lists joined by a delimiter
   # that won't appear in titles, then split for output.
   assign sep = '::bc::'
@@ -79,16 +84,6 @@
       assign names = names | append: sep | append: page.title
       assign urls = urls | append: sep | append: page.url
 
-    when 'search'
-      assign label = 'search.title' | t
-      assign names = names | append: sep | append: label
-      assign urls = urls | append: sep | append: routes.search_url
-
-    when 'cart'
-      assign label = 'cart.title' | t
-      assign names = names | append: sep | append: label
-      assign urls = urls | append: sep | append: routes.cart_url
-
     when '404'
       assign label = '404.not_found' | t
       assign names = names | append: sep | append: label
@@ -100,7 +95,12 @@
 -%}
 
 {%- if request.page_type != 'index' and name_list.size > 1 -%}
-  <nav class="breadcrumbs breadcrumbs--{{ separator | default: 'chevron' }}" aria-label="{{ 'breadcrumbs.label' | t }}">
+  {{ 'breadcrumbs.css' | asset_url | stylesheet_tag }}
+
+  <nav
+    class="breadcrumbs breadcrumbs--{{ separator }}{% unless settings.breadcrumbs_show_mobile %} breadcrumbs--hide-mobile{% endunless %} {{ class }}"
+    aria-label="{{ 'breadcrumbs.label' | t }}"
+  >
     <ol class="breadcrumbs__list" role="list">
       {%- for name in name_list -%}
         {%- assign i = forloop.index0 -%}

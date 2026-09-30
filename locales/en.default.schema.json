@@ -943,16 +943,8 @@
       "columns_mobile_info": "Carousel shows part of the next article"
     },
     "breadcrumbs": {
-      "name": "Breadcrumbs",
       "show": "Show breadcrumbs",
-      "show_mobile": "Show on mobile",
-      "header_path": "Path",
-      "home_icon": "Show home as an icon",
-      "product_collection": "Show collection on product pages",
-      "product_collection_info": "Uses the collection the shopper came from, or the product's first collection",
-      "collections_link": "Show \"Collections\" before a collection",
-      "separator": "Separator",
-      "separator_chevron": "Chevron (›)"
+      "show_info": "Style: Theme settings > Breadcrumbs"
     }
   },
   "settings_schema": {
@@ -1408,6 +1400,17 @@
           "label": "Menu"
         }
       }
+    },
+    "breadcrumbs": {
+      "name": "Breadcrumbs",
+      "info": "Breadcrumbs show under the page title (above the images on product pages). Turn them on or off in each page's main section",
+      "show_mobile": "Show on mobile",
+      "separator": "Separator",
+      "separator_chevron": "Chevron (›)",
+      "home_icon": "Show home as an icon",
+      "product_collection": "Show collection on product pages",
+      "product_collection_info": "Uses the collection the shopper came from, or the product's first collection",
+      "collections_link": "Show \"Collections\" before a collection"
     }
   },
   "blocks": {

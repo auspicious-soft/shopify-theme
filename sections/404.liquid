@@ -9,6 +9,7 @@
   {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
   {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
   <{{ heading_tag }} class="{{ heading_class }}">{{ '404.title' | t }}</{{ heading_tag }}>
+  {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'page-breadcrumbs' %}{%- endif -%}
 
   <p>
     {{ '404.not_found' | t }}
@@ -23,6 +24,13 @@
 {
   "name": "t:general.404",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "t:sections.breadcrumbs.show",
+      "info": "t:sections.breadcrumbs.show_info",
+      "default": true
+    },
     {
       "type": "select",
       "id": "heading_tag",
