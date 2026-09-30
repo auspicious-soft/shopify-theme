@@ -1,0 +1,103 @@
+/* Styles for sections/breadcrumbs.liquid and snippets/breadcrumbs.liquid. */
+
+.breadcrumbs-section {
+  padding-block: var(--section-padding-top) var(--section-padding-bottom);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+@media screen and (max-width: 749px) {
+  .breadcrumbs-section--hide-mobile {
+    display: none;
+  }
+}
+
+.breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0;
+  margin: 0;
+  padding: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  list-style: none;
+}
+
+.breadcrumbs-section--medium .breadcrumbs__list {
+  font-size: 0.9rem;
+}
+
+.breadcrumbs-section--center .breadcrumbs__list {
+  justify-content: center;
+}
+
+.breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+/* Separator before every item except the first. */
+.breadcrumbs__item + .breadcrumbs__item::before {
+  display: inline-block;
+  margin-inline: 0.6em;
+  color: color-mix(in srgb, var(--color-foreground) 45%, transparent);
+}
+
+.breadcrumbs--slash .breadcrumbs__item + .breadcrumbs__item::before {
+  content: '/';
+}
+
+.breadcrumbs--dot .breadcrumbs__item + .breadcrumbs__item::before {
+  content: '\2022';
+  font-size: 0.8em;
+}
+
+.breadcrumbs--pipe .breadcrumbs__item + .breadcrumbs__item::before {
+  content: '|';
+}
+
+/* Chevron: a small rotated square border, so it follows the text color. */
+.breadcrumbs--chevron .breadcrumbs__item + .breadcrumbs__item::before {
+  content: '';
+  width: 0.4em;
+  height: 0.4em;
+  margin-inline: 0.75em 0.85em;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+[dir='rtl'] .breadcrumbs--chevron .breadcrumbs__item + .breadcrumbs__item::before {
+  transform: rotate(-135deg);
+}
+
+.breadcrumbs__link {
+  display: inline-flex;
+  align-items: center;
+  color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumbs__link:hover {
+  color: var(--color-foreground);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.breadcrumbs__home-icon {
+  width: 1.15em;
+  height: 1.15em;
+}
+
+/* Long product / article titles shorten with "…" instead of wrapping. */
+.breadcrumbs__current {
+  display: block;
+  max-width: min(40ch, 70vw);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--color-foreground);
+}

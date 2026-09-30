@@ -247,5 +247,9 @@
       "previous": "Previous page",
       "next": "Next page"
     }
+  },
+  "breadcrumbs": {
+    "label": "Breadcrumb",
+    "home": "Home"
   }
 }

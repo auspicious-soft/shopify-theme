@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {}
+    },
     "main": {
       "type": "product",
       "blocks": {
@@ -151,6 +155,7 @@
     }
   },
   "order": [
+    "breadcrumbs",
     "main",
     "related_products",
     "recently_viewed"

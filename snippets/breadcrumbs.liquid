@@ -1,0 +1,144 @@
+{% doc %}
+  Breadcrumb trail for the current page (Home / … / current page), plus
+  schema.org BreadcrumbList structured data so search engines can show the
+  path in results. Rendered by sections/breadcrumbs.liquid; styles live in
+  assets/breadcrumbs.css.
+
+  Trails:
+  - Product: Home / Collection / Product. The collection is the one in the
+    URL (/collections/x/products/y), else the product's first collection
+    when `product_collection` is on.
+  - Collection: Home / (Collections) / Collection / (Tag)
+  - Collection list: Home / Collections
+  - Blog: Home / Blog / (Tag)      Article: Home / Blog / Article
+  - Page, Search, Cart, 404: Home / Page name
+
+  Renders nothing on the home page.
+
+  @param {string} [separator] - chevron (default), slash, dot or pipe
+  @param {boolean} [product_collection] - Add a collection to product trails when the URL has none
+  @param {boolean} [collections_link] - Add "Collections" before a collection
+  @param {boolean} [home_icon] - Show a house icon instead of the word "Home"
+
+  @example
+  {% render 'breadcrumbs', separator: 'slash', product_collection: true %}
+{% enddoc %}
+
+{%- liquid
+  # Names and URLs are built as two parallel lists joined by a delimiter
+  # that won't appear in titles, then split for output.
+  assign sep = '::bc::'
+  assign home_label = 'breadcrumbs.home' | t
+  assign names = home_label
+  assign urls = routes.root_url
+
+  case request.page_type
+    when 'product'
+      assign trail_collection = collection
+      if trail_collection == blank and product_collection
+        assign trail_collection = product.collections.first
+      endif
+      if trail_collection != blank
+        assign names = names | append: sep | append: trail_collection.title
+        assign urls = urls | append: sep | append: trail_collection.url
+      endif
+      assign names = names | append: sep | append: product.title
+      assign urls = urls | append: sep | append: product.url
+
+    when 'collection'
+      if collections_link
+        assign label = 'collections.title' | t
+        assign names = names | append: sep | append: label
+        assign urls = urls | append: sep | append: routes.collections_url
+      endif
+      assign names = names | append: sep | append: collection.title
+      assign urls = urls | append: sep | append: collection.url
+      if current_tags
+        assign names = names | append: sep | append: current_tags.first
+        assign urls = urls | append: sep | append: request.path
+      endif
+
+    when 'list-collections'
+      assign label = 'collections.title' | t
+      assign names = names | append: sep | append: label
+      assign urls = urls | append: sep | append: routes.collections_url
+
+    when 'blog'
+      assign names = names | append: sep | append: blog.title
+      assign urls = urls | append: sep | append: blog.url
+      if current_tags
+        assign names = names | append: sep | append: current_tags.first
+        assign urls = urls | append: sep | append: request.path
+      endif
+
+    when 'article'
+      assign names = names | append: sep | append: blog.title | append: sep | append: article.title
+      assign urls = urls | append: sep | append: blog.url | append: sep | append: article.url
+
+    when 'page'
+      assign names = names | append: sep | append: page.title
+      assign urls = urls | append: sep | append: page.url
+
+    when 'search'
+      assign label = 'search.title' | t
+      assign names = names | append: sep | append: label
+      assign urls = urls | append: sep | append: routes.search_url
+
+    when 'cart'
+      assign label = 'cart.title' | t
+      assign names = names | append: sep | append: label
+      assign urls = urls | append: sep | append: routes.cart_url
+
+    when '404'
+      assign label = '404.not_found' | t
+      assign names = names | append: sep | append: label
+      assign urls = urls | append: sep | append: request.path
+  endcase
+
+  assign name_list = names | split: sep
+  assign url_list = urls | split: sep
+-%}
+
+{%- if request.page_type != 'index' and name_list.size > 1 -%}
+  <nav class="breadcrumbs breadcrumbs--{{ separator | default: 'chevron' }}" aria-label="{{ 'breadcrumbs.label' | t }}">
+    <ol class="breadcrumbs__list" role="list">
+      {%- for name in name_list -%}
+        {%- assign i = forloop.index0 -%}
+        <li class="breadcrumbs__item">
+          {%- if forloop.last -%}
+            <span class="breadcrumbs__current" aria-current="page">{{ name | escape }}</span>
+          {%- else -%}
+            <a href="{{ url_list[i] }}" class="breadcrumbs__link">
+              {%- if forloop.first and home_icon -%}
+                <svg class="breadcrumbs__home-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M3.5 9 10 3.5 16.5 9"/><path d="M5 7.8v8.7h10V7.8"/><path d="M8.5 16.5v-4.5h3v4.5"/>
+                </svg>
+                <span class="visually-hidden">{{ name | escape }}</span>
+              {%- else -%}
+                {{- name | escape -}}
+              {%- endif -%}
+            </a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ol>
+  </nav>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {%- for name in name_list -%}
+          {%- assign i = forloop.index0 -%}
+          {
+            "@type": "ListItem",
+            "position": {{ forloop.index }},
+            "name": {{ name | json }},
+            "item": {{ request.origin | append: url_list[i] | json }}
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}

@@ -941,6 +941,18 @@
       "articles_to_show": "Articles to show",
       "layout_slider": "Carousel",
       "columns_mobile_info": "Carousel shows part of the next article"
+    },
+    "breadcrumbs": {
+      "name": "Breadcrumbs",
+      "show": "Show breadcrumbs",
+      "show_mobile": "Show on mobile",
+      "header_path": "Path",
+      "home_icon": "Show home as an icon",
+      "product_collection": "Show collection on product pages",
+      "product_collection_info": "Uses the collection the shopper came from, or the product's first collection",
+      "collections_link": "Show \"Collections\" before a collection",
+      "separator": "Separator",
+      "separator_chevron": "Chevron (›)"
     }
   },
   "settings_schema": {

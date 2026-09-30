@@ -9,12 +9,17 @@
  */
  {
   "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {}
+    },
     "main": {
       "type": "404",
       "settings": {}
     }
   },
   "order": [
+    "breadcrumbs",
     "main"
   ]
 }

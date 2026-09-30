@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {}
+    },
     "main": {
       "type": "article",
       "settings": {
@@ -16,7 +20,7 @@
         "heading_tag": "h1",
         "heading_class": "h2",
         "heading_alignment": "center",
-        "show_back_link": true,
+        "show_back_link": false,
         "show_tags_top": true,
         "show_date": true,
         "show_author": true,
@@ -40,6 +44,7 @@
     }
   },
   "order": [
+    "breadcrumbs",
     "main",
     "related_articles"
   ]

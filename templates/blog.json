@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {}
+    },
     "main": {
       "type": "blog",
       "settings": {
@@ -30,6 +34,7 @@
     }
   },
   "order": [
+    "breadcrumbs",
     "main"
   ]
 }
