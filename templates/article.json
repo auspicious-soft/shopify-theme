@@ -12,7 +12,10 @@
     "main": {
       "type": "article",
       "settings": {
+        "show_breadcrumbs": true,
         "image_layout": "below",
+        "banner_height": "medium",
+        "banner_overlay": 35,
         "heading_tag": "h1",
         "heading_class": "h2",
         "heading_alignment": "center",
@@ -22,20 +25,39 @@
         "show_author": true,
         "show_reading_time": true,
         "content_width": 760,
+        "text_size": "medium",
         "show_tags": true,
-        "show_share": true,
+        "show_share": false,
         "show_prev_next": true,
-        "show_comments": true
+        "show_comments": true,
+        "comments_per_page": 10,
+        "width": "page",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 64
       }
     },
     "related_articles": {
       "type": "related-articles",
       "settings": {
         "heading": "You may also like",
+        "heading_tag": "h2",
+        "heading_class": "h3",
+        "heading_alignment": "left",
+        "show_view_all": true,
         "articles_to_show": 3,
         "layout": "grid",
         "columns_desktop": 3,
-        "color_scheme": "scheme-2"
+        "columns_mobile": "1",
+        "image_ratio": "landscape",
+        "show_date": true,
+        "show_author": false,
+        "show_excerpt": false,
+        "read_more": "Read more",
+        "width": "page",
+        "color_scheme": "scheme-2",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     }
   },
