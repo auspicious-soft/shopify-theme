@@ -474,8 +474,12 @@
         "devices_desktop": "Desktop only",
         "devices_mobile": "Mobile only",
         "show_image": "Show product image",
-        "show_variants": "Show variant dropdown",
-        "show_variants_info": "Lets shoppers change the variant from the bar; the page updates to match"
+        "show_variants": "Show variant options",
+        "show_variants_info": "Lets shoppers change the variant from the bar; the page updates to match",
+        "picker": "Variant style",
+        "picker_combined": "One dropdown (e.g. \"M / White\")",
+        "picker_dropdowns": "Dropdown per option (Size, Color)",
+        "picker_buttons": "Buttons (color swatches for color)"
       }
     },
     "product_list": {

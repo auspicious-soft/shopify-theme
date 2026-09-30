@@ -135,6 +135,111 @@ html.sticky-atc-visible body {
   pointer-events: none;
 }
 
+/* ---------- Per-option controls ---------- */
+
+.sticky-atc__options {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.sticky-atc__select-wrap--option .sticky-atc__select {
+  min-width: 7.5rem;
+  max-width: 11rem;
+}
+
+/* Buttons: one row per option, scrolling sideways if there are many. */
+.sticky-atc__option {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+  max-width: 22rem;
+  margin: 0;
+  padding: 0.15rem;
+  overflow-x: auto;
+  border: 0;
+  scrollbar-width: none;
+}
+
+.sticky-atc__option::-webkit-scrollbar {
+  display: none;
+}
+
+.sticky-atc__radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sticky-atc__pill {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding-inline: 0.75rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 22%, transparent);
+  border-radius: var(--style-border-radius-inputs, 0);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.sticky-atc__pill:hover {
+  border-color: var(--color-foreground);
+}
+
+.sticky-atc__radio:checked + .sticky-atc__pill {
+  color: var(--color-background);
+  background-color: var(--color-foreground);
+  border-color: var(--color-foreground);
+}
+
+.sticky-atc__swatch {
+  position: relative;
+  flex-shrink: 0;
+  width: 1.9rem;
+  height: 1.9rem;
+  background-color: var(--swatch-color, #ccc);
+  background-image: var(--swatch-image, none);
+  background-position: center;
+  background-size: cover;
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 18%, transparent);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sticky-atc__radio:checked + .sticky-atc__swatch {
+  box-shadow: 0 0 0 2px var(--color-background), 0 0 0 3px var(--color-foreground);
+}
+
+.sticky-atc__radio:focus-visible + .sticky-atc__pill,
+.sticky-atc__radio:focus-visible + .sticky-atc__swatch {
+  outline: 2px solid var(--color-foreground);
+  outline-offset: 2px;
+}
+
+/* Not available with the other current choices: struck through. */
+.sticky-atc__pill.is-unavailable {
+  color: color-mix(in srgb, var(--color-foreground) 45%, transparent);
+  text-decoration: line-through;
+}
+
+.sticky-atc__swatch.is-unavailable::after {
+  content: '';
+  position: absolute;
+  inset: 50% -2px auto;
+  height: 1px;
+  background-color: var(--color-foreground);
+  transform: rotate(-45deg);
+}
+
 /* ---------- Button ---------- */
 
 /* Shares the main button's loading spinner (.product-form__submit), but
@@ -197,6 +302,34 @@ html.sticky-atc-visible body {
   .sticky-atc__select-wrap + input + .sticky-atc__button {
     flex: 0 0 auto;
     min-width: 9rem;
+  }
+
+  /* Per-option controls get their own row; the button fills the next. */
+  .sticky-atc__form-inner:has(.sticky-atc__options) {
+    flex-wrap: wrap;
+  }
+
+  .sticky-atc__options {
+    flex: 1 1 100%;
+    gap: 0.5rem;
+  }
+
+  .sticky-atc__options--dropdowns .sticky-atc__select-wrap--option {
+    flex: 1;
+  }
+
+  /* Sizes and colors share a row, wrapping only when they run out of room. */
+  .sticky-atc__options--buttons {
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+  }
+
+  .sticky-atc__option {
+    max-width: 100%;
+  }
+
+  .sticky-atc__form-inner:has(.sticky-atc__options) .sticky-atc__button {
+    flex: 1 1 100%;
   }
 }
 

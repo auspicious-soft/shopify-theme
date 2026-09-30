@@ -375,6 +375,27 @@
       "visible_if": "{{ section.settings.sticky_atc }}"
     },
     {
+      "type": "select",
+      "id": "sticky_atc_picker",
+      "label": "t:sections.product.sticky_atc.picker",
+      "options": [
+        {
+          "value": "combined",
+          "label": "t:sections.product.sticky_atc.picker_combined"
+        },
+        {
+          "value": "dropdowns",
+          "label": "t:sections.product.sticky_atc.picker_dropdowns"
+        },
+        {
+          "value": "buttons",
+          "label": "t:sections.product.sticky_atc.picker_buttons"
+        }
+      ],
+      "default": "combined",
+      "visible_if": "{{ section.settings.sticky_atc and section.settings.sticky_atc_show_variants }}"
+    },
+    {
       "type": "color_scheme",
       "id": "sticky_atc_color_scheme",
       "label": "t:sections.all.colors.label",

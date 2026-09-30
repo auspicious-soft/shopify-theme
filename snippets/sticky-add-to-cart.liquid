@@ -7,8 +7,11 @@
     opens the cart drawer just like the main button.
   - The inner bar has `data-product-part`: when the variant changes on the
     page, <product-page> re-renders it from the server (price, image, stock).
-  - Picking a variant in the bar's dropdown selects the same options in the
-    main variant picker (assets/sticky-add-to-cart.js), so both stay in sync.
+  - Variants show as one dropdown of every variant, a dropdown per option,
+    or buttons per option (color options as swatches), from Product section
+    > Sticky add to cart > Variant style. A choice in the bar selects the
+    same options in the main variant picker (assets/sticky-add-to-cart.js),
+    so both stay in sync.
 
   Styles: assets/sticky-add-to-cart.css.
 
@@ -27,10 +30,11 @@
 {%- liquid
   assign image = variant.featured_media.preview_image | default: product.featured_media.preview_image
   assign sticky_form_id = 'StickyAtcForm-' | append: section.id
-  assign show_select = false
+  assign show_variants = false
   if section.settings.sticky_atc_show_variants and product.has_only_default_variant == false
-    assign show_select = true
+    assign show_variants = true
   endif
+  assign picker = section.settings.sticky_atc_picker | default: 'combined'
 -%}
 
 <sticky-add-to-cart
@@ -55,7 +59,8 @@
 
     <product-form class="sticky-atc__form" data-cart-type="{{ settings.cart_type }}">
       {%- form 'product', product, id: sticky_form_id, class: 'sticky-atc__form-inner', novalidate: 'novalidate' -%}
-        {%- if show_select -%}
+        {%- if show_variants and picker == 'combined' -%}
+          {%- comment -%} One dropdown listing every variant ("M / White"). {%- endcomment -%}
           <div class="sticky-atc__select-wrap">
             <label class="visually-hidden" for="StickyAtcVariant-{{ section.id }}">{{ 'products.choose_variant' | t }}</label>
             <select
@@ -78,7 +83,71 @@
             {{- 'icon-chevron.svg' | inline_asset_content -}}
           </div>
         {%- else -%}
-          <input type="hidden" name="id" value="{{ variant.id }}">
+          {%- if show_variants -%}
+            {%- comment -%}
+              One control per option: a dropdown each, or buttons (swatches for
+              color). The hidden id below is kept current by <product-page>.
+            {%- endcomment -%}
+            <div class="sticky-atc__options sticky-atc__options--{{ picker }}">
+              {%- for option in product.options_with_values -%}
+                {%- liquid
+                  assign option_index = forloop.index0
+                  assign option_uid = 'StickyAtc-' | append: section.id | append: '-' | append: option_index
+                  assign option_name = option.name | downcase | strip
+                  assign is_swatch = false
+                  if option_name == 'color' or option_name == 'colour'
+                    assign is_swatch = true
+                  endif
+                -%}
+                {%- if picker == 'dropdowns' -%}
+                  <div class="sticky-atc__select-wrap sticky-atc__select-wrap--option">
+                    <label class="visually-hidden" for="{{ option_uid }}">{{ option.name | escape }}</label>
+                    <select id="{{ option_uid }}" class="sticky-atc__select" data-sticky-option data-option-index="{{ option_index }}">
+                      {%- for value in option.values -%}
+                        <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>
+                          {{- value | escape -}}
+                          {%- unless value.available %} — {{ 'products.unavailable' | t }}{% endunless -%}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                    {{- 'icon-chevron.svg' | inline_asset_content -}}
+                  </div>
+                {%- else -%}
+                  <fieldset class="sticky-atc__option{% if is_swatch %} sticky-atc__option--swatch{% endif %}">
+                    <legend class="visually-hidden">{{ option.name | escape }}</legend>
+                    {%- for value in option.values -%}
+                      {%- assign value_id = option_uid | append: '-' | append: forloop.index0 -%}
+                      <input
+                        type="radio"
+                        id="{{ value_id }}"
+                        name="{{ option_uid }}"
+                        value="{{ value | escape }}"
+                        class="sticky-atc__radio"
+                        data-sticky-option
+                        data-option-index="{{ option_index }}"
+                        {% if option.selected_value == value %}checked{% endif %}
+                      >
+                      {%- if is_swatch -%}
+                        <label
+                          for="{{ value_id }}"
+                          class="sticky-atc__swatch{% unless value.available %} is-unavailable{% endunless %}"
+                          style="{% render 'swatch-style', value: value %}"
+                          title="{{ value | escape }}"
+                        >
+                          <span class="visually-hidden">{{ value | escape }}</span>
+                        </label>
+                      {%- else -%}
+                        <label for="{{ value_id }}" class="sticky-atc__pill{% unless value.available %} is-unavailable{% endunless %}">
+                          {{- value | escape -}}
+                        </label>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </fieldset>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          <input type="hidden" name="id" value="{{ variant.id }}" data-variant-id-input data-sticky-id>
         {%- endif -%}
         <input type="hidden" name="quantity" value="1">
 
