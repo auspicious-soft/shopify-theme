@@ -113,6 +113,7 @@
         "share"
       ],
       "settings": {
+        "show_breadcrumbs": true,
         "gallery_layout": "thumbnails",
         "media_size": "medium",
         "media_ratio": "adapt",
