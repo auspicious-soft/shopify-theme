@@ -255,6 +255,30 @@
       },
       {
         "type": "select",
+        "id": "breadcrumbs_alignment",
+        "label": "t:settings_schema.breadcrumbs.alignment",
+        "options": [
+          {
+            "value": "auto",
+            "label": "t:settings_schema.breadcrumbs.alignment_auto"
+          },
+          {
+            "value": "left",
+            "label": "t:options.alignment.left"
+          },
+          {
+            "value": "center",
+            "label": "t:options.alignment.center"
+          },
+          {
+            "value": "right",
+            "label": "t:options.alignment.right"
+          }
+        ],
+        "default": "auto"
+      },
+      {
+        "type": "select",
         "id": "breadcrumbs_separator",
         "label": "t:settings_schema.breadcrumbs.separator",
         "options": [

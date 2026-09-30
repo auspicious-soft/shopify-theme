@@ -1437,7 +1437,9 @@
       "product_collection_info": "Home › Collection › Product. Uses the collection the shopper came from, or the product's first collection",
       "collections_link": "Breadcrumbs: include \"Collections\" on collection pages",
       "collections_link_info": "Home › Collections › Collection",
-      "show_desktop": "Show breadcrumbs on desktop"
+      "show_desktop": "Show breadcrumbs on desktop",
+      "alignment": "Breadcrumb alignment",
+      "alignment_auto": "Match the page title"
     }
   },
   "blocks": {

@@ -29,6 +29,28 @@
   list-style: none;
 }
 
+/* Alignment (Theme settings > Breadcrumbs). "auto" follows the page title;
+   the others take the full row so they can sit left / center / right even
+   inside a centered title area. */
+.breadcrumbs--align-left,
+.breadcrumbs--align-center,
+.breadcrumbs--align-right {
+  align-self: stretch;
+  width: 100%;
+}
+
+.breadcrumbs--align-left .breadcrumbs__list {
+  justify-content: flex-start;
+}
+
+.breadcrumbs--align-center .breadcrumbs__list {
+  justify-content: center;
+}
+
+.breadcrumbs--align-right .breadcrumbs__list {
+  justify-content: flex-end;
+}
+
 .breadcrumbs__item {
   display: inline-flex;
   align-items: center;
