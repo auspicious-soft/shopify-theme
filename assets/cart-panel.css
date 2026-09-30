@@ -139,9 +139,15 @@
   transition: transform 0.3s ease;
 }
 
-.cart-drawer__close:hover svg,
-.cart-drawer__close:focus-visible svg {
+/* Hover only: the drawer focuses this button when it opens, and a cross
+   already turned by :focus-visible would have nothing left to animate. */
+.cart-drawer__close:hover svg {
   transform: rotate(90deg) translateZ(0);
+}
+
+.cart-drawer__close:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
 }
 
 /* ---------- Free shipping bar ---------- */
