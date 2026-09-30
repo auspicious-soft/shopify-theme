@@ -756,60 +756,6 @@ html.facets-open {
   overflow: hidden;
 }
 
-/* ---------- Pagination ---------- */
-
-.pagination {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-  margin-top: clamp(2.5rem, 5vw, 4rem);
-}
-
-.pagination__item {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.5rem;
-  height: 2.5rem;
-  padding-inline: 0.5rem;
-  font-size: 0.9rem;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  transition: border-color 0.15s ease;
-}
-
-a.pagination__item:hover,
-a.pagination__item:focus-visible {
-  border-color: color-mix(in srgb, var(--color-foreground) 30%, transparent);
-}
-
-.pagination__item--current {
-  border-color: var(--color-foreground);
-  font-weight: 600;
-}
-
-.pagination__item--gap {
-  min-width: 1.5rem;
-  opacity: 0.6;
-}
-
-.pagination__arrow svg {
-  width: 1rem;
-  height: 1rem;
-}
-
-.pagination__arrow--prev svg {
-  transform: rotate(90deg);
-}
-
-.pagination__arrow--next svg {
-  transform: rotate(-90deg);
-}
-
 /* ---------- Load more ---------- */
 
 .collection__load-more {

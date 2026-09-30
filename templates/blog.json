@@ -11,7 +11,22 @@
   "sections": {
     "main": {
       "type": "blog",
-      "settings": {}
+      "settings": {
+        "show_title": true,
+        "heading_tag": "h1",
+        "heading_class": "h2",
+        "heading_alignment": "center",
+        "show_tag_filter": true,
+        "layout": "grid",
+        "feature_first": true,
+        "articles_per_page": 10,
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "show_date": true,
+        "show_author": false,
+        "show_excerpt": true,
+        "read_more": "Read more"
+      }
     }
   },
   "order": [

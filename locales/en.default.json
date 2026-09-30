@@ -38,7 +38,36 @@
     "comment_form_email": "Email",
     "comment_form_name": "Name",
     "comment_form_submit": "Post",
-    "comment_form_title": "Add a comment"
+    "comment_form_title": "Add a comment",
+    "all": "All",
+    "filter_by_tag": "Filter articles by topic",
+    "by_author": "By {{ author }}",
+    "no_articles": "There are no articles here yet.",
+    "no_tagged_articles": "There are no articles tagged “{{ tag }}” yet.",
+    "view_all": "View all articles",
+    "back_to_blog": "Back to {{ title }}",
+    "reading_time": {
+      "one": "{{ count }} min read",
+      "other": "{{ count }} min read"
+    },
+    "tagged": "Tagged",
+    "share": "Share",
+    "share_facebook": "Share on Facebook",
+    "share_x": "Share on X",
+    "share_pinterest": "Pin on Pinterest",
+    "copy_link": "Copy link",
+    "link_copied": "Link copied",
+    "more_articles": "More articles",
+    "previous_article": "Previous article",
+    "next_article": "Next article",
+    "comments_count": {
+      "zero": "Comments",
+      "one": "1 comment",
+      "other": "{{ count }} comments"
+    },
+    "comment_posted": "Thanks! Your comment has been posted.",
+    "comment_moderated": "Thanks! Your comment was submitted and will appear once it has been approved.",
+    "comments_moderated_note": "Comments are reviewed before they appear."
   },
   "cart": {
     "checkout": "Checkout",
@@ -211,6 +240,11 @@
       "snapchat": "Snapchat",
       "tumblr": "Tumblr",
       "vimeo": "Vimeo"
+    },
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous page",
+      "next": "Next page"
     }
   }
 }

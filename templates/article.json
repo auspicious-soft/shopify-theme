@@ -11,10 +11,36 @@
   "sections": {
     "main": {
       "type": "article",
-      "settings": {}
+      "settings": {
+        "image_layout": "below",
+        "heading_tag": "h1",
+        "heading_class": "h2",
+        "heading_alignment": "center",
+        "show_back_link": true,
+        "show_tags_top": true,
+        "show_date": true,
+        "show_author": true,
+        "show_reading_time": true,
+        "content_width": 760,
+        "show_tags": true,
+        "show_share": true,
+        "show_prev_next": true,
+        "show_comments": true
+      }
+    },
+    "related_articles": {
+      "type": "related-articles",
+      "settings": {
+        "heading": "You may also like",
+        "articles_to_show": 3,
+        "layout": "grid",
+        "columns_desktop": 3,
+        "color_scheme": "scheme-2"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "related_articles"
   ]
 }

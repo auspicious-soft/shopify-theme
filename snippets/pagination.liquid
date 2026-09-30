@@ -1,0 +1,56 @@
+{% doc %}
+  Numbered pagination (previous / page numbers / next), shared by the
+  collection, blog and article comment lists. Styles live in
+  assets/pagination.css; load it in the section that renders this.
+
+  Renders nothing when there is only one page.
+
+  @param {object} paginate - The `paginate` object from a {% paginate %} tag
+  @param {string} [anchor] - Optional fragment added to every link (e.g. 'comments')
+  @param {string} [link_attributes] - Extra attributes for each link (e.g. 'data-facets-link')
+
+  @example
+  {% render 'pagination', paginate: paginate, anchor: 'comments' %}
+{% enddoc %}
+
+{%- if paginate.pages > 1 -%}
+  {%- liquid
+    assign hash = ''
+    if anchor != blank
+      assign hash = '#' | append: anchor
+    endif
+  -%}
+  <nav class="pagination" aria-label="{{ 'general.pagination.label' | t }}">
+    {%- if paginate.previous -%}
+      <a
+        href="{{ paginate.previous.url }}{{ hash }}"
+        class="pagination__item pagination__arrow pagination__arrow--prev"
+        aria-label="{{ 'general.pagination.previous' | t }}"
+        {{ link_attributes }}
+      >
+        {{- 'icon-chevron.svg' | inline_asset_content -}}
+      </a>
+    {%- endif -%}
+
+    {%- for part in paginate.parts -%}
+      {%- if part.is_link -%}
+        <a href="{{ part.url }}{{ hash }}" class="pagination__item" {{ link_attributes }}>{{ part.title }}</a>
+      {%- elsif part.title == paginate.current_page -%}
+        <span class="pagination__item pagination__item--current" aria-current="page">{{ part.title }}</span>
+      {%- else -%}
+        <span class="pagination__item pagination__item--gap">{{ part.title }}</span>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if paginate.next -%}
+      <a
+        href="{{ paginate.next.url }}{{ hash }}"
+        class="pagination__item pagination__arrow pagination__arrow--next"
+        aria-label="{{ 'general.pagination.next' | t }}"
+        {{ link_attributes }}
+      >
+        {{- 'icon-chevron.svg' | inline_asset_content -}}
+      </a>
+    {%- endif -%}
+  </nav>
+{%- endif -%}

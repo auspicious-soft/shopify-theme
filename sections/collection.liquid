@@ -19,6 +19,7 @@
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-card.js' | asset_url }}" defer></script>
 {{ 'collection.css' | asset_url | stylesheet_tag }}
+{{ 'pagination.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'collection.js' | asset_url }}" defer></script>
 
 {%- liquid
@@ -365,27 +366,7 @@
                   {% endif %}
                 </div>
               {% else %}
-                <nav class="pagination" aria-label="{{ 'collections.pagination' | t }}">
-                  {% if paginate.previous %}
-                    <a href="{{ paginate.previous.url }}" class="pagination__item pagination__arrow pagination__arrow--prev" data-facets-link aria-label="{{ 'collections.previous_page' | t }}">
-                      {{ 'icon-chevron.svg' | inline_asset_content }}
-                    </a>
-                  {% endif %}
-                  {% for part in paginate.parts %}
-                    {% if part.is_link %}
-                      <a href="{{ part.url }}" class="pagination__item" data-facets-link>{{ part.title }}</a>
-                    {% elsif part.title == paginate.current_page %}
-                      <span class="pagination__item pagination__item--current" aria-current="page">{{ part.title }}</span>
-                    {% else %}
-                      <span class="pagination__item pagination__item--gap">{{ part.title }}</span>
-                    {% endif %}
-                  {% endfor %}
-                  {% if paginate.next %}
-                    <a href="{{ paginate.next.url }}" class="pagination__item pagination__arrow pagination__arrow--next" data-facets-link aria-label="{{ 'collections.next_page' | t }}">
-                      {{ 'icon-chevron.svg' | inline_asset_content }}
-                    </a>
-                  {% endif %}
-                </nav>
+                {% render 'pagination', paginate: paginate, link_attributes: 'data-facets-link' %}
               {% endif %}
             {% endif %}
           {% else %}

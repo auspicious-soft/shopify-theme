@@ -1,0 +1,122 @@
+{% doc %}
+  The theme's one blog article card, used by the blog page and Related
+  articles. Style (standard or card), border, radius, shadow, text
+  alignment and color scheme come from Theme settings > Blog cards.
+  Styles live in assets/article-card.css; load it in the section that
+  renders cards.
+
+  @param {article} article - The article to show
+  @param {string} [image_ratio] - adapt, landscape (default), square, portrait or wide
+  @param {string} [sizes] - `sizes` attribute for the image
+  @param {boolean} [featured] - Large card: image beside the text on desktop
+  @param {boolean} [show_image] - Show the article image (default true)
+  @param {boolean} [show_date] - Show the publish date (default true)
+  @param {boolean} [show_author] - Show the author
+  @param {boolean} [show_excerpt] - Show the excerpt (default true)
+  @param {number} [excerpt_words] - Words to show when the article has no excerpt (default 30)
+  @param {boolean} [show_tags] - Show the article's tags
+  @param {string} [read_more] - "Read more" link label; blank hides it
+  @param {string} [heading_tag] - Title tag, defaults to h3
+  @param {boolean} [zoom] - Zoom the image on hover
+  @param {boolean} [eager] - Load the image eagerly (first cards on the page)
+
+  @example
+  {% render 'article-card', article: article, show_author: true, read_more: 'Read more' %}
+{% enddoc %}
+
+{%- liquid
+  assign heading_tag = heading_tag | default: 'h3'
+  assign excerpt_words = excerpt_words | default: 30
+  assign image_sizes = sizes | default: '(min-width: 990px) 33vw, 100vw'
+
+  case image_ratio
+    when 'adapt'
+      assign ratio = article.image.aspect_ratio | default: 1.5
+    when 'square'
+      assign ratio = '1 / 1'
+    when 'portrait'
+      assign ratio = '4 / 5'
+    when 'wide'
+      assign ratio = '16 / 9'
+    else
+      assign ratio = '4 / 3'
+  endcase
+
+  assign has_image = false
+  unless show_image == false
+    if article.image
+      assign has_image = true
+    endif
+  endunless
+
+  assign loading = 'lazy'
+  if eager
+    assign loading = 'eager'
+  endif
+
+  if article.excerpt != blank
+    assign excerpt = article.excerpt | strip_html | truncatewords: excerpt_words
+  else
+    assign excerpt = article.content | strip_html | truncatewords: excerpt_words
+  endif
+-%}
+
+<article
+  class="article-card article-card--{{ settings.blog_card_style }} article-card--align-{{ settings.blog_card_text_alignment }}{% if featured %} article-card--featured{% endif %}{% if zoom %} article-card--zoom{% endif %}{% unless has_image %} article-card--no-image{% endunless %} color-{{ settings.blog_card_color_scheme.id }}"
+  style="--card-image-padding: {{ settings.blog_card_image_padding }}px; --card-ratio: {{ ratio }};"
+  {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
+>
+  {%- if has_image -%}
+    <a href="{{ article.url }}" class="article-card__media" tabindex="-1" aria-hidden="true">
+      {{
+        article.image
+        | image_url: width: 1600
+        | image_tag:
+          class: 'article-card__image',
+          widths: '360, 540, 720, 960, 1200, 1600',
+          sizes: image_sizes,
+          loading: loading,
+          alt: article.image.alt
+      }}
+    </a>
+  {%- endif -%}
+
+  <div class="article-card__content">
+    {%- if show_date != false or show_author -%}
+      <p class="article-card__meta">
+        {%- if show_date != false -%}
+          {{ article.published_at | time_tag: format: 'date' }}
+        {%- endif -%}
+        {%- if show_date != false and show_author and article.author != blank -%}
+          <span class="article-card__meta-dot" aria-hidden="true">·</span>
+        {%- endif -%}
+        {%- if show_author and article.author != blank -%}
+          <span>{{ 'blog.by_author' | t: author: article.author }}</span>
+        {%- endif -%}
+      </p>
+    {%- endif -%}
+
+    <{{ heading_tag }} class="article-card__title{% if featured %} h3{% endif %}">
+      <a href="{{ article.url }}" class="article-card__link">{{ article.title | escape }}</a>
+    </{{ heading_tag }}>
+
+    {%- if show_excerpt != false and excerpt != blank -%}
+      <p class="article-card__excerpt">{{ excerpt }}</p>
+    {%- endif -%}
+
+    {%- if show_tags and article.tags.size > 0 -%}
+      <ul class="article-card__tags" role="list">
+        {%- for tag in article.tags limit: 3 -%}
+          <li class="article-card__tag">{{ tag | escape }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if read_more != blank -%}
+      <span class="article-card__read-more" aria-hidden="true">
+        {{- read_more | escape -}}
+        {{- 'icon-chevron.svg' | inline_asset_content -}}
+      </span>
+    {%- endif -%}
+  </div>
+</article>
