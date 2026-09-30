@@ -130,7 +130,11 @@
               {{- localization.country | image_url: width: 32 | image_tag: width: 16, height: 16, alt: '', loading: 'lazy' -}}
             </span>
             <span class="header-localization__label">
-              {{- localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol -}})
+              {%- comment -%}
+                cart.currency is the currency prices and checkout actually use
+                right now, so the label always matches the prices shown.
+              {%- endcomment -%}
+              {{- localization.country.name }} ({{ cart.currency.iso_code }} {{ cart.currency.symbol -}})
             </span>
           {% else %}
             <span class="header-localization__label">{{ localization.language.endonym_name | capitalize }}</span>
