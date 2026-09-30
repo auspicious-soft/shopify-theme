@@ -11,6 +11,12 @@
   }
 }
 
+@media screen and (min-width: 750px) {
+  .breadcrumbs--hide-desktop {
+    display: none;
+  }
+}
+
 .breadcrumbs__list {
   display: flex;
   flex-wrap: wrap;

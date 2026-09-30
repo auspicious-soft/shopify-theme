@@ -1411,7 +1411,8 @@
       "product_collection": "Breadcrumbs: include the collection on product pages",
       "product_collection_info": "Home › Collection › Product. Uses the collection the shopper came from, or the product's first collection",
       "collections_link": "Breadcrumbs: include \"Collections\" on collection pages",
-      "collections_link_info": "Home › Collections › Collection"
+      "collections_link_info": "Home › Collections › Collection",
+      "show_desktop": "Show breadcrumbs on desktop"
     }
   },
   "blocks": {

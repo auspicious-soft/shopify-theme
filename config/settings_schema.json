@@ -243,6 +243,12 @@
       },
       {
         "type": "checkbox",
+        "id": "breadcrumbs_show_desktop",
+        "label": "t:settings_schema.breadcrumbs.show_desktop",
+        "default": true
+      },
+      {
+        "type": "checkbox",
         "id": "breadcrumbs_show_mobile",
         "label": "t:settings_schema.breadcrumbs.show_mobile",
         "default": true

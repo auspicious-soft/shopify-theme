@@ -3,7 +3,7 @@
   schema.org BreadcrumbList structured data so search engines can show the
   path in results. Rendered inside each page's main section (under the
   title; above the gallery on product pages) when that section's "Show
-  breadcrumbs" setting is on. Separator, home icon, mobile visibility and
+  breadcrumbs" setting is on. Separator, home icon, desktop / mobile visibility and
   the extra collection steps come from Theme settings > Breadcrumbs.
   Loads its own styles (assets/breadcrumbs.css).
 
@@ -98,7 +98,7 @@
   {{ 'breadcrumbs.css' | asset_url | stylesheet_tag }}
 
   <nav
-    class="breadcrumbs breadcrumbs--{{ separator }}{% unless settings.breadcrumbs_show_mobile %} breadcrumbs--hide-mobile{% endunless %} {{ class }}"
+    class="breadcrumbs breadcrumbs--{{ separator }}{% unless settings.breadcrumbs_show_mobile %} breadcrumbs--hide-mobile{% endunless %}{% unless settings.breadcrumbs_show_desktop %} breadcrumbs--hide-desktop{% endunless %} {{ class }}"
     aria-label="{{ 'breadcrumbs.label' | t }}"
   >
     <ol class="breadcrumbs__list" role="list">
