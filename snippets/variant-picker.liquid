@@ -13,6 +13,8 @@
   @param {product} product - The product
   @param {object} block - The variant picker block (picker_type, show_swatches)
   @param {string} section_id - The section id, for unique element ids
+  @param {object} [size_guide_block] - Size guide block whose link shows on the size option's row
+  @param {string} [size_name] - Lowercase name of the size option (e.g. 'size')
 
   @example
   {% render 'variant-picker', product: product, block: block, section_id: section.id %}
@@ -30,6 +32,13 @@
       assign option_index = forloop.index0
       assign option_id = 'Option-' | append: section_id | append: '-' | append: option_index
       assign option_name = option.name | downcase
+      assign show_size_guide = false
+      if size_guide_block
+        assign trimmed_name = option_name | strip
+        if trimmed_name == size_name
+          assign show_size_guide = true
+        endif
+      endif
       assign is_swatch = false
       if block.settings.show_swatches
         if option_name == 'color' or option_name == 'colour'
@@ -39,8 +48,11 @@
     -%}
 
     {% if block.settings.picker_type == 'dropdown' and is_swatch == false %}
-      <div class="variant-picker__field">
+      <div class="variant-picker__field{% if show_size_guide %} variant-picker__field--size-guide{% endif %}">
         <label class="variant-picker__label" for="{{ option_id }}">{{ option.name | escape }}</label>
+        {%- if show_size_guide -%}
+          {% render 'size-guide', product: product, block: size_guide_block, section_id: section_id, part: 'trigger' %}
+        {%- endif -%}
         <div class="variant-picker__select">
           <select id="{{ option_id }}" data-option-input data-option-index="{{ option_index }}">
             {% for value in option.values %}
@@ -54,11 +66,14 @@
         </div>
       </div>
     {% else %}
-      <fieldset class="variant-picker__fieldset">
+      <fieldset class="variant-picker__fieldset{% if show_size_guide %} variant-picker__fieldset--size-guide{% endif %}">
         <legend class="variant-picker__label">
           {{ option.name | escape }}:
           <span class="variant-picker__selected" data-selected-value>{{ option.selected_value | escape }}</span>
         </legend>
+        {%- if show_size_guide -%}
+          {% render 'size-guide', product: product, block: size_guide_block, section_id: section_id, part: 'trigger' %}
+        {%- endif -%}
         <div class="variant-picker__values{% if is_swatch %} variant-picker__values--swatch{% endif %}">
           {% for value in option.values %}
             {%- assign value_id = option_id | append: '-' | append: forloop.index0 -%}

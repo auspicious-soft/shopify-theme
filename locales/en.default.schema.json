@@ -441,6 +441,29 @@
         "divider": {
           "name": "Divider"
         }
+      },
+      "size_guide": {
+        "name": "Size guide",
+        "show": "Show size guide",
+        "label": "Link label",
+        "show_icon": "Show ruler icon",
+        "placement": "Link position",
+        "placement_info": "Products without a size option always show the link where this block is placed",
+        "placement_size_option": "Next to the size option",
+        "placement_block": "Where this block is placed",
+        "only_with_size": "Only for products with a size option",
+        "only_with_size_info": "The size option name is set in Theme settings > Product cards",
+        "style": "Open as",
+        "style_drawer": "Side drawer",
+        "style_popup": "Popup",
+        "header_content": "Guide content",
+        "metafield_info": "For a different guide per product, add a product metafield \"custom.size_guide\" (Page reference or Rich text). It replaces the page and text below",
+        "heading": "Heading",
+        "heading_info": "Leave empty to use the page title",
+        "page": "Page",
+        "page_info": "Best for size charts: create a page with a table in Online Store > Pages",
+        "content": "Text",
+        "content_info": "Used when no page is selected"
       }
     },
     "product_list": {

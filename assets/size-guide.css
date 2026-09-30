@@ -1,0 +1,277 @@
+/* Styles for snippets/size-guide.liquid (product page size guide). */
+
+/* ---------- Trigger link ---------- */
+
+.size-guide__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0;
+  font: inherit;
+  font-size: 0.85rem;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.size-guide__trigger:hover {
+  text-decoration-thickness: 2px;
+}
+
+.size-guide__trigger-icon {
+  display: inline-flex;
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.size-guide__trigger-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Next to the size option: top right of the option's row, level with
+   "Size: M". */
+.variant-picker__fieldset--size-guide,
+.variant-picker__field--size-guide {
+  position: relative;
+}
+
+.variant-picker__fieldset--size-guide > .size-guide__trigger,
+.variant-picker__field--size-guide > .size-guide__trigger {
+  position: absolute;
+  top: 0;
+  inset-inline-end: 0;
+  font-size: 0.8rem;
+}
+
+.variant-picker__fieldset--size-guide > .variant-picker__label,
+.variant-picker__field--size-guide > .variant-picker__label {
+  padding-inline-end: 7rem;
+}
+
+/* ---------- Dialog: shared ---------- */
+
+.size-guide__dialog {
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+  border: none;
+  box-shadow: var(--style-shadow-drawers, 0 10px 40px rgb(0 0 0 / 15%));
+}
+
+.size-guide__dialog[open] {
+  display: flex;
+}
+
+.size-guide__dialog::backdrop {
+  background-color: rgb(0 0 0 / 0%);
+  transition: background-color 350ms ease allow-discrete;
+}
+
+.size-guide__dialog[open]::backdrop {
+  background-color: rgb(0 0 0 / 40%);
+}
+
+@starting-style {
+  .size-guide__dialog[open]::backdrop {
+    background-color: rgb(0 0 0 / 0%);
+  }
+}
+
+.size-guide__header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-foreground) 12%, transparent);
+}
+
+.size-guide__title {
+  margin: 0;
+}
+
+.size-guide__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  color: inherit;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.size-guide__close:hover {
+  background-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+}
+
+.size-guide__close svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* ---------- Drawer: slides in from the side ---------- */
+
+.size-guide__dialog--drawer {
+  position: fixed;
+  inset-block: 0;
+  inset-inline: auto 0;
+  width: min(100%, 36rem);
+  max-width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  transform: translateX(100%);
+  transition:
+    transform 350ms ease,
+    overlay 350ms ease allow-discrete,
+    display 350ms ease allow-discrete;
+}
+
+.size-guide__dialog--drawer[open] {
+  transform: translateX(0);
+}
+
+@starting-style {
+  .size-guide__dialog--drawer[open] {
+    transform: translateX(100%);
+  }
+}
+
+[dir='rtl'] .size-guide__dialog--drawer {
+  transform: translateX(-100%);
+}
+
+[dir='rtl'] .size-guide__dialog--drawer[open] {
+  transform: translateX(0);
+}
+
+/* ---------- Popup: centered ---------- */
+
+.size-guide__dialog--popup {
+  width: min(calc(100% - 2rem), 52rem);
+  max-height: min(85dvh, 50rem);
+  margin: auto;
+  border-radius: var(--style-border-radius-popups, 8px);
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity 250ms ease,
+    transform 250ms ease,
+    overlay 250ms ease allow-discrete,
+    display 250ms ease allow-discrete;
+}
+
+.size-guide__dialog--popup[open] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@starting-style {
+  .size-guide__dialog--popup[open] {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .size-guide__dialog,
+  .size-guide__dialog::backdrop {
+    transition: none;
+  }
+}
+
+/* ---------- Content ---------- */
+
+.size-guide__body {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.size-guide__body > :first-child {
+  margin-top: 0;
+}
+
+.size-guide__body > :last-child {
+  margin-bottom: 0;
+}
+
+.size-guide__body p,
+.size-guide__body ul,
+.size-guide__body ol {
+  margin-block: 0 1em;
+}
+
+.size-guide__body h2,
+.size-guide__body h3,
+.size-guide__body h4 {
+  margin-block: 1.5em 0.5em;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.size-guide__body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+.size-guide__body a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Size charts fill the width, and scroll sideways on small screens
+   instead of squashing (the wrapper is added in the snippet). */
+.size-guide__table {
+  max-width: 100%;
+  margin-block: 0 1.5em;
+  overflow-x: auto;
+}
+
+.size-guide__body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.size-guide__body th,
+.size-guide__body td {
+  padding: 0.65em 0.9em;
+  text-align: center;
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 14%, transparent);
+}
+
+.size-guide__body th:first-child,
+.size-guide__body td:first-child {
+  text-align: start;
+  font-weight: 600;
+}
+
+.size-guide__body thead th,
+.size-guide__body tr:first-child th {
+  font-weight: 600;
+  background-color: color-mix(in srgb, var(--color-foreground) 6%, transparent);
+}
+
+.size-guide__body tbody tr:nth-child(even) td {
+  background-color: color-mix(in srgb, var(--color-foreground) 3%, transparent);
+}

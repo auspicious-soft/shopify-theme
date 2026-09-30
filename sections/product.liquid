@@ -18,6 +18,31 @@
   assign current_variant = product.selected_or_first_available_variant
   assign form_id = 'ProductForm-' | append: section.id
   assign featured_media = current_variant.featured_media | default: product.featured_media
+
+  # Size guide: the first visible Size guide block. With "Only for products
+  # with a size option" on, it's skipped unless the product has an option
+  # named like Theme settings > Product cards > Size option name.
+  assign size_guide_block = nil
+  assign size_name = settings.card_size_option_name | default: 'Size' | downcase | strip
+  assign has_size_option = false
+  for option in product.options_with_values
+    assign option_name = option.name | downcase | strip
+    if option_name == size_name
+      assign has_size_option = true
+    endif
+  endfor
+  for b in section.blocks
+    if b.type == 'size_guide' and b.settings.show
+      if b.settings.only_with_size == false or has_size_option
+        assign size_guide_block = b
+      endif
+      break
+    endif
+  endfor
+  assign picker_size_guide = nil
+  if size_guide_block and size_guide_block.settings.placement == 'size_option' and has_size_option
+    assign picker_size_guide = size_guide_block
+  endif
 -%}
 
 <product-page
@@ -140,8 +165,20 @@
 
           {% when 'variant_picker' %}
             {% unless product.has_only_default_variant %}
-              {% render 'variant-picker', product: product, block: block, section_id: section.id %}
+              {% render 'variant-picker', product: product, block: block, section_id: section.id, size_guide_block: picker_size_guide, size_name: size_name %}
             {% endunless %}
+
+          {% when 'size_guide' %}
+            {%- if size_guide_block -%}
+              <div class="product__size-guide" {{ block.shopify_attributes }}>
+                {%- if picker_size_guide -%}
+                  {%- comment -%} The link sits next to the size option; only the drawer renders here. {%- endcomment -%}
+                  {% render 'size-guide', product: product, block: block, section_id: section.id, part: 'dialog' %}
+                {%- else -%}
+                  {% render 'size-guide', product: product, block: block, section_id: section.id, part: 'both' %}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
 
           {% when 'quantity' %}
             <div class="product__quantity" {{ block.shopify_attributes }}>
@@ -324,6 +361,85 @@
     }
   ],
   "blocks": [
+    {
+      "type": "size_guide",
+      "name": "t:sections.product.size_guide.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show",
+          "label": "t:sections.product.size_guide.show",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.product.size_guide.label",
+          "default": "Size guide"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_icon",
+          "label": "t:sections.product.size_guide.show_icon",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "placement",
+          "label": "t:sections.product.size_guide.placement",
+          "info": "t:sections.product.size_guide.placement_info",
+          "options": [
+            { "value": "size_option", "label": "t:sections.product.size_guide.placement_size_option" },
+            { "value": "block", "label": "t:sections.product.size_guide.placement_block" }
+          ],
+          "default": "size_option"
+        },
+        {
+          "type": "checkbox",
+          "id": "only_with_size",
+          "label": "t:sections.product.size_guide.only_with_size",
+          "info": "t:sections.product.size_guide.only_with_size_info",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "t:sections.product.size_guide.style",
+          "options": [
+            { "value": "drawer", "label": "t:sections.product.size_guide.style_drawer" },
+            { "value": "popup", "label": "t:sections.product.size_guide.style_popup" }
+          ],
+          "default": "drawer"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.product.size_guide.header_content"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.product.size_guide.metafield_info"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.product.size_guide.heading",
+          "info": "t:sections.product.size_guide.heading_info"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "t:sections.product.size_guide.page",
+          "info": "t:sections.product.size_guide.page_info"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:sections.product.size_guide.content",
+          "info": "t:sections.product.size_guide.content_info"
+        }
+      ]
+    },
     { "type": "@app" },
     {
       "type": "text",

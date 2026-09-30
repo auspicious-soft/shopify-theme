@@ -208,7 +208,8 @@
     "scroll_previous": "Scroll to previous products",
     "scroll_next": "Scroll to next products",
     "placeholder_title": "Product title",
-    "clear_history": "Clear"
+    "clear_history": "Clear",
+    "size_guide": "Size guide"
   },
   "search": {
     "title": "Search",

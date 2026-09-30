@@ -1,0 +1,109 @@
+{% doc %}
+  Size guide for the product page (Product section > Size guide block).
+  Renders the "Size guide" trigger and/or the drawer/popup that holds the
+  guide. Opening and closing (close button, backdrop click, Esc, scroll
+  lock) are handled by <theme-panel> (assets/theme-panel.js). Styles live
+  in assets/size-guide.css.
+
+  Content, first one found:
+  1. The product's `custom.size_guide` metafield: a Page reference, or
+     Rich text / Multi-line text (a different guide per product)
+  2. The block's Page
+  3. The block's Text
+
+  Renders nothing when none of these has content, so a product without a
+  guide never shows a dead link.
+
+  @param {product} product - The product
+  @param {object} block - The size guide block
+  @param {string} section_id - The section id, for a unique dialog id
+  @param {string} part - 'trigger' (the link), 'dialog' (the drawer/popup), or 'both'
+
+  @example
+  {% render 'size-guide', product: product, block: block, section_id: section.id, part: 'both' %}
+{% enddoc %}
+
+{%- liquid
+  assign dialog_id = 'SizeGuide-' | append: section_id
+  assign label = 'products.size_guide' | t
+  if block.settings.label != blank
+    assign label = block.settings.label
+  endif
+
+  # Resolve the content.
+  assign guide_page = nil
+  assign guide_html = ''
+  assign guide_field = product.metafields.custom.size_guide
+  if guide_field != blank
+    case guide_field.type
+      when 'page_reference'
+        assign guide_page = guide_field.value
+      when 'rich_text_field'
+        assign guide_html = guide_field | metafield_tag
+      else
+        assign guide_html = guide_field.value | newline_to_br
+    endcase
+  endif
+  if guide_page == nil and guide_html == blank
+    if block.settings.page != blank
+      assign guide_page = block.settings.page
+    elsif block.settings.content != blank
+      assign guide_html = block.settings.content
+    endif
+  endif
+  if guide_page != nil
+    assign guide_html = guide_page.content
+  endif
+
+  # Wrap tables so wide size charts scroll sideways on small screens.
+  assign guide_html = guide_html | replace: '<table', '<div class="size-guide__table"><table' | replace: '</table>', '</table></div>'
+
+  assign title = block.settings.heading
+  if title == blank and guide_page != nil
+    assign title = guide_page.title
+  endif
+  if title == blank
+    assign title = label
+  endif
+-%}
+
+{%- if guide_html != blank -%}
+  {%- if part == 'trigger' or part == 'both' -%}
+    <button
+      type="button"
+      class="size-guide__trigger"
+      data-panel-open="{{ dialog_id }}"
+      aria-haspopup="dialog"
+      aria-controls="{{ dialog_id }}"
+    >
+      {%- if block.settings.show_icon -%}
+        {% render 'icon-library', icon: 'ruler', class: 'size-guide__trigger-icon' %}
+      {%- endif -%}
+      <span>{{ label | escape }}</span>
+    </button>
+  {%- endif -%}
+
+  {%- if part == 'dialog' or part == 'both' -%}
+    {{ 'size-guide.css' | asset_url | stylesheet_tag }}
+    {% render 'theme-panel' %}
+
+    <theme-panel class="size-guide">
+      <dialog
+        id="{{ dialog_id }}"
+        class="size-guide__dialog size-guide__dialog--{{ block.settings.style | default: 'drawer' }} color-{{ settings.popup_color_scheme.id }}"
+        aria-labelledby="{{ dialog_id }}-title"
+        scroll-lock
+      >
+        <div class="size-guide__header">
+          <h2 id="{{ dialog_id }}-title" class="h4 size-guide__title">{{ title | escape }}</h2>
+          <button type="button" class="size-guide__close" data-panel-close aria-label="{{ 'accessibility.close' | t }}">
+            {{- 'icon-close.svg' | inline_asset_content -}}
+          </button>
+        </div>
+        <div class="size-guide__body rte">
+          {{ guide_html }}
+        </div>
+      </dialog>
+    </theme-panel>
+  {%- endif -%}
+{%- endif -%}
