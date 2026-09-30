@@ -148,21 +148,31 @@
   display: none;
 }
 
-/* Standard style only: swap to the transparent-header logo while the
-   header is still overlaid/transparent, and back to the normal default
-   logo once it's solid (scrolled, or no longer overlaid). */
-/* Only when a transparent logo is actually rendered (home page with the
-   setting filled in); otherwise the default logo must stay visible. */
-.header--standard.header--overlay:has(.header__logo--transparent) .header__logo--default {
+/* `.header--swap-logo` (set in sections/header.liquid when the page's
+   header is transparent and a transparent logo is set; standard style on
+   every page, any style outside the home page): show the transparent logo
+   while the header is transparent, and the default logo once it's solid. */
+.header--swap-logo.header--overlay .header__logo--default {
   display: none;
 }
-.header--standard.header--overlay .header__logo--transparent {
+.header--swap-logo.header--overlay .header__logo--transparent {
   display: inline-flex;
 }
-.header--standard.header--overlay.is-scrolled .header__logo--default {
+.header--swap-logo.header--overlay.is-scrolled .header__logo--default {
   display: inline-flex;
 }
-.header--standard.header--overlay.is-scrolled .header__logo--transparent {
+.header--swap-logo.header--overlay.is-scrolled .header__logo--transparent {
+  display: none;
+}
+
+/* Logo reveal style turns the header solid on hover / open search, so the
+   default logo comes back then too. (Standard stays transparent on hover.) */
+.header--logo_reveal.header--swap-logo.header--overlay:hover .header__logo--default,
+.header--logo_reveal.header--swap-logo.header--overlay:has(.predictive-search[open]) .header__logo--default {
+  display: inline-flex;
+}
+.header--logo_reveal.header--swap-logo.header--overlay:hover .header__logo--transparent,
+.header--logo_reveal.header--swap-logo.header--overlay:has(.predictive-search[open]) .header__logo--transparent {
   display: none;
 }
 

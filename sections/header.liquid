@@ -159,14 +159,27 @@
   assign hero_logo = section.settings.hero_logo
   assign transparent_logo = section.settings.transparent_logo
 
-  # The sticky / transparent logo swaps are a home-page look. Every other
-  # page shows only the default logo (Theme settings > Logo).
+  # The sticky logo swap is a home-page look. Every other page shows the
+  # default logo (Theme settings > Logo), or the transparent header logo
+  # while that page's header is transparent.
   assign logo_swaps = is_logo_reveal
   unless template.name == 'index'
     assign logo_swaps = false
     assign sticky_logo = nil
+  endunless
+  unless enable_overlay
     assign transparent_logo = nil
   endunless
+
+  # Swap in the transparent header logo while the header is transparent:
+  # standard style everywhere, and any style outside the home page (the home
+  # page's Logo reveal style has its own hero logo animation).
+  assign swap_transparent_logo = false
+  if transparent_logo != blank
+    if style == 'standard' or template.name != 'index'
+      assign swap_transparent_logo = true
+    endif
+  endif
 
 %}
 
@@ -176,6 +189,7 @@
     color-{{ section.settings.color_scheme.id }}
     {%- if is_sticky %} header--sticky{% endif -%}
     {%- if enable_overlay %} header--overlay{% endif -%}
+    {%- if swap_transparent_logo %} header--swap-logo{% endif -%}
   "
   id="Header-{{ section.id }}"
   {% if watch_scroll %}data-watch-scroll{% endif %}
