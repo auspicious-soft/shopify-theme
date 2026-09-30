@@ -30,7 +30,7 @@
         "show_count": true,
         "pagination_type": "numbers",
         "enable_filtering": true,
-        "filter_layout": "sidebar",
+        "filter_layout": "drawer",
         "enable_sorting": true,
         "color_scheme": "",
         "width": "page",
