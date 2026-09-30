@@ -248,6 +248,10 @@
   <script type="application/json" data-product-variants>
     {{ product.variants | json }}
   </script>
+
+  {%- if section.settings.sticky_atc -%}
+    {% render 'sticky-add-to-cart', product: product, variant: current_variant, section: section %}
+  {%- endif -%}
 </product-page>
 
 {% schema %}
@@ -322,6 +326,64 @@
       "id": "sticky_info",
       "label": "t:sections.product.sticky_info",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.product.sticky_atc.header"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_atc",
+      "label": "t:sections.product.sticky_atc.enable",
+      "info": "t:sections.product.sticky_atc.enable_info",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "sticky_atc_devices",
+      "label": "t:sections.product.sticky_atc.devices",
+      "options": [
+        {
+          "value": "all",
+          "label": "t:sections.product.sticky_atc.devices_all"
+        },
+        {
+          "value": "desktop",
+          "label": "t:sections.product.sticky_atc.devices_desktop"
+        },
+        {
+          "value": "mobile",
+          "label": "t:sections.product.sticky_atc.devices_mobile"
+        }
+      ],
+      "default": "all",
+      "visible_if": "{{ section.settings.sticky_atc }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_atc_show_image",
+      "label": "t:sections.product.sticky_atc.show_image",
+      "default": true,
+      "visible_if": "{{ section.settings.sticky_atc }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_atc_show_variants",
+      "label": "t:sections.product.sticky_atc.show_variants",
+      "info": "t:sections.product.sticky_atc.show_variants_info",
+      "default": true,
+      "visible_if": "{{ section.settings.sticky_atc }}"
+    },
+    {
+      "type": "color_scheme",
+      "id": "sticky_atc_color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1",
+      "visible_if": "{{ section.settings.sticky_atc }}"
+    },
+    {
+      "type": "header",
+      "content": "t:general.section"
     },
     {
       "type": "color_scheme",

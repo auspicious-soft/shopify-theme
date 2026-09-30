@@ -464,6 +464,18 @@
         "page_info": "Best for size charts: create a page with a table in Online Store > Pages",
         "content": "Text",
         "content_info": "Used when no page is selected"
+      },
+      "sticky_atc": {
+        "header": "Sticky add to cart",
+        "enable": "Show sticky add to cart bar",
+        "enable_info": "Appears at the bottom of the screen once the Add to cart button scrolls out of view. Needs the Buy buttons block",
+        "devices": "Show on",
+        "devices_all": "Desktop and mobile",
+        "devices_desktop": "Desktop only",
+        "devices_mobile": "Mobile only",
+        "show_image": "Show product image",
+        "show_variants": "Show variant dropdown",
+        "show_variants_info": "Lets shoppers change the variant from the bar; the page updates to match"
       }
     },
     "product_list": {
