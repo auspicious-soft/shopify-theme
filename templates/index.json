@@ -255,7 +255,7 @@
         "image_bYAbJr": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_1.png",
+            "image": "shopify://shop_images/image_1_1.png",
             "link": "",
             "new_tab": false,
             "username": ""
@@ -264,7 +264,7 @@
         "image_FLhndX": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_2.png",
+            "image": "shopify://shop_images/image_2_1.png",
             "link": "",
             "new_tab": false,
             "username": ""
@@ -273,7 +273,7 @@
         "image_hfdixe": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_1.png",
+            "image": "shopify://shop_images/image_3_1.png",
             "link": "",
             "new_tab": false,
             "username": ""
@@ -282,7 +282,7 @@
         "image_tPnQPM": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_4.png",
+            "image": "shopify://shop_images/image_4_1.png",
             "link": "",
             "new_tab": false,
             "username": ""
@@ -291,7 +291,7 @@
         "image_8f3Lcc": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_5.png",
+            "image": "shopify://shop_images/image_5_1.png",
             "link": "",
             "new_tab": false,
             "username": ""
@@ -300,7 +300,7 @@
         "image_aVXd9p": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_3.png",
+            "image": "shopify://shop_images/image_6_1.png",
             "link": "",
             "new_tab": false,
             "username": ""
