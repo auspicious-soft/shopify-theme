@@ -12,20 +12,32 @@
     "main": {
       "type": "blog",
       "settings": {
-        "show_title": true,
+        "show_breadcrumbs": true,
+        "show_title": false,
         "heading_tag": "h1",
         "heading_class": "h2",
-        "heading_alignment": "center",
+        "description": "",
+        "heading_alignment": "left",
         "show_tag_filter": true,
         "layout": "grid",
         "feature_first": true,
         "articles_per_page": 10,
         "columns_desktop": 3,
         "columns_mobile": "1",
+        "gap": 32,
+        "show_image": true,
+        "image_ratio": "landscape",
+        "zoom_on_hover": true,
         "show_date": true,
-        "show_author": false,
+        "show_author": true,
         "show_excerpt": true,
-        "read_more": "Read more"
+        "excerpt_words": 30,
+        "show_card_tags": false,
+        "read_more": "Read more",
+        "width": "page",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 80
       }
     }
   },
