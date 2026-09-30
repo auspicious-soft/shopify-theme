@@ -930,7 +930,9 @@
       "excerpt_words_info": "Uses the article excerpt when set, otherwise the start of the article",
       "show_card_tags": "Show tags",
       "read_more": "\"Read more\" label",
-      "read_more_info": "Leave empty to hide"
+      "read_more_info": "Leave empty to hide",
+      "read_more_style": "\"Read more\" style",
+      "read_more_text": "Text link"
     },
     "article": {
       "header_image": "Featured image",

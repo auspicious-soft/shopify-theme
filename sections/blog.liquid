@@ -114,6 +114,7 @@
               excerpt_words: section.settings.excerpt_words,
               show_tags: section.settings.show_card_tags,
               read_more: section.settings.read_more,
+              read_more_style: section.settings.read_more_style,
               heading_tag: card_heading_tag,
               zoom: section.settings.zoom_on_hover,
               eager: true
@@ -144,6 +145,7 @@
                 excerpt_words: section.settings.excerpt_words,
                 show_tags: section.settings.show_card_tags,
                 read_more: section.settings.read_more,
+                read_more_style: section.settings.read_more_style,
                 heading_tag: card_heading_tag,
                 zoom: section.settings.zoom_on_hover,
                 eager: eager
@@ -377,6 +379,17 @@
       "label": "t:sections.blog.read_more",
       "info": "t:sections.blog.read_more_info",
       "default": "Read more"
+    },
+    {
+      "type": "select",
+      "id": "read_more_style",
+      "label": "t:sections.blog.read_more_style",
+      "options": [
+        { "value": "text", "label": "t:sections.blog.read_more_text" },
+        { "value": "primary", "label": "t:options.button_style.primary" },
+        { "value": "secondary", "label": "t:options.button_style.secondary" }
+      ],
+      "default": "text"
     },
     {
       "type": "header",

@@ -16,6 +16,7 @@
   @param {number} [excerpt_words] - Words to show when the article has no excerpt (default 30)
   @param {boolean} [show_tags] - Show the article's tags
   @param {string} [read_more] - "Read more" link label; blank hides it
+  @param {string} [read_more_style] - text (default), primary or secondary (button)
   @param {string} [heading_tag] - Title tag, defaults to h3
   @param {boolean} [zoom] - Zoom the image on hover
   @param {boolean} [eager] - Load the image eagerly (first cards on the page)
@@ -113,10 +114,20 @@
     {%- endif -%}
 
     {%- if read_more != blank -%}
-      <span class="article-card__read-more" aria-hidden="true">
-        {{- read_more | escape -}}
-        {{- 'icon-chevron.svg' | inline_asset_content -}}
-      </span>
+      {%- comment -%}
+        Visual only: the title link already covers the whole card, so this
+        is a span styled as a text link or a button, not a second link.
+      {%- endcomment -%}
+      {%- if read_more_style == 'primary' or read_more_style == 'secondary' -%}
+        <span class="button button--{{ read_more_style }} article-card__read-more article-card__read-more--button" aria-hidden="true">
+          {{- read_more | escape -}}
+        </span>
+      {%- else -%}
+        <span class="article-card__read-more" aria-hidden="true">
+          {{- read_more | escape -}}
+          {{- 'icon-chevron.svg' | inline_asset_content -}}
+        </span>
+      {%- endif -%}
     {%- endif -%}
   </div>
 </article>
