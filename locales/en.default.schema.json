@@ -1404,13 +1404,14 @@
     "breadcrumbs": {
       "name": "Breadcrumbs",
       "info": "Breadcrumbs show under the page title (above the images on product pages). Turn them on or off in each page's main section",
-      "show_mobile": "Show on mobile",
-      "separator": "Separator",
+      "show_mobile": "Show breadcrumbs on mobile",
+      "separator": "Breadcrumb separator",
       "separator_chevron": "Chevron (›)",
-      "home_icon": "Show home as an icon",
-      "product_collection": "Show collection on product pages",
-      "product_collection_info": "Uses the collection the shopper came from, or the product's first collection",
-      "collections_link": "Show \"Collections\" before a collection"
+      "home_icon": "Breadcrumbs: show \"Home\" as an icon",
+      "product_collection": "Breadcrumbs: include the collection on product pages",
+      "product_collection_info": "Home › Collection › Product. Uses the collection the shopper came from, or the product's first collection",
+      "collections_link": "Breadcrumbs: include \"Collections\" on collection pages",
+      "collections_link_info": "Home › Collections › Collection"
     }
   },
   "blocks": {

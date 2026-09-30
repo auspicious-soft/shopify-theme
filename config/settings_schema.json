@@ -288,6 +288,7 @@
         "type": "checkbox",
         "id": "breadcrumbs_collections_link",
         "label": "t:settings_schema.breadcrumbs.collections_link",
+        "info": "t:settings_schema.breadcrumbs.collections_link_info",
         "default": false
       }
     ]
