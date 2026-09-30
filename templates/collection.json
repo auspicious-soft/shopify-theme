@@ -12,6 +12,7 @@
     "main": {
       "type": "collection",
       "settings": {
+        "show_breadcrumbs": true,
         "heading_tag": "h1",
         "heading_class": "h1",
         "show_banner": true,
@@ -28,7 +29,7 @@
         "enable_filtering": true,
         "filter_layout": "drawer",
         "enable_sorting": true,
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "width": "page",
         "padding_top": 0,
         "padding_bottom": 64
