@@ -49,7 +49,7 @@
             "show_icon": true,
             "placement": "size_option",
             "only_with_size": true,
-            "style": "drawer",
+            "style": "popup",
             "heading": "Size guide",
             "page": "",
             "content": "<p><strong>How to measure</strong></p><ul><li><strong>Chest:</strong> measure around the fullest part of your chest, keeping the tape level.</li><li><strong>Waist:</strong> measure around your natural waistline.</li><li><strong>Hips:</strong> measure around the fullest part of your hips.</li></ul><p>Between sizes? Choose the larger size for a relaxed fit, or the smaller one for a closer fit.</p>"
