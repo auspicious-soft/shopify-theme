@@ -125,7 +125,7 @@
         "sticky_atc_devices": "all",
         "sticky_atc_show_image": true,
         "sticky_atc_show_variants": true,
-        "sticky_atc_picker": "buttons",
+        "sticky_atc_picker": "dropdowns",
         "sticky_atc_color_scheme": "",
         "color_scheme": "scheme-1",
         "width": "page",
