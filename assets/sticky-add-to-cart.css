@@ -49,6 +49,8 @@ html.sticky-atc-visible body {
   align-items: center;
   gap: 1rem;
   padding-block: 0.75rem;
+  /* Clear the iPhone home indicator. */
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
 }
 
 .sticky-atc__media {
@@ -265,8 +267,44 @@ html.sticky-atc-visible body {
 @media screen and (max-width: 749px) {
   .sticky-atc__inner {
     flex-wrap: wrap;
-    gap: 0.6rem 0.75rem;
-    padding-block: 0.6rem;
+    gap: 0.5rem 0.75rem;
+    padding-block: 0.5rem;
+    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .sticky-atc__title {
+    font-size: 0.85rem;
+  }
+
+  .sticky-atc__price {
+    font-size: 0.8rem;
+  }
+
+  /* Compact option buttons, swatches and dropdowns. */
+  .sticky-atc__pill {
+    min-width: 2rem;
+    height: 2rem;
+    padding-inline: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .sticky-atc__swatch {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .sticky-atc__option {
+    gap: 0.3rem;
+  }
+
+  .sticky-atc__select {
+    height: 2.5rem;
+    font-size: 0.85rem;
+  }
+
+  .sticky-atc__button {
+    height: 2.75rem;
+    min-height: 2.75rem;
   }
 
   .sticky-atc__media {

@@ -11,9 +11,11 @@ if (!customElements.get('sticky-add-to-cart')) {
   class StickyAddToCart extends HTMLElement {
     connectedCallback() {
       this.target = document.querySelector(this.dataset.watch);
-      this.footer = document.querySelector('.shopify-section-group-footer-group, footer');
+      // Every section in the footer group (e.g. newsletter + footer).
+      this.footers = [...document.querySelectorAll('.shopify-section-group-footer-group')];
+      if (!this.footers.length) this.footers = [...document.querySelectorAll('footer')];
+      this.visibleFooters = new Set();
       this.pastForm = false;
-      this.footerVisible = false;
 
       this.onChange = this.onChange.bind(this);
       this.addEventListener('change', this.onChange);
@@ -25,14 +27,16 @@ if (!customElements.get('sticky-add-to-cart')) {
           if (entry.target === this.target) {
             // Past the form = it's out of view above the screen, not below it.
             this.pastForm = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+          } else if (entry.isIntersecting) {
+            this.visibleFooters.add(entry.target);
           } else {
-            this.footerVisible = entry.isIntersecting;
+            this.visibleFooters.delete(entry.target);
           }
         });
-        this.toggle(this.pastForm && !this.footerVisible);
+        this.toggle(this.pastForm && this.visibleFooters.size === 0);
       });
       this.observer.observe(this.target);
-      if (this.footer) this.observer.observe(this.footer);
+      this.footers.forEach((footer) => this.observer.observe(footer));
     }
 
     disconnectedCallback() {
