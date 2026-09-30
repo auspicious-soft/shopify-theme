@@ -17,6 +17,23 @@
   margin-inline: auto;
 }
 
+/* ---------- Breadcrumbs row ---------- */
+
+/* Full page width, so Left / Right line up with the page edges rather than
+   the narrower text column. */
+.article__breadcrumbs-row {
+  margin-block-end: 1.25rem;
+}
+
+.article__banner .article__breadcrumbs-row {
+  margin-block-end: 1.5rem;
+}
+
+/* "Match the page title": centered when the title is. */
+.article--align-center .article__breadcrumbs-row .breadcrumbs--align-auto .breadcrumbs__list {
+  justify-content: center;
+}
+
 /* ---------- Header ---------- */
 
 .article__header {

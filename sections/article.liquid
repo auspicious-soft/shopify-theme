@@ -30,7 +30,6 @@
 -%}
 
 {%- capture article_header -%}
-  {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'article__breadcrumbs' %}{%- endif -%}
   {%- if section.settings.show_back_link -%}
     <a href="{{ blog.url }}" class="article__back">
       {{- 'icon-chevron.svg' | inline_asset_content -}}
@@ -101,12 +100,21 @@
       }}
       <div class="article__banner-overlay" aria-hidden="true"></div>
       <div class="page-width article__banner-inner">
+        {%- if section.settings.show_breadcrumbs -%}
+          <div class="article__breadcrumbs-row">{% render 'breadcrumbs', class: 'article__breadcrumbs' %}</div>
+        {%- endif -%}
         <header class="article__header">{{ article_header }}</header>
       </div>
     </div>
   {%- endif -%}
 
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+    {%- unless image_layout == 'banner' -%}
+      {%- if section.settings.show_breadcrumbs -%}
+        <div class="article__breadcrumbs-row">{% render 'breadcrumbs', class: 'article__breadcrumbs' %}</div>
+      {%- endif -%}
+    {%- endunless -%}
+
     {%- if image_layout == 'above' -%}
       {{ article_image }}
     {%- endif -%}
