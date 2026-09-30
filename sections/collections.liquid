@@ -1,26 +1,46 @@
 {% comment %}
-  Collection list page (templates/list-collections.json): a heading and a
-  responsive grid of collection cards (snippets/collection-card.liquid,
-  styled from Theme settings > Collection cards). Shows every collection,
-  or only the ones picked in the section's Collections setting.
+  Collection list page (templates/list-collections.json). Shows every
+  collection in the store, or only the ones picked in the Collections
+  setting, in one of three layouts:
+
+  - Grid: collection cards (snippets/collection-card.liquid, styled from
+    Theme settings > Collection cards) with numbered pagination.
+  - Mosaic: the same grid with the first collection shown large (2 x 2).
+  - A–Z index: collection names grouped by first letter, with a letter bar
+    that jumps to each group. Good for stores with many collections.
+
+  Sorting and "Hide empty collections" apply to the collections on the
+  current page (Shopify lists collections alphabetically by default).
 {% endcomment %}
 
 {{ 'collection-card.css' | asset_url | stylesheet_tag }}
 {{ 'collections.css' | asset_url | stylesheet_tag }}
+{{ 'pagination.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
+  assign layout = section.settings.layout
   assign columns = section.settings.columns_desktop
   assign columns_mobile = section.settings.columns_mobile | plus: 0
   assign card_sizes = '(min-width: 990px) calc(100vw / ' | append: columns | append: '), calc(100vw / ' | append: columns_mobile | append: ')'
+  assign large_sizes = '(min-width: 990px) calc(200vw / ' | append: columns | append: '), 100vw'
 
-  assign list = collections
-  if section.settings.collection_list != blank
-    assign list = section.settings.collection_list
+  assign per_page = section.settings.per_page
+  if layout == 'index'
+    assign per_page = 250
   endif
+
+  assign picked = false
+  if section.settings.collection_list != blank
+    assign picked = true
+  endif
+
+  assign heading_tag = section.settings.heading_tag | default: 'h1'
+  assign heading_class = section.settings.heading_class | default: heading_tag
+  assign letters = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z' | split: ','
 -%}
 
 <div
-  class="collection-list-page color-{{ section.settings.color_scheme.id }}"
+  class="collection-list-page collection-list-page--{{ layout }} color-{{ section.settings.color_scheme.id }}"
   style="
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -29,10 +49,8 @@
   "
 >
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
-    {% if section.settings.show_heading %}
+    {%- if section.settings.show_heading -%}
       <div class="collection-list-page__header collection-list-page__header--{{ section.settings.heading_alignment }}">
-        {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
-        {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
         <{{ heading_tag }} class="{{ heading_class }} collection-list-page__heading">
           {%- if section.settings.heading != blank -%}
             {{- section.settings.heading | escape -}}
@@ -40,23 +58,159 @@
             {{- 'collections.title' | t -}}
           {%- endif -%}
         </{{ heading_tag }}>
-        {% if section.settings.subheading != blank %}
+        {%- if section.settings.subheading != blank -%}
           <div class="collection-list-page__subheading">{{ section.settings.subheading }}</div>
-        {% endif %}
+        {%- endif -%}
       </div>
-    {% endif %}
+    {%- endif -%}
 
-    {% if list.size > 0 %}
-      <ul class="collection-list-page__grid" role="list">
-        {% for collection in list %}
-          <li>
-            {% render 'collection-card', collection: collection, sizes: card_sizes, eager: forloop.first %}
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p class="collection-list-page__empty">{{ 'collections.empty' | t }}</p>
-    {% endif %}
+    {%- paginate collections by per_page -%}
+      {%- liquid
+        if picked
+          assign list = section.settings.collection_list
+        else
+          assign list = collections
+        endif
+
+        case section.settings.sort
+          when 'title_asc'
+            assign list = list | sort_natural: 'title'
+          when 'title_desc'
+            assign list = list | sort_natural: 'title' | reverse
+          when 'count_desc'
+            assign list = list | sort: 'all_products_count' | reverse
+          when 'count_asc'
+            assign list = list | sort: 'all_products_count'
+        endcase
+
+        # The A–Z index always reads alphabetically.
+        if layout == 'index'
+          assign list = list | sort_natural: 'title'
+        endif
+
+        assign shown = 0
+        for collection in list
+          if section.settings.hide_empty and collection.all_products_count == 0
+            continue
+          endif
+          assign shown = shown | plus: 1
+        endfor
+      -%}
+
+      {%- if shown == 0 -%}
+        <p class="collection-list-page__empty">{{ 'collections.empty' | t }}</p>
+
+      {%- elsif layout == 'index' -%}
+        {%- comment -%} Which letters have collections (anything else goes under "#"). {%- endcomment -%}
+        {%- liquid
+          assign present = ','
+          for collection in list
+            if section.settings.hide_empty and collection.all_products_count == 0
+              continue
+            endif
+            assign first = collection.title | strip | slice: 0 | upcase
+            unless letters contains first
+              assign first = '#'
+            endunless
+            assign key = ',' | append: first | append: ','
+            unless present contains key
+              assign present = present | append: first | append: ','
+            endunless
+          endfor
+        -%}
+
+        <nav class="collection-index__letters" aria-label="{{ 'collections.jump_to_letter' | t }}">
+          <ul role="list">
+            {%- for letter in letters -%}
+              {%- assign key = ',' | append: letter | append: ',' -%}
+              <li>
+                {%- if present contains key -%}
+                  <a href="#CollectionIndex-{{ section.id }}-{{ letter }}" class="collection-index__letter">{{ letter }}</a>
+                {%- else -%}
+                  <span class="collection-index__letter is-empty" aria-hidden="true">{{ letter }}</span>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+            {%- if present contains ',#,' -%}
+              <li><a href="#CollectionIndex-{{ section.id }}-other" class="collection-index__letter">#</a></li>
+            {%- endif -%}
+          </ul>
+        </nav>
+
+        <div class="collection-index__groups">
+          {%- comment -%} Letters first, then everything under "#". {%- endcomment -%}
+          {%- assign groups = letters | join: ',' | append: ',#' | split: ',' -%}
+          {%- for group in groups -%}
+            {%- assign key = ',' | append: group | append: ',' -%}
+            {%- unless present contains key -%}
+              {%- continue -%}
+            {%- endunless -%}
+            {%- liquid
+              assign anchor = group
+              if group == '#'
+                assign anchor = 'other'
+              endif
+            -%}
+            <section class="collection-index__group" id="CollectionIndex-{{ section.id }}-{{ anchor }}">
+              <h2 class="collection-index__group-letter">{{ group }}</h2>
+              <ul class="collection-index__list" role="list">
+                {%- for collection in list -%}
+                  {%- if section.settings.hide_empty and collection.all_products_count == 0 -%}
+                    {%- continue -%}
+                  {%- endif -%}
+                  {%- assign first = collection.title | strip | slice: 0 | upcase -%}
+                  {%- unless letters contains first -%}
+                    {%- assign first = '#' -%}
+                  {%- endunless -%}
+                  {%- if first == group -%}
+                    <li>
+                      <a href="{{ collection.url }}" class="collection-index__link">
+                        <span class="collection-index__name">{{ collection.title | escape }}</span>
+                        {%- if section.settings.index_show_count -%}
+                          <span class="collection-index__count">{{ collection.all_products_count }}</span>
+                        {%- endif -%}
+                      </a>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </section>
+          {%- endfor -%}
+        </div>
+
+      {%- else -%}
+        <ul class="collection-list-page__grid" role="list">
+          {%- assign index = 0 -%}
+          {%- for collection in list -%}
+            {%- if section.settings.hide_empty and collection.all_products_count == 0 -%}
+              {%- continue -%}
+            {%- endif -%}
+            {%- liquid
+              assign index = index | plus: 1
+              assign large = false
+              if layout == 'mosaic' and index == 1 and paginate.current_page == 1
+                assign large = true
+              endif
+              assign sizes = card_sizes
+              if large
+                assign sizes = large_sizes
+              endif
+              assign eager = false
+              if index <= columns and paginate.current_page == 1
+                assign eager = true
+              endif
+            -%}
+            <li class="collection-list-page__item{% if large %} collection-list-page__item--large{% endif %}">
+              {% render 'collection-card', collection: collection, sizes: sizes, eager: eager, heading_tag: 'h2' %}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- unless picked or layout == 'index' -%}
+        {% render 'pagination', paginate: paginate %}
+      {%- endunless -%}
+    {%- endpaginate -%}
   </div>
 </div>
 
@@ -90,7 +244,8 @@
         { "value": "h5", "label": "H5" },
         { "value": "h6", "label": "H6" }
       ],
-      "default": "h1"
+      "default": "h1",
+      "visible_if": "{{ section.settings.show_heading }}"
     },
     {
       "type": "select",
@@ -105,7 +260,8 @@
         { "value": "h2", "label": "t:options.heading_size.extra_large" },
         { "value": "h1", "label": "t:options.heading_size.huge" }
       ],
-      "default": "h1"
+      "default": "h1",
+      "visible_if": "{{ section.settings.show_heading }}"
     },
     {
       "type": "richtext",
@@ -125,14 +281,64 @@
       "visible_if": "{{ section.settings.show_heading }}"
     },
     {
+      "type": "header",
+      "content": "t:sections.collections.header_collections"
+    },
+    {
       "type": "collection_list",
       "id": "collection_list",
       "label": "t:sections.collections.collection_list",
       "info": "t:sections.collections.collection_list_info"
     },
     {
+      "type": "select",
+      "id": "sort",
+      "label": "t:sections.collections.sort",
+      "info": "t:sections.collections.sort_info",
+      "options": [
+        { "value": "default", "label": "t:sections.collections.sort_default" },
+        { "value": "title_asc", "label": "t:sections.collections.sort_title_asc" },
+        { "value": "title_desc", "label": "t:sections.collections.sort_title_desc" },
+        { "value": "count_desc", "label": "t:sections.collections.sort_count_desc" },
+        { "value": "count_asc", "label": "t:sections.collections.sort_count_asc" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_empty",
+      "label": "t:sections.collections.hide_empty",
+      "default": true
+    },
+    {
       "type": "header",
       "content": "t:sections.all.layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.all.layout",
+      "options": [
+        { "value": "grid", "label": "t:sections.collections.layout_grid" },
+        { "value": "mosaic", "label": "t:sections.collections.layout_mosaic" },
+        { "value": "index", "label": "t:sections.collections.layout_index" }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.collections.card_info"
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "label": "t:sections.collections.per_page",
+      "info": "t:sections.collections.per_page_info",
+      "min": 4,
+      "max": 50,
+      "step": 1,
+      "default": 24,
+      "visible_if": "{{ section.settings.layout != 'index' }}"
     },
     {
       "type": "range",
@@ -141,7 +347,8 @@
       "min": 2,
       "max": 6,
       "step": 1,
-      "default": 3
+      "default": 3,
+      "visible_if": "{{ section.settings.layout != 'index' }}"
     },
     {
       "type": "select",
@@ -151,13 +358,19 @@
         { "value": "1", "label": "1" },
         { "value": "2", "label": "2" }
       ],
-      "default": "2"
+      "default": "2",
+      "visible_if": "{{ section.settings.layout != 'index' }}"
     },
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
+      "type": "checkbox",
+      "id": "index_show_count",
+      "label": "t:sections.collections.index_show_count",
+      "default": true,
+      "visible_if": "{{ section.settings.layout == 'index' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:general.section"
     },
     {
       "type": "select",
@@ -170,11 +383,17 @@
       "default": "page"
     },
     {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
       "type": "range",
       "id": "padding_top",
       "label": "t:labels.padding_top",
       "min": 0,
-      "max": 120,
+      "max": 160,
       "step": 4,
       "unit": "px",
       "default": 40
@@ -184,7 +403,7 @@
       "id": "padding_bottom",
       "label": "t:labels.padding_bottom",
       "min": 0,
-      "max": 120,
+      "max": 160,
       "step": 4,
       "unit": "px",
       "default": 64

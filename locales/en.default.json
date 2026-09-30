@@ -133,7 +133,8 @@
     "pagination": "Pagination",
     "previous_page": "Previous page",
     "next_page": "Next page",
-    "view_all": "View all"
+    "view_all": "View all",
+    "jump_to_letter": "Jump to letter"
   },
   "gift_card": {
     "add_to_apple_wallet": "Add to Apple Wallet",

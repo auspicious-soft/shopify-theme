@@ -8,6 +8,7 @@
   @param {collection} collection - The collection to render
   @param {string} [sizes] - `sizes` attribute for the image
   @param {boolean} [eager] - Load the image eagerly
+  @param {string} [heading_tag] - Title tag, defaults to h3
 
   @example
   {% render 'collection-card', collection: collection %}
@@ -15,6 +16,7 @@
 
 {%- liquid
   assign image_sizes = sizes | default: '(min-width: 990px) 33vw, 50vw'
+  assign heading_tag = heading_tag | default: 'h3'
   assign card_image = collection.featured_image | default: collection.products.first.featured_media.preview_image
   assign layout = settings.collection_card_layout | default: 'below'
 
@@ -61,10 +63,10 @@
   </div>
 
   <div class="collection-card__content">
-    <h3 class="collection-card__title">
+    <{{ heading_tag }} class="collection-card__title">
       <span>{{ collection.title | escape }}</span>
       <span class="collection-card__arrow" aria-hidden="true">{{ 'icon-chevron.svg' | inline_asset_content }}</span>
-    </h3>
+    </{{ heading_tag }}>
 
     {% if settings.collection_card_show_count %}
       <p class="collection-card__count">
