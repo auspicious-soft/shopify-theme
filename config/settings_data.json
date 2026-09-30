@@ -22,6 +22,7 @@
     "spacing_grid_horizontal": 8,
     "spacing_grid_vertical": 8,
     "breadcrumbs_show_desktop": true,
+    "breadcrumbs_alignment": "left",
     "animations_reveal_on_scroll": true,
     "animations_hover_elements": "default",
     "buttons_border_thickness": 1,
@@ -196,11 +197,11 @@
       },
       "scheme-869fd07f-c7fd-47b7-9b47-86d04d72fa7f": {
         "settings": {
-          "background": "#FFFFFF",
+          "background": "#ffffff",
           "background_gradient": "",
           "text": "#000000",
           "button": "#000000",
-          "button_label": "#FFFFFF",
+          "button_label": "#ffffff",
           "secondary_button_label": "#000000",
           "shadow": "#000000"
         }
