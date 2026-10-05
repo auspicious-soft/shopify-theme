@@ -1005,7 +1005,12 @@
       "meta_position": "Date position",
       "meta_top": "Above the title",
       "meta_bottom": "Bottom of the card",
-      "title_uppercase": "Uppercase titles"
+      "title_uppercase": "Uppercase titles",
+      "hide_featured": "Hide the featured story",
+      "hide_featured_info": "Match the Blog section's \"Featured article\" setting so the featured story isn't repeated here",
+      "hide_featured_none": "Don't hide",
+      "hide_featured_latest": "The newest article",
+      "hide_featured_tag": "Article with a tag"
     },
     "breadcrumbs": {
       "show": "Show breadcrumbs",

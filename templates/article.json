@@ -62,7 +62,9 @@
         "show_topic": true,
         "title_uppercase": true,
         "show_reading_time": true,
-        "meta_position": "bottom"
+        "meta_position": "bottom",
+        "hide_featured": "tag",
+        "featured_tag": "featured"
       }
     }
   },

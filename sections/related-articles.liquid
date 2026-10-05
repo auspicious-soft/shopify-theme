@@ -1,8 +1,11 @@
 {% comment %}
   "Related articles" (article template): more articles from the same blog,
   shown below the article. Articles sharing a tag with the current one are
-  picked first, then the newest others (shown newest first), never the current article itself. Grid, or
-  a carousel driven by <slider-component> (assets/slider.js).
+  picked first, then the newest others (shown newest first), never the
+  current article itself. "Hide the featured story" leaves out the article
+  the blog page features (the newest one, or the newest with a tag), to
+  match the Blog section's "Featured article" setting. Grid, or a carousel
+  driven by <slider-component> (assets/slider.js).
 {% endcomment %}
 
 {{ 'related-articles.css' | asset_url | stylesheet_tag }}
@@ -15,6 +18,30 @@
   assign columns = section.settings.columns_desktop
   assign card_sizes = '(min-width: 990px) calc(100vw / ' | append: columns | append: '), (min-width: 750px) 50vw, 85vw'
 
+  # The blog's featured story, when it should be left out.
+  assign hidden_id = ''
+  assign featured_key = ''
+  case section.settings.hide_featured
+    when 'latest'
+      assign hidden_id = blog.articles.first.id
+    when 'tag'
+      assign featured_key = section.settings.featured_tag | downcase | strip
+      if featured_key != blank
+        for candidate in blog.articles
+          for candidate_tag in candidate.tags
+            assign candidate_tag_key = candidate_tag | downcase
+            if candidate_tag_key == featured_key
+              assign hidden_id = candidate.id
+              break
+            endif
+          endfor
+          if hidden_id != ''
+            break
+          endif
+        endfor
+      endif
+  endcase
+
   # Pick articles: tag matches first, then the rest, skipping the current one.
   assign picked_ids = ','
   assign count = 0
@@ -23,10 +50,15 @@
       if count >= limit
         break
       endif
-      if candidate.id == article.id
+      if candidate.id == article.id or candidate.id == hidden_id
         continue
       endif
       for tag in candidate.tags
+        # The "featured" tag isn't a shared topic.
+        assign tag_key = tag | downcase
+        if featured_key != blank and tag_key == featured_key
+          continue
+        endif
         if article.tags contains tag
           assign picked_ids = picked_ids | append: candidate.id | append: ','
           assign count = count | plus: 1
@@ -40,7 +72,7 @@
       break
     endif
     assign candidate_key = ',' | append: candidate.id | append: ','
-    if candidate.id == article.id or picked_ids contains candidate_key
+    if candidate.id == article.id or candidate.id == hidden_id or picked_ids contains candidate_key
       continue
     endif
     assign picked_ids = picked_ids | append: candidate.id | append: ','
@@ -241,6 +273,34 @@
       "max": 8,
       "step": 1,
       "default": 3
+    },
+    {
+      "type": "select",
+      "id": "hide_featured",
+      "label": "t:sections.related_articles.hide_featured",
+      "info": "t:sections.related_articles.hide_featured_info",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.related_articles.hide_featured_none"
+        },
+        {
+          "value": "latest",
+          "label": "t:sections.related_articles.hide_featured_latest"
+        },
+        {
+          "value": "tag",
+          "label": "t:sections.related_articles.hide_featured_tag"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "text",
+      "id": "featured_tag",
+      "label": "t:sections.blog.featured_tag",
+      "default": "featured",
+      "visible_if": "{{ section.settings.hide_featured == 'tag' }}"
     },
     {
       "type": "select",
