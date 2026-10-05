@@ -16,6 +16,7 @@
   @param {number} [excerpt_words] - Words to show when the article has no excerpt (default 30)
   @param {boolean} [show_tags] - Show the article's tags
   @param {boolean} [show_topic] - Show the first tag as a small label above the title
+  @param {string} [skip_tag] - A tag never used as the topic (e.g. the blog's "featured" tag)
   @param {boolean} [show_reading_time] - Add "x min read" to the date line
   @param {string} [read_more] - "Read more" link label; blank hides it
   @param {string} [read_more_style] - text (default), primary or secondary (button)
@@ -57,6 +58,18 @@
     assign loading = 'eager'
   endif
 
+  assign topic = ''
+  if show_topic
+    assign skip_key = skip_tag | downcase | strip
+    for tag in article.tags
+      assign tag_key = tag | downcase
+      if skip_key == blank or tag_key != skip_key
+        assign topic = tag
+        break
+      endif
+    endfor
+  endif
+
   if show_reading_time
     assign word_count = article.content | strip_html | split: ' ' | size
     assign reading_minutes = word_count | plus: 199 | divided_by: 200 | at_least: 1
@@ -90,8 +103,8 @@
   {%- endif -%}
 
   <div class="article-card__content">
-    {%- if show_topic and article.tags.size > 0 -%}
-      <p class="article-card__topic">{{ article.tags.first | escape }}</p>
+    {%- if topic != blank -%}
+      <p class="article-card__topic">{{ topic | escape }}</p>
     {%- endif -%}
 
     {%- if show_date != false or show_author or show_reading_time -%}

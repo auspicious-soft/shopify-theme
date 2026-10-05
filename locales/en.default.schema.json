@@ -963,7 +963,12 @@
       "featured_words": "Featured text length (words)",
       "featured_words_info": "The article's excerpt shows as an italic quote; this sets how much of the article text follows it. 0 hides it",
       "show_topic": "Show topic above title",
-      "show_topic_info": "The article's first tag"
+      "show_topic_info": "The article's first tag",
+      "featured_source": "Featured article",
+      "featured_source_latest": "Latest article",
+      "featured_source_tag": "Article with a tag",
+      "featured_tag": "Featured tag",
+      "featured_tag_info": "The newest article with this tag is featured (falls back to the latest article). The tag is hidden from the filter and card topics"
     },
     "article": {
       "header_image": "Featured image",

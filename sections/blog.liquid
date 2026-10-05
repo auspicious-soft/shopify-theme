@@ -8,7 +8,10 @@
   an editorial "story": label, title, the excerpt as a pull quote, the
   opening of the article, date and reading time, beside the image.
 
-  The tag filter shows as pills or as underlined text tabs.
+  The featured article is the newest post, or the newest post with a chosen
+  tag (e.g. "featured"); that tag is left out of the filter and card topics.
+  The tag filter (pills or underlined text tabs) sits below the featured
+  article, above the grid.
   Cards come from snippets/article-card.liquid and follow Theme settings >
   Blog cards.
 
@@ -64,6 +67,30 @@
     </header>
     {%- endif -%}
 
+    {%- liquid
+      # Featured article chosen by tag: the newest article carrying it.
+      assign featured_tag_name = ''
+      assign featured_tag_key = ''
+      assign tagged_feature = nil
+      if section.settings.featured_source == 'tag' and section.settings.featured_tag != blank
+        assign featured_tag_name = section.settings.featured_tag | strip
+        assign featured_tag_key = featured_tag_name | downcase
+        for candidate in blog.articles
+          for candidate_tag in candidate.tags
+            assign candidate_key = candidate_tag | downcase
+            if candidate_key == featured_tag_key
+              assign tagged_feature = candidate
+              break
+            endif
+          endfor
+          if tagged_feature
+            break
+          endif
+        endfor
+      endif
+    -%}
+
+    {%- capture tag_filter -%}
     {%- if section.settings.show_tag_filter and blog.all_tags.size > 0 -%}
       <nav class="blog__tags blog__tags--{{ section.settings.tag_style | default: 'pills' }}" aria-label="{{ 'blog.filter_by_tag' | t }}">
         <ul class="blog__tag-list" role="list">
@@ -81,6 +108,10 @@
             </a>
           </li>
           {%- for tag in blog.all_tags -%}
+            {%- assign tag_key = tag | downcase -%}
+            {%- if featured_tag_key != blank and tag_key == featured_tag_key -%}
+              {%- continue -%}
+            {%- endif -%}
             {%- assign active = false -%}
             {%- if current_tags contains tag -%}
               {%- assign active = true -%}
@@ -98,6 +129,7 @@
         </ul>
       </nav>
     {%- endif -%}
+    {%- endcapture -%}
 
     {%- paginate blog.articles by section.settings.articles_per_page -%}
       {%- liquid
@@ -105,12 +137,15 @@
         if section.settings.feature_first and layout == 'grid' and paginate.current_page == 1 and current_tags == blank
           assign featured_first = true
         endif
+        assign feature = blog.articles.first
+        if tagged_feature
+          assign feature = tagged_feature
+        endif
       -%}
 
       {%- if blog.articles.size > 0 -%}
         {%- if featured_first and section.settings.featured_style == 'story' -%}
           {%- liquid
-            assign feature = blog.articles.first
             assign feature_words = feature.content | strip_html | split: ' ' | size
             assign feature_minutes = feature_words | plus: 199 | divided_by: 200 | at_least: 1
             # With the blog title hidden, the story title is the page's main heading.
@@ -164,7 +199,7 @@
         {%- elsif featured_first -%}
           <div class="blog__featured">
             {% render 'article-card',
-              article: blog.articles.first,
+              article: feature,
               featured: true,
               image_ratio: section.settings.image_ratio,
               sizes: '(min-width: 750px) 60vw, 100vw',
@@ -175,6 +210,7 @@
               excerpt_words: section.settings.excerpt_words,
               show_tags: section.settings.show_card_tags,
               show_topic: section.settings.show_topic,
+              skip_tag: featured_tag_name,
               show_reading_time: section.settings.show_reading_time,
               read_more: section.settings.read_more,
               read_more_style: section.settings.read_more_style,
@@ -185,10 +221,11 @@
           </div>
         {%- endif -%}
 
-        {%- unless featured_first and blog.articles.size == 1 -%}
-        <ul class="blog__grid blog__grid--{{ layout }}" role="list">
+        {{ tag_filter }}
+
+        {%- capture grid_items -%}
           {%- for article in blog.articles -%}
-            {%- if featured_first and forloop.first -%}
+            {%- if featured_first and article.id == feature.id -%}
               {%- continue -%}
             {%- endif -%}
             {%- liquid
@@ -209,6 +246,7 @@
                 excerpt_words: section.settings.excerpt_words,
                 show_tags: section.settings.show_card_tags,
                 show_topic: section.settings.show_topic,
+                skip_tag: featured_tag_name,
                 show_reading_time: section.settings.show_reading_time,
                 read_more: section.settings.read_more,
                 read_more_style: section.settings.read_more_style,
@@ -218,11 +256,17 @@
               %}
             </li>
           {%- endfor -%}
-        </ul>
-        {%- endunless -%}
+        {%- endcapture -%}
+
+        {%- if grid_items != blank -%}
+          <ul class="blog__grid blog__grid--{{ layout }}" role="list">
+            {{ grid_items }}
+          </ul>
+        {%- endif -%}
 
         {% render 'pagination', paginate: paginate %}
       {%- else -%}
+        {{ tag_filter }}
         <div class="blog__empty">
           {%- if current_tags -%}
             <p>{{ 'blog.no_tagged_articles' | t: tag: current_tags.first }}</p>
@@ -404,6 +448,31 @@
       "label": "t:sections.blog.feature_first",
       "info": "t:sections.blog.feature_first_info",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "featured_source",
+      "label": "t:sections.blog.featured_source",
+      "options": [
+        {
+          "value": "latest",
+          "label": "t:sections.blog.featured_source_latest"
+        },
+        {
+          "value": "tag",
+          "label": "t:sections.blog.featured_source_tag"
+        }
+      ],
+      "default": "latest",
+      "visible_if": "{{ section.settings.feature_first }}"
+    },
+    {
+      "type": "text",
+      "id": "featured_tag",
+      "label": "t:sections.blog.featured_tag",
+      "info": "t:sections.blog.featured_tag_info",
+      "default": "featured",
+      "visible_if": "{{ section.settings.feature_first and section.settings.featured_source == 'tag' }}"
     },
     {
       "type": "select",
