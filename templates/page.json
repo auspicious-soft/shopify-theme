@@ -201,24 +201,12 @@
             "text": "<p>Biella, nestled at the foot of the Italian Alps, is renowned for its crystalline glacial waters—essential for washing raw wool without damaging its organic protective scales. Our partner mill has operated in this valley for over a century, passing down local secrets of slow tensioning.<br/><br/><strong>No Harsh Chemical Treatments<br/></strong>Our raw virgin cashmere is never exposed to acid stripping or aggressive bleaches, preserving the fibers' authentic loft and softness.<br/><br/><strong>Kyoto Slub Silk Lining<br/></strong>Each coat is lined with raw slub silk sourced from heritage weavers in Kyoto, offering a organic tactile friction that adapts beautifully to skin temperature.</p>",
             "size": "medium"
           }
-        },
-        "buttons_WVNUU6": {
-          "type": "buttons",
-          "settings": {
-            "button_label": "Shop now",
-            "button_link": "",
-            "button_style": "primary",
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_2": "secondary"
-          }
         }
       },
       "block_order": [
         "caption_a4QLtY",
         "heading_VrtqxL",
-        "text_47kki8",
-        "buttons_WVNUU6"
+        "text_47kki8"
       ],
       "name": "t:sections.image_with_text.name",
       "settings": {
