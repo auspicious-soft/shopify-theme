@@ -60,47 +60,26 @@
     "image_with_text_7kC9T4": {
       "type": "image-with-text",
       "blocks": {
-        "caption_Kc9UYV": {
-          "type": "caption",
-          "settings": {
-            "caption": "New collection",
-            "style": "uppercase",
-            "size": "small"
-          }
-        },
         "heading_e9Mfin": {
           "type": "heading",
           "settings": {
-            "heading": "Image with text",
+            "heading": "\"A garment should not merely occupy space in your wardrobe; it should bridge daily warmth with an elevated, sculptural presence.\"",
             "heading_tag": "h2",
-            "heading_class": "h2",
+            "heading_class": "h6",
             "uppercase": false
           }
         },
         "text_G96ND8": {
           "type": "text",
           "settings": {
-            "text": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text": "<p>Founded with a commitment to raw honesty and structural permanence, our studio rejects the rapid obsolescence of modern fashion. Instead, we trace our raw fibers directly to ethical sheep ranches and historical family-owned mills in Biella, Italy, and Kyoto, Japan.<br/></p><p>Each pattern is designed with heavy, natural cashmere and structural drop shoulders, allowing the material to drape in complete alignment with the human form. By weaving slowly, we preserve the breath of the fibers, resulting in garments that endure for generations.</p>",
             "size": "medium"
-          }
-        },
-        "buttons_XDrkqY": {
-          "type": "buttons",
-          "settings": {
-            "button_label": "Shop now",
-            "button_link": "",
-            "button_style": "primary",
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_2": "secondary"
           }
         }
       },
       "block_order": [
-        "caption_Kc9UYV",
         "heading_e9Mfin",
-        "text_G96ND8",
-        "buttons_XDrkqY"
+        "text_G96ND8"
       ],
       "name": "t:sections.image_with_text.name",
       "settings": {
