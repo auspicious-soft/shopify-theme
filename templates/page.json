@@ -181,7 +181,7 @@
         "caption_a4QLtY": {
           "type": "caption",
           "settings": {
-            "caption": "New collection",
+            "caption": "THE ART OF BIELLESE WEAVING",
             "style": "uppercase",
             "size": "small"
           }
@@ -189,10 +189,10 @@
         "heading_VrtqxL": {
           "type": "heading",
           "settings": {
-            "heading": "Image with text",
+            "heading": "Honoring Untreated Raw Cashmere",
             "heading_tag": "h2",
             "heading_class": "h2",
-            "uppercase": false
+            "uppercase": true
           }
         },
         "text_47kki8": {
