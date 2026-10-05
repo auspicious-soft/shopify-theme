@@ -1,6 +1,7 @@
 {% comment %}
   "Multicolumn": a heading area above a row of columns, each with an image
-  (or icon), title, text and an optional link. Good for features, benefits,
+  (or icon), a number (01, 02… or the column's own), or nothing on top,
+  then a title, text and an optional link. Good for features, benefits,
   services or values ("Free shipping", "30-day returns", ...).
 
   - Columns per row on desktop and mobile; on mobile a grid or a swipe slider.
@@ -79,7 +80,22 @@
             <a href="{{ block.settings.link }}" class="multicolumn__cover-link" aria-label="{{ block.settings.title | strip_html | escape }}"></a>
           {%- endif -%}
 
-          {%- if block.settings.image != blank -%}
+          {%- assign column_top = section.settings.column_media | default: 'image' -%}
+          {%- if column_top == 'number' -%}
+            {%- liquid
+              if block.settings.number != blank
+                assign column_number = block.settings.number
+              else
+                assign column_number = forloop.index
+                if section.settings.number_format == 'padded' and forloop.index < 10
+                  assign column_number = '0' | append: forloop.index
+                endif
+              endif
+            -%}
+            <p class="multicolumn__number multicolumn__number--{{ section.settings.number_size }}" aria-hidden="true">{{ column_number | escape }}</p>
+          {%- elsif column_top == 'none' -%}
+            {%- comment -%} No image or number. {%- endcomment -%}
+          {%- elsif block.settings.image != blank -%}
             <div class="multicolumn__media{% if ratio == '' %} multicolumn__media--adapt{% endif %}">
               {{
                 block.settings.image
@@ -153,12 +169,30 @@
       "label": "t:labels.heading_tag",
       "info": "t:labels.heading_tag_info",
       "options": [
-        { "value": "h1", "label": "H1" },
-        { "value": "h2", "label": "H2" },
-        { "value": "h3", "label": "H3" },
-        { "value": "h4", "label": "H4" },
-        { "value": "h5", "label": "H5" },
-        { "value": "h6", "label": "H6" }
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
       ],
       "default": "h2"
     },
@@ -168,12 +202,30 @@
       "label": "t:labels.heading_class",
       "info": "t:labels.heading_class_info",
       "options": [
-        { "value": "h6", "label": "t:options.heading_size.extra_small" },
-        { "value": "h5", "label": "t:options.heading_size.small" },
-        { "value": "h4", "label": "t:options.heading_size.medium" },
-        { "value": "h3", "label": "t:options.heading_size.large" },
-        { "value": "h2", "label": "t:options.heading_size.extra_large" },
-        { "value": "h1", "label": "t:options.heading_size.huge" }
+        {
+          "value": "h6",
+          "label": "t:options.heading_size.extra_small"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.heading_size.small"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.heading_size.medium"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.heading_size.large"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.heading_size.extra_large"
+        },
+        {
+          "value": "h1",
+          "label": "t:options.heading_size.huge"
+        }
       ],
       "default": "h3"
     },
@@ -187,8 +239,14 @@
       "id": "heading_alignment",
       "label": "t:sections.multicolumn.heading_alignment",
       "options": [
-        { "value": "left", "label": "t:options.alignment.left" },
-        { "value": "center", "label": "t:options.alignment.center" }
+        {
+          "value": "left",
+          "label": "t:options.alignment.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.alignment.center"
+        }
       ],
       "default": "center"
     },
@@ -210,8 +268,14 @@
       "id": "columns_mobile",
       "label": "t:sections.all.columns_mobile",
       "options": [
-        { "value": "1", "label": "1" },
-        { "value": "2", "label": "2" }
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
       ],
       "default": "1"
     },
@@ -220,8 +284,14 @@
       "id": "mobile_layout",
       "label": "t:sections.collection_banners.mobile_layout",
       "options": [
-        { "value": "grid", "label": "t:sections.multicolumn.mobile_grid" },
-        { "value": "slider", "label": "t:sections.collection_banners.mobile_slider" }
+        {
+          "value": "grid",
+          "label": "t:sections.multicolumn.mobile_grid"
+        },
+        {
+          "value": "slider",
+          "label": "t:sections.collection_banners.mobile_slider"
+        }
       ],
       "default": "grid"
     },
@@ -230,8 +300,14 @@
       "id": "column_alignment",
       "label": "t:sections.multicolumn.column_alignment",
       "options": [
-        { "value": "left", "label": "t:options.alignment.left" },
-        { "value": "center", "label": "t:options.alignment.center" }
+        {
+          "value": "left",
+          "label": "t:options.alignment.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.alignment.center"
+        }
       ],
       "default": "center"
     },
@@ -250,8 +326,14 @@
       "id": "width",
       "label": "t:labels.section_width",
       "options": [
-        { "value": "full", "label": "t:options.section_width.full" },
-        { "value": "page", "label": "t:options.section_width.page" }
+        {
+          "value": "full",
+          "label": "t:options.section_width.full"
+        },
+        {
+          "value": "page",
+          "label": "t:options.section_width.page"
+        }
       ],
       "default": "page"
     },
@@ -261,16 +343,90 @@
     },
     {
       "type": "select",
+      "id": "column_media",
+      "label": "t:sections.multicolumn.column_media",
+      "options": [
+        {
+          "value": "image",
+          "label": "t:sections.multicolumn.column_media_image"
+        },
+        {
+          "value": "number",
+          "label": "t:sections.multicolumn.column_media_number"
+        },
+        {
+          "value": "none",
+          "label": "t:sections.multicolumn.column_media_none"
+        }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "select",
+      "id": "number_format",
+      "label": "t:sections.multicolumn.number_format",
+      "options": [
+        {
+          "value": "padded",
+          "label": "t:sections.multicolumn.number_padded"
+        },
+        {
+          "value": "plain",
+          "label": "t:sections.multicolumn.number_plain"
+        }
+      ],
+      "default": "padded",
+      "visible_if": "{{ section.settings.column_media == 'number' }}"
+    },
+    {
+      "type": "select",
+      "id": "number_size",
+      "label": "t:sections.multicolumn.number_size",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:options.heading_size.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.heading_size.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.heading_size.large"
+        }
+      ],
+      "default": "medium",
+      "visible_if": "{{ section.settings.column_media == 'number' }}"
+    },
+    {
+      "type": "select",
       "id": "image_ratio",
       "label": "t:sections.collection_banners.image_ratio",
       "options": [
-        { "value": "adapt", "label": "t:options.height_type.adapt" },
-        { "value": "square", "label": "t:sections.collection_banners.ratio_square" },
-        { "value": "portrait", "label": "t:sections.collection_banners.ratio_portrait" },
-        { "value": "landscape", "label": "t:sections.collection_banners.ratio_landscape" },
-        { "value": "circle", "label": "t:sections.multicolumn.ratio_circle" }
+        {
+          "value": "adapt",
+          "label": "t:options.height_type.adapt"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.collection_banners.ratio_square"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.collection_banners.ratio_portrait"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.collection_banners.ratio_landscape"
+        },
+        {
+          "value": "circle",
+          "label": "t:sections.multicolumn.ratio_circle"
+        }
       ],
-      "default": "adapt"
+      "default": "adapt",
+      "visible_if": "{{ section.settings.column_media == 'image' }}"
     },
     {
       "type": "select",
@@ -278,11 +434,21 @@
       "label": "t:sections.multicolumn.image_width",
       "info": "t:sections.multicolumn.image_width_info",
       "options": [
-        { "value": "full", "label": "t:sections.multicolumn.image_full" },
-        { "value": "half", "label": "t:sections.multicolumn.image_half" },
-        { "value": "third", "label": "t:sections.multicolumn.image_third" }
+        {
+          "value": "full",
+          "label": "t:sections.multicolumn.image_full"
+        },
+        {
+          "value": "half",
+          "label": "t:sections.multicolumn.image_half"
+        },
+        {
+          "value": "third",
+          "label": "t:sections.multicolumn.image_third"
+        }
       ],
-      "default": "full"
+      "default": "full",
+      "visible_if": "{{ section.settings.column_media == 'image' }}"
     },
     {
       "type": "range",
@@ -299,7 +465,8 @@
       "id": "show_placeholders",
       "label": "t:sections.multicolumn.show_placeholders",
       "info": "t:sections.multicolumn.show_placeholders_info",
-      "default": false
+      "default": false,
+      "visible_if": "{{ section.settings.column_media == 'image' }}"
     },
     {
       "type": "header",
@@ -321,8 +488,14 @@
       "id": "button_style",
       "label": "t:labels.button_style",
       "options": [
-        { "value": "primary", "label": "t:options.button_style.primary" },
-        { "value": "secondary", "label": "t:options.button_style.secondary" }
+        {
+          "value": "primary",
+          "label": "t:options.button_style.primary"
+        },
+        {
+          "value": "secondary",
+          "label": "t:options.button_style.secondary"
+        }
       ],
       "default": "primary"
     },
@@ -381,6 +554,12 @@
           "id": "image",
           "label": "t:sections.multicolumn.image",
           "info": "t:sections.multicolumn.image_info"
+        },
+        {
+          "type": "text",
+          "id": "number",
+          "label": "t:sections.multicolumn.number",
+          "info": "t:sections.multicolumn.number_info"
         },
         {
           "type": "inline_richtext",

@@ -734,7 +734,17 @@
       "image": "Image or icon",
       "image_info": "Optional. Use a small image or icon with a smaller Image size",
       "link_label": "Link text",
-      "link_label_info": "Shown as a text link with an arrow. Leave empty to make the whole column clickable instead"
+      "link_label_info": "Shown as a text link with an arrow. Leave empty to make the whole column clickable instead",
+      "column_media": "Column top",
+      "column_media_image": "Image",
+      "column_media_number": "Number",
+      "column_media_none": "None",
+      "number_format": "Number style",
+      "number_padded": "01, 02, 03",
+      "number_plain": "1, 2, 3",
+      "number_size": "Number size",
+      "number": "Custom number",
+      "number_info": "Used when the section shows numbers. Leave empty to number columns automatically"
     },
     "image_with_text": {
       "name": "Image with text",
