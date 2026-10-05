@@ -1,0 +1,229 @@
+/* Styles for sections/multirow.liquid. */
+
+.multirow {
+  padding-block: var(--section-padding-top) var(--section-padding-bottom);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* ---------- Section header ---------- */
+
+.multirow__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 44rem;
+  margin-block-end: clamp(2rem, 5vw, 3.5rem);
+}
+
+.multirow__header--center {
+  align-items: center;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.multirow__subheading {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
+}
+
+.multirow__heading {
+  margin: 0;
+}
+
+.multirow__description {
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--color-foreground) 80%, transparent);
+}
+
+.multirow__description > * {
+  margin: 0;
+}
+
+/* ---------- Rows ---------- */
+
+.multirow__rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--multirow-row-gap, 64px);
+}
+
+.multirow__row {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.multirow--mobile-last .multirow__media {
+  order: 2;
+}
+
+.multirow__media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--row-ratio, 4 / 5);
+  background-color: color-mix(in srgb, var(--color-foreground) 6%, transparent);
+  border-radius: var(--multirow-radius, 0);
+}
+
+.multirow__media .placeholder-svg,
+.multirow__media > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .multirow__row {
+    display: grid;
+    grid-template-columns: var(--multirow-image-fr, 1fr) var(--multirow-content-fr, 1fr);
+    align-items: stretch;
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .multirow--mobile-last .multirow__media {
+    order: 0;
+  }
+
+  /* Image on the right: swap the columns. */
+  .multirow__row--image-right {
+    grid-template-columns: var(--multirow-content-fr, 1fr) var(--multirow-image-fr, 1fr);
+  }
+
+  .multirow__row--image-right .multirow__media {
+    order: 2;
+  }
+}
+
+/* ---------- Content ---------- */
+
+.multirow__content-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: var(--multirow-justify, center);
+}
+
+.multirow__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  width: 100%;
+  max-width: var(--multirow-content-width, 480px);
+  color: var(--color-foreground);
+}
+
+/* Card style: content on its own background (card color scheme). */
+.multirow--content-card .multirow__content {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background-color: var(--color-background);
+  border-radius: var(--multirow-radius, 0);
+}
+
+@media screen and (min-width: 750px) {
+  .multirow--content-card .multirow__content {
+    max-width: calc(var(--multirow-content-width, 480px) + 6rem);
+  }
+
+  /* Keep the text block next to the image rather than at the far edge. */
+  .multirow__row--image-right .multirow__content-wrap {
+    align-items: flex-end;
+  }
+
+  .multirow--align-center .multirow__content-wrap {
+    align-items: center;
+  }
+}
+
+.multirow--align-center .multirow__content {
+  align-items: center;
+  text-align: center;
+}
+
+.multirow--align-right .multirow__content {
+  align-items: flex-end;
+  text-align: right;
+}
+
+@media screen and (max-width: 749px) {
+  .multirow__content {
+    max-width: none;
+  }
+
+  .multirow--mobile-align-left .multirow__content {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .multirow--mobile-align-center .multirow__content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .multirow--mobile-align-right .multirow__content {
+    align-items: flex-end;
+    text-align: right;
+  }
+}
+
+.multirow__caption {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
+}
+
+.multirow__row-heading {
+  margin: 0;
+}
+
+.multirow__text {
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
+}
+
+.multirow__text > * {
+  margin: 0 0 0.8em;
+}
+
+.multirow__text > :last-child {
+  margin-bottom: 0;
+}
+
+.multirow__text--small {
+  font-size: 0.9rem;
+}
+
+.multirow__text--large {
+  font-size: 1.15rem;
+}
+
+.multirow__text a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.multirow__button {
+  margin-top: 0.5rem;
+}
+
+.multirow__link {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 1px;
+}
+
+.multirow__link:hover {
+  text-decoration-thickness: 2px;
+}

@@ -1,0 +1,551 @@
+{% comment %}
+  "Multirow": a stack of rows, each an image beside a caption, heading,
+  text and button (a Row block per row), with an optional heading above.
+
+  - Image position for all rows: alternating (starting left or right) or
+    always on one side. Each row can override it.
+  - Image width, shape and corner radius; content vertical position, text
+    alignment, and plain or card style (card colors per section).
+  - Mobile: image above or below the text.
+
+  Images use snippets/banner-media.liquid (mobile image supported).
+  Styles: assets/multirow.css.
+{% endcomment %}
+
+{{ 'multirow.css' | asset_url | stylesheet_tag }}
+{{ 'banner-media.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  case section.settings.image_ratio
+    when 'square'
+      assign ratio = '1 / 1'
+    when 'portrait'
+      assign ratio = '4 / 5'
+    when 'tall'
+      assign ratio = '2 / 3'
+    when 'landscape'
+      assign ratio = '4 / 3'
+    when 'wide'
+      assign ratio = '16 / 9'
+    else
+      assign ratio = 'auto'
+  endcase
+
+  case section.settings.image_width
+    when 'small'
+      assign image_fr = 1
+      assign content_fr = 2
+      assign image_sizes = '(min-width: 750px) 33vw, 100vw'
+    when 'large'
+      assign image_fr = 2
+      assign content_fr = 1
+      assign image_sizes = '(min-width: 750px) 66vw, 100vw'
+    else
+      assign image_fr = 1
+      assign content_fr = 1
+      assign image_sizes = '(min-width: 750px) 50vw, 100vw'
+  endcase
+
+  case section.settings.content_position
+    when 'top'
+      assign v_align = 'flex-start'
+    when 'bottom'
+      assign v_align = 'flex-end'
+    else
+      assign v_align = 'center'
+  endcase
+
+  assign heading_tag = section.settings.heading_tag | default: 'h2'
+  assign heading_class = section.settings.heading_class | default: heading_tag
+  assign row_heading_tag = 'h3'
+  if section.settings.heading == blank
+    assign row_heading_tag = 'h2'
+  endif
+  assign row_heading_class = section.settings.row_heading_class | default: 'h3'
+-%}
+
+<div
+  class="multirow multirow--align-{{ section.settings.alignment }} multirow--mobile-align-{{ section.settings.mobile_alignment }} multirow--mobile-{{ section.settings.mobile_image_position }} multirow--content-{{ section.settings.content_style }} color-{{ section.settings.color_scheme.id }}"
+  style="
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --multirow-image-fr: {{ image_fr }}fr;
+    --multirow-content-fr: {{ content_fr }}fr;
+    --multirow-radius: {{ section.settings.corner_radius }}px;
+    --multirow-row-gap: {{ section.settings.row_gap }}px;
+    --multirow-justify: {{ v_align }};
+    --multirow-content-width: {{ section.settings.content_width }}px;
+  "
+>
+  <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+    {%- if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank -%}
+      <div class="multirow__header multirow__header--{{ section.settings.heading_alignment }}">
+        {%- if section.settings.subheading != blank -%}
+          <p class="multirow__subheading">{{ section.settings.subheading | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <{{ heading_tag }} class="{{ heading_class }} multirow__heading">{{ section.settings.heading | escape }}</{{ heading_tag }}>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="multirow__description rte">{{ section.settings.description }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="multirow__rows">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          # Which side this row's image sits on.
+          assign odd = forloop.index | modulo: 2
+          assign side = block.settings.image_position
+          if side == 'auto' or side == blank
+            case section.settings.image_position
+              when 'alternate_left'
+                if odd == 1
+                  assign side = 'left'
+                else
+                  assign side = 'right'
+                endif
+              when 'alternate_right'
+                if odd == 1
+                  assign side = 'right'
+                else
+                  assign side = 'left'
+                endif
+              else
+                assign side = section.settings.image_position
+            endcase
+          endif
+
+          assign placeholder_name = 'lifestyle-1'
+          if odd == 0
+            assign placeholder_name = 'lifestyle-2'
+          endif
+
+          assign row_ratio = ratio
+          if ratio == 'auto'
+            assign row_ratio = block.settings.image.aspect_ratio | default: 1.25
+          endif
+
+          assign has_link = false
+          if block.settings.button_label != blank and block.settings.button_link != blank
+            assign has_link = true
+          endif
+        -%}
+        <div
+          class="multirow__row multirow__row--image-{{ side }}"
+          style="--row-ratio: {{ row_ratio }};"
+          {{ block.shopify_attributes }}
+          {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
+        >
+          <div class="multirow__media">
+            {% render 'banner-media',
+              image: block.settings.image,
+              mobile_image: block.settings.mobile_image,
+              show_video: false,
+              alt: block.settings.image.alt,
+              sizes: image_sizes,
+              placeholder: placeholder_name
+            %}
+          </div>
+
+          <div class="multirow__content-wrap">
+            <div class="multirow__content{% if section.settings.content_style == 'card' %} color-{{ section.settings.card_color_scheme.id }}{% endif %}">
+              {%- if block.settings.caption != blank -%}
+                <p class="multirow__caption">{{ block.settings.caption | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.heading != blank -%}
+                <{{ row_heading_tag }} class="{{ row_heading_class }} multirow__row-heading">{{ block.settings.heading | escape }}</{{ row_heading_tag }}>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <div class="multirow__text multirow__text--{{ section.settings.text_size }} rte">{{ block.settings.text }}</div>
+              {%- endif -%}
+              {%- if has_link -%}
+                <a
+                  href="{{ block.settings.button_link }}"
+                  class="{% if section.settings.button_style == 'link' %}multirow__link{% else %}button button--{{ section.settings.button_style }} multirow__button{% endif %}"
+                >
+                  {{- block.settings.button_label | escape -}}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.multirow.name",
+  "class": "section-multirow",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:labels.subheading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:labels.heading",
+      "default": "Made to last"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:labels.heading_tag",
+      "info": "t:labels.heading_tag_info",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "heading_class",
+      "label": "t:labels.heading_class",
+      "info": "t:labels.heading_class_info",
+      "options": [
+        { "value": "h6", "label": "t:options.heading_size.extra_small" },
+        { "value": "h5", "label": "t:options.heading_size.small" },
+        { "value": "h4", "label": "t:options.heading_size.medium" },
+        { "value": "h3", "label": "t:options.heading_size.large" },
+        { "value": "h2", "label": "t:options.heading_size.extra_large" },
+        { "value": "h1", "label": "t:options.heading_size.huge" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.multirow.description"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.multirow.heading_alignment",
+      "options": [
+        { "value": "left", "label": "t:options.alignment.left" },
+        { "value": "center", "label": "t:options.alignment.center" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.multirow.header_rows"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "t:sections.multirow.image_position",
+      "info": "t:sections.multirow.image_position_info",
+      "options": [
+        { "value": "alternate_left", "label": "t:sections.multirow.position_alternate_left" },
+        { "value": "alternate_right", "label": "t:sections.multirow.position_alternate_right" },
+        { "value": "left", "label": "t:sections.multirow.position_left" },
+        { "value": "right", "label": "t:sections.multirow.position_right" }
+      ],
+      "default": "alternate_left"
+    },
+    {
+      "type": "select",
+      "id": "image_width",
+      "label": "t:sections.multirow.image_width",
+      "options": [
+        { "value": "small", "label": "t:sections.multirow.width_small" },
+        { "value": "medium", "label": "t:sections.multirow.width_medium" },
+        { "value": "large", "label": "t:sections.multirow.width_large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:sections.multirow.image_ratio",
+      "options": [
+        { "value": "adapt", "label": "t:sections.all.ratio_adapt" },
+        { "value": "square", "label": "t:sections.all.ratio_square" },
+        { "value": "portrait", "label": "t:sections.all.ratio_portrait" },
+        { "value": "tall", "label": "t:sections.all.ratio_tall" },
+        { "value": "landscape", "label": "t:sections.all.ratio_landscape" },
+        { "value": "wide", "label": "t:sections.blog.ratio_wide" }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:sections.multirow.corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "row_gap",
+      "label": "t:sections.multirow.row_gap",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "header",
+      "content": "t:labels.content_settings"
+    },
+    {
+      "type": "select",
+      "id": "content_style",
+      "label": "t:sections.multirow.content_style",
+      "options": [
+        { "value": "plain", "label": "t:sections.multirow.content_plain" },
+        { "value": "card", "label": "t:sections.multirow.content_card" }
+      ],
+      "default": "plain"
+    },
+    {
+      "type": "color_scheme",
+      "id": "card_color_scheme",
+      "label": "t:sections.multirow.card_color_scheme",
+      "default": "scheme-2",
+      "visible_if": "{{ section.settings.content_style == 'card' }}"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "t:labels.content_position_vertical",
+      "options": [
+        { "value": "top", "label": "t:options.vertical_position.top" },
+        { "value": "middle", "label": "t:options.vertical_position.middle" },
+        { "value": "bottom", "label": "t:options.vertical_position.bottom" }
+      ],
+      "default": "middle"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:sections.multirow.alignment",
+      "options": [
+        { "value": "left", "label": "t:options.alignment.left" },
+        { "value": "center", "label": "t:options.alignment.center" },
+        { "value": "right", "label": "t:options.alignment.right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "t:sections.multirow.content_width",
+      "min": 320,
+      "max": 720,
+      "step": 20,
+      "unit": "px",
+      "default": 480
+    },
+    {
+      "type": "select",
+      "id": "row_heading_class",
+      "label": "t:sections.multirow.row_heading_size",
+      "options": [
+        { "value": "h6", "label": "t:options.heading_size.extra_small" },
+        { "value": "h5", "label": "t:options.heading_size.small" },
+        { "value": "h4", "label": "t:options.heading_size.medium" },
+        { "value": "h3", "label": "t:options.heading_size.large" },
+        { "value": "h2", "label": "t:options.heading_size.extra_large" },
+        { "value": "h1", "label": "t:options.heading_size.huge" }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "t:sections.multirow.text_size",
+      "options": [
+        { "value": "small", "label": "t:options.heading_size.small" },
+        { "value": "medium", "label": "t:options.heading_size.medium" },
+        { "value": "large", "label": "t:options.heading_size.large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:labels.button_style",
+      "options": [
+        { "value": "primary", "label": "t:options.button_style.primary" },
+        { "value": "secondary", "label": "t:options.button_style.secondary" },
+        { "value": "link", "label": "t:sections.multirow.button_link_style" }
+      ],
+      "default": "secondary"
+    },
+    {
+      "type": "header",
+      "content": "t:labels.mobile_settings"
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_position",
+      "label": "t:sections.multirow.mobile_image_position",
+      "options": [
+        { "value": "first", "label": "t:sections.multirow.mobile_image_first" },
+        { "value": "last", "label": "t:sections.multirow.mobile_image_last" }
+      ],
+      "default": "first"
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "label": "t:sections.multirow.mobile_alignment",
+      "options": [
+        { "value": "left", "label": "t:options.alignment.left" },
+        { "value": "center", "label": "t:options.alignment.center" },
+        { "value": "right", "label": "t:options.alignment.right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:general.section"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        { "value": "full", "label": "t:options.section_width.full" },
+        { "value": "page", "label": "t:options.section_width.page" }
+      ],
+      "default": "page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:labels.padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:labels.padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "t:sections.multirow.row",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.multirow.image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "t:labels.mobile_image",
+          "info": "t:labels.mobile_image_info"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "t:sections.multirow.row_image_position",
+          "options": [
+            { "value": "auto", "label": "t:sections.multirow.row_position_auto" },
+            { "value": "left", "label": "t:sections.multirow.position_left" },
+            { "value": "right", "label": "t:sections.multirow.position_right" }
+          ],
+          "default": "auto"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "t:sections.multirow.caption"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:labels.heading",
+          "default": "Row heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:labels.text",
+          "default": "<p>Pair text with an image to tell a story, explain a detail or highlight a product.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "t:sections.multirow.button_label",
+          "default": "Learn more"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.multirow.button_link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.multirow.name",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "caption": "Craft",
+            "heading": "Woven to last",
+            "text": "<p>Every piece starts with fabric chosen for how it wears, washes and ages, not just how it looks on day one.</p>",
+            "button_label": "Our materials"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "caption": "Fit",
+            "heading": "Cut for real life",
+            "text": "<p>Relaxed where you move, tailored where it counts. Tried on, adjusted and tried on again.</p>",
+            "button_label": "Find your fit"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "caption": "Care",
+            "heading": "Made to be worn",
+            "text": "<p>Simple care, honest materials and repairs when you need them, so your favorites stay favorites.</p>",
+            "button_label": "Care guide"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
