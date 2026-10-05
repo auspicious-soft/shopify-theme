@@ -52,7 +52,7 @@
         "image_ratio": "landscape",
         "show_date": true,
         "show_author": false,
-        "show_excerpt": false,
+        "show_excerpt": true,
         "read_more": "Read more",
         "width": "page",
         "color_scheme": "scheme-1",
