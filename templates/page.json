@@ -169,7 +169,7 @@
         "button_link": "",
         "button_style": "primary",
         "color_scheme": "",
-        "card": false,
+        "card": true,
         "card_color_scheme": "",
         "padding_top": 40,
         "padding_bottom": 56
