@@ -90,7 +90,7 @@
         "layout": "side",
         "image_position": "right",
         "image_width": "medium",
-        "content_position": "middle",
+        "content_position": "top",
         "alignment": "left",
         "mobile_alignment": "left",
         "mobile_image_position": "first",
