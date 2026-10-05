@@ -56,10 +56,79 @@
         "padding_top": 64,
         "padding_bottom": 64
       }
+    },
+    "image_with_text_7kC9T4": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption_Kc9UYV": {
+          "type": "caption",
+          "settings": {
+            "caption": "New collection",
+            "style": "uppercase",
+            "size": "small"
+          }
+        },
+        "heading_e9Mfin": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image with text",
+            "heading_tag": "h2",
+            "heading_class": "h2",
+            "uppercase": false
+          }
+        },
+        "text_G96ND8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "size": "medium"
+          }
+        },
+        "buttons_XDrkqY": {
+          "type": "buttons",
+          "settings": {
+            "button_label": "Shop now",
+            "button_link": "",
+            "button_style": "primary",
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_2": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "caption_Kc9UYV",
+        "heading_e9Mfin",
+        "text_G96ND8",
+        "buttons_XDrkqY"
+      ],
+      "name": "t:sections.image_with_text.name",
+      "settings": {
+        "media_type": "image",
+        "image": "shopify://shop_images/Hero_Image_2.png",
+        "image_ratio": "portrait",
+        "corner_radius": 0,
+        "layout": "side",
+        "image_position": "right",
+        "image_width": "medium",
+        "content_position": "middle",
+        "alignment": "left",
+        "mobile_alignment": "left",
+        "mobile_image_position": "first",
+        "content_width": 520,
+        "gap": 48,
+        "width": "page",
+        "color_scheme": "",
+        "content_card": false,
+        "content_color_scheme": "",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
     "main",
-    "rich_text_B3RJFD"
+    "rich_text_B3RJFD",
+    "image_with_text_7kC9T4"
   ]
 }
