@@ -17,6 +17,8 @@
   @param {boolean} [show_tags] - Show the article's tags
   @param {boolean} [show_topic] - Show the first tag as a small label above the title
   @param {string} [skip_tag] - A tag never used as the topic (e.g. the blog's "featured" tag)
+  @param {boolean} [title_uppercase] - Uppercase, bold title
+  @param {string} [meta_position] - Date line above the title ('top', default) or at the bottom of the card ('bottom')
   @param {boolean} [show_reading_time] - Add "x min read" to the date line
   @param {string} [read_more] - "Read more" link label; blank hides it
   @param {string} [read_more_style] - text (default), primary or secondary (button)
@@ -107,8 +109,9 @@
       <p class="article-card__topic">{{ topic | escape }}</p>
     {%- endif -%}
 
+    {%- capture meta -%}
     {%- if show_date != false or show_author or show_reading_time -%}
-      <p class="article-card__meta">
+      <p class="article-card__meta article-card__meta--{{ meta_position | default: 'top' }}">
         {%- if show_date != false -%}
           {{ article.published_at | time_tag: format: 'date' }}
         {%- endif -%}
@@ -126,8 +129,11 @@
         {%- endif -%}
       </p>
     {%- endif -%}
+    {%- endcapture -%}
 
-    <{{ heading_tag }} class="article-card__title{% if featured %} h3{% endif %}">
+    {%- unless meta_position == 'bottom' -%}{{ meta }}{%- endunless -%}
+
+    <{{ heading_tag }} class="article-card__title{% if featured %} h3{% endif %}{% if title_uppercase %} article-card__title--uppercase{% endif %}">
       <a href="{{ article.url }}" class="article-card__link">{{ article.title | escape }}</a>
     </{{ heading_tag }}>
 
@@ -142,6 +148,8 @@
         {%- endfor -%}
       </ul>
     {%- endif -%}
+
+    {%- if meta_position == 'bottom' -%}{{ meta }}{%- endif -%}
 
     {%- if read_more != blank -%}
       {%- comment -%}

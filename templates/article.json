@@ -40,7 +40,7 @@
     "related_articles": {
       "type": "related-articles",
       "settings": {
-        "heading": "You may also like",
+        "heading": "Related editorial stories",
         "heading_tag": "h2",
         "heading_class": "h3",
         "heading_alignment": "left",
@@ -52,12 +52,17 @@
         "image_ratio": "landscape",
         "show_date": true,
         "show_author": false,
-        "show_excerpt": false,
-        "read_more": "Read more",
+        "show_excerpt": true,
+        "read_more": "",
         "width": "page",
         "color_scheme": "scheme-2",
         "padding_top": 64,
-        "padding_bottom": 64
+        "padding_bottom": 64,
+        "subheading": "Keep reading",
+        "show_topic": true,
+        "title_uppercase": true,
+        "show_reading_time": true,
+        "meta_position": "bottom"
       }
     }
   },

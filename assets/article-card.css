@@ -112,6 +112,26 @@
   line-height: 1.3;
 }
 
+.article-card__title--uppercase {
+  font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Date line at the bottom of the card: pushed down so cards in a row line
+   up, with the date in bold. */
+.article-card__meta--bottom {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.article-card__meta--bottom time {
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+
 .article-card__link {
   color: inherit;
   text-decoration: none;

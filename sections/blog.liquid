@@ -4,12 +4,13 @@
   then the articles as a grid or list with numbered pagination.
 
   "Feature the first article" shows the newest article above the others on
-  page 1 (grid layout, no tag filter active), either as a large card or as
+  page 1 (grid layout, on every tag tab too), either as a large card or as
   an editorial "story": label, title, the excerpt as a pull quote, the
   opening of the article, date and reading time, beside the image.
 
   The featured article is the newest post, or the newest post with a chosen
   tag (e.g. "featured"); that tag is left out of the filter and card topics.
+  It's looked up in the whole blog, so it stays the same on every tag tab.
   The tag filter (pills or underlined text tabs) sits below the featured
   article, above the grid.
   Cards come from snippets/article-card.liquid and follow Theme settings >
@@ -68,6 +69,10 @@
     {%- endif -%}
 
     {%- liquid
+      # On a tag page blog.articles only holds that tag's posts, so the
+      # featured article comes from the whole blog.
+      assign all_articles = blogs[blog.handle].articles | default: blog.articles
+
       # Featured article chosen by tag: the newest article carrying it.
       assign featured_tag_name = ''
       assign featured_tag_key = ''
@@ -75,7 +80,7 @@
       if section.settings.featured_source == 'tag' and section.settings.featured_tag != blank
         assign featured_tag_name = section.settings.featured_tag | strip
         assign featured_tag_key = featured_tag_name | downcase
-        for candidate in blog.articles
+        for candidate in all_articles
           for candidate_tag in candidate.tags
             assign candidate_key = candidate_tag | downcase
             if candidate_key == featured_tag_key
@@ -134,10 +139,10 @@
     {%- paginate blog.articles by section.settings.articles_per_page -%}
       {%- liquid
         assign featured_first = false
-        if section.settings.feature_first and layout == 'grid' and paginate.current_page == 1 and current_tags == blank
+        if section.settings.feature_first and layout == 'grid' and paginate.current_page == 1
           assign featured_first = true
         endif
-        assign feature = blog.articles.first
+        assign feature = all_articles.first | default: blog.articles.first
         if tagged_feature
           assign feature = tagged_feature
         endif

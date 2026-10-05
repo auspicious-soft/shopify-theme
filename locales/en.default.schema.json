@@ -1001,7 +1001,11 @@
       "show_view_all": "Show \"View all articles\" link",
       "articles_to_show": "Articles to show",
       "layout_slider": "Carousel",
-      "columns_mobile_info": "Carousel shows part of the next article"
+      "columns_mobile_info": "Carousel shows part of the next article",
+      "meta_position": "Date position",
+      "meta_top": "Above the title",
+      "meta_bottom": "Bottom of the card",
+      "title_uppercase": "Uppercase titles"
     },
     "breadcrumbs": {
       "show": "Show breadcrumbs",

@@ -25,6 +25,26 @@
   text-align: center;
 }
 
+.related-articles__titles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.related-articles__header--center .related-articles__titles {
+  align-items: center;
+}
+
+/* Small label above the heading, e.g. "Keep reading". */
+.related-articles__subheading {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
+}
+
 .related-articles__heading {
   margin: 0;
 }
