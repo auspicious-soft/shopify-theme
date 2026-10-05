@@ -809,6 +809,77 @@
         "padding_top": 32,
         "padding_bottom": 64
       }
+    },
+    "multirow_aV78Gf": {
+      "type": "multirow",
+      "blocks": {
+        "row_rzV8X6": {
+          "type": "row",
+          "settings": {
+            "image_position": "auto",
+            "caption": "Craft",
+            "heading": "Woven to last",
+            "text": "<p>Every piece starts with fabric chosen for how it wears, washes and ages, not just how it looks on day one.</p>",
+            "button_label": "Our materials",
+            "button_link": ""
+          }
+        },
+        "row_KmDQ8W": {
+          "type": "row",
+          "settings": {
+            "image_position": "auto",
+            "caption": "Fit",
+            "heading": "Cut for real life",
+            "text": "<p>Relaxed where you move, tailored where it counts. Tried on, adjusted and tried on again.</p>",
+            "button_label": "Find your fit",
+            "button_link": ""
+          }
+        },
+        "row_NHFTDK": {
+          "type": "row",
+          "settings": {
+            "image_position": "auto",
+            "caption": "Care",
+            "heading": "Made to be worn",
+            "text": "<p>Simple care, honest materials and repairs when you need them, so your favorites stay favorites.</p>",
+            "button_label": "Care guide",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_rzV8X6",
+        "row_KmDQ8W",
+        "row_NHFTDK"
+      ],
+      "name": "t:sections.multirow.name",
+      "settings": {
+        "subheading": "",
+        "heading": "Made to last",
+        "heading_tag": "h2",
+        "heading_class": "h2",
+        "description": "",
+        "heading_alignment": "center",
+        "image_position": "alternate_left",
+        "image_width": "medium",
+        "image_ratio": "portrait",
+        "corner_radius": 0,
+        "row_gap": 64,
+        "content_style": "plain",
+        "card_color_scheme": "",
+        "content_position": "middle",
+        "alignment": "left",
+        "content_width": 480,
+        "row_heading_class": "h3",
+        "text_size": "medium",
+        "button_style": "secondary",
+        "mobile_image_position": "first",
+        "mobile_alignment": "left",
+        "width": "page",
+        "color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     }
   },
   "order": [
@@ -825,6 +896,7 @@
     "multicolumn_Jn7mQR",
     "video_BxDwVW",
     "collapsible_content_LNyBUz",
-    "featured_product_tUwAFc"
+    "featured_product_tUwAFc",
+    "multirow_aV78Gf"
   ]
 }
