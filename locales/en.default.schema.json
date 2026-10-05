@@ -948,7 +948,22 @@
       "read_more": "\"Read more\" label",
       "read_more_info": "Leave empty to hide",
       "read_more_style": "\"Read more\" style",
-      "read_more_text": "Text link"
+      "read_more_text": "Text link",
+      "tag_style": "Tag filter style",
+      "tag_style_pills": "Pills",
+      "tag_style_tabs": "Text tabs (underlined)",
+      "all_label": "\"All\" label",
+      "all_label_info": "e.g. \"All stories\". Leave empty to use \"All\"",
+      "featured_style": "Featured article style",
+      "featured_card": "Large card",
+      "featured_story": "Editorial story (text beside image)",
+      "featured_image_position": "Featured image position",
+      "featured_label": "Featured label",
+      "featured_uppercase": "Uppercase featured title",
+      "featured_words": "Featured text length (words)",
+      "featured_words_info": "The article's excerpt shows as an italic quote; this sets how much of the article text follows it. 0 hides it",
+      "show_topic": "Show topic above title",
+      "show_topic_info": "The article's first tag"
     },
     "article": {
       "header_image": "Featured image",

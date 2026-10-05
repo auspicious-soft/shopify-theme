@@ -3,8 +3,12 @@
   a row of tag filters (All / each tag, using Shopify's /tagged/ URLs),
   then the articles as a grid or list with numbered pagination.
 
-  "Feature the first article" shows the newest article as a large card
-  above the others on page 1 (grid layout, no tag filter active).
+  "Feature the first article" shows the newest article above the others on
+  page 1 (grid layout, no tag filter active), either as a large card or as
+  an editorial "story": label, title, the excerpt as a pull quote, the
+  opening of the article, date and reading time, beside the image.
+
+  The tag filter shows as pills or as underlined text tabs.
   Cards come from snippets/article-card.liquid and follow Theme settings >
   Blog cards.
 
@@ -61,7 +65,7 @@
     {%- endif -%}
 
     {%- if section.settings.show_tag_filter and blog.all_tags.size > 0 -%}
-      <nav class="blog__tags" aria-label="{{ 'blog.filter_by_tag' | t }}">
+      <nav class="blog__tags blog__tags--{{ section.settings.tag_style | default: 'pills' }}" aria-label="{{ 'blog.filter_by_tag' | t }}">
         <ul class="blog__tag-list" role="list">
           <li>
             <a
@@ -69,7 +73,11 @@
               class="blog__tag{% if current_tags == blank %} is-active{% endif %}"
               {% if current_tags == blank %}aria-current="page"{% endif %}
             >
-              {{- 'blog.all' | t -}}
+              {%- if section.settings.all_label != blank -%}
+                {{- section.settings.all_label | escape -}}
+              {%- else -%}
+                {{- 'blog.all' | t -}}
+              {%- endif -%}
             </a>
           </li>
           {%- for tag in blog.all_tags -%}
@@ -100,7 +108,60 @@
       -%}
 
       {%- if blog.articles.size > 0 -%}
-        {%- if featured_first -%}
+        {%- if featured_first and section.settings.featured_style == 'story' -%}
+          {%- liquid
+            assign feature = blog.articles.first
+            assign feature_words = feature.content | strip_html | split: ' ' | size
+            assign feature_minutes = feature_words | plus: 199 | divided_by: 200 | at_least: 1
+            # With the blog title hidden, the story title is the page's main heading.
+            assign feature_tag = 'h2'
+            unless section.settings.show_title
+              assign feature_tag = 'h1'
+            endunless
+          -%}
+          <article
+            class="blog-feature blog-feature--image-{{ section.settings.featured_image_position }}{% unless feature.image %} blog-feature--no-image{% endunless %}"
+            {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
+          >
+            <div class="blog-feature__content">
+              {%- if section.settings.featured_label != blank -%}
+                <p class="blog-feature__label">{{ section.settings.featured_label | escape }}</p>
+              {%- endif -%}
+              <{{ feature_tag }} class="blog-feature__title{% if section.settings.featured_uppercase %} blog-feature__title--uppercase{% endif %}">
+                <a href="{{ feature.url }}">{{ feature.title | escape }}</a>
+              </{{ feature_tag }}>
+              {%- if feature.excerpt != blank -%}
+                <blockquote class="blog-feature__quote">{{ feature.excerpt | strip_html | truncatewords: 45 }}</blockquote>
+              {%- endif -%}
+              {%- if section.settings.featured_words > 0 -%}
+                <p class="blog-feature__text">{{ feature.content | strip_html | truncatewords: section.settings.featured_words }}</p>
+              {%- endif -%}
+              <p class="blog-feature__meta">
+                {%- if section.settings.show_date -%}
+                  <span class="blog-feature__meta-item">{{ feature.published_at | time_tag: format: 'date' }}</span>
+                {%- endif -%}
+                {%- if section.settings.show_reading_time -%}
+                  <span class="blog-feature__meta-item">{{ 'blog.reading_time' | t: count: feature_minutes }}</span>
+                {%- endif -%}
+              </p>
+            </div>
+            {%- if feature.image -%}
+              <a href="{{ feature.url }}" class="blog-feature__media" tabindex="-1" aria-hidden="true">
+                {{
+                  feature.image
+                  | image_url: width: 1800
+                  | image_tag:
+                    class: 'blog-feature__image',
+                    widths: '600, 900, 1200, 1500, 1800',
+                    sizes: '(min-width: 750px) 60vw, 100vw',
+                    loading: 'eager',
+                    fetchpriority: 'high',
+                    alt: feature.image.alt
+                }}
+              </a>
+            {%- endif -%}
+          </article>
+        {%- elsif featured_first -%}
           <div class="blog__featured">
             {% render 'article-card',
               article: blog.articles.first,
@@ -113,6 +174,8 @@
               show_excerpt: section.settings.show_excerpt,
               excerpt_words: section.settings.excerpt_words,
               show_tags: section.settings.show_card_tags,
+              show_topic: section.settings.show_topic,
+              show_reading_time: section.settings.show_reading_time,
               read_more: section.settings.read_more,
               read_more_style: section.settings.read_more_style,
               heading_tag: card_heading_tag,
@@ -144,6 +207,8 @@
                 show_excerpt: section.settings.show_excerpt,
                 excerpt_words: section.settings.excerpt_words,
                 show_tags: section.settings.show_card_tags,
+                show_topic: section.settings.show_topic,
+                show_reading_time: section.settings.show_reading_time,
                 read_more: section.settings.read_more,
                 read_more_style: section.settings.read_more_style,
                 heading_tag: card_heading_tag,
@@ -198,12 +263,30 @@
       "label": "t:labels.heading_tag",
       "info": "t:labels.heading_tag_info",
       "options": [
-        { "value": "h1", "label": "H1" },
-        { "value": "h2", "label": "H2" },
-        { "value": "h3", "label": "H3" },
-        { "value": "h4", "label": "H4" },
-        { "value": "h5", "label": "H5" },
-        { "value": "h6", "label": "H6" }
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
       ],
       "default": "h1"
     },
@@ -213,12 +296,30 @@
       "label": "t:labels.heading_class",
       "info": "t:labels.heading_class_info",
       "options": [
-        { "value": "h6", "label": "t:options.heading_size.extra_small" },
-        { "value": "h5", "label": "t:options.heading_size.small" },
-        { "value": "h4", "label": "t:options.heading_size.medium" },
-        { "value": "h3", "label": "t:options.heading_size.large" },
-        { "value": "h2", "label": "t:options.heading_size.extra_large" },
-        { "value": "h1", "label": "t:options.heading_size.huge" }
+        {
+          "value": "h6",
+          "label": "t:options.heading_size.extra_small"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.heading_size.small"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.heading_size.medium"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.heading_size.large"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.heading_size.extra_large"
+        },
+        {
+          "value": "h1",
+          "label": "t:options.heading_size.huge"
+        }
       ],
       "default": "h2"
     },
@@ -233,8 +334,14 @@
       "id": "heading_alignment",
       "label": "t:labels.alignment",
       "options": [
-        { "value": "left", "label": "t:options.alignment.left" },
-        { "value": "center", "label": "t:options.alignment.center" }
+        {
+          "value": "left",
+          "label": "t:options.alignment.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.alignment.center"
+        }
       ],
       "default": "left"
     },
@@ -246,6 +353,30 @@
       "default": true
     },
     {
+      "type": "select",
+      "id": "tag_style",
+      "label": "t:sections.blog.tag_style",
+      "options": [
+        {
+          "value": "pills",
+          "label": "t:sections.blog.tag_style_pills"
+        },
+        {
+          "value": "tabs",
+          "label": "t:sections.blog.tag_style_tabs"
+        }
+      ],
+      "default": "pills",
+      "visible_if": "{{ section.settings.show_tag_filter }}"
+    },
+    {
+      "type": "text",
+      "id": "all_label",
+      "label": "t:sections.blog.all_label",
+      "info": "t:sections.blog.all_label_info",
+      "visible_if": "{{ section.settings.show_tag_filter }}"
+    },
+    {
       "type": "header",
       "content": "t:sections.all.layout"
     },
@@ -254,8 +385,14 @@
       "id": "layout",
       "label": "t:sections.all.layout",
       "options": [
-        { "value": "grid", "label": "t:sections.blog.layout_grid" },
-        { "value": "list", "label": "t:sections.blog.layout_list" }
+        {
+          "value": "grid",
+          "label": "t:sections.blog.layout_grid"
+        },
+        {
+          "value": "list",
+          "label": "t:sections.blog.layout_list"
+        }
       ],
       "default": "grid"
     },
@@ -265,6 +402,65 @@
       "label": "t:sections.blog.feature_first",
       "info": "t:sections.blog.feature_first_info",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "featured_style",
+      "label": "t:sections.blog.featured_style",
+      "options": [
+        {
+          "value": "card",
+          "label": "t:sections.blog.featured_card"
+        },
+        {
+          "value": "story",
+          "label": "t:sections.blog.featured_story"
+        }
+      ],
+      "default": "card",
+      "visible_if": "{{ section.settings.feature_first }}"
+    },
+    {
+      "type": "select",
+      "id": "featured_image_position",
+      "label": "t:sections.blog.featured_image_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:options.alignment.left"
+        },
+        {
+          "value": "right",
+          "label": "t:options.alignment.right"
+        }
+      ],
+      "default": "right",
+      "visible_if": "{{ section.settings.feature_first and section.settings.featured_style == 'story' }}"
+    },
+    {
+      "type": "text",
+      "id": "featured_label",
+      "label": "t:sections.blog.featured_label",
+      "default": "Featured story",
+      "visible_if": "{{ section.settings.feature_first and section.settings.featured_style == 'story' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "featured_uppercase",
+      "label": "t:sections.blog.featured_uppercase",
+      "default": true,
+      "visible_if": "{{ section.settings.feature_first and section.settings.featured_style == 'story' }}"
+    },
+    {
+      "type": "range",
+      "id": "featured_words",
+      "label": "t:sections.blog.featured_words",
+      "info": "t:sections.blog.featured_words_info",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 40,
+      "visible_if": "{{ section.settings.feature_first and section.settings.featured_style == 'story' }}"
     },
     {
       "type": "range",
@@ -291,8 +487,14 @@
       "id": "columns_mobile",
       "label": "t:sections.all.columns_mobile",
       "options": [
-        { "value": "1", "label": "1" },
-        { "value": "2", "label": "2" }
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
       ],
       "default": "1"
     },
@@ -325,11 +527,26 @@
       "id": "image_ratio",
       "label": "t:sections.blog.image_ratio",
       "options": [
-        { "value": "adapt", "label": "t:sections.all.ratio_adapt" },
-        { "value": "landscape", "label": "t:sections.all.ratio_landscape" },
-        { "value": "wide", "label": "t:sections.blog.ratio_wide" },
-        { "value": "square", "label": "t:sections.all.ratio_square" },
-        { "value": "portrait", "label": "t:sections.all.ratio_portrait" }
+        {
+          "value": "adapt",
+          "label": "t:sections.all.ratio_adapt"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.all.ratio_landscape"
+        },
+        {
+          "value": "wide",
+          "label": "t:sections.blog.ratio_wide"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.all.ratio_square"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.all.ratio_portrait"
+        }
       ],
       "default": "landscape"
     },
@@ -350,6 +567,19 @@
       "id": "show_author",
       "label": "t:sections.blog.show_author",
       "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reading_time",
+      "label": "t:sections.article.show_reading_time",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_topic",
+      "label": "t:sections.blog.show_topic",
+      "info": "t:sections.blog.show_topic_info",
+      "default": true
     },
     {
       "type": "checkbox",
@@ -385,9 +615,18 @@
       "id": "read_more_style",
       "label": "t:sections.blog.read_more_style",
       "options": [
-        { "value": "text", "label": "t:sections.blog.read_more_text" },
-        { "value": "primary", "label": "t:options.button_style.primary" },
-        { "value": "secondary", "label": "t:options.button_style.secondary" }
+        {
+          "value": "text",
+          "label": "t:sections.blog.read_more_text"
+        },
+        {
+          "value": "primary",
+          "label": "t:options.button_style.primary"
+        },
+        {
+          "value": "secondary",
+          "label": "t:options.button_style.secondary"
+        }
       ],
       "default": "text"
     },
@@ -400,8 +639,14 @@
       "id": "width",
       "label": "t:labels.section_width",
       "options": [
-        { "value": "full", "label": "t:options.section_width.full" },
-        { "value": "page", "label": "t:options.section_width.page" }
+        {
+          "value": "full",
+          "label": "t:options.section_width.full"
+        },
+        {
+          "value": "page",
+          "label": "t:options.section_width.page"
+        }
       ],
       "default": "page"
     },

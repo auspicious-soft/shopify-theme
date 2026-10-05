@@ -15,6 +15,8 @@
   @param {boolean} [show_excerpt] - Show the excerpt (default true)
   @param {number} [excerpt_words] - Words to show when the article has no excerpt (default 30)
   @param {boolean} [show_tags] - Show the article's tags
+  @param {boolean} [show_topic] - Show the first tag as a small label above the title
+  @param {boolean} [show_reading_time] - Add "x min read" to the date line
   @param {string} [read_more] - "Read more" link label; blank hides it
   @param {string} [read_more_style] - text (default), primary or secondary (button)
   @param {string} [heading_tag] - Title tag, defaults to h3
@@ -55,6 +57,11 @@
     assign loading = 'eager'
   endif
 
+  if show_reading_time
+    assign word_count = article.content | strip_html | split: ' ' | size
+    assign reading_minutes = word_count | plus: 199 | divided_by: 200 | at_least: 1
+  endif
+
   if article.excerpt != blank
     assign excerpt = article.excerpt | strip_html | truncatewords: excerpt_words
   else
@@ -83,7 +90,11 @@
   {%- endif -%}
 
   <div class="article-card__content">
-    {%- if show_date != false or show_author -%}
+    {%- if show_topic and article.tags.size > 0 -%}
+      <p class="article-card__topic">{{ article.tags.first | escape }}</p>
+    {%- endif -%}
+
+    {%- if show_date != false or show_author or show_reading_time -%}
       <p class="article-card__meta">
         {%- if show_date != false -%}
           {{ article.published_at | time_tag: format: 'date' }}
@@ -93,6 +104,12 @@
         {%- endif -%}
         {%- if show_author and article.author != blank -%}
           <span>{{ 'blog.by_author' | t: author: article.author }}</span>
+        {%- endif -%}
+        {%- if show_reading_time -%}
+          {%- if show_date != false or show_author and article.author != blank -%}
+            <span class="article-card__meta-dot" aria-hidden="true">·</span>
+          {%- endif -%}
+          <span>{{ 'blog.reading_time' | t: count: reading_minutes }}</span>
         {%- endif -%}
       </p>
     {%- endif -%}
