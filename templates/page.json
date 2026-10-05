@@ -25,7 +25,7 @@
         "caption_yhcEXj": {
           "type": "caption",
           "settings": {
-            "caption": "Our story",
+            "caption": "OUR PHILOSOPHY & GENESIS",
             "style": "uppercase",
             "size": "small"
           }
@@ -33,10 +33,10 @@
         "heading_PThJEq": {
           "type": "heading",
           "settings": {
-            "heading": "Talk about your brand",
+            "heading": "&nbsp;Weaving Slow Stories: Our Mill Legacy&nbsp;",
             "heading_tag": "h2",
             "heading_class": "h2",
-            "uppercase": false
+            "uppercase": true
           }
         }
       },
