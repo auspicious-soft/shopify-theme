@@ -102,7 +102,7 @@
     {%- paginate blog.articles by section.settings.articles_per_page -%}
       {%- liquid
         assign featured_first = false
-        if section.settings.feature_first and layout == 'grid' and paginate.current_page == 1 and current_tags == blank and blog.articles.size > 1
+        if section.settings.feature_first and layout == 'grid' and paginate.current_page == 1 and current_tags == blank
           assign featured_first = true
         endif
       -%}
@@ -185,6 +185,7 @@
           </div>
         {%- endif -%}
 
+        {%- unless featured_first and blog.articles.size == 1 -%}
         <ul class="blog__grid blog__grid--{{ layout }}" role="list">
           {%- for article in blog.articles -%}
             {%- if featured_first and forloop.first -%}
@@ -218,6 +219,7 @@
             </li>
           {%- endfor -%}
         </ul>
+        {%- endunless -%}
 
         {% render 'pagination', paginate: paginate %}
       {%- else -%}
