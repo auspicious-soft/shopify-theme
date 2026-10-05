@@ -293,9 +293,9 @@
         "column_Jir6yi": {
           "type": "column",
           "settings": {
-            "number": "",
-            "title": "Free shipping",
-            "text": "<p>On all orders over $100, delivered to your door in 3–5 days.</p>",
+            "number": "2018",
+            "title": "Archive Exploration",
+            "text": "<p>Elena and Arthur journey through the historic wool mills of Biella, solidifying the slow-weaving loom philosophy.</p>",
             "link_label": "",
             "link": ""
           }
@@ -303,9 +303,9 @@
         "column_6xwePi": {
           "type": "column",
           "settings": {
-            "number": "",
-            "title": "30-day returns",
-            "text": "<p>Not the right fit? Send it back within 30 days for a full refund.</p>",
+            "number": "2020",
+            "title": "Atelier Foundation",
+            "text": "<p>Our first small-scale design studio opens, strictly limiting production to 100 numbered coats per season.</p>",
             "link_label": "",
             "link": ""
           }
@@ -313,9 +313,19 @@
         "column_eEnr3X": {
           "type": "column",
           "settings": {
-            "number": "",
-            "title": "Secure checkout",
-            "text": "<p>Pay safely with all major cards, Shop Pay and PayPal.</p>",
+            "number": "2022",
+            "title": "Kyoto Alliance",
+            "text": "<p>Partnering with multi-generational slub silk weavers in Kyoto to source sustainable, natural silk linings.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_zwEmdq": {
+          "type": "column",
+          "settings": {
+            "number": "2025",
+            "title": "Circular Mill Sourcing",
+            "text": "<p>100% of our raw cashmere is certified directly traceable to independent, regenerative sheep ranches.</p>",
             "link_label": "",
             "link": ""
           }
@@ -324,7 +334,8 @@
       "block_order": [
         "column_Jir6yi",
         "column_6xwePi",
-        "column_eEnr3X"
+        "column_eEnr3X",
+        "column_zwEmdq"
       ],
       "name": "t:sections.multicolumn.name",
       "settings": {
