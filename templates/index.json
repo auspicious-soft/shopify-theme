@@ -572,7 +572,7 @@
         "column_EfMA8k": {
           "type": "column",
           "settings": {
-            "number": "01",
+            "number": "",
             "title": "Free shipping",
             "text": "<p>On all orders over $100, delivered to your door in 3–5 days.</p>",
             "link_label": "",
@@ -619,7 +619,7 @@
         "column_alignment": "center",
         "gap": 32,
         "width": "page",
-        "column_media": "number",
+        "column_media": "image",
         "number_format": "padded",
         "number_size": "large",
         "image_ratio": "adapt",
