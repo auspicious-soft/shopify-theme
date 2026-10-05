@@ -49,7 +49,8 @@
         "width": "page",
         "color_scheme": "scheme-869fd07f-c7fd-47b7-9b47-86d04d72fa7f",
         "padding_top": 48,
-        "padding_bottom": 80
+        "padding_bottom": 80,
+        "meta_position": "bottom"
       }
     }
   },

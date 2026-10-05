@@ -217,6 +217,7 @@
               show_topic: section.settings.show_topic,
               skip_tag: featured_tag_name,
               show_reading_time: section.settings.show_reading_time,
+              meta_position: section.settings.meta_position,
               read_more: section.settings.read_more,
               read_more_style: section.settings.read_more_style,
               heading_tag: card_heading_tag,
@@ -253,6 +254,7 @@
                 show_topic: section.settings.show_topic,
                 skip_tag: featured_tag_name,
                 show_reading_time: section.settings.show_reading_time,
+                meta_position: section.settings.meta_position,
                 read_more: section.settings.read_more,
                 read_more_style: section.settings.read_more_style,
                 heading_tag: card_heading_tag,
@@ -649,6 +651,22 @@
       "id": "show_reading_time",
       "label": "t:sections.article.show_reading_time",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "meta_position",
+      "label": "t:sections.related_articles.meta_position",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:sections.related_articles.meta_top"
+        },
+        {
+          "value": "bottom",
+          "label": "t:sections.related_articles.meta_bottom"
+        }
+      ],
+      "default": "top"
     },
     {
       "type": "checkbox",
