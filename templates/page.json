@@ -85,7 +85,7 @@
       "settings": {
         "media_type": "image",
         "image": "shopify://shop_images/Hero_Image_2.png",
-        "image_ratio": "portrait",
+        "image_ratio": "adapt",
         "corner_radius": 0,
         "layout": "side",
         "image_position": "right",
