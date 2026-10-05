@@ -174,12 +174,81 @@
         "padding_top": 40,
         "padding_bottom": 56
       }
+    },
+    "image_with_text_aXk4fR": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption_a4QLtY": {
+          "type": "caption",
+          "settings": {
+            "caption": "New collection",
+            "style": "uppercase",
+            "size": "small"
+          }
+        },
+        "heading_VrtqxL": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image with text",
+            "heading_tag": "h2",
+            "heading_class": "h2",
+            "uppercase": false
+          }
+        },
+        "text_47kki8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "size": "medium"
+          }
+        },
+        "buttons_WVNUU6": {
+          "type": "buttons",
+          "settings": {
+            "button_label": "Shop now",
+            "button_link": "",
+            "button_style": "primary",
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_2": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "caption_a4QLtY",
+        "heading_VrtqxL",
+        "text_47kki8",
+        "buttons_WVNUU6"
+      ],
+      "name": "t:sections.image_with_text.name",
+      "settings": {
+        "media_type": "image",
+        "image": "shopify://shop_images/Craft_Image.png",
+        "image_ratio": "adapt",
+        "corner_radius": 0,
+        "layout": "side",
+        "image_position": "left",
+        "image_width": "medium",
+        "content_position": "top",
+        "alignment": "left",
+        "mobile_alignment": "left",
+        "mobile_image_position": "first",
+        "content_width": 520,
+        "gap": 48,
+        "width": "page",
+        "color_scheme": "",
+        "content_card": false,
+        "content_color_scheme": "",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
     "main",
     "rich_text_B3RJFD",
     "image_with_text_7kC9T4",
-    "multicolumn_WLkhDY"
+    "multicolumn_WLkhDY",
+    "image_with_text_aXk4fR"
   ]
 }
