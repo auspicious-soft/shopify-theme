@@ -23,6 +23,8 @@
         "all_label": "All stories",
         "layout": "grid",
         "feature_first": true,
+        "featured_source": "tag",
+        "featured_tag": "featured",
         "featured_style": "story",
         "featured_image_position": "right",
         "featured_label": "Featured story",
