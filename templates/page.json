@@ -11,13 +11,55 @@
   "sections": {
     "main": {
       "type": "page",
+      "disabled": true,
       "settings": {
+        "show_breadcrumbs": true,
         "heading_tag": "h1",
-        "heading_class": "h2"
+        "heading_class": "h2",
+        "width": "page"
+      }
+    },
+    "rich_text_B3RJFD": {
+      "type": "rich-text",
+      "blocks": {
+        "caption_yhcEXj": {
+          "type": "caption",
+          "settings": {
+            "caption": "Our story",
+            "style": "uppercase",
+            "size": "small"
+          }
+        },
+        "heading_PThJEq": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_tag": "h2",
+            "heading_class": "h2",
+            "uppercase": false
+          }
+        }
+      },
+      "block_order": [
+        "caption_yhcEXj",
+        "heading_PThJEq"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "alignment": "left",
+        "mobile_alignment": "left",
+        "position": "left",
+        "content_width": 760,
+        "block_spacing": 20,
+        "width": "page",
+        "color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "rich_text_B3RJFD"
   ]
 }
