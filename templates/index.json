@@ -572,6 +572,7 @@
         "column_EfMA8k": {
           "type": "column",
           "settings": {
+            "number": "01",
             "title": "Free shipping",
             "text": "<p>On all orders over $100, delivered to your door in 3–5 days.</p>",
             "link_label": "",
@@ -581,6 +582,7 @@
         "column_KXePcH": {
           "type": "column",
           "settings": {
+            "number": "",
             "title": "30-day returns",
             "text": "<p>Not the right fit? Send it back within 30 days for a full refund.</p>",
             "link_label": "",
@@ -590,6 +592,7 @@
         "column_d9MFn4": {
           "type": "column",
           "settings": {
+            "number": "",
             "title": "Secure checkout",
             "text": "<p>Pay safely with all major cards, Shop Pay and PayPal.</p>",
             "link_label": "",
@@ -616,6 +619,9 @@
         "column_alignment": "center",
         "gap": 32,
         "width": "page",
+        "column_media": "image",
+        "number_format": "padded",
+        "number_size": "medium",
         "image_ratio": "adapt",
         "image_width": "full",
         "corner_radius": 0,
