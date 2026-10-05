@@ -230,6 +230,74 @@
         "padding_top": 56,
         "padding_bottom": 56
       }
+    },
+    "image_with_text_7CgaFV": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption_MBYKQq": {
+          "type": "caption",
+          "settings": {
+            "caption": "THE FOUNDERS' STATEMENT",
+            "style": "uppercase",
+            "size": "small"
+          }
+        },
+        "heading_ac6GEJ": {
+          "type": "heading",
+          "settings": {
+            "heading": "A Shared Rebellion Against Disposable Fashion",
+            "heading_tag": "h2",
+            "heading_class": "h3",
+            "uppercase": false
+          }
+        },
+        "text_qfmjWb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>In 2018, while wandering the historical textile archives of northern Italy, founders Elena and Arthur noticed a profound contrast between vintage garments—heavy, structural, full of natural character—and modern retail fabrics.<br/><br/>We wanted to build an atelier that feels like a library rather than a showroom,\" Arthur reflects. \"Each design starts with a deep structural appreciation of the loom's capabilities, prioritizing raw, untreated materials over slick, computerized finishes.</p>",
+            "size": "medium"
+          }
+        },
+        "buttons_D8Lnqn": {
+          "type": "buttons",
+          "settings": {
+            "button_label": "Shop now",
+            "button_link": "",
+            "button_style": "primary",
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_2": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "caption_MBYKQq",
+        "heading_ac6GEJ",
+        "text_qfmjWb",
+        "buttons_D8Lnqn"
+      ],
+      "name": "t:sections.image_with_text.name",
+      "settings": {
+        "media_type": "image",
+        "image": "shopify://shop_images/Founders_Portrait.png",
+        "image_ratio": "adapt",
+        "corner_radius": 0,
+        "layout": "side",
+        "image_position": "left",
+        "image_width": "medium",
+        "content_position": "middle",
+        "alignment": "left",
+        "mobile_alignment": "left",
+        "mobile_image_position": "first",
+        "content_width": 520,
+        "gap": 48,
+        "width": "page",
+        "color_scheme": "",
+        "content_card": false,
+        "content_color_scheme": "",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
@@ -237,6 +305,7 @@
     "rich_text_B3RJFD",
     "image_with_text_7kC9T4",
     "multicolumn_WLkhDY",
-    "image_with_text_aXk4fR"
+    "image_with_text_aXk4fR",
+    "image_with_text_7CgaFV"
   ]
 }
