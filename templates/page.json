@@ -257,24 +257,12 @@
             "text": "<p>In 2018, while wandering the historical textile archives of northern Italy, founders Elena and Arthur noticed a profound contrast between vintage garments—heavy, structural, full of natural character—and modern retail fabrics.<br/><br/>We wanted to build an atelier that feels like a library rather than a showroom,\" Arthur reflects. \"Each design starts with a deep structural appreciation of the loom's capabilities, prioritizing raw, untreated materials over slick, computerized finishes.</p>",
             "size": "medium"
           }
-        },
-        "buttons_D8Lnqn": {
-          "type": "buttons",
-          "settings": {
-            "button_label": "Shop now",
-            "button_link": "",
-            "button_style": "primary",
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_2": "secondary"
-          }
         }
       },
       "block_order": [
         "caption_MBYKQq",
         "heading_ac6GEJ",
-        "text_qfmjWb",
-        "buttons_D8Lnqn"
+        "text_qfmjWb"
       ],
       "name": "t:sections.image_with_text.name",
       "settings": {
@@ -283,7 +271,7 @@
         "image_ratio": "adapt",
         "corner_radius": 0,
         "layout": "side",
-        "image_position": "left",
+        "image_position": "right",
         "image_width": "medium",
         "content_position": "middle",
         "alignment": "left",
