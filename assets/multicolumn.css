@@ -200,6 +200,34 @@
   align-items: center;
 }
 
+/* Right aligned. */
+.multicolumn--align-right .multicolumn__item,
+.multicolumn--align-right .multicolumn__body {
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* Mobile override ("Same as desktop" adds nothing). */
+@media screen and (max-width: 749px) {
+  .multicolumn--mobile-align-left .multicolumn__item,
+  .multicolumn--mobile-align-left .multicolumn__body {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .multicolumn--mobile-align-center .multicolumn__item,
+  .multicolumn--mobile-align-center .multicolumn__body {
+    align-items: center;
+    text-align: center;
+  }
+
+  .multicolumn--mobile-align-right .multicolumn__item,
+  .multicolumn--mobile-align-right .multicolumn__body {
+    align-items: flex-end;
+    text-align: right;
+  }
+}
+
 .multicolumn__title {
   margin: 0;
   font-size: 1.15rem;

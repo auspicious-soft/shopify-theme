@@ -47,7 +47,7 @@
 -%}
 
 <div
-  class="multicolumn multicolumn--align-{{ section.settings.column_alignment }} multicolumn--header-{{ section.settings.heading_alignment }} multicolumn--mobile-{{ section.settings.mobile_layout }} multicolumn--image-{{ section.settings.image_width }}{% if section.settings.image_ratio == 'circle' %} multicolumn--circle{% endif %}{% if section.settings.card %} multicolumn--card{% endif %} color-{{ section.settings.color_scheme.id }}"
+  class="multicolumn multicolumn--align-{{ section.settings.column_alignment }} multicolumn--mobile-align-{{ section.settings.mobile_column_alignment | default: 'same' }} multicolumn--header-{{ section.settings.heading_alignment }} multicolumn--mobile-{{ section.settings.mobile_layout }} multicolumn--image-{{ section.settings.image_width }}{% if section.settings.image_ratio == 'circle' %} multicolumn--circle{% endif %}{% if section.settings.card %} multicolumn--card{% endif %} color-{{ section.settings.color_scheme.id }}"
   style="
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -307,9 +307,37 @@
         {
           "value": "center",
           "label": "t:options.alignment.center"
+        },
+        {
+          "value": "right",
+          "label": "t:options.alignment.right"
         }
       ],
       "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "mobile_column_alignment",
+      "label": "t:sections.multicolumn.mobile_column_alignment",
+      "options": [
+        {
+          "value": "same",
+          "label": "t:sections.multicolumn.alignment_same"
+        },
+        {
+          "value": "left",
+          "label": "t:options.alignment.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.alignment.center"
+        },
+        {
+          "value": "right",
+          "label": "t:options.alignment.right"
+        }
+      ],
+      "default": "same"
     },
     {
       "type": "range",
