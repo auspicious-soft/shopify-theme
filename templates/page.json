@@ -103,11 +103,83 @@
         "padding_top": 20,
         "padding_bottom": 56
       }
+    },
+    "multicolumn_WLkhDY": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_xHVVFB": {
+          "type": "column",
+          "settings": {
+            "number": "",
+            "title": "Absolute Traceability",
+            "text": "<p>We trace our wool and silks back to specific, certified ethical ranches. We believe knowing the hands that sheared, spun, and dyed the fabric is essential to genuine quality.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_4QNDen": {
+          "type": "column",
+          "settings": {
+            "number": "",
+            "title": "Slow-Weaving Loom Philosophy",
+            "text": "<p>By employing historic shuttle looms in northern Italy, we weave at a fraction of modern industrial speeds. This gentle process respects the natural elasticity of raw cashmere.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_VKA7m3": {
+          "type": "column",
+          "settings": {
+            "number": "",
+            "title": "Sculptural Permanence",
+            "text": "<p>Our garments are engineered as wearable sculptures. We balance relaxed dropped shoulders with heavy, comforting structures designed to retain their form for decades.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_xHVVFB",
+        "column_4QNDen",
+        "column_VKA7m3"
+      ],
+      "name": "t:sections.multicolumn.name",
+      "settings": {
+        "subheading": "GUIDING PRINCIPLES",
+        "heading": "Designed with Intent, Crafted in Silence",
+        "heading_tag": "h2",
+        "heading_class": "h3",
+        "description": "",
+        "heading_alignment": "left",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "mobile_layout": "grid",
+        "column_alignment": "left",
+        "mobile_column_alignment": "same",
+        "gap": 32,
+        "width": "page",
+        "column_media": "number",
+        "number_format": "padded",
+        "number_size": "medium",
+        "image_ratio": "adapt",
+        "image_width": "full",
+        "corner_radius": 0,
+        "show_placeholders": false,
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "color_scheme": "",
+        "card": false,
+        "card_color_scheme": "",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
     "main",
     "rich_text_B3RJFD",
-    "image_with_text_7kC9T4"
+    "image_with_text_7kC9T4",
+    "multicolumn_WLkhDY"
   ]
 }
