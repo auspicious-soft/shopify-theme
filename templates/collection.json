@@ -17,7 +17,7 @@
         "heading_class": "h1",
         "show_banner": true,
         "banner_style": "image",
-        "banner_height": "large",
+        "banner_height": "medium",
         "banner_overlay": 10,
         "banner_alignment": "left",
         "show_description": true,
@@ -32,7 +32,10 @@
         "color_scheme": "scheme-1",
         "width": "page",
         "padding_top": 0,
-        "padding_bottom": 64
+        "padding_bottom": 64,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
       }
     }
   },
