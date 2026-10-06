@@ -50,10 +50,16 @@
 
 .footer__heading {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+@media screen and (min-width: 750px) {
+  .footer__heading {
+    font-size: 16px;
+  }
 }
 
 .footer__heading--large {
