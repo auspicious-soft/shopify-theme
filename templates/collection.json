@@ -30,6 +30,7 @@
         "pagination_type": "numbers",
         "enable_filtering": true,
         "filter_layout": "drawer",
+        "filter_button_size": "small",
         "enable_sorting": true,
         "color_scheme": "scheme-1",
         "width": "page",
