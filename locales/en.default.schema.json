@@ -1108,6 +1108,28 @@
       "show_title": "Show page title",
       "show_title_info": "When off, the title is still read by search engines and screen readers",
       "title_alignment": "Title alignment"
+    },
+    "cart": {
+      "show_continue_shopping": "Show continue shopping link",
+      "continue_url": "Continue shopping link",
+      "continue_url_info": "Leave empty to link to all products",
+      "summary": "Order summary",
+      "sticky_summary": "Sticky on desktop",
+      "summary_color_scheme": "Summary color scheme",
+      "show_free_shipping": "Show free shipping bar",
+      "show_free_shipping_info": "Set the threshold in Theme settings > Cart",
+      "show_terms": "Require terms agreement",
+      "show_terms_info": "Customers must tick a checkbox before checkout. Express checkout buttons skip it",
+      "terms_page": "Terms page",
+      "show_dynamic_checkout": "Show express checkout buttons",
+      "show_dynamic_checkout_info": "e.g. Shop Pay, PayPal, Apple Pay, based on your payment settings",
+      "show_payment_icons": "Show payment icons",
+      "summary_text": "Text below checkout",
+      "summary_text_info": "e.g. returns or delivery promise",
+      "empty_cart": "Empty cart",
+      "empty_collection": "Product suggestions",
+      "empty_collection_info": "Products shown when the cart is empty",
+      "empty_products_count": "Number of products"
     }
   },
   "settings_schema": {
