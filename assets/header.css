@@ -439,6 +439,14 @@ header.is-scrolled img.header__hero-logo-image {
   color: var(--header-nav-hover-color, currentColor);
 }
 
+/* Navigation > Hover color (transparent header): while the header is
+   transparent the menu links use their own hover color. Set on the links,
+   since the normal hover color is inline on the header. Logo reveal turns
+   solid on hover, so it keeps the normal hover color. */
+.header--transparent-hover.header--overlay:not(.is-scrolled):not(.header--logo_reveal) .header__menu-link {
+  --header-nav-hover-color: var(--header-nav-hover-color-transparent);
+}
+
 /* Chevron on items that have sub-links; flips while their menu is open. */
 .header__menu-chevron {
   display: inline-flex;

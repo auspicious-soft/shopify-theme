@@ -190,7 +190,9 @@
     "overlay_content_color_info": "Logo text, menu and icons while the header is transparent",
     "buttons": "Buttons",
     "button_size": "Button size",
-    "banner_color_scheme": "Banner color scheme"
+    "banner_color_scheme": "Banner color scheme",
+    "nav_hover_color_transparent": "Hover color (transparent header)",
+    "nav_hover_color_transparent_info": "Used while the header is transparent. Leave empty to use the hover color above"
   },
   "options": {
     "section_width": {

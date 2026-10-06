@@ -190,6 +190,7 @@
     {%- if is_sticky %} header--sticky{% endif -%}
     {%- if enable_overlay %} header--overlay{% endif -%}
     {%- if swap_transparent_logo %} header--swap-logo{% endif -%}
+    {%- if enable_overlay and section.settings.nav_hover_color_transparent != blank %} header--transparent-hover{% endif -%}
   "
   id="Header-{{ section.id }}"
   {% if watch_scroll %}data-watch-scroll{% endif %}
@@ -210,6 +211,9 @@
     {% endif %}
     {% if enable_overlay %}
       --header-overlay-text: {{ section.settings.overlay_text_color }};
+      {%- if section.settings.nav_hover_color_transparent != blank %}
+      --header-nav-hover-color-transparent: {{ section.settings.nav_hover_color_transparent }};
+      {%- endif %}
       {%- if section.settings.overlay_content_color != blank %}
       --header-overlay-content: {{ section.settings.overlay_content_color }};
       {%- endif %}
@@ -732,6 +736,13 @@
       "id": "nav_hover_color",
       "label": "t:labels.nav_hover_color",
       "default": "#000000",
+      "visible_if": "{{ section.settings.menu_type == 'horizontal' }}"
+    },
+    {
+      "type": "color",
+      "id": "nav_hover_color_transparent",
+      "label": "t:labels.nav_hover_color_transparent",
+      "info": "t:labels.nav_hover_color_transparent_info",
       "visible_if": "{{ section.settings.menu_type == 'horizontal' }}"
     }
   ],
