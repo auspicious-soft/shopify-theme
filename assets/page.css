@@ -1,33 +1,20 @@
 /* Styles for sections/page.liquid. */
 
-/* ---------- Alignment (title, breadcrumbs, content) ---------- */
+/* ---------- Title alignment (the content keeps its own alignment) ---------- */
 
-.main-page--align-left {
-  text-align: start;
-}
-
-.main-page--align-center {
+.main-page--align-center .main-page__title {
   text-align: center;
 }
 
-.main-page--align-right {
+.main-page--align-right .main-page__title {
   text-align: end;
 }
 
-/* Breadcrumbs set to "Match the page title" follow the page alignment. */
+/* Breadcrumbs set to "Match the page title" follow the title. */
 .main-page--align-center .breadcrumbs--align-auto .breadcrumbs__list {
   justify-content: center;
 }
 
 .main-page--align-right .breadcrumbs--align-auto .breadcrumbs__list {
   justify-content: flex-end;
-}
-
-/* Images and other blocks in the content follow the alignment too. */
-.main-page--align-center :is(img, iframe, table) {
-  margin-inline: auto;
-}
-
-.main-page--align-right :is(img, iframe, table) {
-  margin-inline: auto 0;
 }

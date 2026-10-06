@@ -1100,7 +1100,8 @@
     },
     "page": {
       "show_title": "Show page title",
-      "show_title_info": "When off, the title is still read by search engines and screen readers"
+      "show_title_info": "When off, the title is still read by search engines and screen readers",
+      "title_alignment": "Title alignment"
     }
   },
   "settings_schema": {
