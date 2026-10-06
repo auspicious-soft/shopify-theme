@@ -31,7 +31,8 @@
           "type": "price",
           "settings": {
             "show_saving": true,
-            "show_tax_note": true
+            "badge_color_scheme": "scheme-5",
+            "show_tax_note": false
           }
         },
         "variant_picker": {
