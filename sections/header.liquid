@@ -191,6 +191,7 @@
     {%- if enable_overlay %} header--overlay{% endif -%}
     {%- if swap_transparent_logo %} header--swap-logo{% endif -%}
     {%- if enable_overlay and section.settings.nav_hover_color_transparent != blank %} header--transparent-hover{% endif -%}
+    {%- if enable_overlay and section.settings.overlay_hover_solid %} header--hover-solid{% endif -%}
   "
   id="Header-{{ section.id }}"
   {% if watch_scroll %}data-watch-scroll{% endif %}
@@ -534,6 +535,14 @@
       "id": "overlay_text_color",
       "label": "t:labels.overlay_text_color",
       "default": "#ffffff",
+      "visible_if": "{{ section.settings.overlay_on_home or section.settings.overlay_on_product or section.settings.overlay_on_collection or section.settings.overlay_on_page or section.settings.overlay_on_blog }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay_hover_solid",
+      "label": "t:labels.overlay_hover_solid",
+      "info": "t:labels.overlay_hover_solid_info",
+      "default": true,
       "visible_if": "{{ section.settings.overlay_on_home or section.settings.overlay_on_product or section.settings.overlay_on_collection or section.settings.overlay_on_page or section.settings.overlay_on_blog }}"
     },
     {

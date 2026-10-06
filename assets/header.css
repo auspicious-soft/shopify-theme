@@ -155,6 +155,14 @@
   color: var(--header-overlay-text);
 }
 
+/* Transparent header > Solid background on hover (Standard style; Logo
+   reveal always does this): hovering the transparent header, or an open
+   search, shows it solid with the sticky background and solid colors. */
+.header--standard.header--hover-solid.header--overlay:not(.is-scrolled):is(:hover, :has(.predictive-search[open])) {
+  background-color: var(--header-sticky-bg);
+  color: var(--header-overlay-text);
+}
+
 /* Transparent header logo (Header settings > Transparent header logo):
    hidden everywhere by default so setting it has no effect unless a style
    below explicitly opts in. */
@@ -180,13 +188,17 @@
 }
 
 /* Logo reveal style turns the header solid on hover / open search, so the
-   default logo comes back then too. (Standard stays transparent on hover.) */
+   default logo comes back then too. (Standard does too with "Solid background on hover".) */
 .header--logo_reveal.header--swap-logo.header--overlay:hover .header__logo--default,
-.header--logo_reveal.header--swap-logo.header--overlay:has(.predictive-search[open]) .header__logo--default {
+.header--logo_reveal.header--swap-logo.header--overlay:has(.predictive-search[open]) .header__logo--default,
+.header--hover-solid.header--swap-logo.header--overlay:hover .header__logo--default,
+.header--hover-solid.header--swap-logo.header--overlay:has(.predictive-search[open]) .header__logo--default {
   display: inline-flex;
 }
 .header--logo_reveal.header--swap-logo.header--overlay:hover .header__logo--transparent,
-.header--logo_reveal.header--swap-logo.header--overlay:has(.predictive-search[open]) .header__logo--transparent {
+.header--logo_reveal.header--swap-logo.header--overlay:has(.predictive-search[open]) .header__logo--transparent,
+.header--hover-solid.header--swap-logo.header--overlay:hover .header__logo--transparent,
+.header--hover-solid.header--swap-logo.header--overlay:has(.predictive-search[open]) .header__logo--transparent {
   display: none;
 }
 
@@ -443,7 +455,7 @@ header.is-scrolled img.header__hero-logo-image {
    transparent the menu links use their own hover color. Set on the links,
    since the normal hover color is inline on the header. Logo reveal turns
    solid on hover, so it keeps the normal hover color. */
-.header--transparent-hover.header--overlay:not(.is-scrolled):not(.header--logo_reveal) .header__menu-link {
+.header--transparent-hover.header--overlay:not(.is-scrolled):not(.header--logo_reveal):not(.header--hover-solid) .header__menu-link {
   --header-nav-hover-color: var(--header-nav-hover-color-transparent);
 }
 
