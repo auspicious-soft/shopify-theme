@@ -107,7 +107,7 @@
         "mega_menu_promo_eeJ4AX"
       ],
       "settings": {
-        "header_style": "logo_reveal",
+        "header_style": "standard",
         "logo_position": "center",
         "menu": "main-menu",
         "menu_type": "hamburger",
@@ -130,6 +130,7 @@
         "overlay_on_blog": false,
         "overlay_content_color": "#ffffff",
         "overlay_text_color": "#000000",
+        "overlay_hover_solid": true,
         "transparent_logo": "shopify://shop_images/Layer_1_2.png",
         "show_search": true,
         "show_account": true,
@@ -144,7 +145,8 @@
         "nav_font_size": 15,
         "nav_font_weight": "500",
         "nav_item_spacing": 32,
-        "nav_hover_color": "#000000"
+        "nav_hover_color": "#000000",
+        "nav_hover_color_transparent": ""
       }
     },
     "cart-panel": {
