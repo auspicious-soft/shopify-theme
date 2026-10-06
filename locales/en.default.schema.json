@@ -1097,6 +1097,10 @@
       "caption": "Caption",
       "button_label": "Button label",
       "button_link": "Button link"
+    },
+    "page": {
+      "show_title": "Show page title",
+      "show_title_info": "When off, the title is still read by search engines and screen readers"
     }
   },
   "settings_schema": {

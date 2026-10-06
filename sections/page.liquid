@@ -5,10 +5,13 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/page
 {% endcomment %}
 
-<div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+{{ 'page.css' | asset_url | stylesheet_tag }}
+
+<div class="main-page main-page--align-{{ section.settings.alignment | default: 'left' }} page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
   {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
   {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
-  <{{ heading_tag }} class="{{ heading_class }}">{{ page.title }}</{{ heading_tag }}>
+  {%- comment -%} A hidden title stays in the page for search engines and screen readers. {%- endcomment -%}
+  <{{ heading_tag }} class="{% if section.settings.show_title == false %}visually-hidden{% else %}{{ heading_class }} main-page__title{% endif %}">{{ page.title }}</{{ heading_tag }}>
   {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'page-breadcrumbs' %}{%- endif -%}
 
   {{ page.content }}
@@ -25,6 +28,13 @@
       "id": "show_breadcrumbs",
       "label": "t:sections.breadcrumbs.show",
       "info": "t:sections.breadcrumbs.show_info",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "t:sections.page.show_title",
+      "info": "t:sections.page.show_title_info",
       "default": true
     },
     {
@@ -58,7 +68,8 @@
           "label": "H6"
         }
       ],
-      "default": "h1"
+      "default": "h1",
+      "visible_if": "{{ section.settings.show_title }}"
     },
     {
       "type": "select",
@@ -91,7 +102,28 @@
           "label": "t:options.heading_size.huge"
         }
       ],
-      "default": "h1"
+      "default": "h1",
+      "visible_if": "{{ section.settings.show_title }}"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:labels.alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:options.alignment.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.alignment.center"
+        },
+        {
+          "value": "right",
+          "label": "t:options.alignment.right"
+        }
+      ]
     },
     {
       "type": "select",
