@@ -79,7 +79,7 @@
           "type": "text",
           "settings": {
             "text": "<p>Founded with a commitment to raw honesty and structural permanence, our studio rejects the rapid obsolescence of modern fashion. Instead, we trace our raw fibers directly to ethical sheep ranches and historical family-owned mills in Biella, Italy, and Kyoto, Japan.<br/></p><p>Each pattern is designed with heavy, natural cashmere and structural drop shoulders, allowing the material to drape in complete alignment with the human form. By weaving slowly, we preserve the breath of the fibers, resulting in garments that endure for generations.</p>",
-            "size": "medium"
+            "size": "small"
           }
         }
       },
@@ -178,9 +178,9 @@
         "button_label": "",
         "button_link": "",
         "button_style": "primary",
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "card": true,
-        "card_color_scheme": "",
+        "card_color_scheme": "scheme-1",
         "padding_top": 24,
         "padding_bottom": 24,
         "button_size": "medium",

@@ -7,11 +7,34 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
- {
+{
   "sections": {
     "main": {
       "type": "404",
-      "settings": {}
+      "settings": {
+        "show_code": true,
+        "heading": "",
+        "heading_tag": "h1",
+        "heading_class": "h1",
+        "text": "",
+        "alignment": "center",
+        "show_search": true,
+        "button_label": "",
+        "button_url": "",
+        "show_home_button": true,
+        "menu": "",
+        "menu_heading": "Popular pages",
+        "products_collection": "",
+        "products_heading": "",
+        "products_count": 4,
+        "width": "page",
+        "color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 80,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
+      }
     }
   },
   "order": [
