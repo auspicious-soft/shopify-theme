@@ -13,8 +13,10 @@
       "type": "page",
       "settings": {
         "show_breadcrumbs": true,
+        "show_title": false,
         "heading_tag": "h1",
         "heading_class": "h2",
+        "alignment": "left",
         "width": "page",
         "heading_case": "uppercase"
       }
