@@ -132,9 +132,9 @@
   padding-top: 1.25rem;
 }
 
-/* Product: above the image gallery. */
+/* Product: a full row above the gallery and product info. */
 .product__breadcrumbs {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 /* Blog, article, collection list: inside their title area. */
