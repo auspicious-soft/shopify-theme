@@ -86,12 +86,12 @@
   color: var(--header-overlay-text);
   background-color: var(--header-sticky-bg);
 }
-/* Header options > Bottom border: a hairline under the header whenever it's
-   solid (never while transparent). An inset shadow, so it adds no height. */
-.header--bordered:not(.header--overlay),
-.header--bordered.header--overlay.is-scrolled,
-.header--bordered.header--logo_reveal.header--overlay:is(:hover, :has(.predictive-search[open])),
-.header--bordered.header--hover-solid.header--overlay:is(:hover, :has(.predictive-search[open])) {
+/* Bottom border: a hairline under the header whenever it's solid (never
+   while transparent). An inset shadow, so it adds no height. */
+.header:not(.header--overlay),
+.header.header--overlay.is-scrolled,
+.header.header--logo_reveal.header--overlay:is(:hover, :has(.predictive-search[open])),
+.header.header--hover-solid.header--overlay:is(:hover, :has(.predictive-search[open])) {
   box-shadow: inset 0 -1px 0 0 color-mix(in srgb, var(--color-border) 80%, transparent);
 }
 

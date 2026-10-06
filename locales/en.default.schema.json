@@ -194,9 +194,7 @@
     "nav_hover_color_transparent": "Hover color (transparent header)",
     "nav_hover_color_transparent_info": "Used while the header stays transparent on hover (Standard style with \"Solid background on hover\" off). Leave empty to use the hover color above",
     "overlay_hover_solid": "Solid background on hover",
-    "overlay_hover_solid_info": "Standard style: the transparent header turns solid while hovered. Logo reveal always does this",
-    "header_show_border": "Bottom border",
-    "header_show_border_info": "A thin line under the header whenever it isn't transparent"
+    "overlay_hover_solid_info": "Standard style: the transparent header turns solid while hovered. Logo reveal always does this"
   },
   "options": {
     "section_width": {

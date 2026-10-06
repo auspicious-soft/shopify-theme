@@ -192,7 +192,6 @@
     {%- if swap_transparent_logo %} header--swap-logo{% endif -%}
     {%- if enable_overlay and section.settings.nav_hover_color_transparent != blank %} header--transparent-hover{% endif -%}
     {%- if enable_overlay and section.settings.overlay_hover_solid %} header--hover-solid{% endif -%}
-    {%- if section.settings.show_border %} header--bordered{% endif -%}
   "
   id="Header-{{ section.id }}"
   {% if watch_scroll %}data-watch-scroll{% endif %}
@@ -467,13 +466,6 @@
       "info": "t:labels.sticky_background_color_info",
       "default": "#ffffff",
       "visible_if": "{{ section.settings.header_style == 'logo_reveal' or section.settings.sticky_header_type != 'none' }}"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_border",
-      "label": "t:labels.header_show_border",
-      "info": "t:labels.header_show_border_info",
-      "default": true
     },
     {
       "type": "range",
