@@ -11,11 +11,14 @@
   "current": {
     "logo": "shopify://shop_images/Layer_1_3.png",
     "logo_width": 140,
+    "favicon": "shopify://shop_images/Layer_1_5.png",
     "popup_color_scheme": "scheme-1",
     "menu_drawer_color_scheme": "scheme-1",
     "type_header_font": "petrona_n7",
     "heading_scale": 100,
     "type_body_font": "geist_n5",
+    "body_size_desktop": 14,
+    "body_size_mobile": 13,
     "page_width": 1400,
     "page_margin_mobile": 16,
     "spacing_sections": 0,
@@ -206,8 +209,6 @@
           "shadow": "#000000"
         }
       }
-    },
-    "body_size_desktop": 14,
-    "body_size_mobile": 13
+    }
   }
 }
