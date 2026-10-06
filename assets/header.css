@@ -141,6 +141,14 @@
   color: var(--color-foreground);
 }
 
+/* Hovering the scrolled (solid) header keeps it exactly as it is: the
+   standard hover rule above would reset it to the transparent
+   --header-bg. */
+.header--standard.header--overlay.is-scrolled:is(:hover, :has(.predictive-search[open])) {
+  color: var(--color-foreground);
+  background-color: var(--header-sticky-bg);
+}
+
 /* Transparent header content color (Header settings > Transparent header
    content color): the logo text, menu links and icons while the header is
    transparent over the page. Chained with .header so it beats the standard
