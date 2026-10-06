@@ -115,7 +115,7 @@
         "hamburger_display": "text",
         "hamburger_text": "Menu",
         "width": "page",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "hero_logo": "shopify://shop_images/Layer_1_1.png",
         "sticky_logo": "shopify://shop_images/logo.png",
         "logo_reveal_speed": 400,
