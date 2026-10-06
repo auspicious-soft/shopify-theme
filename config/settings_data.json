@@ -113,7 +113,7 @@
     "drawer_shadow_blur": 0,
     "badge_position": "top left",
     "badge_corner_radius": 0,
-    "sale_badge_color_scheme": "scheme-4",
+    "sale_badge_color_scheme": "scheme-5",
     "sold_out_badge_color_scheme": "scheme-3",
     "brand_headline": "",
     "brand_description": "",
@@ -188,9 +188,9 @@
         "settings": {
           "background": "#FFFFFF",
           "background_gradient": "",
-          "text": "#ffffff",
+          "text": "#AE0000",
           "button": "#AE0000",
-          "button_label": "#AE0000",
+          "button_label": "#FFFFFF",
           "secondary_button_label": "#AE0000",
           "shadow": "#AE0000"
         }
