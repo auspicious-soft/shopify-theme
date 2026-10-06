@@ -141,7 +141,7 @@
         "subheading": "",
         "heading": "Before you write",
         "heading_tag": "h2",
-        "heading_class": "h2",
+        "heading_class": "h3",
         "description": "",
         "heading_alignment": "center",
         "layout": "stacked",
