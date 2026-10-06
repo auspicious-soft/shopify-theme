@@ -17,7 +17,7 @@
       "settings": {
         "heading": "Join our newsletter",
         "heading_tag": "h2",
-        "heading_class": "h3",
+        "heading_class": "h2",
         "subheading": "Be the first to know about new drops and offers",
         "description": "<p>Sign up for 10% off your first order, plus early access to new collections.</p>",
         "form_position": "below",
