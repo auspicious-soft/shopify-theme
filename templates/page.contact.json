@@ -19,6 +19,8 @@
         "heading_class": "h2",
         "alignment": "left",
         "width": "page",
+        "padding_top": 40,
+        "padding_bottom": 64,
         "heading_case": "uppercase"
       }
     },
@@ -80,7 +82,7 @@
         "success_message": "",
         "success_style": "highlight",
         "privacy_note": "",
-        "info_position": "left",
+        "info_position": "below",
         "form_width": 680,
         "corner_radius": 0,
         "width": "page",
