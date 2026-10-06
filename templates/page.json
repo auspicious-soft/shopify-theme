@@ -11,13 +11,372 @@
   "sections": {
     "main": {
       "type": "page",
+      "disabled": true,
       "settings": {
+        "show_breadcrumbs": true,
         "heading_tag": "h1",
-        "heading_class": "h2"
+        "heading_class": "h2",
+        "width": "page"
+      }
+    },
+    "rich_text_B3RJFD": {
+      "type": "rich-text",
+      "blocks": {
+        "caption_yhcEXj": {
+          "type": "caption",
+          "settings": {
+            "caption": "OUR PHILOSOPHY & GENESIS",
+            "style": "uppercase",
+            "size": "small"
+          }
+        },
+        "heading_PThJEq": {
+          "type": "heading",
+          "settings": {
+            "heading": "&nbsp;Weaving Slow Stories: Our Mill Legacy&nbsp;",
+            "heading_tag": "h2",
+            "heading_class": "h2",
+            "uppercase": true
+          }
+        }
+      },
+      "block_order": [
+        "caption_yhcEXj",
+        "heading_PThJEq"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "alignment": "left",
+        "mobile_alignment": "left",
+        "position": "left",
+        "content_width": 1080,
+        "block_spacing": 20,
+        "width": "page",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "image_with_text_7kC9T4": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_e9Mfin": {
+          "type": "heading",
+          "settings": {
+            "heading": "\"A garment should not merely occupy space in your wardrobe; it should bridge daily warmth with an elevated, sculptural presence.\"",
+            "heading_tag": "h2",
+            "heading_class": "h6",
+            "uppercase": false
+          }
+        },
+        "text_G96ND8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Founded with a commitment to raw honesty and structural permanence, our studio rejects the rapid obsolescence of modern fashion. Instead, we trace our raw fibers directly to ethical sheep ranches and historical family-owned mills in Biella, Italy, and Kyoto, Japan.<br/></p><p>Each pattern is designed with heavy, natural cashmere and structural drop shoulders, allowing the material to drape in complete alignment with the human form. By weaving slowly, we preserve the breath of the fibers, resulting in garments that endure for generations.</p>",
+            "size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "heading_e9Mfin",
+        "text_G96ND8"
+      ],
+      "name": "t:sections.image_with_text.name",
+      "settings": {
+        "media_type": "image",
+        "image": "shopify://shop_images/Hero_Image_2.png",
+        "image_ratio": "adapt",
+        "corner_radius": 0,
+        "layout": "side",
+        "image_position": "right",
+        "image_width": "medium",
+        "content_position": "top",
+        "alignment": "left",
+        "mobile_alignment": "left",
+        "mobile_image_position": "first",
+        "content_width": 520,
+        "gap": 48,
+        "width": "page",
+        "color_scheme": "",
+        "content_card": false,
+        "content_color_scheme": "",
+        "padding_top": 20,
+        "padding_bottom": 56
+      }
+    },
+    "multicolumn_WLkhDY": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_xHVVFB": {
+          "type": "column",
+          "settings": {
+            "number": "",
+            "title": "Absolute Traceability",
+            "text": "<p>We trace our wool and silks back to specific, certified ethical ranches. We believe knowing the hands that sheared, spun, and dyed the fabric is essential to genuine quality.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_4QNDen": {
+          "type": "column",
+          "settings": {
+            "number": "",
+            "title": "Slow-Weaving Loom Philosophy",
+            "text": "<p>By employing historic shuttle looms in northern Italy, we weave at a fraction of modern industrial speeds. This gentle process respects the natural elasticity of raw cashmere.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_VKA7m3": {
+          "type": "column",
+          "settings": {
+            "number": "",
+            "title": "Sculptural Permanence",
+            "text": "<p>Our garments are engineered as wearable sculptures. We balance relaxed dropped shoulders with heavy, comforting structures designed to retain their form for decades.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_xHVVFB",
+        "column_4QNDen",
+        "column_VKA7m3"
+      ],
+      "name": "t:sections.multicolumn.name",
+      "settings": {
+        "subheading": "GUIDING PRINCIPLES",
+        "heading": "Designed with Intent, Crafted in Silence",
+        "heading_tag": "h2",
+        "heading_class": "h3",
+        "description": "",
+        "heading_alignment": "left",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "mobile_layout": "grid",
+        "column_alignment": "left",
+        "mobile_column_alignment": "same",
+        "gap": 32,
+        "width": "page",
+        "column_media": "number",
+        "number_format": "padded",
+        "number_size": "medium",
+        "image_ratio": "adapt",
+        "image_width": "full",
+        "corner_radius": 0,
+        "show_placeholders": false,
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "color_scheme": "",
+        "card": true,
+        "card_color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 56
+      }
+    },
+    "image_with_text_aXk4fR": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption_a4QLtY": {
+          "type": "caption",
+          "settings": {
+            "caption": "THE ART OF BIELLESE WEAVING",
+            "style": "uppercase",
+            "size": "small"
+          }
+        },
+        "heading_VrtqxL": {
+          "type": "heading",
+          "settings": {
+            "heading": "Honoring Untreated Raw Cashmere",
+            "heading_tag": "h2",
+            "heading_class": "h2",
+            "uppercase": true
+          }
+        },
+        "text_47kki8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Biella, nestled at the foot of the Italian Alps, is renowned for its crystalline glacial waters—essential for washing raw wool without damaging its organic protective scales. Our partner mill has operated in this valley for over a century, passing down local secrets of slow tensioning.<br/><br/><strong>No Harsh Chemical Treatments<br/></strong>Our raw virgin cashmere is never exposed to acid stripping or aggressive bleaches, preserving the fibers' authentic loft and softness.<br/><br/><strong>Kyoto Slub Silk Lining<br/></strong>Each coat is lined with raw slub silk sourced from heritage weavers in Kyoto, offering a organic tactile friction that adapts beautifully to skin temperature.</p>",
+            "size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "caption_a4QLtY",
+        "heading_VrtqxL",
+        "text_47kki8"
+      ],
+      "name": "t:sections.image_with_text.name",
+      "settings": {
+        "media_type": "image",
+        "image": "shopify://shop_images/Craft_Image.png",
+        "image_ratio": "adapt",
+        "corner_radius": 0,
+        "layout": "side",
+        "image_position": "left",
+        "image_width": "medium",
+        "content_position": "top",
+        "alignment": "left",
+        "mobile_alignment": "left",
+        "mobile_image_position": "first",
+        "content_width": 520,
+        "gap": 48,
+        "width": "page",
+        "color_scheme": "",
+        "content_card": false,
+        "content_color_scheme": "",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "image_with_text_7CgaFV": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption_MBYKQq": {
+          "type": "caption",
+          "settings": {
+            "caption": "THE FOUNDERS' STATEMENT",
+            "style": "uppercase",
+            "size": "small"
+          }
+        },
+        "heading_ac6GEJ": {
+          "type": "heading",
+          "settings": {
+            "heading": "A Shared Rebellion Against Disposable Fashion",
+            "heading_tag": "h2",
+            "heading_class": "h3",
+            "uppercase": false
+          }
+        },
+        "text_qfmjWb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>In 2018, while wandering the historical textile archives of northern Italy, founders Elena and Arthur noticed a profound contrast between vintage garments—heavy, structural, full of natural character—and modern retail fabrics.<br/><br/>We wanted to build an atelier that feels like a library rather than a showroom,\" Arthur reflects. \"Each design starts with a deep structural appreciation of the loom's capabilities, prioritizing raw, untreated materials over slick, computerized finishes.</p>",
+            "size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "caption_MBYKQq",
+        "heading_ac6GEJ",
+        "text_qfmjWb"
+      ],
+      "name": "t:sections.image_with_text.name",
+      "settings": {
+        "media_type": "image",
+        "image": "shopify://shop_images/Founders_Portrait.png",
+        "image_ratio": "adapt",
+        "corner_radius": 0,
+        "layout": "side",
+        "image_position": "right",
+        "image_width": "medium",
+        "content_position": "middle",
+        "alignment": "left",
+        "mobile_alignment": "left",
+        "mobile_image_position": "first",
+        "content_width": 520,
+        "gap": 48,
+        "width": "page",
+        "color_scheme": "",
+        "content_card": false,
+        "content_color_scheme": "",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "multicolumn_9NmhtK": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_Jir6yi": {
+          "type": "column",
+          "settings": {
+            "number": "2018",
+            "title": "Archive Exploration",
+            "text": "<p>Elena and Arthur journey through the historic wool mills of Biella, solidifying the slow-weaving loom philosophy.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_6xwePi": {
+          "type": "column",
+          "settings": {
+            "number": "2020",
+            "title": "Atelier Foundation",
+            "text": "<p>Our first small-scale design studio opens, strictly limiting production to 100 numbered coats per season.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_eEnr3X": {
+          "type": "column",
+          "settings": {
+            "number": "2022",
+            "title": "Kyoto Alliance",
+            "text": "<p>Partnering with multi-generational slub silk weavers in Kyoto to source sustainable, natural silk linings.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_zwEmdq": {
+          "type": "column",
+          "settings": {
+            "number": "2025",
+            "title": "Circular Mill Sourcing",
+            "text": "<p>100% of our raw cashmere is certified directly traceable to independent, regenerative sheep ranches.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_Jir6yi",
+        "column_6xwePi",
+        "column_eEnr3X",
+        "column_zwEmdq"
+      ],
+      "name": "t:sections.multicolumn.name",
+      "settings": {
+        "subheading": "OUR JOURNEY",
+        "heading": "Atelier Milestones",
+        "heading_tag": "h2",
+        "heading_class": "h3",
+        "description": "",
+        "heading_alignment": "left",
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "mobile_layout": "grid",
+        "column_alignment": "left",
+        "mobile_column_alignment": "same",
+        "gap": 32,
+        "width": "page",
+        "column_media": "number",
+        "number_format": "padded",
+        "number_size": "medium",
+        "image_ratio": "adapt",
+        "image_width": "full",
+        "corner_radius": 0,
+        "show_placeholders": false,
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "color_scheme": "",
+        "card": false,
+        "card_color_scheme": "",
+        "padding_top": 56,
+        "padding_bottom": 56
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "rich_text_B3RJFD",
+    "image_with_text_7kC9T4",
+    "multicolumn_WLkhDY",
+    "image_with_text_aXk4fR",
+    "image_with_text_7CgaFV",
+    "multicolumn_9NmhtK"
   ]
 }

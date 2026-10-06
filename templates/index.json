@@ -18,9 +18,9 @@
         "mobile_image": "shopify://shop_images/iPhone_13_14_-_1.png",
         "video": "shopify://files/videos/YTSave_YouTube_Demo-Background-Sample-Video_Media_K4TOrB7at0Y_001_1080p.mp4",
         "video_url": "",
-        "background_color": "#ffffff",
+        "background_color": "#000000",
         "overlay_color": "#000000",
-        "overlay_opacity": 5,
+        "overlay_opacity": 20,
         "height_type": "fullscreen",
         "heading": "End of summer sale",
         "heading_tag": "h1",
@@ -36,7 +36,7 @@
         "button_text": "Shop now",
         "button_url": "shopify://collections/all",
         "button_style": "primary",
-        "button_color_scheme": "scheme-1"
+        "button_color_scheme": "scheme-2"
       }
     },
     "featured_collection_7YqJiY": {
@@ -617,6 +617,7 @@
         "columns_mobile": "1",
         "mobile_layout": "grid",
         "column_alignment": "center",
+        "mobile_column_alignment": "same",
         "gap": 32,
         "width": "page",
         "column_media": "image",
