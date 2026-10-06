@@ -12,19 +12,30 @@
     "main": {
       "type": "collections",
       "settings": {
+        "show_breadcrumbs": true,
         "show_heading": true,
         "heading": "",
         "heading_tag": "h1",
         "heading_class": "h1",
         "subheading": "",
         "heading_alignment": "left",
+        "show_banner": true,
+        "banner_height": "medium",
+        "banner_overlay": 30,
+        "banner_color_scheme": "",
         "collection_list": [],
+        "sort": "default",
+        "hide_empty": true,
+        "layout": "grid",
+        "per_page": 24,
         "columns_desktop": 3,
         "columns_mobile": "2",
+        "index_show_count": true,
         "width": "page",
         "color_scheme": "scheme-1",
         "padding_top": 40,
-        "padding_bottom": 64
+        "padding_bottom": 64,
+        "heading_case": "uppercase"
       }
     }
   },
