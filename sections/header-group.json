@@ -97,9 +97,9 @@
             "menu_item": "Catalog",
             "show_image": true,
             "image": "shopify://shop_images/2015-07-02_Ashley_33_51032_24034.jpg",
-            "show_title": true,
-            "title": "Snowboard",
-            "link": "shopify://products/the-collection-snowboard-hydrogen"
+            "show_title": false,
+            "title": "",
+            "link": "shopify://products/a-line-pocket-shift-black"
           }
         }
       },
