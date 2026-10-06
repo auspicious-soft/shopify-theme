@@ -16,7 +16,6 @@
     "type_header_font": "petrona_n7",
     "heading_scale": 100,
     "type_body_font": "geist_n5",
-    "body_scale": 100,
     "page_width": 1400,
     "page_margin_mobile": 16,
     "spacing_sections": 0,
@@ -207,6 +206,8 @@
           "shadow": "#000000"
         }
       }
-    }
+    },
+    "body_size_desktop": 14,
+    "body_size_mobile": 13
   }
 }

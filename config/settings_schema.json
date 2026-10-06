@@ -150,13 +150,23 @@
       },
       {
         "type": "range",
-        "id": "body_scale",
-        "min": 100,
-        "max": 130,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.typography.settings.body_scale.label",
-        "default": 100
+        "id": "body_size_desktop",
+        "min": 12,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.typography.settings.body_size_desktop.label",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "body_size_mobile",
+        "min": 12,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.typography.settings.body_size_mobile.label",
+        "default": 13
       }
     ]
   },

@@ -28,8 +28,15 @@ h6,
   margin-block: 0 0.5em;
 }
 
+/* Theme settings > Typography > Body text size (mobile / desktop). */
 body {
-  font-size: calc(1rem * var(--body-scale) / 100);
+  font-size: var(--body-size-mobile, 13px);
+}
+
+@media screen and (min-width: 750px) {
+  body {
+    font-size: var(--body-size-desktop, 14px);
+  }
 }
 
 h1,

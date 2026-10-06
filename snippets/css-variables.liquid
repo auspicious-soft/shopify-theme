@@ -19,7 +19,8 @@
     --font-heading--style: {{ settings.type_header_font.style }};
     --font-heading--weight: {{ settings.type_header_font.weight }};
     --heading-scale: {{ settings.heading_scale }};
-    --body-scale: {{ settings.body_scale }};
+    --body-size-desktop: {{ settings.body_size_desktop }}px;
+    --body-size-mobile: {{ settings.body_size_mobile }}px;
 
     --page-width: {{ settings.page_width | divided_by: 16.0 }}rem;
     --page-margin: {{ settings.page_margin_mobile | default: 20 }}px;

@@ -1210,8 +1210,11 @@
         "type_body_font": {
           "label": "Font"
         },
-        "body_scale": {
-          "label": "Scale"
+        "body_size_desktop": {
+          "label": "Body text size – desktop"
+        },
+        "body_size_mobile": {
+          "label": "Body text size – mobile"
         }
       }
     },
