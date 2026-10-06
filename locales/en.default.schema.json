@@ -423,7 +423,8 @@
         "price": {
           "name": "Price",
           "show_saving": "Show saving percentage",
-          "show_tax_note": "Show tax and shipping note"
+          "show_tax_note": "Show tax and shipping note",
+          "badge_color_scheme": "Badge color scheme"
         },
         "sku": {
           "name": "SKU"

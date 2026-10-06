@@ -584,6 +584,12 @@
   text-transform: uppercase;
 }
 
+/* Price block > Badge color scheme: its own colors, not the section's. */
+.product__saving--scheme {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
 .product__unit-price {
   flex-basis: 100%;
   margin: 0;
