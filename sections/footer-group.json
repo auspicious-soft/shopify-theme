@@ -97,8 +97,8 @@
         "show_payment_icons": true,
         "show_divider": true,
         "color_scheme": "scheme-4",
-        "padding_top": 64,
-        "padding_bottom": 24
+        "padding_top": 40,
+        "padding_bottom": 0
       }
     }
   },
