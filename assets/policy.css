@@ -15,13 +15,11 @@
   text-align: center;
 }
 
+/* The theme's H3 size (assets/base.css); font and color come from the
+   base heading styles. */
 .shopify-policy__title h1 {
   margin: 0;
-  font-family: var(--font-heading--family);
-  font-style: var(--font-heading--style);
-  font-weight: var(--font-heading--weight);
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  line-height: 1.15;
+  font-size: calc(var(--heading-scale) / 100 * clamp(1.5rem, 1.35rem + 0.6vw, 2rem));
 }
 
 .shopify-policy__body {
