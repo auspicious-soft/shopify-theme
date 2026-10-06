@@ -35,8 +35,8 @@
         "divider_width": "page",
         "divider_thickness": 1,
         "divider_opacity": 20,
-        "padding_top": 56,
-        "padding_bottom": 56,
+        "padding_top": 60,
+        "padding_bottom": 60,
         "heading_case": "uppercase",
         "button_case": "uppercase"
       }
