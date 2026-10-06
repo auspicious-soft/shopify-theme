@@ -70,7 +70,7 @@
         "subheading": "",
         "heading": "Get in touch",
         "heading_tag": "h1",
-        "heading_class": "h1",
+        "heading_class": "h2",
         "description": "<p>Questions about an order, sizing or anything else? Send us a message and we'll reply within one business day.</p>",
         "heading_alignment": "center",
         "show_phone": true,
