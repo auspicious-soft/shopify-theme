@@ -1149,6 +1149,27 @@
       "suggestions_heading": "Heading",
       "suggestions_heading_info": "Leave empty for \"Popular products\"",
       "suggestions_count": "Number of products"
+    },
+    "not_found": {
+      "show_code": "Show large \"404\"",
+      "heading_info": "Leave empty for \"Page not found\"",
+      "text_info": "Leave empty for the default message",
+      "actions": "Search and buttons",
+      "show_search": "Show search box",
+      "button_label": "Button label",
+      "button_label_info": "Leave empty for \"Back to shopping\"",
+      "button_url": "Button link",
+      "button_url_info": "Leave empty to link to all products",
+      "show_home_button": "Show \"Back to home\" button",
+      "menu": "Quick links menu",
+      "menu_info": "Optional. Shown as links under the buttons",
+      "menu_heading": "Quick links heading",
+      "products": "Product suggestions",
+      "products_collection": "Collection",
+      "products_collection_info": "Optional. Products shown below",
+      "products_heading": "Heading",
+      "products_heading_info": "Leave empty for \"Popular products\"",
+      "products_count": "Number of products"
     }
   },
   "settings_schema": {

@@ -11,7 +11,11 @@
   "404": {
     "title": "404",
     "not_found": "Page not found.",
-    "back_to_shopping": "Back to shopping"
+    "back_to_shopping": "Back to shopping",
+    "heading": "Page not found",
+    "text": "Sorry, the page you're looking for doesn't exist or has been moved. Try searching, or head back to the shop.",
+    "search_placeholder": "Search products, pages…",
+    "back_home": "Back to home"
   },
   "accessibility": {
     "close": "Close",

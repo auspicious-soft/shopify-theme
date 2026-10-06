@@ -1,0 +1,195 @@
+/* Styles for sections/404.liquid. */
+
+.not-found {
+  padding-block: var(--section-padding-top, 64px) var(--section-padding-bottom, 80px);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+.not-found__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  max-width: 40rem;
+}
+
+.not-found--center .not-found__content {
+  align-items: center;
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* Breadcrumbs set to "Match the page title" follow the alignment. */
+.not-found--center .breadcrumbs--align-auto .breadcrumbs__list {
+  justify-content: center;
+}
+
+.not-found__code {
+  margin: 0;
+  font-family: var(--font-heading--family);
+  font-size: clamp(5rem, 18vw, 10rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: color-mix(in srgb, var(--color-foreground) 12%, transparent);
+}
+
+.not-found__heading {
+  margin: 0;
+}
+
+.not-found__text {
+  color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
+}
+
+.not-found__text > * {
+  margin: 0;
+}
+
+.not-found__text > * + * {
+  margin-top: 0.75em;
+}
+
+/* ---------- Search ---------- */
+
+.not-found__search {
+  position: relative;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.not-found__search-input {
+  width: 100%;
+  height: 3.25rem;
+  padding: 0 3.5rem 0 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 25%, transparent);
+  border-radius: var(--style-border-radius-inputs, 0);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font: inherit;
+}
+
+.not-found__search-input:focus-visible {
+  outline: none;
+  border-color: var(--color-foreground);
+}
+
+/* Bare icon button: opt out of the theme's filled button look. */
+.not-found__search-submit {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.not-found__search-submit svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* ---------- Buttons ---------- */
+
+.not-found__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.not-found--center .not-found__buttons {
+  justify-content: center;
+}
+
+/* ---------- Quick links ---------- */
+
+.not-found__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+}
+
+.not-found--center .not-found__links {
+  align-items: center;
+}
+
+.not-found__links-heading {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
+}
+
+.not-found__links-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.not-found--center .not-found__links-list {
+  justify-content: center;
+}
+
+.not-found__link {
+  display: inline-flex;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 20%, transparent);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.not-found__link:hover,
+.not-found__link:focus-visible {
+  border-color: var(--color-foreground);
+  background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+}
+
+/* ---------- Product suggestions ---------- */
+
+.not-found__products {
+  margin-top: clamp(3rem, 7vw, 5rem);
+}
+
+.not-found__products-heading {
+  margin: 0 0 1.5rem;
+}
+
+.not-found--center .not-found__products-heading {
+  text-align: center;
+}
+
+.not-found__products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--spacing-grid-vertical, 16px) * 2) var(--spacing-grid-horizontal, 16px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media screen and (min-width: 990px) {
+  .not-found__products-grid {
+    grid-template-columns: repeat(var(--not-found-columns, 4), minmax(0, 1fr));
+  }
+}
