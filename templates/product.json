@@ -115,7 +115,7 @@
       ],
       "settings": {
         "show_breadcrumbs": true,
-        "gallery_layout": "thumbnails",
+        "gallery_layout": "grid",
         "media_size": "medium",
         "media_ratio": "adapt",
         "enable_zoom": true,
@@ -130,7 +130,10 @@
         "color_scheme": "scheme-1",
         "width": "page",
         "padding_top": 32,
-        "padding_bottom": 64
+        "padding_bottom": 48,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
       }
     },
     "related_products": {
@@ -149,7 +152,10 @@
         "color_scheme": "scheme-1",
         "width": "page",
         "padding_top": 48,
-        "padding_bottom": 64
+        "padding_bottom": 64,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
       }
     },
     "recently_viewed": {
@@ -168,7 +174,10 @@
         "color_scheme": "scheme-1",
         "width": "page",
         "padding_top": 24,
-        "padding_bottom": 64
+        "padding_bottom": 64,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
       }
     }
   },
