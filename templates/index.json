@@ -188,8 +188,8 @@
       "name": "t:sections.collection_banner.name",
       "settings": {
         "collection": "",
-        "image": "shopify://shop_images/Container_1.png",
-        "mobile_image": "shopify://shop_images/iPhone_13_14_-_3_1.png",
+        "image": "shopify://shop_images/Container_2.png",
+        "mobile_image": "shopify://shop_images/iPhone_13_14_-_3_2.png",
         "media_type": "image",
         "video_url": "",
         "height": "fullscreen",
