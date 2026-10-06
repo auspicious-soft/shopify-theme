@@ -205,18 +205,19 @@
 
 /* ---------- Content ---------- */
 
+/* Text size: Medium is the body text size (Theme settings > Typography). */
 .article__content {
-  font-size: 1.05rem;
+  font-size: var(--body-size, 14px);
   line-height: 1.8;
   overflow-wrap: break-word;
 }
 
 .article--text-small .article__content {
-  font-size: 0.95rem;
+  font-size: calc(var(--body-size, 14px) - 1px);
 }
 
 .article--text-large .article__content {
-  font-size: 1.15rem;
+  font-size: calc(var(--body-size, 14px) + 2px);
 }
 
 .article__content > :first-child {
