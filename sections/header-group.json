@@ -107,7 +107,7 @@
         "mega_menu_promo_eeJ4AX"
       ],
       "settings": {
-        "header_style": "logo_reveal",
+        "header_style": "standard",
         "logo_position": "center",
         "menu": "main-menu",
         "menu_type": "hamburger",
