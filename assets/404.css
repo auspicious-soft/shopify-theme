@@ -20,11 +20,6 @@
   text-align: center;
 }
 
-/* Breadcrumbs set to "Match the page title" follow the alignment. */
-.not-found--center .breadcrumbs--align-auto .breadcrumbs__list {
-  justify-content: center;
-}
-
 .not-found__code {
   margin: 0;
   font-family: var(--font-heading--family);

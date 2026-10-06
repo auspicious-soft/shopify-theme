@@ -26,8 +26,6 @@
   "
 >
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
-    {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'page-breadcrumbs not-found__breadcrumbs' %}{%- endif -%}
-
     <div class="not-found__content">
       {%- if section.settings.show_code -%}
         <p class="not-found__code" aria-hidden="true">404</p>
@@ -122,13 +120,6 @@
 {
   "name": "t:general.404",
   "settings": [
-    {
-      "type": "checkbox",
-      "id": "show_breadcrumbs",
-      "label": "t:sections.breadcrumbs.show",
-      "info": "t:sections.breadcrumbs.show_info",
-      "default": true
-    },
     {
       "type": "checkbox",
       "id": "show_code",
