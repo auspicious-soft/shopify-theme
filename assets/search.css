@@ -1,11 +1,214 @@
-/* Styles for sections/search.liquid. */
+/* Styles for sections/search.liquid. The toolbar, filters, grid and
+   pagination come from assets/collection.css (shared with the collection
+   page); this file adds the search header, type tabs and result cards. */
 
-.search-results {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+/* ---------- Header: title, search form, summary ---------- */
+
+.search-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
 }
-.search-results .prev,
-.search-results .page,
-.search-results .next {
-  grid-column: 1 / -1;
+
+.search-page__header--center {
+  align-items: center;
+  text-align: center;
+}
+
+.search-page__title {
+  margin: 0;
+}
+
+.search-page__form {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 40rem;
+}
+
+.search-page__input {
+  width: 100%;
+  height: 3.25rem;
+  padding: 0 3.5rem 0 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 25%, transparent);
+  border-radius: var(--style-border-radius-inputs, 0);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.search-page__input:focus-visible {
+  outline: none;
+  border-color: var(--color-foreground);
+}
+
+.search-page__input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+/* Bare icon button: opt out of the theme's filled button look. */
+.search-page__submit {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.search-page__submit svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.search-page__summary {
+  margin: 0;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+}
+
+/* ---------- Type tabs ---------- */
+
+.search-page__tabs {
+  display: flex;
+  gap: 1.75rem;
+  margin-bottom: 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+}
+
+.search-page__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.search-page__header--center + .search-page__tabs {
+  justify-content: center;
+}
+
+.search-page__tab {
+  flex: 0 0 auto;
+  padding-block: 0.75rem;
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
+  text-decoration: none;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.search-page__tab:hover {
+  color: var(--color-foreground);
+}
+
+.search-page__tab.is-active {
+  border-bottom-color: currentColor;
+  color: var(--color-foreground);
+  font-weight: 500;
+}
+
+/* The toolbar sits right under the tabs: drop its top border. */
+.search-page__tabs + .collection__toolbar {
+  border-top: 0;
+}
+
+/* ---------- Result cards (articles and pages) ---------- */
+
+.search-page__item {
+  position: relative;
+}
+
+.search-page__type {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
+}
+
+/* Page results: a text card the height of the row. */
+.search-page__page-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: 100%;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  background-color: color-mix(in srgb, var(--color-foreground) 4%, var(--color-background));
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.search-page__page-card:hover {
+  background-color: color-mix(in srgb, var(--color-foreground) 7%, var(--color-background));
+}
+
+.search-page__page-card .search-page__type {
+  margin-bottom: 0;
+}
+
+.search-page__page-title {
+  margin: 0;
+}
+
+.search-page__page-excerpt {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
+}
+
+.search-page__page-link {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+/* ---------- No results / suggestions ---------- */
+
+.search-page__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-block: clamp(1.5rem, 5vw, 3rem);
+  text-align: center;
+}
+
+.search-page__empty-title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.search-page__tips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+}
+
+.search-page__suggestions {
+  margin-top: clamp(1.5rem, 4vw, 3rem);
+}
+
+.search-page__suggestions-title {
+  margin: 0 0 1.5rem;
+  text-align: center;
 }

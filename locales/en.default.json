@@ -229,6 +229,32 @@
       "searching": "Searching...",
       "suggestions": "Suggestions",
       "products": "Products"
+    },
+    "results_title": "Search results",
+    "results_count_html": {
+      "one": "{{ count }} result for “{{ terms }}”",
+      "other": "{{ count }} results for “{{ terms }}”"
+    },
+    "results_short": {
+      "one": "{{ count }} result",
+      "other": "{{ count }} results"
+    },
+    "result_types": "Result types",
+    "types": {
+      "all": "All",
+      "product": "Products",
+      "article": "Articles",
+      "page": "Pages",
+      "article_single": "Article",
+      "page_single": "Page"
+    },
+    "read_more": "Read more",
+    "showing": "Showing {{ shown }} of {{ total }} results",
+    "popular_products": "Popular products",
+    "tips": {
+      "spelling": "Check the spelling",
+      "fewer_words": "Try fewer or different words",
+      "general": "Search for something more general, like “shirt”"
     }
   },
   "general": {

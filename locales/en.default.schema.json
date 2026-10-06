@@ -1130,6 +1130,21 @@
       "empty_collection": "Product suggestions",
       "empty_collection_info": "Products shown when the cart is empty",
       "empty_products_count": "Number of products"
+    },
+    "search": {
+      "results": "Results",
+      "result_types": "Search in",
+      "result_types_all": "Products, articles and pages",
+      "result_types_products": "Products only",
+      "show_type_tabs": "Show type tabs",
+      "results_per_page": "Results per page",
+      "enable_filtering_info": "Product filters from Search & Discovery",
+      "suggestions": "Product suggestions",
+      "suggestions_collection": "Collection",
+      "suggestions_collection_info": "Shown before a search and when nothing is found",
+      "suggestions_heading": "Heading",
+      "suggestions_heading_info": "Leave empty for \"Popular products\"",
+      "suggestions_count": "Number of products"
     }
   },
   "settings_schema": {
