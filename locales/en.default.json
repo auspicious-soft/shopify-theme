@@ -121,10 +121,7 @@
     "price_to": "To",
     "apply": "Apply",
     "clear_all": "Clear all",
-    "view_results": {
-      "one": "View {{ count }} result",
-      "other": "View {{ count }} results"
-    },
+    "view_results": "View results",
     "remove_filter": "Remove filter",
     "no_results": "No products match these filters.",
     "empty_collection": "This collection is empty.",
