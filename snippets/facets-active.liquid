@@ -1,0 +1,40 @@
+{% doc %}
+  Active filter chips (each removes its filter) and "Clear all", above the
+  product grid on the collection and search pages.
+
+  @param {object} results - The collection or `search` object
+  @param {number} active_filter_count - Number of active filter values
+  @param {string} clear_url - URL that clears every filter
+
+  @example
+  {% render 'facets-active', results: collection, active_filter_count: active_filter_count, clear_url: clear_url %}
+{% enddoc %}
+
+{%- if active_filter_count > 0 -%}
+  <div class="facets__active">
+    {% for filter in results.filters %}
+      {% if filter.type == 'price_range' %}
+        {% if filter.min_value.value != nil or filter.max_value.value != nil %}
+          <a href="{{ filter.url_to_remove }}" class="facets__chip" data-facets-link>
+            <span>
+              {{- filter.min_value.value | default: 0 | money -}}
+              –
+              {%- if filter.max_value.value != nil %} {{ filter.max_value.value | money }}{% else %} {{ filter.range_max | money }}{% endif -%}
+            </span>
+            {{ 'icon-close.svg' | inline_asset_content }}
+            <span class="visually-hidden">{{ 'collections.remove_filter' | t }}</span>
+          </a>
+        {% endif %}
+      {% else %}
+        {% for value in filter.active_values %}
+          <a href="{{ value.url_to_remove }}" class="facets__chip" data-facets-link>
+            <span>{{ filter.label | escape }}: {{ value.label | escape }}</span>
+            {{ 'icon-close.svg' | inline_asset_content }}
+            <span class="visually-hidden">{{ 'collections.remove_filter' | t }}</span>
+          </a>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+    <a href="{{ clear_url }}" class="facets__clear" data-facets-link>{{ 'collections.clear_all' | t }}</a>
+  </div>
+{%- endif -%}

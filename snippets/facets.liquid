@@ -1,0 +1,186 @@
+{% doc %}
+  Product filters (Shopify storefront filtering) for the collection and
+  search pages: a sidebar on desktop or an off-canvas drawer (always a drawer
+  below 990px), with "Clear all" / "View results". When there are no filters
+  but sorting is on, renders just the (hidden) form the sort select posts with.
+
+  Driven by assets/collection.js (<collection-page>): it submits the form
+  with the Section Rendering API and swaps every [data-results-part].
+  Styles live in assets/collection.css.
+
+  @param {object} results - The collection or `search` object (filters, sort_by)
+  @param {string} url - Form action, e.g. collection.url or routes.search_url
+  @param {string} section_id - The section's id
+  @param {boolean} filtering - Show the filters
+  @param {boolean} sorting - Sorting is shown in the toolbar
+  @param {string} filter_layout - 'drawer' or 'sidebar'
+  @param {string} clear_url - URL that clears every filter
+  @param {string} [button_size] - Drawer button size: small / medium / large
+  @param {string} [hidden_inputs] - Extra hidden inputs (the search page's q / type)
+
+  @example
+  {% render 'facets', results: collection, url: collection.url, section_id: section.id, filtering: true, sorting: true, filter_layout: 'drawer', clear_url: collection.url %}
+{% enddoc %}
+
+{%- if filtering -%}
+  <aside
+    id="Facets-{{ section_id }}"
+    class="facets facets--{{ filter_layout }} facets--buttons-{{ button_size | default: 'medium' }}"
+    aria-labelledby="FacetsHeading-{{ section_id }}"
+    data-facets
+  >
+    <div class="facets__backdrop" data-facets-close></div>
+    <div class="facets__panel">
+      <div class="facets__header">
+        <h2 id="FacetsHeading-{{ section_id }}" class="facets__heading">{{ 'collections.filters' | t }}</h2>
+        <button type="button" class="facets__close" data-facets-close aria-label="{{ 'accessibility.close' | t }}">
+          {{ 'icon-close.svg' | inline_asset_content }}
+        </button>
+      </div>
+
+      <form
+        id="FacetsForm-{{ section_id }}"
+        class="facets__form"
+        action="{{ url }}"
+        method="get"
+        data-facets-form
+        data-results-part
+      >
+        {{ hidden_inputs }}
+
+        {% unless sorting %}
+          <input type="hidden" name="sort_by" value="{{ results.sort_by | escape }}">
+        {% endunless %}
+
+        {% for filter in results.filters %}
+          {%- liquid
+            assign group_id = 'FacetGroup-' | append: section_id | append: '-' | append: forloop.index
+            assign group_active = filter.active_values.size
+            if filter.type == 'price_range'
+              assign group_active = 0
+              if filter.min_value.value != nil or filter.max_value.value != nil
+                assign group_active = 1
+              endif
+            endif
+          -%}
+          <details id="{{ group_id }}" class="facets__group"{% if group_active > 0 or forloop.index <= 3 %} open{% endif %}>
+            <summary class="facets__summary">
+              <span>
+                {{- filter.label | escape -}}
+                {%- if group_active > 0 and filter.type != 'price_range' %}
+                  <span class="facets__summary-count">({{ group_active }})</span>
+                {%- endif -%}
+              </span>
+              <span class="facets__plus" aria-hidden="true"></span>
+            </summary>
+
+            {% if filter.type == 'price_range' %}
+              {%- liquid
+                assign range_max = filter.range_max | divided_by: 100.0 | ceil
+                assign min_display = ''
+                assign max_display = ''
+                if filter.min_value.value != nil
+                  assign min_display = filter.min_value.value | divided_by: 100.0
+                endif
+                if filter.max_value.value != nil
+                  assign max_display = filter.max_value.value | divided_by: 100.0
+                endif
+              -%}
+              <div class="facets__price">
+                <div class="facets__price-field">
+                  <label for="{{ group_id }}-min" class="facets__price-label">{{ 'collections.price_from' | t }}</label>
+                  <div class="facets__price-input">
+                    <span aria-hidden="true">{{ cart.currency.symbol }}</span>
+                    <input
+                      id="{{ group_id }}-min"
+                      type="number"
+                      inputmode="decimal"
+                      name="{{ filter.min_value.param_name }}"
+                      value="{{ min_display }}"
+                      placeholder="0"
+                      min="0"
+                      max="{{ range_max }}"
+                      step="any"
+                      data-facets-price
+                    >
+                  </div>
+                </div>
+                <span class="facets__price-sep" aria-hidden="true">–</span>
+                <div class="facets__price-field">
+                  <label for="{{ group_id }}-max" class="facets__price-label">{{ 'collections.price_to' | t }}</label>
+                  <div class="facets__price-input">
+                    <span aria-hidden="true">{{ cart.currency.symbol }}</span>
+                    <input
+                      id="{{ group_id }}-max"
+                      type="number"
+                      inputmode="decimal"
+                      name="{{ filter.max_value.param_name }}"
+                      value="{{ max_display }}"
+                      placeholder="{{ range_max }}"
+                      min="0"
+                      max="{{ range_max }}"
+                      step="any"
+                      data-facets-price
+                    >
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              <ul class="facets__list" role="list">
+                {% for value in filter.values %}
+                  {%- liquid
+                    assign option_id = group_id | append: '-' | append: forloop.index
+                    assign is_disabled = false
+                    if value.count == 0 and value.active == false
+                      assign is_disabled = true
+                    endif
+                  -%}
+                  <li>
+                    <label for="{{ option_id }}" class="facets__option{% if is_disabled %} is-disabled{% endif %}">
+                      <input
+                        id="{{ option_id }}"
+                        type="checkbox"
+                        name="{{ value.param_name }}"
+                        value="{{ value.value | escape }}"
+                        class="facets__checkbox"
+                        data-facets-input
+                        {% if value.active %}checked{% endif %}
+                        {% if is_disabled %}disabled{% endif %}
+                      >
+                      {% if value.swatch.color or value.swatch.image %}
+                        <span
+                          class="facets__swatch"
+                          style="{% if value.swatch.color %}--swatch-color: {{ value.swatch.color }};{% endif %}{% if value.swatch.image %} --swatch-image: url('{{ value.swatch.image | image_url: width: 60 }}');{% endif %}"
+                          aria-hidden="true"
+                        ></span>
+                      {% else %}
+                        <span class="facets__box" aria-hidden="true"></span>
+                      {% endif %}
+                      <span class="facets__option-label">{{ value.label | escape }}</span>
+                      <span class="facets__option-count">({{ value.count }})</span>
+                    </label>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </details>
+        {% endfor %}
+
+        <noscript>
+          <button type="submit" class="button button--primary facets__apply">{{ 'collections.apply' | t }}</button>
+        </noscript>
+      </form>
+
+      <div id="FacetsFooter-{{ section_id }}" class="facets__footer" data-results-part>
+        <a href="{{ clear_url }}" class="button button--secondary facets__footer-button" data-facets-link>
+          {{- 'collections.clear_all' | t -}}
+        </a>
+        <button type="button" class="button button--primary facets__footer-button" data-facets-close>
+          {{- 'collections.show_results' | t -}}
+        </button>
+      </div>
+    </div>
+  </aside>
+{% elsif sorting %}
+  <form id="FacetsForm-{{ section_id }}" action="{{ url }}" method="get" data-facets-form hidden>{{ hidden_inputs }}</form>
+{%- endif -%}

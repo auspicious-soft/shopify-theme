@@ -43,7 +43,7 @@
 .variant-picker__fieldset--size-guide > .size-guide__trigger,
 .variant-picker__field--size-guide > .size-guide__trigger {
   position: absolute;
-  top: 0;
+  top: -28px;
   inset-inline-end: 0;
   font-size: 0.8rem;
 }
