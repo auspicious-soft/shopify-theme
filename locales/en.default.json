@@ -121,7 +121,7 @@
     "price_to": "To",
     "apply": "Apply",
     "clear_all": "Clear all",
-    "view_results": "View results",
+    "show_results": "View results",
     "remove_filter": "Remove filter",
     "no_results": "No products match these filters.",
     "empty_collection": "This collection is empty.",
