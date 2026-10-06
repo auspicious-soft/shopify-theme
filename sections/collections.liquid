@@ -16,6 +16,9 @@
 {{ 'collection-card.css' | asset_url | stylesheet_tag }}
 {{ 'collections.css' | asset_url | stylesheet_tag }}
 {{ 'pagination.css' | asset_url | stylesheet_tag }}
+{%- if section.settings.show_banner -%}
+  {{ 'banner-media.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 
 {%- liquid
   assign layout = section.settings.layout
@@ -40,7 +43,7 @@
 -%}
 
 <div
-  class="collection-list-page collection-list-page--{{ layout }} color-{{ section.settings.color_scheme.id }}"
+  class="collection-list-page collection-list-page--{{ layout }}{% if section.settings.show_banner %} collection-list-page--banner{% endif %} color-{{ section.settings.color_scheme.id }}"
   style="
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -48,7 +51,7 @@
     --grid-columns-mobile: {{ columns_mobile }};
   "
 >
-  <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+  {%- capture page_header -%}
     {%- if section.settings.show_heading == false -%}
       {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'collection-list-page__breadcrumbs' %}{%- endif -%}
     {%- endif -%}
@@ -67,6 +70,34 @@
         {%- endif -%}
       </div>
     {%- endif -%}
+  {%- endcapture -%}
+
+  {%- if section.settings.show_banner -%}
+    {%- comment -%} Banner: full width at the top, with the page header on it. {%- endcomment -%}
+    <div
+      class="collection-list-banner collection-list-banner--{{ section.settings.banner_height }} color-{{ section.settings.banner_color_scheme.id }}"
+      style="--banner-overlay: {{ section.settings.banner_overlay }}%;"
+    >
+      <div class="collection-list-banner__media">
+        {% render 'banner-media',
+          image: section.settings.banner_image,
+          mobile_image: section.settings.banner_mobile_image,
+          alt: section.settings.banner_image.alt,
+          eager: true,
+          placeholder: 'hero-apparel-1'
+        %}
+      </div>
+      <div class="collection-list-banner__overlay" aria-hidden="true"></div>
+      <div class="collection-list-banner__content page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+        {{ page_header }}
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+    {%- unless section.settings.show_banner -%}
+      {{ page_header }}
+    {%- endunless -%}
 
     {%- paginate collections by per_page -%}
       {%- liquid
@@ -334,6 +365,70 @@
       ],
       "default": "left",
       "visible_if": "{{ section.settings.show_heading }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.collection.banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_banner",
+      "label": "t:sections.collections.show_banner",
+      "info": "t:sections.collections.show_banner_info",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "t:sections.collections.banner_image",
+      "visible_if": "{{ section.settings.show_banner }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_mobile_image",
+      "label": "t:sections.collections.banner_mobile_image",
+      "info": "t:sections.collections.banner_mobile_image_info",
+      "visible_if": "{{ section.settings.show_banner }}"
+    },
+    {
+      "type": "select",
+      "id": "banner_height",
+      "label": "t:sections.collection.banner_height",
+      "default": "medium",
+      "visible_if": "{{ section.settings.show_banner }}",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:options.size.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.size.large"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "banner_overlay",
+      "label": "t:labels.overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 30,
+      "visible_if": "{{ section.settings.show_banner }}"
+    },
+    {
+      "type": "color_scheme",
+      "id": "banner_color_scheme",
+      "label": "t:labels.banner_color_scheme",
+      "info": "t:sections.collections.banner_color_scheme_info",
+      "default": "scheme-2",
+      "visible_if": "{{ section.settings.show_banner }}"
     },
     {
       "type": "header",

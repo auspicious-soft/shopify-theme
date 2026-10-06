@@ -18,6 +18,57 @@
   text-align: center;
 }
 
+/* ---------- Banner (Show banner) ---------- */
+
+/* The banner sits flush under the header; the section padding goes below it. */
+.collection-list-page--banner {
+  padding-top: 0;
+}
+
+.collection-list-banner {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  overflow: hidden;
+  /* Banner color scheme: text and overlay color. */
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+.collection-list-banner--small {
+  min-height: clamp(14rem, 28vw, 20rem);
+}
+
+.collection-list-banner--medium {
+  min-height: clamp(18rem, 38vw, 28rem);
+}
+
+.collection-list-banner--large {
+  min-height: clamp(22rem, 50vw, 38rem);
+}
+
+.collection-list-banner__media,
+.collection-list-banner__overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.collection-list-banner__overlay {
+  background-color: color-mix(in srgb, var(--color-background) var(--banner-overlay, 30%), transparent);
+}
+
+.collection-list-banner__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-block: 2.5rem;
+}
+
+.collection-list-banner .collection-list-page__header {
+  margin-bottom: 0;
+}
+
 .collection-list-page__heading {
   margin: 0;
   line-height: 1.1;

@@ -356,7 +356,13 @@
       "card_info": "Card design (image ratio, text over or below the image, product count, description): Theme settings > Collection cards",
       "per_page": "Collections per page",
       "per_page_info": "For full rows, use a multiple of the columns",
-      "index_show_count": "Show product count"
+      "index_show_count": "Show product count",
+      "show_banner": "Show banner",
+      "show_banner_info": "Shows the heading, breadcrumbs and subheading on an image banner",
+      "banner_image": "Image",
+      "banner_mobile_image": "Mobile image",
+      "banner_mobile_image_info": "Optional. Used on screens under 750px",
+      "banner_color_scheme_info": "Text and overlay color"
     },
     "collection": {
       "banner": "Banner",
