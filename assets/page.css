@@ -1,5 +1,9 @@
 /* Styles for sections/page.liquid. */
 
+.main-page {
+  padding-block: var(--section-padding-top, 40px) var(--section-padding-bottom, 64px);
+}
+
 /* ---------- Title alignment (the content keeps its own alignment) ---------- */
 
 .main-page--align-center .main-page__title {

@@ -7,7 +7,9 @@
 
 {{ 'page.css' | asset_url | stylesheet_tag }}
 
-<div class="main-page main-page--align-{{ section.settings.alignment | default: 'left' }} page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+<div class="main-page main-page--align-{{ section.settings.alignment | default: 'left' }} page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}"
+  style="--section-padding-top: {{ section.settings.padding_top }}px; --section-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
   {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
   {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
   {%- comment -%} A hidden title stays in the page for search engines and screen readers. {%- endcomment -%}
@@ -126,6 +128,10 @@
       ]
     },
     {
+      "type": "header",
+      "content": "t:general.section"
+    },
+    {
       "type": "select",
       "id": "width",
       "label": "t:labels.section_width",
@@ -140,6 +146,26 @@
         }
       ],
       "default": "page"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:labels.padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:labels.padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
     },
     {
       "type": "header",
