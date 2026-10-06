@@ -22,7 +22,7 @@
         "description": "<p>Sign up for 10% off your first order, plus early access to new collections.</p>",
         "form_position": "below",
         "alignment": "center",
-        "form_width": 460,
+        "form_width": 700,
         "field_style": "boxed",
         "placeholder": "",
         "button_label": "Subscribe",
@@ -35,8 +35,10 @@
         "divider_width": "page",
         "divider_thickness": 1,
         "divider_opacity": 20,
-        "padding_top": 56,
-        "padding_bottom": 56
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
       }
     },
     "footer": {
@@ -95,8 +97,8 @@
         "show_payment_icons": true,
         "show_divider": true,
         "color_scheme": "scheme-4",
-        "padding_top": 64,
-        "padding_bottom": 24
+        "padding_top": 40,
+        "padding_bottom": 0
       }
     }
   },

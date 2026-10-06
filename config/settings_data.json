@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "logo": "shopify://shop_images/Link_margin.png",
+    "logo": "shopify://shop_images/Layer_1_3.png",
     "logo_width": 140,
     "popup_color_scheme": "scheme-1",
     "menu_drawer_color_scheme": "scheme-1",
@@ -17,7 +17,7 @@
     "heading_scale": 100,
     "type_body_font": "assistant_n4",
     "body_scale": 100,
-    "page_width": 1300,
+    "page_width": 1400,
     "spacing_sections": 0,
     "spacing_grid_horizontal": 8,
     "spacing_grid_vertical": 8,
@@ -41,7 +41,7 @@
     "variant_pills_shadow_blur": 0,
     "inputs_border_thickness": 1,
     "inputs_border_opacity": 55,
-    "inputs_radius": 4,
+    "inputs_radius": 0,
     "inputs_shadow_opacity": 0,
     "inputs_shadow_horizontal_offset": 0,
     "inputs_shadow_vertical_offset": 0,
