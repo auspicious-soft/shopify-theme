@@ -45,6 +45,13 @@ body {
   font-size: var(--body-size);
 }
 
+/* Paragraphs use the body text size everywhere by default. Components that
+   style their own paragraphs (class rules) keep their sizes, and text blocks
+   with a Text size setting pass their size on to their paragraphs. */
+p {
+  font-size: var(--body-size, 14px);
+}
+
 h1,
 .h1 {
   font-size: calc(var(--heading-scale) / 100 * clamp(2.25rem, 1.9rem + 1.5vw, 3.5rem));

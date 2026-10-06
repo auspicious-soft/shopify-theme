@@ -223,6 +223,11 @@
   color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
 }
 
+/* Text size setting: its own sizes; paragraphs follow it (not the body size). */
+.image-with-text__text p {
+  font-size: inherit;
+}
+
 .image-with-text__text--small {
   font-size: 0.9rem;
 }

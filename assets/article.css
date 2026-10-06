@@ -212,6 +212,10 @@
   overflow-wrap: break-word;
 }
 
+.article__content p {
+  font-size: inherit;
+}
+
 .article--text-small .article__content {
   font-size: calc(var(--body-size, 14px) - 1px);
 }

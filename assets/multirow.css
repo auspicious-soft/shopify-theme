@@ -197,6 +197,11 @@
   margin-bottom: 0;
 }
 
+/* Text size setting: its own sizes; paragraphs follow it (Medium is the body size). */
+.multirow__text p {
+  font-size: inherit;
+}
+
 .multirow__text--small {
   font-size: 0.9rem;
 }
