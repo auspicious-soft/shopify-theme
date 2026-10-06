@@ -31,8 +31,8 @@
         "suggestions_count": 4,
         "width": "page",
         "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 64,
+        "padding_top": 32,
+        "padding_bottom": 48,
         "button_size": "medium",
         "heading_case": "uppercase",
         "button_case": "uppercase"
