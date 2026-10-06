@@ -37,6 +37,7 @@
         "button_url": "shopify://collections/all",
         "button_style": "primary",
         "button_color_scheme": "scheme-2",
+        "button_size": "medium",
         "heading_case": "uppercase",
         "button_case": "uppercase"
       }
@@ -68,6 +69,7 @@
         "products_width": "full",
         "padding_top": 48,
         "padding_bottom": 48,
+        "button_size": "medium",
         "heading_case": "uppercase",
         "button_case": "uppercase"
       }
@@ -175,7 +177,7 @@
         "button_color_scheme": "scheme-2",
         "full_link": false,
         "color_scheme": "",
-        "padding_top": 32,
+        "padding_top": 48,
         "padding_bottom": 48,
         "heading_case": "uppercase",
         "button_case": "uppercase"
@@ -342,7 +344,7 @@
         "corner_radius": 0,
         "color_scheme": "",
         "width": "full",
-        "padding_top": 32,
+        "padding_top": 48,
         "padding_bottom": 48,
         "heading_case": "uppercase"
       }
