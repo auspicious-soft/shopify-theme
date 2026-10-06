@@ -36,7 +36,7 @@
         "button_text": "Shop now",
         "button_url": "shopify://collections/all",
         "button_style": "primary",
-        "button_color_scheme": "scheme-1"
+        "button_color_scheme": "scheme-2"
       }
     },
     "featured_collection_7YqJiY": {
@@ -617,6 +617,7 @@
         "columns_mobile": "1",
         "mobile_layout": "grid",
         "column_alignment": "center",
+        "mobile_column_alignment": "same",
         "gap": 32,
         "width": "page",
         "column_media": "image",
