@@ -387,10 +387,6 @@
     padding-bottom: 2rem;
   }
 
-  .footer--accordion .footer__column--menu:last-child {
-    border-bottom: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
-  }
-
   .footer--accordion .footer__summary {
     padding-block: 1.1rem;
     cursor: pointer;
