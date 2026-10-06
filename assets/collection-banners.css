@@ -192,6 +192,20 @@
   font-size: 1.125rem;
 }
 
+/* Smaller on mobile */
+@media screen and (max-width: 749px) {
+  .collection-tile__button--small {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.65rem;
+  }
+
+  .collection-tile__button--large {
+    min-width: 10rem;
+    padding: 0.95rem 2rem;
+    font-size: 1rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .collection-tile .banner-media__image,
   .collection-tile .banner-media__video {

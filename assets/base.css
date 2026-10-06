@@ -88,6 +88,16 @@ a {
   cursor: pointer;
 }
 
+/* Buttons are a step smaller on mobile (every size: see Button size below). */
+@media screen and (max-width: 749px) {
+  .button--primary,
+  .button--secondary {
+    min-width: 7.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9375rem;
+  }
+}
+
 button,
 .button,
 .button--primary,
@@ -205,4 +215,17 @@ select {
   min-width: 12rem;
   padding: 1.15rem 2.75rem;
   font-size: 1.125rem;
+}
+
+@media screen and (max-width: 749px) {
+  .shopify-section:has(.button-size--small) :is(.button--primary, .button--secondary):not(.facets__footer-button, .facets__apply, .sticky-atc__button) {
+    padding: 0.55rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .shopify-section:has(.button-size--large) :is(.button--primary, .button--secondary):not(.facets__footer-button, .facets__apply, .sticky-atc__button) {
+    min-width: 10rem;
+    padding: 0.95rem 2rem;
+    font-size: 1rem;
+  }
 }

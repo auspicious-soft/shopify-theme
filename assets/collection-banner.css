@@ -162,6 +162,20 @@
   font-size: 1.125rem;
 }
 
+/* Smaller on mobile */
+@media screen and (max-width: 749px) {
+  .promo-banner__button--small {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.65rem;
+  }
+
+  .promo-banner__button--large {
+    min-width: 10rem;
+    padding: 0.95rem 2rem;
+    font-size: 1rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .promo-banner .banner-media__image,
   .promo-banner .banner-media__video {
