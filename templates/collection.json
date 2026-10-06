@@ -19,7 +19,7 @@
         "banner_style": "image",
         "banner_placeholder": true,
         "banner_height": "medium",
-        "banner_overlay": 30,
+        "banner_overlay": 40,
         "banner_alignment": "left",
         "show_description": true,
         "banner_color_scheme": "scheme-2",
