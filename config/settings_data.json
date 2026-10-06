@@ -11,7 +11,7 @@
   "current": {
     "logo": "shopify://shop_images/Layer_1_3.png",
     "logo_width": 140,
-    "favicon": "shopify://shop_images/Layer_1_5.png",
+    "favicon": "shopify://shop_images/image_54.png",
     "popup_color_scheme": "scheme-1",
     "menu_drawer_color_scheme": "scheme-1",
     "type_header_font": "petrona_n7",
@@ -200,7 +200,7 @@
       },
       "scheme-869fd07f-c7fd-47b7-9b47-86d04d72fa7f": {
         "settings": {
-          "background": "#F5F5F5",
+          "background": "#f5f5f5",
           "background_gradient": "",
           "text": "#000000",
           "button": "#000000",

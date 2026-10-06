@@ -19,6 +19,8 @@
         "heading_class": "h2",
         "alignment": "left",
         "width": "page",
+        "padding_top": 40,
+        "padding_bottom": 64,
         "heading_case": "uppercase"
       }
     },
@@ -122,6 +124,7 @@
           "settings": {
             "number": "",
             "title": "Absolute Traceability",
+            "title_uppercase": false,
             "text": "<p>We trace our wool and silks back to specific, certified ethical ranches. We believe knowing the hands that sheared, spun, and dyed the fabric is essential to genuine quality.</p>",
             "link_label": "",
             "link": ""
@@ -132,6 +135,7 @@
           "settings": {
             "number": "",
             "title": "Slow-Weaving Loom Philosophy",
+            "title_uppercase": false,
             "text": "<p>By employing historic shuttle looms in northern Italy, we weave at a fraction of modern industrial speeds. This gentle process respects the natural elasticity of raw cashmere.</p>",
             "link_label": "",
             "link": ""
@@ -142,6 +146,7 @@
           "settings": {
             "number": "",
             "title": "Sculptural Permanence",
+            "title_uppercase": false,
             "text": "<p>Our garments are engineered as wearable sculptures. We balance relaxed dropped shoulders with heavy, comforting structures designed to retain their form for decades.</p>",
             "link_label": "",
             "link": ""
@@ -316,6 +321,7 @@
           "settings": {
             "number": "2018",
             "title": "Archive Exploration",
+            "title_uppercase": false,
             "text": "<p>Elena and Arthur journey through the historic wool mills of Biella, solidifying the slow-weaving loom philosophy.</p>",
             "link_label": "",
             "link": ""
@@ -326,6 +332,7 @@
           "settings": {
             "number": "2020",
             "title": "Atelier Foundation",
+            "title_uppercase": false,
             "text": "<p>Our first small-scale design studio opens, strictly limiting production to 100 numbered coats per season.</p>",
             "link_label": "",
             "link": ""
@@ -336,6 +343,7 @@
           "settings": {
             "number": "2022",
             "title": "Kyoto Alliance",
+            "title_uppercase": false,
             "text": "<p>Partnering with multi-generational slub silk weavers in Kyoto to source sustainable, natural silk linings.</p>",
             "link_label": "",
             "link": ""
@@ -346,6 +354,7 @@
           "settings": {
             "number": "2025",
             "title": "Circular Mill Sourcing",
+            "title_uppercase": false,
             "text": "<p>100% of our raw cashmere is certified directly traceable to independent, regenerative sheep ranches.</p>",
             "link_label": "",
             "link": ""
