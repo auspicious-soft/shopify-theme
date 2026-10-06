@@ -144,7 +144,7 @@
         "nav_font_size": 15,
         "nav_font_weight": "500",
         "nav_item_spacing": 32,
-        "nav_hover_color": "rgba(0,0,0,0)"
+        "nav_hover_color": "#000000"
       }
     },
     "cart-panel": {
