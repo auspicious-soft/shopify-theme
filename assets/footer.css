@@ -295,7 +295,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1.25rem 2rem;
-  margin-top: clamp(2.5rem, 5vw, 4rem);
+  margin-top: clamp(2.5rem, 5vw, 48px);
   padding-top: 1.5rem;
 }
 
