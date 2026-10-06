@@ -33,8 +33,8 @@
         "index_show_count": true,
         "width": "page",
         "color_scheme": "scheme-1",
-        "padding_top": 40,
-        "padding_bottom": 64,
+        "padding_top": 48,
+        "padding_bottom": 48,
         "heading_case": "uppercase"
       }
     }
