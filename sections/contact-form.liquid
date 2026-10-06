@@ -4,8 +4,8 @@
   optional order number / subject, and message. Shows a success message
   after sending and field errors when something is missing.
 
-  Optional contact details panel beside the form (left or right) or below
-  it, built from blocks: icon (snippets/icon-library.liquid) + title + text,
+  Optional contact details beside the form (left or right) or below it, as
+  plain text, one panel, or a separate card per detail, built from blocks: icon (snippets/icon-library.liquid) + title + text,
   e.g. email, phone, address, opening hours.
 
   Styles live in assets/contact-form.css.
@@ -21,6 +21,7 @@
   if section.blocks.size == 0
     assign info_position = 'none'
   endif
+  assign info_style = section.settings.info_style | default: 'panel'
 
   assign button_label = 'contact.form.send' | t
   if section.settings.button_label != blank
@@ -46,7 +47,7 @@
 -%}
 
 <div
-  class="contact contact--info-{{ info_position }} contact--align-{{ section.settings.heading_alignment }}{% if section.settings.info_card %} contact--info-card{% endif %} color-{{ section.settings.color_scheme.id }}"
+  class="contact contact--info-{{ info_position }} contact--align-{{ section.settings.heading_alignment }} contact--details-{{ info_style }}{% if info_style == 'panel' %} contact--info-card{% endif %} color-{{ section.settings.color_scheme.id }}"
   style="
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -203,7 +204,7 @@
       </div>
 
       {%- if info_position != 'none' -%}
-        <div class="contact__info{% if section.settings.info_card %} color-{{ section.settings.info_color_scheme.id }}{% endif %}">
+        <div class="contact__info{% if info_style != 'plain' %} color-{{ section.settings.info_color_scheme.id }}{% endif %}">
           {%- for block in section.blocks -%}
             <div class="contact__info-item" {{ block.shopify_attributes }}>
               {%- if block.settings.icon != 'none' -%}
@@ -523,18 +524,32 @@
       "default": "scheme-1"
     },
     {
-      "type": "checkbox",
-      "id": "info_card",
-      "label": "t:sections.contact_form.info_card",
-      "info": "t:sections.contact_form.info_card_info",
-      "default": true
+      "type": "select",
+      "id": "info_style",
+      "label": "t:sections.contact_form.info_style",
+      "info": "t:sections.contact_form.info_style_info",
+      "default": "panel",
+      "options": [
+        {
+          "value": "plain",
+          "label": "t:sections.contact_form.info_style_plain"
+        },
+        {
+          "value": "panel",
+          "label": "t:sections.contact_form.info_style_panel"
+        },
+        {
+          "value": "cards",
+          "label": "t:sections.contact_form.info_style_cards"
+        }
+      ]
     },
     {
       "type": "color_scheme",
       "id": "info_color_scheme",
       "label": "t:sections.image_with_text.content_color_scheme",
       "default": "scheme-1",
-      "visible_if": "{{ section.settings.info_card }}"
+      "visible_if": "{{ section.settings.info_style != 'plain' }}"
     },
     {
       "type": "range",

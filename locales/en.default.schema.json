@@ -640,8 +640,6 @@
       "info_left": "Left of the form",
       "info_below": "Below the form",
       "info_none": "Hidden",
-      "info_card": "Show contact details in a card",
-      "info_card_info": "Gives the contact details a light background and padding",
       "block_name": "Contact detail",
       "header_success": "After sending",
       "success_display": "Show",
@@ -652,7 +650,12 @@
       "success_style": "Message style",
       "success_highlight": "Highlighted (green)",
       "success_plain": "Plain (color scheme)",
-      "header_more": "Note under the form"
+      "header_more": "Note under the form",
+      "info_style": "Contact details style",
+      "info_style_info": "Separate cards sit in a row below the form, or stacked beside it",
+      "info_style_plain": "Plain",
+      "info_style_panel": "Single panel",
+      "info_style_cards": "Separate cards"
     },
     "featured_product": {
       "name": "Featured product",

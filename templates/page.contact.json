@@ -87,13 +87,13 @@
         "corner_radius": 0,
         "width": "page",
         "color_scheme": "",
-        "info_card": true,
         "info_color_scheme": "",
         "padding_top": 32,
         "padding_bottom": 24,
         "button_size": "medium",
         "heading_case": "uppercase",
-        "button_case": "uppercase"
+        "button_case": "uppercase",
+        "info_style": "panel"
       }
     },
     "faq": {
