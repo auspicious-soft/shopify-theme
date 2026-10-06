@@ -85,15 +85,15 @@
         "info_position": "below",
         "form_width": 680,
         "corner_radius": 0,
-        "width": "page",
+        "width": "full",
         "color_scheme": "",
+        "info_style": "cards",
         "info_color_scheme": "",
         "padding_top": 32,
         "padding_bottom": 24,
         "button_size": "medium",
         "heading_case": "uppercase",
-        "button_case": "uppercase",
-        "info_style": "panel"
+        "button_case": "uppercase"
       }
     },
     "faq": {
