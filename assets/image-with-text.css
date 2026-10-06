@@ -21,7 +21,8 @@
 @media screen and (min-width: 750px) {
   .image-with-text__grid {
     display: grid;
-    grid-template-columns: var(--iwt-image-fr, 1fr) var(--iwt-content-fr, 1fr);
+    /* minmax(0, …): a large image can't widen its column over the content. */
+    grid-template-columns: minmax(0, var(--iwt-image-fr, 1fr)) minmax(0, var(--iwt-content-fr, 1fr));
     align-items: stretch;
     gap: var(--iwt-gap, 48px);
   }
@@ -32,7 +33,7 @@
 
   /* Image on the right: swap the columns. */
   .image-with-text--image-right .image-with-text__grid {
-    grid-template-columns: var(--iwt-content-fr, 1fr) var(--iwt-image-fr, 1fr);
+    grid-template-columns: minmax(0, var(--iwt-content-fr, 1fr)) minmax(0, var(--iwt-image-fr, 1fr));
   }
 
   .image-with-text--image-right .image-with-text__media {
@@ -42,8 +43,12 @@
 
 /* ---------- Media ---------- */
 
+/* Never wider than its column, whatever the image size or row height. */
 .image-with-text__media {
   position: relative;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   overflow: hidden;
   aspect-ratio: var(--iwt-ratio, 4 / 5);
   border-radius: var(--iwt-radius, 0);
@@ -53,6 +58,7 @@
 /* ---------- Content ---------- */
 
 .image-with-text__content-wrap {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: var(--iwt-justify, center);
