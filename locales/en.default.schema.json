@@ -786,7 +786,8 @@
       "number": "Custom number",
       "number_info": "Used when the section shows numbers. Leave empty to number columns automatically",
       "mobile_column_alignment": "Content alignment on mobile",
-      "alignment_same": "Same as desktop"
+      "alignment_same": "Same as desktop",
+      "title_uppercase": "Uppercase title"
     },
     "image_with_text": {
       "name": "Image with text",
