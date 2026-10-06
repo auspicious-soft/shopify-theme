@@ -32,17 +32,24 @@
   position: relative;
   display: flex;
   margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  /* Banner color scheme */
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
 
 .collection-banner--minimal {
   padding-block: clamp(2rem, 5vw, 3.5rem) 0;
 }
 
+/* A banner color scheme that differs from the section's shows as a band. */
+.collection-banner--minimal.collection-banner--filled {
+  padding-block-end: clamp(2rem, 5vw, 3.5rem);
+}
+
 .collection-banner--image {
   align-items: flex-end;
   min-height: 18rem;
   overflow: hidden;
-  color: #fff;
 }
 
 .collection-banner--small {
@@ -66,13 +73,20 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgb(0 0 0 / var(--banner-overlay, 0.3));
+  /* Overlay in the banner color scheme's background color. */
+  background-color: color-mix(in srgb, var(--color-background) calc(var(--banner-overlay, 0.3) * 100%), transparent);
 }
 
 .collection-banner__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Placeholder illustration for collections without an image. */
+.collection-banner__placeholder {
+  background-color: color-mix(in srgb, var(--color-foreground) 8%, var(--color-background));
+  fill: color-mix(in srgb, var(--color-foreground) 30%, transparent);
 }
 
 .collection-banner__content {

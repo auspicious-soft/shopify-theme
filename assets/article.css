@@ -150,7 +150,9 @@
   min-height: 55vh;
   margin-block-end: clamp(2rem, 5vw, 3.5rem);
   overflow: hidden;
-  color: #fff;
+  /* Banner color scheme */
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
 
 .article__banner--small {
@@ -174,7 +176,12 @@
 }
 
 .article__banner-overlay {
-  background: linear-gradient(to top, rgb(0 0 0 / calc(var(--banner-overlay, 35%) + 15%)), rgb(0 0 0 / var(--banner-overlay, 35%)));
+  /* In the banner color scheme's background color. */
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-background) calc(var(--banner-overlay, 35%) + 15%), transparent),
+    color-mix(in srgb, var(--color-background) var(--banner-overlay, 35%), transparent)
+  );
 }
 
 .article__banner-inner {
@@ -193,7 +200,7 @@
 }
 
 .article__banner .article__meta {
-  color: rgb(255 255 255 / 0.85);
+  color: color-mix(in srgb, currentColor 85%, transparent);
 }
 
 /* ---------- Content ---------- */

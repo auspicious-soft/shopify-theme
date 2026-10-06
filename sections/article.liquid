@@ -86,7 +86,7 @@
   "
 >
   {%- if image_layout == 'banner' -%}
-    <div class="article__banner article__banner--{{ section.settings.banner_height }}">
+    <div class="article__banner article__banner--{{ section.settings.banner_height }} color-{{ section.settings.banner_color_scheme.id }}">
       {{
         article.image
         | image_url: width: 3000
@@ -393,6 +393,13 @@
       "step": 5,
       "unit": "%",
       "default": 35
+    },
+    {
+      "type": "color_scheme",
+      "id": "banner_color_scheme",
+      "label": "t:labels.banner_color_scheme",
+      "info": "t:sections.article.banner_color_scheme_info",
+      "default": "scheme-2"
     },
     {
       "type": "header",

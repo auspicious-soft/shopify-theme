@@ -189,7 +189,8 @@
     "overlay_content_color": "Transparent header content color",
     "overlay_content_color_info": "Logo text, menu and icons while the header is transparent",
     "buttons": "Buttons",
-    "button_size": "Button size"
+    "button_size": "Button size",
+    "banner_color_scheme": "Banner color scheme"
   },
   "options": {
     "section_width": {
@@ -380,7 +381,12 @@
       "filter_layout_info": "Filters always open in a drawer on mobile",
       "filter_layout_sidebar": "Sidebar",
       "filter_layout_drawer": "Drawer",
-      "enable_sorting": "Enable sorting"
+      "enable_sorting": "Enable sorting",
+      "banner_placeholder": "Show placeholder for collections without an image",
+      "banner_placeholder_info": "When off, those collections show the minimal banner",
+      "banner_placeholder_image": "Placeholder image",
+      "banner_placeholder_image_info": "Leave empty to use a placeholder illustration",
+      "banner_color_scheme_info": "Text and overlay color on image banners, background on minimal banners"
     },
     "product": {
       "media": "Media",
@@ -1026,7 +1032,8 @@
       "comments_info": "Turn comments on per blog in Shopify admin > Content > Blog posts > Manage blogs",
       "show_comments": "Show comments",
       "comments_per_page": "Comments per page",
-      "width_info": "The text column keeps its own width"
+      "width_info": "The text column keeps its own width",
+      "banner_color_scheme_info": "Text and overlay color on the banner"
     },
     "related_articles": {
       "name": "Related articles",

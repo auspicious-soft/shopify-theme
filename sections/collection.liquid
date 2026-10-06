@@ -48,9 +48,20 @@
     endif
   endfor
 
+  # Image banner: the collection's image. Collections without one show the
+  # placeholder image (or a placeholder illustration) when "Show placeholder"
+  # is on, and the minimal banner when it's off.
   assign banner_image = nil
+  assign banner_placeholder = false
   if section.settings.banner_style == 'image'
     assign banner_image = collection.image
+    if banner_image == blank and section.settings.banner_placeholder
+      if section.settings.banner_placeholder_image != blank
+        assign banner_image = section.settings.banner_placeholder_image
+      else
+        assign banner_placeholder = true
+      endif
+    endif
   endif
 
   assign clear_url = collection.url
@@ -71,8 +82,12 @@
   "
 >
   {% if section.settings.show_banner %}
-    <div class="collection-banner collection-banner--{% if banner_image %}image collection-banner--{{ section.settings.banner_height }}{% else %}minimal{% endif %} collection-banner--{{ section.settings.banner_alignment }}">
-      {% if banner_image %}
+    <div class="collection-banner collection-banner--{% if banner_image or banner_placeholder %}image collection-banner--{{ section.settings.banner_height }}{% else %}minimal{% endif %} collection-banner--{{ section.settings.banner_alignment }}{% if section.settings.banner_color_scheme.id != section.settings.color_scheme.id %} collection-banner--filled{% endif %} color-{{ section.settings.banner_color_scheme.id }}">
+      {% if banner_placeholder %}
+        <div class="collection-banner__media">
+          {{ 'hero-apparel-1' | placeholder_svg_tag: 'collection-banner__image collection-banner__placeholder' }}
+        </div>
+      {% elsif banner_image %}
         <div class="collection-banner__media">
           {{
             banner_image
@@ -499,6 +514,21 @@
       "visible_if": "{{ section.settings.show_banner }}"
     },
     {
+      "type": "checkbox",
+      "id": "banner_placeholder",
+      "label": "t:sections.collection.banner_placeholder",
+      "info": "t:sections.collection.banner_placeholder_info",
+      "default": true,
+      "visible_if": "{{ section.settings.show_banner and section.settings.banner_style == 'image' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_placeholder_image",
+      "label": "t:sections.collection.banner_placeholder_image",
+      "info": "t:sections.collection.banner_placeholder_image_info",
+      "visible_if": "{{ section.settings.show_banner and section.settings.banner_style == 'image' and section.settings.banner_placeholder }}"
+    },
+    {
       "type": "select",
       "id": "banner_height",
       "label": "t:sections.collection.banner_height",
@@ -552,6 +582,14 @@
       "id": "show_description",
       "label": "t:sections.collection.show_description",
       "default": true,
+      "visible_if": "{{ section.settings.show_banner }}"
+    },
+    {
+      "type": "color_scheme",
+      "id": "banner_color_scheme",
+      "label": "t:labels.banner_color_scheme",
+      "info": "t:sections.collection.banner_color_scheme_info",
+      "default": "scheme-1",
       "visible_if": "{{ section.settings.show_banner }}"
     },
     {

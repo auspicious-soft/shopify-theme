@@ -35,7 +35,8 @@
         "padding_bottom": 64,
         "button_size": "medium",
         "heading_case": "uppercase",
-        "button_case": "uppercase"
+        "button_case": "uppercase",
+        "banner_color_scheme": "scheme-2"
       }
     }
   },
