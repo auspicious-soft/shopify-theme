@@ -190,3 +190,19 @@ select {
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
+
+/* ---------- Button size (each section's "Button size" setting) ----------
+   snippets/button-size.liquid drops a hidden marker into the section for
+   Small / Large; Medium is the standard button above. The filter drawer and
+   sticky add to cart bar keep their own compact buttons. */
+.shopify-section:has(.button-size--small) :is(.button--primary, .button--secondary):not(.facets__footer-button, .facets__apply, .sticky-atc__button) {
+  min-width: 0;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.8125rem;
+}
+
+.shopify-section:has(.button-size--large) :is(.button--primary, .button--secondary):not(.facets__footer-button, .facets__apply, .sticky-atc__button) {
+  min-width: 12rem;
+  padding: 1.15rem 2.75rem;
+  font-size: 1.125rem;
+}

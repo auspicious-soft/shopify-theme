@@ -187,7 +187,9 @@
     "heading_case": "Headings",
     "button_case": "Button labels",
     "overlay_content_color": "Transparent header content color",
-    "overlay_content_color_info": "Logo text, menu and icons while the header is transparent"
+    "overlay_content_color_info": "Logo text, menu and icons while the header is transparent",
+    "buttons": "Buttons",
+    "button_size": "Button size"
   },
   "options": {
     "section_width": {
@@ -311,6 +313,11 @@
       "all": "UPPERCASE headings and buttons",
       "headings": "UPPERCASE headings only",
       "buttons": "UPPERCASE buttons only"
+    },
+    "button_size": {
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large"
     }
   },
   "sections": {

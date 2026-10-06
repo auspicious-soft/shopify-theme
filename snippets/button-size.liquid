@@ -1,0 +1,16 @@
+{% doc %}
+  Applies a section's "Button size" setting (Small / Medium / Large).
+  Outputs an invisible marker; the matching rules in assets/base.css resize
+  the section's buttons. Medium is the theme's standard button, so it adds
+  nothing.
+
+  @param {object} section - The section, with a `button_size` setting
+
+  @example
+  {% render 'button-size', section: section %}
+{% enddoc %}
+
+{%- assign button_size = section.settings.button_size | default: 'medium' -%}
+{%- if button_size != 'medium' -%}
+  <span class="button-size button-size--{{ button_size }}" hidden></span>
+{%- endif -%}

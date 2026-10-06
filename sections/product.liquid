@@ -255,6 +255,7 @@
 </product-page>
 
 {% render 'text-case', section: section %}
+{% render 'button-size', section: section %}
 
 {% schema %}
 {
@@ -485,6 +486,30 @@
       "step": 4,
       "unit": "px",
       "default": 64
+    },
+    {
+      "type": "header",
+      "content": "t:labels.buttons"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "label": "t:labels.button_size",
+      "default": "medium",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:options.button_size.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.button_size.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.button_size.large"
+        }
+      ]
     },
     {
       "type": "header",
