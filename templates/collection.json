@@ -17,10 +17,12 @@
         "heading_class": "h1",
         "show_banner": true,
         "banner_style": "image",
+        "banner_placeholder": true,
         "banner_height": "medium",
-        "banner_overlay": 10,
+        "banner_overlay": 30,
         "banner_alignment": "left",
         "show_description": true,
+        "banner_color_scheme": "scheme-2",
         "products_per_page": 16,
         "columns_desktop": 4,
         "columns_mobile": "2",
@@ -35,8 +37,7 @@
         "padding_bottom": 64,
         "button_size": "medium",
         "heading_case": "uppercase",
-        "button_case": "uppercase",
-        "banner_color_scheme": "scheme-2"
+        "button_case": "uppercase"
       }
     }
   },
