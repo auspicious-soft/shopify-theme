@@ -20,7 +20,7 @@
           "type": "title",
           "settings": {
             "heading_tag": "h1",
-            "heading_class": "h1"
+            "heading_class": "h3"
           }
         },
         "rating": {
