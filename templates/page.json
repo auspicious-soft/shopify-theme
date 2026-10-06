@@ -13,10 +13,10 @@
       "type": "page",
       "settings": {
         "show_breadcrumbs": true,
-        "show_title": false,
+        "show_title": true,
         "heading_tag": "h1",
         "heading_class": "h2",
-        "alignment": "center",
+        "alignment": "left",
         "width": "page",
         "heading_case": "uppercase"
       }
