@@ -113,3 +113,25 @@ body {
 .page-width--full {
   max-width: none;
 }
+
+.returns-policy {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+ 
+.policy-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+ 
+.policy-card h2 {
+  margin: 0;
+}
+ 
+.policy-card p,
+.policy-card ul,
+.policy-card ol {
+  margin: 0;
+}
