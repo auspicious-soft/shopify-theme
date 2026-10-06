@@ -48,7 +48,7 @@
         "brand": {
           "type": "brand",
           "settings": {
-            "column_width": 40,
+            "column_width": 35,
             "image": "shopify://shop_images/Layer_1_2.png",
             "image_width": 140,
             "show_shop_name": true,
