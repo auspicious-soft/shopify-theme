@@ -118,7 +118,7 @@
                 {% render 'price', price: current_variant.price, compare_at_price: current_variant.compare_at_price %}
                 {% if block.settings.show_saving and current_variant.compare_at_price > current_variant.price %}
                   {%- assign saving = current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round -%}
-                  <span class="product__saving product__saving--scheme color-{{ block.settings.badge_color_scheme.id }}">{{ 'products.save_percent' | t: percent: saving }}</span>
+                  <span class="product__saving product__saving--scheme color-{{ block.settings.badge_color_scheme.id }}" style="--badge-radius: {{ block.settings.badge_corner_radius }}px;">{{ 'products.save_percent' | t: percent: saving }}</span>
                 {% endif %}
                 {% if current_variant.unit_price_measurement %}
                   <p class="product__unit-price">
@@ -791,6 +791,17 @@
           "id": "badge_color_scheme",
           "label": "t:sections.product.blocks.price.badge_color_scheme",
           "default": "scheme-2",
+          "visible_if": "{{ block.settings.show_saving }}"
+        },
+        {
+          "type": "range",
+          "id": "badge_corner_radius",
+          "label": "t:sections.product.blocks.price.badge_corner_radius",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 40,
           "visible_if": "{{ block.settings.show_saving }}"
         },
         {
