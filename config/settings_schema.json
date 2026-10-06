@@ -1854,6 +1854,33 @@
     ]
   },
   {
+    "name": "t:settings_schema.gift_card.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.gift_card.info"
+      },
+      {
+        "type": "color_scheme",
+        "id": "gift_card_color_scheme",
+        "label": "t:settings_schema.gift_card.page_color_scheme",
+        "default": "scheme-1"
+      },
+      {
+        "type": "color_scheme",
+        "id": "gift_card_card_color_scheme",
+        "label": "t:settings_schema.gift_card.card_color_scheme",
+        "default": "scheme-2"
+      },
+      {
+        "type": "image_picker",
+        "id": "gift_card_image",
+        "label": "t:settings_schema.gift_card.card_image",
+        "info": "t:settings_schema.gift_card.card_image_info"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.customer_accounts.name",
     "settings": [
       {

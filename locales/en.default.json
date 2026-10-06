@@ -150,7 +150,22 @@
     "card": "Gift card",
     "expired": "This gift card has expired",
     "expires_on": "Expires on {{ expires_on }}",
-    "use_at_checkout": "Use this gift card at checkout"
+    "use_at_checkout": "Use this gift card at checkout",
+    "title": "Here’s your {{ value }} gift card for {{ shop }}",
+    "balance": "Balance",
+    "initial_value": "of {{ value }}",
+    "disabled": "This gift card is no longer active",
+    "status": {
+      "disabled": "Disabled",
+      "expired": "Expired",
+      "used": "Used"
+    },
+    "for_recipient": "For {{ name }}",
+    "copy_code": "Copy",
+    "copied": "Copied",
+    "scan_in_store": "Scan this code in store",
+    "start_shopping": "Start shopping",
+    "print": "Print"
   },
   "password": {
     "title": "This shop is private",

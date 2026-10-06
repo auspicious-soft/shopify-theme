@@ -1643,6 +1643,14 @@
       "show_desktop": "Show breadcrumbs on desktop",
       "alignment": "Breadcrumb alignment",
       "alignment_auto": "Match the page title"
+    },
+    "gift_card": {
+      "name": "Gift card",
+      "info": "The page customers open from their gift card email. The logo comes from Theme settings > Logo.",
+      "page_color_scheme": "Page color scheme",
+      "card_color_scheme": "Card color scheme",
+      "card_image": "Card image",
+      "card_image_info": "Optional background for the card. Text uses the card color scheme"
     }
   },
   "blocks": {
