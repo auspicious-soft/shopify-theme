@@ -233,6 +233,46 @@
   pointer-events: none;
 }
 
+/* Mobile: filter, count and sort stay on one row. The "Sort by" label is
+   kept for screen readers only, and a long sort option is trimmed. */
+@media screen and (max-width: 749px) {
+  .collection__toolbar {
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+  }
+
+  .collection__filter-toggle,
+  .collection__count {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .collection__sort {
+    min-width: 0;
+    font-size: 0.85rem;
+  }
+
+  .collection__sort-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .collection__select {
+    min-width: 0;
+  }
+
+  .collection__select select {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
 /* ---------- Layout ---------- */
 
 .collection__layout {
