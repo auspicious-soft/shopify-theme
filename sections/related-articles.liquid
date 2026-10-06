@@ -151,6 +151,8 @@
   </slider-component>
 {%- endif -%}
 
+{% render 'text-case', section: section %}
+
 {% schema %}
 {
   "name": "t:sections.related_articles.name",
@@ -481,6 +483,26 @@
       "step": 4,
       "unit": "px",
       "default": 64
+    },
+    {
+      "type": "header",
+      "content": "t:labels.text_case"
+    },
+    {
+      "type": "select",
+      "id": "heading_case",
+      "label": "t:labels.heading_case",
+      "options": [
+        {
+          "value": "uppercase",
+          "label": "t:options.text_case.uppercase"
+        },
+        {
+          "value": "none",
+          "label": "t:options.text_case.none"
+        }
+      ],
+      "default": "uppercase"
     }
   ],
   "presets": [

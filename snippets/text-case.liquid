@@ -1,0 +1,35 @@
+{% doc %}
+  Applies a section's "Text case" settings (Headings / Button labels:
+  UPPERCASE or as typed). Outputs an invisible marker; the matching rules in
+  assets/base.css capitalize the section's headings (.h1–.h6) and buttons
+  (.button) when the marker is present. "As typed" adds nothing, so a
+  section's own uppercase options still work.
+
+  Sections short on settings can use a single `text_case` select instead
+  (all / headings / buttons / none).
+
+  @param {object} section - The section, with `heading_case` and (optionally) `button_case` settings, or `text_case`
+
+  @example
+  {% render 'text-case', section: section %}
+{% enddoc %}
+
+{%- liquid
+  assign heading_case = section.settings.heading_case | default: 'uppercase'
+  assign button_case = section.settings.button_case | default: 'uppercase'
+
+  if section.settings.text_case != blank
+    assign heading_case = 'none'
+    assign button_case = 'none'
+    if section.settings.text_case == 'all' or section.settings.text_case == 'headings'
+      assign heading_case = 'uppercase'
+    endif
+    if section.settings.text_case == 'all' or section.settings.text_case == 'buttons'
+      assign button_case = 'uppercase'
+    endif
+  endif
+-%}
+<span
+  class="text-case{% if heading_case == 'uppercase' %} text-case--headings-upper{% endif %}{% if button_case == 'uppercase' %} text-case--buttons-upper{% endif %}"
+  hidden
+></span>

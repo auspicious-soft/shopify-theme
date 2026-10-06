@@ -103,6 +103,8 @@
   </div>
 </div>
 
+{% render 'text-case', section: section %}
+
 {% schema %}
 {
   "name": "t:sections.collapsible.name",
@@ -130,12 +132,30 @@
       "label": "t:labels.heading_tag",
       "info": "t:labels.heading_tag_info",
       "options": [
-        { "value": "h1", "label": "H1" },
-        { "value": "h2", "label": "H2" },
-        { "value": "h3", "label": "H3" },
-        { "value": "h4", "label": "H4" },
-        { "value": "h5", "label": "H5" },
-        { "value": "h6", "label": "H6" }
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
       ],
       "default": "h2"
     },
@@ -145,12 +165,30 @@
       "label": "t:labels.heading_class",
       "info": "t:labels.heading_class_info",
       "options": [
-        { "value": "h6", "label": "t:options.heading_size.extra_small" },
-        { "value": "h5", "label": "t:options.heading_size.small" },
-        { "value": "h4", "label": "t:options.heading_size.medium" },
-        { "value": "h3", "label": "t:options.heading_size.large" },
-        { "value": "h2", "label": "t:options.heading_size.extra_large" },
-        { "value": "h1", "label": "t:options.heading_size.huge" }
+        {
+          "value": "h6",
+          "label": "t:options.heading_size.extra_small"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.heading_size.small"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.heading_size.medium"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.heading_size.large"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.heading_size.extra_large"
+        },
+        {
+          "value": "h1",
+          "label": "t:options.heading_size.huge"
+        }
       ],
       "default": "h3"
     },
@@ -164,8 +202,14 @@
       "id": "heading_alignment",
       "label": "t:sections.multicolumn.heading_alignment",
       "options": [
-        { "value": "left", "label": "t:options.alignment.left" },
-        { "value": "center", "label": "t:options.alignment.center" }
+        {
+          "value": "left",
+          "label": "t:options.alignment.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.alignment.center"
+        }
       ],
       "default": "center"
     },
@@ -178,8 +222,14 @@
       "id": "layout",
       "label": "t:sections.image_with_text.layout",
       "options": [
-        { "value": "stacked", "label": "t:sections.collapsible.layout_stacked" },
-        { "value": "side", "label": "t:sections.collapsible.layout_side" }
+        {
+          "value": "stacked",
+          "label": "t:sections.collapsible.layout_stacked"
+        },
+        {
+          "value": "side",
+          "label": "t:sections.collapsible.layout_side"
+        }
       ],
       "default": "stacked"
     },
@@ -195,8 +245,14 @@
       "id": "row_style",
       "label": "t:sections.collapsible.row_style",
       "options": [
-        { "value": "lines", "label": "t:sections.collapsible.row_lines" },
-        { "value": "cards", "label": "t:sections.collapsible.row_cards" }
+        {
+          "value": "lines",
+          "label": "t:sections.collapsible.row_lines"
+        },
+        {
+          "value": "cards",
+          "label": "t:sections.collapsible.row_cards"
+        }
       ],
       "default": "lines"
     },
@@ -205,13 +261,34 @@
       "id": "row_heading_size",
       "label": "t:sections.collapsible.row_heading_size",
       "options": [
-        { "value": "default", "label": "t:sections.collapsible.row_heading_default" },
-        { "value": "h6", "label": "t:options.heading_size.extra_small" },
-        { "value": "h5", "label": "t:options.heading_size.small" },
-        { "value": "h4", "label": "t:options.heading_size.medium" },
-        { "value": "h3", "label": "t:options.heading_size.large" },
-        { "value": "h2", "label": "t:options.heading_size.extra_large" },
-        { "value": "h1", "label": "t:options.heading_size.huge" }
+        {
+          "value": "default",
+          "label": "t:sections.collapsible.row_heading_default"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.heading_size.extra_small"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.heading_size.small"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.heading_size.medium"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.heading_size.large"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.heading_size.extra_large"
+        },
+        {
+          "value": "h1",
+          "label": "t:options.heading_size.huge"
+        }
       ],
       "default": "default"
     },
@@ -220,10 +297,22 @@
       "id": "row_content_size",
       "label": "t:sections.collapsible.row_content_size",
       "options": [
-        { "value": "small", "label": "t:sections.collection_banner.size_small" },
-        { "value": "medium", "label": "t:sections.collection_banner.size_medium" },
-        { "value": "large", "label": "t:sections.collection_banner.size_large" },
-        { "value": "xlarge", "label": "t:sections.collapsible.size_xlarge" }
+        {
+          "value": "small",
+          "label": "t:sections.collection_banner.size_small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.collection_banner.size_medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.collection_banner.size_large"
+        },
+        {
+          "value": "xlarge",
+          "label": "t:sections.collapsible.size_xlarge"
+        }
       ],
       "default": "medium"
     },
@@ -232,8 +321,14 @@
       "id": "expand_icon",
       "label": "t:sections.collapsible.expand_icon",
       "options": [
-        { "value": "plus", "label": "t:sections.collapsible.expand_plus" },
-        { "value": "chevron", "label": "t:sections.collapsible.expand_chevron" }
+        {
+          "value": "plus",
+          "label": "t:sections.collapsible.expand_plus"
+        },
+        {
+          "value": "chevron",
+          "label": "t:sections.collapsible.expand_chevron"
+        }
       ],
       "default": "plus"
     },
@@ -281,8 +376,14 @@
       "id": "width",
       "label": "t:labels.section_width",
       "options": [
-        { "value": "full", "label": "t:options.section_width.full" },
-        { "value": "page", "label": "t:options.section_width.page" }
+        {
+          "value": "full",
+          "label": "t:options.section_width.full"
+        },
+        {
+          "value": "page",
+          "label": "t:options.section_width.page"
+        }
       ],
       "default": "page"
     },
@@ -322,6 +423,26 @@
       "step": 4,
       "unit": "px",
       "default": 56
+    },
+    {
+      "type": "header",
+      "content": "t:labels.text_case"
+    },
+    {
+      "type": "select",
+      "id": "heading_case",
+      "label": "t:labels.heading_case",
+      "options": [
+        {
+          "value": "uppercase",
+          "label": "t:options.text_case.uppercase"
+        },
+        {
+          "value": "none",
+          "label": "t:options.text_case.none"
+        }
+      ],
+      "default": "uppercase"
     }
   ],
   "blocks": [
@@ -341,30 +462,102 @@
           "id": "icon",
           "label": "t:labels.icon",
           "options": [
-            { "value": "none", "label": "t:sections.collapsible.icons.none" },
-            { "value": "truck", "label": "t:sections.collapsible.icons.truck" },
-            { "value": "return", "label": "t:sections.collapsible.icons.return" },
-            { "value": "lock", "label": "t:sections.collapsible.icons.lock" },
-            { "value": "credit_card", "label": "t:sections.collapsible.icons.credit_card" },
-            { "value": "box", "label": "t:sections.collapsible.icons.box" },
-            { "value": "gift", "label": "t:sections.collapsible.icons.gift" },
-            { "value": "leaf", "label": "t:sections.collapsible.icons.leaf" },
-            { "value": "recycle", "label": "t:sections.collapsible.icons.recycle" },
-            { "value": "star", "label": "t:sections.collapsible.icons.star" },
-            { "value": "heart", "label": "t:sections.collapsible.icons.heart" },
-            { "value": "check", "label": "t:sections.collapsible.icons.check" },
-            { "value": "question", "label": "t:sections.collapsible.icons.question" },
-            { "value": "chat", "label": "t:sections.collapsible.icons.chat" },
-            { "value": "phone", "label": "t:sections.collapsible.icons.phone" },
-            { "value": "mail", "label": "t:sections.collapsible.icons.mail" },
-            { "value": "clock", "label": "t:sections.collapsible.icons.clock" },
-            { "value": "calendar", "label": "t:sections.collapsible.icons.calendar" },
-            { "value": "ruler", "label": "t:sections.collapsible.icons.ruler" },
-            { "value": "shirt", "label": "t:sections.collapsible.icons.shirt" },
-            { "value": "washing", "label": "t:sections.collapsible.icons.washing" },
-            { "value": "globe", "label": "t:sections.collapsible.icons.globe" },
-            { "value": "map_pin", "label": "t:sections.collapsible.icons.map_pin" },
-            { "value": "sparkle", "label": "t:sections.collapsible.icons.sparkle" }
+            {
+              "value": "none",
+              "label": "t:sections.collapsible.icons.none"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.collapsible.icons.truck"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.collapsible.icons.return"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.collapsible.icons.lock"
+            },
+            {
+              "value": "credit_card",
+              "label": "t:sections.collapsible.icons.credit_card"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.collapsible.icons.box"
+            },
+            {
+              "value": "gift",
+              "label": "t:sections.collapsible.icons.gift"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.collapsible.icons.leaf"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.collapsible.icons.recycle"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.collapsible.icons.star"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.collapsible.icons.heart"
+            },
+            {
+              "value": "check",
+              "label": "t:sections.collapsible.icons.check"
+            },
+            {
+              "value": "question",
+              "label": "t:sections.collapsible.icons.question"
+            },
+            {
+              "value": "chat",
+              "label": "t:sections.collapsible.icons.chat"
+            },
+            {
+              "value": "phone",
+              "label": "t:sections.collapsible.icons.phone"
+            },
+            {
+              "value": "mail",
+              "label": "t:sections.collapsible.icons.mail"
+            },
+            {
+              "value": "clock",
+              "label": "t:sections.collapsible.icons.clock"
+            },
+            {
+              "value": "calendar",
+              "label": "t:sections.collapsible.icons.calendar"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.collapsible.icons.ruler"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.collapsible.icons.shirt"
+            },
+            {
+              "value": "washing",
+              "label": "t:sections.collapsible.icons.washing"
+            },
+            {
+              "value": "globe",
+              "label": "t:sections.collapsible.icons.globe"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.collapsible.icons.map_pin"
+            },
+            {
+              "value": "sparkle",
+              "label": "t:sections.collapsible.icons.sparkle"
+            }
           ],
           "default": "none"
         },

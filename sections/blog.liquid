@@ -287,6 +287,8 @@
   </div>
 </div>
 
+{% render 'text-case', section: section %}
+
 {% schema %}
 {
   "name": "t:general.blog",
@@ -769,6 +771,34 @@
       "step": 4,
       "unit": "px",
       "default": 80
+    },
+    {
+      "type": "header",
+      "content": "t:labels.text_case"
+    },
+    {
+      "type": "select",
+      "id": "text_case",
+      "label": "t:labels.text_case_combined",
+      "default": "all",
+      "options": [
+        {
+          "value": "all",
+          "label": "t:options.text_case.all"
+        },
+        {
+          "value": "headings",
+          "label": "t:options.text_case.headings"
+        },
+        {
+          "value": "buttons",
+          "label": "t:options.text_case.buttons"
+        },
+        {
+          "value": "none",
+          "label": "t:options.text_case.none"
+        }
+      ]
     }
   ]
 }

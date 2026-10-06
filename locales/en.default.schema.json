@@ -181,7 +181,11 @@
     "text": "Text",
     "transition_speed": "Transition speed",
     "desktop_submenu_type": "Submenu type",
-    "desktop_submenu_type_info": "Mega menu shows 2nd-level links as column headings with their 3rd-level links beneath. Add a Mega menu promo block to show an image and title on the right."
+    "desktop_submenu_type_info": "Mega menu shows 2nd-level links as column headings with their 3rd-level links beneath. Add a Mega menu promo block to show an image and title on the right.",
+    "text_case": "Text case",
+    "text_case_combined": "Capitalization",
+    "heading_case": "Headings",
+    "button_case": "Button labels"
   },
   "options": {
     "section_width": {
@@ -298,6 +302,13 @@
     "desktop_submenu_type": {
       "dropdown": "Dropdown",
       "mega": "Mega menu"
+    },
+    "text_case": {
+      "uppercase": "UPPERCASE",
+      "none": "As typed",
+      "all": "UPPERCASE headings and buttons",
+      "headings": "UPPERCASE headings only",
+      "buttons": "UPPERCASE buttons only"
     }
   },
   "sections": {

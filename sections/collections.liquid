@@ -218,6 +218,8 @@
   </div>
 </div>
 
+{% render 'text-case', section: section %}
+
 {% schema %}
 {
   "name": "t:general.collections_grid",
@@ -248,12 +250,30 @@
       "label": "t:labels.heading_tag",
       "info": "t:labels.heading_tag_info",
       "options": [
-        { "value": "h1", "label": "H1" },
-        { "value": "h2", "label": "H2" },
-        { "value": "h3", "label": "H3" },
-        { "value": "h4", "label": "H4" },
-        { "value": "h5", "label": "H5" },
-        { "value": "h6", "label": "H6" }
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
       ],
       "default": "h1",
       "visible_if": "{{ section.settings.show_heading }}"
@@ -264,12 +284,30 @@
       "label": "t:labels.heading_class",
       "info": "t:labels.heading_class_info",
       "options": [
-        { "value": "h6", "label": "t:options.heading_size.extra_small" },
-        { "value": "h5", "label": "t:options.heading_size.small" },
-        { "value": "h4", "label": "t:options.heading_size.medium" },
-        { "value": "h3", "label": "t:options.heading_size.large" },
-        { "value": "h2", "label": "t:options.heading_size.extra_large" },
-        { "value": "h1", "label": "t:options.heading_size.huge" }
+        {
+          "value": "h6",
+          "label": "t:options.heading_size.extra_small"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.heading_size.small"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.heading_size.medium"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.heading_size.large"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.heading_size.extra_large"
+        },
+        {
+          "value": "h1",
+          "label": "t:options.heading_size.huge"
+        }
       ],
       "default": "h1",
       "visible_if": "{{ section.settings.show_heading }}"
@@ -285,8 +323,14 @@
       "id": "heading_alignment",
       "label": "t:labels.alignment",
       "options": [
-        { "value": "left", "label": "t:options.alignment.left" },
-        { "value": "center", "label": "t:options.alignment.center" }
+        {
+          "value": "left",
+          "label": "t:options.alignment.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.alignment.center"
+        }
       ],
       "default": "left",
       "visible_if": "{{ section.settings.show_heading }}"
@@ -307,11 +351,26 @@
       "label": "t:sections.collections.sort",
       "info": "t:sections.collections.sort_info",
       "options": [
-        { "value": "default", "label": "t:sections.collections.sort_default" },
-        { "value": "title_asc", "label": "t:sections.collections.sort_title_asc" },
-        { "value": "title_desc", "label": "t:sections.collections.sort_title_desc" },
-        { "value": "count_desc", "label": "t:sections.collections.sort_count_desc" },
-        { "value": "count_asc", "label": "t:sections.collections.sort_count_asc" }
+        {
+          "value": "default",
+          "label": "t:sections.collections.sort_default"
+        },
+        {
+          "value": "title_asc",
+          "label": "t:sections.collections.sort_title_asc"
+        },
+        {
+          "value": "title_desc",
+          "label": "t:sections.collections.sort_title_desc"
+        },
+        {
+          "value": "count_desc",
+          "label": "t:sections.collections.sort_count_desc"
+        },
+        {
+          "value": "count_asc",
+          "label": "t:sections.collections.sort_count_asc"
+        }
       ],
       "default": "default"
     },
@@ -330,9 +389,18 @@
       "id": "layout",
       "label": "t:sections.all.layout",
       "options": [
-        { "value": "grid", "label": "t:sections.collections.layout_grid" },
-        { "value": "mosaic", "label": "t:sections.collections.layout_mosaic" },
-        { "value": "index", "label": "t:sections.collections.layout_index" }
+        {
+          "value": "grid",
+          "label": "t:sections.collections.layout_grid"
+        },
+        {
+          "value": "mosaic",
+          "label": "t:sections.collections.layout_mosaic"
+        },
+        {
+          "value": "index",
+          "label": "t:sections.collections.layout_index"
+        }
       ],
       "default": "grid"
     },
@@ -366,8 +434,14 @@
       "id": "columns_mobile",
       "label": "t:sections.all.columns_mobile",
       "options": [
-        { "value": "1", "label": "1" },
-        { "value": "2", "label": "2" }
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
       ],
       "default": "2",
       "visible_if": "{{ section.settings.layout != 'index' }}"
@@ -388,8 +462,14 @@
       "id": "width",
       "label": "t:labels.section_width",
       "options": [
-        { "value": "full", "label": "t:options.section_width.full" },
-        { "value": "page", "label": "t:options.section_width.page" }
+        {
+          "value": "full",
+          "label": "t:options.section_width.full"
+        },
+        {
+          "value": "page",
+          "label": "t:options.section_width.page"
+        }
       ],
       "default": "page"
     },
@@ -418,8 +498,32 @@
       "step": 4,
       "unit": "px",
       "default": 64
+    },
+    {
+      "type": "header",
+      "content": "t:labels.text_case"
+    },
+    {
+      "type": "select",
+      "id": "heading_case",
+      "label": "t:labels.heading_case",
+      "options": [
+        {
+          "value": "uppercase",
+          "label": "t:options.text_case.uppercase"
+        },
+        {
+          "value": "none",
+          "label": "t:options.text_case.none"
+        }
+      ],
+      "default": "uppercase"
     }
   ],
-  "presets": [{ "name": "t:general.collections_grid" }]
+  "presets": [
+    {
+      "name": "t:general.collections_grid"
+    }
+  ]
 }
 {% endschema %}

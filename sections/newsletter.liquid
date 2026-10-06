@@ -109,6 +109,8 @@
   </div>
 </div>
 
+{% render 'text-case', section: section %}
+
 {% schema %}
 {
   "name": "t:sections.newsletter.name",
@@ -130,12 +132,30 @@
       "label": "t:labels.heading_tag",
       "info": "t:labels.heading_tag_info",
       "options": [
-        { "value": "h1", "label": "H1" },
-        { "value": "h2", "label": "H2" },
-        { "value": "h3", "label": "H3" },
-        { "value": "h4", "label": "H4" },
-        { "value": "h5", "label": "H5" },
-        { "value": "h6", "label": "H6" }
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
       ],
       "default": "h2"
     },
@@ -145,12 +165,30 @@
       "label": "t:labels.heading_class",
       "info": "t:labels.heading_class_info",
       "options": [
-        { "value": "h6", "label": "t:options.heading_size.extra_small" },
-        { "value": "h5", "label": "t:options.heading_size.small" },
-        { "value": "h4", "label": "t:options.heading_size.medium" },
-        { "value": "h3", "label": "t:options.heading_size.large" },
-        { "value": "h2", "label": "t:options.heading_size.extra_large" },
-        { "value": "h1", "label": "t:options.heading_size.huge" }
+        {
+          "value": "h6",
+          "label": "t:options.heading_size.extra_small"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.heading_size.small"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.heading_size.medium"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.heading_size.large"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.heading_size.extra_large"
+        },
+        {
+          "value": "h1",
+          "label": "t:options.heading_size.huge"
+        }
       ],
       "default": "h3"
     },
@@ -176,8 +214,14 @@
       "label": "t:sections.newsletter.form_position",
       "info": "t:sections.newsletter.form_position_info",
       "options": [
-        { "value": "right", "label": "t:sections.newsletter.form_right" },
-        { "value": "below", "label": "t:sections.newsletter.form_below" }
+        {
+          "value": "right",
+          "label": "t:sections.newsletter.form_right"
+        },
+        {
+          "value": "below",
+          "label": "t:sections.newsletter.form_below"
+        }
       ],
       "default": "right"
     },
@@ -186,8 +230,14 @@
       "id": "alignment",
       "label": "t:labels.alignment",
       "options": [
-        { "value": "left", "label": "t:options.alignment.left" },
-        { "value": "center", "label": "t:options.alignment.center" }
+        {
+          "value": "left",
+          "label": "t:options.alignment.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.alignment.center"
+        }
       ],
       "default": "left",
       "visible_if": "{{ section.settings.form_position == 'below' }}"
@@ -207,8 +257,14 @@
       "id": "field_style",
       "label": "t:sections.newsletter.field_style",
       "options": [
-        { "value": "boxed", "label": "t:sections.newsletter.field_boxed" },
-        { "value": "underline", "label": "t:sections.newsletter.field_underline" }
+        {
+          "value": "boxed",
+          "label": "t:sections.newsletter.field_boxed"
+        },
+        {
+          "value": "underline",
+          "label": "t:sections.newsletter.field_underline"
+        }
       ],
       "default": "boxed"
     },
@@ -230,8 +286,14 @@
       "id": "button_style",
       "label": "t:labels.button_style",
       "options": [
-        { "value": "primary", "label": "t:options.button_style.primary" },
-        { "value": "secondary", "label": "t:options.button_style.secondary" }
+        {
+          "value": "primary",
+          "label": "t:options.button_style.primary"
+        },
+        {
+          "value": "secondary",
+          "label": "t:options.button_style.secondary"
+        }
       ],
       "default": "primary",
       "visible_if": "{{ section.settings.field_style == 'boxed' }}"
@@ -263,8 +325,14 @@
       "id": "width",
       "label": "t:labels.section_width",
       "options": [
-        { "value": "full", "label": "t:options.section_width.full" },
-        { "value": "page", "label": "t:options.section_width.page" }
+        {
+          "value": "full",
+          "label": "t:options.section_width.full"
+        },
+        {
+          "value": "page",
+          "label": "t:options.section_width.page"
+        }
       ],
       "default": "page"
     },
@@ -283,8 +351,14 @@
       "id": "divider_width",
       "label": "t:sections.newsletter.divider_width",
       "options": [
-        { "value": "page", "label": "t:sections.newsletter.divider_page" },
-        { "value": "full", "label": "t:sections.newsletter.divider_full" }
+        {
+          "value": "page",
+          "label": "t:sections.newsletter.divider_page"
+        },
+        {
+          "value": "full",
+          "label": "t:sections.newsletter.divider_full"
+        }
       ],
       "default": "page",
       "visible_if": "{{ section.settings.show_divider }}"
@@ -330,6 +404,42 @@
       "step": 4,
       "unit": "px",
       "default": 56
+    },
+    {
+      "type": "header",
+      "content": "t:labels.text_case"
+    },
+    {
+      "type": "select",
+      "id": "heading_case",
+      "label": "t:labels.heading_case",
+      "options": [
+        {
+          "value": "uppercase",
+          "label": "t:options.text_case.uppercase"
+        },
+        {
+          "value": "none",
+          "label": "t:options.text_case.none"
+        }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "select",
+      "id": "button_case",
+      "label": "t:labels.button_case",
+      "options": [
+        {
+          "value": "uppercase",
+          "label": "t:options.text_case.uppercase"
+        },
+        {
+          "value": "none",
+          "label": "t:options.text_case.none"
+        }
+      ],
+      "default": "uppercase"
     }
   ],
   "presets": [
