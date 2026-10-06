@@ -16,7 +16,8 @@
         "show_breadcrumbs": true,
         "heading_tag": "h1",
         "heading_class": "h2",
-        "width": "page"
+        "width": "page",
+        "heading_case": "uppercase"
       }
     },
     "rich_text_B3RJFD": {
@@ -54,7 +55,10 @@
         "width": "page",
         "color_scheme": "",
         "padding_top": 40,
-        "padding_bottom": 40
+        "padding_bottom": 40,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
       }
     },
     "image_with_text_7kC9T4": {
@@ -85,6 +89,7 @@
       "settings": {
         "media_type": "image",
         "image": "shopify://shop_images/Hero_Image_2.png",
+        "video_url": "",
         "image_ratio": "adapt",
         "corner_radius": 0,
         "layout": "side",
@@ -101,7 +106,10 @@
         "content_card": false,
         "content_color_scheme": "",
         "padding_top": 20,
-        "padding_bottom": 56
+        "padding_bottom": 56,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
       }
     },
     "multicolumn_WLkhDY": {
@@ -172,7 +180,10 @@
         "card": true,
         "card_color_scheme": "",
         "padding_top": 40,
-        "padding_bottom": 56
+        "padding_bottom": 56,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
       }
     },
     "image_with_text_aXk4fR": {
@@ -212,6 +223,7 @@
       "settings": {
         "media_type": "image",
         "image": "shopify://shop_images/Craft_Image.png",
+        "video_url": "",
         "image_ratio": "adapt",
         "corner_radius": 0,
         "layout": "side",
@@ -228,7 +240,10 @@
         "content_card": false,
         "content_color_scheme": "",
         "padding_top": 56,
-        "padding_bottom": 56
+        "padding_bottom": 56,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
       }
     },
     "image_with_text_7CgaFV": {
@@ -268,6 +283,7 @@
       "settings": {
         "media_type": "image",
         "image": "shopify://shop_images/Founders_Portrait.png",
+        "video_url": "",
         "image_ratio": "adapt",
         "corner_radius": 0,
         "layout": "side",
@@ -284,7 +300,10 @@
         "content_card": false,
         "content_color_scheme": "",
         "padding_top": 56,
-        "padding_bottom": 56
+        "padding_bottom": 56,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
       }
     },
     "multicolumn_9NmhtK": {
@@ -366,7 +385,10 @@
         "card": false,
         "card_color_scheme": "",
         "padding_top": 56,
-        "padding_bottom": 56
+        "padding_bottom": 56,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
       }
     }
   },
