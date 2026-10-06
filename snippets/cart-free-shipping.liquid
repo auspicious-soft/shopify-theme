@@ -10,15 +10,21 @@
   the cart-panel script rescales it with `Shopify.currency.rate` and
   rewrites the message/progress on load and after every cart update.
 
+  @param {boolean} [show] - Show the bar regardless of the drawer setting (the cart page passes its own setting)
+
   @example
   {% render 'cart-free-shipping' %}
 {% enddoc %}
 
 {%- liquid
   assign threshold = settings.free_shipping_threshold | times: 100 | round
+  assign show_bar = settings.free_shipping_bar_enabled
+  if show != nil
+    assign show_bar = show
+  endif
 -%}
 
-{%- if settings.free_shipping_bar_enabled and threshold > 0 -%}
+{%- if show_bar and threshold > 0 -%}
   {%- liquid
     assign remaining = threshold | minus: cart.total_price
     if remaining < 0

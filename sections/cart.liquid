@@ -39,7 +39,7 @@
   "
 >
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}" data-cart-page-contents>
-    <div class="cart-page__header">
+    <div class="cart-page__header{% if cart.item_count == 0 %} cart-page__header--empty{% endif %}">
       <{{ heading_tag }} class="{{ heading_class }} cart-page__title">
         {{- 'cart.title' | t -}}
         {%- if cart.item_count > 0 %}
@@ -222,9 +222,7 @@
         <aside class="cart-summary{% if section.settings.sticky_summary %} cart-summary--sticky{% endif %} color-{{ section.settings.summary_color_scheme.id }}" aria-labelledby="CartSummary-{{ section.id }}">
           <h2 id="CartSummary-{{ section.id }}" class="h5 cart-summary__title">{{ 'cart.order_summary' | t }}</h2>
 
-          {%- if section.settings.show_free_shipping -%}
-            {% render 'cart-free-shipping' %}
-          {%- endif -%}
+          {% render 'cart-free-shipping', show: section.settings.show_free_shipping %}
 
           {%- if settings.show_cart_note -%}
             <details class="cart-summary__note"{% if cart.note != blank %} open{% endif %}>

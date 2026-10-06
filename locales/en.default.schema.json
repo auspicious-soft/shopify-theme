@@ -1117,7 +1117,7 @@
       "sticky_summary": "Sticky on desktop",
       "summary_color_scheme": "Summary color scheme",
       "show_free_shipping": "Show free shipping bar",
-      "show_free_shipping_info": "Set the threshold in Theme settings > Cart",
+      "show_free_shipping_info": "Uses the free shipping threshold in Theme settings > Cart",
       "show_terms": "Require terms agreement",
       "show_terms_info": "Customers must tick a checkbox before checkout. Express checkout buttons skip it",
       "terms_page": "Terms page",
@@ -1569,11 +1569,11 @@
             "info": "Shown when cart drawer is empty"
           },
           "free_shipping_bar": {
-            "label": "Free shipping bar"
+            "label": "Free shipping bar in cart drawer"
           },
           "free_shipping_threshold": {
             "label": "Free shipping threshold",
-            "info": "Order subtotal needed for free shipping, in your store's default currency. Converted automatically for other currencies. Make sure it matches your shipping rates in Settings > Shipping and delivery."
+            "info": "Order subtotal needed for free shipping, in your store's default currency. Converted automatically for other currencies. Used by the cart drawer and the cart page bar. Make sure it matches your shipping rates in Settings > Shipping and delivery."
           }
         }
       }

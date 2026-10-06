@@ -18,6 +18,13 @@
   margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
 }
 
+/* Empty cart: the title sits centered above the empty message. */
+.cart-page__header--empty {
+  justify-content: center;
+  margin-bottom: 0;
+  text-align: center;
+}
+
 .cart-page__title {
   margin: 0;
 }
@@ -359,14 +366,19 @@
 }
 
 /* Free shipping bar (snippets/cart-free-shipping.liquid) inside the summary. */
+/* Reset the drawer's bar styles (assets/cart-panel.css loads sitewide). */
 .cart-summary .cart-shipping {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  padding: 0;
+  border: 0;
+  background: none;
 }
 
 .cart-summary .cart-shipping__message {
   margin: 0;
+  text-align: start;
   font-size: 0.85rem;
   line-height: 1.4;
 }
