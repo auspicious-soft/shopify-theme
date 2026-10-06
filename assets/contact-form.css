@@ -385,3 +385,12 @@
 .contact--info-below .contact__info {
   width: 100%;
 }
+
+/* Contact details color scheme, when it differs from the section's: the
+   panel / cards take that scheme's own background and text colors (with
+   the same scheme they keep the light tint above so they still show). */
+.contact--details-scheme.contact--info-card .contact__info,
+.contact--details-scheme.contact--details-cards .contact__info-item {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}

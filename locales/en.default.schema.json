@@ -655,7 +655,9 @@
       "info_style_info": "Separate cards sit in a row below the form, or stacked beside it",
       "info_style_plain": "Plain",
       "info_style_panel": "Single panel",
-      "info_style_cards": "Separate cards"
+      "info_style_cards": "Separate cards",
+      "info_color_scheme": "Contact details color scheme",
+      "info_color_scheme_info": "Pick a different scheme from the section to give the panel or cards their own background and text colors"
     },
     "featured_product": {
       "name": "Featured product",

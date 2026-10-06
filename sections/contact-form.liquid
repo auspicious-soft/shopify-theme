@@ -47,7 +47,7 @@
 -%}
 
 <div
-  class="contact contact--info-{{ info_position }} contact--align-{{ section.settings.heading_alignment }} contact--details-{{ info_style }}{% if info_style == 'panel' %} contact--info-card{% endif %} color-{{ section.settings.color_scheme.id }}"
+  class="contact contact--info-{{ info_position }} contact--align-{{ section.settings.heading_alignment }} contact--details-{{ info_style }}{% if info_style == 'panel' %} contact--info-card{% endif %}{% if info_style != 'plain' and section.settings.info_color_scheme.id != section.settings.color_scheme.id %} contact--details-scheme{% endif %} color-{{ section.settings.color_scheme.id }}"
   style="
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -547,9 +547,10 @@
     {
       "type": "color_scheme",
       "id": "info_color_scheme",
-      "label": "t:sections.image_with_text.content_color_scheme",
+      "label": "t:sections.contact_form.info_color_scheme",
       "default": "scheme-1",
-      "visible_if": "{{ section.settings.info_style != 'plain' }}"
+      "visible_if": "{{ section.settings.info_style != 'plain' }}",
+      "info": "t:sections.contact_form.info_color_scheme_info"
     },
     {
       "type": "range",
