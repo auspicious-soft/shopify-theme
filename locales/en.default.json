@@ -170,7 +170,23 @@
   "password": {
     "title": "This shop is private",
     "password": "Password",
-    "enter": "Enter"
+    "enter": "Enter",
+    "heading": "Something new is on its way",
+    "enter_using_password": "Enter using password",
+    "enter_store": "Enter store using password",
+    "wrong_password": "Incorrect password. Please try again.",
+    "store_owner": "Store owner?",
+    "log_in": "Log in",
+    "notify_me": "Notify me",
+    "newsletter_success": "Thanks! We’ll let you know as soon as we launch.",
+    "countdown_label": "Time until launch",
+    "countdown_done": "We’re live! Enter the store with your password.",
+    "units": {
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    }
   },
   "contact": {
     "form": {
