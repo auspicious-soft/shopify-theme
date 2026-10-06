@@ -1,0 +1,108 @@
+/* Shopify policy pages (/policies/…: privacy, refund, terms of service,
+   shipping, contact information). Shopify renders their markup itself
+   (.shopify-policy__*); this styles it to match the theme. Loaded only on
+   policy pages from layout/theme.liquid. */
+
+.shopify-policy__container {
+  width: 100%;
+  max-width: calc(48rem + 2 * var(--page-margin, 20px));
+  margin-inline: auto;
+  padding: clamp(2.5rem, 6vw, 4rem) var(--page-margin, 20px) clamp(3rem, 8vw, 5rem);
+}
+
+.shopify-policy__title {
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  text-align: center;
+}
+
+.shopify-policy__title h1 {
+  margin: 0;
+  font-family: var(--font-heading--family);
+  font-style: var(--font-heading--style);
+  font-weight: var(--font-heading--weight);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.15;
+}
+
+.shopify-policy__body {
+  font-size: var(--body-size, 14px);
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
+  overflow-wrap: break-word;
+}
+
+.shopify-policy__body > :first-child,
+.shopify-policy__body .rte > :first-child {
+  margin-top: 0;
+}
+
+.shopify-policy__body :is(p, ul, ol, table, blockquote) {
+  margin: 0 0 1.1em;
+}
+
+.shopify-policy__body :is(h2, h3, h4, h5, h6) {
+  margin: 2em 0 0.6em;
+  font-family: var(--font-heading--family);
+  line-height: 1.3;
+  color: var(--color-foreground);
+}
+
+.shopify-policy__body h2 {
+  font-size: 1.35em;
+}
+
+.shopify-policy__body h3 {
+  font-size: 1.15em;
+}
+
+.shopify-policy__body :is(h4, h5, h6) {
+  font-size: 1em;
+}
+
+.shopify-policy__body :is(ul, ol) {
+  padding-inline-start: 1.25em;
+}
+
+.shopify-policy__body li + li {
+  margin-top: 0.35em;
+}
+
+.shopify-policy__body a {
+  color: var(--color-foreground);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.shopify-policy__body a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.shopify-policy__body strong {
+  color: var(--color-foreground);
+}
+
+/* Tables scroll sideways on small screens instead of overflowing. */
+.shopify-policy__body table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.shopify-policy__body :is(th, td) {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+  text-align: start;
+  vertical-align: top;
+}
+
+.shopify-policy__body th {
+  background-color: color-mix(in srgb, var(--color-foreground) 4%, transparent);
+  color: var(--color-foreground);
+}
+
+.shopify-policy__body hr {
+  margin: 2em 0;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+}

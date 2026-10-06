@@ -39,6 +39,11 @@
     {{ 'image.css' | asset_url | stylesheet_tag }}
     {{ 'badge.css' | asset_url | stylesheet_tag }}
 
+    {% # Shopify policy pages (/policies/…) %}
+    {%- if request.page_type == 'policy' -%}
+      {{ 'policy.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
+
     {% # Header component: rendered on every page via the header group, so its assets load sitewide %}
     {{ 'header.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'header.js' | asset_url }}" defer></script>
