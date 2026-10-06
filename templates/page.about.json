@@ -14,8 +14,10 @@
       "disabled": true,
       "settings": {
         "show_breadcrumbs": true,
+        "show_title": true,
         "heading_tag": "h1",
         "heading_class": "h2",
+        "alignment": "left",
         "width": "page",
         "heading_case": "uppercase"
       }
@@ -34,8 +36,8 @@
         "heading_PThJEq": {
           "type": "heading",
           "settings": {
-            "heading": "&nbsp;Weaving Slow Stories: Our Mill Legacy&nbsp;",
-            "heading_tag": "h2",
+            "heading": "Weaving Slow Stories: Our Mill Legacy&nbsp;",
+            "heading_tag": "h1",
             "heading_class": "h2",
             "uppercase": true
           }
