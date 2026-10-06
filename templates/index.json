@@ -48,7 +48,7 @@
       "settings": {
         "heading": "New Arrivals",
         "heading_tag": "h2",
-        "heading_class": "h4",
+        "heading_class": "h1",
         "subheading": "",
         "heading_alignment": "left",
         "collection": "new-arrivals",
