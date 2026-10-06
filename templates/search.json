@@ -13,8 +13,29 @@
       "type": "search",
       "settings": {
         "heading_tag": "h1",
-        "heading_class": "h3",
-        "color_scheme": ""
+        "heading_class": "h2",
+        "heading_alignment": "center",
+        "result_types": "all",
+        "show_type_tabs": true,
+        "show_count": true,
+        "results_per_page": 24,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "pagination_type": "numbers",
+        "enable_filtering": true,
+        "filter_layout": "drawer",
+        "filter_button_size": "medium",
+        "enable_sorting": true,
+        "suggestions_collection": "",
+        "suggestions_heading": "",
+        "suggestions_count": 4,
+        "width": "page",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 64,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
       }
     }
   },
