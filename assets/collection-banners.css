@@ -186,6 +186,12 @@
   text-transform: uppercase;
 }
 
+.collection-tile__button--large {
+  min-width: 12rem;
+  padding: 1.15rem 2.75rem;
+  font-size: 1.125rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .collection-tile .banner-media__image,
   .collection-tile .banner-media__video {

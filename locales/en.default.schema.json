@@ -185,7 +185,9 @@
     "text_case": "Text case",
     "text_case_combined": "Capitalization",
     "heading_case": "Headings",
-    "button_case": "Button labels"
+    "button_case": "Button labels",
+    "overlay_content_color": "Transparent header content color",
+    "overlay_content_color_info": "Logo text, menu and icons while the header is transparent"
   },
   "options": {
     "section_width": {

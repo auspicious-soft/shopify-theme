@@ -156,6 +156,12 @@
   text-transform: uppercase;
 }
 
+.promo-banner__button--large {
+  min-width: 12rem;
+  padding: 1.15rem 2.75rem;
+  font-size: 1.125rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .promo-banner .banner-media__image,
   .promo-banner .banner-media__video {

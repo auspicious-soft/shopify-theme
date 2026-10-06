@@ -141,6 +141,20 @@
   color: var(--color-foreground);
 }
 
+/* Transparent header content color (Header settings > Transparent header
+   content color): the logo text, menu links and icons while the header is
+   transparent over the page. Chained with .header so it beats the standard
+   style's hover rule above (a standard header stays transparent on hover).
+   Once the header turns solid it goes back to the colors above. */
+.header.header--overlay:not(.is-scrolled) {
+  color: var(--header-overlay-content, var(--header-text));
+}
+
+/* Logo reveal turns solid on hover / open search: use the solid colors. */
+.header--logo_reveal.header--overlay:not(.is-scrolled):is(:hover, :has(.predictive-search[open])) {
+  color: var(--header-overlay-text);
+}
+
 /* Transparent header logo (Header settings > Transparent header logo):
    hidden everywhere by default so setting it has no effect unless a style
    below explicitly opts in. */
