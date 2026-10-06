@@ -23,6 +23,21 @@
   endif
   assign info_style = section.settings.info_style | default: 'panel'
 
+  # Separate cards can sit on a background bar (its own color scheme); each
+  # card is solid in the details scheme when that differs from what's behind it.
+  assign info_bar = false
+  if info_style == 'cards' and section.settings.info_bar
+    assign info_bar = true
+  endif
+  assign behind_scheme = section.settings.color_scheme.id
+  if info_bar
+    assign behind_scheme = section.settings.info_bar_color_scheme.id
+  endif
+  assign info_solid = false
+  if info_style != 'plain' and section.settings.info_color_scheme.id != behind_scheme
+    assign info_solid = true
+  endif
+
   assign button_label = 'contact.form.send' | t
   if section.settings.button_label != blank
     assign button_label = section.settings.button_label
@@ -47,7 +62,7 @@
 -%}
 
 <div
-  class="contact contact--info-{{ info_position }} contact--align-{{ section.settings.heading_alignment }} contact--details-{{ info_style }}{% if info_style == 'panel' %} contact--info-card{% endif %}{% if info_style != 'plain' and section.settings.info_color_scheme.id != section.settings.color_scheme.id %} contact--details-scheme{% endif %} color-{{ section.settings.color_scheme.id }}"
+  class="contact contact--info-{{ info_position }} contact--align-{{ section.settings.heading_alignment }} contact--details-{{ info_style }}{% if info_style == 'panel' %} contact--info-card{% endif %}{% if info_solid %} contact--details-scheme{% endif %}{% if info_bar %} contact--details-bar{% endif %} color-{{ section.settings.color_scheme.id }}"
   style="
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -204,9 +219,9 @@
       </div>
 
       {%- if info_position != 'none' -%}
-        <div class="contact__info{% if info_style != 'plain' %} color-{{ section.settings.info_color_scheme.id }}{% endif %}">
+        <div class="contact__info{% if info_bar %} color-{{ section.settings.info_bar_color_scheme.id }}{% elsif info_style == 'panel' %} color-{{ section.settings.info_color_scheme.id }}{% endif %}">
           {%- for block in section.blocks -%}
-            <div class="contact__info-item" {{ block.shopify_attributes }}>
+            <div class="contact__info-item{% if info_style == 'cards' %} color-{{ section.settings.info_color_scheme.id }}{% endif %}" {{ block.shopify_attributes }}>
               {%- if block.settings.icon != 'none' -%}
                 <span class="contact__info-icon">{% render 'icon-library', icon: block.settings.icon %}</span>
               {%- endif -%}
@@ -551,6 +566,21 @@
       "default": "scheme-1",
       "visible_if": "{{ section.settings.info_style != 'plain' }}",
       "info": "t:sections.contact_form.info_color_scheme_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "info_bar",
+      "label": "t:sections.contact_form.info_bar",
+      "info": "t:sections.contact_form.info_bar_info",
+      "default": false,
+      "visible_if": "{{ section.settings.info_style == 'cards' }}"
+    },
+    {
+      "type": "color_scheme",
+      "id": "info_bar_color_scheme",
+      "label": "t:sections.contact_form.info_bar_color_scheme",
+      "default": "scheme-2",
+      "visible_if": "{{ section.settings.info_style == 'cards' and section.settings.info_bar }}"
     },
     {
       "type": "range",

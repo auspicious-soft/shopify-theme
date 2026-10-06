@@ -394,3 +394,12 @@
   background-color: var(--color-background);
   color: var(--color-foreground);
 }
+
+/* Separate cards > Background behind cards: a padded bar in its own color
+   scheme behind all the cards. */
+.contact--details-bar .contact__info {
+  padding: clamp(1rem, 3vw, 2rem);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  border-radius: var(--contact-radius, 0);
+}
