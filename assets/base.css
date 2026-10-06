@@ -94,7 +94,7 @@ a {
   justify-content: center;
   min-width: 9rem;
   padding: 0.9rem 2rem;
-  font-size: 1rem;
+  font-size: var(--body-size, 14px);
   line-height: 1.2;
   text-align: center;
   text-decoration: none;
