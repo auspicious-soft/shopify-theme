@@ -386,7 +386,9 @@
       "banner_placeholder_info": "When off, those collections show the minimal banner",
       "banner_placeholder_image": "Placeholder image",
       "banner_placeholder_image_info": "Leave empty to use a placeholder illustration",
-      "banner_color_scheme_info": "Text and overlay color on image banners, background on minimal banners"
+      "banner_color_scheme_info": "Text and overlay color on image banners, background on minimal banners",
+      "filter_button_size": "Filter button size",
+      "filter_button_size_info": "Clear all and View results buttons in the filter drawer"
     },
     "product": {
       "media": "Media",

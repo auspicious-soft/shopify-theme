@@ -164,7 +164,7 @@
         {% if filtering %}
           <aside
             id="Facets-{{ section_id }}"
-            class="facets facets--{{ filter_layout }}"
+            class="facets facets--{{ filter_layout }} facets--buttons-{{ section.settings.filter_button_size }}"
             aria-labelledby="FacetsHeading-{{ section_id }}"
             data-facets
           >
@@ -680,6 +680,28 @@
         }
       ],
       "default": "sidebar",
+      "visible_if": "{{ section.settings.enable_filtering }}"
+    },
+    {
+      "type": "select",
+      "id": "filter_button_size",
+      "label": "t:sections.collection.filter_button_size",
+      "info": "t:sections.collection.filter_button_size_info",
+      "default": "medium",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:options.button_size.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.button_size.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.button_size.large"
+        }
+      ],
       "visible_if": "{{ section.settings.enable_filtering }}"
     },
     {

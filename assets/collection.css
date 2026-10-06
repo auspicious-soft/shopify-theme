@@ -611,6 +611,29 @@
   padding-inline: 1rem;
 }
 
+/* Filtering > Filter button size (Medium is the standard button). */
+.facets--buttons-small :is(.facets__footer-button, .facets__apply) {
+  padding-block: 0.6rem;
+  font-size: 0.8125rem;
+}
+
+.facets--buttons-large :is(.facets__footer-button, .facets__apply) {
+  padding-block: 1.15rem;
+  font-size: 1.125rem;
+}
+
+@media screen and (max-width: 749px) {
+  .facets--buttons-small :is(.facets__footer-button, .facets__apply) {
+    padding-block: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .facets--buttons-large :is(.facets__footer-button, .facets__apply) {
+    padding-block: 0.95rem;
+    font-size: 1rem;
+  }
+}
+
 /* ---------- Facets: sidebar (desktop) ---------- */
 
 @media (min-width: 990px) {
