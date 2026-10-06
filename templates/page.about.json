@@ -209,7 +209,7 @@
           "settings": {
             "heading": "Honoring Untreated Raw Cashmere",
             "heading_tag": "h2",
-            "heading_class": "h2",
+            "heading_class": "h3",
             "uppercase": true
           }
         },
