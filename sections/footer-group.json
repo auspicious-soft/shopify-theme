@@ -31,7 +31,7 @@
         "note": "",
         "color_scheme": "scheme-4",
         "width": "page",
-        "show_divider": false,
+        "show_divider": true,
         "divider_width": "page",
         "divider_thickness": 1,
         "divider_opacity": 20,
