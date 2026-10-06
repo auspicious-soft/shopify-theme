@@ -26,7 +26,7 @@
         "show_author": true,
         "show_reading_time": true,
         "content_width": 760,
-        "text_size": "medium",
+        "text_size": "small",
         "show_tags": true,
         "show_share": false,
         "show_prev_next": true,
