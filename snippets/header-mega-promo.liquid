@@ -1,17 +1,21 @@
 {% doc %}
-  Renders the "Mega menu promo" block (image and/or title with link) that
-  belongs to a top-level menu link, if any. A block matches when its Menu
-  item setting equals the link's title (case-insensitive) or handle.
+  Renders the "Mega menu promo" blocks (image and/or title with link) that
+  belong to a top-level menu link. A block matches when its Menu item
+  setting equals the link's title (case-insensitive) or handle; every
+  matching block is shown, side by side in the mega menu and stacked in the
+  drawer.
+
   When a product is picked, an empty image / title / link falls back to the
-  product's featured image, title and URL. Renders nothing when there's no
-  match, or when both the image and the title are switched off or empty.
+  product's featured image, title and URL. A promo is skipped when both its
+  image and title are switched off or empty; nothing renders when no promo
+  is left.
 
   Shared by the desktop mega menu (snippets/header-navigation.liquid) and
   the mobile menu drawer (snippets/header-drawer.liquid).
 
   @param section {Object} - the header section
   @param link {Object} - the top-level menu link
-  @param [modifier] {String} - extra class for placement-specific styling
+  @param [modifier] {String} - extra class for placement-specific styling (the wrapper gets it with "s", e.g. header__mega-promos--drawer)
   @param [sizes] {String} - image `sizes` attribute
 
   @example
@@ -19,60 +23,73 @@
 {% enddoc %}
 
 {%- liquid
-  assign promo = nil
   assign link_title = link.title | strip | downcase
-  for block in section.blocks
-    if block.type == 'mega_menu_promo'
-      assign block_item = block.settings.menu_item | strip | downcase
-      if block_item == link_title or block_item == link.handle
-        assign promo = block
-        break
-      endif
-    endif
-  endfor
-
-  assign show_promo_image = false
-  assign show_promo_title = false
-  if promo
-    # Empty image / title / link fall back to the picked product.
-    assign promo_product = promo.settings.product
-    assign promo_image = promo.settings.image | default: promo_product.featured_image
-    assign promo_title = promo.settings.title | default: promo_product.title
-    assign promo_url = promo.settings.link | default: promo_product.url
-
-    if promo.settings.show_image and promo_image != blank
-      assign show_promo_image = true
-    endif
-    if promo.settings.show_title and promo_title != blank
-      assign show_promo_title = true
-    endif
+  assign image_sizes = sizes | default: '(min-width: 989px) 18rem, 100vw'
+  assign wrapper_modifier = ''
+  if modifier != blank
+    assign wrapper_modifier = modifier | replace: '__mega-promo', '__mega-promos'
   endif
+  assign promo_count = 0
 -%}
 
-{%- if show_promo_image or show_promo_title -%}
-  {%- liquid
-    assign promo_tag = 'div'
-    if promo_url != blank
-      assign promo_tag = 'a'
-    endif
-    assign image_sizes = sizes | default: '(min-width: 989px) 20rem, 100vw'
-  -%}
-  <{{ promo_tag }}
-    class="header__mega-promo{% if modifier != blank %} {{ modifier }}{% endif %}"
-    {% if promo_url != blank %}href="{{ promo_url }}"{% endif %}
-    {{ promo.shopify_attributes }}
-  >
-    {% if show_promo_image %}
-      <span class="header__mega-promo-image">
-        {{
-          promo_image
-          | image_url: width: 800
-          | image_tag: loading: 'lazy', widths: '300, 400, 600, 800', sizes: image_sizes, alt: promo_image.alt
-        }}
-      </span>
-    {% endif %}
-    {% if show_promo_title %}
-      <span class="header__mega-promo-title">{{ promo_title | escape }}</span>
-    {% endif %}
-  </{{ promo_tag }}>
+{%- capture promos -%}
+  {%- for promo in section.blocks -%}
+    {%- liquid
+      if promo.type != 'mega_menu_promo'
+        continue
+      endif
+      assign block_item = promo.settings.menu_item | strip | downcase
+      unless block_item == link_title or block_item == link.handle
+        continue
+      endunless
+
+      # Empty image / title / link fall back to the picked product.
+      assign promo_product = promo.settings.product
+      assign promo_image = promo.settings.image | default: promo_product.featured_image
+      assign promo_title = promo.settings.title | default: promo_product.title
+      assign promo_url = promo.settings.link | default: promo_product.url
+
+      assign show_promo_image = false
+      if promo.settings.show_image and promo_image != blank
+        assign show_promo_image = true
+      endif
+      assign show_promo_title = false
+      if promo.settings.show_title and promo_title != blank
+        assign show_promo_title = true
+      endif
+      unless show_promo_image or show_promo_title
+        continue
+      endunless
+
+      assign promo_count = promo_count | plus: 1
+      assign promo_tag = 'div'
+      if promo_url != blank
+        assign promo_tag = 'a'
+      endif
+    -%}
+    <{{ promo_tag }}
+      class="header__mega-promo{% if modifier != blank %} {{ modifier }}{% endif %}"
+      {% if promo_url != blank %}href="{{ promo_url }}"{% endif %}
+      {{ promo.shopify_attributes }}
+    >
+      {% if show_promo_image %}
+        <span class="header__mega-promo-image">
+          {{
+            promo_image
+            | image_url: width: 800
+            | image_tag: loading: 'lazy', widths: '300, 400, 600, 800', sizes: image_sizes, alt: promo_image.alt
+          }}
+        </span>
+      {% endif %}
+      {% if show_promo_title %}
+        <span class="header__mega-promo-title">{{ promo_title | escape }}</span>
+      {% endif %}
+    </{{ promo_tag }}>
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if promos != blank -%}
+  <div class="header__mega-promos{% if wrapper_modifier != blank %} {{ wrapper_modifier }}{% endif %}" style="--promo-count: {{ promo_count }};">
+    {{ promos }}
+  </div>
 {%- endif -%}

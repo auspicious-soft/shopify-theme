@@ -323,6 +323,13 @@
    drawer only needs full width, spacing, and plain link colors since it
    sits outside <header>. */
 
+/* Several promos stack, one under the other. */
+.header__mega-promos--drawer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .header__mega-promo--drawer {
   display: flex;
   flex-direction: column;
@@ -332,12 +339,12 @@
 }
 
 /* Slide: after the panel's list. */
-.header__drawer-panel > .header__mega-promo--drawer {
+.header__drawer-panel > .header__mega-promos--drawer {
   margin-top: 1.5rem;
 }
 
 /* Accordion: inside the open item, lined up with its sub-links. */
-.header__drawer-details > .header__mega-promo--drawer {
+.header__drawer-details > .header__mega-promos--drawer {
   margin: 0.25rem 0 1.25rem 1rem;
 }
 

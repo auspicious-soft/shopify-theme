@@ -650,9 +650,18 @@ header.is-scrolled img.header__hero-logo-image {
   text-underline-offset: 0.25em;
 }
 
-/* Optional promo (Mega menu promo block): image and/or title with link. */
+/* Optional promos (Mega menu promo blocks): image and/or title with link.
+   Several promos for one menu item sit side by side; together they take up
+   to about half of the menu. */
+.header__mega-promos {
+  flex: 0 0 min(calc(var(--promo-count, 1) * 18rem + (var(--promo-count, 1) - 1) * 1.5rem), calc(var(--promo-count, 1) * 28%), 55%);
+  display: grid;
+  grid-template-columns: repeat(var(--promo-count, 1), minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
 .header__mega-promo {
-  flex: 0 0 min(20rem, 28%);
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
