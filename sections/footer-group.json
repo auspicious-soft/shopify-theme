@@ -101,7 +101,7 @@
         "newsletter_qxwe49"
       ],
       "settings": {
-        "footer_width": "page",
+        "footer_width": "full",
         "mobile_menu_style": "accordion",
         "column_gap": 48,
         "copyright_text": "",
