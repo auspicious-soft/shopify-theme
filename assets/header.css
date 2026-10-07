@@ -715,11 +715,7 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
   letter-spacing: 0.02em;
   line-height: 1.2;
   text-transform: uppercase;
-}
-
-.header .header__mega-link {
-  font-size: 0.8125rem;
-}
+} 
 
 .header__mega-list {
   gap: 0.6rem;
