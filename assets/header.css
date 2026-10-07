@@ -220,8 +220,6 @@
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   column-gap: 1rem;
-  height: 52px;
-  padding-inline: 12px;
 }
 
 /* Each zone is a flex row so any combination of logo/nav/toggle assigned
@@ -876,10 +874,6 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
 /* ---------- Desktop breakpoint ---------- */
 
 @media (min-width: 989px) {
-  .header__inner {
-    height: 60px;
-    padding-inline: 16px;
-  }
 
   .header__logo-image {
     max-width: var(--header-logo-width, 130px);
