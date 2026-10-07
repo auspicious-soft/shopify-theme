@@ -55,7 +55,7 @@
     "card_color_scheme": "scheme-1",
     "card_image_ratio": "adapt",
     "card_info_layout": "stacked",
-    "card_badge_style": "percent",
+    "card_badge_style": "amount",
     "card_border_thickness": 0,
     "card_border_opacity": 0,
     "card_corner_radius": 0,
