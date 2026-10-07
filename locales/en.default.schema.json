@@ -199,6 +199,8 @@
   "options": {
     "section_width": {
       "full": "Full width",
+      "full_no_padding": "Full width, no padding",
+      "full_padded": "Full width with padding",
       "page": "Page width"
     },
     "alignment": {

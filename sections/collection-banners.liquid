@@ -67,7 +67,7 @@
     --tiles-text-align: {{ section.settings.content_position_horizontal }};
   "
 >
-  <div class="{% if section.settings.width == 'page' %}page-width{% else %}collection-tiles__full{% endif %}">
+  <div class="{% case section.settings.width %}{% when 'page' %}page-width{% when 'full_padded' %}page-width page-width--full{% else %}collection-tiles__full{% endcase %}">
     {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
       <div class="collection-tiles__header collection-tiles__header--{{ section.settings.heading_alignment }}">
         {%- if section.settings.heading != blank -%}
@@ -310,7 +310,11 @@
       "options": [
         {
           "value": "full",
-          "label": "t:options.section_width.full"
+          "label": "t:options.section_width.full_no_padding"
+        },
+        {
+          "value": "full_padded",
+          "label": "t:options.section_width.full_padded"
         },
         {
           "value": "page",
