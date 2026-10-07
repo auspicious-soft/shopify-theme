@@ -1539,6 +1539,17 @@
         },
         "sold_out_badge_color_scheme": {
           "label": "Sold out badge color scheme"
+        },
+        "best_seller": {
+          "header": "Best seller badge",
+          "show": "Show best seller badge",
+          "tag": "Product tag",
+          "tag_info": "Products with this tag get the badge (not case sensitive)",
+          "text": "Badge text",
+          "text_info": "Leave empty to use \"Best seller\"",
+          "position": "Position on cards",
+          "position_info": "Use a different position from the sale badge so they don't overlap",
+          "color_scheme": "Best seller badge color scheme"
         }
       }
     },

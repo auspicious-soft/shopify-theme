@@ -35,7 +35,8 @@
   },
   "badges": {
     "sale": "Sale",
-    "sold_out": "Sold out"
+    "sold_out": "Sold out",
+    "best_seller": "Best seller"
   },
   "blog": {
     "article_comments": "Comments",

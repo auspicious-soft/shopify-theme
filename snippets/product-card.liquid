@@ -182,6 +182,35 @@
     </span>
 
     {%- liquid
+      # Best seller: products tagged with Theme settings > Badges > Product tag.
+      assign is_best_seller = false
+      if settings.best_seller_badge_show and settings.best_seller_badge_tag != blank
+        assign best_seller_tag = settings.best_seller_badge_tag | handleize
+        for tag in product.tags
+          assign tag_handle = tag | handleize
+          if tag_handle == best_seller_tag
+            assign is_best_seller = true
+            break
+          endif
+        endfor
+      endif
+    -%}
+    {%- if is_best_seller -%}
+      {%- liquid
+        assign best_seller_text = settings.best_seller_badge_text
+        if best_seller_text == blank
+          assign best_seller_text = 'badges.best_seller' | t
+        endif
+      -%}
+      <span
+        class="badge product-card__badge product-card__badge--best-seller color-{{ settings.best_seller_badge_color_scheme.id }} badge--{{ settings.best_seller_badge_position | handleize }}"
+        style="--badge-radius: {{ settings.badge_corner_radius }}px;"
+      >
+        {{- best_seller_text | escape -}}
+      </span>
+    {%- endif -%}
+
+    {%- liquid
       # Sold-out products still show their sizes (struck through, disabled).
       assign show_quick = false
       if mode != 'none'

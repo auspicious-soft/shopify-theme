@@ -1653,6 +1653,64 @@
         "id": "sold_out_badge_color_scheme",
         "label": "t:settings_schema.badges.settings.sold_out_badge_color_scheme.label",
         "default": "scheme-3"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.badges.settings.best_seller.header"
+      },
+      {
+        "type": "checkbox",
+        "id": "best_seller_badge_show",
+        "label": "t:settings_schema.badges.settings.best_seller.show",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "best_seller_badge_tag",
+        "label": "t:settings_schema.badges.settings.best_seller.tag",
+        "info": "t:settings_schema.badges.settings.best_seller.tag_info",
+        "default": "best-seller",
+        "visible_if": "{{ settings.best_seller_badge_show }}"
+      },
+      {
+        "type": "text",
+        "id": "best_seller_badge_text",
+        "label": "t:settings_schema.badges.settings.best_seller.text",
+        "info": "t:settings_schema.badges.settings.best_seller.text_info",
+        "visible_if": "{{ settings.best_seller_badge_show }}"
+      },
+      {
+        "type": "select",
+        "id": "best_seller_badge_position",
+        "label": "t:settings_schema.badges.settings.best_seller.position",
+        "info": "t:settings_schema.badges.settings.best_seller.position_info",
+        "options": [
+          {
+            "value": "bottom left",
+            "label": "t:settings_schema.badges.settings.position.options__1.label"
+          },
+          {
+            "value": "bottom right",
+            "label": "t:settings_schema.badges.settings.position.options__2.label"
+          },
+          {
+            "value": "top left",
+            "label": "t:settings_schema.badges.settings.position.options__3.label"
+          },
+          {
+            "value": "top right",
+            "label": "t:settings_schema.badges.settings.position.options__4.label"
+          }
+        ],
+        "default": "top left",
+        "visible_if": "{{ settings.best_seller_badge_show }}"
+      },
+      {
+        "type": "color_scheme",
+        "id": "best_seller_badge_color_scheme",
+        "label": "t:settings_schema.badges.settings.best_seller.color_scheme",
+        "default": "scheme-1",
+        "visible_if": "{{ settings.best_seller_badge_show }}"
       }
     ]
   },
