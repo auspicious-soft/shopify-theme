@@ -20,11 +20,17 @@
   list-style: none;
   cursor: pointer;
   color: inherit;
-  font-size: 0.8rem;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
+}
+
+@media screen and (min-width: 750px) {
+  .header-localization__trigger {
+    font-size: 15px;
+  }
 }
 
 .header-localization__trigger::-webkit-details-marker {

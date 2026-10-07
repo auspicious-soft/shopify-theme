@@ -71,7 +71,7 @@
 
 .footer__text {
   font-size: var(--body-size, 15px);
-  line-height: var(--body-line-height, 24px);
+  line-height: 1.6;
   color: color-mix(in srgb, var(--color-foreground) 72%, transparent);
 }
 

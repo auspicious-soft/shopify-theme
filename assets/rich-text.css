@@ -121,7 +121,7 @@
 
 .rich-text__text {
   width: 100%;
-  line-height: var(--body-line-height, 24px);
+  line-height: 1.6;
   color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
 }
 

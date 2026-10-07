@@ -141,9 +141,15 @@
 
 .collection-tile__subheading {
   margin: 0;
-  font-size: 0.7rem;
+  font-size: 13px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
+}
+
+@media screen and (min-width: 750px) {
+  .collection-tile__subheading {
+    font-size: 15px;
+  }
 }
 
 .collection-tile__heading {
