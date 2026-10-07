@@ -102,8 +102,7 @@ a {
   align-items: center;
   justify-content: center;
   min-width: 9rem;
-  padding: 0.9rem 2rem;
-  font-size: var(--body-size, 15px);
+  padding: 0.95rem 1rem;
   line-height: 1.2;
   text-align: center;
   text-decoration: none;
