@@ -45,7 +45,7 @@
         {% if link.links != blank %}
           {% if submenu_type == 'mega' %}
             <div class="header__mega color-{{ menu_scheme }}">
-              <div class="header__mega-inner page-width">
+              <div class="header__mega-inner page-width{% if section.settings.mega_menu_width == 'full' %} page-width--full{% endif %}">
                 <ul class="header__mega-columns" role="list">
                   {% for child_link in link.links %}
                     <li class="header__mega-column">

@@ -694,6 +694,23 @@
       "visible_if": "{{ section.settings.menu_type == 'horizontal' }}"
     },
     {
+      "type": "select",
+      "id": "mega_menu_width",
+      "label": "t:labels.mega_menu_width",
+      "options": [
+        {
+          "value": "page",
+          "label": "t:options.section_width.page"
+        },
+        {
+          "value": "full",
+          "label": "t:options.section_width.full"
+        }
+      ],
+      "default": "page",
+      "visible_if": "{{ section.settings.menu_type == 'horizontal' and section.settings.desktop_submenu_type == 'mega' }}"
+    },
+    {
       "type": "range",
       "id": "nav_font_size",
       "label": "t:labels.font_size",
