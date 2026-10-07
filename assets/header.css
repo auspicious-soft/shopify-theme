@@ -877,7 +877,7 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
 
   .header__logo-image {
     max-width: var(--header-logo-width, 130px);
-    max-height: calc(82px - 1.25rem); 
+    max-height: calc(82px - 1.25rem);      
   }
 
   .header__navigation {
