@@ -72,6 +72,10 @@
   letter-spacing: 0.4em;
 }
 
+.hero-banner__subheading--wide {
+  letter-spacing: 0.6em;
+}
+
 .hero-banner__button {
   margin-top: 1.5rem;
 }

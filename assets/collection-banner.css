@@ -118,11 +118,16 @@
   pointer-events: auto;
 }
 
-.promo-banner__subheading {
+/* Shared with hero-banner.css — keep both in sync. */
+.hero-banner__subheading {
   margin: 0;
-  font-size: 0.75rem;
-  letter-spacing: 0.3em;
+  color: inherit;
   text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+
+.hero-banner__subheading--wide {
+  letter-spacing: 0.6em;
 }
 
 .promo-banner__heading {
