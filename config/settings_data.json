@@ -121,6 +121,7 @@
     "badge_corner_radius": 0,
     "sale_badge_color_scheme": "scheme-5",
     "sold_out_badge_color_scheme": "scheme-56590322-c170-4511-a8c5-0f7377624337",
+    "best_seller_badge_color_scheme": "scheme-2",
     "brand_headline": "",
     "brand_description": "",
     "brand_image_width": 100,
