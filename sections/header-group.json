@@ -91,6 +91,17 @@
     "header": {
       "type": "header",
       "blocks": {
+        "mega_menu_promo_Kaga6V": {
+          "type": "mega_menu_promo",
+          "settings": {
+            "menu_item": "Shop",
+            "product": "aliam-skirt-black",
+            "show_image": true,
+            "show_title": true,
+            "title": "",
+            "link": ""
+          }
+        },
         "mega_menu_promo_qwit9N": {
           "type": "mega_menu_promo",
           "settings": {
@@ -115,6 +126,7 @@
         }
       },
       "block_order": [
+        "mega_menu_promo_Kaga6V",
         "mega_menu_promo_qwit9N",
         "mega_menu_promo_eeJ4AX"
       ],
