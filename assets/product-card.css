@@ -294,18 +294,16 @@
   gap: 10px;
   min-width: 30px;
   height: 30px;
-  padding: 0 10px;
+  padding: 0 8px;
   margin: 0;
   font: inherit;
   font-size: 10px;
   font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0;
   line-height: 1;
   text-align: center;
   text-transform: uppercase;
   color: #000;
-  background: rgb(255 255 255 / 0.7);
+  background: rgb(255 255 255 / 0);
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   border: 1px solid rgb(0 0 0 / 0.2);
@@ -471,6 +469,10 @@
 .product-card__compare {
   color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
   font-size: 0.9em;
+}
+
+.product-card__amount {
+  font-weight: 600;
 }
 
 .product-card__amount--sale {
