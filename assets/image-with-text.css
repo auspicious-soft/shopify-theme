@@ -219,7 +219,7 @@
 }
 
 .image-with-text__text {
-  line-height: 1.7;
+  line-height: var(--body-line-height, 24px);
   color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
 }
 

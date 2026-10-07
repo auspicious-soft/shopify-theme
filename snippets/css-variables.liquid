@@ -21,6 +21,7 @@
     --heading-scale: {{ settings.heading_scale }};
     --body-size-desktop: {{ settings.body_size_desktop }}px;
     --body-size-mobile: {{ settings.body_size_mobile }}px;
+    --body-line-height: {{ settings.body_line_height | default: 24 }}px;
 
     --page-width: {{ settings.page_width | divided_by: 16.0 }}rem;
     --page-margin: {{ settings.page_margin_mobile | default: 20 }}px;

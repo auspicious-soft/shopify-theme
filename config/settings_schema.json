@@ -156,7 +156,7 @@
         "step": 1,
         "unit": "px",
         "label": "t:settings_schema.typography.settings.body_size_desktop.label",
-        "default": 14
+        "default": 15
       },
       {
         "type": "range",
@@ -166,7 +166,17 @@
         "step": 1,
         "unit": "px",
         "label": "t:settings_schema.typography.settings.body_size_mobile.label",
-        "default": 13
+        "default": 15
+      },
+      {
+        "type": "range",
+        "id": "body_line_height",
+        "min": 16,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.typography.settings.body_line_height.label",
+        "default": 24
       }
     ]
   },

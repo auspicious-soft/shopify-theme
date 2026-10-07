@@ -207,7 +207,7 @@
 
 /* Text size: Medium is the body text size (Theme settings > Typography). */
 .article__content {
-  font-size: var(--body-size, 14px);
+  font-size: var(--body-size, 15px);
   line-height: 1.8;
   overflow-wrap: break-word;
 }
@@ -217,11 +217,11 @@
 }
 
 .article--text-small .article__content {
-  font-size: calc(var(--body-size, 14px) - 1px);
+  font-size: calc(var(--body-size, 15px) - 1px);
 }
 
 .article--text-large .article__content {
-  font-size: calc(var(--body-size, 14px) + 2px);
+  font-size: calc(var(--body-size, 15px) + 2px);
 }
 
 .article__content > :first-child {

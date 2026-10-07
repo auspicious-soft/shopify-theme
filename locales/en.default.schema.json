@@ -1336,6 +1336,9 @@
         },
         "body_size_mobile": {
           "label": "Body text size – mobile"
+        },
+        "body_line_height": {
+          "label": "Body line height"
         }
       }
     },

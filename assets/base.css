@@ -32,24 +32,26 @@ h6,
    --body-size is the current one; components that should match body text
    (e.g. product card titles and prices) use it too. */
 :root {
-  --body-size: var(--body-size-mobile, 13px);
+  --body-size: var(--body-size-mobile, 15px);
 }
 
 @media screen and (min-width: 750px) {
   :root {
-    --body-size: var(--body-size-desktop, 14px);
+    --body-size: var(--body-size-desktop, 15px);
   }
 }
 
 body {
   font-size: var(--body-size);
+  line-height: var(--body-line-height, 24px);
 }
 
 /* Paragraphs use the body text size everywhere by default. Components that
    style their own paragraphs (class rules) keep their sizes, and text blocks
    with a Text size setting pass their size on to their paragraphs. */
 p {
-  font-size: var(--body-size, 14px);
+  font-size: var(--body-size, 15px);
+  line-height: var(--body-line-height, 24px);
 }
 
 h1,
@@ -101,7 +103,7 @@ a {
   justify-content: center;
   min-width: 9rem;
   padding: 0.9rem 2rem;
-  font-size: var(--body-size, 14px);
+  font-size: var(--body-size, 15px);
   line-height: 1.2;
   text-align: center;
   text-decoration: none;

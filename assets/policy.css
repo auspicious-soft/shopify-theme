@@ -23,8 +23,8 @@
 }
 
 .shopify-policy__body {
-  font-size: var(--body-size, 14px);
-  line-height: 1.75;
+  font-size: var(--body-size, 15px);
+  line-height: var(--body-line-height, 24px);
   color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
   overflow-wrap: break-word;
 }
