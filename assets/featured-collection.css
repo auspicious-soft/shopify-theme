@@ -44,7 +44,7 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
-  margin-block-end: 1.5rem;
+  margin-block-end: 1.25rem;
 }
 
 .fc__header--center {
