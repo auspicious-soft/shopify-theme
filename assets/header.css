@@ -386,10 +386,11 @@
     position: absolute;
     top: 20px;
     pointer-events: none;
+        padding-inline: var(--page-margin);
 }
 
 img.header__hero-logo-image {
-    width: calc(100% - 32px);
+    width: 100%;
     max-width: 100%;
     height: auto;
     transform: translate3d(0px, 80px, 0) scale(1);
