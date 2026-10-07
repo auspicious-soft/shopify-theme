@@ -181,7 +181,17 @@
       {{- badge_for_current | strip -}}
     </span>
 
-    {%- if mode == 'hover' and product.available -%}
+    {%- liquid
+      # Sold-out products still show their sizes (struck through, disabled).
+      assign show_quick = false
+      if mode != 'none'
+        if product.available or size_option
+          assign show_quick = true
+        endif
+      endif
+    -%}
+
+    {%- if mode == 'hover' and show_quick -%}
       {%- comment -%}
         Touch screens have no hover: this "+" opens the size grid for this
         card (or adds straight to cart when there are no sizes to pick).
@@ -198,7 +208,7 @@
       </button>
     {%- endif -%}
 
-    {%- if mode != 'none' and product.available -%}
+    {%- if show_quick -%}
       <div class="product-card__quick">
         {%- if product.has_only_default_variant -%}
           <form action="{{ routes.cart_add_url }}" method="post" class="product-card__quick-form">
@@ -218,6 +228,7 @@
                   class="product-card__size"
                   data-card-size="{{ value | escape }}"
                   aria-label="{{ 'products.add_size_to_cart' | t: size: value }}"
+                  {% unless product.available %}aria-disabled="true" disabled{% endunless %}
                 >
                   {{- value | escape -}}
                 </button>
