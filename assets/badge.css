@@ -11,21 +11,21 @@
 }
 
 .badge--bottom-left {
-  inset-block-end: 0.5em;
-  inset-inline-start: 0.5em;
+  inset-block-end: 1.5em;
+  inset-inline-start: 1.5em;
 }
 
 .badge--bottom-right {
-  inset-block-end: 0.5em;
-  inset-inline-end: 0.5em;
+  inset-block-end: 1.5em;
+  inset-inline-end: 1.5em;
 }
 
 .badge--top-left {
-  inset-block-start: 0.5em;
-  inset-inline-start: 0.5em;
+  inset-block-start: 1.5em;
+  inset-inline-start: 1.5em;
 }
 
 .badge--top-right {
-  inset-block-start: 0.5em;
-  inset-inline-end: 0.5em;
+  inset-block-start: 1.5em;
+  inset-inline-end: 1.5em;
 }

@@ -303,7 +303,7 @@
   padding: 0 0.45rem;
   margin: 0;
   font: inherit;
-  font-size: 0.75rem;
+  font-size: 10px;
   font-weight: 400;
   letter-spacing: 0.02em;
   line-height: 1;
@@ -358,7 +358,7 @@
   padding: 0;
   margin: 0;
   font: inherit;
-  font-size: 0.75rem;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
