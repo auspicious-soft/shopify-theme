@@ -71,7 +71,7 @@
   min-width: 12rem;
   max-width: calc(100vw - 2rem);
   padding: 1.5rem 1.25rem;
-  background-color: color-mix(in srgb, var(--color-foreground) 8%, var(--color-background));
+  background-color: var(--color-background);
   color: var(--color-foreground);
   border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
   box-shadow: 0 18px 40px -18px rgb(0 0 0 / 30%);
@@ -111,7 +111,7 @@
 }
 
 /* Options: plain uppercase rows with a small square bullet; the current
-   one sits on a white box with a filled bullet. */
+   one sits on a light tinted box with a filled bullet. */
 .header-localization__options {
   display: flex;
   flex-direction: column;
@@ -151,11 +151,11 @@
 
 .header-localization__option:hover,
 .header-localization__option:focus-visible {
-  background-color: color-mix(in srgb, var(--color-background) 60%, transparent);
+  background-color: color-mix(in srgb, var(--color-foreground) 4%, transparent);
 }
 
 .header-localization__option.is-active {
-  background-color: var(--color-background);
+  background-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
   cursor: default;
 }
 

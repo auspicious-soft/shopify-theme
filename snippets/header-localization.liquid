@@ -125,7 +125,7 @@
                 class="header-localization__option{% if is_current %} is-active{% endif %}"
                 {% if is_current %}aria-current="true"{% endif %}
               >
-                {{- country.currency.name | default: currency_code -}}
+                {{- currency_code }} {{ country.currency.symbol -}}
               </button>
             </li>
           {% endfor %}
