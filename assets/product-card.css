@@ -67,7 +67,6 @@
 
 .product-card__badge {
   z-index: 2;
-  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-size: 0.7rem;

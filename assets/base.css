@@ -215,12 +215,10 @@ select {
    buttons. "As typed" adds no marker, so nothing changes. */
 .shopify-section:has(.text-case--headings-upper) :is(.h1, .h2, .h3, .h4, .h5, .h6) {
   text-transform: uppercase;
-  letter-spacing: 0.02em;
 }
 
 .shopify-section:has(.text-case--buttons-upper) .button {
   text-transform: uppercase;
-  letter-spacing: 0.08em;
 }
 
 /* ---------- Button size (each section's "Button size" setting) ----------
