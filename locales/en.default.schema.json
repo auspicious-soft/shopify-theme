@@ -984,7 +984,11 @@
       "footer_width": "Footer width",
       "footer_width_info": "Container lines the footer up with your page content; full width stretches it edge to edge",
       "footer_width_page": "Container (page width)",
-      "footer_width_full": "Full width"
+      "footer_width_full": "Full width",
+      "headings": "Headings",
+      "heading_size": "Heading size",
+      "heading_size_info": "Used by every footer heading",
+      "heading_size_mobile": "Heading size on mobile"
     },
     "blog": {
       "header_heading": "Heading",

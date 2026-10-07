@@ -28,6 +28,8 @@
     --footer-padding-top: {{ section.settings.padding_top }}px;
     --footer-padding-bottom: {{ section.settings.padding_bottom }}px;
     --footer-column-gap: {{ section.settings.column_gap }}px;
+    --footer-heading-size: {{ section.settings.heading_size }}px;
+    --footer-heading-size-mobile: {{ section.settings.heading_size_mobile }}px;
   "
 >
   <footer class="footer__inner page-width{% if section.settings.footer_width == 'full' %} page-width--full{% endif %}">
@@ -220,6 +222,31 @@
         { "value": "simple", "label": "t:sections.footer.mobile_simple" }
       ],
       "default": "accordion"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.headings"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "t:sections.footer.heading_size",
+      "info": "t:sections.footer.heading_size_info",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "t:sections.footer.heading_size_mobile",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 14
     },
     {
       "type": "range",
