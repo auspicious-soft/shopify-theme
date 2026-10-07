@@ -99,7 +99,9 @@
   flex: 1;
   align-items: var(--promo-justify);
   justify-content: var(--promo-align);
-  padding: clamp(1.25rem, 4vw, 3rem);
+  /* Sides match .page-width (--page-margin switches at 750px). */
+  padding-block: clamp(1.25rem, 4vw, 3rem);
+  padding-inline: var(--page-margin);
   pointer-events: none;
 }
 

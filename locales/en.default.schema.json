@@ -98,6 +98,7 @@
     "header_style": "Header style",
     "heading": "Heading",
     "section_width": "Width",
+    "heading_width": "Heading width",
     "heading_tag": "Heading tag",
     "heading_tag_info": "The heading level, for SEO and screen readers. Use H1 for only one heading per page.",
     "heading_class": "Heading size",

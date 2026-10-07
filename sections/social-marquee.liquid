@@ -38,7 +38,7 @@
   "
 >
   {%- if section.settings.heading != blank -%}
-    <div class="page-width social-marquee__header social-marquee__header--{{ section.settings.heading_alignment }}">
+    <div class="page-width{% if section.settings.heading_width == 'full' %} page-width--full{% endif %} social-marquee__headersocial-marquee__header--{{ section.settings.heading_alignment }}">
       {%- assign heading_tag = section.settings.heading_tag | default: 'h2' -%}
       {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
       <{{ heading_tag }} class="{{ heading_class }} social-marquee__heading">{{ section.settings.heading | escape }}</{{ heading_tag }}>
@@ -215,6 +215,22 @@
         }
       ],
       "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "heading_width",
+      "label": "t:labels.heading_width",
+      "options": [
+        {
+          "value": "page",
+          "label": "t:options.section_width.page"
+        },
+        {
+          "value": "full",
+          "label": "t:options.section_width.full"
+        }
+      ],
+      "default": "page"
     },
     {
       "type": "header",
