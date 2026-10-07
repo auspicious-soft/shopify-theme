@@ -5,7 +5,8 @@
   select. Each select submits Shopify's localization form as soon as it
   changes. Header settings > Country/language selector > Show selector
   picks country, language, or both; the whole thing renders nothing when
-  set to Hidden (or the store has only one option of each enabled kind).
+  set to Hidden (or the store has only one country, when that is the only
+  kind shown). The language select shows even with a single language.
   The popup uses Theme settings > Colors > Popup color scheme, shared by
   every popup in the theme.
 
@@ -34,9 +35,11 @@
     endif
   endif
 
+  # The language select shows even with one language (e.g. only English),
+  # so customers always see which language the store is in.
   assign show_language = false
   if selector == 'language' or selector == 'both'
-    if localization.available_languages.size > 1
+    if localization.available_languages.size > 0
       assign show_language = true
     endif
   endif
