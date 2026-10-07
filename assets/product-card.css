@@ -129,7 +129,7 @@
 
 .product-card:hover .product-card__arrow:disabled,
 .product-card:has(:focus-visible) .product-card__arrow:disabled {
-  opacity: 0.3;
+  opacity: 0.5;
 }
 
 /* Arrows and the size grid show while the mouse is over the card, or when
