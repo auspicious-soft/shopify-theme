@@ -292,6 +292,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
+  mix-blend-mode: difference;
   opacity: 0;
   transition: opacity 0.15s ease;
   pointer-events: none;
