@@ -166,6 +166,7 @@
         "drawer_position": "left",
         "drawer_submenu_style": "accordion",
         "desktop_submenu_type": "mega",
+        "mega_menu_width": "full",
         "nav_font_size": 15,
         "nav_font_weight": "400",
         "nav_item_spacing": 32,
