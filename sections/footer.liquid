@@ -30,7 +30,7 @@
     --footer-column-gap: {{ section.settings.column_gap }}px;
   "
 >
-  <footer class="footer__inner {% if section.settings.footer_width == 'full' %}footer__inner--full{% else %}page-width{% endif %}">
+  <footer class="footer__inner page-width{% if section.settings.footer_width == 'full' %} page-width--full{% endif %}">
     {% if section.blocks.size > 0 %}
       <div class="footer__columns">
         {% for block in section.blocks %}
