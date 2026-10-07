@@ -255,14 +255,10 @@
   margin: 0;
 }
 
-/* Mobile: smaller row headings and content, and a section heading capped
-   at 28px. A chosen Row heading size (.h1-.h6) keeps its own size. */
+/* Mobile: smaller row headings and content. A chosen Row heading size
+   (.h1-.h6) keeps its own size; the section heading uses the mobile scale
+   in base.css. */
 @media screen and (max-width: 749px) {
-  .collapsible__heading.h1,
-  .collapsible__heading.h2 {
-    font-size: calc(var(--heading-scale) / 100 * 1.75rem);
-  }
-
   .collapsible__summary {
     padding-block: 1rem;
     font-size: 0.9375rem;

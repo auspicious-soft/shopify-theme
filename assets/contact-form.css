@@ -187,14 +187,9 @@
   align-self: flex-start;
 }
 
-/* Mobile: a smaller heading (Huge / Extra large are capped at 28px) and a
-   more compact send button. The section's Button size setting still wins. */
+/* Mobile: a more compact send button. The section's Button size setting
+   still wins. Heading sizes come from the mobile scale in base.css. */
 @media screen and (max-width: 749px) {
-  .contact__heading.h1,
-  .contact__heading.h2 {
-    font-size: calc(var(--heading-scale) / 100 * 1.75rem);
-  }
-
   .contact__submit {
     min-width: 0;
     padding: 0.65rem 1.4rem;
