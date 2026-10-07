@@ -151,7 +151,6 @@
             {%- comment -%} cart.currency: the currency prices and checkout use right now. {%- endcomment -%}
             {%- if show_country -%}{{ cart.currency.symbol | default: cart.currency.iso_code }}{%- endif -%}
           </span>
-          <span class="header-localization__chevron">{{ 'icon-chevron.svg' | inline_asset_content }}</span>
         </summary>
 
         <div class="header-localization__panel color-{{ settings.popup_color_scheme.id }}">
