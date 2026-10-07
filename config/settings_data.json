@@ -166,28 +166,6 @@
           "shadow": "#ffffff"
         }
       },
-      "scheme-3": {
-        "settings": {
-          "background": "#242833",
-          "background_gradient": "",
-          "text": "#ffffff",
-          "button": "#ffffff",
-          "button_label": "#000000",
-          "secondary_button_label": "#ffffff",
-          "shadow": "#121212"
-        }
-      },
-      "scheme-4": {
-        "settings": {
-          "background": "#1a1a1a",
-          "background_gradient": "",
-          "text": "#ffffff",
-          "button": "#ffffff",
-          "button_label": "#1a1a1a",
-          "secondary_button_label": "#ffffff",
-          "shadow": "#121212"
-        }
-      },
       "scheme-5": {
         "settings": {
           "background": "#ae0000",
