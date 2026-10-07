@@ -3,12 +3,12 @@
 .badge {
   position: absolute;
   z-index: 1;
-  padding: .25em .9em;
+  padding: .24em .8em;
   background-color: var(--color-background);
   color: var(--color-foreground);
   border-radius: var(--badge-radius);
-  font-size: 0.9em;
-      line-height: 1rem;
+  font-size: 0.8em;
+      line-height: 1.2em;
 }
 
 .badge--bottom-left {
@@ -19,10 +19,10 @@
 .badge--bottom-right {
   inset-block-end: 1.5em;
   inset-inline-end: 1.5em;
-}
+} 
 
 .badge--top-left {
-  inset-block-start: 1.5em;
+  inset-block-start: 1.5em; 
   inset-inline-start: 1.5em;
 }
 
