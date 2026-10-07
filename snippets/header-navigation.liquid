@@ -59,10 +59,22 @@
                       {% if child_link.links != blank %}
                         <ul class="header__mega-list" role="list">
                           {% for grandchild_link in child_link.links %}
-                            <li>
+                            {%- liquid
+                              # The column's last link becomes a "Shop the collection" style
+                              # call to action, pinned to the bottom, when its title has "shop"
+                              # in it (e.g. Shop the collection, Shop all).
+                              assign is_cta = false
+                              if forloop.last and forloop.length > 1
+                                assign link_title_lower = grandchild_link.title | downcase
+                                if link_title_lower contains 'shop'
+                                  assign is_cta = true
+                                endif
+                              endif
+                            -%}
+                            <li{% if is_cta %} class="header__mega-cta-item"{% endif %}>
                               <a
                                 href="{{ grandchild_link.url }}"
-                                class="header__mega-link"
+                                class="{% if is_cta %}header__mega-shop-all{% else %}header__mega-link{% endif %}"
                                 {% if grandchild_link.active %}aria-current="page"{% endif %}
                               >
                                 {{- grandchild_link.title -}}

@@ -698,6 +698,84 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
   text-underline-offset: 0.25em;
 }
 
+/* ---------- Mega menu design ----------
+   Columns: uppercase headings in the heading font, small muted links and a
+   "Shop the collection" style last link (from the menu) pinned to the bottom. Promos:
+   near-square images with an uppercase title over a thin line. */
+.header__mega-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.header .header__mega-heading {
+  margin-bottom: 1.1rem;
+  font-family: var(--font-heading--family);
+  font-style: var(--font-heading--style);
+  font-weight: var(--font-heading--weight);
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.header .header__mega-link {
+  font-size: 0.8125rem;
+}
+
+.header__mega-list {
+  gap: 0.6rem;
+}
+
+/* The list grows to fill the column so its CTA item can sit at the bottom. */
+.header__mega-column .header__mega-list {
+  flex: 1 1 auto;
+}
+
+.header__mega-cta-item {
+  margin-top: auto;
+  padding-top: 1.25rem;
+}
+
+.header .header__mega-shop-all {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.header .header__mega-shop-all:hover,
+.header .header__mega-shop-all:focus-visible {
+  text-decoration-thickness: 2px;
+}
+
+.header__mega-promo-image {
+  aspect-ratio: 6 / 5;
+}
+
+.header__mega-promo {
+  gap: 0.75rem;
+}
+
+.header__mega-promo-title {
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-foreground) 70%, transparent);
+  font-family: var(--font-heading--family);
+  font-style: var(--font-heading--style);
+  font-weight: var(--font-heading--weight);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+a.header__mega-promo:hover .header__mega-promo-title,
+a.header__mega-promo:focus-visible .header__mega-promo-title {
+  text-decoration: none;
+  border-bottom-color: var(--color-foreground);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .header__menu-link::after,
   .header__menu-chevron svg,
