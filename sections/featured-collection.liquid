@@ -43,6 +43,20 @@
     assign peek = 0.2
   endif
 
+  # Desktop: half of the next card peeks in when there are more products
+  # than columns.
+  assign shown = limit
+  if collection != blank and collection.products_count < limit
+    assign shown = collection.products_count
+  endif
+  if placeholder_count > 0
+    assign shown = placeholder_count
+  endif
+  assign desktop_columns = columns
+  if layout == 'slider' and section.settings.desktop_peek and shown > columns
+    assign desktop_columns = columns | plus: 0.5
+  endif
+
   # Carousel arrows go beside the heading (top) or on the carousel's sides.
   assign arrows = ''
   if layout == 'slider'
@@ -80,7 +94,7 @@
     style="
       --section-padding-top: {{ section.settings.padding_top }}px;
       --section-padding-bottom: {{ section.settings.padding_bottom }}px;
-      --fc-columns: {{ columns }};
+      --fc-columns: {{ desktop_columns }};
       --fc-columns-mobile: {{ columns_mobile | plus: peek }};
       --fc-gap: {{ section.settings.gap }}px;
       --fc-gap-mobile: {{ section.settings.gap | times: 0.6 | round }}px;
@@ -331,6 +345,14 @@
         }
       ],
       "default": "2"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_peek",
+      "label": "t:sections.featured_collection.desktop_peek",
+      "info": "t:sections.featured_collection.desktop_peek_info",
+      "default": true,
+      "visible_if": "{{ section.settings.layout == 'slider' }}"
     },
     {
       "type": "checkbox",

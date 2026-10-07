@@ -211,6 +211,11 @@
   .product-list--slider .product-list__item {
     flex-basis: calc((100% - var(--list-gap) * (var(--list-columns) - 1)) / var(--list-columns));
   }
+
+  /* Half of the next card peeks in at the end of the row. */
+  .product-list--peek .product-list__item {
+    flex-basis: calc((100% - var(--list-gap) * var(--list-columns)) / (var(--list-columns) + 0.5));
+  }
 }
 
 /* Recently viewed "Clear" link. */

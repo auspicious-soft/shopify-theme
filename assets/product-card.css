@@ -121,9 +121,15 @@
   transform: rotate(-90deg);
 }
 
+/* At the first / last image the arrow stays visible but dimmed. */
 .product-card__arrow:disabled {
-  opacity: 0 !important;
+  cursor: default;
   pointer-events: none;
+}
+
+.product-card:hover .product-card__arrow:disabled,
+.product-card:has(:focus-visible) .product-card__arrow:disabled {
+  opacity: 0.3;
 }
 
 /* Arrows and the size grid show while the mouse is over the card, or when

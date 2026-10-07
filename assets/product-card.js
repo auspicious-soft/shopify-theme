@@ -212,19 +212,11 @@ if (!customElements.get('product-card')) {
       }
     }
 
-    // Arrows loop: past the last image goes back to the first and vice versa.
+    // Previous goes back until the first image, next goes on until the last.
     step(direction) {
       if (!this.slides) return;
       const sign = document.dir === 'rtl' ? -1 : 1;
-      const max = this.slides.scrollWidth - this.slides.clientWidth;
-      const position = Math.abs(this.slides.scrollLeft);
-      if (direction > 0 && position >= max - 2) {
-        this.slides.scrollTo({ left: 0, behavior: 'smooth' });
-      } else if (direction < 0 && position <= 2) {
-        this.slides.scrollTo({ left: sign * max, behavior: 'smooth' });
-      } else {
-        this.slides.scrollBy({ left: direction * sign * this.slides.clientWidth, behavior: 'smooth' });
-      }
+      this.slides.scrollBy({ left: direction * sign * this.slides.clientWidth, behavior: 'smooth' });
     }
 
     showSlide(index) {
@@ -235,10 +227,11 @@ if (!customElements.get('product-card')) {
 
     updateArrows() {
       if (!this.slides || !this.prev || !this.next) return;
-      // Looping arrows: only disabled when there's nothing to scroll.
-      const single = this.slides.scrollWidth - this.slides.clientWidth <= 2;
-      this.prev.disabled = single;
-      this.next.disabled = single;
+      // At the first image "previous" is disabled, at the last "next" is.
+      const max = this.slides.scrollWidth - this.slides.clientWidth;
+      const position = Math.abs(this.slides.scrollLeft);
+      this.prev.disabled = position <= 2;
+      this.next.disabled = position >= max - 2;
     }
   }
 

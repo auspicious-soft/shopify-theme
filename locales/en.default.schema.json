@@ -592,7 +592,9 @@
       "view_all_button": "Button under the products",
       "view_all_link": "Link beside the heading",
       "cards": "Product cards",
-      "cards_info": "The card design (image, badge, swatches, sizes, quick add) is set in Theme settings > Product cards, so every product card in the store matches"
+      "cards_info": "The card design (image, badge, swatches, sizes, quick add) is set in Theme settings > Product cards, so every product card in the store matches",
+      "desktop_peek": "Show part of the next card on desktop",
+      "desktop_peek_info": "Half of the next product shows at the end of the row, when there are more products than columns"
     },
     "collection_banner": {
       "name": "Image banner",

@@ -26,10 +26,21 @@
   assign limit = section.settings.products_to_show | default: 4
   assign card_sizes = '(min-width: 990px) calc(100vw / ' | append: columns | append: '), calc(100vw / ' | append: columns_mobile | append: ')'
   assign placeholder_count = placeholder_count | default: 0
+
+  # Slider: show half of the next card on desktop when there are more
+  # products than columns (so it's clear the row scrolls).
+  assign shown = products.size | at_most: limit
+  if shown == 0
+    assign shown = placeholder_count
+  endif
+  assign desktop_peek = false
+  if layout == 'slider' and shown > columns
+    assign desktop_peek = true
+  endif
 -%}
 
 <slider-component
-  class="product-list product-list--{{ layout }} color-{{ section.settings.color_scheme.id }}"
+  class="product-list product-list--{{ layout }}{% if desktop_peek %} product-list--peek{% endif %} color-{{ section.settings.color_scheme.id }}"
   style="
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;

@@ -162,7 +162,7 @@
     </div>
 
     {%- if use_slider and product.media.size > 1 -%}
-      <button type="button" class="product-card__arrow product-card__arrow--prev" data-card-prev aria-label="{{ 'products.previous_media' | t }}">
+      <button type="button" class="product-card__arrow product-card__arrow--prev" data-card-prev aria-label="{{ 'products.previous_media' | t }}" disabled>
         {{ 'icon-chevron.svg' | inline_asset_content }}
       </button>
       <button type="button" class="product-card__arrow product-card__arrow--next" data-card-next aria-label="{{ 'products.next_media' | t }}">
