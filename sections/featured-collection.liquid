@@ -43,8 +43,9 @@
     assign peek = 0.2
   endif
 
-  # Desktop: half of the next card peeks in when there are more products
-  # than columns.
+  # Desktop: with Products width = Page, half of the next card peeks in when
+  # there are more products than columns. (Full width already shows a slice
+  # of the next card where the row runs off the screen edge.)
   assign shown = limit
   if collection != blank and collection.products_count < limit
     assign shown = collection.products_count
@@ -53,7 +54,7 @@
     assign shown = placeholder_count
   endif
   assign desktop_columns = columns
-  if layout == 'slider' and section.settings.desktop_peek and shown > columns
+  if layout == 'slider' and section.settings.products_width != 'full' and section.settings.desktop_peek and shown > columns
     assign desktop_columns = columns | plus: 0.5
   endif
 
@@ -352,7 +353,7 @@
       "label": "t:sections.featured_collection.desktop_peek",
       "info": "t:sections.featured_collection.desktop_peek_info",
       "default": true,
-      "visible_if": "{{ section.settings.layout == 'slider' }}"
+      "visible_if": "{{ section.settings.layout == 'slider' and section.settings.products_width == 'page' }}"
     },
     {
       "type": "checkbox",

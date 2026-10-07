@@ -594,7 +594,7 @@
       "cards": "Product cards",
       "cards_info": "The card design (image, badge, swatches, sizes, quick add) is set in Theme settings > Product cards, so every product card in the store matches",
       "desktop_peek": "Show part of the next card on desktop",
-      "desktop_peek_info": "Half of the next product shows at the end of the row, when there are more products than columns"
+      "desktop_peek_info": "Half of the next product shows at the end of the row (Products width: Page). With Full width, a slice of the next product shows at the screen edge instead"
     },
     "collection_banner": {
       "name": "Image banner",
