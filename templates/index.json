@@ -56,6 +56,7 @@
         "layout": "slider",
         "columns_desktop": 4,
         "columns_mobile": "2",
+        "desktop_peek": true,
         "mobile_peek": true,
         "gap": 16,
         "arrow_position": "top",
