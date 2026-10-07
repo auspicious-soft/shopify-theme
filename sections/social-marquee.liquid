@@ -38,14 +38,14 @@
   "
 >
   {%- if section.settings.heading != blank -%}
-    <div class="page-width{% if section.settings.heading_width == 'full' %} page-width--full{% endif %} social-marquee__headersocial-marquee__header--{{ section.settings.heading_alignment }}">
+    <div class="page-width{% if section.settings.heading_width == 'full' %} page-width--full{% endif %} social-marquee__header social-marquee__header--{{ section.settings.heading_alignment }}">
       {%- assign heading_tag = section.settings.heading_tag | default: 'h2' -%}
       {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
       <{{ heading_tag }} class="{{ heading_class }} social-marquee__heading">{{ section.settings.heading | escape }}</{{ heading_tag }}>
     </div>
   {%- endif -%}
 
-  {%- if section.settings.width == 'page' -%}<div class="page-width">{%- endif -%}
+  {%- if section.settings.width == 'page' -%}<div class="page-width">{%- elsif section.settings.width == 'full_padded' -%}<div class="page-width page-width--full">{%- endif -%}
   <div class="social-marquee__viewport" data-marquee-viewport>
     <div class="social-marquee__track" data-marquee-track>
       <ul class="social-marquee__group" role="list" data-marquee-group>
@@ -114,7 +114,7 @@
       </ul>
     </div>
   </div>
-  {%- if section.settings.width == 'page' -%}</div>{%- endif -%}
+  {%- unless section.settings.width == 'full' -%}</div>{%- endunless -%}
 </social-marquee>
 
 {% render 'text-case', section: section %}
@@ -343,7 +343,11 @@
       "options": [
         {
           "value": "full",
-          "label": "t:options.section_width.full"
+          "label": "t:options.section_width.full_no_padding"
+        },
+        {
+          "value": "full_padded",
+          "label": "t:options.section_width.full_padded"
         },
         {
           "value": "page",

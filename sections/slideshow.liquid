@@ -85,7 +85,7 @@
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
   "
 >
-  <div class="{% if section.settings.width == 'page' %}page-width{% endif %}">
+  <div class="{% if section.settings.width == 'page' %}page-width{% elsif section.settings.width == 'full_padded' %}page-width page-width--full{% endif %}">
     <slide-show
       class="slideshow slideshow--{{ section.settings.transition }} slideshow--height-{{ section.settings.height }} slideshow--mobile-{{ section.settings.mobile_height }} slideshow--pagination-{{ pagination }} slideshow--pagination-{{ section.settings.pagination_position }} slideshow--arrows-{{ section.settings.arrow_position }}{% if section.settings.image_zoom %} slideshow--zoom{% endif %}"
       role="region"
@@ -342,7 +342,11 @@
       "options": [
         {
           "value": "full",
-          "label": "t:options.section_width.full"
+          "label": "t:options.section_width.full_no_padding"
+        },
+        {
+          "value": "full_padded",
+          "label": "t:options.section_width.full_padded"
         },
         {
           "value": "page",

@@ -84,7 +84,7 @@
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
   "
 >
-  <div class="{% if section.settings.width == 'page' %}page-width{% endif %}">
+  <div class="{% if section.settings.width == 'page' %}page-width{% elsif section.settings.width == 'full_padded' %}page-width page-width--full{% endif %}">
     <div
       class="promo-banner promo-banner--{{ section.settings.height }} promo-banner--mobile-{{ section.settings.mobile_height }}{% if section.settings.zoom_on_hover %} promo-banner--zoom{% endif %}{% if section.settings.parallax %} promo-banner--parallax{% endif %}"
       style="
@@ -282,7 +282,11 @@
       "options": [
         {
           "value": "full",
-          "label": "t:options.section_width.full"
+          "label": "t:options.section_width.full_no_padding"
+        },
+        {
+          "value": "full_padded",
+          "label": "t:options.section_width.full_padded"
         },
         {
           "value": "page",

@@ -119,12 +119,12 @@
   "
 >
   {%- if content_position == 'above' and content != blank -%}
-    <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %} video-section__header">
+    <div class="page-width{% unless section.settings.width == 'page' %} page-width--full{% endunless %} video-section__header">
       {{ content }}
     </div>
   {%- endif -%}
 
-  <div class="{% if section.settings.width == 'page' %}page-width{% endif %}">
+  <div class="{% if section.settings.width == 'page' %}page-width{% elsif section.settings.width == 'full_padded' %}page-width page-width--full{% endif %}">
     <div class="video-section__frame-wrap">
       {%- if mode == 'player' -%}
         <video-player class="video-section__frame" data-controls="{{ section.settings.show_controls }}">
@@ -413,7 +413,11 @@
       "options": [
         {
           "value": "full",
-          "label": "t:options.section_width.full"
+          "label": "t:options.section_width.full_no_padding"
+        },
+        {
+          "value": "full_padded",
+          "label": "t:options.section_width.full_padded"
         },
         {
           "value": "page",

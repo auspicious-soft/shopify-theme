@@ -58,7 +58,7 @@
   endif
 %}
 
-{%- if section.settings.width == 'page' -%}<div class="page-width">{%- endif -%}
+{%- if section.settings.width == 'page' -%}<div class="page-width">{%- elsif section.settings.width == 'full_padded' -%}<div class="page-width page-width--full">{%- endif -%}
 <div
   class="hero-banner{% if is_adapt %} hero-banner--adapt{% endif %}"
   style="
@@ -116,7 +116,7 @@
     </div>
   </div>
 </div>
-{%- if section.settings.width == 'page' -%}</div>{%- endif -%}
+{%- unless section.settings.width == 'full' -%}</div>{%- endunless -%}
 
 {% render 'text-case', section: section %}
 {% render 'button-size', section: section %}
@@ -368,7 +368,11 @@
       "options": [
         {
           "value": "full",
-          "label": "t:options.section_width.full"
+          "label": "t:options.section_width.full_no_padding"
+        },
+        {
+          "value": "full_padded",
+          "label": "t:options.section_width.full_padded"
         },
         {
           "value": "page",
