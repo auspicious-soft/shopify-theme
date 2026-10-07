@@ -24,7 +24,7 @@
         "height_type": "fullscreen",
         "heading": "End of summer sale",
         "heading_tag": "h1",
-        "heading_class": "h3",
+        "heading_class": "h2",
         "subheading": "Up to 40% off",
         "text_color": "#ffffff",
         "content_position_horizontal": "center",
@@ -48,7 +48,7 @@
       "settings": {
         "heading": "New Arrivals",
         "heading_tag": "h2",
-        "heading_class": "h2",
+        "heading_class": "h3",
         "subheading": "",
         "heading_alignment": "left",
         "collection": "new-arrivals",
