@@ -336,6 +336,7 @@
         "heading_tag": "h2",
         "heading_class": "h3",
         "heading_alignment": "left",
+        "heading_width": "full",
         "speed": 110,
         "direction": "left",
         "items_desktop": 5,
