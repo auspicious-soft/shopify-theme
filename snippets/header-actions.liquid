@@ -65,3 +65,63 @@
     {% render 'header-menu-toggle', section: section, modifier: toggle_class %}
   {% endif %}
 </div>
+
+{% javascript %}
+  // Hover label for the header icons (search / account / cart): one
+  // tooltip on <body> that follows the mouse, just below and right of the
+  // cursor. Reads the text from the icon's data-tooltip attribute.
+  (() => {
+    if (window.headerTooltipReady) return;
+    window.headerTooltipReady = true;
+
+    const OFFSET_X = 14;
+    const OFFSET_Y = 18;
+    const EDGE = 8;
+    let tip = null;
+    let current = null;
+
+    const getTip = () => {
+      if (!tip || !tip.isConnected) {
+        tip = document.createElement('div');
+        tip.className = 'header-tooltip';
+        tip.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(tip);
+      }
+      return tip;
+    };
+
+    const hide = () => {
+      current = null;
+      if (tip) tip.classList.remove('is-visible');
+    };
+
+    document.addEventListener('pointermove', (event) => {
+      if (event.pointerType !== 'mouse') return;
+      const target = event.target.closest && event.target.closest('.header__actions [data-tooltip]');
+      if (!target || target.closest('.predictive-search[open]')) {
+        hide();
+        return;
+      }
+
+      const el = getTip();
+      if (target !== current) {
+        current = target;
+        el.textContent = target.dataset.tooltip;
+        el.style.color = getComputedStyle(target).color;
+      }
+
+      // Keep it on screen: flip to the left of the cursor near the right edge.
+      let x = event.clientX + OFFSET_X;
+      const y = event.clientY + OFFSET_Y;
+      if (x + el.offsetWidth > window.innerWidth - EDGE) {
+        x = event.clientX - OFFSET_X - el.offsetWidth;
+      }
+      el.style.transform = `translate(${x}px, ${y}px)`;
+      el.classList.add('is-visible');
+    });
+
+    document.documentElement.addEventListener('mouseleave', hide);
+    document.addEventListener('pointerdown', hide);
+    window.addEventListener('scroll', hide, { passive: true });
+  })();
+{% endjavascript %}

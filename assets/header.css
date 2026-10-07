@@ -279,12 +279,13 @@
   cursor: pointer;
 }
 
-.header__actions [data-tooltip]::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  z-index: 2;
+/* The label itself follows the mouse (bottom right of the cursor); it is
+   one element on <body>, positioned by the script in header-actions.liquid. */
+.header-tooltip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
   font-size: 0.65rem;
   font-weight: 700;
   line-height: 1;
@@ -292,25 +293,12 @@
   text-transform: uppercase;
   white-space: nowrap;
   opacity: 0;
-  transform: translate(-50%, -0.25rem);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.15s ease;
   pointer-events: none;
 }
 
-@media (hover: hover) {
-  .header__actions [data-tooltip]:hover::after {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-
-.header__actions [data-tooltip]:focus-visible::after {
+.header-tooltip.is-visible {
   opacity: 1;
-  transform: translate(-50%, 0);
-}
-
-.header__actions .predictive-search[open] [data-tooltip]::after {
-  opacity: 0;
 }
 
 .header__actions .header__action svg,
