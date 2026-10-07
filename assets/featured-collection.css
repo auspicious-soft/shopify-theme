@@ -7,10 +7,10 @@
   color: var(--color-foreground);
 }
 
-/* Wider side padding, the same as the Collection banner's text
-   (assets/collection-banner.css), so the products line up with it. */
+/* Side padding follows .page-width (--page-margin switches at 750px),
+   the same as the Collection banner's text (assets/collection-banner.css). */
 .fc {
-  --fc-side: clamp(1.25rem, 4vw, 3rem);
+  --fc-side: var(--page-margin);
 }
 
 .fc > .page-width {
