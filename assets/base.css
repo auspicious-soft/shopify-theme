@@ -134,6 +134,8 @@ a {
   justify-content: center;
   min-width: 9rem;
   padding: 0.95rem 1rem;
+  /* Body text size (Theme settings > Typography), mobile and desktop. */
+  font-size: var(--body-size, 15px);
   line-height: 1.2;
   text-align: center;
   text-decoration: none;
@@ -146,7 +148,6 @@ a {
   .button--secondary {
     min-width: 7.5rem;
     padding: 0.75rem 1.5rem;
-    font-size: 0.9375rem;
   }
 }
 
