@@ -25,6 +25,7 @@
     <shopify-account
       menu="{{ settings.customer_account_menu }}"
       class="header__action header__account{% if section.settings.account_display == 'text' %} header__account--text{% endif %}"
+      {% unless section.settings.account_display == 'text' %}data-tooltip="{{ 'accessibility.account' | t }}"{% endunless %}
     >
       <span slot="signed-out-avatar" class="header__account-avatar">
         {% if section.settings.account_display == 'text' %}
@@ -43,6 +44,7 @@
         class="header__action header__cart"
         data-panel-open="cart-panel-dialog"
         aria-label="{{ 'cart.title' | t }}"
+        data-tooltip="{{ 'cart.title' | t }}"
       >
         {% if section.settings.show_cart_count %}
           <cart-count class="header__cart-count" {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</cart-count>
@@ -50,7 +52,7 @@
         {{ 'icon-cart.svg' | inline_asset_content }}
       </button>
     {% else %}
-      <a href="{{ routes.cart_url }}" class="header__action header__cart">
+      <a href="{{ routes.cart_url }}" class="header__action header__cart" data-tooltip="{{ 'cart.title' | t }}">
         {% if section.settings.show_cart_count %}
           <cart-count class="header__cart-count" {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</cart-count>
         {% endif %}

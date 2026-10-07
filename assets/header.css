@@ -273,6 +273,45 @@
   padding: 0;
 }
 
+/* Hover label under the search / account / cart icons (data-tooltip). */
+.header__actions [data-tooltip] {
+  position: relative;
+}
+
+.header__actions [data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 2;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, -0.25rem);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .header__actions [data-tooltip]:hover::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.header__actions [data-tooltip]:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.header__actions .predictive-search[open] [data-tooltip]::after {
+  opacity: 0;
+}
+
 .header__actions .header__action svg,
 .header__actions .predictive-search__trigger svg,
 .header__actions .header__menu-toggle svg {
@@ -688,6 +727,10 @@ a.header__mega-promo:hover .header__mega-promo-image img {
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.35;
+  /* One line max; long titles end in "…" (full title on hover). */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 a.header__mega-promo:hover .header__mega-promo-title,

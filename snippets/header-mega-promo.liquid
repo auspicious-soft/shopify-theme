@@ -82,7 +82,7 @@
         </span>
       {% endif %}
       {% if show_promo_title %}
-        <span class="header__mega-promo-title">{{ promo_title | escape }}</span>
+        <span class="header__mega-promo-title" title="{{ promo_title | escape }}">{{ promo_title | escape }}</span>
       {% endif %}
     </{{ promo_tag }}>
   {%- endfor -%}
