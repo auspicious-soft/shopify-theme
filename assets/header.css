@@ -276,6 +276,7 @@
 /* Hover label under the search / account / cart icons (data-tooltip). */
 .header__actions [data-tooltip] {
   position: relative;
+  cursor: pointer;
 }
 
 .header__actions [data-tooltip]::after {
