@@ -430,7 +430,7 @@ header.is-scrolled img.header__hero-logo-image {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  padding-block: 0.5rem;
+  padding-block: 1.5rem;
   position: relative;
 }
 
@@ -877,7 +877,7 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
 
   .header__logo-image {
     max-width: var(--header-logo-width, 130px);
-    max-height: calc(60px - 1.25rem);
+    max-height: calc(82px - 1.25rem); 
   }
 
   .header__navigation {
