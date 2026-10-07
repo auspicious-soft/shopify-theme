@@ -45,22 +45,16 @@
    Footer > Headings. */
 .footer__heading {
   margin: 0;
+  font-family: var(--font-heading--family);
+  font-style: var(--font-heading--style);
   font-size: var(--footer-heading-size-mobile, 14px);
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  text-transform: var(--footer-heading-case, uppercase);
 }
 
 @media screen and (min-width: 750px) {
   .footer__heading {
     font-size: var(--footer-heading-size, 16px);
   }
-}
-
-.footer__heading--large {
-  font-weight: 500;
-  letter-spacing: 0;
-  text-transform: none;
 }
 
 .footer__text {

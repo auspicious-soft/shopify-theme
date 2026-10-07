@@ -988,7 +988,8 @@
       "headings": "Headings",
       "heading_size": "Heading size",
       "heading_size_info": "Used by every footer heading",
-      "heading_size_mobile": "Heading size on mobile"
+      "heading_size_mobile": "Heading size on mobile",
+      "heading_case": "Heading case"
     },
     "blog": {
       "header_heading": "Heading",

@@ -30,6 +30,7 @@
     --footer-column-gap: {{ section.settings.column_gap }}px;
     --footer-heading-size: {{ section.settings.heading_size }}px;
     --footer-heading-size-mobile: {{ section.settings.heading_size_mobile }}px;
+    --footer-heading-case: {{ section.settings.heading_case | default: 'uppercase' }};
   "
 >
   <footer class="footer__inner page-width{% if section.settings.footer_width == 'full' %} page-width--full{% endif %}">
@@ -247,6 +248,16 @@
       "step": 1,
       "unit": "px",
       "default": 14
+    },
+    {
+      "type": "select",
+      "id": "heading_case",
+      "label": "t:sections.footer.heading_case",
+      "options": [
+        { "value": "uppercase", "label": "t:options.text_case.uppercase" },
+        { "value": "none", "label": "t:options.text_case.none" }
+      ],
+      "default": "uppercase"
     },
     {
       "type": "range",
