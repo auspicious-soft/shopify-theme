@@ -12,8 +12,8 @@
     "main": {
       "type": "collections",
       "settings": {
-        "show_breadcrumbs": true,
-        "show_heading": true,
+        "show_breadcrumbs": false,
+        "show_heading": false,
         "heading": "",
         "heading_tag": "h1",
         "heading_class": "h1",
