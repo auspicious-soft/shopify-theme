@@ -320,13 +320,11 @@
 .product-card__size:hover:not([aria-disabled='true']),
 .product-card__size:focus-visible {
   border-color: #000;
-  background: rgb(255 255 255 / 0.9);
 }
 
 /* Sold out in the chosen color: faded and struck through. */
 .product-card__size[aria-disabled='true'] {
   color: rgb(0 0 0 / 0.4);
-  background: rgb(255 255 255 / 0.4);
   border-color: rgb(0 0 0 / 0.1);
   text-decoration: line-through;
   cursor: not-allowed;
