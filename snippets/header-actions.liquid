@@ -107,7 +107,6 @@
       if (target !== current) {
         current = target;
         el.textContent = target.dataset.tooltip;
-        el.style.color = getComputedStyle(target).color;
       }
 
       // Keep it on screen: flip to the left of the cursor near the right edge.
