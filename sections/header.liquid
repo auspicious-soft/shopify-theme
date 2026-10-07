@@ -772,6 +772,12 @@
           "info": "t:blocks.mega_menu_promo.menu_item_info"
         },
         {
+          "type": "product",
+          "id": "product",
+          "label": "t:blocks.mega_menu_promo.product",
+          "info": "t:blocks.mega_menu_promo.product_info"
+        },
+        {
           "type": "checkbox",
           "id": "show_image",
           "label": "t:blocks.mega_menu_promo.show_image",
@@ -781,7 +787,8 @@
           "type": "image_picker",
           "id": "image",
           "label": "t:blocks.mega_menu_promo.image",
-          "visible_if": "{{ block.settings.show_image }}"
+          "visible_if": "{{ block.settings.show_image }}",
+          "info": "t:blocks.mega_menu_promo.image_info"
         },
         {
           "type": "checkbox",
@@ -793,7 +800,8 @@
           "type": "text",
           "id": "title",
           "label": "t:blocks.mega_menu_promo.title",
-          "visible_if": "{{ block.settings.show_title }}"
+          "visible_if": "{{ block.settings.show_title }}",
+          "info": "t:blocks.mega_menu_promo.title_info"
         },
         {
           "type": "url",

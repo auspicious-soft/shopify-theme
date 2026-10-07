@@ -1711,7 +1711,11 @@
       "show_title": "Show title",
       "title": "Title",
       "link": "Link",
-      "link_info": "Makes the image and title clickable"
+      "link_info": "Makes the image and title clickable. Leave empty to link to the product",
+      "product": "Product",
+      "product_info": "Optional. When the image, title or link below is empty, the product's featured image, title and page are used",
+      "image_info": "Leave empty to use the product's featured image",
+      "title_info": "Leave empty to use the product's title"
     }
   }
 }
