@@ -24,7 +24,7 @@
         "height_type": "fullscreen",
         "heading": "End of summer sale",
         "heading_tag": "h1",
-        "heading_class": "h1",
+        "heading_class": "h3",
         "subheading": "Up to 40% off",
         "text_color": "#ffffff",
         "content_position_horizontal": "center",
