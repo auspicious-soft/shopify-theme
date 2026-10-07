@@ -86,7 +86,7 @@
   border-radius: 0;
   background: none;
   box-shadow: none;
-  color: var(--color-foreground);
+  color: #fff;
   cursor: pointer;
   transform: translateY(-50%);
   transition: opacity 0.2s ease;
