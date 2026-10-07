@@ -95,11 +95,11 @@
           "type": "mega_menu_promo",
           "settings": {
             "menu_item": "Shop",
+            "product": "3-4-sleeve-kimono-dress-coral",
             "show_image": true,
-            "image": "shopify://shop_images/2015-07-02_Ashley_33_51032_24034.jpg",
             "show_title": true,
-            "title": "A-Line Pocket Shift in Black",
-            "link": "shopify://products/a-line-pocket-shift-black"
+            "title": "",
+            "link": ""
           }
         }
       },
