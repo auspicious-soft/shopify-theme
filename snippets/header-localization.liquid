@@ -60,61 +60,78 @@
 
   {% capture localization_form %}
   {% form 'localization', class: 'header-localization__form' %}
+    {%- comment -%}
+      Each option is a submit button carrying its own value, so a click
+      switches straight away (no JavaScript needed). The current one is
+      highlighted.
+    {%- endcomment -%}
     {% if show_language %}
       <div class="header-localization__field">
-        <label class="header-localization__heading" for="{{ panel_id }}-language">
-          {{- 'localization.language' | t -}}
-        </label>
-        <div class="header-localization__select-wrapper">
-          <select
-            id="{{ panel_id }}-language"
-            name="language_code"
-            class="header-localization__select"
-            data-header-localization-select
-          >
-            {% for language in localization.available_languages %}
-              <option
+        <p class="header-localization__heading" id="{{ panel_id }}-language">{{ 'localization.language' | t }}:</p>
+        <ul class="header-localization__options" role="list" aria-labelledby="{{ panel_id }}-language">
+          {% for language in localization.available_languages %}
+            {%- assign is_current = false -%}
+            {%- if language.iso_code == localization.language.iso_code -%}{%- assign is_current = true -%}{%- endif -%}
+            <li>
+              <button
+                type="submit"
+                name="language_code"
                 value="{{ language.iso_code }}"
-                {% if language.iso_code == localization.language.iso_code %}selected{% endif %}
+                class="header-localization__option{% if is_current %} is-active{% endif %}"
+                lang="{{ language.iso_code }}"
+                aria-label="{{ language.endonym_name | capitalize }}"
+                {% if is_current %}aria-current="true"{% endif %}
               >
-                {{ language.endonym_name | capitalize }}
-              </option>
-            {% endfor %}
-          </select>
-          {{ 'icon-chevron.svg' | inline_asset_content }}
-        </div>
+                {{- language.iso_code | upcase -}}
+              </button>
+            </li>
+          {% endfor %}
+        </ul>
       </div>
     {% endif %}
 
     {% if show_country %}
+      {%- comment -%}
+        One entry per currency. It switches to the current country when that
+        uses the currency, otherwise to the first country that does.
+      {%- endcomment -%}
       <div class="header-localization__field">
-        <label class="header-localization__heading" for="{{ panel_id }}-country">
-          {{- 'localization.country' | t -}}
-        </label>
-        <div class="header-localization__select-wrapper">
-          <select
-            id="{{ panel_id }}-country"
-            name="country_code"
-            class="header-localization__select"
-            data-header-localization-select
-          >
-            {% for country in localization.available_countries %}
-              <option
-                value="{{ country.iso_code }}"
-                {% if country.iso_code == localization.country.iso_code %}selected{% endif %}
+        <p class="header-localization__heading" id="{{ panel_id }}-currency">{{ 'localization.currency' | t }}:</p>
+        <ul class="header-localization__options" role="list" aria-labelledby="{{ panel_id }}-currency">
+          {%- assign seen_currencies = ',' -%}
+          {% for country in localization.available_countries %}
+            {%- liquid
+              assign currency_code = country.currency.iso_code
+              assign currency_key = ',' | append: currency_code | append: ','
+              if seen_currencies contains currency_key
+                continue
+              endif
+              assign seen_currencies = seen_currencies | append: currency_code | append: ','
+
+              assign target_country = country.iso_code
+              if localization.country.currency.iso_code == currency_code
+                assign target_country = localization.country.iso_code
+              endif
+              assign is_current = false
+              if currency_code == cart.currency.iso_code
+                assign is_current = true
+              endif
+            -%}
+            <li>
+              <button
+                type="submit"
+                name="country_code"
+                value="{{ target_country }}"
+                class="header-localization__option{% if is_current %} is-active{% endif %}"
+                {% if is_current %}aria-current="true"{% endif %}
               >
-                {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
-              </option>
-            {% endfor %}
-          </select>
-          {{ 'icon-chevron.svg' | inline_asset_content }}
-        </div>
+                {{- country.currency.name | default: currency_code -}}
+              </button>
+            </li>
+          {% endfor %}
+        </ul>
       </div>
     {% endif %}
-
-    <noscript>
-      <button type="submit" class="header-localization__submit">{{ 'localization.update' | t }}</button>
-    </noscript>
   {% endform %}
   {% endcapture %}
 
@@ -128,20 +145,12 @@
           data-panel-open="{{ panel_id }}"
           aria-label="{{ 'localization.title' | t }}"
         >
-          {% if show_country %}
-            <span class="header-localization__flag">
-              {{- localization.country | image_url: width: 32 | image_tag: width: 16, height: 16, alt: '', loading: 'lazy' -}}
-            </span>
-            <span class="header-localization__label">
-              {%- comment -%}
-                cart.currency is the currency prices and checkout actually use
-                right now, so the label always matches the prices shown.
-              {%- endcomment -%}
-              {{- localization.country.name }} ({{ cart.currency.iso_code }} {{ cart.currency.symbol -}})
-            </span>
-          {% else %}
-            <span class="header-localization__label">{{ localization.language.endonym_name | capitalize }}</span>
-          {% endif %}
+          <span class="header-localization__label">
+            {%- if show_language -%}{{ localization.language.iso_code | upcase }}{%- endif -%}
+            {%- if show_language and show_country %} / {% endif -%}
+            {%- comment -%} cart.currency: the currency prices and checkout use right now. {%- endcomment -%}
+            {%- if show_country -%}{{ cart.currency.symbol | default: cart.currency.iso_code }}{%- endif -%}
+          </span>
           <span class="header-localization__chevron">{{ 'icon-chevron.svg' | inline_asset_content }}</span>
         </summary>
 

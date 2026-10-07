@@ -29,7 +29,8 @@
     "title": "Country/region and language",
     "language": "Language",
     "country": "Country/region",
-    "update": "Update"
+    "update": "Update",
+    "currency": "Currency"
   },
   "badges": {
     "sale": "Sale",
