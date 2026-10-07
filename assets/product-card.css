@@ -293,25 +293,33 @@
   list-style: none;
 }
 
+/* Size box (Figma): 30 x 30, white 70% with a 5px blur, 20% black border,
+   10px uppercase text. Wider labels (e.g. XXL) grow the box sideways. */
 .product-card__size {
   position: relative;
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  min-width: 2.1rem;
-  height: 2.1rem;
-  padding: 0 0.45rem;
+  align-items: center;
+  gap: 10px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 10px;
   margin: 0;
   font: inherit;
   font-size: 10px;
+  font-style: normal;
   font-weight: 400;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   line-height: 1;
+  text-align: center;
   text-transform: uppercase;
-  color: var(--color-foreground);
-  background-color: color-mix(in srgb, var(--color-background) 85%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-foreground) 22%, transparent);
-  border-radius: 2px;
+  color: #000;
+  background: rgb(255 255 255 / 0.7);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgb(0 0 0 / 0.2);
+  border-radius: 0;
   box-shadow: none;
   cursor: pointer;
   text-decoration: none;
@@ -323,15 +331,15 @@
 
 .product-card__size:hover:not([aria-disabled='true']),
 .product-card__size:focus-visible {
-  border-color: var(--color-foreground);
-  background-color: var(--color-background);
+  border-color: #000;
+  background: rgb(255 255 255 / 0.9);
 }
 
 /* Sold out in the chosen color: faded and struck through. */
 .product-card__size[aria-disabled='true'] {
-  color: color-mix(in srgb, var(--color-foreground) 40%, transparent);
-  background-color: transparent;
-  border-color: color-mix(in srgb, var(--color-foreground) 12%, transparent);
+  color: rgb(0 0 0 / 0.4);
+  background: rgb(255 255 255 / 0.4);
+  border-color: rgb(0 0 0 / 0.1);
   text-decoration: line-through;
   cursor: not-allowed;
 }
@@ -343,9 +351,9 @@
 }
 
 .product-card__size.is-added {
-  border-color: var(--color-foreground);
-  background-color: var(--color-foreground);
-  color: var(--color-background);
+  border-color: #000;
+  background: #000;
+  color: #fff;
 }
 
 /* Products without sizes: "Add to cart" as plain text in the same panel. */
