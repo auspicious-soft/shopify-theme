@@ -144,7 +144,7 @@ if (!customElements.get('product-card')) {
       const price = this.querySelector('[data-card-price]');
       if (price) {
         price.innerHTML = variant.compare
-          ? `<s class="product-card__compare">${variant.compare}</s><span class="product-card__amount product-card__amount--sale">${variant.price}</span>`
+          ? `<span class="product-card__amount product-card__amount--sale">${variant.price}</span><s class="product-card__compare">${variant.compare}</s>`
           : `<span class="product-card__amount">${variant.price}</span>`;
       }
 

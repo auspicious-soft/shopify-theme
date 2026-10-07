@@ -258,8 +258,8 @@
 
       <div class="product-card__price" data-card-price>
         {%- if current.compare_at_price > current.price -%}
-          <s class="product-card__compare">{{ current.compare_at_price | money }}</s>
           <span class="product-card__amount product-card__amount--sale">{{ current.price | money }}</span>
+          <s class="product-card__compare">{{ current.compare_at_price | money }}</s>
         {%- else -%}
           <span class="product-card__amount">{{ current.price | money }}</span>
         {%- endif -%}
