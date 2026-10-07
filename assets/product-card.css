@@ -121,10 +121,11 @@
   transform: rotate(-90deg);
 }
 
-/* At the first / last image the arrow stays visible but dimmed. */
+/* At the first / last image the arrow stays visible but dimmed. It still
+   catches the click (does nothing), so a click on it never falls through
+   to the image link and opens the product page. */
 .product-card__arrow:disabled {
   cursor: default;
-  pointer-events: none;
 }
 
 .product-card:hover .product-card__arrow:disabled,
