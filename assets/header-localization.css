@@ -108,11 +108,11 @@
 }
 
 .header-localization__heading {
-  margin: 0 0 0.35rem;
-  font-size: 0.7rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
+    font-size: .8rem;
+    font-weight: 400;
+    text-transform: uppercase;
   text-transform: uppercase;
+      line-height: 1.2em;
   color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
 }
 
