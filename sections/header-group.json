@@ -167,7 +167,7 @@
         "drawer_submenu_style": "accordion",
         "desktop_submenu_type": "mega",
         "nav_font_size": 15,
-        "nav_font_weight": "500",
+        "nav_font_weight": "400",
         "nav_item_spacing": 32,
         "nav_hover_color": "#000000",
         "nav_hover_color_transparent": ""
