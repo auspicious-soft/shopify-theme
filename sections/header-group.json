@@ -162,7 +162,7 @@
         "account_text": "Account",
         "show_cart": true,
         "show_cart_count": true,
-        "localization_selector": "country",
+        "localization_selector": "both",
         "drawer_position": "left",
         "drawer_submenu_style": "accordion",
         "desktop_submenu_type": "mega",
