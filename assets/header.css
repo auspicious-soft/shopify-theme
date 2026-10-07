@@ -669,7 +669,6 @@ header.is-scrolled img.header__hero-logo-image {
 .header__mega-promo-image {
   display: block;
   overflow: hidden;
-  aspect-ratio: 3 / 2;
   background-color: color-mix(in srgb, var(--color-foreground) 4%, transparent);
 }
 
@@ -744,10 +743,6 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
 .header .header__mega-shop-all:hover,
 .header .header__mega-shop-all:focus-visible {
   text-decoration-thickness: 2px;
-}
-
-.header__mega-promo-image {
-  aspect-ratio: 6 / 5;
 }
 
 .header__mega-promo {
