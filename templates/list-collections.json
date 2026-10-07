@@ -20,6 +20,7 @@
         "subheading": "",
         "heading_alignment": "left",
         "show_banner": true,
+        "banner_image": "shopify://shop_images/Collection_Hero.png",
         "banner_height": "medium",
         "banner_overlay": 30,
         "banner_color_scheme": "",
