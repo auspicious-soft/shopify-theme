@@ -35,6 +35,9 @@
     --font-primary--family: {% if custom_body_font_faces != blank %}"Theme Custom Body", {% endif %}{{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
     --font-primary--style: {{ settings.type_body_font.style }};
     --font-primary--weight: {{ settings.type_body_font.weight }};
+    {%- if custom_body_font_faces != blank %}
+    --font-body--weight: {{ settings.type_body_custom_weight | default: 400 }};
+    {%- endif %}
     --font-heading--family: {% if custom_heading_font_faces != blank %}"Theme Custom Heading", {% endif %}{{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
     {%- if custom_heading_font_faces != blank %}
     --font-heading--style: normal;

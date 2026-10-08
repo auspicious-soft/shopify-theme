@@ -260,6 +260,21 @@
         "visible_if": "{{ settings.type_body_font_source == 'custom' }}"
       },
       {
+        "type": "select",
+        "id": "type_body_custom_weight",
+        "label": "t:settings_schema.typography.settings.type_body_custom_weight.label",
+        "info": "t:settings_schema.typography.settings.type_header_custom_weight.info",
+        "default": "400",
+        "visible_if": "{{ settings.type_body_font_source == 'custom' }}",
+        "options": [
+          { "value": "300", "label": "t:settings_schema.typography.settings.custom_font_light.label" },
+          { "value": "400", "label": "t:settings_schema.typography.settings.custom_font_regular.label" },
+          { "value": "500", "label": "t:settings_schema.typography.settings.custom_font_medium.label" },
+          { "value": "600", "label": "t:settings_schema.typography.settings.custom_font_semibold.label" },
+          { "value": "700", "label": "t:settings_schema.typography.settings.custom_font_bold.label" }
+        ]
+      },
+      {
         "type": "range",
         "id": "body_size_desktop",
         "min": 12,

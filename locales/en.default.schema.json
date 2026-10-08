@@ -1377,6 +1377,9 @@
         "type_header_custom_weight": {
           "label": "Heading weight",
           "info": "Choose a weight you added above"
+        },
+        "type_body_custom_weight": {
+          "label": "Body weight"
         }
       }
     },
