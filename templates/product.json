@@ -14,7 +14,9 @@
       "blocks": {
         "vendor": {
           "type": "vendor",
-          "settings": {}
+          "settings": {
+            "letter_spacing": "large"
+          }
         },
         "title": {
           "type": "title",
@@ -118,7 +120,7 @@
       "settings": {
         "show_breadcrumbs": true,
         "gallery_layout": "grid",
-        "media_size": "large",
+        "media_size": "medium",
         "media_ratio": "adapt",
         "enable_zoom": true,
         "video_loop": false,
