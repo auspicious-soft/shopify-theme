@@ -30,7 +30,7 @@
         "sort": "default",
         "hide_empty": true,
         "layout": "grid",
-        "card_image_source": "banner",
+        "card_image_source": "card",
         "per_page": 24,
         "columns_desktop": 3,
         "columns_mobile": "2",
