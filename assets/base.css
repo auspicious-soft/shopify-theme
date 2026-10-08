@@ -312,9 +312,23 @@ select {
     opacity: 1;
     translate: 0 0;
   }
+
+  /* Whole sections (set by assets/scroll-reveal.js). Ends on `translate: none`
+     so fixed-position children (drawers, sticky bars) aren't affected. */
+  [data-animate-section] {
+    opacity: 0;
+    translate: 0 2rem;
+    transition: opacity 0.6s ease, translate 0.6s ease;
+  }
+
+  [data-animate-section].is-revealed {
+    opacity: 1;
+    translate: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  [data-animate-section],
   [data-animate] {
     opacity: 1;
     translate: none;
