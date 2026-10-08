@@ -1331,6 +1331,36 @@
         "heading_scale": {
           "label": "Scale"
         },
+        "heading_h1": {
+          "content": "Huge heading (H1)"
+        },
+        "heading_h2": {
+          "content": "Extra large heading (H2)"
+        },
+        "heading_h3": {
+          "content": "Large heading (H3)"
+        },
+        "heading_h4": {
+          "content": "Medium heading (H4)"
+        },
+        "heading_h5": {
+          "content": "Small heading (H5)"
+        },
+        "heading_h6": {
+          "content": "Extra small heading (H6)"
+        },
+        "heading_size_desktop": {
+          "label": "Size – desktop"
+        },
+        "heading_line_height_desktop": {
+          "label": "Line height – desktop"
+        },
+        "heading_size_mobile": {
+          "label": "Size – mobile"
+        },
+        "heading_line_height_mobile": {
+          "label": "Line height – mobile"
+        },
         "header__1": {
           "content": "Headings"
         },

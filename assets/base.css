@@ -60,65 +60,77 @@ p {
   line-height: calc(var(--body-line-height-ratio) * var(--body-size, 15px));
 }
 
-/* Heading sizes (Heading size setting label → class), mobile / desktop:
-   Huge h1 34 / 48px, Extra large h2 30 / 40px, Large h3 26 / 34px,
-   Medium h4 22 / 28px, Small h5 19 / 22px, Extra small h6 16 / 18px.
-   Line heights are unitless so they follow the font size; bigger headings
-   get tighter leading. Theme settings > Heading scale multiplies all sizes. */
+/* Heading sizes (Heading size setting label → class): Huge h1, Extra large h2,
+   Large h3, Medium h4, Small h5, Extra small h6. Sizes and line heights come
+   from Theme settings > Typography (mobile / desktop); the fallbacks are the
+   defaults. Line heights are unitless so they follow the font size.
+   Theme settings > Heading scale multiplies all sizes. */
 :root {
-  --heading-size-h1: 34px;
-  --heading-size-h2: 30px;
-  --heading-size-h3: 26px;
-  --heading-size-h4: 22px;
-  --heading-size-h5: 19px;
-  --heading-size-h6: 16px;
+  --heading-size-h1: var(--heading-size-h1-mobile, 34px);
+  --heading-size-h2: var(--heading-size-h2-mobile, 30px);
+  --heading-size-h3: var(--heading-size-h3-mobile, 26px);
+  --heading-size-h4: var(--heading-size-h4-mobile, 22px);
+  --heading-size-h5: var(--heading-size-h5-mobile, 19px);
+  --heading-size-h6: var(--heading-size-h6-mobile, 16px);
+  --heading-line-height-h1: var(--heading-line-height-h1-mobile, 1.1);
+  --heading-line-height-h2: var(--heading-line-height-h2-mobile, 1.1);
+  --heading-line-height-h3: var(--heading-line-height-h3-mobile, 1.1);
+  --heading-line-height-h4: var(--heading-line-height-h4-mobile, 1.15);
+  --heading-line-height-h5: var(--heading-line-height-h5-mobile, 1.2);
+  --heading-line-height-h6: var(--heading-line-height-h6-mobile, 1.24);
 }
 
 @media screen and (min-width: 750px) {
   :root {
-    --heading-size-h1: 48px;
-    --heading-size-h2: 40px;
-    --heading-size-h3: 34px;
-    --heading-size-h4: 28px;
-    --heading-size-h5: 22px;
-    --heading-size-h6: 18px;
+    --heading-size-h1: var(--heading-size-h1-desktop, 48px);
+    --heading-size-h2: var(--heading-size-h2-desktop, 40px);
+    --heading-size-h3: var(--heading-size-h3-desktop, 34px);
+    --heading-size-h4: var(--heading-size-h4-desktop, 28px);
+    --heading-size-h5: var(--heading-size-h5-desktop, 22px);
+    --heading-size-h6: var(--heading-size-h6-desktop, 18px);
+    --heading-line-height-h1: var(--heading-line-height-h1-desktop, 1.1);
+    --heading-line-height-h2: var(--heading-line-height-h2-desktop, 1.1);
+    --heading-line-height-h3: var(--heading-line-height-h3-desktop, 1.1);
+    --heading-line-height-h4: var(--heading-line-height-h4-desktop, 1.15);
+    --heading-line-height-h5: var(--heading-line-height-h5-desktop, 1.2);
+    --heading-line-height-h6: var(--heading-line-height-h6-desktop, 1.24);
   }
 }
 
 h1,
 .h1 {
   font-size: calc(var(--heading-scale) / 100 * var(--heading-size-h1));
-  line-height: 1.1;
+  line-height: var(--heading-line-height-h1);
 }
 
 h2,
 .h2 {
   font-size: calc(var(--heading-scale) / 100 * var(--heading-size-h2));
-  line-height: 1.1;
+  line-height: var(--heading-line-height-h2);
 }
 
 h3,
 .h3 {
   font-size: calc(var(--heading-scale) / 100 * var(--heading-size-h3));
-  line-height: 1.1;
+  line-height: var(--heading-line-height-h3);
 }
 
 h4,
 .h4 {
   font-size: calc(var(--heading-scale) / 100 * var(--heading-size-h4));
-  line-height: 1.15;
+  line-height: var(--heading-line-height-h4);
 }
 
 h5,
 .h5 {
   font-size: calc(var(--heading-scale) / 100 * var(--heading-size-h5));
-  line-height: 1.2;
+  line-height: var(--heading-line-height-h5);
 }
 
 h6,
 .h6 {
   font-size: calc(var(--heading-scale) / 100 * var(--heading-size-h6));
-  line-height: 1.24;
+  line-height: var(--heading-line-height-h6);
 }
 
 a {

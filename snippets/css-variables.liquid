@@ -47,6 +47,18 @@
     --font-heading--weight: {{ settings.type_header_font.weight }};
     {%- endif %}
     --heading-scale: {{ settings.heading_scale }};
+    {%- # Heading sizes h1 (Huge) to h6 (Extra small); line heights are set in % and output unitless, e.g. 110% = 1.1 %}
+    {%- for level in (1..6) %}
+      {%- assign heading_key = 'heading_h' | append: level %}
+      {%- assign size_key = heading_key | append: '_size' %}
+      {%- assign size_mobile_key = heading_key | append: '_size_mobile' %}
+      {%- assign line_height_key = heading_key | append: '_line_height' %}
+      {%- assign line_height_mobile_key = heading_key | append: '_line_height_mobile' %}
+    --heading-size-h{{ level }}-desktop: {{ settings[size_key] }}px;
+    --heading-size-h{{ level }}-mobile: {{ settings[size_mobile_key] }}px;
+    --heading-line-height-h{{ level }}-desktop: {{ settings[line_height_key] | divided_by: 100.0 }};
+    --heading-line-height-h{{ level }}-mobile: {{ settings[line_height_mobile_key] | divided_by: 100.0 }};
+    {%- endfor %}
     --body-size-desktop: {{ settings.body_size_desktop }}px;
     --body-size-mobile: {{ settings.body_size_mobile }}px;
     {%- # Line heights are set in px in the editor and output as a ratio of the text size (line height ÷ text size), e.g. 24px ÷ 15px = 1.6 %}
