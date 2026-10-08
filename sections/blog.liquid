@@ -222,6 +222,7 @@
               read_more_style: section.settings.read_more_style,
               heading_tag: card_heading_tag,
               card: section.settings.card,
+              card_color_scheme: section.settings.card_color_scheme,
               card_background: section.settings.card_background,
               topic_letter_spacing: section.settings.topic_letter_spacing,
               zoom: section.settings.zoom_on_hover,
@@ -263,6 +264,7 @@
                 heading_tag: card_heading_tag,
                 title_size: section.settings.card_title_size,
                 card: section.settings.card,
+                card_color_scheme: section.settings.card_color_scheme,
                 card_background: section.settings.card_background,
                 topic_letter_spacing: section.settings.topic_letter_spacing,
                 zoom: section.settings.zoom_on_hover,
@@ -639,10 +641,17 @@
       "default": false
     },
     {
+      "type": "color_scheme",
+      "id": "card_color_scheme",
+      "label": "t:sections.blog.card_color_scheme",
+      "default": "scheme-1",
+      "visible_if": "{{ section.settings.card }}"
+    },
+    {
       "type": "color",
       "id": "card_background",
       "label": "t:sections.blog.card_background",
-      "default": "#f5f5f5",
+      "info": "t:sections.blog.card_background_info",
       "visible_if": "{{ section.settings.card }}"
     },
     {

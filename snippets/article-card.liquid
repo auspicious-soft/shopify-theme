@@ -25,7 +25,8 @@
   @param {string} [heading_tag] - Title tag, defaults to h3
   @param {string} [title_size] - Title size class h1–h6 (Theme settings > Typography), defaults to h6 (h3 for a featured card)
   @param {boolean} [card] - Show as a card, overriding Theme settings > Blog cards
-  @param {color} [card_background] - Card background color, used with `card`
+  @param {color_scheme} [card_color_scheme] - Card color scheme (background and text), used with `card`
+  @param {color} [card_background] - Optional card background color, overrides the color scheme's background
   @param {string} [topic_letter_spacing] - Topic label letter spacing: small, medium or large
   @param {boolean} [zoom] - Zoom the image on hover
   @param {boolean} [eager] - Load the image eagerly (first cards on the page)
@@ -46,6 +47,9 @@
   assign card_scheme_id = settings.blog_card_color_scheme.id
   if card
     assign card_style = 'card'
+    if card_color_scheme
+      assign card_scheme_id = card_color_scheme.id
+    endif
   endif
   assign excerpt_words = excerpt_words | default: 30
   assign image_sizes = sizes | default: '(min-width: 990px) 33vw, 100vw'
