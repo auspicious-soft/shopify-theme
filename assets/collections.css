@@ -86,7 +86,7 @@
 
 .collection-list-banner__breadcrumbs {
   padding-block: 1rem;
-  margin-bottom: clamp(1rem, 3vw, 2.5rem);
+  margin-bottom: clamp(1rem, 3vw, 2rem);
 }
 
 .collection-list-page__heading {
