@@ -147,7 +147,7 @@
         "intent": "related",
         "heading": "You may also like",
         "heading_tag": "h2",
-        "heading_class": "h2",
+        "heading_class": "h3",
         "subheading": "",
         "heading_alignment": "left",
         "products_to_show": 4,
@@ -171,7 +171,7 @@
       "settings": {
         "heading": "Recently viewed",
         "heading_tag": "h2",
-        "heading_class": "h2",
+        "heading_class": "h3",
         "subheading": "",
         "heading_alignment": "left",
         "show_clear": true,
