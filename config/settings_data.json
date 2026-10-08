@@ -35,7 +35,7 @@
     "spacing_grid_vertical_mobile": 16,
     "breadcrumbs_show_desktop": true,
     "breadcrumbs_alignment": "left",
-    "animations_reveal_on_scroll": true,
+    "animations_reveal_on_scroll": false,
     "animations_hover_elements": "default",
     "buttons_border_thickness": 1,
     "buttons_border_opacity": 100,
