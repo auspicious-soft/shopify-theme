@@ -331,7 +331,6 @@
 
 .article__tags-label,
 .article__share-label {
-  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -459,7 +458,6 @@
 .article__pager-title {
   display: -webkit-box;
   overflow: hidden;
-  font-weight: 600;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }

@@ -98,7 +98,7 @@
       <div class="related-articles__header related-articles__header--{{ section.settings.heading_alignment }}">
         <div class="related-articles__titles">
           {%- if section.settings.subheading != blank -%}
-            <p class="related-articles__subheading">{{ section.settings.subheading | escape }}</p>
+            <p class="related-articles__subheading{% if section.settings.subheading_letter_spacing != blank and section.settings.subheading_letter_spacing != 'none' %} letter-spacing--{{ section.settings.subheading_letter_spacing }}{% endif %}">{{ section.settings.subheading | escape }}</p>
           {%- endif -%}
           {%- if section.settings.heading != blank -%}
             <{{ heading_tag }} class="{{ heading_class }} related-articles__heading">{{ section.settings.heading | escape }}</{{ heading_tag }}>
@@ -141,6 +141,11 @@
               title_uppercase: section.settings.title_uppercase,
               meta_position: section.settings.meta_position,
               read_more: section.settings.read_more,
+              title_size: section.settings.card_title_size,
+              card: section.settings.card,
+              card_color_scheme: section.settings.card_color_scheme,
+              card_background: section.settings.card_background,
+              topic_letter_spacing: section.settings.topic_letter_spacing,
               zoom: true
             %}
           </li>
@@ -167,6 +172,31 @@
       "id": "subheading",
       "label": "t:labels.subheading",
       "default": "Keep reading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_letter_spacing",
+      "label": "t:labels.letter_spacing",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.subheading != blank }}"
     },
     {
       "type": "text",
@@ -350,6 +380,59 @@
       "content": "t:sections.blog.header_card"
     },
     {
+      "type": "checkbox",
+      "id": "card",
+      "label": "t:sections.blog.card",
+      "info": "t:sections.blog.card_info",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "card_color_scheme",
+      "label": "t:sections.blog.card_color_scheme",
+      "default": "scheme-1",
+      "visible_if": "{{ section.settings.card }}"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "t:sections.blog.card_background",
+      "info": "t:sections.blog.card_background_info",
+      "visible_if": "{{ section.settings.card }}"
+    },
+    {
+      "type": "select",
+      "id": "card_title_size",
+      "label": "t:sections.blog.card_title_size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:options.heading_size.huge"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.heading_size.extra_large"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.heading_size.large"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.heading_size.medium"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.heading_size.small"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.heading_size.extra_small"
+        }
+      ],
+      "default": "h6"
+    },
+    {
       "type": "select",
       "id": "image_ratio",
       "label": "t:sections.blog.image_ratio",
@@ -383,6 +466,31 @@
       "label": "t:sections.blog.show_topic",
       "info": "t:sections.blog.show_topic_info",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "topic_letter_spacing",
+      "label": "t:sections.blog.topic_letter_spacing",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.show_topic }}"
     },
     {
       "type": "checkbox",
