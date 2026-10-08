@@ -58,9 +58,51 @@
         "mobile_padding_bottom": 64,
         "heading_case": "uppercase"
       }
+    },
+    "collection_banner_XjtJBz": {
+      "type": "collection-banner",
+      "name": "t:sections.collection_banner.name",
+      "settings": {
+        "collection": "",
+        "image": "shopify://shop_images/Banner_Image_1.png",
+        "media_type": "image",
+        "height": "medium",
+        "mobile_height": "medium",
+        "width": "page",
+        "corner_radius": 0,
+        "zoom_on_hover": true,
+        "parallax": false,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "subheading": "BEHIND THE DESIGN",
+        "heading": "Weaving Slow Stories: Our Mill Philosophy",
+        "heading_tag": "h2",
+        "heading_class": "h2",
+        "heading_uppercase": false,
+        "text": "<p>Every garment in this collection is traced to mills in northern Italy and Kyoto, using historic weaving processes that respect raw wool and heavy slub silks.</p>",
+        "text_color": "#ffffff",
+        "content_position_horizontal": "left",
+        "content_position_vertical": "top",
+        "content_width": 520,
+        "button_label": "READ THE JOURNAL",
+        "button_link": "shopify://blogs/news",
+        "button_style": "secondary",
+        "button_size": "small",
+        "button_color_scheme": "scheme-2",
+        "full_link": true,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0,
+        "heading_case": "none",
+        "button_case": "uppercase"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "collection_banner_XjtJBz"
   ]
 }
