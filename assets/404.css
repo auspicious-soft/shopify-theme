@@ -24,7 +24,6 @@
   margin: 0;
   font-family: var(--font-heading--family);
   font-size: clamp(5rem, 18vw, 10rem);
-  font-weight: 700;
   line-height: 0.9;
   color: color-mix(in srgb, var(--color-foreground) 12%, transparent);
 }

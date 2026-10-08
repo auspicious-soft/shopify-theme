@@ -274,12 +274,10 @@
 .size-guide__body th:first-child,
 .size-guide__body td:first-child {
   text-align: start;
-  font-weight: 600;
 }
 
 .size-guide__body thead th,
 .size-guide__body tr:first-child th {
-  font-weight: 600;
   background-color: color-mix(in srgb, var(--color-foreground) 6%, transparent);
 }
 

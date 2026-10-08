@@ -145,7 +145,6 @@
   cursor: pointer;
   font: inherit;
   font-size: 0.85rem;
-  font-weight: 500;
   white-space: nowrap;
   color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
   transition: color 0.15s ease;
@@ -278,7 +277,6 @@ predictive-search:has(#predictive-search-dropdown[open]) .predictive-search__bac
   margin: 0;
   padding: 0.85rem 1.1rem 0.35rem;
   font-size: 0.7rem;
-  font-weight: 600;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 55%, transparent);
 }
@@ -361,7 +359,6 @@ predictive-search:has(#predictive-search-dropdown[open]) .predictive-search__bac
 .predictive-search__product-price {
   margin: 0;
   font-size: 0.82rem;
-  font-weight: 500;
 }
 
 /* ---------- Footer / view all ---------- */
@@ -376,7 +373,6 @@ predictive-search:has(#predictive-search-dropdown[open]) .predictive-search__bac
   padding: 0.8rem 1.1rem;
   text-align: center;
   font-size: 0.85rem;
-  font-weight: 600;
   text-decoration: none;
   color: inherit;
   transition: background-color 0.15s ease;

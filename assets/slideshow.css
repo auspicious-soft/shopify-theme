@@ -392,7 +392,6 @@
 
 .slideshow__pagination--numbers .slideshow__page {
   font-size: 0.8rem;
-  font-weight: 600;
   opacity: 0.55;
   padding-block-end: 0.3rem;
   border-bottom: 1px solid transparent;
@@ -414,7 +413,6 @@
 .slideshow__pagination--fraction {
   gap: 0.4rem;
   font-size: 0.85rem;
-  font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 

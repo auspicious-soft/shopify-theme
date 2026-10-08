@@ -378,7 +378,6 @@
 }
 .header__logo-text {
   font-size: 1.25rem;
-  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -604,7 +603,6 @@ header.is-scrolled img.header__hero-logo-image {
   border-top: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
   box-shadow: 0 18px 30px -18px rgb(0 0 0 / 20%);
   font-size: 0.9rem;
-  font-weight: 400;
   opacity: 0;
   visibility: hidden;
   transform: translateY(6px);
@@ -758,7 +756,6 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
 .header .header__mega-shop-all {
   display: inline-block;
   font-size: 0.7rem;
-  font-weight: 500;
   text-transform: uppercase;
   text-decoration: underline;
   text-underline-offset: 0.3em;

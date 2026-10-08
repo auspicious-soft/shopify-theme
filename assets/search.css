@@ -114,7 +114,6 @@
 .search-page__tab.is-active {
   border-bottom-color: currentColor;
   color: var(--color-foreground);
-  font-weight: 500;
 }
 
 /* The toolbar sits right under the tabs: drop its top border. */

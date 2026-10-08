@@ -79,7 +79,6 @@
 .newsletter__subheading {
   margin: 0;
   font-size: 1.05rem;
-  font-weight: 500;
 }
 
 .newsletter__description {
@@ -169,7 +168,6 @@
   margin: 0;
   font: inherit;
   font-size: 0.85rem;
-  font-weight: 600;
   text-transform: uppercase;
   color: inherit;
   background: none;

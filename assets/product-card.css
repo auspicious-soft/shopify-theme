@@ -351,7 +351,6 @@
   margin: 0;
   font: inherit;
   font-size: 0.625rem;
-  font-weight: 600;
   text-transform: uppercase;
   color: var(--color-foreground);
   background: none;
@@ -431,7 +430,6 @@
   margin: 0;
   font-family: inherit;
   font-size: var(--body-size, 0.9375rem);
-  font-weight: 500;
   line-height: 1.35;
 }
 
@@ -463,10 +461,6 @@
 .product-card__compare {
   color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
   font-size: 0.9em;
-}
-
-.product-card__amount {
-  font-weight: 500;
 }
 
 .product-card__amount--sale {

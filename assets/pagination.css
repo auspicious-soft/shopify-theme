@@ -31,7 +31,6 @@ a.pagination__item:focus-visible {
 
 .pagination__item--current {
   border-color: var(--color-foreground);
-  font-weight: 600;
 }
 
 .pagination__item--gap {

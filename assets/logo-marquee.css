@@ -148,7 +148,6 @@ a.logo-marquee__logo:focus-visible {
 
 .logo-marquee__text {
   font-size: calc(var(--logo-height-mobile) * 0.5);
-  font-weight: 600;
   text-transform: uppercase;
   white-space: nowrap;
   overflow: hidden;

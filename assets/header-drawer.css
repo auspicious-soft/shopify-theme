@@ -294,7 +294,6 @@
   border-bottom: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
   font: inherit;
   font-size: 0.8rem;
-  font-weight: 600;
   text-transform: uppercase;
   text-align: start;
   color: inherit;

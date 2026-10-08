@@ -91,13 +91,11 @@
 
 .footer__shop-name {
   font-size: 1.4rem;
-  font-weight: 600;
 }
 
 .footer__headline {
   margin: 0;
   font-size: 1.05rem;
-  font-weight: 500;
   line-height: 1.4;
 }
 
@@ -238,7 +236,6 @@
   color: inherit;
   font: inherit;
   font-size: 0.85rem;
-  font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
   translate: none;

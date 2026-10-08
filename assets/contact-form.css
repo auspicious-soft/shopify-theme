@@ -25,7 +25,6 @@
 .contact__subheading {
   margin: 0;
   font-size: 0.75rem;
-  font-weight: 600;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
 }
@@ -240,10 +239,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-}
-
-.contact__message-heading {
-  font-weight: 600;
 }
 
 .contact__message-link {

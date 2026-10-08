@@ -28,7 +28,6 @@
 .video-section__subheading {
   margin: 0;
   font-size: 0.75rem;
-  font-weight: 600;
   text-transform: uppercase;
   opacity: 0.8;
 }
@@ -36,9 +35,6 @@
 .video-section__heading {
   margin: 0;
   color: inherit;
-}
-
-.video-section__description {
 }
 
 .video-section__description > * {
@@ -189,7 +185,6 @@ video-player.is-playing .video-section__play {
   border: none;
   border-radius: 999px;
   font-size: 0.8rem;
-  font-weight: 600;
   text-transform: uppercase;
 }
 

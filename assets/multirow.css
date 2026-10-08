@@ -25,7 +25,6 @@
 .multirow__subheading {
   margin: 0;
   font-size: 0.75rem;
-  font-weight: 600;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
 }
@@ -172,7 +171,6 @@
 .multirow__caption {
   margin: 0;
   font-size: 0.75rem;
-  font-weight: 600;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
 }
@@ -218,7 +216,6 @@
 .multirow__link {
   margin-top: 0.25rem;
   font-size: 0.9rem;
-  font-weight: 600;
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 0.3em;

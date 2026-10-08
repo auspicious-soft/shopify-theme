@@ -507,7 +507,6 @@
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
-  font-weight: 600;
   background-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
   border-radius: 50%;
 }
@@ -525,7 +524,6 @@
 }
 
 .article__comment-author {
-  font-weight: 600;
   color: var(--color-foreground);
 }
 
@@ -574,10 +572,6 @@
   .article__field--half {
     flex-basis: calc(50% - 0.5rem);
   }
-}
-
-.article__label {
-  font-weight: 500;
 }
 
 .article__input {

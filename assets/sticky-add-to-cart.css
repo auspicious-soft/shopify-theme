@@ -81,7 +81,6 @@ html.sticky-atc-visible body {
   margin: 0;
   overflow: hidden;
   font-size: 0.95rem;
-  font-weight: 500;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
