@@ -48,9 +48,12 @@
         "read_more": "Read more",
         "read_more_style": "text",
         "width": "page",
-        "color_scheme": "scheme-869fd07f-c7fd-47b7-9b47-86d04d72fa7f",
+        "color_scheme": "scheme-1",
         "padding_top": 32,
         "padding_bottom": 48,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 80,
         "text_case": "all"
       }
     }
