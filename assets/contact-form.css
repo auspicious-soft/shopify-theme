@@ -115,7 +115,6 @@
 
 .contact__label {
   font-size: 0.85rem;
-  font-weight: 500;
 }
 
 .contact__required {
@@ -321,7 +320,6 @@
   margin: 0;
   font-family: inherit;
   font-size: 0.95rem;
-  font-weight: 600;
 }
 
 .contact__info-text {

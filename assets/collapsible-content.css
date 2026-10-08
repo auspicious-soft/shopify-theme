@@ -109,9 +109,6 @@
   align-items: center;
   gap: 0.9rem;
   padding-block: 1.2rem;
-  font-size: 1.05rem;
-  font-weight: 500;
-  line-height: 1.35;
   list-style: none;
   cursor: pointer;
 }
@@ -258,7 +255,6 @@
 @media screen and (max-width: 749px) {
   .collapsible__summary {
     padding-block: 1rem;
-    font-size: 0.9375rem;
   }
 
   .collapsible--content-small .collapsible__content-inner {
