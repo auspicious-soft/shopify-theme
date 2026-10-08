@@ -75,7 +75,6 @@
   margin: 0;
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
@@ -108,7 +107,6 @@
   gap: 0.35rem 0;
   margin: 0;
   font-size: 0.75rem;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: color-mix(in srgb, currentColor 70%, transparent);
 }
@@ -208,7 +206,6 @@
 /* Text size: Medium is the body text size (Theme settings > Typography). */
 .article__content {
   font-size: var(--body-size, 15px);
-  line-height: 1.8;
   overflow-wrap: break-word;
 }
 
@@ -247,7 +244,6 @@
 .article__content h5,
 .article__content h6 {
   margin-block: 2em 0.6em;
-  line-height: 1.25;
 }
 
 .article__content h2 {
@@ -360,7 +356,6 @@
 .article__share-label {
   font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -474,7 +469,6 @@
   align-items: center;
   gap: 0.35rem;
   font-size: 0.75rem;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
   opacity: 0.7;
 }
@@ -570,7 +564,6 @@
 }
 
 .article__comment-text {
-  line-height: 1.7;
   overflow-wrap: anywhere;
 }
 

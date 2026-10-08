@@ -89,7 +89,6 @@
   margin: 0;
   font-size: 0.68rem;
   font-weight: 500;
-  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
 }
@@ -101,7 +100,6 @@
   gap: 0.4rem;
   margin: 0;
   font-size: 0.75rem;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
 }
@@ -116,7 +114,6 @@
   font-size: clamp(0.95rem, 1.3vw, 1.05rem);
   font-weight: 700;
   line-height: 1.35;
-  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
@@ -197,7 +194,6 @@
   padding-top: 0.25rem;
   font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
 }
 
 .article-card__read-more svg {
@@ -220,7 +216,6 @@
   margin-top: auto;
   padding: 0.75rem 1.5rem;
   font-size: 0.85rem;
-  letter-spacing: 0.04em;
 }
 
 .article-card__content:has(.article-card__read-more--button) {

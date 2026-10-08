@@ -131,7 +131,6 @@
 .cart-line__vendor {
   margin: 0;
   font-size: 0.7rem;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
 }
@@ -243,7 +242,6 @@
     column-gap: 1.5rem;
     padding-bottom: 0.75rem;
     font-size: 0.75rem;
-    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   }

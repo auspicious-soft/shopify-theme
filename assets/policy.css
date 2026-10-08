@@ -24,7 +24,6 @@
 
 .shopify-policy__body {
   font-size: var(--body-size, 15px);
-  line-height: 1.6;
   color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
   overflow-wrap: break-word;
 }
@@ -41,7 +40,6 @@
 .shopify-policy__body :is(h2, h3, h4, h5, h6) {
   margin: 2em 0 0.6em;
   font-family: var(--font-heading--family);
-  line-height: 1.3;
   color: var(--color-foreground);
 }
 

@@ -26,7 +26,6 @@
   margin: 0;
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
 }
@@ -36,7 +35,6 @@
 }
 
 .multicolumn__description {
-  line-height: 1.6;
   color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
 }
 
@@ -237,13 +235,10 @@
 /* Column > Uppercase title */
 .multicolumn__title--uppercase {
   font-size: 1rem;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .multicolumn__text {
-  font-size: 0.95rem;
-  line-height: 1.65;
   color: color-mix(in srgb, var(--color-foreground) 80%, transparent);
 }
 
@@ -271,7 +266,6 @@
   margin-top: 0.25rem;
   font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: inherit;
   text-decoration: none;

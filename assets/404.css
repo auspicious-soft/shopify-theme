@@ -26,7 +26,6 @@
   font-size: clamp(5rem, 18vw, 10rem);
   font-weight: 700;
   line-height: 0.9;
-  letter-spacing: -0.04em;
   color: color-mix(in srgb, var(--color-foreground) 12%, transparent);
 }
 
@@ -125,7 +124,6 @@
 .not-found__links-heading {
   margin: 0;
   font-size: 0.75rem;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
 }

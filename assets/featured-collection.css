@@ -60,7 +60,6 @@
 .fc__heading {
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
 }
 
 .fc__subheading {
@@ -78,7 +77,6 @@
 .fc__view-all-link {
   color: inherit;
   font-size: 0.85rem;
-  letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: underline;
   text-underline-offset: 0.25em;

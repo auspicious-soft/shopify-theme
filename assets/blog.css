@@ -32,7 +32,6 @@
 }
 
 .blog__description {
-  line-height: 1.7;
   color: color-mix(in srgb, var(--color-foreground) 80%, transparent);
 }
 
@@ -194,7 +193,6 @@
   padding: 0.75rem 0;
   font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   background: none;
@@ -260,7 +258,6 @@
   margin: 0;
   font-size: 0.7rem;
   font-weight: 500;
-  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
 }
@@ -272,7 +269,6 @@
 }
 
 .blog-feature__title--uppercase {
-  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
@@ -299,8 +295,6 @@
 
 .blog-feature__text {
   margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.7;
   color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
 }
 
@@ -310,7 +304,6 @@
   align-items: center;
   margin: 0.25rem 0 0;
   font-size: 0.7rem;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
 }

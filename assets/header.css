@@ -288,7 +288,6 @@
   z-index: 1000;
   font-size: 0.65rem;  
   line-height: 1;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
   /* White + difference: the text inverts against whatever is behind it. */
@@ -760,7 +759,6 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
   display: inline-block;
   font-size: 0.7rem;
   font-weight: 500;
-  letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: underline;
   text-underline-offset: 0.3em;
@@ -831,7 +829,6 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
 .header__account--text {
   font-size: var(--header-nav-font-size, 15px);
   font-weight: var(--header-nav-font-weight, 500);
-  letter-spacing: 0.02em;
 }
 
 /* Pinned to the icon's top-right corner, not the corner of the 40px box. */

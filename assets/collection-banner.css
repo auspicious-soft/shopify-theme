@@ -125,22 +125,18 @@
   margin: 0;
   color: inherit;
   text-transform: uppercase;
-  letter-spacing: 0.4em;
 }
 
 .hero-banner__subheading--wide {
-  letter-spacing: 0.6em;
 }
 
 .promo-banner__heading {
   margin: 0;
   color: inherit;
-  line-height: 1.1;
 }
 
 .promo-banner__heading--uppercase {
   text-transform: uppercase;
-  letter-spacing: 0.02em;
 }
 
 .promo-banner__text {
@@ -159,7 +155,6 @@
   min-width: 0;
   padding: 0.6rem 1.1rem;
   font-size: 0.7rem;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 

@@ -132,7 +132,6 @@
   display: inline-block;
   margin-bottom: 0.5rem;
   font-size: 0.7rem;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
 }
@@ -164,8 +163,6 @@
 
 .search-page__page-excerpt {
   margin: 0;
-  font-size: 0.875rem;
-  line-height: 1.55;
   color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
 }
 

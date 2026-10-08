@@ -69,11 +69,9 @@
   margin: 0;
   color: inherit;
   text-transform: uppercase;
-  letter-spacing: 0.4em;
 }
 
 .hero-banner__subheading--wide {
-  letter-spacing: 0.6em;
 }
 
 .hero-banner__button {

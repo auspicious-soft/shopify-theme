@@ -59,7 +59,6 @@
 
 .footer__text {
   font-size: var(--body-size, 15px);
-  line-height: 1.6;
   color: color-mix(in srgb, var(--color-foreground) 72%, transparent);
 }
 
@@ -93,7 +92,6 @@
 .footer__shop-name {
   font-size: 1.4rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
 }
 
 .footer__headline {
@@ -241,7 +239,6 @@
   font: inherit;
   font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
   translate: none;

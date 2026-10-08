@@ -17,7 +17,6 @@
 .social-marquee__heading {
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 /* The viewport is the size container, so an item can be sized as a

@@ -213,19 +213,16 @@
 .slideshow__subheading {
   margin: 0;
   font-size: 0.75rem;
-  letter-spacing: 0.3em;
   text-transform: uppercase;
 }
 
 .slideshow__heading {
   margin: 0;
   color: inherit;
-  line-height: 1.05;
 }
 
 .slideshow__heading--uppercase {
   text-transform: uppercase;
-  letter-spacing: 0.02em;
 }
 
 .slideshow__text > * {
@@ -396,7 +393,6 @@
 .slideshow__pagination--numbers .slideshow__page {
   font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
   opacity: 0.55;
   padding-block-end: 0.3rem;
   border-bottom: 1px solid transparent;
@@ -419,7 +415,6 @@
   gap: 0.4rem;
   font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
   font-variant-numeric: tabular-nums;
 }
 

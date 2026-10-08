@@ -29,7 +29,6 @@
   margin: 0;
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.2em;
   text-transform: uppercase;
   opacity: 0.8;
 }
@@ -40,7 +39,6 @@
 }
 
 .video-section__description {
-  line-height: 1.7;
 }
 
 .video-section__description > * {
@@ -192,7 +190,6 @@ video-player.is-playing .video-section__play {
   border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 

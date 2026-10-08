@@ -173,7 +173,6 @@
 
 .image-with-text__caption--uppercase {
   font-weight: 600;
-  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
@@ -208,7 +207,6 @@
 
 .image-with-text__heading--uppercase {
   text-transform: uppercase;
-  letter-spacing: 0.02em;
 }
 
 .image-with-text__heading a,
@@ -219,7 +217,6 @@
 }
 
 .image-with-text__text {
-  line-height: 1.6;
   color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
 }
 

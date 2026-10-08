@@ -19,7 +19,6 @@
 .logo-marquee__heading {
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 /* The viewport is the size container, so each logo slot can be a share of
@@ -150,7 +149,6 @@ a.logo-marquee__logo:focus-visible {
 .logo-marquee__text {
   font-size: calc(var(--logo-height-mobile) * 0.5);
   font-weight: 600;
-  letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
   overflow: hidden;

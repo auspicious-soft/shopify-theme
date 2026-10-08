@@ -26,7 +26,6 @@
   margin: 0;
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
 }
@@ -36,7 +35,6 @@
 }
 
 .multirow__description {
-  line-height: 1.7;
   color: color-mix(in srgb, var(--color-foreground) 80%, transparent);
 }
 
@@ -175,7 +173,6 @@
   margin: 0;
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
 }
@@ -185,7 +182,6 @@
 }
 
 .multirow__text {
-  line-height: 1.7;
   color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
 }
 

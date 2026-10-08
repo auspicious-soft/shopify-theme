@@ -109,14 +109,10 @@
 
 .collection-banner__title {
   margin: 0;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
 }
 
 .collection-banner__description {
   max-width: 42rem;
-  font-size: 0.95rem;
-  line-height: 1.6;
   color: color-mix(in srgb, currentColor 80%, transparent);
 }
 
@@ -141,8 +137,6 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  font-size: 0.9rem;
-  font-weight: 500;
 }
 
 /* Two-line "sliders" icon drawn in CSS. */

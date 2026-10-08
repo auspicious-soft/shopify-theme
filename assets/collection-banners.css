@@ -25,7 +25,6 @@
 .collection-tiles__title {
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
 }
 
 .collection-tiles__subtitle {
@@ -142,7 +141,6 @@
 .collection-tile__subheading {
   margin: 0;
   font-size: 13px;
-  letter-spacing: 0.3em;
   text-transform: uppercase;
 }
 
@@ -172,7 +170,6 @@
 
 .collection-tile__heading--uppercase {
   text-transform: uppercase;
-  letter-spacing: 0.02em;
 }
 
 .collection-tile__text > * {
@@ -188,7 +185,6 @@
   min-width: 0;
   padding: 0.6rem 1.1rem;
   font-size: 0.7rem;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
