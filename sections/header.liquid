@@ -277,6 +277,21 @@
 {% endif %}
 </header>
 
+{%- comment -%}
+  Measure the announcement bar and header right away (not after the deferred
+  header.js loads), so a transparent header sits below the announcement bar
+  and content under it is offset on the first paint, with no jump on load.
+  header.js keeps these values up to date afterwards (resize, editor).
+{%- endcomment -%}
+<script>
+  (function () {
+    var root = document.documentElement;
+    var bar = document.querySelector('.announcement-bar');
+    var header = document.querySelector('.header');
+    root.style.setProperty('--announcement-bar-height', (bar ? bar.offsetHeight : 0) + 'px');
+    root.style.setProperty('--header-height', (header ? header.offsetHeight : 0) + 'px');
+  })();
+</script>
 
 
 {% render 'header-drawer', section: section %}
