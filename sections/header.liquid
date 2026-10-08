@@ -62,8 +62,10 @@
       assign enable_overlay = section.settings.overlay_on_home
     when 'product'
       assign enable_overlay = section.settings.overlay_on_product
-    when 'collection', 'list-collections'
+    when 'collection'
       assign enable_overlay = section.settings.overlay_on_collection
+    when 'list-collections'
+      assign enable_overlay = section.settings.overlay_on_list_collections
     when 'page'
       assign enable_overlay = section.settings.overlay_on_page
     when 'blog', 'article'
@@ -512,6 +514,12 @@
     },
     {
       "type": "checkbox",
+      "id": "overlay_on_list_collections",
+      "label": "t:labels.overlay_on_list_collections",
+      "default": false
+    },
+    {
+      "type": "checkbox",
       "id": "overlay_on_page",
       "label": "t:labels.overlay_on_page",
       "default": false
@@ -528,14 +536,14 @@
       "label": "t:labels.overlay_content_color",
       "info": "t:labels.overlay_content_color_info",
       "default": "#ffffff",
-      "visible_if": "{{ section.settings.overlay_on_home or section.settings.overlay_on_product or section.settings.overlay_on_collection or section.settings.overlay_on_page or section.settings.overlay_on_blog }}"
+      "visible_if": "{{ section.settings.overlay_on_home or section.settings.overlay_on_product or section.settings.overlay_on_collection or section.settings.overlay_on_list_collections or section.settings.overlay_on_page or section.settings.overlay_on_blog }}"
     },
     {
       "type": "color",
       "id": "overlay_text_color",
       "label": "t:labels.overlay_text_color",
       "default": "#ffffff",
-      "visible_if": "{{ section.settings.overlay_on_home or section.settings.overlay_on_product or section.settings.overlay_on_collection or section.settings.overlay_on_page or section.settings.overlay_on_blog }}"
+      "visible_if": "{{ section.settings.overlay_on_home or section.settings.overlay_on_product or section.settings.overlay_on_collection or section.settings.overlay_on_list_collections or section.settings.overlay_on_page or section.settings.overlay_on_blog }}"
     },
     {
       "type": "checkbox",
@@ -543,14 +551,14 @@
       "label": "t:labels.overlay_hover_solid",
       "info": "t:labels.overlay_hover_solid_info",
       "default": true,
-      "visible_if": "{{ section.settings.overlay_on_home or section.settings.overlay_on_product or section.settings.overlay_on_collection or section.settings.overlay_on_page or section.settings.overlay_on_blog }}"
+      "visible_if": "{{ section.settings.overlay_on_home or section.settings.overlay_on_product or section.settings.overlay_on_collection or section.settings.overlay_on_list_collections or section.settings.overlay_on_page or section.settings.overlay_on_blog }}"
     },
     {
       "type": "image_picker",
       "id": "transparent_logo",
       "label": "t:labels.transparent_logo",
       "info": "t:labels.transparent_logo_info",
-      "visible_if": "{{ section.settings.overlay_on_home or section.settings.overlay_on_product or section.settings.overlay_on_collection or section.settings.overlay_on_page or section.settings.overlay_on_blog }}"
+      "visible_if": "{{ section.settings.overlay_on_home or section.settings.overlay_on_product or section.settings.overlay_on_collection or section.settings.overlay_on_list_collections or section.settings.overlay_on_page or section.settings.overlay_on_blog }}"
     },
     {
       "type": "header",

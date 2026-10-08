@@ -144,6 +144,7 @@
     "overlay_color": "Overlay color",
     "overlay_on_blog": "Blog & article pages",
     "overlay_on_collection": "Collection pages",
+    "overlay_on_list_collections": "Collection list page",
     "overlay_on_home": "Home page",
     "overlay_on_page": "Page template",
     "overlay_on_product": "Product pages",

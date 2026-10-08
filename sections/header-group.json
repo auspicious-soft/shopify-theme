@@ -150,6 +150,7 @@
         "overlay_on_home": true,
         "overlay_on_product": false,
         "overlay_on_collection": true,
+        "overlay_on_list_collections": true,
         "overlay_on_page": false,
         "overlay_on_blog": false,
         "overlay_content_color": "#ffffff",
