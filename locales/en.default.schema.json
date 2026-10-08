@@ -1069,6 +1069,7 @@
       "featured_tag_info": "The newest article with this tag is featured (falls back to the latest article). The tag is hidden from the filter and card topics"
     },
     "article": {
+      "eyebrow_letter_spacing": "Tag letter spacing",
       "header_image": "Featured image",
       "image_layout": "Image position",
       "image_above": "Above the title",

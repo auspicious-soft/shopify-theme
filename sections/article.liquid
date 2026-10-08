@@ -38,7 +38,7 @@
   {%- endif -%}
 
   {%- if section.settings.show_tags_top and article.tags.size > 0 -%}
-    <p class="article__eyebrow">
+    <p class="article__eyebrow{% if section.settings.eyebrow_letter_spacing != blank and section.settings.eyebrow_letter_spacing != 'none' %} letter-spacing--{{ section.settings.eyebrow_letter_spacing }}{% endif %}">
       <a href="{{ blog.url }}/tagged/{{ article.tags.first | handleize }}">{{ article.tags.first | escape }}</a>
     </p>
   {%- endif -%}
@@ -498,6 +498,19 @@
       "label": "t:sections.article.show_tags_top",
       "info": "t:sections.article.show_tags_top_info",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_letter_spacing",
+      "label": "t:sections.article.eyebrow_letter_spacing",
+      "options": [
+        { "value": "none", "label": "t:options.letter_spacing.none" },
+        { "value": "small", "label": "t:options.letter_spacing.small" },
+        { "value": "medium", "label": "t:options.letter_spacing.medium" },
+        { "value": "large", "label": "t:options.letter_spacing.large" }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.show_tags_top }}"
     },
     {
       "type": "checkbox",
