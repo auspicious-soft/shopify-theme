@@ -297,7 +297,7 @@
   padding: 0 8px;
   margin: 0;
   font: inherit;
-  font-size: 10px;
+  font-size: 0.625rem;
   font-style: normal;
   line-height: 1;
   text-align: center;
@@ -350,7 +350,7 @@
   padding: 0;
   margin: 0;
   font: inherit;
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 600;
   text-transform: uppercase;
   color: var(--color-foreground);
@@ -430,7 +430,7 @@
 .product-card__title {
   margin: 0;
   font-family: inherit;
-  font-size: var(--body-size, 15px);
+  font-size: var(--body-size, 0.9375rem);
   font-weight: 500;
   line-height: 1.35;
 }
@@ -457,7 +457,7 @@
   align-items: baseline;
   gap: 0.5rem;
   flex-shrink: 0;
-  font-size: var(--body-size, 15px);
+  font-size: var(--body-size, 0.9375rem);
 }
 
 .product-card__compare {

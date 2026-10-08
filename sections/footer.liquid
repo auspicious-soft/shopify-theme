@@ -27,8 +27,8 @@
   style="
     {% render 'section-padding-vars', section: section, prefix: 'footer-padding' %}
     --footer-column-gap: {{ section.settings.column_gap }}px;
-    --footer-heading-size: {{ section.settings.heading_size }}px;
-    --footer-heading-size-mobile: {{ section.settings.heading_size_mobile }}px;
+    --footer-heading-size: {{ section.settings.heading_size | divided_by: 16.0 }}rem;
+    --footer-heading-size-mobile: {{ section.settings.heading_size_mobile | divided_by: 16.0 }}rem;
     --footer-heading-case: {{ section.settings.heading_case | default: 'uppercase' }};
   "
 >

@@ -226,15 +226,15 @@
 }
 
 .image-with-text__text--small {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
 }
 
 .image-with-text__text--medium {
-  font-size: 1rem;
+  font-size: 0.875rem;
 }
 
 .image-with-text__text--large {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .image-with-text__text > * {

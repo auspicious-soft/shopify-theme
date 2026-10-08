@@ -23,7 +23,7 @@
 }
 
 .shopify-policy__body {
-  font-size: var(--body-size, 15px);
+  font-size: var(--body-size, 0.9375rem);
   color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
   overflow-wrap: break-word;
 }

@@ -91,11 +91,11 @@
   style="
     --announcement-bar-bg: {{ section.settings.background_color }};
     --announcement-bar-text: {{ section.settings.text_color }};
-    --announcement-bar-font-size: {{ section.settings.font_size }}px;
+    --announcement-bar-font-size: {{ section.settings.font_size | divided_by: 16.0 }}rem;
     --announcement-bar-font-weight: {{ section.settings.font_weight }};
     --announcement-bar-padding-top: {{ section.settings.padding_top }}px;
     --announcement-bar-padding-bottom: {{ section.settings.padding_bottom }}px;
-    --announcement-bar-font-size-mobile: {{ section.settings.mobile_font_size }}px;
+    --announcement-bar-font-size-mobile: {{ section.settings.mobile_font_size | divided_by: 16.0 }}rem;
     --announcement-bar-padding-top-mobile: {{ section.settings.mobile_padding_top }}px;
     --announcement-bar-padding-bottom-mobile: {{ section.settings.mobile_padding_bottom }}px;
     --announcement-bar-padding-inline-mobile: {{ section.settings.mobile_padding_inline }}px;

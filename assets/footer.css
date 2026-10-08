@@ -58,7 +58,7 @@
 }
 
 .footer__text {
-  font-size: var(--body-size, 15px);
+  font-size: var(--body-size, 0.9375rem);
   color: color-mix(in srgb, var(--color-foreground) 72%, transparent);
 }
 

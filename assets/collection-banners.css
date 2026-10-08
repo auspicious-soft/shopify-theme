@@ -140,13 +140,13 @@
 
 .collection-tile__subheading {
   margin: 0;
-  font-size: 13px;
+  font-size: 0.8125rem;
   text-transform: uppercase;
 }
 
 @media screen and (min-width: 750px) {
   .collection-tile__subheading {
-    font-size: 15px;
+    font-size: 0.9375rem;
   }
 }
 

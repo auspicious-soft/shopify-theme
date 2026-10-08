@@ -550,13 +550,13 @@
       },
       {
         "type": "range",
-        "id": "body_line_height",
-        "min": 16,
-        "max": 40,
+        "id": "body_line_height_percent",
+        "min": 100,
+        "max": 200,
         "step": 1,
-        "unit": "px",
+        "unit": "%",
         "label": "t:settings_schema.typography.settings.body_line_height.label",
-        "default": 24
+        "default": 160
       },
       {
         "type": "range",
@@ -570,13 +570,13 @@
       },
       {
         "type": "range",
-        "id": "body_line_height_mobile",
-        "min": 16,
-        "max": 40,
+        "id": "body_line_height_percent_mobile",
+        "min": 100,
+        "max": 200,
         "step": 1,
-        "unit": "px",
+        "unit": "%",
         "label": "t:settings_schema.typography.settings.body_line_height_mobile.label",
-        "default": 24
+        "default": 160
       }
     ]
   },

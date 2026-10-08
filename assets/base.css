@@ -43,17 +43,17 @@ h6,
 /* Theme settings > Typography > Body text size and line height (mobile / desktop).
    --body-size and --body-line-height are the current ones; components that
    should match body text (e.g. product card titles and prices) use them too.
-   The line height is a ratio of the body size: --body-line-height is that
-   ratio in em, e.g. 24px line height ÷ 15px text = 1.6em. */
+   The line height setting is a % of the text size (160% = 1.6), output as
+   a ratio; --body-line-height is that ratio in em. */
 :root {
-  --body-size: var(--body-size-mobile, 15px);
+  --body-size: var(--body-size-mobile, 0.9375rem);
   --body-line-height-ratio: var(--body-line-height-ratio-mobile, 1.6);
   --body-line-height: calc(var(--body-line-height-ratio) * 1em);
 }
 
 @media screen and (min-width: 750px) {
   :root {
-    --body-size: var(--body-size-desktop, 15px);
+    --body-size: var(--body-size-desktop, 0.9375rem);
     --body-line-height-ratio: var(--body-line-height-ratio-desktop, 1.6);
   }
 }
@@ -68,7 +68,7 @@ body {
    with a Text size setting pass their size on to their paragraphs. Their line
    height stays the body line height (body size × ratio), whatever their size. */
 p {
-  font-size: var(--body-size, 15px);
+  font-size: var(--body-size, 0.9375rem);
   line-height: calc(var(--body-line-height-ratio) * var(--body-size, 15px));
 }
 
@@ -78,12 +78,12 @@ p {
    defaults. Line heights are unitless so they follow the font size.
    Theme settings > Heading scale multiplies all sizes. */
 :root {
-  --heading-size-h1: var(--heading-size-h1-mobile, 34px);
-  --heading-size-h2: var(--heading-size-h2-mobile, 30px);
-  --heading-size-h3: var(--heading-size-h3-mobile, 26px);
-  --heading-size-h4: var(--heading-size-h4-mobile, 22px);
-  --heading-size-h5: var(--heading-size-h5-mobile, 19px);
-  --heading-size-h6: var(--heading-size-h6-mobile, 16px);
+  --heading-size-h1: var(--heading-size-h1-mobile, 2.125rem);
+  --heading-size-h2: var(--heading-size-h2-mobile, 1.875rem);
+  --heading-size-h3: var(--heading-size-h3-mobile, 1.625rem);
+  --heading-size-h4: var(--heading-size-h4-mobile, 1.375rem);
+  --heading-size-h5: var(--heading-size-h5-mobile, 1.1875rem);
+  --heading-size-h6: var(--heading-size-h6-mobile, 1rem);
   --heading-line-height-h1: var(--heading-line-height-h1-mobile, 1.1);
   --heading-line-height-h2: var(--heading-line-height-h2-mobile, 1.1);
   --heading-line-height-h3: var(--heading-line-height-h3-mobile, 1.1);
@@ -94,12 +94,12 @@ p {
 
 @media screen and (min-width: 750px) {
   :root {
-    --heading-size-h1: var(--heading-size-h1-desktop, 48px);
-    --heading-size-h2: var(--heading-size-h2-desktop, 40px);
-    --heading-size-h3: var(--heading-size-h3-desktop, 34px);
-    --heading-size-h4: var(--heading-size-h4-desktop, 28px);
-    --heading-size-h5: var(--heading-size-h5-desktop, 22px);
-    --heading-size-h6: var(--heading-size-h6-desktop, 18px);
+    --heading-size-h1: var(--heading-size-h1-desktop, 3rem);
+    --heading-size-h2: var(--heading-size-h2-desktop, 2.5rem);
+    --heading-size-h3: var(--heading-size-h3-desktop, 2.125rem);
+    --heading-size-h4: var(--heading-size-h4-desktop, 1.75rem);
+    --heading-size-h5: var(--heading-size-h5-desktop, 1.375rem);
+    --heading-size-h6: var(--heading-size-h6-desktop, 1.125rem);
     --heading-line-height-h1: var(--heading-line-height-h1-desktop, 1.1);
     --heading-line-height-h2: var(--heading-line-height-h2-desktop, 1.1);
     --heading-line-height-h3: var(--heading-line-height-h3-desktop, 1.1);
@@ -179,7 +179,7 @@ a {
   min-width: 9rem;
   padding: 0.95rem 1rem;
   /* Body text size (Theme settings > Typography), mobile and desktop. */
-  font-size: var(--body-size, 15px);
+  font-size: var(--body-size, 0.9375rem);
   line-height: 1.2;
   text-align: center;
   text-decoration: none;

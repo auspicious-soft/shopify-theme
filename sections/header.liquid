@@ -200,7 +200,7 @@
   style="
     --header-logo-width: {{ section.settings.desktop_logo_width }}px;
     --header-logo-width-mobile: {{ section.settings.mobile_logo_width }}px;
-    --header-nav-font-size: {{ section.settings.nav_font_size }}px;
+    --header-nav-font-size: {{ section.settings.nav_font_size | divided_by: 16.0 }}rem;
     --header-nav-font-weight: {{ section.settings.nav_font_weight }};
     --header-nav-item-gap: {{ section.settings.nav_item_spacing }}px;
     --header-nav-hover-color: {{ section.settings.nav_hover_color }};

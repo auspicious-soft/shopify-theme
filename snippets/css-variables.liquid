@@ -54,16 +54,16 @@
       {%- assign size_mobile_key = heading_key | append: '_size_mobile' %}
       {%- assign line_height_key = heading_key | append: '_line_height' %}
       {%- assign line_height_mobile_key = heading_key | append: '_line_height_mobile' %}
-    --heading-size-h{{ level }}-desktop: {{ settings[size_key] }}px;
-    --heading-size-h{{ level }}-mobile: {{ settings[size_mobile_key] }}px;
+    --heading-size-h{{ level }}-desktop: {{ settings[size_key] | divided_by: 16.0 }}rem;
+    --heading-size-h{{ level }}-mobile: {{ settings[size_mobile_key] | divided_by: 16.0 }}rem;
     --heading-line-height-h{{ level }}-desktop: {{ settings[line_height_key] | divided_by: 100.0 }};
     --heading-line-height-h{{ level }}-mobile: {{ settings[line_height_mobile_key] | divided_by: 100.0 }};
     {%- endfor %}
-    --body-size-desktop: {{ settings.body_size_desktop }}px;
-    --body-size-mobile: {{ settings.body_size_mobile }}px;
-    {%- # Line heights are set in px in the editor and output as a ratio of the text size (line height ÷ text size), e.g. 24px ÷ 15px = 1.6 %}
-    --body-line-height-ratio-desktop: {{ settings.body_line_height | default: 24 | times: 1.0 | divided_by: settings.body_size_desktop | round: 4 }};
-    --body-line-height-ratio-mobile: {{ settings.body_line_height_mobile | default: 24 | times: 1.0 | divided_by: settings.body_size_mobile | round: 4 }};
+    --body-size-desktop: {{ settings.body_size_desktop | divided_by: 16.0 }}rem;
+    --body-size-mobile: {{ settings.body_size_mobile | divided_by: 16.0 }}rem;
+    {%- # Font sizes are set in px in the editor and output in rem (px ÷ 16); body line heights are set in % and output as a ratio, e.g. 160% = 1.6 %}
+    --body-line-height-ratio-desktop: {{ settings.body_line_height_percent | default: 160 | divided_by: 100.0 }};
+    --body-line-height-ratio-mobile: {{ settings.body_line_height_percent_mobile | default: 160 | divided_by: 100.0 }};
 
     --page-width: {{ settings.page_width | divided_by: 16.0 }}rem;
     --page-margin: {{ settings.page_margin_mobile | default: 20 }}px;

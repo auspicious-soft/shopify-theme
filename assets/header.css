@@ -448,7 +448,7 @@ header.is-scrolled img.header__hero-logo-image {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: var(--header-nav-font-size, 15px);
+  font-size: var(--header-nav-font-size, 0.9375rem);
   font-weight: var(--header-nav-font-weight, 500);
 }
 
@@ -827,7 +827,7 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
 
 .header__menu-toggle--text,
 .header__account--text {
-  font-size: var(--header-nav-font-size, 15px);
+  font-size: var(--header-nav-font-size, 0.9375rem);
   font-weight: var(--header-nav-font-weight, 500);
 }
 
