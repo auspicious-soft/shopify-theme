@@ -20,7 +20,8 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 1rem 2rem;
-  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  /* Same as the Featured collection header (.fc__header). */
+  margin-block-end: 1.25rem;
 }
 
 .product-list__header--center {
