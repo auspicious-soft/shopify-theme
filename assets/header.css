@@ -680,10 +680,10 @@ header.is-scrolled img.header__hero-logo-image {
    Several promos for one menu item sit side by side; together they take up
    to about half of the menu. */
 .header__mega-promos {
-  flex: 0 0 min(calc(var(--promo-count, 1) * 18rem + (var(--promo-count, 1) - 1) * 1.5rem), calc(var(--promo-count, 1) * 28%), 55%);
+  flex: 0 0 min(calc(var(--promo-count, 1) * 18rem + (var(--promo-count, 1) - 1) * var(--spacing-grid-horizontal)), calc(var(--promo-count, 1) * 28%), 55%);
   display: grid;
   grid-template-columns: repeat(var(--promo-count, 1), minmax(0, 1fr));
-  gap: 1.5rem;
+  gap: var(--spacing-grid-vertical) var(--spacing-grid-horizontal);
 }
 
 .header__mega-promo {

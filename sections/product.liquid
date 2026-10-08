@@ -84,7 +84,7 @@
 
           {% when 'vendor' %}
             {% if product.vendor != blank %}
-              <p class="product__vendor" {{ block.shopify_attributes }}>{{ product.vendor | link_to_vendor }}</p>
+              <p class="product__vendor{% if block.settings.letter_spacing != blank and block.settings.letter_spacing != 'none' %} letter-spacing--{{ block.settings.letter_spacing }}{% endif %}" {{ block.shopify_attributes }}>{{ product.vendor | link_to_vendor }}</p>
             {% endif %}
 
           {% when 'title' %}
@@ -717,7 +717,32 @@
       "type": "vendor",
       "name": "t:sections.product.blocks.vendor.name",
       "limit": 1,
-      "settings": []
+      "settings": [
+        {
+          "type": "select",
+          "id": "letter_spacing",
+          "label": "t:labels.letter_spacing",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:options.letter_spacing.none"
+            },
+            {
+              "value": "small",
+              "label": "t:options.letter_spacing.small"
+            },
+            {
+              "value": "medium",
+              "label": "t:options.letter_spacing.medium"
+            },
+            {
+              "value": "large",
+              "label": "t:options.letter_spacing.large"
+            }
+          ],
+          "default": "none"
+        }
+      ]
     },
     {
       "type": "title",
