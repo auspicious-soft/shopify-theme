@@ -20,7 +20,7 @@
     "type_header_custom_weight": "400",
     "heading_scale": 100,
     "type_body_font": "geist_n4",
-    "type_body_font_source": "custom",
+    "type_body_font_source": "theme",
     "body_size_desktop": 15,
     "body_size_mobile": 13,
     "body_line_height": 24,
