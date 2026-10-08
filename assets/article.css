@@ -72,7 +72,6 @@
 
 .article__eyebrow {
   margin: 0;
-  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -210,14 +209,6 @@
   font-size: inherit;
 }
 
-.article--text-small .article__content {
-  font-size: calc(var(--body-size, 0.9375rem) - 0.0625rem);
-}
-
-.article--text-large .article__content {
-  font-size: calc(var(--body-size, 0.9375rem) + 0.125rem);
-}
-
 .article__content > :first-child {
   margin-top: 0;
 }
@@ -232,7 +223,7 @@
 .article__content blockquote,
 .article__content figure,
 .article__content table {
-  margin-block: 0 1.4em;
+  margin-block: 0.875em;
 }
 
 .article__content h2,
