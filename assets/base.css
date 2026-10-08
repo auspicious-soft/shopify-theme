@@ -224,6 +224,44 @@ input[type="button"] {
   box-shadow: none;
 }
 
+/* Hover: primary darkens slightly toward its text color; secondary fills in.
+   Colors come from the color scheme, so this works in every scheme. */
+.button--primary,
+.button--secondary {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.button--primary:hover {
+  background-color: color-mix(in srgb, var(--color-button-background) 85%, var(--color-button-text));
+  border-color: color-mix(in srgb, var(--color-button-background) 85%, var(--color-button-text));
+}
+
+.button--secondary:hover {
+  background-color: var(--color-link);
+  color: var(--color-background);
+  border-color: var(--color-link);
+}
+
+.button--primary:disabled,
+.button--secondary:disabled,
+.button--primary[aria-disabled="true"],
+.button--secondary[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.button--primary:disabled:hover,
+.button--primary[aria-disabled="true"]:hover {
+  background-color: var(--color-button-background);
+  border-color: color-mix(in srgb, var(--color-button-background) var(--style-border-opacity-buttons), transparent);
+}
+
+.button--secondary:disabled:hover,
+.button--secondary[aria-disabled="true"]:hover {
+  background-color: transparent;
+  color: var(--color-link);
+  border-color: color-mix(in srgb, var(--color-link) var(--style-border-opacity-buttons), transparent);
+}
+
 hr {
   border: none;
   border-top: 1px solid var(--color-border);
