@@ -14,6 +14,7 @@
       "settings": {
         "show_breadcrumbs": false,
         "show_heading": true,
+        "caption": "Shop By Collection",
         "heading": "All Collections",
         "heading_tag": "h1",
         "heading_class": "h1",
@@ -23,6 +24,7 @@
         "banner_image": "shopify://shop_images/Hero_Image_1_79c0eb2a-aff2-40c9-9214-03bf3908ddf9.png",
         "banner_height": "medium",
         "banner_overlay": 30,
+        "banner_content_position": "middle-center",
         "banner_color_scheme": "",
         "collection_list": [],
         "sort": "default",

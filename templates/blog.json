@@ -32,7 +32,7 @@
         "featured_title_size": "h3",
         "featured_uppercase": true,
         "featured_words": 40,
-        "articles_per_page": 10,
+        "articles_per_page": 15,
         "columns_desktop": 3,
         "columns_mobile": "1",
         "gap": 24,
