@@ -69,7 +69,6 @@
 }
 
 .rich-text__caption--uppercase {
-  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -78,7 +77,7 @@
 }
 
 .rich-text__caption--medium {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
 }
 
 .rich-text__caption--large {

@@ -48,6 +48,7 @@
   },
   "labels": {
     "alignment": "Alignment",
+    "letter_spacing": "Letter spacing",
     "media": "Media",
     "media_type": "Media type",
     "mobile_image": "Mobile image",
@@ -230,6 +231,12 @@
       "medium": "Medium",
       "semibold": "Semibold",
       "bold": "Bold"
+    },
+    "letter_spacing": {
+      "none": "None",
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large"
     },
     "heading_size": {
       "extra_small": "Extra small",
