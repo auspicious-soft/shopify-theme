@@ -126,20 +126,9 @@
   justify-content: center;
 }
 
-/* Same quarter-turn close as the search popup. */
 .cart-drawer__close svg {
   width: 18px;
   height: 18px;
-  transform: rotate(0deg) translateZ(0);
-  backface-visibility: hidden;
-  will-change: transform;
-  transition: transform 0.3s ease;
-}
-
-/* Hover only: the drawer focuses this button when it opens, and a cross
-   already turned by :focus-visible would have nothing left to animate. */
-.cart-drawer__close:hover svg {
-  transform: rotate(90deg) translateZ(0);
 }
 
 .cart-drawer__close:focus-visible {

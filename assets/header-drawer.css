@@ -102,21 +102,6 @@
 .header__drawer-close svg {
   width: 1.25rem;
   height: 1.25rem;
-  transform: rotate(0deg) translateZ(0);
-  backface-visibility: hidden;
-  will-change: transform;
-  transition: transform 0.3s ease;
-}
-
-/* Same quarter-turn close as the search popup (hover only). */
-.header__drawer-close:hover svg {
-  transform: rotate(90deg) translateZ(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .header__drawer-close svg {
-    transition: none;
-  }
 }
 
 /* ---------- Menu (shared by both submenu styles) ---------- */

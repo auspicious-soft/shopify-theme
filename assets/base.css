@@ -270,9 +270,7 @@ select {
 @media (prefers-reduced-motion: no-preference) {
   /* Hover effect (Theme settings > Animations): buttons, plus icon links and
      toggles that aren't <button>s (header account, search, cart link,
-     language/currency, social icons, pagination). Close (×) buttons are
-     left out: they have their own hover (the icon turns), and lifting the
-     button made the icon drift. */
+     language/currency, social icons, pagination). */
   .hover-vertical-lift,
   html[data-hover-elements="vertical-lift"] :is(button, .button, .header__action, .predictive-search__trigger, .header-localization__trigger, .social-icons__link, a.pagination__item) {
     /* Keeps the controls' own color fades (buttons, social icons, pagination). */
@@ -280,7 +278,7 @@ select {
   }
 
   .hover-vertical-lift:hover,
-  html[data-hover-elements="vertical-lift"] :is(button, .button, .header__action, .predictive-search__trigger, .header-localization__trigger, .social-icons__link, a.pagination__item):not([class*='__close'], .header__drawer-close):hover {
+  html[data-hover-elements="vertical-lift"] :is(button, .button, .header__action, .predictive-search__trigger, .header-localization__trigger, .social-icons__link, a.pagination__item):hover {
     translate: 0 -0.25rem;
   }
 
@@ -290,7 +288,7 @@ select {
   }
 
   .hover-3d-lift:hover,
-  html[data-hover-elements="3d-lift"] :is(button, .button, .header__action, .predictive-search__trigger, .header-localization__trigger, .social-icons__link, a.pagination__item):not([class*='__close'], .header__drawer-close):hover {
+  html[data-hover-elements="3d-lift"] :is(button, .button, .header__action, .predictive-search__trigger, .header-localization__trigger, .social-icons__link, a.pagination__item):hover {
     transform: perspective(600px) rotateX(2deg) rotateY(-2deg) translateY(-0.25rem);
   }
 

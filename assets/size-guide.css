@@ -116,19 +116,9 @@
   transform: none;
 }
 
-/* Same quarter-turn close as the search popup and cart drawer (hover only:
-   the dialog focuses this button when it opens). */
 .size-guide__close svg {
   width: 18px;
   height: 18px;
-  transform: rotate(0deg) translateZ(0);
-  backface-visibility: hidden;
-  will-change: transform;
-  transition: transform 0.3s ease;
-}
-
-.size-guide__close:hover svg {
-  transform: rotate(90deg) translateZ(0);
 }
 
 .size-guide__close:focus-visible {
@@ -201,8 +191,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .size-guide__dialog,
-  .size-guide__dialog::backdrop,
-  .size-guide__close svg {
+  .size-guide__dialog::backdrop {
     transition: none;
   }
 }
