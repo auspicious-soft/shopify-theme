@@ -231,16 +231,6 @@ input[type="button"] {
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.button--primary:hover {
-  background-color: color-mix(in srgb, var(--color-button-background) 85%, var(--color-button-text));
-  border-color: color-mix(in srgb, var(--color-button-background) 85%, var(--color-button-text));
-}
-
-.button--secondary:hover {
-  background-color: var(--color-link);
-  color: var(--color-background);
-  border-color: var(--color-link);
-}
 
 .button--primary:disabled,
 .button--secondary:disabled,
