@@ -73,6 +73,57 @@
   margin: 0;
 }
 
+/* Caption: a short line above the heading. */
+.collection-list-page__caption {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, currentColor 75%, transparent);
+}
+
+/* Banner > Content position: vertical (top / middle / bottom) and
+   horizontal (left / center / right). Horizontal overrides the heading
+   alignment while the banner is on. */
+.collection-list-banner[class*='--top-'] {
+  align-items: flex-start;
+}
+
+.collection-list-banner[class*='--middle-'] {
+  align-items: center;
+}
+
+.collection-list-banner[class*='--bottom-'] {
+  align-items: flex-end;
+}
+
+.collection-list-banner[class*='-left'] .collection-list-page__header {
+  align-items: flex-start;
+  text-align: start;
+}
+
+.collection-list-banner[class*='-center'] .collection-list-page__header {
+  align-items: center;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.collection-list-banner[class*='-right'] .collection-list-page__header {
+  align-items: flex-end;
+  margin-inline-start: auto;
+  text-align: end;
+}
+
+/* Breadcrumbs set to "Match the page title" follow the position. */
+.collection-list-banner[class*='-center'] .breadcrumbs--align-auto .breadcrumbs__list {
+  justify-content: center;
+}
+
+.collection-list-banner[class*='-right'] .breadcrumbs--align-auto .breadcrumbs__list {
+  justify-content: flex-end;
+}
+
 .collection-list-page__subheading {
   max-width: 40rem;
   color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
