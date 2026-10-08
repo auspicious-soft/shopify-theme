@@ -23,9 +23,10 @@
   @param {string} [read_more] - "Read more" link label; blank hides it
   @param {string} [read_more_style] - text (default), primary or secondary (button)
   @param {string} [heading_tag] - Title tag, defaults to h3
-  @param {string} [title_size] - Title size class h1–h6 (Theme settings > Typography), defaults to h6
+  @param {string} [title_size] - Title size class h1–h6 (Theme settings > Typography), defaults to h6 (h3 for a featured card)
   @param {boolean} [card] - Show as a card, overriding Theme settings > Blog cards
-  @param {color_scheme} [card_color_scheme] - Card color scheme, used with `card`
+  @param {color} [card_background] - Card background color, used with `card`
+  @param {string} [topic_letter_spacing] - Topic label letter spacing: small, medium or large
   @param {boolean} [zoom] - Zoom the image on hover
   @param {boolean} [eager] - Load the image eagerly (first cards on the page)
 
@@ -35,18 +36,16 @@
 
 {%- liquid
   assign heading_tag = heading_tag | default: 'h3'
-  assign title_size = title_size | default: 'h6'
   if featured
-    assign title_size = 'h3'
+    assign title_size = title_size | default: 'h3'
+  else
+    assign title_size = title_size | default: 'h6'
   endif
 
   assign card_style = settings.blog_card_style
   assign card_scheme_id = settings.blog_card_color_scheme.id
   if card
     assign card_style = 'card'
-    if card_color_scheme
-      assign card_scheme_id = card_color_scheme.id
-    endif
   endif
   assign excerpt_words = excerpt_words | default: 30
   assign image_sizes = sizes | default: '(min-width: 990px) 33vw, 100vw'
@@ -102,7 +101,7 @@
 
 <article
   class="article-card article-card--{{ card_style }} article-card--align-{{ settings.blog_card_text_alignment }}{% if featured %} article-card--featured{% endif %}{% if zoom %} article-card--zoom{% endif %}{% unless has_image %} article-card--no-image{% endunless %} color-{{ card_scheme_id }}"
-  style="--card-image-padding: {{ settings.blog_card_image_padding }}px; --card-ratio: {{ ratio }};"
+  style="--card-image-padding: {{ settings.blog_card_image_padding }}px; --card-ratio: {{ ratio }};{% if card and card_background != blank %} --card-background: {{ card_background }};{% endif %}"
   {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
 >
   {%- if has_image -%}
@@ -122,7 +121,7 @@
 
   <div class="article-card__content">
     {%- if topic != blank -%}
-      <p class="article-card__topic">{{ topic | escape }}</p>
+      <p class="article-card__topic{% if topic_letter_spacing != blank and topic_letter_spacing != 'none' %} letter-spacing--{{ topic_letter_spacing }}{% endif %}">{{ topic | escape }}</p>
     {%- endif -%}
 
     {%- capture meta -%}

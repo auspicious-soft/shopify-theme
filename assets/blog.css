@@ -190,7 +190,6 @@
 .blog__tags--tabs .blog__tag {
   margin-bottom: -1px;
   padding: 0.75rem 0;
-  font-weight: 500;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   background: none;
@@ -254,7 +253,6 @@
 
 .blog-feature__label {
   margin: 0;
-  font-weight: 500;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
 }
@@ -301,7 +299,6 @@
 }
 
 .blog-feature__meta-item:first-child {
-  font-weight: 600;
   color: var(--color-foreground);
 }
 

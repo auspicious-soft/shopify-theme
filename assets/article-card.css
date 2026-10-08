@@ -11,7 +11,8 @@
 /* "Card" style from Theme settings > Blog cards. */
 .article-card--card {
   overflow: hidden;
-  background-color: var(--color-background);
+  /* --card-background: Blog section > Card background color */
+  background-color: var(--card-background, var(--color-background));
   border-width: var(--style-border-thickness-blog-cards);
   border-style: solid;
   border-color: color-mix(in srgb, var(--color-foreground) var(--style-border-opacity-blog-cards), transparent);
@@ -85,7 +86,6 @@
 /* Topic: the article's first tag, above the title. */
 .article-card__topic {
   margin: 0;
-  font-weight: 500;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
 }
@@ -105,7 +105,6 @@
 }
 
 .article-card__title--uppercase {
-  font-weight: 700;
   text-transform: uppercase;
 }
 
@@ -117,7 +116,6 @@
 }
 
 .article-card__meta--bottom time {
-  font-weight: 600;
   color: var(--color-foreground);
 }
 
@@ -181,7 +179,6 @@
   gap: 0.35rem;
   margin-top: auto;
   padding-top: 0.25rem;
-  font-weight: 600;
 }
 
 .article-card__read-more svg {

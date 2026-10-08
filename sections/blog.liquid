@@ -164,9 +164,9 @@
           >
             <div class="blog-feature__content">
               {%- if section.settings.featured_label != blank -%}
-                <p class="blog-feature__label">{{ section.settings.featured_label | escape }}</p>
+                <p class="blog-feature__label{% if section.settings.featured_label_letter_spacing != blank and section.settings.featured_label_letter_spacing != 'none' %} letter-spacing--{{ section.settings.featured_label_letter_spacing }}{% endif %}">{{ section.settings.featured_label | escape }}</p>
               {%- endif -%}
-              <{{ feature_tag }} class="blog-feature__title{% if section.settings.featured_uppercase %} blog-feature__title--uppercase{% endif %}">
+              <{{ feature_tag }} class="blog-feature__title {{ section.settings.featured_title_size | default: 'h2' }}{% if section.settings.featured_uppercase %} blog-feature__title--uppercase{% endif %}">
                 <a href="{{ feature.url }}">{{ feature.title | escape }}</a>
               </{{ feature_tag }}>
               {%- if feature.excerpt != blank -%}
@@ -205,6 +205,7 @@
             {% render 'article-card',
               article: feature,
               featured: true,
+              title_size: section.settings.featured_title_size,
               image_ratio: section.settings.image_ratio,
               sizes: '(min-width: 750px) 60vw, 100vw',
               show_image: section.settings.show_image,
@@ -220,9 +221,9 @@
               read_more: section.settings.read_more,
               read_more_style: section.settings.read_more_style,
               heading_tag: card_heading_tag,
-              title_size: section.settings.card_title_size,
               card: section.settings.card,
-              card_color_scheme: section.settings.card_color_scheme,
+              card_background: section.settings.card_background,
+              topic_letter_spacing: section.settings.topic_letter_spacing,
               zoom: section.settings.zoom_on_hover,
               eager: true
             %}
@@ -262,7 +263,8 @@
                 heading_tag: card_heading_tag,
                 title_size: section.settings.card_title_size,
                 card: section.settings.card,
-                card_color_scheme: section.settings.card_color_scheme,
+                card_background: section.settings.card_background,
+                topic_letter_spacing: section.settings.topic_letter_spacing,
                 zoom: section.settings.zoom_on_hover,
                 eager: eager
               %}
@@ -530,6 +532,34 @@
       "visible_if": "{{ section.settings.feature_first and section.settings.featured_style == 'story' }}"
     },
     {
+      "type": "select",
+      "id": "featured_label_letter_spacing",
+      "label": "t:sections.blog.featured_label_letter_spacing",
+      "options": [
+        { "value": "none", "label": "t:options.letter_spacing.none" },
+        { "value": "small", "label": "t:options.letter_spacing.small" },
+        { "value": "medium", "label": "t:options.letter_spacing.medium" },
+        { "value": "large", "label": "t:options.letter_spacing.large" }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.feature_first and section.settings.featured_style == 'story' }}"
+    },
+    {
+      "type": "select",
+      "id": "featured_title_size",
+      "label": "t:sections.blog.featured_title_size",
+      "options": [
+        { "value": "h1", "label": "t:options.heading_size.huge" },
+        { "value": "h2", "label": "t:options.heading_size.extra_large" },
+        { "value": "h3", "label": "t:options.heading_size.large" },
+        { "value": "h4", "label": "t:options.heading_size.medium" },
+        { "value": "h5", "label": "t:options.heading_size.small" },
+        { "value": "h6", "label": "t:options.heading_size.extra_small" }
+      ],
+      "default": "h2",
+      "visible_if": "{{ section.settings.feature_first }}"
+    },
+    {
       "type": "checkbox",
       "id": "featured_uppercase",
       "label": "t:sections.blog.featured_uppercase",
@@ -609,10 +639,10 @@
       "default": false
     },
     {
-      "type": "color_scheme",
-      "id": "card_color_scheme",
-      "label": "t:sections.blog.card_color_scheme",
-      "default": "scheme-1",
+      "type": "color",
+      "id": "card_background",
+      "label": "t:sections.blog.card_background",
+      "default": "#f5f5f5",
       "visible_if": "{{ section.settings.card }}"
     },
     {
@@ -709,6 +739,19 @@
       "label": "t:sections.blog.show_topic",
       "info": "t:sections.blog.show_topic_info",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "topic_letter_spacing",
+      "label": "t:sections.blog.topic_letter_spacing",
+      "options": [
+        { "value": "none", "label": "t:options.letter_spacing.none" },
+        { "value": "small", "label": "t:options.letter_spacing.small" },
+        { "value": "medium", "label": "t:options.letter_spacing.medium" },
+        { "value": "large", "label": "t:options.letter_spacing.large" }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.show_topic }}"
     },
     {
       "type": "checkbox",
