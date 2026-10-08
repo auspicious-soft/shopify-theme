@@ -1347,7 +1347,10 @@
           "label": "Body text size – mobile"
         },
         "body_line_height": {
-          "label": "Body line height"
+          "label": "Body line height – desktop"
+        },
+        "body_line_height_mobile": {
+          "label": "Body line height – mobile"
         },
         "font_source": {
           "label": "Font source",

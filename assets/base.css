@@ -28,30 +28,36 @@ h6,
   margin-block: 0 0.5em;
 }
 
-/* Theme settings > Typography > Body text size (mobile / desktop).
-   --body-size is the current one; components that should match body text
-   (e.g. product card titles and prices) use it too. */
+/* Theme settings > Typography > Body text size and line height (mobile / desktop).
+   --body-size and --body-line-height are the current ones; components that
+   should match body text (e.g. product card titles and prices) use them too.
+   The line height is a ratio of the body size: --body-line-height is that
+   ratio in em, e.g. 24px line height ÷ 15px text = 1.6em. */
 :root {
   --body-size: var(--body-size-mobile, 15px);
+  --body-line-height-ratio: var(--body-line-height-ratio-mobile, 1.6);
+  --body-line-height: calc(var(--body-line-height-ratio) * 1em);
 }
 
 @media screen and (min-width: 750px) {
   :root {
     --body-size: var(--body-size-desktop, 15px);
+    --body-line-height-ratio: var(--body-line-height-ratio-desktop, 1.6);
   }
 }
 
 body {
   font-size: var(--body-size);
-  line-height: var(--body-line-height, 24px);
+  line-height: var(--body-line-height);
 }
 
 /* Paragraphs use the body text size everywhere by default. Components that
    style their own paragraphs (class rules) keep their sizes, and text blocks
-   with a Text size setting pass their size on to their paragraphs. */
+   with a Text size setting pass their size on to their paragraphs. Their line
+   height stays the body line height (body size × ratio), whatever their size. */
 p {
   font-size: var(--body-size, 15px);
-  line-height: var(--body-line-height, 24px);
+  line-height: calc(var(--body-line-height-ratio) * var(--body-size, 15px));
 }
 
 /* Heading sizes (Heading size setting label → class), mobile / desktop:

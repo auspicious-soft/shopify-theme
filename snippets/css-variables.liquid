@@ -49,7 +49,9 @@
     --heading-scale: {{ settings.heading_scale }};
     --body-size-desktop: {{ settings.body_size_desktop }}px;
     --body-size-mobile: {{ settings.body_size_mobile }}px;
-    --body-line-height: {{ settings.body_line_height | default: 24 }}px;
+    {%- # Line heights are set in px in the editor and output as a ratio of the text size (line height ÷ text size), e.g. 24px ÷ 15px = 1.6 %}
+    --body-line-height-ratio-desktop: {{ settings.body_line_height | default: 24 | times: 1.0 | divided_by: settings.body_size_desktop | round: 4 }};
+    --body-line-height-ratio-mobile: {{ settings.body_line_height_mobile | default: 24 | times: 1.0 | divided_by: settings.body_size_mobile | round: 4 }};
 
     --page-width: {{ settings.page_width | divided_by: 16.0 }}rem;
     --page-margin: {{ settings.page_margin_mobile | default: 20 }}px;
