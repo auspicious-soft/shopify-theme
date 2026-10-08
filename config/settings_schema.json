@@ -1450,6 +1450,63 @@
       },
       {
         "type": "select",
+        "id": "collection_card_heading_size",
+        "label": "t:settings_schema.collection_cards.settings.heading_size",
+        "options": [
+          {
+            "value": "h1",
+            "label": "t:options.heading_size.huge"
+          },
+          {
+            "value": "h2",
+            "label": "t:options.heading_size.extra_large"
+          },
+          {
+            "value": "h3",
+            "label": "t:options.heading_size.large"
+          },
+          {
+            "value": "h4",
+            "label": "t:options.heading_size.medium"
+          },
+          {
+            "value": "h5",
+            "label": "t:options.heading_size.small"
+          },
+          {
+            "value": "h6",
+            "label": "t:options.heading_size.extra_small"
+          }
+        ],
+        "default": "h6"
+      },
+      {
+        "type": "color",
+        "id": "collection_card_overlay_color",
+        "label": "t:settings_schema.collection_cards.settings.overlay_color",
+        "default": "#000000",
+        "visible_if": "{{ settings.collection_card_layout == 'overlay' }}"
+      },
+      {
+        "type": "range",
+        "id": "collection_card_overlay_opacity",
+        "label": "t:settings_schema.collection_cards.settings.overlay_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 70,
+        "visible_if": "{{ settings.collection_card_layout == 'overlay' }}"
+      },
+      {
+        "type": "color",
+        "id": "collection_card_overlay_text_color",
+        "label": "t:settings_schema.collection_cards.settings.overlay_text_color",
+        "default": "#ffffff",
+        "visible_if": "{{ settings.collection_card_layout == 'overlay' }}"
+      },
+      {
+        "type": "select",
         "id": "collection_card_image_ratio",
         "label": "t:settings_schema.collection_cards.settings.image_ratio",
         "options": [
