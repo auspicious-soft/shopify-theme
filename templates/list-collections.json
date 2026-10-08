@@ -31,14 +31,14 @@
           "bags",
           "blazers",
           "long-sleeves",
-          "mens",
           "suites",
           "sweaters",
           "t-shirts",
           "trousers",
           "hoodies",
-          "pants",
-          "shoes"
+          "shoes",
+          "zipper",
+          "hats"
         ],
         "sort": "default",
         "hide_empty": true,
