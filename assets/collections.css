@@ -78,6 +78,17 @@
   margin-bottom: 0;
 }
 
+/* Breadcrumbs below the banner: the banner's bottom spacing moves below
+   the trail, so it sits close under the image. */
+.collection-list-banner:has(+ .collection-list-banner__breadcrumbs) {
+  margin-bottom: 0;
+}
+
+.collection-list-banner__breadcrumbs {
+  padding-block: 1rem;
+  margin-bottom: clamp(1rem, 3vw, 2.5rem);
+}
+
 .collection-list-page__heading {
   margin: 0;
 }
