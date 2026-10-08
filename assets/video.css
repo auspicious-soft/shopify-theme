@@ -38,6 +38,9 @@
   color: inherit;
 }
 
+.video-section__description {
+}
+
 .video-section__description > * {
   margin: 0;
 }

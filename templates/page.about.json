@@ -21,6 +21,9 @@
         "width": "page",
         "padding_top": 40,
         "padding_bottom": 64,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 64,
         "heading_case": "uppercase"
       }
     },
@@ -32,7 +35,7 @@
           "settings": {
             "caption": "OUR PHILOSOPHY & GENESIS",
             "style": "uppercase",
-            "size": "small"
+            "size": "medium"
           }
         },
         "heading_PThJEq": {
@@ -60,6 +63,9 @@
         "color_scheme": "",
         "padding_top": 32,
         "padding_bottom": 24,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 64,
+        "mobile_padding_bottom": 64,
         "button_size": "medium",
         "heading_case": "uppercase",
         "button_case": "uppercase"
@@ -111,6 +117,9 @@
         "content_color_scheme": "",
         "padding_top": 24,
         "padding_bottom": 48,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 56,
+        "mobile_padding_bottom": 56,
         "button_size": "medium",
         "heading_case": "uppercase",
         "button_case": "uppercase"
@@ -188,6 +197,9 @@
         "card_color_scheme": "scheme-1",
         "padding_top": 48,
         "padding_bottom": 48,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 56,
+        "mobile_padding_bottom": 56,
         "button_size": "medium",
         "heading_case": "uppercase",
         "button_case": "uppercase"
@@ -248,6 +260,9 @@
         "content_color_scheme": "",
         "padding_top": 48,
         "padding_bottom": 24,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 56,
+        "mobile_padding_bottom": 56,
         "button_size": "medium",
         "heading_case": "uppercase",
         "button_case": "uppercase"
@@ -308,6 +323,9 @@
         "content_color_scheme": "",
         "padding_top": 24,
         "padding_bottom": 48,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 56,
+        "mobile_padding_bottom": 56,
         "button_size": "medium",
         "heading_case": "uppercase",
         "button_case": "uppercase"
@@ -397,6 +415,9 @@
         "card_color_scheme": "scheme-1",
         "padding_top": 48,
         "padding_bottom": 48,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 56,
+        "mobile_padding_bottom": 56,
         "button_size": "medium",
         "heading_case": "uppercase",
         "button_case": "uppercase"
