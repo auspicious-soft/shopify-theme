@@ -36,6 +36,9 @@
         "width": "full",
         "padding_top": 0,
         "padding_bottom": 48,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 64,
         "button_size": "medium",
         "heading_case": "uppercase",
         "button_case": "uppercase"
