@@ -23,6 +23,9 @@
   @param {string} [read_more] - "Read more" link label; blank hides it
   @param {string} [read_more_style] - text (default), primary or secondary (button)
   @param {string} [heading_tag] - Title tag, defaults to h3
+  @param {string} [title_size] - Title size class h1–h6 (Theme settings > Typography), defaults to h6
+  @param {boolean} [card] - Show as a card, overriding Theme settings > Blog cards
+  @param {color_scheme} [card_color_scheme] - Card color scheme, used with `card`
   @param {boolean} [zoom] - Zoom the image on hover
   @param {boolean} [eager] - Load the image eagerly (first cards on the page)
 
@@ -32,6 +35,19 @@
 
 {%- liquid
   assign heading_tag = heading_tag | default: 'h3'
+  assign title_size = title_size | default: 'h6'
+  if featured
+    assign title_size = 'h3'
+  endif
+
+  assign card_style = settings.blog_card_style
+  assign card_scheme_id = settings.blog_card_color_scheme.id
+  if card
+    assign card_style = 'card'
+    if card_color_scheme
+      assign card_scheme_id = card_color_scheme.id
+    endif
+  endif
   assign excerpt_words = excerpt_words | default: 30
   assign image_sizes = sizes | default: '(min-width: 990px) 33vw, 100vw'
 
@@ -85,7 +101,7 @@
 -%}
 
 <article
-  class="article-card article-card--{{ settings.blog_card_style }} article-card--align-{{ settings.blog_card_text_alignment }}{% if featured %} article-card--featured{% endif %}{% if zoom %} article-card--zoom{% endif %}{% unless has_image %} article-card--no-image{% endunless %} color-{{ settings.blog_card_color_scheme.id }}"
+  class="article-card article-card--{{ card_style }} article-card--align-{{ settings.blog_card_text_alignment }}{% if featured %} article-card--featured{% endif %}{% if zoom %} article-card--zoom{% endif %}{% unless has_image %} article-card--no-image{% endunless %} color-{{ card_scheme_id }}"
   style="--card-image-padding: {{ settings.blog_card_image_padding }}px; --card-ratio: {{ ratio }};"
   {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
 >
@@ -133,7 +149,7 @@
 
     {%- unless meta_position == 'bottom' -%}{{ meta }}{%- endunless -%}
 
-    <{{ heading_tag }} class="article-card__title{% if featured %} h3{% endif %}{% if title_uppercase %} article-card__title--uppercase{% endif %}">
+    <{{ heading_tag }} class="article-card__title {{ title_size }}{% if title_uppercase %} article-card__title--uppercase{% endif %}">
       <a href="{{ article.url }}" class="article-card__link">{{ article.title | escape }}</a>
     </{{ heading_tag }}>
 

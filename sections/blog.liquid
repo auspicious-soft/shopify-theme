@@ -220,6 +220,9 @@
               read_more: section.settings.read_more,
               read_more_style: section.settings.read_more_style,
               heading_tag: card_heading_tag,
+              title_size: section.settings.card_title_size,
+              card: section.settings.card,
+              card_color_scheme: section.settings.card_color_scheme,
               zoom: section.settings.zoom_on_hover,
               eager: true
             %}
@@ -257,6 +260,9 @@
                 read_more: section.settings.read_more,
                 read_more_style: section.settings.read_more_style,
                 heading_tag: card_heading_tag,
+                title_size: section.settings.card_title_size,
+                card: section.settings.card,
+                card_color_scheme: section.settings.card_color_scheme,
                 zoom: section.settings.zoom_on_hover,
                 eager: eager
               %}
@@ -594,6 +600,34 @@
     {
       "type": "paragraph",
       "content": "t:sections.blog.card_style_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "card",
+      "label": "t:sections.blog.card",
+      "info": "t:sections.blog.card_info",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "card_color_scheme",
+      "label": "t:sections.blog.card_color_scheme",
+      "default": "scheme-1",
+      "visible_if": "{{ section.settings.card }}"
+    },
+    {
+      "type": "select",
+      "id": "card_title_size",
+      "label": "t:sections.blog.card_title_size",
+      "options": [
+        { "value": "h1", "label": "t:options.heading_size.huge" },
+        { "value": "h2", "label": "t:options.heading_size.extra_large" },
+        { "value": "h3", "label": "t:options.heading_size.large" },
+        { "value": "h4", "label": "t:options.heading_size.medium" },
+        { "value": "h5", "label": "t:options.heading_size.small" },
+        { "value": "h6", "label": "t:options.heading_size.extra_small" }
+      ],
+      "default": "h6"
     },
     {
       "type": "checkbox",
