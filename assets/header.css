@@ -780,10 +780,8 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
 .header__mega-promo-title {
   padding-bottom: 0.4rem;
   border-bottom: 1px solid color-mix(in srgb, var(--color-foreground) 70%, transparent);
-  font-family: var(--font-heading--family);
   font-style: var(--font-heading--style);
   font-weight: var(--font-heading--weight);
-  text-transform: uppercase;
 }
 
 a.header__mega-promo:hover .header__mega-promo-title,
