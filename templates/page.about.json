@@ -35,7 +35,8 @@
           "settings": {
             "caption": "OUR PHILOSOPHY & GENESIS",
             "style": "uppercase",
-            "size": "medium"
+            "size": "medium",
+            "letter_spacing": "large"
           }
         },
         "heading_PThJEq": {
