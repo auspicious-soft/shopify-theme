@@ -1,20 +1,19 @@
 {% doc %}
   Price for one variant in sections/featured-product.liquid, matching the
-  product page's price block: price with compare-at, optional "Save x%", and
+  product page's price block: price with compare-at, optional badges, and
   the unit price. Rendered for the current variant and, captured, for every
   variant in the section's JSON so the price can change without a reload.
 
   @param {variant} variant - The variant
-  @param {boolean} [show_saving] - Show "Save x%" when on sale
+  @param {boolean} [show_saving] - Show the badges (Theme settings > Badges)
 
   @example
   {% render 'featured-product-price', variant: current_variant, show_saving: true %}
 {% enddoc %}
 
 {%- render 'price', price: variant.price, compare_at_price: variant.compare_at_price -%}
-{%- if show_saving and variant.compare_at_price > variant.price -%}
-  {%- assign saving = variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round -%}
-  <span class="product__saving">{{ 'products.save_percent' | t: percent: saving }}</span>
+{%- if show_saving -%}
+  {%- render 'product-badges', product: variant.product, variant: variant -%}
 {%- endif -%}
 {%- if variant.unit_price_measurement -%}
   <p class="product__unit-price">

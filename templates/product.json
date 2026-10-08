@@ -33,8 +33,6 @@
           "type": "price",
           "settings": {
             "show_saving": true,
-            "badge_color_scheme": "scheme-5",
-            "badge_corner_radius": 0,
             "show_tax_note": false
           }
         },

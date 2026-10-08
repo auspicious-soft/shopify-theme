@@ -467,10 +467,9 @@
         },
         "price": {
           "name": "Price",
-          "show_saving": "Show saving percentage",
-          "show_tax_note": "Show tax and shipping note",
-          "badge_color_scheme": "Badge color scheme",
-          "badge_corner_radius": "Badge corner radius"
+          "show_saving": "Show badges",
+          "show_saving_info": "Sale, sold out and best seller badges. Text, colors and corner radius: Theme settings > Badges",
+          "show_tax_note": "Show tax and shipping note"
         },
         "sku": {
           "name": "SKU"

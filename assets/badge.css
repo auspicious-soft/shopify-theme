@@ -1,4 +1,4 @@
-/* Sale / sold-out badge (used by snippets/product-card.liquid). Position and colors come from Theme settings > Badges. */
+/* Sale / sold-out / best seller badges (snippets/product-card.liquid, snippets/product-badges.liquid). Position and colors come from Theme settings > Badges. */
 
 .badge {
   position: absolute;
@@ -29,4 +29,19 @@
 .badge--top-right {
   inset-block-start: 1.5em;    
   inset-inline-end: 1.5em;
+}
+
+/* In-flow badges (product page, featured product): same look as the card badges. */
+.product-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  /* Same text size as on cards, not the larger price text around it. */
+  font-size: var(--body-size);
+}
+
+.badge--inline {
+  position: static;
+  display: inline-flex;
 }

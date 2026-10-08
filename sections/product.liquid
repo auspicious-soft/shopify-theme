@@ -115,9 +115,8 @@
             <div class="product__price-block" {{ block.shopify_attributes }}>
               <div id="Price-{{ section.id }}" class="product__price" data-product-part>
                 {% render 'price', price: current_variant.price, compare_at_price: current_variant.compare_at_price %}
-                {% if block.settings.show_saving and current_variant.compare_at_price > current_variant.price %}
-                  {%- assign saving = current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round -%}
-                  <span class="product__saving product__saving--scheme color-{{ block.settings.badge_color_scheme.id }}" style="--badge-radius: {{ block.settings.badge_corner_radius }}px;">{{ 'products.save_percent' | t: percent: saving }}</span>
+                {% if block.settings.show_saving %}
+                  {% render 'product-badges', product: product, variant: current_variant %}
                 {% endif %}
                 {% if current_variant.unit_price_measurement %}
                   <p class="product__unit-price">
@@ -837,25 +836,8 @@
           "type": "checkbox",
           "id": "show_saving",
           "label": "t:sections.product.blocks.price.show_saving",
+          "info": "t:sections.product.blocks.price.show_saving_info",
           "default": true
-        },
-        {
-          "type": "color_scheme",
-          "id": "badge_color_scheme",
-          "label": "t:sections.product.blocks.price.badge_color_scheme",
-          "default": "scheme-2",
-          "visible_if": "{{ block.settings.show_saving }}"
-        },
-        {
-          "type": "range",
-          "id": "badge_corner_radius",
-          "label": "t:sections.product.blocks.price.badge_corner_radius",
-          "min": 0,
-          "max": 40,
-          "step": 1,
-          "unit": "px",
-          "default": 40,
-          "visible_if": "{{ block.settings.show_saving }}"
         },
         {
           "type": "checkbox",

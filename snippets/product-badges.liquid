@@ -1,0 +1,66 @@
+{% doc %}
+  Renders a product's badges inline (product page price block): sale or sold
+  out for the given variant, plus best seller. Text, colors and corner radius
+  come from Theme settings > Badges, the same as the product card badges.
+  Styles: assets/badge.css (.badge, .badge--inline).
+
+  @param {product} product - The product
+  @param {variant} variant - The selected variant (sale / sold-out state)
+
+  @example
+  {% render 'product-badges', product: product, variant: current_variant %}
+{% enddoc %}
+
+{%- liquid
+  assign badge_mode = settings.card_badge_style | default: 'amount'
+
+  assign is_best_seller = false
+  if settings.best_seller_badge_show and settings.best_seller_badge_tag != blank
+    assign best_seller_tag = settings.best_seller_badge_tag | handleize
+    for tag in product.tags
+      assign tag_handle = tag | handleize
+      if tag_handle == best_seller_tag
+        assign is_best_seller = true
+        break
+      endif
+    endfor
+  endif
+-%}
+
+{%- capture status_badge -%}
+  {%- if variant.available == false -%}
+    {{ 'badges.sold_out' | t }}
+  {%- elsif variant.compare_at_price > variant.price -%}
+    {%- case badge_mode -%}
+      {%- when 'text' -%}
+        {{ 'badges.sale' | t }}
+      {%- when 'percent' -%}
+        {%- assign percent = variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round -%}
+        {{ 'products.save_percent' | t: percent: percent }}
+      {%- else -%}
+        {%- assign saved = variant.compare_at_price | minus: variant.price | money_without_trailing_zeros -%}
+        {{ 'products.save_amount' | t: amount: saved }}
+    {%- endcase -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if status_badge != blank or is_best_seller -%}
+  <div class="product-badges" style="--badge-radius: {{ settings.badge_corner_radius }}px;">
+    {%- if status_badge != blank -%}
+      <span class="badge badge--inline color-{% if variant.available %}{{ settings.sale_badge_color_scheme.id }}{% else %}{{ settings.sold_out_badge_color_scheme.id }}{% endif %}">
+        {{- status_badge | strip -}}
+      </span>
+    {%- endif -%}
+    {%- if is_best_seller -%}
+      {%- liquid
+        assign best_seller_text = settings.best_seller_badge_text
+        if best_seller_text == blank
+          assign best_seller_text = 'badges.best_seller' | t
+        endif
+      -%}
+      <span class="badge badge--inline color-{{ settings.best_seller_badge_color_scheme.id }}">
+        {{- best_seller_text | escape -}}
+      </span>
+    {%- endif -%}
+  </div>
+{%- endif -%}
