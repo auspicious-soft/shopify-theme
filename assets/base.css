@@ -292,6 +292,13 @@ select {
     transform: perspective(600px) rotateX(2deg) rotateY(-2deg) translateY(-0.25rem);
   }
 
+  /* Close (×) buttons stay in place: they have their own hover (the icon
+     turns), and lifting the button made the icon drift. */
+  html[data-hover-elements] :is([class*='__close'], .header__drawer-close):hover {
+    translate: none;
+    transform: none;
+  }
+
   [data-animate] {
     opacity: 0;
     translate: 0 2rem;
