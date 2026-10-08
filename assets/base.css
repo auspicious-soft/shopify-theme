@@ -268,27 +268,27 @@ select {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  /* Hover effect (Theme settings > Animations): buttons, plus icon links and
+     toggles that aren't <button>s (header account, search, cart link,
+     language/currency, social icons, pagination). */
   .hover-vertical-lift,
-  html[data-hover-elements="vertical-lift"] button,
-  html[data-hover-elements="vertical-lift"] .button {
-    transition: translate 0.2s ease;
+  html[data-hover-elements="vertical-lift"] :is(button, .button, .header__action, .predictive-search__trigger, .header-localization__trigger, .social-icons__link, a.pagination__item) {
+    /* Keeps the controls' own color fades (buttons, social icons, pagination). */
+    transition: translate 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
   }
 
   .hover-vertical-lift:hover,
-  html[data-hover-elements="vertical-lift"] button:hover,
-  html[data-hover-elements="vertical-lift"] .button:hover {
+  html[data-hover-elements="vertical-lift"] :is(button, .button, .header__action, .predictive-search__trigger, .header-localization__trigger, .social-icons__link, a.pagination__item):hover {
     translate: 0 -0.25rem;
   }
 
   .hover-3d-lift,
-  html[data-hover-elements="3d-lift"] button,
-  html[data-hover-elements="3d-lift"] .button {
-    transition: transform 0.2s ease;
+  html[data-hover-elements="3d-lift"] :is(button, .button, .header__action, .predictive-search__trigger, .header-localization__trigger, .social-icons__link, a.pagination__item) {
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
   }
 
   .hover-3d-lift:hover,
-  html[data-hover-elements="3d-lift"] button:hover,
-  html[data-hover-elements="3d-lift"] .button:hover {
+  html[data-hover-elements="3d-lift"] :is(button, .button, .header__action, .predictive-search__trigger, .header-localization__trigger, .social-icons__link, a.pagination__item):hover {
     transform: perspective(600px) rotateX(2deg) rotateY(-2deg) translateY(-0.25rem);
   }
 
