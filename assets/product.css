@@ -953,6 +953,9 @@
 
 /* ---------- Description / tabs / share ---------- */
 
+.rte {
+}
+
 .rte > :first-child {
   margin-top: 0;
 }
