@@ -46,6 +46,32 @@
     var bar = document.querySelector('.announcement-bar');
     var height = bar ? bar.offsetHeight : 0;
     document.documentElement.style.setProperty('--announcement-bar-height', height + 'px');
+    updateHeaderHeight();
+  }
+
+  // The header's rendered height as --header-height, so content under an
+  // overlay header (e.g. the collection list banner) can start below it
+  // instead of guessing a pixel offset. Changes with logo size, menu
+  // layout and desktop/mobile.
+  var headerObserver = null;
+  var observedHeader = null;
+
+  function updateHeaderHeight() {
+    var header = document.querySelector('.header');
+    var height = header ? header.offsetHeight : 0;
+    document.documentElement.style.setProperty('--header-height', height + 'px');
+
+    if (header !== observedHeader && 'ResizeObserver' in window) {
+      if (!headerObserver) {
+        headerObserver = new ResizeObserver(function () {
+          var current = document.querySelector('.header');
+          document.documentElement.style.setProperty('--header-height', (current ? current.offsetHeight : 0) + 'px');
+        });
+      }
+      if (observedHeader) headerObserver.unobserve(observedHeader);
+      if (header) headerObserver.observe(header);
+      observedHeader = header;
+    }
   }
 
   function bind(header) {

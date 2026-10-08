@@ -57,7 +57,7 @@
     {%- if section.settings.show_heading -%}
       <div class="collection-list-page__header collection-list-page__header--{{ section.settings.heading_alignment }}">
         {%- if section.settings.caption != blank -%}
-          <p class="collection-list-page__caption">{{ section.settings.caption | escape }}</p>
+          <p class="collection-list-page__caption letter-spacing--{{ section.settings.caption_letter_spacing | default: 'small' }}">{{ section.settings.caption | escape }}</p>
         {%- endif -%}
         <{{ heading_tag }} class="{{ heading_class }} collection-list-page__heading">
           {%- if section.settings.heading != blank -%}
@@ -276,6 +276,27 @@
       "label": "t:labels.caption",
       "info": "t:sections.collections.caption_info",
       "visible_if": "{{ section.settings.show_heading }}"
+    },
+    {
+      "type": "select",
+      "id": "caption_letter_spacing",
+      "label": "t:labels.letter_spacing",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
+      ],
+      "default": "small",
+      "visible_if": "{{ section.settings.caption != blank }}"
     },
     {
       "type": "text",

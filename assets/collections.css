@@ -48,6 +48,15 @@
   min-height: clamp(22rem, 50vw, 38rem);
 }
 
+/* With a transparent header over the banner (collection list section first
+   on the page), the content area starts below the header. --header-height
+   is the header's measured height (assets/header.js), so the nine text
+   positions and the breadcrumb line up in the visible part of the banner;
+   min-height includes this padding, so the banner itself keeps its size. */
+:root:has(.header--overlay) .shopify-section-group-header-group + .shopify-section:not(.shopify-section-group-header-group) .collection-list-banner {
+  padding-top: var(--header-height, 0px);
+}
+
 .collection-list-banner__media,
 .collection-list-banner__overlay {
   position: absolute;
@@ -76,7 +85,6 @@
 /* Caption: a short line above the heading. */
 .collection-list-page__caption {
   margin: 0;
-  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: color-mix(in srgb, currentColor 75%, transparent);
 }
