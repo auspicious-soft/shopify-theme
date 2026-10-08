@@ -25,7 +25,7 @@
         "banner_height": "medium",
         "banner_overlay": 30,
         "banner_content_position": "middle-center",
-        "banner_color_scheme": "",
+        "banner_color_scheme": "scheme-2",
         "collection_list": [
           "accesories",
           "bags",
