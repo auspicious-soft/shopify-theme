@@ -358,7 +358,7 @@
         "items_desktop": 5,
         "items_mobile": 2,
         "aspect_ratio": "9 / 16",
-        "gap": 16,
+        "gap": 8,
         "corner_radius": 0,
         "color_scheme": "",
         "width": "full",
