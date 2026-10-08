@@ -94,10 +94,10 @@
 }
 
 /* Caption: a short line above the heading. */
-.collection-list-page__caption {
+.collection-list-page__caption { 
   margin: 0;
   text-transform: uppercase;
-  color: color-mix(in srgb, currentColor 75%, transparent);
+  color: color-mix(in srgb, currentColor);
 }
 
 /* Banner > Content position: vertical (top / middle / bottom) and
@@ -143,7 +143,7 @@
 
 .collection-list-page__subheading {
   max-width: 40rem;
-  color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+  color: color-mix(in srgb, var(--color-foreground));
 }
 
 .collection-list-page__subheading > * {
