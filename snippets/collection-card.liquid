@@ -73,6 +73,13 @@
       {%- else -%}
         {{ 'collection-1' | placeholder_svg_tag: 'collection-card__image collection-card__placeholder' }}
       {%- endif -%}
+
+      {%- comment -%} Product count: always on the image, top right. {%- endcomment -%}
+      {% if settings.collection_card_show_count %}
+        <p class="collection-card__count">
+          {{- 'collections.card_count' | t: count: collection.all_products_count -}}
+        </p>
+      {% endif %}
     </div>
   </div>
 
@@ -81,12 +88,6 @@
       <span>{{ collection.title | escape }}</span>
       <span class="collection-card__arrow" aria-hidden="true">{{ 'icon-chevron.svg' | inline_asset_content }}</span>
     </{{ heading_tag }}>
-
-    {% if settings.collection_card_show_count %}
-      <p class="collection-card__count">
-        {{- 'collections.product_count' | t: count: collection.all_products_count -}}
-      </p>
-    {% endif %}
 
     {% if settings.collection_card_show_description and collection.description != blank %}
       <p class="collection-card__description">{{ collection.description | strip_html | truncatewords: 16 }}</p>

@@ -82,7 +82,19 @@
   transition: transform 0.3s ease;
 }
 
-.collection-card__count,
+/* Product count: top right of the image in every layout. */
+.collection-card__count {
+  position: absolute;
+  inset-block-start: 0.85rem;
+  inset-inline-end: 0.9rem;
+  z-index: 1;
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 45%);
+}
+
 .collection-card__description {
   margin: 0;
   font-size: 0.85rem;
@@ -114,7 +126,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgb(0 0 0 / 55%), rgb(0 0 0 / 0%) 60%);
+  background: linear-gradient(to top, rgb(0 0 0 / 70%), rgb(0 0 0 / 25%) 40%, rgb(0 0 0 / 0%) 65%);
   transition: opacity 0.3s ease;
 }
 
@@ -131,13 +143,32 @@
   inset-block-end: calc(var(--card-image-padding, 0px) + 1.85rem);
 }
 
-.collection-card--overlay .collection-card__title {
-  font-size: 1.25rem;
+.collection-card--overlay .collection-card__content {
+  gap: 0.45rem;
 }
 
-.collection-card--overlay .collection-card__count,
+.collection-card--overlay .collection-card__title {
+  font-size: 1.15rem;
+}
+
+/* Overlay: no arrow, and a two-line description like the reference. */
+.collection-card--overlay .collection-card__arrow {
+  display: none;
+}
+
 .collection-card--overlay .collection-card__description {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 0.8rem;
+  line-height: 1.5;
   color: rgb(255 255 255 / 85%);
+}
+
+/* The count sits above the dark fade, so keep it over the image. */
+.collection-card--overlay .collection-card__count {
+  z-index: 2;
 }
 
 @media (prefers-reduced-motion: reduce) {
