@@ -577,6 +577,31 @@
         "unit": "px",
         "label": "t:settings_schema.typography.settings.body_line_height_mobile.label",
         "default": 24
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__subheadings.content"
+      },
+      {
+        "type": "select",
+        "id": "subheading_letter_spacing",
+        "label": "t:settings_schema.typography.settings.subheading_letter_spacing.label",
+        "info": "t:settings_schema.typography.settings.subheading_letter_spacing.info",
+        "default": "0.375em",
+        "options": [
+          {
+            "value": "0.125em",
+            "label": "t:settings_schema.typography.settings.subheading_letter_spacing.options__small"
+          },
+          {
+            "value": "0.25em",
+            "label": "t:settings_schema.typography.settings.subheading_letter_spacing.options__medium"
+          },
+          {
+            "value": "0.375em",
+            "label": "t:settings_schema.typography.settings.subheading_letter_spacing.options__large"
+          }
+        ]
       }
     ]
   },
