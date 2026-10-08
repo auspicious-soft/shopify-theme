@@ -5,10 +5,18 @@
   color scheme, border and shadow. Styles live in
   assets/collection-card.css.
 
+  Image (image_source param):
+  - "banner" (default): the collection image (also used by the collection
+    page banner), else the first product's image.
+  - "card": the collection's "Card image" metafield (custom.card_image, an
+    image file), for a card-shaped image separate from the banner; falls
+    back to the collection image, then the first product's image.
+
   @param {collection} collection - The collection to render
   @param {string} [sizes] - `sizes` attribute for the image
   @param {boolean} [eager] - Load the image eagerly
   @param {string} [heading_tag] - Title tag, defaults to h3
+  @param {string} [image_source] - "banner" (default) or "card" (custom.card_image metafield)
 
   @example
   {% render 'collection-card', collection: collection %}
@@ -17,7 +25,13 @@
 {%- liquid
   assign image_sizes = sizes | default: '(min-width: 990px) 33vw, 50vw'
   assign heading_tag = heading_tag | default: 'h3'
-  assign card_image = collection.featured_image | default: collection.products.first.featured_media.preview_image
+  assign card_image = nil
+  if image_source == 'card'
+    assign card_image = collection.metafields.custom.card_image.value
+  endif
+  if card_image == blank
+    assign card_image = collection.featured_image | default: collection.products.first.featured_media.preview_image
+  endif
   assign layout = settings.collection_card_layout | default: 'below'
 
   case settings.collection_card_image_ratio
@@ -59,6 +73,13 @@
       {%- else -%}
         {{ 'collection-1' | placeholder_svg_tag: 'collection-card__image collection-card__placeholder' }}
       {%- endif -%}
+
+      {%- comment -%} Product count: always on the image, top right. {%- endcomment -%}
+      {% if settings.collection_card_show_count %}
+        <p class="collection-card__count">
+          {{- 'collections.card_count' | t: count: collection.all_products_count -}}
+        </p>
+      {% endif %}
     </div>
   </div>
 
@@ -67,12 +88,6 @@
       <span>{{ collection.title | escape }}</span>
       <span class="collection-card__arrow" aria-hidden="true">{{ 'icon-chevron.svg' | inline_asset_content }}</span>
     </{{ heading_tag }}>
-
-    {% if settings.collection_card_show_count %}
-      <p class="collection-card__count">
-        {{- 'collections.product_count' | t: count: collection.all_products_count -}}
-      </p>
-    {% endif %}
 
     {% if settings.collection_card_show_description and collection.description != blank %}
       <p class="collection-card__description">{{ collection.description | strip_html | truncatewords: 16 }}</p>

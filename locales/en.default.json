@@ -146,7 +146,11 @@
     "previous_page": "Previous page",
     "next_page": "Next page",
     "view_all": "View all",
-    "jump_to_letter": "Jump to letter"
+    "jump_to_letter": "Jump to letter",
+    "card_count": {
+      "one": "{{ count }} piece",
+      "other": "{{ count }} pieces"
+    }
   },
   "gift_card": {
     "add_to_apple_wallet": "Add to Apple Wallet",

@@ -235,7 +235,7 @@
               endif
             -%}
             <li class="collection-list-page__item{% if large %} collection-list-page__item--large{% endif %}">
-              {% render 'collection-card', collection: collection, sizes: sizes, eager: eager, heading_tag: 'h2' %}
+              {% render 'collection-card', collection: collection, sizes: sizes, eager: eager, heading_tag: 'h2', image_source: section.settings.card_image_source %}
             </li>
           {%- endfor -%}
         </ul>
@@ -497,6 +497,24 @@
         }
       ],
       "default": "grid"
+    },
+    {
+      "type": "select",
+      "id": "card_image_source",
+      "label": "t:sections.collections.card_image_source",
+      "info": "t:sections.collections.card_image_source_info",
+      "default": "banner",
+      "options": [
+        {
+          "value": "banner",
+          "label": "t:sections.collections.card_image_banner"
+        },
+        {
+          "value": "card",
+          "label": "t:sections.collections.card_image_card"
+        }
+      ],
+      "visible_if": "{{ section.settings.layout != 'index' }}"
     },
     {
       "type": "paragraph",
