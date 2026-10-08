@@ -55,7 +55,6 @@
     {% render 'section-padding-vars', section: section %}
     --tiles-columns: {{ columns }};
     --tiles-columns-mobile: {{ section.settings.columns_mobile }};
-    --tiles-gap: {{ section.settings.gap }}px;
     --tiles-ratio: {{ ratio }};
     --tiles-radius: {{ section.settings.corner_radius }}px;
     --tiles-text: {{ section.settings.text_color }};
@@ -321,16 +320,6 @@
         }
       ],
       "default": "page"
-    },
-    {
-      "type": "range",
-      "id": "gap",
-      "label": "t:labels.item_gap",
-      "min": 0,
-      "max": 48,
-      "step": 2,
-      "unit": "px",
-      "default": 12
     },
     {
       "type": "header",

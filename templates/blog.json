@@ -35,7 +35,6 @@
         "articles_per_page": 15,
         "columns_desktop": 3,
         "columns_mobile": "1",
-        "gap": 24,
         "card": true,
         "card_color_scheme": "scheme-869fd07f-c7fd-47b7-9b47-86d04d72fa7f",
         "card_background": "",

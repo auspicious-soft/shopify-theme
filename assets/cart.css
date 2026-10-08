@@ -595,7 +595,7 @@
 .cart-page__suggestions-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: calc(var(--spacing-grid-vertical, 16px) * 2) var(--spacing-grid-horizontal, 16px);
+  gap: var(--spacing-grid-vertical) var(--spacing-grid-horizontal);
   margin: 0;
   padding: 0;
   list-style: none;

@@ -71,7 +71,6 @@
     --multirow-image-fr: {{ image_fr }}fr;
     --multirow-content-fr: {{ content_fr }}fr;
     --multirow-radius: {{ section.settings.corner_radius }}px;
-    --multirow-row-gap: {{ section.settings.row_gap }}px;
     --multirow-justify: {{ v_align }};
     --multirow-content-width: {{ section.settings.content_width }}px;
   "
@@ -372,16 +371,6 @@
       "step": 2,
       "unit": "px",
       "default": 0
-    },
-    {
-      "type": "range",
-      "id": "row_gap",
-      "label": "t:sections.multirow.row_gap",
-      "min": 0,
-      "max": 160,
-      "step": 8,
-      "unit": "px",
-      "default": 64
     },
     {
       "type": "header",

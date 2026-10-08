@@ -1,7 +1,7 @@
 /* Styles for sections/related-articles.liquid. Cards: assets/article-card.css. */
 
 .related-articles {
-  --related-gap: clamp(1rem, 2.5vw, 2rem);
+  --related-gap: var(--spacing-grid-horizontal);
   display: block;
   padding-block: var(--section-padding-top) var(--section-padding-bottom);
   background-color: var(--color-background);
@@ -112,7 +112,7 @@
 .related-articles__track {
   display: grid;
   grid-template-columns: repeat(var(--related-columns-mobile, 1), minmax(0, 1fr));
-  gap: calc(var(--related-gap) * 1.5) var(--related-gap);
+  gap: var(--spacing-grid-vertical) var(--related-gap);
   margin: 0;
   padding: 0;
   list-style: none;

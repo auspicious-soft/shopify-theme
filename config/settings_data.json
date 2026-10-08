@@ -31,6 +31,8 @@
     "spacing_sections": 0,
     "spacing_grid_horizontal": 16,
     "spacing_grid_vertical": 16,
+    "spacing_grid_horizontal_mobile": 16,
+    "spacing_grid_vertical_mobile": 16,
     "breadcrumbs_show_desktop": true,
     "breadcrumbs_alignment": "left",
     "animations_reveal_on_scroll": true,

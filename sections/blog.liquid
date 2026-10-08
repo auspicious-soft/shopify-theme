@@ -45,7 +45,6 @@
     {% render 'section-padding-vars', section: section %}
     --blog-columns: {{ columns }};
     --blog-columns-mobile: {{ section.settings.columns_mobile }};
-    --blog-gap: {{ section.settings.gap }}px;
   "
 >
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
@@ -614,16 +613,6 @@
         }
       ],
       "default": "1"
-    },
-    {
-      "type": "range",
-      "id": "gap",
-      "label": "t:labels.grid_gap",
-      "min": 8,
-      "max": 64,
-      "step": 4,
-      "unit": "px",
-      "default": 32
     },
     {
       "type": "header",

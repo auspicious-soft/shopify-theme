@@ -1481,10 +1481,16 @@
           "content": "Affects areas with multiple columns or rows"
         },
         "spacing_grid_horizontal": {
-          "label": "Horizontal space"
+          "label": "Horizontal space – desktop"
         },
         "spacing_grid_vertical": {
-          "label": "Vertical space"
+          "label": "Vertical space – desktop"
+        },
+        "spacing_grid_horizontal_mobile": {
+          "label": "Horizontal space – mobile"
+        },
+        "spacing_grid_vertical_mobile": {
+          "label": "Vertical space – mobile"
         }
       }
     },

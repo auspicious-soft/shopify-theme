@@ -35,7 +35,7 @@
 .collection-tiles__grid {
   display: grid;
   grid-template-columns: repeat(var(--tiles-columns-mobile), minmax(0, 1fr));
-  gap: var(--tiles-gap);
+  gap: var(--spacing-grid-vertical) var(--spacing-grid-horizontal);
   margin: 0;
   padding: 0;
   list-style: none;

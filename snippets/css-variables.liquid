@@ -68,8 +68,8 @@
     --page-width: {{ settings.page_width | divided_by: 16.0 }}rem;
     --page-margin: {{ settings.page_margin_mobile | default: 20 }}px;
     --spacing-sections: {{ settings.spacing_sections }}px;
-    --spacing-grid-horizontal: {{ settings.spacing_grid_horizontal }}px;
-    --spacing-grid-vertical: {{ settings.spacing_grid_vertical }}px;
+    --spacing-grid-horizontal: {{ settings.spacing_grid_horizontal_mobile | default: settings.spacing_grid_horizontal }}px;
+    --spacing-grid-vertical: {{ settings.spacing_grid_vertical_mobile | default: settings.spacing_grid_vertical }}px;
 
     --color-background: {{ default_scheme.settings.background }};
     --color-foreground: {{ default_scheme.settings.text }};
@@ -144,6 +144,8 @@
   @media screen and (min-width: 750px) {
     :root {
       --page-margin: {{ settings.page_margin | default: 32 }}px;
+      --spacing-grid-horizontal: {{ settings.spacing_grid_horizontal }}px;
+      --spacing-grid-vertical: {{ settings.spacing_grid_vertical }}px;
     }
   }
 {% endstyle %}

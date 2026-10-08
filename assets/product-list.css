@@ -5,7 +5,7 @@
  */
 
 .product-list {
-  --list-gap: calc(var(--spacing-grid-horizontal, 8px) * 2);
+  --list-gap: var(--spacing-grid-horizontal);
   display: block;
   padding-block: var(--section-padding-top, 48px) var(--section-padding-bottom, 48px);
   background-color: var(--color-background);
@@ -152,7 +152,7 @@
 .product-list__track {
   display: grid;
   grid-template-columns: repeat(var(--list-columns-mobile, 2), minmax(0, 1fr));
-  gap: calc(var(--spacing-grid-vertical, 8px) * 4) var(--list-gap);
+  gap: var(--spacing-grid-vertical) var(--list-gap);
   margin: 0;
   padding: 0;
   list-style: none;

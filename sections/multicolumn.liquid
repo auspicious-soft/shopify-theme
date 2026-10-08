@@ -52,7 +52,6 @@
     {% render 'section-padding-vars', section: section %}
     --mc-columns: {{ columns }};
     --mc-columns-mobile: {{ columns_mobile }};
-    --mc-gap: {{ section.settings.gap }}px;
     --mc-radius: {{ section.settings.corner_radius }}px;
     {% if ratio != '' %}--mc-ratio: {{ ratio }};{% endif %}
   "
@@ -414,16 +413,6 @@
         }
       ],
       "default": "same"
-    },
-    {
-      "type": "range",
-      "id": "gap",
-      "label": "t:labels.item_gap",
-      "min": 0,
-      "max": 64,
-      "step": 4,
-      "unit": "px",
-      "default": 32
     },
     {
       "type": "select",

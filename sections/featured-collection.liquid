@@ -96,8 +96,6 @@
       {% render 'section-padding-vars', section: section %}
       --fc-columns: {{ desktop_columns }};
       --fc-columns-mobile: {{ columns_mobile | plus: peek }};
-      --fc-gap: {{ section.settings.gap }}px;
-      --fc-gap-mobile: {{ section.settings.gap | times: 0.6 | round }}px;
     "
   >
     <div class="{{ container_class }}">
@@ -361,16 +359,6 @@
       "info": "t:sections.featured_collection.mobile_peek_info",
       "default": true,
       "visible_if": "{{ section.settings.layout == 'slider' }}"
-    },
-    {
-      "type": "range",
-      "id": "gap",
-      "label": "t:labels.item_gap",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 16
     },
     {
       "type": "select",

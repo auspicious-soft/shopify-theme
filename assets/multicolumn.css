@@ -73,7 +73,7 @@
 .multicolumn__list {
   display: grid;
   grid-template-columns: repeat(var(--mc-columns-mobile, 1), minmax(0, 1fr));
-  gap: calc(var(--mc-gap, 32px) * 1.25) var(--mc-gap, 32px);
+  gap: var(--spacing-grid-vertical) var(--spacing-grid-horizontal);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -95,7 +95,7 @@
 @media screen and (max-width: 749px) {
   .multicolumn--mobile-slider .multicolumn__list {
     display: flex;
-    gap: var(--mc-gap, 32px);
+    gap: var(--spacing-grid-horizontal);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: var(--page-margin);
@@ -110,7 +110,7 @@
   }
 
   .multicolumn--mobile-slider .multicolumn__item {
-    flex: 0 0 calc((100% - var(--mc-gap, 32px) * (var(--mc-columns-mobile, 1) - 1)) / (var(--mc-columns-mobile, 1) + 0.2));
+    flex: 0 0 calc((100% - var(--spacing-grid-horizontal) * (var(--mc-columns-mobile, 1) - 1)) / (var(--mc-columns-mobile, 1) + 0.2));
     scroll-snap-align: start;
   }
 }
