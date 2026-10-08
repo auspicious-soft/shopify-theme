@@ -92,7 +92,7 @@
         "full_link": true,
         "color_scheme": "",
         "padding_top": 0,
-        "padding_bottom": 0,
+        "padding_bottom": 40,
         "mobile_padding_custom": false,
         "mobile_padding_top": 0,
         "mobile_padding_bottom": 0,
