@@ -744,8 +744,6 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
   font-family: var(--font-heading--family);
   font-style: var(--font-heading--style);
   font-weight: var(--font-heading--weight);
-  font-size: 1.15rem;
-  letter-spacing: 0.02em;
   line-height: 1.2;
   text-transform: uppercase;
 } 
