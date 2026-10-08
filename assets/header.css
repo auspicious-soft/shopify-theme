@@ -649,8 +649,6 @@ header.is-scrolled img.header__hero-logo-image {
 .header__mega-heading {
   display: inline-block;
   margin-bottom: 0.9rem;
-  font-size: 0.95rem;
-  font-weight: 600;
 }
 
 .header__mega-list {

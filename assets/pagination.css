@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
-  margin-top: clamp(2.5rem, 5vw, 4rem);
+  margin-top: clamp(2rem, 5vw, 2rem);
 }
 
 .pagination__item {
