@@ -125,8 +125,6 @@
   margin: 0;
   color: inherit;
   text-transform: uppercase;
-  /* Theme settings > Typography > Subheading letter spacing */
-  letter-spacing: var(--subheading-letter-spacing, 0.375em);
 }
 
 .promo-banner__heading { 

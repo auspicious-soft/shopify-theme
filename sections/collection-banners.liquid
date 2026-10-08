@@ -131,7 +131,7 @@
 
           <div class="collection-tile__content">
             {%- if block.settings.subheading != blank -%}
-              <p class="collection-tile__subheading">{{ block.settings.subheading | escape }}</p>
+              <p class="collection-tile__subheading letter-spacing--large">{{ block.settings.subheading | escape }}</p>
             {%- endif -%}
             {%- if heading != blank -%}
               <h3 class="collection-tile__heading collection-tile__heading--{{ section.settings.heading_size }}{% if section.settings.heading_uppercase %} collection-tile__heading--uppercase{% endif %}">

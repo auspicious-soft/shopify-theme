@@ -149,6 +149,20 @@ a {
   color: var(--color-link);
 }
 
+/* Letter spacing utilities, in em so they scale with the text
+   (at 16px: small 2px, medium 4px, large 6px). */
+.letter-spacing--small {
+  letter-spacing: 0.125em;
+}
+
+.letter-spacing--medium {
+  letter-spacing: 0.25em;
+}
+
+.letter-spacing--large {
+  letter-spacing: 0.375em;
+}
+
 /**
  * Buttons come in two variants, `.button` and `.button--secondary`:
  * primary is solid-filled (the default for any bare <button> or

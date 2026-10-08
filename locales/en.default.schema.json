@@ -1384,16 +1384,6 @@
         "body_line_height_mobile": {
           "label": "Body line height – mobile"
         },
-        "header__subheadings": {
-          "content": "Subheadings"
-        },
-        "subheading_letter_spacing": {
-          "label": "Letter spacing",
-          "info": "Used by the subheadings in Hero banner, Collection banner and Collection banners",
-          "options__small": "Small",
-          "options__medium": "Medium",
-          "options__large": "Large"
-        },
         "font_source": {
           "label": "Font source",
           "info": "Custom uses your own licensed font files. The font above is used as the fallback",

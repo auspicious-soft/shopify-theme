@@ -142,8 +142,6 @@
   margin: 0;
   font-size: 13px;
   text-transform: uppercase;
-  /* Theme settings > Typography > Subheading letter spacing */
-  letter-spacing: var(--subheading-letter-spacing, 0.375em);
 }
 
 @media screen and (min-width: 750px) {

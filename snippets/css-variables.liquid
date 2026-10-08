@@ -47,7 +47,6 @@
     --font-heading--weight: {{ settings.type_header_font.weight }};
     {%- endif %}
     --heading-scale: {{ settings.heading_scale }};
-    --subheading-letter-spacing: {{ settings.subheading_letter_spacing | default: '0.375em' }};
     {%- # Heading sizes h1 (Huge) to h6 (Extra small); line heights are set in % and output unitless, e.g. 110% = 1.1 %}
     {%- for level in (1..6) %}
       {%- assign heading_key = 'heading_h' | append: level %}
