@@ -248,11 +248,6 @@
   transition: transform 0.25s ease;
 }
 
-.footer__newsletter-submit:hover svg,
-.footer__newsletter-submit:focus-visible svg {
-  transform: translateX(0.25rem);
-}
-
 .footer__newsletter-message {
   margin: 0.75rem 0 0;
   font-size: 0.85rem;
