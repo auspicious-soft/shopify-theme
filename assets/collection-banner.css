@@ -129,7 +129,7 @@
   letter-spacing: var(--subheading-letter-spacing, 0.375em);
 }
 
-.promo-banner__heading {
+.promo-banner__heading { 
   margin: 0;
   color: inherit;
 }
