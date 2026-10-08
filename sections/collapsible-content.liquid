@@ -28,8 +28,7 @@
 <div
   class="collapsible collapsible--layout-{{ section.settings.layout }} collapsible--rows-{{ section.settings.row_style }} collapsible--expand-{{ section.settings.expand_icon }} collapsible--align-{{ section.settings.heading_alignment }} collapsible--content-{{ section.settings.row_content_size }} color-{{ section.settings.color_scheme.id }}"
   style="
-    --section-padding-top: {{ section.settings.padding_top }}px;
-    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {% render 'section-padding-vars', section: section %}
     --collapsible-width: {{ section.settings.content_width }}px;
     --collapsible-icon-size: {{ section.settings.icon_size }}px;
     --collapsible-radius: {{ section.settings.corner_radius }}px;
@@ -423,6 +422,35 @@
       "step": 4,
       "unit": "px",
       "default": 56
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_padding_custom",
+      "label": "t:labels.mobile_padding_custom",
+      "info": "t:labels.mobile_padding_custom_info",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "t:labels.mobile_padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 56,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "t:labels.mobile_padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 56,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
     },
     {
       "type": "header",

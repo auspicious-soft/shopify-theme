@@ -52,8 +52,7 @@
   data-product-handle="{{ product.handle | escape }}"
   data-label-unavailable="{{ 'products.unavailable' | t | escape }}"
   style="
-    --section-padding-top: {{ section.settings.padding_top }}px;
-    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {% render 'section-padding-vars', section: section %}
   "
 >
   {%- if section.settings.show_breadcrumbs -%}
@@ -496,6 +495,35 @@
       "step": 4,
       "unit": "px",
       "default": 64
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_padding_custom",
+      "label": "t:labels.mobile_padding_custom",
+      "info": "t:labels.mobile_padding_custom_info",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "t:labels.mobile_padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 32,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "t:labels.mobile_padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
     },
     {
       "type": "header",

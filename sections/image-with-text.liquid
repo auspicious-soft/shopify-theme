@@ -70,8 +70,7 @@
 <div
   class="image-with-text image-with-text--image-{{ section.settings.image_position }} image-with-text--mobile-{{ section.settings.mobile_image_position }} image-with-text--layout-{{ section.settings.layout }} image-with-text--align-{{ section.settings.alignment }} image-with-text--mobile-align-{{ section.settings.mobile_alignment }}{% if card %} image-with-text--card{% endif %} color-{{ section.settings.color_scheme.id }}"
   style="
-    --section-padding-top: {{ section.settings.padding_top }}px;
-    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {% render 'section-padding-vars', section: section %}
     --iwt-ratio: {{ ratio }};
     --iwt-image-fr: {{ image_fr }}fr;
     --iwt-content-fr: {{ content_fr }}fr;
@@ -488,6 +487,35 @@
       "step": 4,
       "unit": "px",
       "default": 56
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_padding_custom",
+      "label": "t:labels.mobile_padding_custom",
+      "info": "t:labels.mobile_padding_custom_info",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "t:labels.mobile_padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 56,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "t:labels.mobile_padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 56,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
     },
     {
       "type": "header",

@@ -93,8 +93,7 @@
     data-slider-arrow-anchor=".product-card__media"
     class="fc fc--{{ layout }}{% if section.settings.width == 'full' %} fc--width-full{% endif %} color-{{ section.settings.color_scheme.id }}"
     style="
-      --section-padding-top: {{ section.settings.padding_top }}px;
-      --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+      {% render 'section-padding-vars', section: section %}
       --fc-columns: {{ desktop_columns }};
       --fc-columns-mobile: {{ columns_mobile | plus: peek }};
       --fc-gap: {{ section.settings.gap }}px;
@@ -518,6 +517,35 @@
       "step": 4,
       "unit": "px",
       "default": 48
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_padding_custom",
+      "label": "t:labels.mobile_padding_custom",
+      "info": "t:labels.mobile_padding_custom_info",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "t:labels.mobile_padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "t:labels.mobile_padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
     },
     {
       "type": "header",

@@ -75,8 +75,7 @@
     --hero-banner-align: {{ h_align }};
     --hero-banner-justify: {{ v_align }};
     --hero-banner-text-align: {{ section.settings.content_position_horizontal }};
-    --hero-banner-padding-top: {{ section.settings.padding_top }}px;
-    --hero-banner-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {% render 'section-padding-vars', section: section, prefix: 'hero-banner-padding' %}
   "
 >
   <div class="hero-banner__media">
@@ -400,6 +399,35 @@
       "step": 4,
       "unit": "px",
       "default": 40
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_padding_custom",
+      "label": "t:labels.mobile_padding_custom",
+      "info": "t:labels.mobile_padding_custom_info",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "t:labels.mobile_padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "t:labels.mobile_padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 40,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
     },
     {
       "type": "header",

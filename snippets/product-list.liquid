@@ -42,8 +42,7 @@
 <slider-component
   class="product-list product-list--{{ layout }}{% if desktop_peek %} product-list--peek{% endif %} color-{{ section.settings.color_scheme.id }}"
   style="
-    --section-padding-top: {{ section.settings.padding_top }}px;
-    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {% render 'section-padding-vars', section: section %}
     --list-columns: {{ columns }};
     --list-columns-mobile: {{ columns_mobile }};
   "

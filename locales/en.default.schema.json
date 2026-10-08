@@ -129,6 +129,8 @@
     "mobile_font_size": "Mobile font size",
     "mobile_logo_width": "Mobile logo width",
     "mobile_padding_bottom": "Mobile padding bottom",
+    "mobile_padding_custom": "Separate mobile padding",
+    "mobile_padding_custom_info": "When off, mobile uses the padding above",
     "mobile_padding_inline": "Mobile horizontal padding",
     "mobile_padding_top": "Mobile padding top",
     "mobile_settings": "Mobile",

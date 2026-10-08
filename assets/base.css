@@ -28,6 +28,18 @@ h6,
   margin-block: 0 0.5em;
 }
 
+/* 1 below 750px, 0 from 750px up. Lets inline custom properties pick a mobile
+   or desktop value without a media query (see snippets/section-padding-vars). */
+:root {
+  --viewport-mobile: 1;
+}
+
+@media screen and (min-width: 750px) {
+  :root {
+    --viewport-mobile: 0;
+  }
+}
+
 /* Theme settings > Typography > Body text size and line height (mobile / desktop).
    --body-size and --body-line-height are the current ones; components that
    should match body text (e.g. product card titles and prices) use them too.

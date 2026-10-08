@@ -49,8 +49,7 @@
 <div
   class="multicolumn multicolumn--align-{{ section.settings.column_alignment }} multicolumn--mobile-align-{{ section.settings.mobile_column_alignment | default: 'same' }} multicolumn--header-{{ section.settings.heading_alignment }} multicolumn--mobile-{{ section.settings.mobile_layout }} multicolumn--image-{{ section.settings.image_width }}{% if section.settings.image_ratio == 'circle' %} multicolumn--circle{% endif %}{% if section.settings.card %} multicolumn--card{% endif %} color-{{ section.settings.color_scheme.id }}"
   style="
-    --section-padding-top: {{ section.settings.padding_top }}px;
-    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {% render 'section-padding-vars', section: section %}
     --mc-columns: {{ columns }};
     --mc-columns-mobile: {{ columns_mobile }};
     --mc-gap: {{ section.settings.gap }}px;
@@ -573,6 +572,35 @@
       "step": 4,
       "unit": "px",
       "default": 56
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_padding_custom",
+      "label": "t:labels.mobile_padding_custom",
+      "info": "t:labels.mobile_padding_custom_info",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "t:labels.mobile_padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 56,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "t:labels.mobile_padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 56,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
     },
     {
       "type": "header",

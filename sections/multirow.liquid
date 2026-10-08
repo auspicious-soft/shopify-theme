@@ -67,8 +67,7 @@
 <div
   class="multirow multirow--align-{{ section.settings.alignment }} multirow--mobile-align-{{ section.settings.mobile_alignment }} multirow--mobile-{{ section.settings.mobile_image_position }} multirow--content-{{ section.settings.content_style }} color-{{ section.settings.color_scheme.id }}"
   style="
-    --section-padding-top: {{ section.settings.padding_top }}px;
-    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {% render 'section-padding-vars', section: section %}
     --multirow-image-fr: {{ image_fr }}fr;
     --multirow-content-fr: {{ content_fr }}fr;
     --multirow-radius: {{ section.settings.corner_radius }}px;
@@ -618,6 +617,35 @@
       "step": 4,
       "unit": "px",
       "default": 64
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_padding_custom",
+      "label": "t:labels.mobile_padding_custom",
+      "info": "t:labels.mobile_padding_custom_info",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "t:labels.mobile_padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "t:labels.mobile_padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
     },
     {
       "type": "header",

@@ -1,0 +1,31 @@
+{% doc %}
+  Outputs a section's top and bottom padding as CSS custom properties, for use
+  inside the section's inline `style` attribute.
+
+  Desktop values come from the `padding_top` and `padding_bottom` settings.
+  When "Separate mobile padding" (`mobile_padding_custom`) is on, the values
+  switch to `mobile_padding_top` / `mobile_padding_bottom` below 750px through
+  the `--viewport-mobile` switch in assets/base.css (1 on mobile, 0 on desktop).
+  When it's off, mobile uses the desktop values.
+
+  @param {object} section - The section whose padding settings are output
+  @param {string} [prefix] - Custom property prefix, defaults to 'section-padding'
+
+  @example
+  style="{% render 'section-padding-vars', section: section %}"
+  style="{% render 'section-padding-vars', section: section, prefix: 'footer-padding' %}"
+{% enddoc %}
+
+{%- liquid
+  assign prefix = prefix | default: 'section-padding'
+  assign top = section.settings.padding_top | append: 'px'
+  assign bottom = section.settings.padding_bottom | append: 'px'
+
+  if section.settings.mobile_padding_custom
+    assign top_mobile = section.settings.mobile_padding_top | append: 'px'
+    assign bottom_mobile = section.settings.mobile_padding_bottom | append: 'px'
+    assign top = 'calc(' | append: top | append: ' * (1 - var(--viewport-mobile, 0)) + ' | append: top_mobile | append: ' * var(--viewport-mobile, 0))'
+    assign bottom = 'calc(' | append: bottom | append: ' * (1 - var(--viewport-mobile, 0)) + ' | append: bottom_mobile | append: ' * var(--viewport-mobile, 0))'
+  endif
+-%}
+--{{ prefix }}-top: {{ top }}; --{{ prefix }}-bottom: {{ bottom }};
