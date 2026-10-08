@@ -61,7 +61,14 @@
     {%- if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank -%}
       <div class="multicolumn__header">
         {%- if section.settings.subheading != blank -%}
-          <p class="multicolumn__subheading">{{ section.settings.subheading | escape }}</p>
+          {%- liquid
+            assign subheading_style = section.settings.subheading_style | default: 'uppercase'
+            assign subheading_size = section.settings.subheading_size | default: 'small'
+            assign subheading_spacing = section.settings.subheading_letter_spacing | default: 'none'
+          -%}
+          <p class="multicolumn__subheading multicolumn__subheading--{{ subheading_style }} multicolumn__subheading--{{ subheading_size }}{% if subheading_spacing != 'none' %} letter-spacing--{{ subheading_spacing }}{% endif %}">
+            {{- section.settings.subheading | escape -}}
+          </p>
         {%- endif -%}
         {%- if section.settings.heading != blank -%}
           <{{ heading_tag }} class="{{ heading_class }} multicolumn__heading">{{ section.settings.heading }}</{{ heading_tag }}>
@@ -72,6 +79,10 @@
       </div>
     {%- endif -%}
 
+    {%- liquid
+      assign title_size = section.settings.title_size | default: 'default'
+      assign text_size = section.settings.text_size | default: 'medium'
+    -%}
     <ul class="multicolumn__list" role="list">
       {%- for block in section.blocks -%}
         <li class="multicolumn__item{% if section.settings.card %} color-{{ section.settings.card_color_scheme.id }}{% endif %}" {{ block.shopify_attributes }}>
@@ -115,10 +126,10 @@
 
           <div class="multicolumn__body">
             {%- if block.settings.title != blank -%}
-              <h3 class="multicolumn__title{% if block.settings.title_uppercase %} multicolumn__title--uppercase{% endif %}">{{ block.settings.title }}</h3>
+              <h3 class="multicolumn__title {% if title_size == 'default' %}multicolumn__title--default{% else %}{{ title_size }}{% endif %}{% if block.settings.title_uppercase %} multicolumn__title--uppercase{% endif %}">{{ block.settings.title }}</h3>
             {%- endif -%}
             {%- if block.settings.text != blank -%}
-              <div class="multicolumn__text rte">{{ block.settings.text }}</div>
+              <div class="multicolumn__text multicolumn__text--{{ text_size }} rte">{{ block.settings.text }}</div>
             {%- endif -%}
             {%- if block.settings.link_label != blank and block.settings.link != blank -%}
               <a href="{{ block.settings.link }}" class="multicolumn__link">
@@ -158,6 +169,69 @@
       "type": "text",
       "id": "subheading",
       "label": "t:labels.subheading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_style",
+      "label": "t:sections.rich_text.caption_style",
+      "options": [
+        {
+          "value": "uppercase",
+          "label": "t:sections.rich_text.caption_uppercase"
+        },
+        {
+          "value": "subtitle",
+          "label": "t:sections.rich_text.caption_subtitle"
+        }
+      ],
+      "default": "uppercase",
+      "visible_if": "{{ section.settings.subheading != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "subheading_size",
+      "label": "t:sections.rich_text.text_size",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:sections.collection_banner.size_small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.collection_banner.size_medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.collection_banner.size_large"
+        }
+      ],
+      "default": "small",
+      "visible_if": "{{ section.settings.subheading != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "subheading_letter_spacing",
+      "label": "t:labels.letter_spacing",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.subheading != blank }}"
     },
     {
       "type": "inline_richtext",
@@ -366,6 +440,63 @@
         }
       ],
       "default": "page"
+    },
+    {
+      "type": "select",
+      "id": "title_size",
+      "label": "t:sections.multicolumn.title_size",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:options.heading_size.default"
+        },
+        {
+          "value": "h1",
+          "label": "t:options.heading_size.huge"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.heading_size.extra_large"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.heading_size.large"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.heading_size.medium"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.heading_size.small"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.heading_size.extra_small"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "t:sections.multicolumn.text_size",
+      "info": "t:sections.multicolumn.text_size_info",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:sections.collection_banner.size_small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.collection_banner.size_medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.collection_banner.size_large"
+        }
+      ],
+      "default": "medium"
     },
     {
       "type": "header",

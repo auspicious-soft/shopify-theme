@@ -239,6 +239,7 @@
       "large": "Large"
     },
     "heading_size": {
+      "default": "Default",
       "extra_small": "Extra small",
       "small": "Small",
       "medium": "Medium",
@@ -810,7 +811,10 @@
       "number_info": "Used when the section shows numbers. Leave empty to number columns automatically",
       "mobile_column_alignment": "Content alignment on mobile",
       "alignment_same": "Same as desktop",
-      "title_uppercase": "Uppercase title"
+      "title_uppercase": "Uppercase title",
+      "title_size": "Column heading size",
+      "text_size": "Column text size",
+      "text_size_info": "Small 12px, medium 14px, large 16px"
     },
     "image_with_text": {
       "name": "Image with text",

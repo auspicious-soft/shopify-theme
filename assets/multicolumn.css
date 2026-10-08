@@ -24,10 +24,37 @@
 
 .multicolumn__subheading {
   margin: 0;
-  font-size: 0.75rem;
   font-weight: 600;
-  text-transform: uppercase;
   color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
+}
+
+/* Subheading style and size (same scale as the Rich text caption). */
+.multicolumn__subheading--uppercase {
+  text-transform: uppercase;
+}
+
+.multicolumn__subheading--small {
+  font-size: 0.75rem;
+}
+
+.multicolumn__subheading--medium {
+  font-size: 0.875rem;
+}
+
+.multicolumn__subheading--large {
+  font-size: 1.1rem;
+}
+
+.multicolumn__subheading--subtitle.multicolumn__subheading--small {
+  font-size: 0.95rem;
+}
+
+.multicolumn__subheading--subtitle.multicolumn__subheading--medium {
+  font-size: 1.1rem;
+}
+
+.multicolumn__subheading--subtitle.multicolumn__subheading--large {
+  font-size: 1.3rem;
 }
 
 .multicolumn__heading {
@@ -228,18 +255,43 @@
 
 .multicolumn__title {
   margin: 0;
+}
+
+/* Column heading size "Default"; the other sizes use the .h1–.h6 classes
+   (Theme settings > Typography). */
+.multicolumn__title--default {
   font-size: 1.15rem;
   line-height: 1.3;
 }
 
 /* Column > Uppercase title */
 .multicolumn__title--uppercase {
-  font-size: 1rem;
   text-transform: uppercase;
+}
+
+.multicolumn__title--default.multicolumn__title--uppercase {
+  font-size: 1rem;
 }
 
 .multicolumn__text {
   color: color-mix(in srgb, var(--color-foreground) 80%, transparent);
+}
+
+/* Column text size: 12 / 14 / 16px. Paragraphs follow it. */
+.multicolumn__text--small {
+  font-size: 0.75rem;
+}
+
+.multicolumn__text--medium {
+  font-size: 0.875rem;
+}
+
+.multicolumn__text--large {
+  font-size: 1rem;
+}
+
+.multicolumn__text p {
+  font-size: inherit;
 }
 
 .multicolumn__text > * {

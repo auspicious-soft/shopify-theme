@@ -106,7 +106,7 @@
               {%- when 'caption' -%}
                 {%- if block.settings.caption != blank -%}
                   <p
-                    class="image-with-text__caption image-with-text__caption--{{ block.settings.style }} image-with-text__caption--{{ block.settings.size }}"
+                    class="image-with-text__caption image-with-text__caption--{{ block.settings.style }} image-with-text__caption--{{ block.settings.size }}{% if block.settings.letter_spacing != blank and block.settings.letter_spacing != 'none' %} letter-spacing--{{ block.settings.letter_spacing }}{% endif %}"
                     {{ block.shopify_attributes }}
                   >
                     {{- block.settings.caption | escape -}}
@@ -627,6 +627,30 @@
             }
           ],
           "default": "small"
+        },
+        {
+          "type": "select",
+          "id": "letter_spacing",
+          "label": "t:labels.letter_spacing",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:options.letter_spacing.none"
+            },
+            {
+              "value": "small",
+              "label": "t:options.letter_spacing.small"
+            },
+            {
+              "value": "medium",
+              "label": "t:options.letter_spacing.medium"
+            },
+            {
+              "value": "large",
+              "label": "t:options.letter_spacing.large"
+            }
+          ],
+          "default": "none"
         }
       ]
     },
