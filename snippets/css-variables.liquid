@@ -1,5 +1,22 @@
 {% liquid
   assign default_scheme = settings.color_schemes.first
+
+  # Custom fonts are declared first in the font stack; the font_picker font stays as the fallback
+  assign custom_heading_font_faces = ''
+  if settings.type_header_font_source == 'custom'
+    capture custom_heading_font_faces
+      render 'custom-font-face', prefix: 'type_header_custom', family: 'Theme Custom Heading'
+    endcapture
+    assign custom_heading_font_faces = custom_heading_font_faces | strip
+  endif
+
+  assign custom_body_font_faces = ''
+  if settings.type_body_font_source == 'custom'
+    capture custom_body_font_faces
+      render 'custom-font-face', prefix: 'type_body_custom', family: 'Theme Custom Body'
+    endcapture
+    assign custom_body_font_faces = custom_body_font_faces | strip
+  endif
 %}
 {% style %}
   {% # Loads all font variantions with display: swap %}
@@ -11,13 +28,21 @@
   {{ settings.type_header_font | font_face: font_display: 'swap' }}
   {{ settings.type_header_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
 
+  {{ custom_heading_font_faces }}
+  {{ custom_body_font_faces }}
+
   :root {
-    --font-primary--family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+    --font-primary--family: {% if custom_body_font_faces != blank %}"Theme Custom Body", {% endif %}{{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
     --font-primary--style: {{ settings.type_body_font.style }};
     --font-primary--weight: {{ settings.type_body_font.weight }};
-    --font-heading--family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+    --font-heading--family: {% if custom_heading_font_faces != blank %}"Theme Custom Heading", {% endif %}{{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+    {%- if custom_heading_font_faces != blank %}
+    --font-heading--style: normal;
+    --font-heading--weight: {{ settings.type_header_custom_weight | default: 700 }};
+    {%- else %}
     --font-heading--style: {{ settings.type_header_font.style }};
     --font-heading--weight: {{ settings.type_header_font.weight }};
+    {%- endif %}
     --heading-scale: {{ settings.heading_scale }};
     --body-size-desktop: {{ settings.body_size_desktop }}px;
     --body-size-mobile: {{ settings.body_size_mobile }}px;

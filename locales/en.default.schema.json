@@ -1348,6 +1348,35 @@
         },
         "body_line_height": {
           "label": "Body line height"
+        },
+        "font_source": {
+          "label": "Font source",
+          "info": "Custom uses your own licensed font files. The font above is used as the fallback",
+          "options__theme": "Font library",
+          "options__custom": "Custom"
+        },
+        "custom_font_regular": {
+          "label": "Regular",
+          "info": "Upload .woff2 files in Content > Files, then paste each file link here. Leave a weight empty if you don't have it"
+        },
+        "custom_font_italic": {
+          "label": "Italic"
+        },
+        "custom_font_light": {
+          "label": "Light"
+        },
+        "custom_font_medium": {
+          "label": "Medium"
+        },
+        "custom_font_semibold": {
+          "label": "Semibold"
+        },
+        "custom_font_bold": {
+          "label": "Bold"
+        },
+        "type_header_custom_weight": {
+          "label": "Heading weight",
+          "info": "Choose a weight you added above"
         }
       }
     },

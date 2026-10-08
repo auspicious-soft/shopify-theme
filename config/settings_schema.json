@@ -129,6 +129,69 @@
         "label": "t:settings_schema.typography.settings.type_header_font.label"
       },
       {
+        "type": "select",
+        "id": "type_header_font_source",
+        "label": "t:settings_schema.typography.settings.font_source.label",
+        "info": "t:settings_schema.typography.settings.font_source.info",
+        "default": "theme",
+        "options": [
+          { "value": "theme", "label": "t:settings_schema.typography.settings.font_source.options__theme" },
+          { "value": "custom", "label": "t:settings_schema.typography.settings.font_source.options__custom" }
+        ]
+      },
+      {
+        "type": "url",
+        "id": "type_header_custom_regular",
+        "label": "t:settings_schema.typography.settings.custom_font_regular.label",
+        "info": "t:settings_schema.typography.settings.custom_font_regular.info",
+        "visible_if": "{{ settings.type_header_font_source == 'custom' }}"
+      },
+      {
+        "type": "url",
+        "id": "type_header_custom_italic",
+        "label": "t:settings_schema.typography.settings.custom_font_italic.label",
+        "visible_if": "{{ settings.type_header_font_source == 'custom' }}"
+      },
+      {
+        "type": "url",
+        "id": "type_header_custom_light",
+        "label": "t:settings_schema.typography.settings.custom_font_light.label",
+        "visible_if": "{{ settings.type_header_font_source == 'custom' }}"
+      },
+      {
+        "type": "url",
+        "id": "type_header_custom_medium",
+        "label": "t:settings_schema.typography.settings.custom_font_medium.label",
+        "visible_if": "{{ settings.type_header_font_source == 'custom' }}"
+      },
+      {
+        "type": "url",
+        "id": "type_header_custom_semibold",
+        "label": "t:settings_schema.typography.settings.custom_font_semibold.label",
+        "visible_if": "{{ settings.type_header_font_source == 'custom' }}"
+      },
+      {
+        "type": "url",
+        "id": "type_header_custom_bold",
+        "label": "t:settings_schema.typography.settings.custom_font_bold.label",
+        "visible_if": "{{ settings.type_header_font_source == 'custom' }}"
+      },
+      {
+        "type": "select",
+        "id": "type_header_custom_weight",
+        "label": "t:settings_schema.typography.settings.type_header_custom_weight.label",
+        "info": "t:settings_schema.typography.settings.type_header_custom_weight.info",
+        "default": "700",
+        "visible_if": "{{ settings.type_header_font_source == 'custom' }}",
+        "options": [
+          { "value": "300", "label": "t:settings_schema.typography.settings.custom_font_light.label" },
+          { "value": "400", "label": "t:settings_schema.typography.settings.custom_font_regular.label" },
+          { "value": "500", "label": "t:settings_schema.typography.settings.custom_font_medium.label" },
+          { "value": "600", "label": "t:settings_schema.typography.settings.custom_font_semibold.label" },
+          { "value": "700", "label": "t:settings_schema.typography.settings.custom_font_bold.label" }
+        ]
+      },
+      {
         "type": "range",
         "id": "heading_scale",
         "min": 100,
@@ -147,6 +210,54 @@
         "id": "type_body_font",
         "default": "work_sans_n4",
         "label": "t:settings_schema.typography.settings.type_body_font.label"
+      },
+      {
+        "type": "select",
+        "id": "type_body_font_source",
+        "label": "t:settings_schema.typography.settings.font_source.label",
+        "info": "t:settings_schema.typography.settings.font_source.info",
+        "default": "theme",
+        "options": [
+          { "value": "theme", "label": "t:settings_schema.typography.settings.font_source.options__theme" },
+          { "value": "custom", "label": "t:settings_schema.typography.settings.font_source.options__custom" }
+        ]
+      },
+      {
+        "type": "url",
+        "id": "type_body_custom_regular",
+        "label": "t:settings_schema.typography.settings.custom_font_regular.label",
+        "info": "t:settings_schema.typography.settings.custom_font_regular.info",
+        "visible_if": "{{ settings.type_body_font_source == 'custom' }}"
+      },
+      {
+        "type": "url",
+        "id": "type_body_custom_italic",
+        "label": "t:settings_schema.typography.settings.custom_font_italic.label",
+        "visible_if": "{{ settings.type_body_font_source == 'custom' }}"
+      },
+      {
+        "type": "url",
+        "id": "type_body_custom_light",
+        "label": "t:settings_schema.typography.settings.custom_font_light.label",
+        "visible_if": "{{ settings.type_body_font_source == 'custom' }}"
+      },
+      {
+        "type": "url",
+        "id": "type_body_custom_medium",
+        "label": "t:settings_schema.typography.settings.custom_font_medium.label",
+        "visible_if": "{{ settings.type_body_font_source == 'custom' }}"
+      },
+      {
+        "type": "url",
+        "id": "type_body_custom_semibold",
+        "label": "t:settings_schema.typography.settings.custom_font_semibold.label",
+        "visible_if": "{{ settings.type_body_font_source == 'custom' }}"
+      },
+      {
+        "type": "url",
+        "id": "type_body_custom_bold",
+        "label": "t:settings_schema.typography.settings.custom_font_bold.label",
+        "visible_if": "{{ settings.type_body_font_source == 'custom' }}"
       },
       {
         "type": "range",

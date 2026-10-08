@@ -1,0 +1,44 @@
+{% doc %}
+  Outputs @font-face rules for a merchant-supplied custom font.
+
+  Reads the theme settings `<prefix>_regular`, `<prefix>_italic`, `<prefix>_light`,
+  `<prefix>_medium`, `<prefix>_semibold` and `<prefix>_bold` (file links from
+  Content > Files). Only weights with a link are declared, so nothing is
+  downloaded for empty settings. Outputs nothing when every setting is empty.
+
+  Outputs raw CSS, so it must be rendered inside a style tag.
+
+  @param {string} prefix - Settings ID prefix, e.g. 'type_header_custom'
+  @param {string} family - Font family name to declare
+
+  @example
+  {% render 'custom-font-face', prefix: 'type_header_custom', family: 'Theme Custom Heading' %}
+{% enddoc %}
+
+{%- liquid
+  assign variants = 'regular:400:normal,italic:400:italic,light:300:normal,medium:500:normal,semibold:600:normal,bold:700:normal' | split: ','
+
+  for variant in variants
+    assign parts = variant | split: ':'
+    assign setting_id = prefix | append: '_' | append: parts[0]
+    assign src = settings[setting_id] | strip | replace: '"', '%22'
+
+    if src == blank
+      continue
+    endif
+
+    assign path = src | split: '?' | first | downcase
+    assign format = ''
+    if path contains '.woff2'
+      assign format = ' format("woff2")'
+    elsif path contains '.woff'
+      assign format = ' format("woff")'
+    elsif path contains '.otf'
+      assign format = ' format("opentype")'
+    elsif path contains '.ttf'
+      assign format = ' format("truetype")'
+    endif
+
+    echo '@font-face{font-family:"' | append: family | append: '";src:url("' | append: src | append: '")' | append: format | append: ';font-weight:' | append: parts[1] | append: ';font-style:' | append: parts[2] | append: ';font-display:swap;}'
+  endfor
+-%}

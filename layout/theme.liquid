@@ -23,10 +23,10 @@
     {% endunless %}
 
     {% comment %} Preload the base font variant for initial page render {% endcomment %}
-    {% unless settings.type_body_font.system? %}
+    {% unless settings.type_body_font.system? or settings.type_body_font_source == 'custom' %}
       {{ settings.type_body_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
     {% endunless %}
-    {% unless settings.type_header_font.system? %}
+    {% unless settings.type_header_font.system? or settings.type_header_font_source == 'custom' %}
       {{ settings.type_header_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
     {% endunless %}
 
