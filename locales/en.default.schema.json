@@ -199,7 +199,8 @@
     "nav_hover_color_transparent": "Hover color (transparent header)",
     "nav_hover_color_transparent_info": "Used while the header stays transparent on hover (Standard style with \"Solid background on hover\" off). Leave empty to use the hover color above",
     "overlay_hover_solid": "Solid background on hover",
-    "overlay_hover_solid_info": "Standard style: the transparent header turns solid while hovered. Logo reveal always does this"
+    "overlay_hover_solid_info": "Standard style: the transparent header turns solid while hovered. Logo reveal always does this",
+    "caption": "Caption"
   },
   "options": {
     "section_width": {
@@ -384,7 +385,21 @@
       "card_image_source": "Card image",
       "card_image_source_info": "\"Card image\" uses each collection's custom.card_image metafield, falling back to the collection image",
       "card_image_banner": "Collection image (banner)",
-      "card_image_card": "Card image (metafield)"
+      "card_image_card": "Card image (metafield)",
+      "caption_info": "Short text above the heading, e.g. Shop by collection",
+      "banner_content_position": "Content position",
+      "banner_content_position_info": "Where the heading, caption, breadcrumbs and subheading sit on the banner",
+      "position": {
+        "top_left": "Top left",
+        "top_center": "Top center",
+        "top_right": "Top right",
+        "middle_left": "Middle left",
+        "middle_center": "Middle center",
+        "middle_right": "Middle right",
+        "bottom_left": "Bottom left",
+        "bottom_center": "Bottom center",
+        "bottom_right": "Bottom right"
+      }
     },
     "collection": {
       "banner": "Banner",
