@@ -12,7 +12,7 @@
     "main": {
       "type": "collections",
       "settings": {
-        "show_breadcrumbs": false,
+        "show_breadcrumbs": true,
         "show_heading": true,
         "caption": "Shop By Collection",
         "caption_letter_spacing": "large",
