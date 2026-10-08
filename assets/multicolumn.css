@@ -24,7 +24,6 @@
 
 .multicolumn__subheading {
   margin: 0;
-  font-weight: 600;
   color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
 }
 
