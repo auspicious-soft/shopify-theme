@@ -13,14 +13,14 @@
       "type": "collections",
       "settings": {
         "show_breadcrumbs": false,
-        "show_heading": false,
-        "heading": "",
+        "show_heading": true,
+        "heading": "All Collections",
         "heading_tag": "h1",
         "heading_class": "h1",
-        "subheading": "",
-        "heading_alignment": "left",
+        "subheading": "<p>\"Explore every season, every silhouette, and every detail—curated into one place for effortless discovery.\"</p>",
+        "heading_alignment": "center",
         "show_banner": true,
-        "banner_image": "shopify://shop_images/Collection_Hero.png",
+        "banner_image": "shopify://shop_images/Hero_Image_1_79c0eb2a-aff2-40c9-9214-03bf3908ddf9.png",
         "banner_height": "medium",
         "banner_overlay": 30,
         "banner_color_scheme": "",
@@ -28,6 +28,7 @@
         "sort": "default",
         "hide_empty": true,
         "layout": "grid",
+        "card_image_source": "banner",
         "per_page": 24,
         "columns_desktop": 3,
         "columns_mobile": "2",
@@ -36,6 +37,9 @@
         "color_scheme": "scheme-1",
         "padding_top": 48,
         "padding_bottom": 48,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 64,
         "heading_case": "uppercase"
       }
     }
