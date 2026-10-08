@@ -66,10 +66,11 @@
             {{- 'collections.title' | t -}}
           {%- endif -%}
         </{{ heading_tag }}>
-        {%- if section.settings.show_breadcrumbs and section.settings.show_banner == false -%}{% render 'breadcrumbs', class: 'collection-list-page__breadcrumbs' %}{%- endif -%}
         {%- if section.settings.subheading != blank -%}
           <div class="collection-list-page__subheading">{{ section.settings.subheading }}</div>
         {%- endif -%}
+        {%- comment -%} Without a banner, the breadcrumb sits below the header text. {%- endcomment -%}
+        {%- if section.settings.show_breadcrumbs and section.settings.show_banner == false -%}{% render 'breadcrumbs', class: 'collection-list-page__breadcrumbs' %}{%- endif -%}
       </div>
     {%- endif -%}
   {%- endcapture -%}
