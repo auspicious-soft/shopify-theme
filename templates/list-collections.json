@@ -38,7 +38,8 @@
           "hoodies",
           "shoes",
           "zipper",
-          "hats"
+          "hats",
+          "shirts"
         ],
         "sort": "default",
         "hide_empty": true,
