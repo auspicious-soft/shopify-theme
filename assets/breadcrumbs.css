@@ -145,6 +145,16 @@
 }
 
 /* Page, search, cart, 404: under the page title. */
+/* Page: breadcrumbs sit above the title; the space before the page content
+   now comes after the title (or after the trail when the title is hidden). */
 .page-breadcrumbs {
-  margin-block: 0.5rem 1.75rem;
+  margin-block: 0 0.75rem;
+}
+
+.page-breadcrumbs + .main-page__title {
+  margin-block-end: 1.75rem;
+}
+
+.page-breadcrumbs:has(+ .visually-hidden) {
+  margin-block-end: 1.75rem;
 }

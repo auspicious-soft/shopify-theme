@@ -12,9 +12,10 @@
 >
   {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
   {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
+  {%- comment -%} Breadcrumbs first, at the top of the page. {%- endcomment -%}
+  {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'page-breadcrumbs' %}{%- endif -%}
   {%- comment -%} A hidden title stays in the page for search engines and screen readers. {%- endcomment -%}
   <{{ heading_tag }} class="{% if section.settings.show_title == false %}visually-hidden{% else %}{{ heading_class }} main-page__title{% endif %}">{{ page.title }}</{{ heading_tag }}>
-  {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'page-breadcrumbs' %}{%- endif -%}
 
   {{ page.content }}
 </div>

@@ -50,6 +50,8 @@
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
     {%- if section.settings.show_title or section.settings.show_breadcrumbs or section.settings.description != blank and current_tags == blank -%}
     <header class="blog__header">
+      {%- comment -%} Breadcrumbs first, at the top of the page. {%- endcomment -%}
+      {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'blog__breadcrumbs' %}{%- endif -%}
       {%- if section.settings.show_title -%}
         <{{ heading_tag }} class="{{ heading_class }} blog__title">
           {%- if current_tags -%}
@@ -59,7 +61,6 @@
           {%- endif -%}
         </{{ heading_tag }}>
       {%- endif -%}
-      {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'blog__breadcrumbs' %}{%- endif -%}
       {%- if section.settings.description != blank and current_tags == blank -%}
         <div class="blog__description rte">{{ section.settings.description }}</div>
       {%- endif -%}

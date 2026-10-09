@@ -651,7 +651,6 @@ header.is-scrolled img.header__hero-logo-image {
 .header__mega-list {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -688,7 +687,6 @@ header.is-scrolled img.header__hero-logo-image {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
 }
 
 .header__mega-promo-image {

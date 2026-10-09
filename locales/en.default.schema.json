@@ -9,21 +9,21 @@
  */
 {
   "general": {
-    "404": "Not found",
+    "404": "404 page",
     "announcement_bar": "Announcement bar",
     "announcement_item": "Announcement",
-    "article": "Article",
+    "article": "Blog post",
     "block": "Block",
-    "blog": "Blog",
-    "cart": "Cart",
-    "collection": "Collection",
+    "blog": "Blog post list",
+    "cart": "Cart page",
+    "collection": "Collection page",
     "collections": "Collections",
     "collection_card": "Collection card",
     "collections_grid": "Collections grid",
     "colors": "Colors",
     "column": "Column",
     "content": "Content",
-    "custom_section": "Custom section",
+    "custom_section": "Custom content",
     "fonts": "Fonts",
     "footer": "Footer",
     "group": "Group",
@@ -32,12 +32,12 @@
     "hero_banner": "Hero banner",
     "layout": "Layout",
     "main": "Main",
-    "page": "Page",
-    "password": "Password",
+    "page": "Page content",
+    "password": "Password page",
     "primary": "Primary",
-    "product": "Product",
+    "product": "Product page",
     "row": "Row",
-    "search": "Search",
+    "search": "Search results",
     "secondary": "Secondary",
     "section": "Section",
     "settings": "Settings",
@@ -344,8 +344,11 @@
     }
   },
   "sections": {
+    "cart_drawer": {
+      "name": "Cart drawer"
+    },
     "page_header": {
-      "name": "Page header",
+      "name": "Page header banner",
       "heading_info": "Leave empty to use the page title",
       "button_info": "Leave empty to hide the button",
       "transparent_info": "To show the header transparent over this banner, turn it on in the Header section (Transparent header) and add this section first on the page"
@@ -570,7 +573,7 @@
       "layout_slider": "Slider"
     },
     "related_products": {
-      "name": "You may also like",
+      "name": "Related products",
       "info": "Recommendations are picked automatically by Shopify and improve over time as your store gets orders. Customize them with the Search & Discovery app.",
       "intent": "Recommendation type",
       "intent_info": "\"Pairs well with\" shows complementary products you set up in the Search & Discovery app",
@@ -588,13 +591,13 @@
       "show_view_all_info": "Links to the selected collection"
     },
     "recently_viewed": {
-      "name": "Recently viewed",
+      "name": "Recently viewed products",
       "card_name": "Recently viewed card",
       "info": "Shows the products each shopper viewed most recently, saved in their own browser. Hidden until they have viewed a product (the current product is left out).",
       "show_clear": "Show \"Clear\" link"
     },
     "social_marquee": {
-      "name": "Social image marquee",
+      "name": "Scrolling social images",
       "info": "Images scroll on their own. Shoppers can drag the strip; one drag stops the movement and the next drag starts it again.",
       "speed_info": "Pixels moved per second",
       "direction_left": "Right to left",
@@ -613,7 +616,7 @@
       "username_info": "Optional, shown over the top of the image"
     },
     "featured_collection": {
-      "name": "Featured collection",
+      "name": "Featured products",
       "products": "Products",
       "collection": "Collection",
       "layout_carousel": "Carousel",
@@ -718,7 +721,7 @@
       "view_details_label_info": "Leave empty for \"View full details\""
     },
     "collapsible": {
-      "name": "Collapsible content",
+      "name": "FAQ / collapsible rows",
       "layout_stacked": "Heading above rows",
       "layout_side": "Heading beside rows",
       "one_at_a_time": "Open one row at a time",
@@ -807,7 +810,7 @@
       "over_info": "These apply in Background mode with Text position set to Over the video"
     },
     "multicolumn": {
-      "name": "Multicolumn",
+      "name": "Multi-column content",
       "heading_alignment": "Heading alignment",
       "mobile_grid": "Grid",
       "column_alignment": "Content alignment",
@@ -863,7 +866,7 @@
       "content_color_scheme": "Card color scheme"
     },
     "rich_text": {
-      "name": "Rich text",
+      "name": "Text content",
       "alignment": "Text alignment",
       "mobile_alignment": "Text alignment on mobile",
       "position": "Content position",
@@ -879,7 +882,7 @@
       }
     },
     "slideshow": {
-      "name": "Slideshow",
+      "name": "Image slideshow",
       "header_layout": "Layout",
       "header_motion": "Motion",
       "transition": "Transition",
@@ -920,7 +923,7 @@
       "slide_color_scheme_info": "Text and button colors for this slide, and the background behind the image. Pick a scheme with light text for dark images"
     },
     "newsletter": {
-      "name": "Newsletter",
+      "name": "Newsletter signup",
       "title": "Title",
       "subtitle": "Subtitle",
       "description": "Description",
@@ -949,7 +952,7 @@
       "divider_opacity": "Opacity"
     },
     "logo_marquee": {
-      "name": "Logo marquee",
+      "name": "Scrolling logos",
       "header_logos": "Logos",
       "items_desktop": "Logos shown on desktop",
       "items_mobile": "Logos shown on mobile",
@@ -968,7 +971,7 @@
       "alt_info": "Used as the image's alt text, and shown as text when there is no image"
     },
     "collection_banners": {
-      "name": "Image banners",
+      "name": "Image banner grid",
       "block_name": "Image",
       "mobile_layout": "Mobile layout",
       "mobile_stack": "Stacked",
@@ -1120,7 +1123,7 @@
       "banner_color_scheme_info": "Text and overlay color on the banner"
     },
     "related_articles": {
-      "name": "Related articles",
+      "name": "Related blog posts",
       "show_view_all": "Show \"View all articles\" link",
       "articles_to_show": "Articles to show",
       "layout_slider": "Carousel",
@@ -1140,7 +1143,7 @@
       "show_info": "Style: Theme settings > Breadcrumbs"
     },
     "multirow": {
-      "name": "Multirow",
+      "name": "Image and text rows",
       "description": "Description",
       "heading_alignment": "Heading alignment",
       "header_rows": "Rows",

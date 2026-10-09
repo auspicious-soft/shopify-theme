@@ -134,11 +134,8 @@
   inset-inline: calc(var(--card-image-padding, 0px) + 1.25rem);
   inset-block-end: calc(var(--card-image-padding, 0px) + 1.1rem);
   z-index: 1;
-  color: var(--overlay-text-color, #fff);
-}
-
-.collection-card--overlay .collection-card__content {
   gap: 0.45rem;
+  color: var(--overlay-text-color, #fff);
 }
 
 /* Overlay: no arrow, and a two-line description like the reference. */
