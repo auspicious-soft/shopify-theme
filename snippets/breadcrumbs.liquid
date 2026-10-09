@@ -19,6 +19,7 @@
   Renders nothing on the home page.
 
   @param {string} [class] - Extra class for spacing in the host section
+  @param {string} [align] - Overrides Theme settings > Breadcrumbs alignment ('auto' follows the text around it)
 
   @example
   {% render 'breadcrumbs', class: 'page__breadcrumbs' %}
@@ -98,7 +99,7 @@
   {{ 'breadcrumbs.css' | asset_url | stylesheet_tag }}
 
   <nav
-    class="breadcrumbs breadcrumbs--{{ separator }} breadcrumbs--align-{{ settings.breadcrumbs_alignment | default: 'auto' }}{% unless settings.breadcrumbs_show_mobile %} breadcrumbs--hide-mobile{% endunless %}{% unless settings.breadcrumbs_show_desktop %} breadcrumbs--hide-desktop{% endunless %} {{ class }}"
+    class="breadcrumbs breadcrumbs--{{ separator }} breadcrumbs--align-{{ align | default: settings.breadcrumbs_alignment | default: 'auto' }}{% unless settings.breadcrumbs_show_mobile %} breadcrumbs--hide-mobile{% endunless %}{% unless settings.breadcrumbs_show_desktop %} breadcrumbs--hide-desktop{% endunless %} {{ class }}"
     aria-label="{{ 'breadcrumbs.label' | t }}"
   >
     <ol class="breadcrumbs__list" role="list">

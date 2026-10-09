@@ -463,8 +463,10 @@
   font-size: 0.9em;
 }
 
+/* Theme settings > Product cards > Sale price color (--card-sale-color is set
+   on each card by snippets/product-card.liquid). */
 .product-card__amount--sale {
-  color: var(--card-sale-color, #d42c4b);
+  color: var(--card-sale-color);
 }
 
 .product-card__swatches {

@@ -37,8 +37,15 @@
   color: var(--color-foreground);
 }
 
+/* With a transparent header over the banner (collection section first on the
+   page), the banner starts below the header: --header-height is measured by
+   assets/header.js, minus any section top padding already above the banner. */
+:root:has(.header--overlay) .shopify-section-group-header-group + .shopify-section:not(.shopify-section-group-header-group) .collection-banner {
+  --banner-header-offset: max(0px, calc(var(--header-height, 0px) - var(--section-padding-top, 0px)));
+}
+
 .collection-banner--minimal {
-  padding-block: clamp(2rem, 5vw, 3.5rem) 0;
+  padding-block: calc(clamp(2rem, 5vw, 3.5rem) + var(--banner-header-offset, 0px)) 0;
 }
 
 /* A banner color scheme that differs from the section's shows as a band. */
@@ -48,6 +55,7 @@
 
 .collection-banner--image {
   align-items: flex-end;
+  padding-top: var(--banner-header-offset, 0px);
   min-height: 18rem;
   overflow: hidden;
 }
@@ -102,9 +110,32 @@
   padding-block: 2.5rem;
 }
 
-.collection-banner--center .collection-banner__content {
+/* Content position: vertical on the image banner, horizontal on both styles.
+   Breadcrumbs (align: auto) follow the text. */
+.collection-banner--image:is(.collection-banner--top-left, .collection-banner--top-center, .collection-banner--top-right) {
+  align-items: flex-start;
+}
+
+.collection-banner--image:is(.collection-banner--middle-left, .collection-banner--middle-center, .collection-banner--middle-right) {
+  align-items: center;
+}
+
+.collection-banner:is(.collection-banner--top-center, .collection-banner--middle-center, .collection-banner--bottom-center) .collection-banner__content {
   align-items: center;
   text-align: center;
+}
+
+.collection-banner:is(.collection-banner--top-right, .collection-banner--middle-right, .collection-banner--bottom-right) .collection-banner__content {
+  align-items: flex-end;
+  text-align: end;
+}
+
+.collection-banner:is(.collection-banner--top-center, .collection-banner--middle-center, .collection-banner--bottom-center) .breadcrumbs--align-auto .breadcrumbs__list {
+  justify-content: center;
+}
+
+.collection-banner:is(.collection-banner--top-right, .collection-banner--middle-right, .collection-banner--bottom-right) .breadcrumbs--align-auto .breadcrumbs__list {
+  justify-content: flex-end;
 }
 
 .collection-banner__title {

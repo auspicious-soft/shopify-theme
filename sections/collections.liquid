@@ -51,11 +51,13 @@
   "
 >
   {%- capture page_header -%}
-    {%- if section.settings.show_heading == false and section.settings.show_banner == false -%}
-      {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'collection-list-page__breadcrumbs' %}{%- endif -%}
+    {%- if section.settings.show_heading == false -%}
+      {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'collection-list-page__breadcrumbs', align: 'auto' %}{%- endif -%}
     {%- endif -%}
     {%- if section.settings.show_heading -%}
       <div class="collection-list-page__header collection-list-page__header--{{ section.settings.heading_alignment }}">
+        {%- comment -%} Breadcrumb first, aligned with the text (banner position or Alignment). {%- endcomment -%}
+        {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'collection-list-page__breadcrumbs', align: 'auto' %}{%- endif -%}
         {%- if section.settings.caption != blank -%}
           <p class="collection-list-page__caption{% assign caption_spacing = section.settings.caption_letter_spacing | default: 'small' %}{% if caption_spacing != 'none' %} letter-spacing--{{ caption_spacing }}{% endif %}">{{ section.settings.caption | escape }}</p>
         {%- endif -%}
@@ -69,8 +71,6 @@
         {%- if section.settings.subheading != blank -%}
           <div class="collection-list-page__subheading">{{ section.settings.subheading }}</div>
         {%- endif -%}
-        {%- comment -%} Without a banner, the breadcrumb sits below the header text. {%- endcomment -%}
-        {%- if section.settings.show_breadcrumbs and section.settings.show_banner == false -%}{% render 'breadcrumbs', class: 'collection-list-page__breadcrumbs' %}{%- endif -%}
       </div>
     {%- endif -%}
   {%- endcapture -%}
@@ -95,11 +95,6 @@
         {{ page_header }}
       </div>
     </div>
-    {%- if section.settings.show_breadcrumbs -%}
-      <div class="collection-list-banner__breadcrumbs page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
-        {% render 'breadcrumbs' %}
-      </div>
-    {%- endif -%}
   {%- endif -%}
 
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">

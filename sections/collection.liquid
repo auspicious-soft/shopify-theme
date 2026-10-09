@@ -81,7 +81,7 @@
   "
 >
   {% if section.settings.show_banner %}
-    <div class="collection-banner collection-banner--{% if banner_image or banner_placeholder %}image collection-banner--{{ section.settings.banner_height }}{% else %}minimal{% endif %} collection-banner--{{ section.settings.banner_alignment }}{% if section.settings.banner_color_scheme.id != section.settings.color_scheme.id %} collection-banner--filled{% endif %} color-{{ section.settings.banner_color_scheme.id }}">
+    <div class="collection-banner collection-banner--{% if banner_image or banner_placeholder %}image collection-banner--{{ section.settings.banner_height }}{% else %}minimal{% endif %} collection-banner--{{ section.settings.banner_content_position | default: 'bottom-left' }}{% if section.settings.banner_color_scheme.id != section.settings.color_scheme.id %} collection-banner--filled{% endif %} color-{{ section.settings.banner_color_scheme.id }}">
       {% if banner_placeholder %}
         <div class="collection-banner__media">
           {{ 'hero-apparel-1' | placeholder_svg_tag: 'collection-banner__image collection-banner__placeholder' }}
@@ -102,8 +102,9 @@
         </div>
       {% endif %}
       <div class="collection-banner__content page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+        {%- comment -%} Breadcrumb first, aligned with the text (Content position). {%- endcomment -%}
+        {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'collection-banner__breadcrumbs', align: 'auto' %}{%- endif -%}
         <{{ heading_tag }} class="{{ heading_class }} collection-banner__title">{{ collection.title | escape }}</{{ heading_tag }}>
-        {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'collection-banner__breadcrumbs' %}{%- endif -%}
         {% if section.settings.show_description and collection.description != blank %}
           <div class="collection-banner__description">{{ collection.description }}</div>
         {% endif %}
@@ -384,19 +385,47 @@
     },
     {
       "type": "select",
-      "id": "banner_alignment",
-      "label": "t:labels.alignment",
+      "id": "banner_content_position",
+      "label": "t:sections.collections.banner_content_position",
       "options": [
         {
-          "value": "left",
-          "label": "t:options.alignment.left"
+          "value": "top-left",
+          "label": "t:sections.collections.position.top_left"
         },
         {
-          "value": "center",
-          "label": "t:options.alignment.center"
+          "value": "top-center",
+          "label": "t:sections.collections.position.top_center"
+        },
+        {
+          "value": "top-right",
+          "label": "t:sections.collections.position.top_right"
+        },
+        {
+          "value": "middle-left",
+          "label": "t:sections.collections.position.middle_left"
+        },
+        {
+          "value": "middle-center",
+          "label": "t:sections.collections.position.middle_center"
+        },
+        {
+          "value": "middle-right",
+          "label": "t:sections.collections.position.middle_right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "t:sections.collections.position.bottom_left"
+        },
+        {
+          "value": "bottom-center",
+          "label": "t:sections.collections.position.bottom_center"
+        },
+        {
+          "value": "bottom-right",
+          "label": "t:sections.collections.position.bottom_right"
         }
       ],
-      "default": "left",
+      "default": "bottom-left",
       "visible_if": "{{ section.settings.show_banner }}"
     },
     {
