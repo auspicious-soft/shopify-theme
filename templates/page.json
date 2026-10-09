@@ -18,6 +18,11 @@
         "heading_class": "h2",
         "alignment": "left",
         "width": "page",
+        "padding_top": 40,
+        "padding_bottom": 64,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 64,
         "heading_case": "uppercase"
       }
     }

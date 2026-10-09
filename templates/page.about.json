@@ -433,10 +433,45 @@
         "heading_case": "uppercase",
         "button_case": "uppercase"
       }
+    },
+    "page_header_F4kJbU": {
+      "type": "page-header",
+      "name": "t:sections.page_header.name",
+      "settings": {
+        "show_breadcrumbs": true,
+        "show_heading": true,
+        "caption": "",
+        "caption_letter_spacing": "small",
+        "heading": "",
+        "heading_tag": "h1",
+        "heading_class": "h1",
+        "subheading": "",
+        "heading_alignment": "left",
+        "button_text": "",
+        "button_url": "",
+        "button_style": "primary",
+        "button_size": "medium",
+        "show_banner": true,
+        "banner_height": "medium",
+        "banner_overlay": 30,
+        "content_position_horizontal": "left",
+        "content_position_vertical": "bottom",
+        "banner_color_scheme": "",
+        "width": "page",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 64,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 64,
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
+      }
     }
   },
   "order": [
     "main",
+    "page_header_F4kJbU",
     "rich_text_B3RJFD",
     "image_with_text_7kC9T4",
     "multicolumn_WLkhDY",
