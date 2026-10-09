@@ -1,0 +1,141 @@
+/* Styles for sections/page-header.liquid. Mirrors the Collection list page
+   header (assets/collections.css) so both look and behave the same. */
+
+.page-header {
+  padding-block: var(--section-padding-top) var(--section-padding-bottom);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* The banner sits flush under the header; the section padding goes below it. */
+.page-header--banner {
+  padding-top: 0;
+}
+
+/* Transparent header over this section (added first on the page): start
+   the content below the measured header height (assets/header.js). On the
+   banner it's inner padding, so the banner keeps its height; without a
+   banner it's added to the section's own top padding. */
+:root:has(.header--overlay) .shopify-section-group-header-group + .shopify-section:not(.shopify-section-group-header-group) .page-header {
+  --page-header-offset: var(--header-height, 0px);
+}
+
+.page-header:not(.page-header--banner) {
+  padding-top: calc(var(--section-padding-top) + var(--page-header-offset, 0px));
+}
+
+/* ---------- Text ---------- */
+
+.page-header__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.page-header__content--center {
+  align-items: center;
+  text-align: center;
+}
+
+.page-header__caption {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.page-header__heading {
+  margin: 0;
+}
+
+.page-header__subheading {
+  max-width: 40rem;
+}
+
+.page-header__subheading > * {
+  margin: 0;
+}
+
+.page-header__button {
+  margin-top: 0.75rem;
+}
+
+/* ---------- Banner ---------- */
+
+.page-header__banner {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding-top: var(--page-header-offset, 0px);
+  overflow: hidden;
+  /* Banner color scheme: text and overlay color. */
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+.page-header__banner--small {
+  min-height: clamp(14rem, 28vw, 20rem);
+}
+
+.page-header__banner--medium {
+  min-height: clamp(18rem, 38vw, 28rem);
+}
+
+.page-header__banner--large {
+  min-height: clamp(22rem, 50vw, 38rem);
+}
+
+.page-header__media,
+.page-header__overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.page-header__overlay {
+  background-color: color-mix(in srgb, var(--color-background) var(--banner-overlay, 30%), transparent);
+}
+
+.page-header__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-block: 2.5rem;
+}
+
+/* Content position: vertical (top / middle / bottom) and horizontal
+   (left / center / right). Horizontal overrides Heading alignment while
+   the banner is on; breadcrumbs follow the text. */
+.page-header__banner--v-top {
+  align-items: flex-start;
+}
+
+.page-header__banner--v-middle {
+  align-items: center;
+}
+
+.page-header__banner--v-bottom {
+  align-items: flex-end;
+}
+
+.page-header__banner--h-left .page-header__content {
+  align-items: flex-start;
+  text-align: start;
+}
+
+.page-header__banner--h-center .page-header__content {
+  align-items: center;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.page-header__banner--h-right .page-header__content {
+  align-items: flex-end;
+  margin-inline-start: auto;
+  text-align: end;
+}
+
+:is(.page-header__banner--h-center, .page-header__content--center) .breadcrumbs--align-auto .breadcrumbs__list {
+  justify-content: center;
+}
+
+.page-header__banner--h-right .breadcrumbs--align-auto .breadcrumbs__list {
+  justify-content: flex-end;
+}

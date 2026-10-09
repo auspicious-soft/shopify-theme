@@ -147,6 +147,8 @@
     "overlay_on_list_collections": "Collection list page",
     "overlay_on_home": "Home page",
     "overlay_on_page": "Page template",
+    "overlay_page_templates": "Only these page templates",
+    "overlay_page_templates_info": "Optional. Template names separated by commas, e.g. about, contact. Use page for the default page template. Leave empty for every page template",
     "overlay_on_product": "Product pages",
     "overlay_opacity": "Overlay opacity",
     "overlay_text_color": "Overlay text & icon color",
@@ -342,6 +344,12 @@
     }
   },
   "sections": {
+    "page_header": {
+      "name": "Page header",
+      "heading_info": "Leave empty to use the page title",
+      "button_info": "Leave empty to hide the button",
+      "transparent_info": "To show the header transparent over this banner, turn it on in the Header section (Transparent header) and add this section first on the page"
+    },
     "all": {
       "colors": {
         "label": "Color scheme"

@@ -68,6 +68,14 @@
       assign enable_overlay = section.settings.overlay_on_list_collections
     when 'page'
       assign enable_overlay = section.settings.overlay_on_page
+      # Optional: only some page templates (template suffix, "page" = the default page template).
+      if enable_overlay and section.settings.overlay_page_templates != blank
+        assign page_template = template.suffix | default: 'page'
+        assign allowed_page_templates = section.settings.overlay_page_templates | downcase | remove: ' ' | split: ','
+        unless allowed_page_templates contains page_template
+          assign enable_overlay = false
+        endunless
+      endif
     when 'blog', 'article'
       assign enable_overlay = section.settings.overlay_on_blog
   endcase
@@ -538,6 +546,14 @@
       "id": "overlay_on_page",
       "label": "t:labels.overlay_on_page",
       "default": false
+    },
+    {
+      "type": "text",
+      "id": "overlay_page_templates",
+      "label": "t:labels.overlay_page_templates",
+      "info": "t:labels.overlay_page_templates_info",
+      "placeholder": "about, contact",
+      "visible_if": "{{ section.settings.overlay_on_page }}"
     },
     {
       "type": "checkbox",
