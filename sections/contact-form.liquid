@@ -18,7 +18,7 @@
   assign ph_title = nil
   assign ph_text = nil
   if request.design_mode
-    assign ph_heading = 'editor_placeholders.heading' | t
+    assign ph_heading = 'editor_placeholders.section_heading' | t
     assign ph_description = 'editor_placeholders.contact_intro' | t
     assign ph_title = 'editor_placeholders.contact_title' | t
     assign ph_text = 'editor_placeholders.contact_details' | t
@@ -89,7 +89,7 @@
     {%- if s_heading != blank or section.settings.subheading != blank or s_description != blank -%}
       <div class="contact__header">
         {%- if section.settings.subheading != blank -%}
-          <p class="contact__subheading">{{ section.settings.subheading | escape }}</p>
+          <p class="contact__subheading{% if section.settings.subheading_letter_spacing != blank and section.settings.subheading_letter_spacing != 'none' %} letter-spacing--{{ section.settings.subheading_letter_spacing }}{% endif %}">{{ section.settings.subheading | escape }}</p>
         {%- endif -%}
         {%- if s_heading != blank -%}
           <{{ heading_tag }} class="{{ heading_class }} contact__heading">{{ s_heading }}</{{ heading_tag }}>
@@ -277,6 +277,31 @@
       "type": "text",
       "id": "subheading",
       "label": "t:labels.subheading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_letter_spacing",
+      "label": "t:labels.letter_spacing",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.subheading != blank }}"
     },
     {
       "type": "inline_richtext",

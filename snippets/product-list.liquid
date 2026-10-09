@@ -57,7 +57,7 @@
             <{{ heading_tag }} class="{{ heading_class }} product-list__heading">{{ section.settings.heading | escape }}</{{ heading_tag }}>
           {% endif %}
           {% if section.settings.subheading != blank %}
-            <p class="product-list__subheading">{{ section.settings.subheading | escape }}</p>
+            <p class="product-list__subheading{% if section.settings.subheading_letter_spacing != blank and section.settings.subheading_letter_spacing != 'none' %} letter-spacing--{{ section.settings.subheading_letter_spacing }}{% endif %}">{{ section.settings.subheading | escape }}</p>
           {% endif %}
         </div>
 

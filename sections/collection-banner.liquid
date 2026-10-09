@@ -143,7 +143,7 @@
       <div class="promo-banner__inner">
         <div class="promo-banner__content">
           {%- if s_subheading != blank -%}
-            <p class="hero-banner__subheading letter-spacing--large">{{ s_subheading | escape }}</p>
+            <p class="hero-banner__subheading{% if section.settings.subheading_letter_spacing != blank and section.settings.subheading_letter_spacing != 'none' %} letter-spacing--{{ section.settings.subheading_letter_spacing }}{% endif %}">{{ s_subheading | escape }}</p>
           {%- endif -%}
 
           {%- if heading != blank -%}
@@ -362,6 +362,31 @@
       "id": "subheading",
       "label": "t:labels.subheading",
       "placeholder": "t:editor_placeholders.label"
+    },
+    {
+      "type": "select",
+      "id": "subheading_letter_spacing",
+      "label": "t:labels.letter_spacing",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
+      ],
+      "default": "large",
+      "visible_if": "{{ section.settings.subheading != blank }}"
     },
     {
       "type": "text",

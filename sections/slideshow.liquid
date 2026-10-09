@@ -201,7 +201,7 @@
             <div class="slideshow__inner page-width">
               <div class="slideshow__content">
                 {%- if b_subheading != blank -%}
-                  <p class="slideshow__subheading">{{ b_subheading | escape }}</p>
+                  <p class="slideshow__subheading{% if block.settings.subheading_letter_spacing != blank and block.settings.subheading_letter_spacing != 'none' %} letter-spacing--{{ block.settings.subheading_letter_spacing }}{% endif %}">{{ b_subheading | escape }}</p>
                 {%- endif -%}
                 {%- if b_heading != blank -%}
                   <{{ heading_tag }} class="{{ heading_class }} slideshow__heading{% if section.settings.heading_uppercase %} slideshow__heading--uppercase{% endif %}">
@@ -849,6 +849,31 @@
           "id": "subheading",
           "label": "t:labels.subheading",
           "placeholder": "t:editor_placeholders.label"
+        },
+        {
+          "type": "select",
+          "id": "subheading_letter_spacing",
+          "label": "t:labels.letter_spacing",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:options.letter_spacing.none"
+            },
+            {
+              "value": "small",
+              "label": "t:options.letter_spacing.small"
+            },
+            {
+              "value": "medium",
+              "label": "t:options.letter_spacing.medium"
+            },
+            {
+              "value": "large",
+              "label": "t:options.letter_spacing.large"
+            }
+          ],
+          "default": "none",
+          "visible_if": "{{ block.settings.subheading != blank }}"
         },
         {
           "type": "text",

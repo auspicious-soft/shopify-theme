@@ -91,7 +91,7 @@
   {%- if section.settings.subheading != blank or s_heading != blank or section.settings.description != blank or section.settings.button_label != blank -%}
     <div class="video-section__content">
       {%- if section.settings.subheading != blank -%}
-        <p class="video-section__subheading">{{ section.settings.subheading | escape }}</p>
+        <p class="video-section__subheading{% if section.settings.subheading_letter_spacing != blank and section.settings.subheading_letter_spacing != 'none' %} letter-spacing--{{ section.settings.subheading_letter_spacing }}{% endif %}">{{ section.settings.subheading | escape }}</p>
       {%- endif -%}
       {%- if s_heading != blank -%}
         <{{ heading_tag }} class="{{ heading_class }} video-section__heading">{{ s_heading }}</{{ heading_tag }}>
@@ -460,6 +460,31 @@
       "type": "text",
       "id": "subheading",
       "label": "t:labels.subheading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_letter_spacing",
+      "label": "t:labels.letter_spacing",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.subheading != blank }}"
     },
     {
       "type": "inline_richtext",

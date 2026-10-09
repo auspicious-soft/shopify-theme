@@ -16,9 +16,11 @@
   # Theme editor only: guidance for empty fields. request.design_mode is false
   # on the live store, so these are never shown to customers.
   assign ph_heading = nil
+  assign pb_heading = nil
   assign ph_content = nil
   if request.design_mode
-    assign ph_heading = 'editor_placeholders.question' | t
+    assign ph_heading = 'editor_placeholders.section_heading' | t
+    assign pb_heading = 'editor_placeholders.question' | t
     assign ph_content = 'editor_placeholders.answer' | t
   endif
   assign s_heading = section.settings.heading | default: ph_heading
@@ -50,7 +52,7 @@
       {%- if has_header -%}
         <div class="collapsible__header">
           {%- if section.settings.subheading != blank -%}
-            <p class="collapsible__subheading">{{ section.settings.subheading | escape }}</p>
+            <p class="collapsible__subheading{% if section.settings.subheading_letter_spacing != blank and section.settings.subheading_letter_spacing != 'none' %} letter-spacing--{{ section.settings.subheading_letter_spacing }}{% endif %}">{{ section.settings.subheading | escape }}</p>
           {%- endif -%}
           {%- if s_heading != blank -%}
             <{{ heading_tag }} class="{{ heading_class }} collapsible__heading">{{ s_heading }}</{{ heading_tag }}>
@@ -64,7 +66,7 @@
       <div class="collapsible__rows">
         {%- for block in section.blocks -%}
     {%- liquid
-      assign b_heading = block.settings.heading | default: ph_heading
+      assign b_heading = block.settings.heading | default: pb_heading
       assign b_content = block.settings.content | default: ph_content
     -%}
           {%- liquid
@@ -133,6 +135,31 @@
       "type": "text",
       "id": "subheading",
       "label": "t:labels.subheading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_letter_spacing",
+      "label": "t:labels.letter_spacing",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.subheading != blank }}"
     },
     {
       "type": "inline_richtext",

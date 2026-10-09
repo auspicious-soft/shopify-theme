@@ -133,6 +133,31 @@
     },
     {
       "type": "select",
+      "id": "subheading_letter_spacing",
+      "label": "t:labels.letter_spacing",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.subheading != blank }}"
+    },
+    {
+      "type": "select",
       "id": "heading_alignment",
       "label": "t:sections.multicolumn.heading_alignment",
       "options": [

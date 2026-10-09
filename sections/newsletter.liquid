@@ -60,7 +60,7 @@
             <{{ heading_tag }} class="{{ heading_class }} newsletter__heading">{{ s_heading | escape }}</{{ heading_tag }}>
           {%- endif -%}
           {%- if s_subheading != blank -%}
-            <p class="newsletter__subheading">{{ s_subheading | escape }}</p>
+            <p class="newsletter__subheading{% if section.settings.subheading_letter_spacing != blank and section.settings.subheading_letter_spacing != 'none' %} letter-spacing--{{ section.settings.subheading_letter_spacing }}{% endif %}">{{ s_subheading | escape }}</p>
           {%- endif -%}
           {%- if s_description != blank -%}
             <div class="newsletter__description rte">{{ s_description }}</div>
@@ -212,6 +212,31 @@
       "id": "subheading",
       "label": "t:sections.newsletter.subtitle",
       "placeholder": "t:editor_placeholders.newsletter_text"
+    },
+    {
+      "type": "select",
+      "id": "subheading_letter_spacing",
+      "label": "t:labels.letter_spacing",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.subheading != blank }}"
     },
     {
       "type": "richtext",

@@ -11,10 +11,12 @@
   # Theme editor only: guidance for empty fields. request.design_mode is false
   # on the live store, so these are never shown to customers.
   assign ph_heading = nil
+  assign pb_heading = nil
   assign ph_subheading = nil
   assign ph_button_label = nil
   if request.design_mode
-    assign ph_heading = 'editor_placeholders.tile_heading' | t
+    assign ph_heading = 'editor_placeholders.grid_heading' | t
+    assign pb_heading = 'editor_placeholders.tile_heading' | t
     assign ph_subheading = 'editor_placeholders.label' | t
     assign ph_button_label = 'editor_placeholders.button' | t
   endif
@@ -87,7 +89,7 @@
           <{{ heading_tag }} class="{{ heading_class }} collection-tiles__title">{{ s_heading | escape }}</{{ heading_tag }}>
         {%- endif -%}
         {%- if section.settings.subheading != blank -%}
-          <p class="collection-tiles__subtitle">{{ section.settings.subheading | escape }}</p>
+          <p class="collection-tiles__subtitle{% if section.settings.subheading_letter_spacing != blank and section.settings.subheading_letter_spacing != 'none' %} letter-spacing--{{ section.settings.subheading_letter_spacing }}{% endif %}">{{ section.settings.subheading | escape }}</p>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -99,7 +101,7 @@
       {%- for block in section.blocks -%}
     {%- liquid
       assign b_subheading = block.settings.subheading | default: ph_subheading
-      assign b_heading = block.settings.heading | default: ph_heading
+      assign b_heading = block.settings.heading | default: pb_heading
       assign b_button_label = block.settings.button_label | default: ph_button_label
     -%}
         {%- liquid
@@ -112,7 +114,7 @@
             assign collection = collections[collection_handle]
           endif
           assign image = block.settings.image | default: collection.featured_image
-          assign heading = block.settings.heading | default: collection.title | default: ph_heading
+          assign heading = block.settings.heading | default: collection.title | default: pb_heading
           assign tile_ratio = image.aspect_ratio | default: 0.8
           assign show_video = false
           if block.settings.media_type == 'video'
@@ -154,7 +156,7 @@
 
           <div class="collection-tile__content">
             {%- if b_subheading != blank -%}
-              <p class="collection-tile__subheading letter-spacing--large">{{ b_subheading | escape }}</p>
+              <p class="collection-tile__subheading{% if block.settings.subheading_letter_spacing != blank and block.settings.subheading_letter_spacing != 'none' %} letter-spacing--{{ block.settings.subheading_letter_spacing }}{% endif %}">{{ b_subheading | escape }}</p>
             {%- endif -%}
             {%- if heading != blank -%}
               <h3 class="collection-tile__heading collection-tile__heading--{{ section.settings.heading_size }}{% if section.settings.heading_uppercase %} collection-tile__heading--uppercase{% endif %}">
@@ -263,6 +265,31 @@
       "type": "text",
       "id": "subheading",
       "label": "t:labels.subheading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_letter_spacing",
+      "label": "t:labels.letter_spacing",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.subheading != blank }}"
     },
     {
       "type": "select",
@@ -711,6 +738,31 @@
           "id": "subheading",
           "label": "t:labels.subheading",
           "placeholder": "t:editor_placeholders.label"
+        },
+        {
+          "type": "select",
+          "id": "subheading_letter_spacing",
+          "label": "t:labels.letter_spacing",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:options.letter_spacing.none"
+            },
+            {
+              "value": "small",
+              "label": "t:options.letter_spacing.small"
+            },
+            {
+              "value": "medium",
+              "label": "t:options.letter_spacing.medium"
+            },
+            {
+              "value": "large",
+              "label": "t:options.letter_spacing.large"
+            }
+          ],
+          "default": "large",
+          "visible_if": "{{ block.settings.subheading != blank }}"
         },
         {
           "type": "text",
