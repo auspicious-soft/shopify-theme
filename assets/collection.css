@@ -143,8 +143,7 @@
 }
 
 .collection-banner__description {
-  max-width: 42rem;
-  color: color-mix(in srgb, currentColor 80%, transparent);
+  max-width: 40rem;
 }
 
 .collection-banner__description > * {
