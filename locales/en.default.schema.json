@@ -632,7 +632,7 @@
     "collection_banner": {
       "name": "Image banner",
       "collection": "Collection",
-      "collection_info": "Fills in the image, heading and link when those are left empty",
+      "collection_info": "Optional. Fills in the image, heading and link when those are left empty. To link to any other page, use the link setting below",
       "header_image": "Image",
       "image": "Image",
       "image_info": "Leave empty to use the collection image",
@@ -653,7 +653,7 @@
       "size_large": "Large",
       "content_width": "Content max width",
       "button_label_info": "Leave empty to hide the button",
-      "button_link_info": "Leave empty to link to the collection",
+      "button_link_info": "Any page, product, collection, blog post or web address. Leave empty to link to the collection",
       "button_size": "Button size",
       "button_color_scheme": "Button color scheme",
       "full_link": "Make whole banner clickable",

@@ -60,7 +60,7 @@
                 <div class="cart-drawer__empty">
                   <span class="cart-drawer__empty-icon">{{ 'icon-cart.svg' | inline_asset_content }}</span>
                   <p class="cart-drawer__empty-title">{{ 'cart.empty' | t }}</p>
-                  <a href="{{ routes.all_products_collection_url }}" class="button button--primary cart-drawer__empty-button">
+                  <a href="{{ section.settings.continue_url | default: routes.all_products_collection_url }}" class="button button--primary cart-drawer__empty-button">
                     {{- 'cart.continue_shopping' | t -}}
                   </a>
                 </div>
@@ -185,6 +185,13 @@
 {% schema %}
 {
   "name": "t:settings_schema.cart.name",
-  "settings": []
+  "settings": [
+    {
+      "type": "url",
+      "id": "continue_url",
+      "label": "t:sections.cart.continue_url",
+      "info": "t:sections.cart.continue_url_info"
+    }
+  ]
 }
 {% endschema %}

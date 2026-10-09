@@ -112,29 +112,29 @@
 
 /* Content position: vertical on the image banner, horizontal on both styles.
    Breadcrumbs (align: auto) follow the text. */
-.collection-banner--image:is(.collection-banner--top-left, .collection-banner--top-center, .collection-banner--top-right) {
+.collection-banner--image.collection-banner--v-top {
   align-items: flex-start;
 }
 
-.collection-banner--image:is(.collection-banner--middle-left, .collection-banner--middle-center, .collection-banner--middle-right) {
+.collection-banner--image.collection-banner--v-middle {
   align-items: center;
 }
 
-.collection-banner:is(.collection-banner--top-center, .collection-banner--middle-center, .collection-banner--bottom-center) .collection-banner__content {
+.collection-banner--h-center .collection-banner__content {
   align-items: center;
   text-align: center;
 }
 
-.collection-banner:is(.collection-banner--top-right, .collection-banner--middle-right, .collection-banner--bottom-right) .collection-banner__content {
+.collection-banner--h-right .collection-banner__content {
   align-items: flex-end;
   text-align: end;
 }
 
-.collection-banner:is(.collection-banner--top-center, .collection-banner--middle-center, .collection-banner--bottom-center) .breadcrumbs--align-auto .breadcrumbs__list {
+.collection-banner--h-center .breadcrumbs--align-auto .breadcrumbs__list {
   justify-content: center;
 }
 
-.collection-banner:is(.collection-banner--top-right, .collection-banner--middle-right, .collection-banner--bottom-right) .breadcrumbs--align-auto .breadcrumbs__list {
+.collection-banner--h-right .breadcrumbs--align-auto .breadcrumbs__list {
   justify-content: flex-end;
 }
 

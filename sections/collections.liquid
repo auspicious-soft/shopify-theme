@@ -78,7 +78,7 @@
   {%- if section.settings.show_banner -%}
     {%- comment -%} Banner: full width at the top, with the page header on it. {%- endcomment -%}
     <div
-      class="collection-list-banner collection-list-banner--{{ section.settings.banner_height }} collection-list-banner--{{ section.settings.banner_content_position | default: 'bottom-left' }} color-{{ section.settings.banner_color_scheme.id }}"
+      class="collection-list-banner collection-list-banner--{{ section.settings.banner_height }} collection-list-banner--h-{{ section.settings.content_position_horizontal | default: 'left' }} collection-list-banner--v-{{ section.settings.content_position_vertical | default: 'bottom' }} color-{{ section.settings.banner_color_scheme.id }}"
       style="--banner-overlay: {{ section.settings.banner_overlay }}%;"
     >
       <div class="collection-list-banner__media">
@@ -387,7 +387,7 @@
     {
       "type": "select",
       "id": "heading_alignment",
-      "label": "t:labels.alignment",
+      "label": "t:sections.multicolumn.heading_alignment",
       "options": [
         {
           "value": "left",
@@ -459,48 +459,44 @@
     },
     {
       "type": "select",
-      "id": "banner_content_position",
-      "label": "t:sections.collections.banner_content_position",
-      "info": "t:sections.collections.banner_content_position_info",
-      "default": "bottom-left",
+      "id": "content_position_horizontal",
+      "label": "t:labels.content_position_horizontal",
       "options": [
         {
-          "value": "top-left",
-          "label": "t:sections.collections.position.top_left"
+          "value": "left",
+          "label": "t:options.alignment.left"
         },
         {
-          "value": "top-center",
-          "label": "t:sections.collections.position.top_center"
+          "value": "center",
+          "label": "t:options.alignment.center"
         },
         {
-          "value": "top-right",
-          "label": "t:sections.collections.position.top_right"
-        },
-        {
-          "value": "middle-left",
-          "label": "t:sections.collections.position.middle_left"
-        },
-        {
-          "value": "middle-center",
-          "label": "t:sections.collections.position.middle_center"
-        },
-        {
-          "value": "middle-right",
-          "label": "t:sections.collections.position.middle_right"
-        },
-        {
-          "value": "bottom-left",
-          "label": "t:sections.collections.position.bottom_left"
-        },
-        {
-          "value": "bottom-center",
-          "label": "t:sections.collections.position.bottom_center"
-        },
-        {
-          "value": "bottom-right",
-          "label": "t:sections.collections.position.bottom_right"
+          "value": "right",
+          "label": "t:options.alignment.right"
         }
       ],
+      "default": "left",
+      "visible_if": "{{ section.settings.show_banner }}"
+    },
+    {
+      "type": "select",
+      "id": "content_position_vertical",
+      "label": "t:labels.content_position_vertical",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:options.vertical_position.top"
+        },
+        {
+          "value": "middle",
+          "label": "t:options.vertical_position.middle"
+        },
+        {
+          "value": "bottom",
+          "label": "t:options.vertical_position.bottom"
+        }
+      ],
+      "default": "bottom",
       "visible_if": "{{ section.settings.show_banner }}"
     },
     {

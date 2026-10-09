@@ -92,41 +92,41 @@
 /* Banner > Content position: vertical (top / middle / bottom) and
    horizontal (left / center / right). Horizontal overrides the heading
    alignment while the banner is on. */
-.collection-list-banner[class*='--top-'] {
+.collection-list-banner--v-top {
   align-items: flex-start;
 }
 
-.collection-list-banner[class*='--middle-'] {
+.collection-list-banner--v-middle {
   align-items: center;
 }
 
-.collection-list-banner[class*='--bottom-'] {
+.collection-list-banner--v-bottom {
   align-items: flex-end;
 }
 
-.collection-list-banner[class*='-left'] .collection-list-page__header {
+.collection-list-banner--h-left .collection-list-page__header {
   align-items: flex-start;
   text-align: start;
 }
 
-.collection-list-banner[class*='-center'] .collection-list-page__header {
+.collection-list-banner--h-center .collection-list-page__header {
   align-items: center;
   margin-inline: auto;
   text-align: center;
 }
 
-.collection-list-banner[class*='-right'] .collection-list-page__header {
+.collection-list-banner--h-right .collection-list-page__header {
   align-items: flex-end;
   margin-inline-start: auto;
   text-align: end;
 }
 
 /* Breadcrumbs set to "Match the page title" follow the position. */
-.collection-list-banner[class*='-center'] .breadcrumbs--align-auto .breadcrumbs__list {
+.collection-list-banner--h-center .breadcrumbs--align-auto .breadcrumbs__list {
   justify-content: center;
 }
 
-.collection-list-banner[class*='-right'] .breadcrumbs--align-auto .breadcrumbs__list {
+.collection-list-banner--h-right .breadcrumbs--align-auto .breadcrumbs__list {
   justify-content: flex-end;
 }
 
