@@ -20,7 +20,7 @@
         "banner_placeholder": true,
         "banner_height": "medium",
         "banner_overlay": 40,
-        "banner_content_position": "bottom-left",
+        "banner_content_position": "middle-center",
         "show_description": true,
         "banner_color_scheme": "scheme-2",
         "products_per_page": 16,
