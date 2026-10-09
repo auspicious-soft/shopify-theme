@@ -10,6 +10,21 @@
   Styles live in assets/image-with-text.css; the image / video uses
   snippets/banner-media.liquid (assets/banner-media.css).
 {% endcomment %}
+{%- liquid
+  # Theme editor only: guidance for empty fields. request.design_mode is false
+  # on the live store, so these are never shown to customers.
+  assign ph_caption = nil
+  assign ph_heading = nil
+  assign ph_text = nil
+  assign ph_button_label = nil
+  if request.design_mode
+    assign ph_caption = 'editor_placeholders.caption' | t
+    assign ph_heading = 'editor_placeholders.heading' | t
+    assign ph_text = 'editor_placeholders.text' | t
+    assign ph_button_label = 'editor_placeholders.button' | t
+  endif
+
+-%}
 
 {{ 'image-with-text.css' | asset_url | stylesheet_tag }}
 {{ 'banner-media.css' | asset_url | stylesheet_tag }}
@@ -99,22 +114,28 @@
       <div class="image-with-text__content-wrap">
         <div class="image-with-text__content{% if card %} color-{{ section.settings.content_color_scheme.id }}{% endif %}">
           {%- for block in section.blocks -%}
+    {%- liquid
+      assign b_caption = block.settings.caption | default: ph_caption
+      assign b_heading = block.settings.heading | default: ph_heading
+      assign b_text = block.settings.text | default: ph_text
+      assign b_button_label = block.settings.button_label | default: ph_button_label
+    -%}
             {%- case block.type -%}
               {%- when '@app' -%}
                 {% render block %}
 
               {%- when 'caption' -%}
-                {%- if block.settings.caption != blank -%}
+                {%- if b_caption != blank -%}
                   <p
                     class="image-with-text__caption image-with-text__caption--{{ block.settings.style }} image-with-text__caption--{{ block.settings.size }}{% if block.settings.letter_spacing != blank and block.settings.letter_spacing != 'none' %} letter-spacing--{{ block.settings.letter_spacing }}{% endif %}"
                     {{ block.shopify_attributes }}
                   >
-                    {{- block.settings.caption | escape -}}
+                    {{- b_caption | escape -}}
                   </p>
                 {%- endif -%}
 
               {%- when 'heading' -%}
-                {%- if block.settings.heading != blank -%}
+                {%- if b_heading != blank -%}
                   {%- liquid
                     assign heading_tag = block.settings.heading_tag | default: 'h2'
                     assign heading_class = block.settings.heading_class | default: heading_tag
@@ -123,21 +144,21 @@
                     class="{{ heading_class }} image-with-text__heading{% if block.settings.uppercase %} image-with-text__heading--uppercase{% endif %}"
                     {{ block.shopify_attributes }}
                   >
-                    {{- block.settings.heading -}}
+                    {{- b_heading -}}
                   </{{ heading_tag }}>
                 {%- endif -%}
 
               {%- when 'text' -%}
-                {%- if block.settings.text != blank -%}
+                {%- if b_text != blank -%}
                   <div class="image-with-text__text rte image-with-text__text--{{ block.settings.size }}" {{ block.shopify_attributes }}>
-                    {{- block.settings.text -}}
+                    {{- b_text -}}
                   </div>
                 {%- endif -%}
 
               {%- when 'buttons' -%}
-                {%- if block.settings.button_label != blank or block.settings.button_label_2 != blank -%}
+                {%- if b_button_label != blank or block.settings.button_label_2 != blank -%}
                   <div class="image-with-text__buttons" {{ block.shopify_attributes }}>
-                    {%- if block.settings.button_label != blank -%}
+                    {%- if b_button_label != blank -%}
                       <a
                         {% if block.settings.button_link != blank %}
                           href="{{ block.settings.button_link }}"
@@ -146,7 +167,7 @@
                         {% endif %}
                         class="button button--{{ block.settings.button_style }} image-with-text__button"
                       >
-                        {{- block.settings.button_label | escape -}}
+                        {{- b_button_label | escape -}}
                       </a>
                     {%- endif -%}
                     {%- if block.settings.button_label_2 != blank -%}
@@ -590,7 +611,7 @@
           "type": "text",
           "id": "caption",
           "label": "t:sections.rich_text.blocks.caption",
-          "default": "New collection"
+          "placeholder": "t:editor_placeholders.caption"
         },
         {
           "type": "select",
@@ -661,8 +682,7 @@
         {
           "type": "inline_richtext",
           "id": "heading",
-          "label": "t:labels.heading",
-          "default": "Image with text"
+          "label": "t:labels.heading"
         },
         {
           "type": "select",
@@ -745,8 +765,7 @@
         {
           "type": "richtext",
           "id": "text",
-          "label": "t:labels.text",
-          "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+          "label": "t:labels.text"
         },
         {
           "type": "select",
@@ -779,7 +798,7 @@
           "id": "button_label",
           "label": "t:sections.slideshow.button_label",
           "info": "t:sections.collection_banner.button_label_info",
-          "default": "Shop now"
+          "placeholder": "t:editor_placeholders.button"
         },
         {
           "type": "url",

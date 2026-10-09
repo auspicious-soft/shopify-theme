@@ -8,6 +8,18 @@
   uses its own section settings instead of blocks, since it only ever
   shows a single message.
 {% endcomment %}
+{%- liquid
+  # Theme editor only: guidance for empty fields. request.design_mode is false
+  # on the live store, so these are never shown to customers.
+  assign ph_static_text = nil
+  assign ph_static_button_text = nil
+  if request.design_mode
+    assign ph_static_text = 'editor_placeholders.announcement' | t
+    assign ph_static_button_text = 'editor_placeholders.button' | t
+  endif
+  assign s_static_text = section.settings.static_text | default: ph_static_text
+  assign s_static_button_text = section.settings.static_button_text | default: ph_static_button_text
+-%}
 
 {{ 'announcement-bar.css' | asset_url | stylesheet_tag }}
 {{ 'announcement-item.css' | asset_url | stylesheet_tag }}
@@ -215,14 +227,14 @@
         {% when 'static' %}
           <div class="announcement-bar__static{% if section.settings.static_enable_button and section.settings.static_button_url != blank %} announcement-bar__static--with-button{% else %} announcement-bar__static--centered{% endif %}">
             <div class="announcement-bar__static-content" style="text-align: {% if section.settings.static_enable_button and section.settings.static_button_url != blank %}left{% else %}{{ section.settings.static_text_alignment }}{% endif %};">
-              <span class="announcement-bar__text">{{ section.settings.static_text }}</span>
+              <span class="announcement-bar__text">{{ s_static_text }}</span>
             </div>
             {% if section.settings.static_enable_button and section.settings.static_button_url != blank %}
               <a
                 href="{{ section.settings.static_button_url }}"
                 class="announcement-bar__button"
               >
-                {{ section.settings.static_button_text }}
+                {{ s_static_button_text }}
               </a>
             {% endif %}
           </div>
@@ -245,9 +257,18 @@
       "id": "layout_mode",
       "label": "t:labels.announcement_bar_mode",
       "options": [
-        { "value": "marquee", "label": "t:options.announcement_bar_mode.marquee" },
-        { "value": "slider", "label": "t:options.announcement_bar_mode.slider" },
-        { "value": "static", "label": "t:options.announcement_bar_mode.static" }
+        {
+          "value": "marquee",
+          "label": "t:options.announcement_bar_mode.marquee"
+        },
+        {
+          "value": "slider",
+          "label": "t:options.announcement_bar_mode.slider"
+        },
+        {
+          "value": "static",
+          "label": "t:options.announcement_bar_mode.static"
+        }
       ],
       "default": "marquee"
     },
@@ -271,8 +292,14 @@
       "id": "marquee_direction",
       "label": "t:labels.marquee_direction",
       "options": [
-        { "value": "left", "label": "t:options.left_right.left" },
-        { "value": "right", "label": "t:options.left_right.right" }
+        {
+          "value": "left",
+          "label": "t:options.left_right.left"
+        },
+        {
+          "value": "right",
+          "label": "t:options.left_right.right"
+        }
       ],
       "default": "left",
       "visible_if": "{{ section.settings.layout_mode == 'marquee' }}"
@@ -293,11 +320,26 @@
       "id": "marquee_separator",
       "label": "t:labels.separator_style",
       "options": [
-        { "value": "none", "label": "t:options.separator_style.none" },
-        { "value": "dot", "label": "t:options.separator_style.dot" },
-        { "value": "line", "label": "t:options.separator_style.line" },
-        { "value": "slash", "label": "t:options.separator_style.slash" },
-        { "value": "pipe", "label": "t:options.separator_style.pipe" }
+        {
+          "value": "none",
+          "label": "t:options.separator_style.none"
+        },
+        {
+          "value": "dot",
+          "label": "t:options.separator_style.dot"
+        },
+        {
+          "value": "line",
+          "label": "t:options.separator_style.line"
+        },
+        {
+          "value": "slash",
+          "label": "t:options.separator_style.slash"
+        },
+        {
+          "value": "pipe",
+          "label": "t:options.separator_style.pipe"
+        }
       ],
       "default": "dot",
       "visible_if": "{{ section.settings.layout_mode == 'marquee' }}"
@@ -315,9 +357,18 @@
       "label": "t:labels.alignment",
       "info": "t:labels.marquee_alignment_info",
       "options": [
-        { "value": "left", "label": "t:options.alignment.left" },
-        { "value": "center", "label": "t:options.alignment.center" },
-        { "value": "right", "label": "t:options.alignment.right" }
+        {
+          "value": "left",
+          "label": "t:options.alignment.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.alignment.center"
+        },
+        {
+          "value": "right",
+          "label": "t:options.alignment.right"
+        }
       ],
       "default": "left",
       "visible_if": "{{ section.settings.layout_mode == 'marquee' }}"
@@ -360,8 +411,14 @@
       "id": "slider_direction",
       "label": "t:labels.slider_direction",
       "options": [
-        { "value": "up", "label": "t:options.up_down.up" },
-        { "value": "down", "label": "t:options.up_down.down" }
+        {
+          "value": "up",
+          "label": "t:options.up_down.up"
+        },
+        {
+          "value": "down",
+          "label": "t:options.up_down.down"
+        }
       ],
       "default": "up",
       "visible_if": "{{ section.settings.layout_mode == 'slider' and section.settings.slider_autoplay }}"
@@ -378,9 +435,18 @@
       "id": "slider_text_alignment",
       "label": "t:labels.alignment",
       "options": [
-        { "value": "left", "label": "t:options.alignment.left" },
-        { "value": "center", "label": "t:options.alignment.center" },
-        { "value": "right", "label": "t:options.alignment.right" }
+        {
+          "value": "left",
+          "label": "t:options.alignment.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.alignment.center"
+        },
+        {
+          "value": "right",
+          "label": "t:options.alignment.right"
+        }
       ],
       "default": "center",
       "visible_if": "{{ section.settings.layout_mode == 'slider' }}"
@@ -393,8 +459,8 @@
       "type": "text",
       "id": "static_text",
       "label": "t:labels.announcement_text",
-      "default": "Free shipping on orders above $50",
-      "visible_if": "{{ section.settings.layout_mode == 'static' }}"
+      "visible_if": "{{ section.settings.layout_mode == 'static' }}",
+      "placeholder": "t:editor_placeholders.announcement"
     },
     {
       "type": "checkbox",
@@ -407,8 +473,8 @@
       "type": "text",
       "id": "static_button_text",
       "label": "t:labels.button_text",
-      "default": "Shop now",
-      "visible_if": "{{ section.settings.layout_mode == 'static' and section.settings.static_enable_button }}"
+      "visible_if": "{{ section.settings.layout_mode == 'static' and section.settings.static_enable_button }}",
+      "placeholder": "t:editor_placeholders.button"
     },
     {
       "type": "url",
@@ -421,9 +487,18 @@
       "id": "static_text_alignment",
       "label": "t:labels.alignment",
       "options": [
-        { "value": "left", "label": "t:options.alignment.left" },
-        { "value": "center", "label": "t:options.alignment.center" },
-        { "value": "right", "label": "t:options.alignment.right" }
+        {
+          "value": "left",
+          "label": "t:options.alignment.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.alignment.center"
+        },
+        {
+          "value": "right",
+          "label": "t:options.alignment.right"
+        }
       ],
       "default": "center",
       "visible_if": "{{ section.settings.layout_mode == 'static' and section.settings.static_enable_button == false }}"
@@ -502,10 +577,22 @@
       "id": "font_weight",
       "label": "t:labels.font_weight",
       "options": [
-        { "value": "400", "label": "t:options.font_weight.regular" },
-        { "value": "500", "label": "t:options.font_weight.medium" },
-        { "value": "600", "label": "t:options.font_weight.semibold" },
-        { "value": "700", "label": "t:options.font_weight.bold" }
+        {
+          "value": "400",
+          "label": "t:options.font_weight.regular"
+        },
+        {
+          "value": "500",
+          "label": "t:options.font_weight.medium"
+        },
+        {
+          "value": "600",
+          "label": "t:options.font_weight.semibold"
+        },
+        {
+          "value": "700",
+          "label": "t:options.font_weight.bold"
+        }
       ],
       "default": "400"
     },
@@ -514,8 +601,14 @@
       "id": "width",
       "label": "t:labels.section_width",
       "options": [
-        { "value": "full", "label": "t:options.section_width.full" },
-        { "value": "page", "label": "t:options.section_width.page" }
+        {
+          "value": "full",
+          "label": "t:options.section_width.full"
+        },
+        {
+          "value": "page",
+          "label": "t:options.section_width.page"
+        }
       ],
       "default": "page"
     },
@@ -594,9 +687,24 @@
         "text_color": "#ffffff"
       },
       "blocks": [
-        { "type": "announcement-item", "settings": { "text": "Free shipping on orders above $50" } },
-        { "type": "announcement-item", "settings": { "text": "New collection available" } },
-        { "type": "announcement-item", "settings": { "text": "Get 10% off today" } }
+        {
+          "type": "announcement-item",
+          "settings": {
+            "text": "Free shipping on orders above $50"
+          }
+        },
+        {
+          "type": "announcement-item",
+          "settings": {
+            "text": "New collection available"
+          }
+        },
+        {
+          "type": "announcement-item",
+          "settings": {
+            "text": "Get 10% off today"
+          }
+        }
       ]
     }
   ]

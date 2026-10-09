@@ -14,6 +14,15 @@
   Styles: assets/video.css. Click to play: assets/video.js (<video-player>).
   Background mode uses snippets/banner-media.liquid (assets/banner-media.css).
 {% endcomment %}
+{%- liquid
+  # Theme editor only: guidance for empty fields. request.design_mode is false
+  # on the live store, so these are never shown to customers.
+  assign ph_heading = nil
+  if request.design_mode
+    assign ph_heading = 'editor_placeholders.video_heading' | t
+  endif
+  assign s_heading = section.settings.heading | default: ph_heading
+-%}
 
 {{ 'video.css' | asset_url | stylesheet_tag }}
 {{ 'banner-media.css' | asset_url | stylesheet_tag }}
@@ -73,19 +82,19 @@
     assign cover = video.preview_image
   endif
   assign video_title = 'video.play' | t
-  if section.settings.heading != blank
-    assign video_title = section.settings.heading | strip_html
+  if s_heading != blank
+    assign video_title = s_heading | strip_html
   endif
 -%}
 
 {%- capture content -%}
-  {%- if section.settings.subheading != blank or section.settings.heading != blank or section.settings.description != blank or section.settings.button_label != blank -%}
+  {%- if section.settings.subheading != blank or s_heading != blank or section.settings.description != blank or section.settings.button_label != blank -%}
     <div class="video-section__content">
       {%- if section.settings.subheading != blank -%}
         <p class="video-section__subheading">{{ section.settings.subheading | escape }}</p>
       {%- endif -%}
-      {%- if section.settings.heading != blank -%}
-        <{{ heading_tag }} class="{{ heading_class }} video-section__heading">{{ section.settings.heading }}</{{ heading_tag }}>
+      {%- if s_heading != blank -%}
+        <{{ heading_tag }} class="{{ heading_class }} video-section__heading">{{ s_heading }}</{{ heading_tag }}>
       {%- endif -%}
       {%- if section.settings.description != blank -%}
         <div class="video-section__description rte">{{ section.settings.description }}</div>
@@ -455,8 +464,7 @@
     {
       "type": "inline_richtext",
       "id": "heading",
-      "label": "t:labels.heading",
-      "default": "Watch the story"
+      "label": "t:labels.heading"
     },
     {
       "type": "select",

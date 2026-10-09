@@ -4,6 +4,21 @@
   typography (h2), global .button styling and color scheme system instead
   of introducing one-off design tokens.
 {% endcomment %}
+{%- liquid
+  # Theme editor only: guidance for empty fields. request.design_mode is false
+  # on the live store, so these are never shown to customers.
+  assign ph_heading = nil
+  assign ph_subheading = nil
+  assign ph_button_text = nil
+  if request.design_mode
+    assign ph_heading = 'editor_placeholders.banner_heading' | t
+    assign ph_subheading = 'editor_placeholders.banner_text' | t
+    assign ph_button_text = 'editor_placeholders.button' | t
+  endif
+  assign s_heading = section.settings.heading | default: ph_heading
+  assign s_subheading = section.settings.subheading | default: ph_subheading
+  assign s_button_text = section.settings.button_text | default: ph_button_text
+-%}
 
 {{ 'hero-banner.css' | asset_url | stylesheet_tag }}
 {{ 'banner-media.css' | asset_url | stylesheet_tag }}
@@ -86,7 +101,7 @@
       video: section.settings.video,
       mobile_video: section.settings.mobile_video,
       video_url: section.settings.video_url,
-      alt: section.settings.heading,
+      alt: s_heading,
       eager: true
     %}
   </div>
@@ -94,22 +109,22 @@
 
   <div class="hero-banner__inner page-width">
     <div class="hero-banner__content">
-      {% if section.settings.heading != blank %}
+      {% if s_heading != blank %}
         {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
         {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
-        <{{ heading_tag }} class="{{ heading_class }} hero-banner__heading">{{ section.settings.heading }}</{{ heading_tag }}>
+        <{{ heading_tag }} class="{{ heading_class }} hero-banner__heading">{{ s_heading }}</{{ heading_tag }}>
       {% endif %}
 
-      {% if section.settings.subheading != blank %}
-        <p class="hero-banner__subheading letter-spacing--large">{{ section.settings.subheading }}</p>
+      {% if s_subheading != blank %}
+        <p class="hero-banner__subheading letter-spacing--large">{{ s_subheading }}</p>
       {% endif %}
 
-      {% if section.settings.enable_button and section.settings.button_text != blank %}
+      {% if section.settings.enable_button and s_button_text != blank %}
         <a
           href="{{ section.settings.button_url | default: '#' }}"
           class="button button--{{ section.settings.button_style }} hero-banner__button color-{{ section.settings.button_color_scheme.id }}"
         >
-          {{ section.settings.button_text }}
+          {{ s_button_text }}
         </a>
       {% endif %}
     </div>
@@ -240,7 +255,7 @@
       "type": "text",
       "id": "heading",
       "label": "t:labels.heading",
-      "default": "End of summer sale"
+      "placeholder": "t:editor_placeholders.banner_heading"
     },
     {
       "type": "select",
@@ -312,7 +327,7 @@
       "type": "text",
       "id": "subheading",
       "label": "t:labels.subheading",
-      "default": "Up to 40% off"
+      "placeholder": "t:editor_placeholders.banner_text"
     },
     {
       "type": "color",
@@ -443,8 +458,8 @@
       "type": "text",
       "id": "button_text",
       "label": "t:labels.button_text",
-      "default": "Shop now",
-      "visible_if": "{{ section.settings.enable_button }}"
+      "visible_if": "{{ section.settings.enable_button }}",
+      "placeholder": "t:editor_placeholders.button"
     },
     {
       "type": "url",

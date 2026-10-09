@@ -7,6 +7,15 @@
   pixels per second, so it feels the same with 3 logos or 30. Pauses on
   hover (optional) and stands still for shoppers who prefer reduced motion.
 {% endcomment %}
+{%- liquid
+  # Theme editor only: guidance for empty fields. request.design_mode is false
+  # on the live store, so these are never shown to customers.
+  assign ph_heading = nil
+  if request.design_mode
+    assign ph_heading = 'editor_placeholders.logos_heading' | t
+  endif
+  assign s_heading = section.settings.heading | default: ph_heading
+-%}
 
 {{ 'logo-marquee.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'logo-marquee.js' | asset_url }}" defer></script>
@@ -33,11 +42,11 @@
     --logo-opacity: {{ section.settings.logo_opacity | divided_by: 100.0 }};
   "
 >
-  {%- if section.settings.heading != blank -%}
+  {%- if s_heading != blank -%}
     <div class="page-width logo-marquee__header logo-marquee__header--{{ section.settings.heading_alignment }}">
       {%- assign heading_tag = section.settings.heading_tag | default: 'h2' -%}
       {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
-      <{{ heading_tag }} class="{{ heading_class }} logo-marquee__heading">{{ section.settings.heading | escape }}</{{ heading_tag }}>
+      <{{ heading_tag }} class="{{ heading_class }} logo-marquee__heading">{{ s_heading | escape }}</{{ heading_tag }}>
     </div>
   {%- endif -%}
 
@@ -113,7 +122,7 @@
       "type": "text",
       "id": "heading",
       "label": "t:labels.heading",
-      "default": "As featured in"
+      "placeholder": "t:editor_placeholders.logos_heading"
     },
     {
       "type": "select",

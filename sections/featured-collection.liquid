@@ -10,6 +10,15 @@
     the next card in the mobile carousel).
   Shows placeholder cards in the theme editor until a collection is chosen.
 {% endcomment %}
+{%- liquid
+  # Theme editor only: guidance for empty fields. request.design_mode is false
+  # on the live store, so these are never shown to customers.
+  assign ph_heading = nil
+  if request.design_mode
+    assign ph_heading = 'editor_placeholders.products_heading' | t
+  endif
+  assign s_heading = section.settings.heading | default: ph_heading
+-%}
 
 {{ 'featured-collection.css' | asset_url | stylesheet_tag }}
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
@@ -99,11 +108,11 @@
     "
   >
     <div class="{{ container_class }}">
-      {%- if section.settings.heading != blank or section.settings.subheading != blank or arrows == 'top' or section.settings.view_all_style == 'link' -%}
+      {%- if s_heading != blank or section.settings.subheading != blank or arrows == 'top' or section.settings.view_all_style == 'link' -%}
         <div class="fc__header fc__header--{{ section.settings.heading_alignment }}">
           <div class="fc__titles">
-            {%- if section.settings.heading != blank -%}
-              <{{ heading_tag }} class="{{ heading_class }} fc__heading">{{ section.settings.heading | escape }}</{{ heading_tag }}>
+            {%- if s_heading != blank -%}
+              <{{ heading_tag }} class="{{ heading_class }} fc__heading">{{ s_heading | escape }}</{{ heading_tag }}>
             {%- endif -%}
             {%- if section.settings.subheading != blank -%}
               <p class="fc__subheading">{{ section.settings.subheading | escape }}</p>
@@ -188,7 +197,7 @@
       "type": "text",
       "id": "heading",
       "label": "t:labels.heading",
-      "default": "Sale"
+      "placeholder": "t:editor_placeholders.products_heading"
     },
     {
       "type": "select",

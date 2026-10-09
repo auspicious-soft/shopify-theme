@@ -12,6 +12,17 @@
   Styles live in assets/collapsible-content.css; icons come from
   snippets/icon-library.liquid.
 {% endcomment %}
+{%- liquid
+  # Theme editor only: guidance for empty fields. request.design_mode is false
+  # on the live store, so these are never shown to customers.
+  assign ph_heading = nil
+  assign ph_content = nil
+  if request.design_mode
+    assign ph_heading = 'editor_placeholders.question' | t
+    assign ph_content = 'editor_placeholders.answer' | t
+  endif
+  assign s_heading = section.settings.heading | default: ph_heading
+-%}
 
 {{ 'collapsible-content.css' | asset_url | stylesheet_tag }}
 
@@ -20,7 +31,7 @@
   assign heading_tag = section.settings.heading_tag | default: 'h2'
   assign heading_class = section.settings.heading_class | default: heading_tag
   assign has_header = false
-  if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank
+  if s_heading != blank or section.settings.subheading != blank or section.settings.description != blank
     assign has_header = true
   endif
 -%}
@@ -41,8 +52,8 @@
           {%- if section.settings.subheading != blank -%}
             <p class="collapsible__subheading">{{ section.settings.subheading | escape }}</p>
           {%- endif -%}
-          {%- if section.settings.heading != blank -%}
-            <{{ heading_tag }} class="{{ heading_class }} collapsible__heading">{{ section.settings.heading }}</{{ heading_tag }}>
+          {%- if s_heading != blank -%}
+            <{{ heading_tag }} class="{{ heading_class }} collapsible__heading">{{ s_heading }}</{{ heading_tag }}>
           {%- endif -%}
           {%- if section.settings.description != blank -%}
             <div class="collapsible__description rte">{{ section.settings.description }}</div>
@@ -52,6 +63,10 @@
 
       <div class="collapsible__rows">
         {%- for block in section.blocks -%}
+    {%- liquid
+      assign b_heading = block.settings.heading | default: ph_heading
+      assign b_content = block.settings.content | default: ph_content
+    -%}
           {%- liquid
             assign open = false
             if block.settings.open
@@ -83,13 +98,13 @@
               {%- elsif block.settings.icon != 'none' -%}
                 <span class="collapsible__icon">{% render 'icon-library', icon: block.settings.icon %}</span>
               {%- endif -%}
-              <span class="collapsible__title{% if section.settings.row_heading_size != 'default' %} {{ section.settings.row_heading_size }}{% endif %}">{{ block.settings.heading | default: block.settings.page.title | escape }}</span>
+              <span class="collapsible__title{% if section.settings.row_heading_size != 'default' %} {{ section.settings.row_heading_size }}{% endif %}">{{ b_heading | default: block.settings.page.title | escape }}</span>
               <span class="collapsible__toggle" aria-hidden="true"></span>
             </summary>
 
             <div class="collapsible__content">
               <div class="collapsible__content-inner rte">
-                {{- block.settings.content -}}
+                {{- b_content -}}
                 {%- if block.settings.page != blank -%}
                   {{ block.settings.page.content }}
                 {%- endif -%}
@@ -122,8 +137,7 @@
     {
       "type": "inline_richtext",
       "id": "heading",
-      "label": "t:labels.heading",
-      "default": "Frequently asked questions"
+      "label": "t:labels.heading"
     },
     {
       "type": "select",
@@ -483,7 +497,7 @@
           "id": "heading",
           "label": "t:labels.heading",
           "info": "t:sections.collapsible.row_heading_info",
-          "default": "Collapsible row"
+          "placeholder": "t:editor_placeholders.question"
         },
         {
           "type": "select",
@@ -598,8 +612,7 @@
         {
           "type": "richtext",
           "id": "content",
-          "label": "t:sections.collapsible.row_content",
-          "default": "<p>Use this text to share information about your brand or answer a common question.</p>"
+          "label": "t:sections.collapsible.row_content"
         },
         {
           "type": "page",
@@ -623,34 +636,26 @@
         {
           "type": "row",
           "settings": {
-            "heading": "How long does shipping take?",
             "icon": "truck",
-            "content": "<p>Orders ship within 1–2 business days. Standard delivery takes 3–5 business days, and express delivery 1–2.</p>",
             "open": true
           }
         },
         {
           "type": "row",
           "settings": {
-            "heading": "What is your return policy?",
-            "icon": "return",
-            "content": "<p>Not the right fit? Return unworn items within 30 days for a full refund. Returns are free.</p>"
+            "icon": "return"
           }
         },
         {
           "type": "row",
           "settings": {
-            "heading": "How do I find my size?",
-            "icon": "ruler",
-            "content": "<p>Each product page has a size guide. If you're between sizes, we recommend sizing up.</p>"
+            "icon": "ruler"
           }
         },
         {
           "type": "row",
           "settings": {
-            "heading": "Is checkout secure?",
-            "icon": "lock",
-            "content": "<p>Yes. Payments are encrypted and processed securely. We accept all major cards, Shop Pay and PayPal.</p>"
+            "icon": "lock"
           }
         }
       ]

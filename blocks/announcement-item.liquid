@@ -6,7 +6,16 @@
 
   @example
   {% content_for 'blocks' %}
-{% enddoc %} 
+{% enddoc %}{%- liquid
+  # Theme editor only: guidance for empty fields. request.design_mode is false
+  # on the live store, so these are never shown to customers.
+  assign ph_text = nil
+  if request.design_mode
+    assign ph_text = 'editor_placeholders.announcement' | t
+  endif
+  assign s_text = block.settings.text | default: ph_text
+-%}
+ 
 
 {% liquid
   assign is_slide = false
@@ -38,7 +47,7 @@
             }}
           </span>
         {% endif %}
-        <span class="announcement-bar__text">{{ block.settings.text }}</span>
+        <span class="announcement-bar__text">{{ s_text }}</span>
         {% if block.settings.open_in_new_tab %}
           <span class="announcement-bar__visually-hidden">{{ 'accessibility.opens_in_new_window' | t }}</span>
         {% endif %}
@@ -53,7 +62,7 @@
           }}
         </span>
       {% endif %}
-      <span class="announcement-bar__text">{{ block.settings.text }}</span>
+      <span class="announcement-bar__text">{{ s_text }}</span>
     {% endif %}
   </div>
 {% endunless %}
@@ -72,7 +81,7 @@
       "type": "text",
       "id": "text",
       "label": "t:labels.text",
-      "default": "Free shipping on orders above $50"
+      "placeholder": "t:editor_placeholders.announcement"
     },
     {
       "type": "url",

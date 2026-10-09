@@ -9,6 +9,17 @@
   (price, SKU, stock, picker, add to cart button) from the server with the
   Section Rendering API. Styles live in assets/product.css.
 {% endcomment %}
+{%- liquid
+  # Theme editor only: guidance for empty fields. request.design_mode is false
+  # on the live store, so these are never shown to customers.
+  assign ph_text = nil
+  assign ph_heading = nil
+  if request.design_mode
+    assign ph_text = 'editor_placeholders.text' | t
+    assign ph_heading = 'editor_placeholders.tab_heading' | t
+  endif
+
+-%}
 
 {{ 'product.css' | asset_url | stylesheet_tag }}
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
@@ -73,13 +84,27 @@
 
     <div class="product__info{% if section.settings.sticky_info %} product__info--sticky{% endif %}">
       {% for block in section.blocks %}
+    {%- liquid
+      assign b_text = block.settings.text
+      if b_text == blank
+        if block.type == 'text'
+          assign b_text = ph_text
+        endif
+      endif
+      assign b_heading = block.settings.heading
+      if b_heading == blank
+        if block.type == 'collapsible_tab'
+          assign b_heading = ph_heading
+        endif
+      endif
+    -%}
         {% case block.type %}
           {% when '@app' %}
             {% render block %}
 
           {% when 'text' %}
             <div class="product__text product__text--{{ block.settings.text_style }}" {{ block.shopify_attributes }}>
-              {{ block.settings.text }}
+              {{ b_text }}
             </div>
 
           {% when 'vendor' %}
@@ -220,10 +245,10 @@
             {% endif %}
 
           {% when 'collapsible_tab' %}
-            {% if block.settings.heading != blank %}
+            {% if b_heading != blank %}
               <details class="product__accordion" {% if block.settings.open %}open{% endif %} {{ block.shopify_attributes }}>
                 <summary class="product__accordion-summary">
-                  <span>{{ block.settings.heading | escape }}</span>
+                  <span>{{ b_heading | escape }}</span>
                   <span class="product__accordion-icon" aria-hidden="true"></span>
                 </summary>
                 <div class="product__accordion-content rte">
@@ -687,8 +712,7 @@
         {
           "type": "richtext",
           "id": "text",
-          "label": "t:labels.text",
-          "default": "<p>Text block</p>"
+          "label": "t:labels.text"
         },
         {
           "type": "select",
@@ -934,7 +958,7 @@
           "type": "text",
           "id": "heading",
           "label": "t:labels.heading",
-          "default": "Collapsible tab"
+          "placeholder": "t:editor_placeholders.tab_heading"
         },
         {
           "type": "richtext",

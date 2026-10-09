@@ -15,6 +15,21 @@
 
   Styles: assets/slideshow.css. Behavior: assets/slideshow.js (<slide-show>).
 {% endcomment %}
+{%- liquid
+  # Theme editor only: guidance for empty fields. request.design_mode is false
+  # on the live store, so these are never shown to customers.
+  assign ph_subheading = nil
+  assign ph_heading = nil
+  assign ph_text = nil
+  assign ph_button_label = nil
+  if request.design_mode
+    assign ph_subheading = 'editor_placeholders.label' | t
+    assign ph_heading = 'editor_placeholders.slide_heading' | t
+    assign ph_text = 'editor_placeholders.slide_text' | t
+    assign ph_button_label = 'editor_placeholders.button' | t
+  endif
+
+-%}
 
 {{ 'slideshow.css' | asset_url | stylesheet_tag }}
 {{ 'banner-media.css' | asset_url | stylesheet_tag }}
@@ -109,6 +124,12 @@
     >
       <div class="slideshow__track">
         {%- for block in section.blocks -%}
+    {%- liquid
+      assign b_subheading = block.settings.subheading | default: ph_subheading
+      assign b_heading = block.settings.heading | default: ph_heading
+      assign b_text = block.settings.text | default: ph_text
+      assign b_button_label = block.settings.button_label | default: ph_button_label
+    -%}
           {%- liquid
             case block.settings.content_position_horizontal
               when 'left'
@@ -166,7 +187,7 @@
                 video: block.settings.video,
                 mobile_video: block.settings.mobile_video,
                 video_url: block.settings.video_url,
-                alt: block.settings.heading,
+                alt: b_heading,
                 eager: eager,
                 placeholder: placeholder_name
               %}
@@ -179,25 +200,25 @@
 
             <div class="slideshow__inner page-width">
               <div class="slideshow__content">
-                {%- if block.settings.subheading != blank -%}
-                  <p class="slideshow__subheading">{{ block.settings.subheading | escape }}</p>
+                {%- if b_subheading != blank -%}
+                  <p class="slideshow__subheading">{{ b_subheading | escape }}</p>
                 {%- endif -%}
-                {%- if block.settings.heading != blank -%}
+                {%- if b_heading != blank -%}
                   <{{ heading_tag }} class="{{ heading_class }} slideshow__heading{% if section.settings.heading_uppercase %} slideshow__heading--uppercase{% endif %}">
-                    {{- block.settings.heading | escape -}}
+                    {{- b_heading | escape -}}
                   </{{ heading_tag }}>
                 {%- endif -%}
-                {%- if block.settings.text != blank -%}
-                  <div class="slideshow__text rte">{{ block.settings.text }}</div>
+                {%- if b_text != blank -%}
+                  <div class="slideshow__text rte">{{ b_text }}</div>
                 {%- endif -%}
-                {%- if block.settings.button_label != blank or block.settings.button_label_2 != blank -%}
+                {%- if b_button_label != blank or block.settings.button_label_2 != blank -%}
                   <div class="slideshow__buttons">
-                    {%- if block.settings.button_label != blank -%}
+                    {%- if b_button_label != blank -%}
                       <a
                         href="{{ block.settings.button_link | default: '#' }}"
                         class="button button--{{ section.settings.button_style }} slideshow__button"
                       >
-                        {{- block.settings.button_label | escape -}}
+                        {{- b_button_label | escape -}}
                       </a>
                     {%- endif -%}
                     {%- if block.settings.button_label_2 != blank -%}
@@ -230,6 +251,12 @@
             {%- when 'dots' or 'numbers' or 'bars' -%}
               <div class="slideshow__pagination slideshow__pagination--{{ pagination }}">
                 {%- for block in section.blocks -%}
+    {%- liquid
+      assign b_subheading = block.settings.subheading | default: ph_subheading
+      assign b_heading = block.settings.heading | default: ph_heading
+      assign b_text = block.settings.text | default: ph_text
+      assign b_button_label = block.settings.button_label | default: ph_button_label
+    -%}
                   <button
                     type="button"
                     class="slideshow__page{% if forloop.first %} is-active{% endif %}"
@@ -821,19 +848,18 @@
           "type": "text",
           "id": "subheading",
           "label": "t:labels.subheading",
-          "default": "New season"
+          "placeholder": "t:editor_placeholders.label"
         },
         {
           "type": "text",
           "id": "heading",
           "label": "t:labels.heading",
-          "default": "Slide heading"
+          "placeholder": "t:editor_placeholders.slide_heading"
         },
         {
           "type": "richtext",
           "id": "text",
-          "label": "t:labels.text",
-          "default": "<p>Tell your story with a short line about this collection.</p>"
+          "label": "t:labels.text"
         },
         {
           "type": "select",
@@ -906,7 +932,7 @@
           "type": "text",
           "id": "button_label",
           "label": "t:sections.slideshow.button_label",
-          "default": "Shop now"
+          "placeholder": "t:editor_placeholders.button"
         },
         {
           "type": "url",
@@ -940,10 +966,6 @@
         {
           "type": "slide",
           "settings": {
-            "subheading": "New season",
-            "heading": "The spring edit",
-            "text": "<p>Light layers and fresh colors, made to move with you.</p>",
-            "button_label": "Shop now",
             "content_position_horizontal": "left",
             "content_position_vertical": "bottom"
           }
@@ -951,10 +973,6 @@
         {
           "type": "slide",
           "settings": {
-            "subheading": "Just landed",
-            "heading": "Everyday essentials",
-            "text": "<p>The pieces you'll reach for again and again.</p>",
-            "button_label": "Discover",
             "content_position_horizontal": "center",
             "content_position_vertical": "middle"
           }
@@ -962,10 +980,6 @@
         {
           "type": "slide",
           "settings": {
-            "subheading": "Limited time",
-            "heading": "Up to 40% off",
-            "text": "<p>Our end of season sale is on now, while stocks last.</p>",
-            "button_label": "Shop the sale",
             "content_position_horizontal": "left",
             "content_position_vertical": "bottom"
           }

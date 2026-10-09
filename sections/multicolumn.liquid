@@ -12,6 +12,19 @@
 
   Styles live in assets/multicolumn.css.
 {% endcomment %}
+{%- liquid
+  # Theme editor only: guidance for empty fields. request.design_mode is false
+  # on the live store, so these are never shown to customers.
+  assign ph_heading = nil
+  assign ph_title = nil
+  assign ph_text = nil
+  if request.design_mode
+    assign ph_heading = 'editor_placeholders.heading' | t
+    assign ph_title = 'editor_placeholders.column_heading' | t
+    assign ph_text = 'editor_placeholders.column_text' | t
+  endif
+  assign s_heading = section.settings.heading | default: ph_heading
+-%}
 
 {{ 'multicolumn.css' | asset_url | stylesheet_tag }}
 
@@ -57,7 +70,7 @@
   "
 >
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
-    {%- if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank -%}
+    {%- if s_heading != blank or section.settings.subheading != blank or section.settings.description != blank -%}
       <div class="multicolumn__header">
         {%- if section.settings.subheading != blank -%}
           {%- liquid
@@ -69,8 +82,8 @@
             {{- section.settings.subheading | escape -}}
           </p>
         {%- endif -%}
-        {%- if section.settings.heading != blank -%}
-          <{{ heading_tag }} class="{{ heading_class }} multicolumn__heading">{{ section.settings.heading }}</{{ heading_tag }}>
+        {%- if s_heading != blank -%}
+          <{{ heading_tag }} class="{{ heading_class }} multicolumn__heading">{{ s_heading }}</{{ heading_tag }}>
         {%- endif -%}
         {%- if section.settings.description != blank -%}
           <div class="multicolumn__description rte">{{ section.settings.description }}</div>
@@ -84,9 +97,13 @@
     -%}
     <ul class="multicolumn__list" role="list">
       {%- for block in section.blocks -%}
+    {%- liquid
+      assign b_title = block.settings.title | default: ph_title
+      assign b_text = block.settings.text | default: ph_text
+    -%}
         <li class="multicolumn__item{% if section.settings.card %} color-{{ section.settings.card_color_scheme.id }}{% endif %}" {{ block.shopify_attributes }}>
           {%- if block.settings.link != blank and block.settings.link_label == blank -%}
-            <a href="{{ block.settings.link }}" class="multicolumn__cover-link" aria-label="{{ block.settings.title | strip_html | escape }}"></a>
+            <a href="{{ block.settings.link }}" class="multicolumn__cover-link" aria-label="{{ b_title | strip_html | escape }}"></a>
           {%- endif -%}
 
           {%- assign column_top = section.settings.column_media | default: 'image' -%}
@@ -124,11 +141,11 @@
           {%- endif -%}
 
           <div class="multicolumn__body">
-            {%- if block.settings.title != blank -%}
-              <h3 class="multicolumn__title {% if title_size == 'default' %}multicolumn__title--default{% else %}{{ title_size }}{% endif %}{% if block.settings.title_uppercase %} multicolumn__title--uppercase{% endif %}">{{ block.settings.title }}</h3>
+            {%- if b_title != blank -%}
+              <h3 class="multicolumn__title {% if title_size == 'default' %}multicolumn__title--default{% else %}{{ title_size }}{% endif %}{% if block.settings.title_uppercase %} multicolumn__title--uppercase{% endif %}">{{ b_title }}</h3>
             {%- endif -%}
-            {%- if block.settings.text != blank -%}
-              <div class="multicolumn__text multicolumn__text--{{ text_size }} rte">{{ block.settings.text }}</div>
+            {%- if b_text != blank -%}
+              <div class="multicolumn__text multicolumn__text--{{ text_size }} rte">{{ b_text }}</div>
             {%- endif -%}
             {%- if block.settings.link_label != blank and block.settings.link != blank -%}
               <a href="{{ block.settings.link }}" class="multicolumn__link">
@@ -235,8 +252,7 @@
     {
       "type": "inline_richtext",
       "id": "heading",
-      "label": "t:labels.heading",
-      "default": "Why shop with us"
+      "label": "t:labels.heading"
     },
     {
       "type": "select",
@@ -803,8 +819,7 @@
         {
           "type": "inline_richtext",
           "id": "title",
-          "label": "t:sections.newsletter.title",
-          "default": "Column"
+          "label": "t:sections.newsletter.title"
         },
         {
           "type": "checkbox",
@@ -815,8 +830,7 @@
         {
           "type": "richtext",
           "id": "text",
-          "label": "t:labels.text",
-          "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post.</p>"
+          "label": "t:labels.text"
         },
         {
           "type": "text",
@@ -837,25 +851,13 @@
       "name": "t:sections.multicolumn.name",
       "blocks": [
         {
-          "type": "column",
-          "settings": {
-            "title": "Free shipping",
-            "text": "<p>On all orders over $100, delivered to your door in 3–5 days.</p>"
-          }
+          "type": "column"
         },
         {
-          "type": "column",
-          "settings": {
-            "title": "30-day returns",
-            "text": "<p>Not the right fit? Send it back within 30 days for a full refund.</p>"
-          }
+          "type": "column"
         },
         {
-          "type": "column",
-          "settings": {
-            "title": "Secure checkout",
-            "text": "<p>Pay safely with all major cards, Shop Pay and PayPal.</p>"
-          }
+          "type": "column"
         }
       ]
     }

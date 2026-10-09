@@ -10,6 +10,15 @@
 
   Each image is a block, so merchants can add, remove and reorder them.
 {% endcomment %}
+{%- liquid
+  # Theme editor only: guidance for empty fields. request.design_mode is false
+  # on the live store, so these are never shown to customers.
+  assign ph_heading = nil
+  if request.design_mode
+    assign ph_heading = 'editor_placeholders.social_heading' | t
+  endif
+  assign s_heading = section.settings.heading | default: ph_heading
+-%}
 
 {{ 'social-marquee.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'social-marquee.js' | asset_url }}" defer></script>
@@ -36,11 +45,11 @@
     --social-marquee-ratio: {{ section.settings.aspect_ratio }};
   "
 >
-  {%- if section.settings.heading != blank -%}
+  {%- if s_heading != blank -%}
     <div class="page-width{% if section.settings.heading_width == 'full' %} page-width--full{% endif %} social-marquee__header social-marquee__header--{{ section.settings.heading_alignment }}">
       {%- assign heading_tag = section.settings.heading_tag | default: 'h2' -%}
       {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
-      <{{ heading_tag }} class="{{ heading_class }} social-marquee__heading">{{ section.settings.heading | escape }}</{{ heading_tag }}>
+      <{{ heading_tag }} class="{{ heading_class }} social-marquee__heading">{{ s_heading | escape }}</{{ heading_tag }}>
     </div>
   {%- endif -%}
 
@@ -131,7 +140,7 @@
       "type": "text",
       "id": "heading",
       "label": "t:labels.heading",
-      "default": "As seen on #yourbrand"
+      "placeholder": "t:editor_placeholders.social_heading"
     },
     {
       "type": "select",

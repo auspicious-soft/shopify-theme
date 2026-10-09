@@ -4,13 +4,22 @@
   @example
   {% content_for 'block', type: 'text', id: 'text' %}
 {% enddoc %}
+{%- liquid
+  # Theme editor only: guidance for empty fields. request.design_mode is false
+  # on the live store, so these are never shown to customers.
+  assign ph_text = nil
+  if request.design_mode
+    assign ph_text = 'editor_placeholders.text' | t
+  endif
+  assign s_text = block.settings.text | default: ph_text
+-%}
 
 <div
   class="text {{ block.settings.text_style }}"
   style="--text-align: {{ block.settings.alignment }}"
   {{ block.shopify_attributes }}
 >
-  {{ block.settings.text }}
+  {{ s_text }}
 </div>
 
 {% schema %}
@@ -21,16 +30,25 @@
       "type": "text",
       "id": "text",
       "label": "t:labels.text",
-      "default": "Text"
+      "placeholder": "t:editor_placeholders.text"
     },
     {
       "type": "select",
       "id": "text_style",
       "label": "t:labels.text_style",
       "options": [
-        { "value": "text--title", "label": "t:options.text_style.title" },
-        { "value": "text--subtitle", "label": "t:options.text_style.subtitle" },
-        { "value": "text--normal", "label": "t:options.text_style.normal" }
+        {
+          "value": "text--title",
+          "label": "t:options.text_style.title"
+        },
+        {
+          "value": "text--subtitle",
+          "label": "t:options.text_style.subtitle"
+        },
+        {
+          "value": "text--normal",
+          "label": "t:options.text_style.normal"
+        }
       ],
       "default": "text--title"
     },
@@ -55,6 +73,10 @@
       "default": "left"
     }
   ],
-  "presets": [{ "name": "t:general.text" }]
+  "presets": [
+    {
+      "name": "t:general.text"
+    }
+  ]
 }
 {% endschema %}

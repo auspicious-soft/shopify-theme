@@ -10,6 +10,22 @@
 
   Styles live in assets/contact-form.css.
 {% endcomment %}
+{%- liquid
+  # Theme editor only: guidance for empty fields. request.design_mode is false
+  # on the live store, so these are never shown to customers.
+  assign ph_heading = nil
+  assign ph_description = nil
+  assign ph_title = nil
+  assign ph_text = nil
+  if request.design_mode
+    assign ph_heading = 'editor_placeholders.heading' | t
+    assign ph_description = 'editor_placeholders.contact_intro' | t
+    assign ph_title = 'editor_placeholders.contact_title' | t
+    assign ph_text = 'editor_placeholders.contact_details' | t
+  endif
+  assign s_heading = section.settings.heading | default: ph_heading
+  assign s_description = section.settings.description | default: ph_description
+-%}
 
 {{ 'contact-form.css' | asset_url | stylesheet_tag }}
 
@@ -70,16 +86,16 @@
   "
 >
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
-    {%- if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank -%}
+    {%- if s_heading != blank or section.settings.subheading != blank or s_description != blank -%}
       <div class="contact__header">
         {%- if section.settings.subheading != blank -%}
           <p class="contact__subheading">{{ section.settings.subheading | escape }}</p>
         {%- endif -%}
-        {%- if section.settings.heading != blank -%}
-          <{{ heading_tag }} class="{{ heading_class }} contact__heading">{{ section.settings.heading }}</{{ heading_tag }}>
+        {%- if s_heading != blank -%}
+          <{{ heading_tag }} class="{{ heading_class }} contact__heading">{{ s_heading }}</{{ heading_tag }}>
         {%- endif -%}
-        {%- if section.settings.description != blank -%}
-          <div class="contact__description rte">{{ section.settings.description }}</div>
+        {%- if s_description != blank -%}
+          <div class="contact__description rte">{{ s_description }}</div>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -220,16 +236,20 @@
       {%- if info_position != 'none' -%}
         <div class="contact__info{% if info_bar %} color-{{ section.settings.info_bar_color_scheme.id }}{% elsif info_style == 'panel' %} color-{{ section.settings.info_color_scheme.id }}{% endif %}">
           {%- for block in section.blocks -%}
+    {%- liquid
+      assign b_title = block.settings.title | default: ph_title
+      assign b_text = block.settings.text | default: ph_text
+    -%}
             <div class="contact__info-item{% if info_style == 'cards' %} color-{{ section.settings.info_color_scheme.id }}{% endif %}" {{ block.shopify_attributes }}>
               {%- if block.settings.icon != 'none' -%}
                 <span class="contact__info-icon">{% render 'icon-library', icon: block.settings.icon %}</span>
               {%- endif -%}
               <div class="contact__info-body">
-                {%- if block.settings.title != blank -%}
-                  <h3 class="contact__info-title">{{ block.settings.title | escape }}</h3>
+                {%- if b_title != blank -%}
+                  <h3 class="contact__info-title">{{ b_title | escape }}</h3>
                 {%- endif -%}
-                {%- if block.settings.text != blank -%}
-                  <div class="contact__info-text rte">{{ block.settings.text }}</div>
+                {%- if b_text != blank -%}
+                  <div class="contact__info-text rte">{{ b_text }}</div>
                 {%- endif -%}
               </div>
             </div>
@@ -261,8 +281,7 @@
     {
       "type": "inline_richtext",
       "id": "heading",
-      "label": "t:labels.heading",
-      "default": "Get in touch"
+      "label": "t:labels.heading"
     },
     {
       "type": "select",
@@ -333,8 +352,7 @@
     {
       "type": "richtext",
       "id": "description",
-      "label": "t:sections.newsletter.description",
-      "default": "<p>Questions about an order, sizing or anything else? Send us a message and we'll reply within one business day.</p>"
+      "label": "t:sections.newsletter.description"
     },
     {
       "type": "select",
@@ -804,13 +822,12 @@
           "type": "text",
           "id": "title",
           "label": "t:sections.newsletter.title",
-          "default": "Email"
+          "placeholder": "t:editor_placeholders.contact_title"
         },
         {
           "type": "richtext",
           "id": "text",
-          "label": "t:labels.text",
-          "default": "<p>hello@yourstore.com</p>"
+          "label": "t:labels.text"
         }
       ]
     }
@@ -822,33 +839,25 @@
         {
           "type": "info",
           "settings": {
-            "icon": "mail",
-            "title": "Email",
-            "text": "<p><a href=\"mailto:hello@yourstore.com\">hello@yourstore.com</a></p>"
+            "icon": "mail"
           }
         },
         {
           "type": "info",
           "settings": {
-            "icon": "phone",
-            "title": "Phone",
-            "text": "<p>+1 (555) 123-4567</p>"
+            "icon": "phone"
           }
         },
         {
           "type": "info",
           "settings": {
-            "icon": "clock",
-            "title": "Opening hours",
-            "text": "<p>Monday – Friday, 9am – 6pm<br>Saturday, 10am – 4pm</p>"
+            "icon": "clock"
           }
         },
         {
           "type": "info",
           "settings": {
-            "icon": "map_pin",
-            "title": "Visit us",
-            "text": "<p>123 Main Street<br>New York, NY 10001</p>"
+            "icon": "map_pin"
           }
         }
       ]

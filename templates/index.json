@@ -84,7 +84,6 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
-        "collection": "long-sleeves",
         "image": "shopify://shop_images/Banner_2_9a71e6ed-6bac-405d-9534-73d91e01f56f_4000x1562_crop_center.jpg_1.png",
         "mobile_image": "shopify://shop_images/iPhone_13_14_-_2.jpg",
         "media_type": "image",
@@ -129,7 +128,6 @@
         "collection_kahEbC": {
           "type": "collection",
           "settings": {
-            "collection": "",
             "image": "shopify://shop_images/Image_54_4e5d7bbe-6533-44a2-b908-9b4088fad1e1.png",
             "media_type": "image",
             "video_url": "",
@@ -143,7 +141,6 @@
         "collection_fGPGma": {
           "type": "collection",
           "settings": {
-            "collection": "",
             "image": "shopify://shop_images/Image_55.png",
             "media_type": "image",
             "video_url": "",
@@ -198,7 +195,6 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
-        "collection": "",
         "image": "shopify://shop_images/Container_2_bce84f09-8eed-44cd-8125-0015b1d919c9.png",
         "mobile_image": "shopify://shop_images/iPhone_13_14_-_3_1_86a0b6bb-b902-499b-8dd6-1d6f9d8811d5.png",
         "media_type": "image",
@@ -241,7 +237,6 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
-        "collection": "",
         "image": "shopify://shop_images/Banner_5_4000x1562_crop_center.jpg_1.png",
         "mobile_image": "shopify://shop_images/iPhone_13_14_-_4.png",
         "media_type": "image",

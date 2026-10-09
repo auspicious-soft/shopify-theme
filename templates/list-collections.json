@@ -65,7 +65,6 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
-        "collection": "",
         "image": "shopify://shop_images/Banner_Image_1.png",
         "media_type": "image",
         "video_url": "",
