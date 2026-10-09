@@ -151,7 +151,8 @@
         "overlay_on_product": false,
         "overlay_on_collection": true,
         "overlay_on_list_collections": true,
-        "overlay_on_page": false,
+        "overlay_on_page": true,
+        "overlay_page_templates": "",
         "overlay_on_blog": false,
         "overlay_content_color": "#ffffff",
         "overlay_text_color": "#000000",
@@ -177,7 +178,9 @@
     },
     "cart-panel": {
       "type": "cart-panel",
-      "settings": {}
+      "settings": {
+        "continue_url": ""
+      }
     }
   },
   "order": [
