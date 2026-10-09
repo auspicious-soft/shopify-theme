@@ -152,7 +152,7 @@
         "overlay_on_collection": true,
         "overlay_on_list_collections": true,
         "overlay_on_page": false,
-        "overlay_on_blog": false,
+        "overlay_on_blog": true,
         "overlay_content_color": "#ffffff",
         "overlay_text_color": "#000000",
         "overlay_hover_solid": true,
