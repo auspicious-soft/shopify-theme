@@ -62,6 +62,7 @@
     "card_image_padding": 0,
     "card_text_alignment": "left",
     "card_color_scheme": "scheme-1",
+    "card_sale_price_color": "#D01345",
     "card_image_ratio": "adapt",
     "card_info_layout": "stacked",
     "card_badge_style": "amount",
