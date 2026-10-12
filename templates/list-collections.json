@@ -39,7 +39,8 @@
           "hoodies",
           "shoes",
           "hats",
-          "skirts"
+          "skirts",
+          "autumn-translation"
         ],
         "sort": "default",
         "hide_empty": true,
