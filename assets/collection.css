@@ -230,7 +230,7 @@
 .collection__select select {
   appearance: none;
   -webkit-appearance: none;
-  padding: 0.35rem 1.6rem 0.35rem 1.6rem;
+  padding: 0.35rem 1.6rem 0.35rem 0.35rem;
   border: none;
   border-radius: 0;
   box-shadow: none;
