@@ -213,6 +213,7 @@
 
 .collection__sort {
   display: flex;
+  gap: 0.6rem;
   align-items: center;
   margin-inline-start: auto;
 }
