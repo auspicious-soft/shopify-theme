@@ -29,7 +29,6 @@
         "content_position_vertical": "middle",
         "banner_color_scheme": "scheme-2",
         "collection_list": [
-          "accesories",
           "bags",
           "blazers",
           "long-sleeves",
@@ -41,7 +40,8 @@
           "shoes",
           "zipper",
           "hats",
-          "skirts"
+          "skirts",
+          "the-autumn-translation"
         ],
         "sort": "default",
         "hide_empty": true,
@@ -65,6 +65,7 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
+        "button_link": "shopify://blogs/news",
         "image": "shopify://shop_images/Banner_Image_1.png",
         "media_type": "image",
         "video_url": "",
@@ -77,6 +78,7 @@
         "overlay_color": "#000000",
         "overlay_opacity": 45,
         "subheading": "BEHIND THE DESIGN",
+        "subheading_letter_spacing": "large",
         "heading": "Weaving Slow Stories: Our Mill Philosophy",
         "heading_tag": "h2",
         "heading_class": "h2",
@@ -87,7 +89,6 @@
         "content_position_vertical": "bottom",
         "content_width": 520,
         "button_label": "READ THE JOURNAL",
-        "button_link": "shopify://blogs/news",
         "button_style": "secondary",
         "button_size": "medium",
         "button_color_scheme": "scheme-2",
