@@ -49,7 +49,7 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
-        "button_link": "",
+        "button_link": "shopify://blogs/news",
         "image": "shopify://shop_images/Banner_Image_1.png",
         "media_type": "image",
         "height": "large",
@@ -78,11 +78,11 @@
         "full_link": true,
         "color_scheme": "",
         "padding_top": 0,
-        "padding_bottom": 0,
+        "padding_bottom": 48,
         "mobile_padding_custom": false,
         "mobile_padding_top": 0,
         "mobile_padding_bottom": 0,
-        "heading_case": "uppercase",
+        "heading_case": "none",
         "button_case": "uppercase"
       }
     }
