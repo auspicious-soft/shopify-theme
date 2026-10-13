@@ -148,7 +148,7 @@
       "type": "related-products",
       "settings": {
         "intent": "related",
-        "heading": "You may also like",
+        "heading": "Complete The Look",
         "heading_tag": "h2",
         "heading_class": "h3",
         "subheading": "",
