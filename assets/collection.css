@@ -897,23 +897,6 @@ html.facets-open {
    uppercase groups, values as pills / checkbox list (section setting),
    colours as swatches, one full-width Apply filter button. */
 
-.collection__filter-toggle {
-  gap: 0.4rem;
-  font-weight: 600;
-}
-
-/* Small solid caret (▼). */
-.collection__filter-caret {
-  width: 0;
-  height: 0;
-  border-inline: 0.3rem solid transparent;
-  border-top: 0.35rem solid currentColor;
-}
-
-.collection__filter-toggle[aria-expanded='true'] .collection__filter-caret {
-  transform: rotate(180deg);
-}
-
 .collection__active {
   min-width: 0;
 }
@@ -943,10 +926,6 @@ html.facets-open {
 
 .collection__sort-label {
   color: inherit;
-}
-
-.collection__select select {
-  font-weight: 600;
 }
 
 /* Applied filter chips: soft grey pills with a circled ×. */
@@ -980,7 +959,6 @@ html.facets-open {
 
 .facets__summary {
   font-size: 0.75rem;
-  font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }

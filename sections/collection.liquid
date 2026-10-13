@@ -128,11 +128,11 @@
             aria-expanded="false"
             data-facets-open
           >
+            <span class="collection__filter-icon" aria-hidden="true"><span></span><span></span></span>
             <span>{{ 'collections.filter_by' | t }}</span>
             <span id="FilterCount-{{ section_id }}" class="collection__filter-count" data-results-part>
               {%- if active_filter_count > 0 -%}({{ active_filter_count }}){%- endif -%}
             </span>
-            <span class="collection__filter-caret" aria-hidden="true"></span>
           </button>
         {% endif %}
 
