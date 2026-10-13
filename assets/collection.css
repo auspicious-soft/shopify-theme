@@ -890,3 +890,199 @@ html.facets-open {
     transition: none !important;
   }
 }
+
+/* ---------- Filters redesign ----------
+   Toolbar: "Filter By" + applied filter chips (with Clear All Filters) on
+   the left, "Showing X of Y items" and "Sort:" on the right. Drawer:
+   uppercase groups, values as pills / checkbox list (section setting),
+   colours as swatches, one full-width Apply filter button. */
+
+.collection__filter-toggle {
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+/* Small solid caret (▼). */
+.collection__filter-caret {
+  width: 0;
+  height: 0;
+  border-inline: 0.3rem solid transparent;
+  border-top: 0.35rem solid currentColor;
+}
+
+.collection__filter-toggle[aria-expanded='true'] .collection__filter-caret {
+  transform: rotate(180deg);
+}
+
+.collection__active {
+  min-width: 0;
+}
+
+.collection__active:empty {
+  display: none;
+}
+
+.collection__active .facets__active {
+  margin: 0;
+}
+
+.collection__toolbar-end {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-inline-start: auto;
+}
+
+.collection__toolbar-end .collection__sort {
+  margin-inline-start: 0;
+}
+
+.collection__count {
+  font-size: 0.8rem;
+}
+
+.collection__sort-label {
+  color: inherit;
+}
+
+.collection__select select {
+  font-weight: 600;
+}
+
+/* Applied filter chips: soft grey pills with a circled ×. */
+.facets__chip {
+  gap: 0.35rem;
+  padding: 0.3rem 0.55rem 0.3rem 0.7rem;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  background-color: color-mix(in srgb, var(--color-foreground) 7%, transparent);
+  border-color: transparent;
+}
+
+.facets__chip:hover,
+.facets__chip:focus-visible {
+  border-color: transparent;
+  background-color: color-mix(in srgb, var(--color-foreground) 13%, transparent);
+}
+
+.facets__chip svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  padding: 1px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+/* Drawer */
+.facets__heading {
+  font-size: 1.4rem;
+}
+
+.facets__summary {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.facets__summary-count {
+  letter-spacing: 0;
+}
+
+.facets__footer-button {
+  flex: 1 1 100%;
+}
+
+/* Pills: bordered boxes in a wrapping row; picked = filled. */
+.facets__list--pills,
+.facets__list--swatches {
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-height: none;
+  overflow: visible;
+}
+
+.facets__list--pills {
+  gap: 0.4rem;
+}
+
+.facets__list--swatches {
+  gap: 0.7rem;
+  padding-inline-start: 0.2rem;
+}
+
+.facets__option--pills,
+.facets__option--swatches {
+  gap: 0;
+  padding: 0;
+}
+
+.facets__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.2rem;
+  padding: 0 0.75rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 20%, transparent);
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.facets__option--pills:not(.is-disabled):hover .facets__pill {
+  border-color: var(--color-foreground);
+}
+
+.facets__checkbox:checked + .facets__pill {
+  background-color: var(--color-foreground);
+  border-color: var(--color-foreground);
+  color: var(--color-background);
+}
+
+.facets__checkbox:focus-visible + .facets__pill {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.facets__option--pills.is-disabled .facets__pill {
+  text-decoration: line-through;
+}
+
+/* Colour swatches: round, ringed when picked. */
+.facets__option--swatches .facets__swatch {
+  width: 1.75rem;
+  height: 1.75rem;
+  background-position: center;
+}
+
+.facets__option--swatches:not(.is-disabled):hover .facets__swatch {
+  box-shadow:
+    0 0 0 2px var(--color-background),
+    0 0 0 3px color-mix(in srgb, var(--color-foreground) 45%, transparent);
+}
+
+/* Mobile: Filter By and Sort on the first row, applied filters below. */
+@media screen and (max-width: 749px) {
+  .collection__toolbar {
+    flex-wrap: wrap;
+  }
+
+  .collection__active {
+    order: 3;
+    flex: 1 1 100%;
+  }
+
+  .collection__toolbar-end {
+    gap: 0.75rem;
+    min-width: 0;
+  }
+
+  .collection__toolbar-end .collection__count {
+    display: none;
+  }
+}

@@ -443,7 +443,11 @@
       "banner_placeholder_image_info": "Leave empty to use a placeholder illustration",
       "banner_color_scheme_info": "Text and overlay color on image banners, background on minimal banners",
       "filter_button_size": "Filter button size",
-      "filter_button_size_info": "Clear all and View results buttons in the filter drawer"
+      "filter_button_size_info": "Clear all and View results buttons in the filter drawer",
+      "filter_value_style": "Filter value style",
+      "filter_value_style_info": "Colour filters always show as swatches, and Availability as a checkbox list",
+      "filter_value_pills": "Pills",
+      "filter_value_checkbox": "Checkbox list"
     },
     "product": {
       "media": "Media",

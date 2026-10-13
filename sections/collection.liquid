@@ -128,23 +128,36 @@
             aria-expanded="false"
             data-facets-open
           >
-            <span class="collection__filter-icon" aria-hidden="true"><span></span><span></span></span>
-            <span>{{ 'collections.filter' | t }}</span>
+            <span>{{ 'collections.filter_by' | t }}</span>
             <span id="FilterCount-{{ section_id }}" class="collection__filter-count" data-results-part>
               {%- if active_filter_count > 0 -%}({{ active_filter_count }}){%- endif -%}
             </span>
+            <span class="collection__filter-caret" aria-hidden="true"></span>
           </button>
         {% endif %}
 
+        {%- comment -%} Applied filters and "Clear All Filters", outside the drawer. {%- endcomment -%}
+        <div id="ActiveFacets-{{ section_id }}" class="collection__active" data-results-part>
+          {% render 'facets-active', results: collection, active_filter_count: active_filter_count, clear_url: clear_url %}
+        </div>
+
+        <div class="collection__toolbar-end">
+
         {% if section.settings.show_count %}
           <p id="ProductCount-{{ section_id }}" class="collection__count" data-results-part>
-            {{- 'collections.results_count' | t: count: collection.products_count -}}
+            {%- liquid
+              assign shown = collection.products.size
+              if section.settings.pagination_type == 'load_more'
+                assign shown = paginate.current_offset | plus: collection.products.size
+              endif
+            -%}
+            {{- 'collections.showing_items' | t: shown: shown, total: collection.products_count -}}
           </p>
         {% endif %}
 
         {% if sorting %}
           <div class="collection__sort">
-            <label for="SortBy-{{ section_id }}" class="collection__sort-label">{{ 'collections.sort_by' | t }}</label>
+            <label for="SortBy-{{ section_id }}" class="collection__sort-label">{{ 'collections.sort_colon' | t }}</label>
             <div class="collection__select">
               <select id="SortBy-{{ section_id }}" name="sort_by" form="FacetsForm-{{ section_id }}" data-facets-input>
                 {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
@@ -158,6 +171,7 @@
             </div>
           </div>
         {% endif %}
+        </div>
       </div>
 
       <div class="collection__layout{% if filtering and filter_layout == 'sidebar' %} collection__layout--sidebar{% endif %}">
@@ -168,13 +182,11 @@
           filtering: filtering,
           sorting: sorting,
           filter_layout: filter_layout,
-          clear_url: clear_url,
-          button_size: section.settings.filter_button_size
+          button_size: section.settings.filter_button_size,
+          value_style: section.settings.filter_value_style
         %}
 
         <div id="CollectionResults-{{ section_id }}" class="collection__results" data-results-part>
-          {% render 'facets-active', results: collection, active_filter_count: active_filter_count, clear_url: clear_url %}
-
           {% if collection.products.size > 0 %}
             <ul class="collection__grid" role="list" data-collection-grid>
               {% for product in collection.products %}
@@ -528,6 +540,24 @@
         }
       ],
       "default": "sidebar",
+      "visible_if": "{{ section.settings.enable_filtering }}"
+    },
+    {
+      "type": "select",
+      "id": "filter_value_style",
+      "label": "t:sections.collection.filter_value_style",
+      "info": "t:sections.collection.filter_value_style_info",
+      "default": "pills",
+      "options": [
+        {
+          "value": "pills",
+          "label": "t:sections.collection.filter_value_pills"
+        },
+        {
+          "value": "checkbox",
+          "label": "t:sections.collection.filter_value_checkbox"
+        }
+      ],
       "visible_if": "{{ section.settings.enable_filtering }}"
     },
     {
