@@ -36,6 +36,10 @@
             "show_tax_note": false
           }
         },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -67,10 +71,6 @@
             "show_dynamic_checkout": true
           }
         },
-        "description": {
-          "type": "description",
-          "settings": {}
-        },
         "tab_details": {
           "type": "collapsible_tab",
           "settings": {
@@ -99,11 +99,11 @@
         "title",
         "rating",
         "price",
+        "description",
         "variant_picker",
         "size_guide",
         "quantity",
         "buy_buttons",
-        "description",
         "tab_details",
         "tab_shipping",
         "share"
@@ -142,6 +142,7 @@
         "heading_tag": "h2",
         "heading_class": "h3",
         "subheading": "",
+        "subheading_letter_spacing": "none",
         "heading_alignment": "left",
         "products_to_show": 4,
         "layout": "slider",
@@ -166,6 +167,7 @@
         "heading_tag": "h2",
         "heading_class": "h3",
         "subheading": "",
+        "subheading_letter_spacing": "none",
         "heading_alignment": "left",
         "show_clear": true,
         "products_to_show": 4,
