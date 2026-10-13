@@ -996,7 +996,7 @@
       "column_gap": "Space between columns",
       "bottom_bar": "Bottom bar",
       "copyright_text": "Copyright text",
-      "copyright_text_info": "Leave blank for \"© year Store name\". Use [year] to insert the current year",
+      "copyright_text_info": "A © is added in front automatically. Use [year] for the current year, e.g. \"[year] Vera Studio\" shows \"© 2026 Vera Studio\". Leave blank for \"© year Store name\"",
       "show_powered_by": "Show \"Powered by Shopify\"",
       "show_policies": "Show policy links",
       "show_divider": "Show divider line",
