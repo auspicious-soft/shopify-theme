@@ -74,8 +74,8 @@
         "tab_details": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Materials & care",
-            "content": "<p>Share materials, fit and care instructions here.</p>",
+            "heading": "Care Instructions",
+            "content": "<p>Dry clean only. Store on a contoured wooden hanger to maintain shoulder drape. Gently brush with a soft garment comb after wear to remove loose fibers.</p>",
             "page": "",
             "open": false
           }
