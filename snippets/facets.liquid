@@ -164,13 +164,28 @@
                       >
                       {%- case list_mode -%}
                         {%- when 'swatches' -%}
-                          {%- comment -%}
-                            Shopify's swatch (colour / image linked to the value),
-                            else Theme settings > Swatches, else the name as a colour.
-                          {%- endcomment -%}
+                          {%- liquid
+                            # Swatch colour / image, first match wins:
+                            # 1. Shopify's swatch on the filter value (Search & Discovery
+                            #    filter shown as swatches).
+                            # 2. Shopify's colour metaobject (Content > Metaobjects >
+                            #    Color, type shopify--color-pattern) whose handle matches
+                            #    the value, e.g. "Light Brown" -> light-brown.
+                            # 3. Theme settings > Swatches, else the name as a CSS colour.
+                            assign swatch_color = value.swatch.color
+                            assign swatch_image = value.swatch.image
+                            if swatch_color == blank and swatch_image == blank
+                              assign swatch_handle = value.label | handleize
+                              assign swatch_entry = metaobjects['shopify--color-pattern'][swatch_handle]
+                              if swatch_entry
+                                assign swatch_color = swatch_entry.color.value.first | default: swatch_entry.color.value
+                                assign swatch_image = swatch_entry.image.value
+                              endif
+                            endif
+                          -%}
                           <span
                             class="facets__swatch"
-                            style="{% if value.swatch.color or value.swatch.image %}{% if value.swatch.color %}--swatch-color: {{ value.swatch.color }};{% endif %}{% if value.swatch.image %} --swatch-image: url('{{ value.swatch.image | image_url: width: 60 }}');{% endif %}{% else %}{% render 'swatch-style', value: value.label, image_width: 60 %}{% endif %}"
+                            style="{% if swatch_color != blank or swatch_image != blank %}{% if swatch_color != blank %}--swatch-color: {{ swatch_color }};{% endif %}{% if swatch_image != blank %} --swatch-image: url('{{ swatch_image | image_url: width: 60 }}');{% endif %}{% else %}{% render 'swatch-style', value: value.label, image_width: 60 %}{% endif %}"
                             aria-hidden="true"
                           ></span>
                           <span class="visually-hidden">{{ value.label | escape }} ({{ value.count }})</span>
