@@ -172,7 +172,8 @@
               {%- if feature.excerpt != blank -%}
                 <div class="blog-feature__quote">{{ feature.excerpt }}</div>
               {%- endif -%}
-              {%- if section.settings.featured_words > 0 -%}
+              {%- comment -%} The description only shows when the post has no Excerpt. {%- endcomment -%}
+              {%- if section.settings.featured_words > 0 and feature.excerpt == blank -%}
                 <p class="blog-feature__text">{{ feature.content | strip_html | truncatewords: section.settings.featured_words }}</p>
               {%- endif -%}
               <p class="blog-feature__meta">
