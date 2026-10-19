@@ -170,7 +170,7 @@
                 <a href="{{ feature.url }}">{{ feature.title | escape }}</a>
               </{{ feature_tag }}>
               {%- if feature.excerpt != blank -%}
-                <blockquote class="blog-feature__quote">{{ feature.excerpt | strip_html | truncatewords: 45 }}</blockquote>
+                <div class="blog-feature__quote">{{ feature.excerpt }}</div>
               {%- endif -%}
               {%- if section.settings.featured_words > 0 -%}
                 <p class="blog-feature__text">{{ feature.content | strip_html | truncatewords: section.settings.featured_words }}</p>
@@ -212,6 +212,7 @@
               show_date: section.settings.show_date,
               show_author: section.settings.show_author,
               show_excerpt: section.settings.show_excerpt,
+              excerpt_source: section.settings.excerpt_source,
               excerpt_words: section.settings.excerpt_words,
               show_tags: section.settings.show_card_tags,
               show_topic: section.settings.show_topic,
@@ -253,6 +254,7 @@
                 show_date: section.settings.show_date,
                 show_author: section.settings.show_author,
                 show_excerpt: section.settings.show_excerpt,
+              excerpt_source: section.settings.excerpt_source,
                 excerpt_words: section.settings.excerpt_words,
                 show_tags: section.settings.show_card_tags,
                 show_topic: section.settings.show_topic,
@@ -538,10 +540,22 @@
       "id": "featured_label_letter_spacing",
       "label": "t:sections.blog.featured_label_letter_spacing",
       "options": [
-        { "value": "none", "label": "t:options.letter_spacing.none" },
-        { "value": "small", "label": "t:options.letter_spacing.small" },
-        { "value": "medium", "label": "t:options.letter_spacing.medium" },
-        { "value": "large", "label": "t:options.letter_spacing.large" }
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
       ],
       "default": "none",
       "visible_if": "{{ section.settings.feature_first and section.settings.featured_style == 'story' }}"
@@ -551,12 +565,30 @@
       "id": "featured_title_size",
       "label": "t:sections.blog.featured_title_size",
       "options": [
-        { "value": "h1", "label": "t:options.heading_size.huge" },
-        { "value": "h2", "label": "t:options.heading_size.extra_large" },
-        { "value": "h3", "label": "t:options.heading_size.large" },
-        { "value": "h4", "label": "t:options.heading_size.medium" },
-        { "value": "h5", "label": "t:options.heading_size.small" },
-        { "value": "h6", "label": "t:options.heading_size.extra_small" }
+        {
+          "value": "h1",
+          "label": "t:options.heading_size.huge"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.heading_size.extra_large"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.heading_size.large"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.heading_size.medium"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.heading_size.small"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.heading_size.extra_small"
+        }
       ],
       "default": "h2",
       "visible_if": "{{ section.settings.feature_first }}"
@@ -649,12 +681,30 @@
       "id": "card_title_size",
       "label": "t:sections.blog.card_title_size",
       "options": [
-        { "value": "h1", "label": "t:options.heading_size.huge" },
-        { "value": "h2", "label": "t:options.heading_size.extra_large" },
-        { "value": "h3", "label": "t:options.heading_size.large" },
-        { "value": "h4", "label": "t:options.heading_size.medium" },
-        { "value": "h5", "label": "t:options.heading_size.small" },
-        { "value": "h6", "label": "t:options.heading_size.extra_small" }
+        {
+          "value": "h1",
+          "label": "t:options.heading_size.huge"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.heading_size.extra_large"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.heading_size.large"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.heading_size.medium"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.heading_size.small"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.heading_size.extra_small"
+        }
       ],
       "default": "h6"
     },
@@ -744,10 +794,22 @@
       "id": "topic_letter_spacing",
       "label": "t:sections.blog.topic_letter_spacing",
       "options": [
-        { "value": "none", "label": "t:options.letter_spacing.none" },
-        { "value": "small", "label": "t:options.letter_spacing.small" },
-        { "value": "medium", "label": "t:options.letter_spacing.medium" },
-        { "value": "large", "label": "t:options.letter_spacing.large" }
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
       ],
       "default": "none",
       "visible_if": "{{ section.settings.show_topic }}"
@@ -759,6 +821,24 @@
       "default": true
     },
     {
+      "type": "select",
+      "id": "excerpt_source",
+      "label": "t:sections.blog.excerpt_source",
+      "info": "t:sections.blog.excerpt_source_info",
+      "default": "excerpt",
+      "options": [
+        {
+          "value": "excerpt",
+          "label": "t:sections.blog.excerpt_source_excerpt"
+        },
+        {
+          "value": "content",
+          "label": "t:sections.blog.excerpt_source_content"
+        }
+      ],
+      "visible_if": "{{ section.settings.show_excerpt }}"
+    },
+    {
       "type": "range",
       "id": "excerpt_words",
       "label": "t:sections.blog.excerpt_words",
@@ -766,7 +846,8 @@
       "min": 10,
       "max": 60,
       "step": 5,
-      "default": 30
+      "default": 30,
+      "visible_if": "{{ section.settings.show_excerpt }}"
     },
     {
       "type": "checkbox",

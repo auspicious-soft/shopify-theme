@@ -135,6 +135,7 @@
               show_date: section.settings.show_date,
               show_author: section.settings.show_author,
               show_excerpt: section.settings.show_excerpt,
+              excerpt_source: section.settings.excerpt_source,
               excerpt_words: 20,
               show_topic: section.settings.show_topic,
               show_reading_time: section.settings.show_reading_time,
@@ -537,6 +538,24 @@
       "id": "show_excerpt",
       "label": "t:sections.blog.show_excerpt",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "excerpt_source",
+      "label": "t:sections.blog.excerpt_source",
+      "info": "t:sections.blog.excerpt_source_info",
+      "default": "excerpt",
+      "options": [
+        {
+          "value": "excerpt",
+          "label": "t:sections.blog.excerpt_source_excerpt"
+        },
+        {
+          "value": "content",
+          "label": "t:sections.blog.excerpt_source_content"
+        }
+      ],
+      "visible_if": "{{ section.settings.show_excerpt }}"
     },
     {
       "type": "text",
