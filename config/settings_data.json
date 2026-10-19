@@ -151,7 +151,7 @@
     "show_vendor": false,
     "show_cart_note": false,
     "cart_drawer_collection": "automated-collection",
-    "free_shipping_bar_enabled": false,
+    "free_shipping_bar_enabled": true,
     "cart_color_scheme": "scheme-1",
     "customer_account_menu": "customer-account-main-menu",
     "content_for_index": [],
