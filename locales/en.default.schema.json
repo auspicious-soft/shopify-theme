@@ -1101,7 +1101,8 @@
       "excerpt_source": "Excerpt source",
       "excerpt_source_info": "Excerpt: the post's Excerpt field in full (posts without one use the description). Description: the start of the post, trimmed to Excerpt length",
       "excerpt_source_excerpt": "Excerpt (full)",
-      "excerpt_source_content": "Description (trimmed)"
+      "excerpt_source_content": "Description (trimmed)",
+      "show_read_more": "Show read more"
     },
     "article": {
       "eyebrow_letter_spacing": "Tag letter spacing",

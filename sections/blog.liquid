@@ -24,6 +24,12 @@
 {{ 'pagination.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
+  # "Show read more" off: no link / button on the cards.
+  assign read_more_label = blank
+  if section.settings.show_read_more
+    assign read_more_label = section.settings.read_more
+  endif
+
   assign layout = section.settings.layout
   assign columns = section.settings.columns_desktop
   if layout == 'list'
@@ -220,7 +226,7 @@
               skip_tag: featured_tag_name,
               show_reading_time: section.settings.show_reading_time,
               meta_position: section.settings.meta_position,
-              read_more: section.settings.read_more,
+              read_more: read_more_label,
               read_more_style: section.settings.read_more_style,
               heading_tag: card_heading_tag,
               card: section.settings.card,
@@ -262,7 +268,7 @@
                 skip_tag: featured_tag_name,
                 show_reading_time: section.settings.show_reading_time,
                 meta_position: section.settings.meta_position,
-                read_more: section.settings.read_more,
+                read_more: read_more_label,
                 read_more_style: section.settings.read_more_style,
                 heading_tag: card_heading_tag,
                 title_size: section.settings.card_title_size,
@@ -857,11 +863,18 @@
       "default": false
     },
     {
+      "type": "checkbox",
+      "id": "show_read_more",
+      "label": "t:sections.blog.show_read_more",
+      "default": true
+    },
+    {
       "type": "text",
       "id": "read_more",
       "label": "t:sections.blog.read_more",
       "info": "t:sections.blog.read_more_info",
-      "default": "Read more"
+      "default": "Read more",
+      "visible_if": "{{ section.settings.show_read_more }}"
     },
     {
       "type": "select",
@@ -881,7 +894,8 @@
           "label": "t:options.button_style.secondary"
         }
       ],
-      "default": "text"
+      "default": "text",
+      "visible_if": "{{ section.settings.show_read_more }}"
     },
     {
       "type": "header",
