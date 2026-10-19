@@ -97,7 +97,7 @@
         "block_spacing": 20,
         "width": "page",
         "color_scheme": "",
-        "padding_top": 32,
+        "padding_top": 24,
         "padding_bottom": 24,
         "mobile_padding_custom": false,
         "mobile_padding_top": 64,
