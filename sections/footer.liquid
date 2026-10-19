@@ -190,8 +190,16 @@
       <div class="footer__legal">
         <p class="footer__copyright">
           {%- if section.settings.copyright_text != blank -%}
-            {%- assign current_year = 'now' | date: '%Y' -%}
-            {{ section.settings.copyright_text | replace: '[year]', current_year }}
+            {%- liquid
+              # [year] becomes the current year; (c) / [c] become ©, and a © is
+              # added in front when the text doesn't have one already.
+              assign current_year = 'now' | date: '%Y'
+              assign copyright = section.settings.copyright_text | replace: '[year]', current_year | replace: '[YEAR]', current_year | replace: '(c)', '©' | replace: '(C)', '©' | replace: '[c]', '©' | replace: '[C]', '©'
+              unless copyright contains '©' or copyright contains '&copy;'
+                assign copyright = '© ' | append: copyright
+              endunless
+            -%}
+            {{ copyright }}
           {%- else -%}
             &copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}
           {%- endif -%}

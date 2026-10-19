@@ -150,7 +150,12 @@
     "card_count": {
       "one": "{{ count }} piece",
       "other": "{{ count }} pieces"
-    }
+    },
+    "filter_by": "Filter By",
+    "sort_colon": "Sort:",
+    "showing_items": "Showing {{ shown }} of {{ total }} items",
+    "clear_all_filters": "Clear All Filters",
+    "apply_filter": "Apply filter"
   },
   "gift_card": {
     "add_to_apple_wallet": "Add to Apple Wallet",

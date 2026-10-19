@@ -27,6 +27,11 @@ if (!customElements.get('product-card')) {
 
       this.updateArrows();
       this.updateAvailability();
+
+      // Open on the selected variant's image, e.g. the colour picked in the
+      // collection filters (Shopify selects the matching variant).
+      const initial = this.findVariant();
+      if (initial && initial.media > 1) this.showSlide(initial.media - 1, 'instant');
     }
 
     disconnectedCallback() {
@@ -219,10 +224,10 @@ if (!customElements.get('product-card')) {
       this.slides.scrollBy({ left: direction * sign * this.slides.clientWidth, behavior: 'smooth' });
     }
 
-    showSlide(index) {
+    showSlide(index, behavior = 'smooth') {
       const slide = this.slides?.children[index];
       if (!slide) return;
-      this.slides.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
+      this.slides.scrollTo({ left: slide.offsetLeft, behavior });
     }
 
     updateArrows() {

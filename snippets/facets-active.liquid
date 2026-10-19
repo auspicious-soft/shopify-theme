@@ -35,6 +35,9 @@
         {% endfor %}
       {% endif %}
     {% endfor %}
-    <a href="{{ clear_url }}" class="facets__clear" data-facets-link>{{ 'collections.clear_all' | t }}</a>
+    <a href="{{ clear_url }}" class="facets__chip facets__chip--clear" data-facets-link>
+      <span>{{ 'collections.clear_all_filters' | t }}</span>
+      {{ 'icon-close.svg' | inline_asset_content }}
+    </a>
   </div>
 {%- endif -%}

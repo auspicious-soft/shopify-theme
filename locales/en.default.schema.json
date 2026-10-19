@@ -443,7 +443,11 @@
       "banner_placeholder_image_info": "Leave empty to use a placeholder illustration",
       "banner_color_scheme_info": "Text and overlay color on image banners, background on minimal banners",
       "filter_button_size": "Filter button size",
-      "filter_button_size_info": "Clear all and View results buttons in the filter drawer"
+      "filter_button_size_info": "Clear all and View results buttons in the filter drawer",
+      "filter_value_style": "Filter value style",
+      "filter_value_style_info": "Colour filters always show as swatches, and Availability as a checkbox list",
+      "filter_value_pills": "Pills",
+      "filter_value_checkbox": "Checkbox list"
     },
     "product": {
       "media": "Media",
@@ -992,7 +996,7 @@
       "column_gap": "Space between columns",
       "bottom_bar": "Bottom bar",
       "copyright_text": "Copyright text",
-      "copyright_text_info": "Leave blank for \"© year Store name\". Use [year] to insert the current year",
+      "copyright_text_info": "A © is added in front automatically. Use [year] for the current year, e.g. \"[year] Vera Studio\" shows \"© 2026 Vera Studio\". Leave blank for \"© year Store name\"",
       "show_powered_by": "Show \"Powered by Shopify\"",
       "show_policies": "Show policy links",
       "show_divider": "Show divider line",
@@ -1093,7 +1097,12 @@
       "featured_source_latest": "Latest article",
       "featured_source_tag": "Article with a tag",
       "featured_tag": "Featured tag",
-      "featured_tag_info": "The newest article with this tag is featured (falls back to the latest article). The tag is hidden from the filter and card topics"
+      "featured_tag_info": "The newest article with this tag is featured (falls back to the latest article). The tag is hidden from the filter and card topics",
+      "excerpt_source": "Excerpt source",
+      "excerpt_source_info": "Excerpt: the post's Excerpt field in full (posts without one use the description). Description: the start of the post, trimmed to Excerpt length",
+      "excerpt_source_excerpt": "Excerpt (full)",
+      "excerpt_source_content": "Description (trimmed)",
+      "show_read_more": "Show read more"
     },
     "article": {
       "eyebrow_letter_spacing": "Tag letter spacing",

@@ -27,6 +27,41 @@
         "heading_case": "uppercase"
       }
     },
+    "page_header_F4kJbU": {
+      "type": "page-header",
+      "name": "t:sections.page_header.name",
+      "settings": {
+        "show_breadcrumbs": false,
+        "show_heading": true,
+        "caption": "THE ART OF STYLE",
+        "caption_letter_spacing": "large",
+        "heading": "About Us",
+        "heading_tag": "h1",
+        "heading_class": "h1",
+        "subheading": "<p>Discover collections that bring together timeless essentials, modern silhouettes, and effortless style for every season.</p>",
+        "heading_alignment": "left",
+        "button_text": "",
+        "button_url": "",
+        "button_style": "primary",
+        "button_size": "medium",
+        "show_banner": true,
+        "banner_image": "shopify://shop_images/Hero_Image_2_b86bfbf4-4a40-4124-9c48-2b2f1f64b4f7.png",
+        "banner_height": "medium",
+        "banner_overlay": 30,
+        "content_position_horizontal": "center",
+        "content_position_vertical": "middle",
+        "banner_color_scheme": "",
+        "width": "page",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 24,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 64,
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
+      }
+    },
     "rich_text_B3RJFD": {
       "type": "rich-text",
       "blocks": {
@@ -62,7 +97,7 @@
         "block_spacing": 20,
         "width": "page",
         "color_scheme": "",
-        "padding_top": 32,
+        "padding_top": 24,
         "padding_bottom": 24,
         "mobile_padding_custom": false,
         "mobile_padding_top": 64,
@@ -78,7 +113,7 @@
         "heading_e9Mfin": {
           "type": "heading",
           "settings": {
-            "heading": "\"A garment should not merely occupy space in your wardrobe; it should bridge daily warmth with an elevated, sculptural presence.\"",
+            "heading": "<em>\"A garment should not merely occupy space in your wardrobe; it should bridge daily warmth with an elevated, sculptural presence.\"</em>",
             "heading_tag": "h2",
             "heading_class": "h6",
             "uppercase": false
@@ -87,7 +122,7 @@
         "text_G96ND8": {
           "type": "text",
           "settings": {
-            "text": "<p>Founded with a commitment to raw honesty and structural permanence, our studio rejects the rapid obsolescence of modern fashion. Instead, we trace our raw fibers directly to ethical sheep ranches and historical family-owned mills in Biella, Italy, and Kyoto, Japan.<br/></p><p>Each pattern is designed with heavy, natural cashmere and structural drop shoulders, allowing the material to drape in complete alignment with the human form. By weaving slowly, we preserve the breath of the fibers, resulting in garments that endure for generations.</p>",
+            "text": "<p>Founded with a commitment to raw honesty and structural permanence, our studio rejects the rapid obsolescence of modern fashion. Instead, we trace our raw fibers directly to ethical sheep ranches and historical family-owned mills in Biella, Italy, and Kyoto, Japan.<br/></p><p>Each pattern is designed with heavy, natural cashmere and structural drop shoulders, allowing the material to drape in complete alignment with the human form. By weaving slowly, we preserve the breath of the fibers, resulting in garments that endure for generations.</p><p>Every thread carries the mark of the hands that shaped it. We honor traditional craftsmanship by embracing thoughtful processes, natural materials, and the beauty of imperfection. The result is clothing that feels personal, ages gracefully, and tells a story far beyond the season.</p><p></p>",
             "size": "medium"
           }
         }
@@ -122,7 +157,7 @@
         "mobile_padding_top": 56,
         "mobile_padding_bottom": 56,
         "button_size": "medium",
-        "heading_case": "uppercase",
+        "heading_case": "none",
         "button_case": "uppercase"
       }
     },
@@ -298,7 +333,7 @@
         "text_qfmjWb": {
           "type": "text",
           "settings": {
-            "text": "<p>In 2018, while wandering the historical textile archives of northern Italy, founders Elena and Arthur noticed a profound contrast between vintage garments—heavy, structural, full of natural character—and modern retail fabrics.<br/><br/>We wanted to build an atelier that feels like a library rather than a showroom,\" Arthur reflects. \"Each design starts with a deep structural appreciation of the loom's capabilities, prioritizing raw, untreated materials over slick, computerized finishes.</p>",
+            "text": "<p>In 2018, while wandering the historical textile archives of northern Italy, founders Elena and Arthur noticed a profound contrast between vintage garments—heavy, structural, full of natural character—and modern retail fabrics.<br/><br/>\"We wanted to build an atelier that feels like a library rather than a showroom,\" Arthur reflects. \"Each design starts with a deep structural appreciation of the loom's capabilities, prioritizing raw, untreated materials over slick, computerized finishes.\"</p>",
             "size": "medium"
           }
         }
@@ -346,7 +381,7 @@
           "settings": {
             "number": "2018",
             "title": "Archive Exploration",
-            "title_uppercase": false,
+            "title_uppercase": true,
             "text": "<p>Elena and Arthur journey through the historic wool mills of Biella, solidifying the slow-weaving loom philosophy.</p>",
             "link_label": "",
             "link": ""
@@ -357,7 +392,7 @@
           "settings": {
             "number": "2020",
             "title": "Atelier Foundation",
-            "title_uppercase": false,
+            "title_uppercase": true,
             "text": "<p>Our first small-scale design studio opens, strictly limiting production to 100 numbered coats per season.</p>",
             "link_label": "",
             "link": ""
@@ -368,7 +403,7 @@
           "settings": {
             "number": "2022",
             "title": "Kyoto Alliance",
-            "title_uppercase": false,
+            "title_uppercase": true,
             "text": "<p>Partnering with multi-generational slub silk weavers in Kyoto to source sustainable, natural silk linings.</p>",
             "link_label": "",
             "link": ""
@@ -379,7 +414,7 @@
           "settings": {
             "number": "2025",
             "title": "Circular Mill Sourcing",
-            "title_uppercase": false,
+            "title_uppercase": true,
             "text": "<p>100% of our raw cashmere is certified directly traceable to independent, regenerative sheep ranches.</p>",
             "link_label": "",
             "link": ""
@@ -430,40 +465,6 @@
         "mobile_padding_top": 56,
         "mobile_padding_bottom": 56,
         "button_size": "medium",
-        "heading_case": "uppercase",
-        "button_case": "uppercase"
-      }
-    },
-    "page_header_F4kJbU": {
-      "type": "page-header",
-      "name": "t:sections.page_header.name",
-      "settings": {
-        "show_breadcrumbs": true,
-        "show_heading": true,
-        "caption": "",
-        "caption_letter_spacing": "small",
-        "heading": "",
-        "heading_tag": "h1",
-        "heading_class": "h1",
-        "subheading": "",
-        "heading_alignment": "left",
-        "button_text": "",
-        "button_url": "",
-        "button_style": "primary",
-        "button_size": "medium",
-        "show_banner": true,
-        "banner_height": "medium",
-        "banner_overlay": 30,
-        "content_position_horizontal": "left",
-        "content_position_vertical": "bottom",
-        "banner_color_scheme": "",
-        "width": "page",
-        "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 64,
-        "mobile_padding_custom": false,
-        "mobile_padding_top": 40,
-        "mobile_padding_bottom": 64,
         "heading_case": "uppercase",
         "button_case": "uppercase"
       }

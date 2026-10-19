@@ -13,7 +13,10 @@
   @param {boolean} [show_date] - Show the publish date (default true)
   @param {boolean} [show_author] - Show the author
   @param {boolean} [show_excerpt] - Show the excerpt (default true)
-  @param {number} [excerpt_words] - Words to show when the article has no excerpt (default 30)
+  @param {string} [excerpt_source] - 'excerpt' (default): the post's Excerpt in full, else the description;
+    'content': the post's description (content), trimmed to excerpt_words
+  @param {number} [excerpt_words] - Words to show when the article has no excerpt (default 30).
+    The post's own Excerpt (admin > Blog posts > Excerpt) shows in full, with its formatting.
   @param {boolean} [show_tags] - Show the article's tags
   @param {boolean} [show_topic] - Show the first tag as a small label above the title
   @param {string} [skip_tag] - A tag never used as the topic (e.g. the blog's "featured" tag)
@@ -96,8 +99,12 @@
     assign reading_minutes = word_count | plus: 199 | divided_by: 200 | at_least: 1
   endif
 
-  if article.excerpt != blank
-    assign excerpt = article.excerpt | strip_html | truncatewords: excerpt_words
+  # The post's Excerpt field shows as written (paragraphs, italics, …);
+  # without one, the start of the content is used, trimmed to excerpt_words.
+  assign has_excerpt = false
+  if article.excerpt != blank and excerpt_source != 'content'
+    assign has_excerpt = true
+    assign excerpt = article.excerpt
   else
     assign excerpt = article.content | strip_html | truncatewords: excerpt_words
   endif
@@ -157,7 +164,11 @@
     </{{ heading_tag }}>
 
     {%- if show_excerpt != false and excerpt != blank -%}
-      <p class="article-card__excerpt">{{ excerpt }}</p>
+      {%- if has_excerpt -%}
+        <div class="article-card__excerpt article-card__excerpt--rich">{{ excerpt }}</div>
+      {%- else -%}
+        <p class="article-card__excerpt">{{ excerpt }}</p>
+      {%- endif -%}
     {%- endif -%}
 
     {%- if show_tags and article.tags.size > 0 -%}

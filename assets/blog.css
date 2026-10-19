@@ -275,12 +275,23 @@
   text-decoration-thickness: 1px;
 }
 
+/* The featured post's Excerpt, in full with its own formatting (e.g. an
+   italic quote, then a paragraph). */
 .blog-feature__quote {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
   margin: 0.25rem 0 0;
   padding: 0;
-  font-family: var(--font-heading--family, inherit);
-  font-style: italic;
   border: 0;
+}
+
+.blog-feature__quote > * {
+  margin: 0;
+}
+
+.blog-feature__quote em {
+  font-family: var(--font-heading--family, inherit);
 }
 
 .blog-feature__text {

@@ -49,6 +49,9 @@
     else
       assign media_sizes = '(min-width: 990px) 52vw, 100vw'
   endcase
+  # Grid: two columns, but the first media spans both, so it keeps the full
+  # size (otherwise the browser picks a half-width file and it looks blurry).
+  assign full_media_sizes = media_sizes
   if layout == 'grid'
     assign media_sizes = media_sizes | replace: '62vw', '31vw' | replace: '52vw', '26vw' | replace: '40vw', '20vw'
   endif
@@ -91,6 +94,10 @@
               assign loading = 'eager'
             endif
             assign media_ratio = media.preview_image.aspect_ratio | default: 1
+            assign slide_sizes = media_sizes
+            if forloop.first
+              assign slide_sizes = full_media_sizes
+            endif
           -%}
           <li
             class="product-gallery__slide product-gallery__slide--{{ media.media_type }}{% if forloop.index0 == featured_index %} is-active{% endif %}"
@@ -104,12 +111,12 @@
                 {%- capture image_markup -%}
                   {{
                     media
-                    | image_url: width: 2000
+                    | image_url: width: 3000
                     | image_tag:
                       class: 'product-gallery__image',
                       loading: loading,
-                      widths: '400, 600, 800, 1000, 1300, 1600, 2000',
-                      sizes: media_sizes,
+                      widths: '400, 600, 800, 1000, 1300, 1600, 2000, 2500, 3000',
+                      sizes: slide_sizes,
                       alt: media.alt
                   }}
                 {%- endcapture -%}

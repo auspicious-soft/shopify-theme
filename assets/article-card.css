@@ -149,13 +149,23 @@
   }
 }
 
+/* Excerpts show in full (no line limit). */
 .article-card__excerpt {
-  display: -webkit-box;
   margin: 0;
-  overflow: hidden;
   color: color-mix(in srgb, var(--color-foreground) 80%, transparent);
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+}
+
+/* The post's own Excerpt: shown in full with its formatting (paragraphs,
+   italics, quotes). */
+.article-card__excerpt--rich {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+
+.article-card__excerpt--rich > * {
+  margin: 0;
+  font-size: inherit;
 }
 
 .article-card__tags {
@@ -229,9 +239,6 @@
     padding: 0;
   }
 
-  .article-card--featured .article-card__excerpt {
-    -webkit-line-clamp: 4;
-  }
 }
 
 /* ---------- List layout (blog page) ---------- */

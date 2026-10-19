@@ -94,7 +94,12 @@
 
   assign media_list = product.media
   if use_slider == false
+    # One image: the selected variant's (e.g. the colour picked in the
+    # filters), else the product's first.
     assign media_list = product.media | slice: 0, 1
+    if current.featured_media
+      assign media_list = product.media | where: 'id', current.featured_media.id
+    endif
   endif
 -%}
 

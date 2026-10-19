@@ -24,6 +24,12 @@
 {{ 'pagination.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
+  # "Show read more" off: no link / button on the cards.
+  assign read_more_label = blank
+  if section.settings.show_read_more
+    assign read_more_label = section.settings.read_more
+  endif
+
   assign layout = section.settings.layout
   assign columns = section.settings.columns_desktop
   if layout == 'list'
@@ -170,9 +176,10 @@
                 <a href="{{ feature.url }}">{{ feature.title | escape }}</a>
               </{{ feature_tag }}>
               {%- if feature.excerpt != blank -%}
-                <blockquote class="blog-feature__quote">{{ feature.excerpt | strip_html | truncatewords: 45 }}</blockquote>
+                <div class="blog-feature__quote">{{ feature.excerpt }}</div>
               {%- endif -%}
-              {%- if section.settings.featured_words > 0 -%}
+              {%- comment -%} The description only shows when the post has no Excerpt. {%- endcomment -%}
+              {%- if section.settings.featured_words > 0 and feature.excerpt == blank -%}
                 <p class="blog-feature__text">{{ feature.content | strip_html | truncatewords: section.settings.featured_words }}</p>
               {%- endif -%}
               <p class="blog-feature__meta">
@@ -212,13 +219,14 @@
               show_date: section.settings.show_date,
               show_author: section.settings.show_author,
               show_excerpt: section.settings.show_excerpt,
+              excerpt_source: section.settings.excerpt_source,
               excerpt_words: section.settings.excerpt_words,
               show_tags: section.settings.show_card_tags,
               show_topic: section.settings.show_topic,
               skip_tag: featured_tag_name,
               show_reading_time: section.settings.show_reading_time,
               meta_position: section.settings.meta_position,
-              read_more: section.settings.read_more,
+              read_more: read_more_label,
               read_more_style: section.settings.read_more_style,
               heading_tag: card_heading_tag,
               card: section.settings.card,
@@ -253,13 +261,14 @@
                 show_date: section.settings.show_date,
                 show_author: section.settings.show_author,
                 show_excerpt: section.settings.show_excerpt,
+              excerpt_source: section.settings.excerpt_source,
                 excerpt_words: section.settings.excerpt_words,
                 show_tags: section.settings.show_card_tags,
                 show_topic: section.settings.show_topic,
                 skip_tag: featured_tag_name,
                 show_reading_time: section.settings.show_reading_time,
                 meta_position: section.settings.meta_position,
-                read_more: section.settings.read_more,
+                read_more: read_more_label,
                 read_more_style: section.settings.read_more_style,
                 heading_tag: card_heading_tag,
                 title_size: section.settings.card_title_size,
@@ -538,10 +547,22 @@
       "id": "featured_label_letter_spacing",
       "label": "t:sections.blog.featured_label_letter_spacing",
       "options": [
-        { "value": "none", "label": "t:options.letter_spacing.none" },
-        { "value": "small", "label": "t:options.letter_spacing.small" },
-        { "value": "medium", "label": "t:options.letter_spacing.medium" },
-        { "value": "large", "label": "t:options.letter_spacing.large" }
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
       ],
       "default": "none",
       "visible_if": "{{ section.settings.feature_first and section.settings.featured_style == 'story' }}"
@@ -551,12 +572,30 @@
       "id": "featured_title_size",
       "label": "t:sections.blog.featured_title_size",
       "options": [
-        { "value": "h1", "label": "t:options.heading_size.huge" },
-        { "value": "h2", "label": "t:options.heading_size.extra_large" },
-        { "value": "h3", "label": "t:options.heading_size.large" },
-        { "value": "h4", "label": "t:options.heading_size.medium" },
-        { "value": "h5", "label": "t:options.heading_size.small" },
-        { "value": "h6", "label": "t:options.heading_size.extra_small" }
+        {
+          "value": "h1",
+          "label": "t:options.heading_size.huge"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.heading_size.extra_large"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.heading_size.large"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.heading_size.medium"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.heading_size.small"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.heading_size.extra_small"
+        }
       ],
       "default": "h2",
       "visible_if": "{{ section.settings.feature_first }}"
@@ -649,12 +688,30 @@
       "id": "card_title_size",
       "label": "t:sections.blog.card_title_size",
       "options": [
-        { "value": "h1", "label": "t:options.heading_size.huge" },
-        { "value": "h2", "label": "t:options.heading_size.extra_large" },
-        { "value": "h3", "label": "t:options.heading_size.large" },
-        { "value": "h4", "label": "t:options.heading_size.medium" },
-        { "value": "h5", "label": "t:options.heading_size.small" },
-        { "value": "h6", "label": "t:options.heading_size.extra_small" }
+        {
+          "value": "h1",
+          "label": "t:options.heading_size.huge"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.heading_size.extra_large"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.heading_size.large"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.heading_size.medium"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.heading_size.small"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.heading_size.extra_small"
+        }
       ],
       "default": "h6"
     },
@@ -744,10 +801,22 @@
       "id": "topic_letter_spacing",
       "label": "t:sections.blog.topic_letter_spacing",
       "options": [
-        { "value": "none", "label": "t:options.letter_spacing.none" },
-        { "value": "small", "label": "t:options.letter_spacing.small" },
-        { "value": "medium", "label": "t:options.letter_spacing.medium" },
-        { "value": "large", "label": "t:options.letter_spacing.large" }
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
       ],
       "default": "none",
       "visible_if": "{{ section.settings.show_topic }}"
@@ -759,6 +828,24 @@
       "default": true
     },
     {
+      "type": "select",
+      "id": "excerpt_source",
+      "label": "t:sections.blog.excerpt_source",
+      "info": "t:sections.blog.excerpt_source_info",
+      "default": "excerpt",
+      "options": [
+        {
+          "value": "excerpt",
+          "label": "t:sections.blog.excerpt_source_excerpt"
+        },
+        {
+          "value": "content",
+          "label": "t:sections.blog.excerpt_source_content"
+        }
+      ],
+      "visible_if": "{{ section.settings.show_excerpt }}"
+    },
+    {
       "type": "range",
       "id": "excerpt_words",
       "label": "t:sections.blog.excerpt_words",
@@ -766,7 +853,8 @@
       "min": 10,
       "max": 60,
       "step": 5,
-      "default": 30
+      "default": 30,
+      "visible_if": "{{ section.settings.show_excerpt }}"
     },
     {
       "type": "checkbox",
@@ -775,11 +863,18 @@
       "default": false
     },
     {
+      "type": "checkbox",
+      "id": "show_read_more",
+      "label": "t:sections.blog.show_read_more",
+      "default": true
+    },
+    {
       "type": "text",
       "id": "read_more",
       "label": "t:sections.blog.read_more",
       "info": "t:sections.blog.read_more_info",
-      "default": "Read more"
+      "default": "Read more",
+      "visible_if": "{{ section.settings.show_read_more }}"
     },
     {
       "type": "select",
@@ -799,7 +894,8 @@
           "label": "t:options.button_style.secondary"
         }
       ],
-      "default": "text"
+      "default": "text",
+      "visible_if": "{{ section.settings.show_read_more }}"
     },
     {
       "type": "header",

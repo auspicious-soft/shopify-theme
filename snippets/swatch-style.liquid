@@ -6,12 +6,14 @@
   Where the color comes from, first match wins:
   1. Shopify's own swatch (the value is linked to the category's color
      metafield in the admin): its color and/or image.
-  2. Theme settings > Swatches > Swatch colors: one "Name: value" per line,
+  2. Shopify's colour metaobject (shopify--color-pattern) with the same
+     handle as the value, e.g. "Light Brown" -> light-brown.
+  3. Theme settings > Swatches > Swatch colors: one "Name: value" per line,
      where value is a color (#556b2f, rgb(...), navy), an image URL, or the
      name of an image uploaded to Content > Files (e.g. leopard.png).
      Names match case-insensitively. This covers products imported without
      a category, whose options can't use Shopify's swatches.
-  3. The value's own name as a CSS color (works for "Red", "Navy", ...).
+  4. The value's own name as a CSS color (works for "Red", "Navy", ...).
 
   @param {object} value - A product option value (product_option_value)
   @param {number} [image_width] - Width for swatch images, defaults to 100
@@ -26,6 +28,19 @@
   assign swatch_image = ''
   if value.swatch.image
     assign swatch_image = value.swatch.image | image_url: width: width
+  endif
+
+  # Shopify's colour metaobject (Content > Metaobjects > Color,
+  # shopify--color-pattern) whose handle matches the value name.
+  if swatch_color == blank and swatch_image == blank
+    assign swatch_handle = value.name | default: value | handleize
+    assign swatch_entry = metaobjects['shopify--color-pattern'][swatch_handle]
+    if swatch_entry
+      assign swatch_color = swatch_entry.color.value.first | default: swatch_entry.color.value
+      if swatch_entry.image.value
+        assign swatch_image = swatch_entry.image.value | image_url: width: width
+      endif
+    endif
   endif
 
   if swatch_color == blank and swatch_image == blank

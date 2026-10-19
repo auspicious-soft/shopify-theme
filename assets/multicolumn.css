@@ -262,8 +262,14 @@
   line-height: 1.3;
 }
 
-/* Column > Uppercase title */
-.multicolumn__title--uppercase {
+/* Column > Uppercase title. Column titles follow only this checkbox, not
+   the section's Text case > Headings setting (which targets the .h1–.h6
+   size classes the titles also use); specificity beats that rule. */
+.shopify-section .multicolumn .multicolumn__title {
+  text-transform: none;
+}
+
+.shopify-section .multicolumn .multicolumn__title--uppercase {
   text-transform: uppercase;
 }
 

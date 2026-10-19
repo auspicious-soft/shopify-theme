@@ -171,6 +171,11 @@ if (!customElements.get('collection-page')) {
           grid.append(...freshGrid.children);
           firstNew?.querySelector('a')?.focus({ preventScroll: true });
         }
+        // "Showing X of Y items" counts every loaded product.
+        const count = this.querySelector('.collection__count');
+        const freshCount = count && doc.getElementById(count.id);
+        if (freshCount) count.replaceWith(freshCount);
+
         const freshWrapper = doc.querySelector('[data-load-more-wrapper]');
         if (wrapper) {
           if (freshWrapper) wrapper.replaceWith(freshWrapper);

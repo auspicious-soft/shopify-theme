@@ -14,12 +14,13 @@
   @param {boolean} filtering - Show the filters
   @param {boolean} sorting - Sorting is shown in the toolbar
   @param {string} filter_layout - 'drawer' or 'sidebar'
-  @param {string} clear_url - URL that clears every filter
   @param {string} [button_size] - Drawer button size: small / medium / large
   @param {string} [hidden_inputs] - Extra hidden inputs (the search page's q / type)
+  @param {string} [value_style] - How filter values show: 'checkbox' (default) list or 'pills'.
+    Colour filters always show as swatches, and Availability as a checkbox list.
 
   @example
-  {% render 'facets', results: collection, url: collection.url, section_id: section.id, filtering: true, sorting: true, filter_layout: 'drawer', clear_url: collection.url %}
+  {% render 'facets', results: collection, url: collection.url, section_id: section.id, filtering: true, sorting: true, filter_layout: 'drawer' %}
 {% enddoc %}
 
 {%- if filtering -%}
@@ -56,6 +57,16 @@
           {%- liquid
             assign group_id = 'FacetGroup-' | append: section_id | append: '-' | append: forloop.index
             assign group_active = filter.active_values.size
+
+            # How this filter's values show: colour swatches, a checkbox list
+            # (always for Availability / yes-no filters) or the chosen style.
+            assign list_mode = value_style | default: 'checkbox'
+            assign filter_label_lower = filter.label | downcase
+            if filter.type == 'boolean' or filter.param_name contains 'availability'
+              assign list_mode = 'checkbox'
+            elsif filter.presentation == 'swatch' or filter_label_lower contains 'color' or filter_label_lower contains 'colour'
+              assign list_mode = 'swatches'
+            endif
             if filter.type == 'price_range'
               assign group_active = 0
               if filter.min_value.value != nil or filter.max_value.value != nil
@@ -126,7 +137,7 @@
                 </div>
               </div>
             {% else %}
-              <ul class="facets__list" role="list">
+              <ul class="facets__list facets__list--{{ list_mode }}" role="list">
                 {% for value in filter.values %}
                   {%- liquid
                     assign option_id = group_id | append: '-' | append: forloop.index
@@ -136,7 +147,11 @@
                     endif
                   -%}
                   <li>
-                    <label for="{{ option_id }}" class="facets__option{% if is_disabled %} is-disabled{% endif %}">
+                    <label
+                      for="{{ option_id }}"
+                      class="facets__option facets__option--{{ list_mode }}{% if is_disabled %} is-disabled{% endif %}"
+                      {% if list_mode == 'swatches' %}title="{{ value.label | escape }}"{% endif %}
+                    >
                       <input
                         id="{{ option_id }}"
                         type="checkbox"
@@ -147,17 +162,41 @@
                         {% if value.active %}checked{% endif %}
                         {% if is_disabled %}disabled{% endif %}
                       >
-                      {% if value.swatch.color or value.swatch.image %}
-                        <span
-                          class="facets__swatch"
-                          style="{% if value.swatch.color %}--swatch-color: {{ value.swatch.color }};{% endif %}{% if value.swatch.image %} --swatch-image: url('{{ value.swatch.image | image_url: width: 60 }}');{% endif %}"
-                          aria-hidden="true"
-                        ></span>
-                      {% else %}
-                        <span class="facets__box" aria-hidden="true"></span>
-                      {% endif %}
-                      <span class="facets__option-label">{{ value.label | escape }}</span>
-                      <span class="facets__option-count">({{ value.count }})</span>
+                      {%- case list_mode -%}
+                        {%- when 'swatches' -%}
+                          {%- liquid
+                            # Swatch colour / image, first match wins:
+                            # 1. Shopify's swatch on the filter value (Search & Discovery
+                            #    filter shown as swatches).
+                            # 2. Shopify's colour metaobject (Content > Metaobjects >
+                            #    Color, type shopify--color-pattern) whose handle matches
+                            #    the value, e.g. "Light Brown" -> light-brown.
+                            # 3. Theme settings > Swatches, else the name as a CSS colour.
+                            assign swatch_color = value.swatch.color
+                            assign swatch_image = value.swatch.image
+                            if swatch_color == blank and swatch_image == blank
+                              assign swatch_handle = value.label | handleize
+                              assign swatch_entry = metaobjects['shopify--color-pattern'][swatch_handle]
+                              if swatch_entry
+                                assign swatch_color = swatch_entry.color.value.first | default: swatch_entry.color.value
+                                assign swatch_image = swatch_entry.image.value
+                              endif
+                            endif
+                          -%}
+                          <span
+                            class="facets__swatch"
+                            style="{% if swatch_color != blank or swatch_image != blank %}{% if swatch_color != blank %}--swatch-color: {{ swatch_color }};{% endif %}{% if swatch_image != blank %} --swatch-image: url('{{ swatch_image | image_url: width: 60 }}');{% endif %}{% else %}{% render 'swatch-style', value: value.label, image_width: 60 %}{% endif %}"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">{{ value.label | escape }} ({{ value.count }})</span>
+                        {%- when 'pills' -%}
+                          <span class="facets__pill">{{ value.label | escape }}</span>
+                          <span class="visually-hidden">({{ value.count }})</span>
+                        {%- else -%}
+                          <span class="facets__box" aria-hidden="true"></span>
+                          <span class="facets__option-label">{{ value.label | escape }}</span>
+                          <span class="facets__option-count">({{ value.count }})</span>
+                      {%- endcase -%}
                     </label>
                   </li>
                 {% endfor %}
@@ -172,11 +211,8 @@
       </form>
 
       <div id="FacetsFooter-{{ section_id }}" class="facets__footer" data-results-part>
-        <a href="{{ clear_url }}" class="button button--secondary facets__footer-button" data-facets-link>
-          {{- 'collections.clear_all' | t -}}
-        </a>
         <button type="button" class="button button--primary facets__footer-button" data-facets-close>
-          {{- 'collections.show_results' | t -}}
+          {{- 'collections.apply_filter' | t -}}
         </button>
       </div>
     </div>

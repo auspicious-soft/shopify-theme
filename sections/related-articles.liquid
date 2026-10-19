@@ -13,6 +13,12 @@
 <script src="{{ 'slider.js' | asset_url }}" defer></script>
 
 {%- liquid
+  # "Show read more" off: no link / button on the cards.
+  assign read_more_label = blank
+  if section.settings.show_read_more
+    assign read_more_label = section.settings.read_more
+  endif
+
   assign limit = section.settings.articles_to_show
   assign layout = section.settings.layout
   assign columns = section.settings.columns_desktop
@@ -135,12 +141,13 @@
               show_date: section.settings.show_date,
               show_author: section.settings.show_author,
               show_excerpt: section.settings.show_excerpt,
+              excerpt_source: section.settings.excerpt_source,
               excerpt_words: 20,
               show_topic: section.settings.show_topic,
               show_reading_time: section.settings.show_reading_time,
               title_uppercase: section.settings.title_uppercase,
               meta_position: section.settings.meta_position,
-              read_more: section.settings.read_more,
+              read_more: read_more_label,
               title_size: section.settings.card_title_size,
               card: section.settings.card,
               card_color_scheme: section.settings.card_color_scheme,
@@ -539,11 +546,36 @@
       "default": true
     },
     {
+      "type": "select",
+      "id": "excerpt_source",
+      "label": "t:sections.blog.excerpt_source",
+      "info": "t:sections.blog.excerpt_source_info",
+      "default": "excerpt",
+      "options": [
+        {
+          "value": "excerpt",
+          "label": "t:sections.blog.excerpt_source_excerpt"
+        },
+        {
+          "value": "content",
+          "label": "t:sections.blog.excerpt_source_content"
+        }
+      ],
+      "visible_if": "{{ section.settings.show_excerpt }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_read_more",
+      "label": "t:sections.blog.show_read_more",
+      "default": true
+    },
+    {
       "type": "text",
       "id": "read_more",
       "label": "t:sections.blog.read_more",
       "info": "t:sections.blog.read_more_info",
-      "default": "Read more"
+      "default": "Read more",
+      "visible_if": "{{ section.settings.show_read_more }}"
     },
     {
       "type": "header",
