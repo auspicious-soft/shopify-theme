@@ -152,7 +152,7 @@
     "show_cart_note": false,
     "cart_drawer_collection": "automated-collection",
     "free_shipping_bar_enabled": true,
-    "free_shipping_threshold": 500,
+    "free_shipping_threshold": 1000,
     "cart_color_scheme": "scheme-1",
     "customer_account_menu": "customer-account-main-menu",
     "content_for_index": [],
