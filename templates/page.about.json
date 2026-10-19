@@ -157,7 +157,7 @@
         "mobile_padding_top": 56,
         "mobile_padding_bottom": 56,
         "button_size": "medium",
-        "heading_case": "uppercase",
+        "heading_case": "none",
         "button_case": "uppercase"
       }
     },
