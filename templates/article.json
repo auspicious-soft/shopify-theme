@@ -34,7 +34,7 @@
         "show_prev_next": true,
         "show_comments": true,
         "comments_per_page": 10,
-        "width": "full",
+        "width": "page",
         "color_scheme": "",
         "padding_top": 48,
         "padding_bottom": 48,
