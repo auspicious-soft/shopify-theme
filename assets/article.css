@@ -632,3 +632,17 @@
   background-color: color-mix(in srgb, #c0392b 7%, transparent);
   border-color: color-mix(in srgb, #c0392b 35%, transparent);
 }
+
+/* ---------- Text width (section setting) ----------
+   column: the Text column width (default); image: as wide as the image
+   above / below the title; full: the whole section width (image too). */
+.article--text-width-image .article__container,
+.article--text-width-image.article .article__banner .article__header {
+  max-width: calc(var(--article-width, 760px) + 22rem);
+}
+
+.article--text-width-full .article__container,
+.article--text-width-full .article__media,
+.article--text-width-full.article .article__banner .article__header {
+  max-width: none;
+}

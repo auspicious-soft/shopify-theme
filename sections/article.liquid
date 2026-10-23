@@ -77,7 +77,7 @@
 {%- endcapture -%}
 
 <article
-  class="article article--image-{{ image_layout }} article--align-{{ section.settings.heading_alignment }} article--text-{{ section.settings.text_size }} color-{{ section.settings.color_scheme.id }}"
+  class="article article--text-width-{{ section.settings.text_width | default: 'column' }} article--image-{{ image_layout }} article--align-{{ section.settings.heading_alignment }} article--text-{{ section.settings.text_size }} color-{{ section.settings.color_scheme.id }}"
   style="
     {% render 'section-padding-vars', section: section %}
     --article-width: {{ section.settings.content_width }}px;
@@ -504,10 +504,22 @@
       "id": "eyebrow_letter_spacing",
       "label": "t:sections.article.eyebrow_letter_spacing",
       "options": [
-        { "value": "none", "label": "t:options.letter_spacing.none" },
-        { "value": "small", "label": "t:options.letter_spacing.small" },
-        { "value": "medium", "label": "t:options.letter_spacing.medium" },
-        { "value": "large", "label": "t:options.letter_spacing.large" }
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
       ],
       "default": "none",
       "visible_if": "{{ section.settings.show_tags_top }}"
@@ -535,6 +547,27 @@
       "content": "t:sections.article.header_content"
     },
     {
+      "type": "select",
+      "id": "text_width",
+      "label": "t:sections.article.text_width",
+      "info": "t:sections.article.text_width_info",
+      "default": "column",
+      "options": [
+        {
+          "value": "column",
+          "label": "t:sections.article.text_width_column"
+        },
+        {
+          "value": "image",
+          "label": "t:sections.article.text_width_image"
+        },
+        {
+          "value": "full",
+          "label": "t:sections.article.text_width_full"
+        }
+      ]
+    },
+    {
       "type": "range",
       "id": "content_width",
       "label": "t:sections.article.content_width",
@@ -542,7 +575,8 @@
       "max": 1100,
       "step": 20,
       "unit": "px",
-      "default": 760
+      "default": 760,
+      "visible_if": "{{ section.settings.text_width != 'full' }}"
     },
     {
       "type": "select",
