@@ -19,7 +19,7 @@
         "banner_color_scheme": "",
         "heading_tag": "h1",
         "heading_class": "h2",
-        "heading_alignment": "center",
+        "heading_alignment": "left",
         "show_back_link": false,
         "show_tags_top": true,
         "eyebrow_letter_spacing": "large",
