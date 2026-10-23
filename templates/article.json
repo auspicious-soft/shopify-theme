@@ -26,7 +26,7 @@
         "show_date": true,
         "show_author": true,
         "show_reading_time": true,
-        "text_width": "image",
+        "text_width": "full",
         "content_width": 760,
         "text_size": "small",
         "show_tags": true,
