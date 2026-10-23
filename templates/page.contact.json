@@ -31,7 +31,7 @@
       "type": "page-header",
       "name": "t:sections.page_header.name",
       "settings": {
-        "show_breadcrumbs": true,
+        "show_breadcrumbs": false,
         "show_heading": true,
         "caption": "",
         "caption_letter_spacing": "small",
