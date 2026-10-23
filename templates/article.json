@@ -74,6 +74,8 @@
         "meta_position": "bottom",
         "show_author": false,
         "show_excerpt": true,
+        "excerpt_source": "excerpt",
+        "show_read_more": false,
         "read_more": "Read more",
         "width": "page",
         "color_scheme": "scheme-1",
