@@ -22,6 +22,7 @@
 {{ 'blog.css' | asset_url | stylesheet_tag }}
 {{ 'article-card.css' | asset_url | stylesheet_tag }}
 {{ 'pagination.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'blog.js' | asset_url }}" defer></script>
 
 {%- liquid
   # "Show read more" off: no link / button on the cards.
@@ -47,6 +48,8 @@
 
 <div
   class="blog blog--align-{{ section.settings.heading_alignment }} color-{{ section.settings.color_scheme.id }}"
+  data-blog-ajax
+  data-section-id="{{ section.id }}"
   style="
     {% render 'section-padding-vars', section: section %}
     --blog-columns: {{ columns }};
