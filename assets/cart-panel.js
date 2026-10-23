@@ -194,7 +194,9 @@ if (!customElements.get('cart-panel')) {
       }
       bar.classList.toggle('cart-shipping--unlocked', remaining === 0);
       bar.querySelector('[data-free-shipping-fill]')?.style.setProperty('--progress', `${progress}%`);
-      bar.querySelector('[data-free-shipping-track]')?.setAttribute('aria-valuenow', progress);
+      const track = bar.querySelector('[data-free-shipping-track]');
+      track?.setAttribute('aria-valuenow', progress);
+      track?.style.setProperty('--progress', `${progress}%`);
     }
 
     open() {

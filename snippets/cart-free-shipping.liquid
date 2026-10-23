@@ -46,13 +46,20 @@
     data-message-remaining="{{ 'cart.free_shipping.remaining_html' | t: amount: '__AMOUNT__' | escape }}"
     data-message-unlocked="{{ 'cart.free_shipping.unlocked' | t | escape }}"
   >
-    <p class="cart-shipping__message" data-free-shipping-message>
-      {%- if remaining > 0 -%}
-        {{ 'cart.free_shipping.remaining_html' | t: amount: remaining_formatted }}
-      {%- else -%}
-        {{ 'cart.free_shipping.unlocked' | t }}
-      {%- endif -%}
-    </p>
+    <div class="cart-shipping__row">
+      {%- comment -%} Truck while there's still some way to go, a check once unlocked (CSS swaps them). {%- endcomment -%}
+      <span class="cart-shipping__icon" aria-hidden="true">
+        {% render 'icon-library', icon: 'truck', class: 'cart-shipping__icon-truck' %}
+        <svg class="cart-shipping__icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5.5 12.5 4.25 4.25L18.5 8"/></svg>
+      </span>
+      <p class="cart-shipping__message" data-free-shipping-message>
+        {%- if remaining > 0 -%}
+          {{ 'cart.free_shipping.remaining_html' | t: amount: remaining_formatted }}
+        {%- else -%}
+          {{ 'cart.free_shipping.unlocked' | t }}
+        {%- endif -%}
+      </p>
+    </div>
     <div
       class="cart-shipping__track"
       role="progressbar"
@@ -60,6 +67,7 @@
       aria-valuemin="0"
       aria-valuemax="100"
       aria-valuenow="{{ progress }}"
+      style="--progress: {{ progress }}%;"
       data-free-shipping-track
     >
       <span class="cart-shipping__fill" style="--progress: {{ progress }}%;" data-free-shipping-fill></span>
