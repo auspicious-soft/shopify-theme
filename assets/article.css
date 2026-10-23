@@ -19,14 +19,15 @@
 
 /* ---------- Breadcrumbs row ---------- */
 
-/* Full page width, so Left / Right line up with the page edges rather than
-   the narrower text column. */
+/* Same width as the title and text (the text column, or the Text width
+   setting), so the breadcrumbs line up with the content. */
 .article__breadcrumbs-row {
   margin-block-end: 1.25rem;
 }
 
 .article__banner .article__breadcrumbs-row {
-  margin-block-end: 1.5rem;
+  max-width: var(--article-width, 760px);
+  margin: 0 auto 1.5rem;
 }
 
 /* "Match the page title": centered when the title is. */
@@ -637,12 +638,14 @@
    column: the Text column width (default); image: as wide as the image
    above / below the title; full: the whole section width (image too). */
 .article--text-width-image .article__container,
+.article--text-width-image.article .article__banner .article__breadcrumbs-row,
 .article--text-width-image.article .article__banner .article__header {
   max-width: calc(var(--article-width, 760px) + 22rem);
 }
 
 .article--text-width-full .article__container,
 .article--text-width-full .article__media,
+.article--text-width-full.article .article__banner .article__breadcrumbs-row,
 .article--text-width-full.article .article__banner .article__header {
   max-width: none;
 }
