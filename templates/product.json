@@ -147,7 +147,7 @@
         "sticky_atc_show_image": true,
         "sticky_atc_show_variants": true,
         "sticky_atc_picker": "dropdowns",
-        "sticky_atc_color_scheme": "",
+        "sticky_atc_color_scheme": "scheme-1",
         "color_scheme": "scheme-1",
         "width": "full",
         "padding_top": 20,
