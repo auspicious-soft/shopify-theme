@@ -159,6 +159,59 @@
         "button_case": "uppercase"
       }
     },
+    "rich_text_Bzbhgi": {
+      "type": "rich-text",
+      "blocks": {
+        "caption_BH3wWb": {
+          "type": "caption",
+          "settings": {
+            "caption": "Editorial Product",
+            "style": "uppercase",
+            "size": "small",
+            "letter_spacing": "large"
+          }
+        },
+        "heading_bhKJVD": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Art of Timeless Dressing and Everyday Elegance",
+            "heading_tag": "h2",
+            "heading_class": "h2",
+            "uppercase": false
+          }
+        },
+        "text_jU8iPf": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "caption_BH3wWb",
+        "heading_bhKJVD",
+        "text_jU8iPf"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "alignment": "center",
+        "mobile_alignment": "center",
+        "position": "center",
+        "content_width": 760,
+        "block_spacing": 20,
+        "width": "page",
+        "color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 64,
+        "mobile_padding_bottom": 64,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
+      }
+    },
     "collection_banner_UKKaPU": {
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
@@ -298,6 +351,7 @@
   },
   "order": [
     "main",
+    "rich_text_Bzbhgi",
     "collection_banner_UKKaPU",
     "collection_banner_gUMLJF",
     "related_products",
