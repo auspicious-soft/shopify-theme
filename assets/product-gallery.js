@@ -60,9 +60,20 @@ if (!customElements.get('product-gallery')) {
       if (this.scrollFrame) return;
       this.scrollFrame = requestAnimationFrame(() => {
         this.scrollFrame = null;
-        const width = this.track.clientWidth || 1;
-        const index = Math.round(Math.abs(this.track.scrollLeft) / width);
+        // The slide whose start is nearest the scroll position (slides can
+        // be narrower than the track, e.g. the full-screen layout).
+        const position = Math.abs(this.track.scrollLeft);
+        let index = 0;
+        let best = Infinity;
+        this.slides.forEach((slide, i) => {
+          const distance = Math.abs(slide.offsetLeft - this.track.offsetLeft - position);
+          if (distance < best) {
+            best = distance;
+            index = i;
+          }
+        });
         if (index !== this.activeIndex) this.setActive(index);
+        else this.updateArrows();
       });
     }
 
@@ -88,6 +99,7 @@ if (!customElements.get('product-gallery')) {
       });
 
       if (this.counter) this.counter.textContent = index + 1;
+      this.updateArrows();
 
       if (this.thumbs) {
         this.thumbs.querySelectorAll('[data-thumb-index]').forEach((thumb) => {
@@ -107,6 +119,18 @@ if (!customElements.get('product-gallery')) {
           }
         });
       }
+    }
+
+    // Previous is disabled on the first image, next once the last image is
+    // in view (the track can't scroll any further).
+    updateArrows() {
+      const prev = this.querySelector('[data-gallery-prev]');
+      const next = this.querySelector('[data-gallery-next]');
+      if (!prev || !next) return;
+      const max = this.track.scrollWidth - this.track.clientWidth;
+      const position = Math.abs(this.track.scrollLeft);
+      prev.disabled = this.activeIndex <= 0 && position <= 2;
+      next.disabled = this.activeIndex >= this.slides.length - 1 || position >= max - 2;
     }
 
     pauseMedia(slide) {
