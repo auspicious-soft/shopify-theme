@@ -501,10 +501,16 @@
           "pills": "Pills",
           "dropdown": "Dropdown",
           "show_swatches": "Show color swatches",
-          "show_swatches_info": "For options named Color or Colour"
+          "show_swatches_info": "For options named Color or Colour",
+          "underline": "Underline"
         },
         "quantity": {
-          "name": "Quantity selector"
+          "name": "Quantity selector",
+          "layout": "Layout",
+          "layout_info": "Same line: the quantity sits beside Add to cart (needs a Buy buttons block)",
+          "layout_inline": "Same line as Add to cart",
+          "layout_stacked": "Own line, above the buttons",
+          "show_label": "Show \"Quantity\" label"
         },
         "buy_buttons": {
           "name": "Buy buttons",
@@ -578,7 +584,16 @@
       "gallery_autoplay_marquee": "Marquee (continuous)",
       "gallery_autoplay_slide": "One image at a time",
       "gallery_marquee_speed": "Marquee speed",
-      "gallery_marquee_speed_info": "Pixels per second"
+      "gallery_marquee_speed_info": "Pixels per second",
+      "content_style": "Collapsible content style",
+      "content_style_info": "Tabs: the Collapsible tab blocks show as a row of tabs",
+      "content_style_accordion": "Accordion (open / close)",
+      "content_style_tabs": "Tabs",
+      "tabs_position": "Tabs position",
+      "tabs_above": "Above the buttons",
+      "tabs_below": "Below the buttons",
+      "tabs_description": "Description as first tab",
+      "tabs_description_label": "Description tab label"
     },
     "product_list": {
       "products_to_show": "Products to show",

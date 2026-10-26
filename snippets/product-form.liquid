@@ -14,6 +14,7 @@
   @param {string} form_id - The product form id
   @param {object} block - The buy buttons block (show_dynamic_checkout)
   @param {string} section_id - The section id, for unique element ids
+  @param {string} [quantity] - Quantity selector markup shown on the same line as Add to cart
 
   @example
   {% render 'product-form', product: product, variant: current_variant, form_id: form_id, block: block, section_id: section.id %}
@@ -26,6 +27,8 @@
     <input type="hidden" name="id" value="{{ variant.id }}" data-variant-id-input>
 
     <div class="product-form__buttons">
+      <div class="product-form__row">
+      {{ quantity }}
       <button
         id="AddToCart-{{ section_id }}"
         type="submit"
@@ -44,6 +47,7 @@
         </span>
         <span class="product-form__spinner" aria-hidden="true"></span>
       </button>
+      </div>
 
       {% if block.settings.show_dynamic_checkout %}
         <div class="product-form__dynamic">{{ form | payment_button }}</div>

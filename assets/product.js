@@ -134,3 +134,46 @@ if (!customElements.get('product-page')) {
 
   customElements.define('product-page', ProductPage);
 }
+
+// Product page tabs (Product section > Content style: Tabs). Click or
+// arrow keys switch the panel.
+if (!customElements.get('product-tabs')) {
+  class ProductTabs extends HTMLElement {
+    connectedCallback() {
+      // Only the selected tab is in the Tab order; arrow keys reach the rest.
+      const selected = this.querySelector('[role="tab"][aria-selected="true"]') || this.querySelector('[role="tab"]');
+      if (selected) this.select(selected);
+
+      this.addEventListener('click', (event) => {
+        const tab = event.target.closest('[role="tab"]');
+        if (tab) this.select(tab);
+      });
+      this.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        const tabs = [...this.querySelectorAll('[role="tab"]')];
+        const current = tabs.indexOf(document.activeElement);
+        if (current < 0) return;
+        event.preventDefault();
+        const forward = (event.key === 'ArrowRight') !== (document.dir === 'rtl');
+        let next = forward ? current + 1 : current - 1;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = tabs.length - 1;
+        next = (next + tabs.length) % tabs.length;
+        tabs[next].focus();
+        this.select(tabs[next]);
+      });
+    }
+
+    select(tab) {
+      this.querySelectorAll('[role="tab"]').forEach((el) => {
+        const active = el === tab;
+        el.setAttribute('aria-selected', String(active));
+        el.tabIndex = active ? 0 : -1;
+        const panel = this.querySelector('#' + CSS.escape(el.getAttribute('aria-controls')));
+        if (panel) panel.hidden = !active;
+      });
+    }
+  }
+
+  customElements.define('product-tabs', ProductTabs);
+}

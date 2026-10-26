@@ -1171,3 +1171,164 @@
 .product-gallery.is-marquee .product-gallery__slide {
   scroll-snap-align: none;
 }
+
+/* ---------- Colour swatches: 14 x 14, ring only on the selected one ---------- */
+.variant-picker__values--swatch {
+  gap: 0.85rem;
+  padding: 3px;
+}
+
+.variant-picker__swatch {
+  width: 14px;
+  height: 14px;
+  box-shadow: none;
+}
+
+.variant-picker__swatch:hover {
+  box-shadow:
+    0 0 0 2px var(--color-background),
+    0 0 0 3px color-mix(in srgb, var(--color-foreground) 35%, transparent);
+}
+
+.variant-picker__input:checked + .variant-picker__swatch {
+  box-shadow:
+    0 0 0 2px var(--color-background),
+    0 0 0 3px var(--color-foreground);
+}
+
+.variant-picker__swatch.is-unavailable::after {
+  inset-inline: -1px;
+  height: 1px;
+}
+
+/* ---------- Picker style: Underline (sizes as plain text, the picked one underlined) ---------- */
+.variant-picker--underline .variant-picker__values:not(.variant-picker__values--swatch) {
+  gap: 0.35rem 1.4rem;
+}
+
+.variant-picker--underline .variant-picker__pill {
+  min-width: 0;
+  padding: 0.3rem 0.1rem;
+  font-size: 0.8125rem;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.45em;
+  transition:
+    color 0.15s ease,
+    text-decoration-color 0.15s ease;
+}
+
+.variant-picker--underline .variant-picker__pill:hover {
+  color: var(--color-foreground);
+}
+
+.variant-picker--underline .variant-picker__input:checked + .variant-picker__pill {
+  background: none;
+  color: var(--color-foreground);
+  font-weight: 600;
+  text-decoration-color: currentColor;
+}
+
+.variant-picker--underline .variant-picker__pill.is-unavailable,
+.variant-picker--underline .variant-picker__input:checked + .variant-picker__pill.is-unavailable {
+  color: color-mix(in srgb, var(--color-foreground) 35%, transparent);
+  text-decoration: line-through;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+}
+
+/* ---------- Quantity on the same line as Add to cart ---------- */
+.product-form__row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.65rem;
+}
+
+.product-form__row .product-form__submit {
+  flex: 1 1 auto;
+  width: auto;
+}
+
+.product__quantity--inline {
+  flex: 0 0 auto;
+  display: flex;
+}
+
+.product__quantity--inline .quantity-input {
+  height: auto;
+  min-height: 3.25rem;
+}
+
+/* ---------- Content tabs (Content style: Tabs) ---------- */
+.product-tabs {
+  display: block;
+}
+
+.product-tabs__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  margin-bottom: 0.9rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-foreground) 12%, transparent);
+}
+
+.product-tabs__tab {
+  position: relative;
+  margin: 0 0 -1px;
+  padding: 0.55rem 0;
+  border: 0;
+  border-bottom: 1.5px solid transparent;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.product-tabs__tab:hover {
+  color: var(--color-foreground);
+}
+
+.product-tabs__tab[aria-selected='true'] {
+  color: var(--color-foreground);
+  border-bottom-color: var(--color-foreground);
+}
+
+.product-tabs__tab:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.product-tabs__panel {
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
+}
+
+.product-tabs__panel p {
+  font-size: inherit;
+}
+
+.product-tabs__panel > :first-child {
+  margin-top: 0;
+}
+
+.product-tabs__panel > :last-child {
+  margin-bottom: 0;
+}
+
+.product-tabs__panel:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}

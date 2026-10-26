@@ -43,7 +43,7 @@
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
-            "picker_type": "pills",
+            "picker_type": "underline",
             "show_swatches": true
           }
         },
@@ -144,7 +144,11 @@
         "mobile_padding_bottom": 64,
         "button_size": "medium",
         "heading_case": "uppercase",
-        "button_case": "uppercase"
+        "button_case": "uppercase",
+        "content_style": "tabs",
+        "tabs_position": "above",
+        "tabs_description": true,
+        "tabs_description_label": "Overview"
       }
     },
     "collection_banner_UKKaPU": {
