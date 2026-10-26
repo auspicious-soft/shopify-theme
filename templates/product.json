@@ -245,7 +245,7 @@
         "overlay_opacity": 30,
         "color_scheme": "",
         "padding_top": 24,
-        "padding_bottom": 56,
+        "padding_bottom": 24,
         "mobile_padding_custom": false,
         "mobile_padding_top": 56,
         "mobile_padding_bottom": 56,
@@ -254,86 +254,76 @@
         "button_case": "uppercase"
       }
     },
-    "collection_banner_UKKaPU": {
-      "type": "collection-banner",
-      "name": "t:sections.collection_banner.name",
+    "image_with_text_MEUBXB": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption_ihc4jE": {
+          "type": "caption",
+          "settings": {
+            "caption": "",
+            "style": "uppercase",
+            "size": "small",
+            "letter_spacing": "none"
+          }
+        },
+        "heading_GEgAce": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_tag": "h2",
+            "heading_class": "h2",
+            "uppercase": false
+          }
+        },
+        "text_JkNEVj": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "size": "medium"
+          }
+        },
+        "buttons_YeFW3J": {
+          "type": "buttons",
+          "settings": {
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_2": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "caption_ihc4jE",
+        "heading_GEgAce",
+        "text_JkNEVj",
+        "buttons_YeFW3J"
+      ],
+      "name": "t:sections.image_with_text.name",
       "settings": {
-        "button_link": "shopify://collections/autumn-translation",
-        "image": "shopify://shop_images/image-with-text-overlay.png",
         "media_type": "image",
-        "video_url": "",
-        "height": "large",
-        "mobile_height": "medium",
-        "width": "full_padded",
+        "image_ratio": "portrait",
         "corner_radius": 0,
-        "zoom_on_hover": true,
-        "parallax": false,
-        "overlay_color": "#000000",
-        "overlay_opacity": 20,
-        "subheading": "CRAFTED FOR A SLOWER TOMORROW",
-        "subheading_letter_spacing": "large",
-        "heading": "Timeless Pieces for everyday Life",
-        "heading_tag": "h2",
-        "heading_class": "h2",
-        "heading_uppercase": true,
-        "text": "<p>Discover our collection of premium cashmere essentials,<br/>thoughtfully made for comfort, longevity and a more<br/>conscious wardrobe.</p>",
-        "text_color": "#ffffff",
-        "content_position_horizontal": "left",
-        "content_position_vertical": "middle",
+        "layout": "side",
+        "image_position": "right",
+        "image_width": "medium",
+        "content_position": "middle",
+        "alignment": "left",
+        "mobile_alignment": "left",
+        "mobile_image_position": "first",
         "content_width": 520,
-        "button_label": "Explore",
-        "button_style": "secondary",
-        "button_size": "medium",
-        "button_color_scheme": "scheme-2",
-        "full_link": false,
+        "gap": 48,
+        "width": "page",
         "color_scheme": "",
+        "content_card": false,
+        "content_color_scheme": "",
         "padding_top": 24,
-        "padding_bottom": 24,
+        "padding_bottom": 56,
         "mobile_padding_custom": false,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0,
-        "heading_case": "uppercase",
-        "button_case": "uppercase"
-      }
-    },
-    "collection_banner_gUMLJF": {
-      "type": "collection-banner",
-      "name": "t:sections.collection_banner.name",
-      "settings": {
-        "button_link": "shopify://collections/autumn-translation",
-        "image": "shopify://shop_images/image-with-text-overlay_1.png",
-        "media_type": "image",
-        "video_url": "",
-        "height": "large",
-        "mobile_height": "medium",
-        "width": "full_padded",
-        "corner_radius": 0,
-        "zoom_on_hover": true,
-        "parallax": false,
-        "overlay_color": "#000000",
-        "overlay_opacity": 20,
-        "subheading": "Crafted For Everyday Elegance",
-        "subheading_letter_spacing": "large",
-        "heading": "THE ART OF EVERYDAY DRESSING",
-        "heading_tag": "h2",
-        "heading_class": "h2",
-        "heading_uppercase": true,
-        "text": "<p>Discover refined essentials for every occasion, from tailored coats and effortless knitwear to elegant trousers, silk blouses, and timeless leather accessories. Designed to bring comfort, quality, and understated elegance to your everyday wardrobe.</p>",
-        "text_color": "#ffffff",
-        "content_position_horizontal": "left",
-        "content_position_vertical": "middle",
-        "content_width": 520,
-        "button_label": "Explore",
-        "button_style": "secondary",
+        "mobile_padding_top": 56,
+        "mobile_padding_bottom": 56,
         "button_size": "medium",
-        "button_color_scheme": "scheme-2",
-        "full_link": false,
-        "color_scheme": "",
-        "padding_top": 24,
-        "padding_bottom": 24,
-        "mobile_padding_custom": false,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0,
         "heading_case": "uppercase",
         "button_case": "uppercase"
       }
@@ -395,8 +385,7 @@
     "main",
     "rich_text_Bzbhgi",
     "video_WgUWbe",
-    "collection_banner_UKKaPU",
-    "collection_banner_gUMLJF",
+    "image_with_text_MEUBXB",
     "related_products",
     "recently_viewed"
   ]
