@@ -1176,6 +1176,21 @@
           "label": "t:sections.product.blocks.buy_buttons.show_dynamic_checkout",
           "info": "t:sections.product.blocks.buy_buttons.show_dynamic_checkout_info",
           "default": true
+        },
+        {
+          "type": "color",
+          "id": "buy_now_background",
+          "label": "t:sections.product.blocks.buy_buttons.buy_now_background",
+          "info": "t:sections.product.blocks.buy_buttons.buy_now_info",
+          "default": "#000000",
+          "visible_if": "{{ block.settings.show_dynamic_checkout }}"
+        },
+        {
+          "type": "color",
+          "id": "buy_now_text",
+          "label": "t:sections.product.blocks.buy_buttons.buy_now_text",
+          "default": "#ffffff",
+          "visible_if": "{{ block.settings.show_dynamic_checkout }}"
         }
       ]
     },

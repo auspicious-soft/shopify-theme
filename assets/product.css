@@ -938,6 +938,19 @@
   border-radius: var(--style-border-radius-buttons, 0);
 }
 
+/* Buy buttons block > "Buy it now" colors. Only the unbranded button can be
+   restyled; branded ones (Shop Pay, PayPal...) keep their own colors. */
+.product-form__dynamic .shopify-payment-button__button--unbranded,
+.product-form__dynamic .shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  background-color: var(--buy-now-bg, #000);
+  color: var(--buy-now-text, #fff);
+  letter-spacing: var(--style-letter-spacing-buttons, 0);
+}
+
+.product-form__dynamic .shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  opacity: 0.85;
+}
+
 .product-form__error {
   margin: 0.5rem 0 0;
   font-size: 0.85rem;

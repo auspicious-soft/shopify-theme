@@ -12,7 +12,7 @@
   @param {product} product - The product
   @param {variant} variant - The selected (or first available) variant
   @param {string} form_id - The product form id
-  @param {object} block - The buy buttons block (button_style, show_dynamic_checkout)
+  @param {object} block - The buy buttons block (button_style, show_dynamic_checkout, buy_now_background, buy_now_text)
   @param {string} section_id - The section id, for unique element ids
   @param {string} [quantity] - Quantity selector markup shown on the same line as Add to cart
 
@@ -50,7 +50,12 @@
       </div>
 
       {% if block.settings.show_dynamic_checkout %}
-        <div class="product-form__dynamic">{{ form | payment_button }}</div>
+        <div
+          class="product-form__dynamic"
+          style="--buy-now-bg: {{ block.settings.buy_now_background | default: '#000000' }}; --buy-now-text: {{ block.settings.buy_now_text | default: '#ffffff' }};"
+        >
+          {{ form | payment_button }}
+        </div>
       {% endif %}
     </div>
 

@@ -517,6 +517,9 @@
           "button_style": "Add to cart button style",
           "button_style_primary": "Primary",
           "button_style_secondary": "Secondary",
+          "buy_now_background": "Buy it now background",
+          "buy_now_text": "Buy it now text",
+          "buy_now_info": "Applies to the plain \"Buy it now\" button. Branded buttons like Shop Pay or PayPal keep their own colors",
           "show_dynamic_checkout": "Show dynamic checkout buttons",
           "show_dynamic_checkout_info": "Lets customers check out directly with a payment method like Shop Pay or PayPal"
         },
