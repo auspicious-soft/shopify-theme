@@ -131,10 +131,20 @@
       # description, when "Description as first tab" is on) joins one row of
       # tabs, drawn above or below the buy buttons instead of where the
       # blocks sit.
-      assign tabs_mode = false
+      # Each Collapsible tab block can override this (Show as: tab / accordion).
+      assign section_tabs = false
       if section.settings.content_style == 'tabs'
-        assign tabs_mode = true
+        assign section_tabs = true
       endif
+      assign tabs_mode = false
+      for b in section.blocks
+        if b.type == 'collapsible_tab'
+          assign b_mode = b.settings.display | default: 'section'
+          if b_mode == 'tab' or b_mode == 'section' and section_tabs
+            assign tabs_mode = true
+          endif
+        endif
+      endfor
       assign tabs_with_description = false
       if tabs_mode and section.settings.tabs_description and product.description != blank
         assign tabs_with_description = true
@@ -143,48 +153,7 @@
     -%}
     {%- capture tabs_markup -%}
       {%- if tabs_mode -%}
-        {%- assign tab_count = 0 -%}
-        {%- capture tab_buttons -%}
-          {%- if tabs_with_description -%}
-            {%- assign tab_count = tab_count | plus: 1 -%}
-            <button type="button" class="product-tabs__tab" role="tab" id="Tab-{{ section.id }}-description" aria-controls="TabPanel-{{ section.id }}-description" aria-selected="true">
-              {{- section.settings.tabs_description_label | default: 'Overview' | escape -}}
-            </button>
-          {%- endif -%}
-          {%- for tb in section.blocks -%}
-            {%- if tb.type != 'collapsible_tab' -%}{%- continue -%}{%- endif -%}
-            {%- assign tab_title = tb.settings.heading | default: tb.settings.page.title -%}
-            {%- if tab_title == blank and request.design_mode -%}{%- assign tab_title = ph_heading -%}{%- endif -%}
-            {%- if tab_title == blank -%}{%- continue -%}{%- endif -%}
-            {%- assign tab_count = tab_count | plus: 1 -%}
-            <button type="button" class="product-tabs__tab" role="tab" id="Tab-{{ tb.id }}" aria-controls="TabPanel-{{ tb.id }}" aria-selected="{% if tab_count == 1 %}true{% else %}false{% endif %}" {{ tb.shopify_attributes }}>
-              {{- tab_title | escape -}}
-            </button>
-          {%- endfor -%}
-        {%- endcapture -%}
-        {%- if tab_count > 0 -%}
-          <product-tabs class="product-tabs">
-            <div class="product-tabs__list" role="tablist">{{ tab_buttons }}</div>
-            {%- assign panel_count = 0 -%}
-            {%- if tabs_with_description -%}
-              {%- assign panel_count = panel_count | plus: 1 -%}
-              <div class="product-tabs__panel rte" role="tabpanel" id="TabPanel-{{ section.id }}-description" aria-labelledby="Tab-{{ section.id }}-description" tabindex="0">
-                {{ product.description }}
-              </div>
-            {%- endif -%}
-            {%- for tb in section.blocks -%}
-              {%- if tb.type != 'collapsible_tab' -%}{%- continue -%}{%- endif -%}
-              {%- assign tab_title = tb.settings.heading | default: tb.settings.page.title -%}
-              {%- if tab_title == blank and request.design_mode -%}{%- assign tab_title = ph_heading -%}{%- endif -%}
-              {%- if tab_title == blank -%}{%- continue -%}{%- endif -%}
-              {%- assign panel_count = panel_count | plus: 1 -%}
-              <div class="product-tabs__panel rte" role="tabpanel" id="TabPanel-{{ tb.id }}" aria-labelledby="Tab-{{ tb.id }}" tabindex="0"{% if panel_count > 1 %} hidden{% endif %}>
-                {{ tb.settings.content }}
-                {{ tb.settings.page.content }}
-              </div>
-            {%- endfor -%}
-          </product-tabs>
-        {%- endif -%}
+        {% render 'product-tabs', section: section, product: product, section_tabs: section_tabs, with_description: tabs_with_description, placeholder_heading: ph_heading %}
       {%- endif -%}
     {%- endcapture -%}
     {%- liquid
@@ -353,7 +322,14 @@
             {% endif %}
 
           {% when 'collapsible_tab' %}
-            {%- if tabs_mode -%}
+            {%- liquid
+              assign block_mode = block.settings.display | default: 'section'
+              assign block_is_tab = false
+              if block_mode == 'tab' or block_mode == 'section' and section_tabs
+                assign block_is_tab = true
+              endif
+            -%}
+            {%- if block_is_tab -%}
               {%- if has_buy_block == false and tabs_rendered == false -%}
                 {{ tabs_markup }}
                 {%- assign tabs_rendered = true -%}
@@ -598,21 +574,20 @@
           "label": "t:sections.product.tabs_below"
         }
       ],
-      "visible_if": "{{ section.settings.content_style == 'tabs' }}"
+      "info": "t:sections.product.tabs_position_info"
     },
     {
       "type": "checkbox",
       "id": "tabs_description",
       "label": "t:sections.product.tabs_description",
-      "default": true,
-      "visible_if": "{{ section.settings.content_style == 'tabs' }}"
+      "default": true
     },
     {
       "type": "text",
       "id": "tabs_description_label",
       "label": "t:sections.product.tabs_description_label",
       "default": "Overview",
-      "visible_if": "{{ section.settings.content_style == 'tabs' and section.settings.tabs_description }}"
+      "visible_if": "{{ section.settings.tabs_description }}"
     },
     {
       "type": "header",
@@ -1197,6 +1172,27 @@
       "type": "collapsible_tab",
       "name": "t:sections.product.blocks.collapsible_tab.name",
       "settings": [
+        {
+          "type": "select",
+          "id": "display",
+          "label": "t:sections.product.blocks.collapsible_tab.display",
+          "info": "t:sections.product.blocks.collapsible_tab.display_info",
+          "default": "section",
+          "options": [
+            {
+              "value": "section",
+              "label": "t:sections.product.blocks.collapsible_tab.display_section"
+            },
+            {
+              "value": "tab",
+              "label": "t:sections.product.blocks.collapsible_tab.display_tab"
+            },
+            {
+              "value": "accordion",
+              "label": "t:sections.product.blocks.collapsible_tab.display_accordion"
+            }
+          ]
+        },
         {
           "type": "text",
           "id": "heading",

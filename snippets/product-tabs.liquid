@@ -1,0 +1,62 @@
+{% doc %}
+  Product page content tabs: the Collapsible tab blocks shown as tabs (each
+  block's Show as, else the section's Collapsible content style), plus
+  the description as the first tab when enabled. Behaviour: <product-tabs>
+  in assets/product.js; styles in assets/product.css.
+
+  @param {object} section - The product section
+  @param {product} product - The product
+  @param {boolean} section_tabs - The section's content style is Tabs
+  @param {boolean} with_description - Show the description as the first tab
+  @param {string} [placeholder_heading] - Heading for untitled tabs in the editor
+
+  @example
+  {% render 'product-tabs', section: section, product: product, section_tabs: true, with_description: true %}
+{% enddoc %}
+
+  {%- assign tab_count = 0 -%}
+  {%- capture tab_buttons -%}
+    {%- if with_description -%}
+      {%- assign tab_count = tab_count | plus: 1 -%}
+      <button type="button" class="product-tabs__tab" role="tab" id="Tab-{{ section.id }}-description" aria-controls="TabPanel-{{ section.id }}-description" aria-selected="true">
+        {{- section.settings.tabs_description_label | default: 'Overview' | escape -}}
+      </button>
+    {%- endif -%}
+    {%- for tb in section.blocks -%}
+      {%- if tb.type != 'collapsible_tab' -%}{%- continue -%}{%- endif -%}
+      {%- assign tb_mode = tb.settings.display | default: 'section' -%}
+      {%- if tb_mode == 'accordion' or tb_mode == 'section' and section_tabs == false -%}{%- continue -%}{%- endif -%}
+      {%- assign tab_title = tb.settings.heading | default: tb.settings.page.title -%}
+      {%- if tab_title == blank and request.design_mode -%}{%- assign tab_title = placeholder_heading -%}{%- endif -%}
+      {%- if tab_title == blank -%}{%- continue -%}{%- endif -%}
+      {%- assign tab_count = tab_count | plus: 1 -%}
+      <button type="button" class="product-tabs__tab" role="tab" id="Tab-{{ tb.id }}" aria-controls="TabPanel-{{ tb.id }}" aria-selected="{% if tab_count == 1 %}true{% else %}false{% endif %}" {{ tb.shopify_attributes }}>
+        {{- tab_title | escape -}}
+      </button>
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- if tab_count > 0 -%}
+    <product-tabs class="product-tabs">
+      <div class="product-tabs__list" role="tablist">{{ tab_buttons }}</div>
+      {%- assign panel_count = 0 -%}
+      {%- if with_description -%}
+        {%- assign panel_count = panel_count | plus: 1 -%}
+        <div class="product-tabs__panel rte" role="tabpanel" id="TabPanel-{{ section.id }}-description" aria-labelledby="Tab-{{ section.id }}-description" tabindex="0">
+          {{ product.description }}
+        </div>
+      {%- endif -%}
+      {%- for tb in section.blocks -%}
+        {%- if tb.type != 'collapsible_tab' -%}{%- continue -%}{%- endif -%}
+        {%- assign tb_mode = tb.settings.display | default: 'section' -%}
+        {%- if tb_mode == 'accordion' or tb_mode == 'section' and section_tabs == false -%}{%- continue -%}{%- endif -%}
+        {%- assign tab_title = tb.settings.heading | default: tb.settings.page.title -%}
+        {%- if tab_title == blank and request.design_mode -%}{%- assign tab_title = placeholder_heading -%}{%- endif -%}
+        {%- if tab_title == blank -%}{%- continue -%}{%- endif -%}
+        {%- assign panel_count = panel_count | plus: 1 -%}
+        <div class="product-tabs__panel rte" role="tabpanel" id="TabPanel-{{ tb.id }}" aria-labelledby="Tab-{{ tb.id }}" tabindex="0"{% if panel_count > 1 %} hidden{% endif %}>
+          {{ tb.settings.content }}
+          {{ tb.settings.page.content }}
+        </div>
+      {%- endfor -%}
+    </product-tabs>
+  {%- endif -%}
