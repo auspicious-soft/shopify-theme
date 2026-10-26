@@ -260,16 +260,16 @@
         "caption_ihc4jE": {
           "type": "caption",
           "settings": {
-            "caption": "",
+            "caption": "THE ART OF LAYERING",
             "style": "uppercase",
             "size": "small",
-            "letter_spacing": "none"
+            "letter_spacing": "large"
           }
         },
         "heading_GEgAce": {
           "type": "heading",
           "settings": {
-            "heading": "",
+            "heading": "A Softer Side of Everyday Luxury",
             "heading_tag": "h2",
             "heading_class": "h2",
             "uppercase": false
@@ -278,31 +278,20 @@
         "text_JkNEVj": {
           "type": "text",
           "settings": {
-            "text": "",
-            "size": "medium"
-          }
-        },
-        "buttons_YeFW3J": {
-          "type": "buttons",
-          "settings": {
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_2": "secondary"
+            "text": "<p>Some pieces become wardrobe essentials without asking for attention. The Oversized Cashmere Coat brings together a relaxed silhouette, understated elegance, and timeless appeal, creating a piece that feels as effortless as it looks. Thoughtfully designed for cooler days, it offers a refined balance of comfort, versatility, and everyday sophistication.</p><p>Layer it over fine knitwear for a relaxed daytime look, or pair it with tailored trousers and leather boots for a more polished expression. Its versatile design makes it easy to transition between occasions, while its understated character allows it to complement your wardrobe season after season.</p>",
+            "size": "small"
           }
         }
       },
       "block_order": [
         "caption_ihc4jE",
         "heading_GEgAce",
-        "text_JkNEVj",
-        "buttons_YeFW3J"
+        "text_JkNEVj"
       ],
       "name": "t:sections.image_with_text.name",
       "settings": {
         "media_type": "image",
+        "image": "shopify://shop_images/Hero_Image_4.png",
         "image_ratio": "portrait",
         "corner_radius": 0,
         "layout": "side",
@@ -319,7 +308,7 @@
         "content_card": false,
         "content_color_scheme": "",
         "padding_top": 24,
-        "padding_bottom": 56,
+        "padding_bottom": 24,
         "mobile_padding_custom": false,
         "mobile_padding_top": 56,
         "mobile_padding_bottom": 56,
