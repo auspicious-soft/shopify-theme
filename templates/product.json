@@ -425,7 +425,7 @@
         "text": "<p>Discover refined essentials for every occasion, from tailored coats and effortless knitwear to elegant trousers, silk blouses, and timeless leather accessories. Designed to bring comfort, quality, and understated elegance to your everyday wardrobe.</p>",
         "text_color": "#ffffff",
         "content_position_horizontal": "left",
-        "content_position_vertical": "top",
+        "content_position_vertical": "middle",
         "content_width": 520,
         "button_label": "Explore",
         "button_style": "secondary",
