@@ -37,6 +37,7 @@
     "breadcrumbs_alignment": "auto",
     "animations_reveal_on_scroll": true,
     "animations_hover_elements": "vertical-lift",
+    "buttons_letter_spacing": 3,
     "buttons_border_thickness": 1,
     "buttons_border_opacity": 100,
     "buttons_radius": 0,
