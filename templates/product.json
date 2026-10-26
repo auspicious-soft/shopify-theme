@@ -408,7 +408,7 @@
         "button_link": "shopify://collections/autumn-translation",
         "image": "shopify://shop_images/image-with-text-overlay_1.png",
         "media_type": "image",
-        "height": "medium",
+        "height": "large",
         "mobile_height": "medium",
         "width": "full_padded",
         "corner_radius": 0,
