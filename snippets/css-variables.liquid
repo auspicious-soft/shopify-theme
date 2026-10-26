@@ -87,6 +87,7 @@
     --style-border-thickness-buttons: {{ settings.buttons_border_thickness }}px;
     --style-border-opacity-buttons: {{ settings.buttons_border_opacity }}%;
     --style-border-radius-buttons: {{ settings.buttons_radius }}px;
+    --style-letter-spacing-buttons: {{ settings.buttons_letter_spacing | default: 0 }}px;
     --style-shadow-buttons: {{ settings.buttons_shadow_horizontal_offset }}px {{ settings.buttons_shadow_vertical_offset }}px {{ settings.buttons_shadow_blur }}px 0 color-mix(in srgb, var(--color-foreground) {{ settings.buttons_shadow_opacity }}%, transparent);
 
     --style-border-thickness-pills: {{ settings.variant_pills_border_thickness }}px;

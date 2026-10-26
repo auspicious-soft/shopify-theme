@@ -221,7 +221,7 @@
 
           {% when 'price' %}
             <div class="product__price-block" {{ block.shopify_attributes }}>
-              <div id="Price-{{ section.id }}" class="product__price" data-product-part>
+              <div id="Price-{{ section.id }}" class="product__price" style="--card-sale-color: {{ settings.card_sale_price_color }};" data-product-part>
                 {% render 'price', price: current_variant.price, compare_at_price: current_variant.compare_at_price %}
                 {% if block.settings.show_saving %}
                   {% render 'product-badges', product: product, variant: current_variant %}
@@ -1154,6 +1154,22 @@
       "name": "t:sections.product.blocks.buy_buttons.name",
       "limit": 1,
       "settings": [
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "t:sections.product.blocks.buy_buttons.button_style",
+          "default": "primary",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:sections.product.blocks.buy_buttons.button_style_primary"
+            },
+            {
+              "value": "secondary",
+              "label": "t:sections.product.blocks.buy_buttons.button_style_secondary"
+            }
+          ]
+        },
         {
           "type": "checkbox",
           "id": "show_dynamic_checkout",

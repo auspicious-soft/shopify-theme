@@ -209,6 +209,15 @@ input[type="button"] {
   box-shadow: var(--style-shadow-buttons);
 }
 
+/* Theme settings > Buttons > Letter spacing, for every text button. */
+.button,
+.button--primary,
+.button--secondary,
+input[type="submit"],
+input[type="button"] {
+  letter-spacing: var(--style-letter-spacing-buttons, 0);
+}
+
 /* The primary button's border matches its fill, so it reads as one solid shape. */
 .button--primary {
   border-color: color-mix(in srgb, var(--color-button-background) var(--style-border-opacity-buttons), transparent);

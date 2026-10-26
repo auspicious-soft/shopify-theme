@@ -514,6 +514,9 @@
         },
         "buy_buttons": {
           "name": "Buy buttons",
+          "button_style": "Add to cart button style",
+          "button_style_primary": "Primary",
+          "button_style_secondary": "Secondary",
           "show_dynamic_checkout": "Show dynamic checkout buttons",
           "show_dynamic_checkout_info": "Lets customers check out directly with a payment method like Shop Pay or PayPal"
         },
@@ -1574,7 +1577,9 @@
       }
     },
     "buttons": {
-      "name": "Buttons"
+      "name": "Buttons",
+      "header_text": "Text",
+      "letter_spacing": "Letter spacing"
     },
     "variant_pills": {
       "name": "Variant pills",

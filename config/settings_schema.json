@@ -800,6 +800,20 @@
     "settings": [
       {
         "type": "header",
+        "content": "t:settings_schema.buttons.header_text"
+      },
+      {
+        "type": "range",
+        "id": "buttons_letter_spacing",
+        "min": 0,
+        "max": 5,
+        "step": 0.5,
+        "unit": "px",
+        "label": "t:settings_schema.buttons.letter_spacing",
+        "default": 0
+      },
+      {
+        "type": "header",
         "content": "t:settings_schema.global.settings.header__border.content"
       },
       {

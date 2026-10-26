@@ -12,7 +12,7 @@
   @param {product} product - The product
   @param {variant} variant - The selected (or first available) variant
   @param {string} form_id - The product form id
-  @param {object} block - The buy buttons block (show_dynamic_checkout)
+  @param {object} block - The buy buttons block (button_style, show_dynamic_checkout)
   @param {string} section_id - The section id, for unique element ids
   @param {string} [quantity] - Quantity selector markup shown on the same line as Add to cart
 
@@ -33,7 +33,7 @@
         id="AddToCart-{{ section_id }}"
         type="submit"
         name="add"
-        class="button button--primary product-form__submit"
+        class="button button--{{ block.settings.button_style | default: 'primary' }} product-form__submit"
         data-add-to-cart
         data-product-part
         {% unless variant.available %}disabled{% endunless %}

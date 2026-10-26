@@ -569,6 +569,23 @@
   font-size: 1.25rem;
 }
 
+/* Sale price matches the product card: sale price first in Theme settings >
+   Product cards > Sale price color, then the struck-through compare-at price. */
+.product__price .price {
+  flex-wrap: wrap;
+}
+
+.product__price .price__sale {
+  order: -1;
+  color: var(--card-sale-color);
+}
+
+.product__price .price__compare-at {
+  color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
+  font-size: 0.9em;
+  opacity: 1;
+}
+
 .product__unit-price {
   flex-basis: 100%;
   margin: 0;
