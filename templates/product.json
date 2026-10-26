@@ -63,7 +63,10 @@
         },
         "quantity": {
           "type": "quantity",
-          "settings": {}
+          "settings": {
+            "layout": "inline",
+            "show_label": false
+          }
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -74,6 +77,7 @@
         "collapsible_tab_Xpt3QM": {
           "type": "collapsible_tab",
           "settings": {
+            "display": "section",
             "heading": "Weaving Philosophy & Traceability",
             "content": "<p>This garment is spun and woven in the Biella mill region of northern Italy, tracing back to ethical sheep ranches certified in sustainable farming. Finished using historic slow-weaving looms that respect the natural breath of raw, untreated cashmere fibers.</p>",
             "page": "",
@@ -83,7 +87,8 @@
         "tab_details": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Care Instructions",
+            "display": "section",
+            "heading": "Instructions",
             "content": "<p>Dry clean only. Store on a contoured wooden hanger to maintain shoulder drape. Gently brush with a soft garment comb after wear to remove loose fibers.</p>",
             "page": "",
             "open": false
@@ -92,6 +97,7 @@
         "tab_shipping": {
           "type": "collapsible_tab",
           "settings": {
+            "display": "section",
             "heading": "Next Day Delivery & Easy Returns",
             "content": "<p>Enjoy next day carbon-neutral delivery across NL, BE, & DE if ordered before 6 PM. Standard international delivery takes 3-5 working days. Returns are accepted within 14 days of delivery.</p>",
             "page": "",
@@ -123,12 +129,18 @@
         "show_breadcrumbs": true,
         "gallery_layout": "overlay",
         "gallery_autoplay": true,
+        "gallery_autoplay_style": "marquee",
         "gallery_autoplay_speed": 3,
+        "gallery_marquee_speed": 40,
         "media_size": "medium",
         "media_ratio": "adapt",
         "enable_zoom": true,
         "video_loop": false,
         "sticky_info": true,
+        "content_style": "tabs",
+        "tabs_position": "above",
+        "tabs_description": true,
+        "tabs_description_label": "Overview",
         "sticky_atc": true,
         "sticky_atc_devices": "all",
         "sticky_atc_show_image": true,
@@ -144,11 +156,7 @@
         "mobile_padding_bottom": 64,
         "button_size": "medium",
         "heading_case": "uppercase",
-        "button_case": "uppercase",
-        "content_style": "tabs",
-        "tabs_position": "above",
-        "tabs_description": true,
-        "tabs_description_label": "Overview"
+        "button_case": "uppercase"
       }
     },
     "collection_banner_UKKaPU": {
