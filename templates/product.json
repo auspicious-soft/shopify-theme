@@ -324,9 +324,9 @@
           "type": "column",
           "settings": {
             "number": "",
-            "title": "",
+            "title": "<strong>A Refined Silhouette</strong>",
             "title_uppercase": false,
-            "text": "",
+            "text": "<p>An oversized shape that brings relaxed proportions and effortless sophistication to everyday dressing.</p>",
             "link_label": "",
             "link": ""
           }
@@ -335,9 +335,9 @@
           "type": "column",
           "settings": {
             "number": "",
-            "title": "",
+            "title": "<strong>&nbsp;Effortless Layering</strong>",
             "title_uppercase": false,
-            "text": "",
+            "text": "<p>Designed to complement fine knits, tailored trousers, and understated accessories.</p>",
             "link_label": "",
             "link": ""
           }
@@ -346,9 +346,9 @@
           "type": "column",
           "settings": {
             "number": "",
-            "title": "",
+            "title": "<strong>Timeless Appeal</strong>",
             "title_uppercase": false,
-            "text": "",
+            "text": "<p>A versatile outerwear essential that works beautifully across occasions and changing seasons.</p>",
             "link_label": "",
             "link": ""
           }
@@ -389,7 +389,7 @@
         "button_link": "",
         "button_style": "primary",
         "color_scheme": "",
-        "card": false,
+        "card": true,
         "card_color_scheme": "",
         "padding_top": 56,
         "padding_bottom": 56,
