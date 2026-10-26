@@ -1061,3 +1061,65 @@
     animation: none;
   }
 }
+
+/* ---------- Gallery layout: Full screen with details over images ----------
+   Desktop: an edge-to-edge row of images as tall as the screen (below the
+   header), scrolling sideways with the arrows / swipe; the product details
+   sit on a translucent, blurred panel over the right side and scroll on
+   their own. Below 990px it's the usual swipe gallery with details below. */
+@media (min-width: 990px) {
+  .product--gallery-overlay {
+    --overlay-height: max(34rem, calc(100svh - var(--header-height, 80px)));
+    --overlay-panel: min(34rem, 38vw);
+  }
+
+  .product--gallery-overlay .product__container {
+    position: relative;
+    display: block;
+    max-width: none;
+    padding-inline: 0;
+  }
+
+  .product--gallery-overlay .product-gallery__track {
+    gap: 0.6rem;
+    height: var(--overlay-height);
+    border-radius: 0;
+    /* The last image can scroll out from behind the details panel. */
+    padding-inline-end: var(--overlay-panel);
+    scroll-padding-inline: 0;
+  }
+
+  .product--gallery-overlay .product-gallery__slide {
+    flex: 0 0 42vw;
+    height: 100%;
+  }
+
+  .product--gallery-overlay .product-gallery__frame,
+  .product--gallery-overlay .product-gallery__zoom {
+    height: 100%;
+    aspect-ratio: auto;
+    border-radius: 0;
+  }
+
+  /* Arrows + counter centred under the images, clear of the panel. */
+  .product--gallery-overlay .product-gallery__controls {
+    inset-inline-start: calc((100% - var(--overlay-panel)) / 2);
+  }
+
+  .product--gallery-overlay .product__info,
+  .product--gallery-overlay .product__info--sticky {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    z-index: 3;
+    justify-content: safe center;
+    width: var(--overlay-panel);
+    max-height: none;
+    overflow-y: auto;
+    padding: clamp(2rem, 3.5vw, 3.5rem);
+    background-color: color-mix(in srgb, var(--color-background) 82%, transparent);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    scrollbar-width: thin;
+  }
+}

@@ -568,7 +568,9 @@
         "picker_combined": "One dropdown (e.g. \"M / White\")",
         "picker_dropdowns": "Dropdown per option (Size, Color)",
         "picker_buttons": "Buttons (color swatches for color)"
-      }
+      },
+      "gallery_overlay": "Full screen with details over images",
+      "gallery_layout_info": "Full screen: images edge to edge at screen height, with the product details on a translucent panel. Works best with Section width set to Full"
     },
     "product_list": {
       "products_to_show": "Products to show",
