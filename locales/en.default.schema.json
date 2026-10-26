@@ -570,7 +570,10 @@
         "picker_buttons": "Buttons (color swatches for color)"
       },
       "gallery_overlay": "Full screen with details over images",
-      "gallery_layout_info": "Full screen: images edge to edge at screen height, with the product details on a translucent panel. Works best with Section width set to Full"
+      "gallery_layout_info": "Full screen: images edge to edge at screen height, with the product details on a translucent panel. Works best with Section width set to Full",
+      "gallery_autoplay": "Autoplay images",
+      "gallery_autoplay_info": "Images slide by themselves in slider layouts (and on mobile). Pauses on hover or touch",
+      "gallery_autoplay_speed": "Change image every"
     },
     "product_list": {
       "products_to_show": "Products to show",

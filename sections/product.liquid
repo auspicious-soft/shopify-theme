@@ -339,6 +339,24 @@
       "info": "t:sections.product.gallery_layout_info"
     },
     {
+      "type": "checkbox",
+      "id": "gallery_autoplay",
+      "label": "t:sections.product.gallery_autoplay",
+      "info": "t:sections.product.gallery_autoplay_info",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "gallery_autoplay_speed",
+      "label": "t:sections.product.gallery_autoplay_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5,
+      "visible_if": "{{ section.settings.gallery_autoplay }}"
+    },
+    {
       "type": "select",
       "id": "media_size",
       "label": "t:sections.product.media_size",

@@ -21,6 +21,53 @@ if (!customElements.get('product-gallery')) {
       requestAnimationFrame(() => (start > 0 ? this.goTo(start, 'instant') : this.setActive(0)));
 
       if (this.querySelector('model-viewer')) this.loadModelViewer();
+      this.setupAutoplay();
+    }
+
+    disconnectedCallback() {
+      this.stopAutoplay();
+      document.removeEventListener('visibilitychange', this.onVisibility);
+    }
+
+    // Product section > Autoplay: the images slide by themselves, one at a
+    // time, back to the first after the last. Pauses while the shopper
+    // hovers, touches or tabs into the gallery, and while the tab is hidden;
+    // off for visitors who prefer reduced motion.
+    setupAutoplay() {
+      this.autoplayDelay = Number(this.dataset.autoplay || 0);
+      if (!this.autoplayDelay || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      this.paused = false;
+      const pause = () => {
+        this.paused = true;
+      };
+      const resume = () => {
+        this.paused = false;
+      };
+      this.addEventListener('mouseenter', pause);
+      this.addEventListener('mouseleave', resume);
+      this.addEventListener('focusin', pause);
+      this.addEventListener('focusout', resume);
+      // A swipe or arrow click restarts the wait before the next slide.
+      this.addEventListener('pointerdown', () => this.startAutoplay());
+      this.onVisibility = () => (document.hidden ? this.stopAutoplay() : this.startAutoplay());
+      document.addEventListener('visibilitychange', this.onVisibility);
+      this.startAutoplay();
+    }
+
+    startAutoplay() {
+      if (!this.autoplayDelay) return;
+      this.stopAutoplay();
+      this.autoplayTimer = setInterval(() => {
+        if (this.paused || !this.isSlider || this.lightbox?.open) return;
+        const max = this.track.scrollWidth - this.track.clientWidth;
+        const atEnd = Math.abs(this.track.scrollLeft) >= max - 2 || this.activeIndex >= this.slides.length - 1;
+        this.goTo(atEnd ? 0 : this.activeIndex + 1);
+      }, this.autoplayDelay);
+    }
+
+    stopAutoplay() {
+      clearInterval(this.autoplayTimer);
     }
 
     get slides() {
