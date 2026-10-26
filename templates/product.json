@@ -378,7 +378,7 @@
         "width": "page",
         "title_size": "default",
         "text_size": "medium",
-        "column_media": "image",
+        "column_media": "number",
         "number_format": "padded",
         "number_size": "medium",
         "image_ratio": "adapt",
