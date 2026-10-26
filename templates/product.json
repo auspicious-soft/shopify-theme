@@ -431,7 +431,7 @@
         "button_style": "secondary",
         "button_size": "small",
         "button_color_scheme": "scheme-56590322-c170-4511-a8c5-0f7377624337",
-        "full_link": true,
+        "full_link": false,
         "color_scheme": "",
         "padding_top": 24,
         "padding_bottom": 24,
