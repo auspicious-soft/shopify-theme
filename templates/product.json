@@ -78,7 +78,7 @@
           "type": "collapsible_tab",
           "settings": {
             "display": "section",
-            "heading": "Weaving Philosophy & Traceability",
+            "heading": "Material",
             "content": "<p>This garment is spun and woven in the Biella mill region of northern Italy, tracing back to ethical sheep ranches certified in sustainable farming. Finished using historic slow-weaving looms that respect the natural breath of raw, untreated cashmere fibers.</p>",
             "page": "",
             "open": false
@@ -98,7 +98,7 @@
           "type": "collapsible_tab",
           "settings": {
             "display": "section",
-            "heading": "Next Day Delivery & Easy Returns",
+            "heading": "Delivery + returns",
             "content": "<p>Enjoy next day carbon-neutral delivery across NL, BE, & DE if ordered before 6 PM. Standard international delivery takes 3-5 working days. Returns are accepted within 14 days of delivery.</p>",
             "page": "",
             "open": false
