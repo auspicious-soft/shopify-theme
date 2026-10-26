@@ -149,10 +149,63 @@
         "sticky_atc_color_scheme": "",
         "color_scheme": "scheme-1",
         "width": "full",
-        "padding_top": 32,
+        "padding_top": 20,
         "padding_bottom": 24,
         "mobile_padding_custom": false,
         "mobile_padding_top": 32,
+        "mobile_padding_bottom": 64,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
+      }
+    },
+    "rich_text_Bzbhgi": {
+      "type": "rich-text",
+      "blocks": {
+        "caption_BH3wWb": {
+          "type": "caption",
+          "settings": {
+            "caption": "Editorial Product",
+            "style": "uppercase",
+            "size": "small",
+            "letter_spacing": "large"
+          }
+        },
+        "heading_bhKJVD": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Art of Timeless Dressing and Everyday Elegance",
+            "heading_tag": "h2",
+            "heading_class": "h2",
+            "uppercase": false
+          }
+        },
+        "text_jU8iPf": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Designed to complement the rhythm of everyday life, it layers naturally over fine knitwear for relaxed afternoons or pairs beautifully with tailored separates for more considered occasions. Its versatile character makes it an easy addition to a thoughtfully curated wardrobe, season after season.&nbsp;</p><p>Because true style isn't about having more. It's about choosing pieces that feel right, every time.</p>",
+            "size": "small"
+          }
+        }
+      },
+      "block_order": [
+        "caption_BH3wWb",
+        "heading_bhKJVD",
+        "text_jU8iPf"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "alignment": "center",
+        "mobile_alignment": "center",
+        "position": "center",
+        "content_width": 760,
+        "block_spacing": 20,
+        "width": "page",
+        "color_scheme": "",
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 64,
         "mobile_padding_bottom": 64,
         "button_size": "medium",
         "heading_case": "uppercase",
@@ -298,6 +351,7 @@
   },
   "order": [
     "main",
+    "rich_text_Bzbhgi",
     "collection_banner_UKKaPU",
     "collection_banner_gUMLJF",
     "related_products",
