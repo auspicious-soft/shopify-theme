@@ -71,6 +71,28 @@ if (!customElements.get('product-gallery')) {
       }, this.autoplayDelay);
     }
 
+    // A variant was picked: let the gallery settle on its image. The marquee
+    // stops for a few seconds (longer while hovered) and then glides on from
+    // there; the one-at-a-time autoplay restarts its wait.
+    holdAutoplay() {
+      if (!this.autoplayDelay) return;
+      if (!this.classList.contains('is-marquee')) {
+        this.startAutoplay();
+        return;
+      }
+      this.paused = true;
+      clearTimeout(this.resumeTimer);
+      const resume = () => {
+        if (this.matches(':hover')) {
+          this.resumeTimer = setTimeout(resume, 1000);
+          return;
+        }
+        this.paused = false;
+        this.position = Math.abs(this.track.scrollLeft);
+      };
+      this.resumeTimer = setTimeout(resume, 5000);
+    }
+
     stopAutoplay() {
       clearInterval(this.autoplayTimer);
       cancelAnimationFrame(this.marqueeFrame);
@@ -273,6 +295,7 @@ if (!customElements.get('product-gallery')) {
       if (!slide) return;
 
       if (this.isSlider) {
+        this.holdAutoplay();
         this.goTo(this.slides.indexOf(slide));
       } else {
         this.track.prepend(slide);
