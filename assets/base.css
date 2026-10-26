@@ -344,7 +344,7 @@ select {
   text-transform: uppercase;
 }
 
-.shopify-section:has(.text-case--buttons-upper) .button {
+.shopify-section:has(.text-case--buttons-upper) :is(.button, .shopify-payment-button__button--unbranded) {
   text-transform: uppercase;
 }
 
