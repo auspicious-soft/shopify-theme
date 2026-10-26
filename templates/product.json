@@ -122,6 +122,8 @@
       "settings": {
         "show_breadcrumbs": true,
         "gallery_layout": "overlay",
+        "gallery_autoplay": true,
+        "gallery_autoplay_speed": 3,
         "media_size": "medium",
         "media_ratio": "adapt",
         "enable_zoom": true,
