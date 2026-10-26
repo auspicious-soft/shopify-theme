@@ -63,6 +63,13 @@
     assign media_sizes = media_sizes | replace: '62vw', '31vw' | replace: '52vw', '26vw' | replace: '40vw', '20vw'
   endif
 
+  # Marquee autoplay is only for the full screen layout; every other layout
+  # autoplays one image at a time like a carousel.
+  assign autoplay_style = 'slide'
+  if layout == 'overlay' and section.settings.gallery_autoplay_style == 'marquee'
+    assign autoplay_style = 'marquee'
+  endif
+
   assign show_thumbs = false
   if layout == 'thumbnails' or layout == 'thumbnails_left'
     if product.media.size > 1
@@ -89,7 +96,7 @@
   id="{{ gallery_id }}"
   class="product-gallery product-gallery--{{ layout }}{% if show_thumbs %} product-gallery--has-thumbs{% endif %}{% if product.media.size <= 1 %} product-gallery--single{% endif %}"
   data-start-index="{{ featured_index }}"
-  {% if section.settings.gallery_autoplay and product.media.size > 1 %}data-autoplay="{{ section.settings.gallery_autoplay_speed | times: 1000 }}" data-autoplay-style="{{ section.settings.gallery_autoplay_style | default: 'slide' }}" data-marquee-speed="{{ section.settings.gallery_marquee_speed | default: 40 }}"{% endif %}
+  {% if section.settings.gallery_autoplay and product.media.size > 1 %}data-autoplay="{{ section.settings.gallery_autoplay_speed | times: 1000 }}" data-autoplay-style="{{ autoplay_style }}" data-marquee-speed="{{ section.settings.gallery_marquee_speed | default: 40 }}"{% endif %}
   {% if ratio %}style="--media-ratio: {{ ratio }};"{% endif %}
 >
   <div class="product-gallery__viewport">

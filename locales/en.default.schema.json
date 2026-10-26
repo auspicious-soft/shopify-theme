@@ -586,6 +586,7 @@
       "gallery_autoplay_info": "Images slide by themselves in slider layouts (and on mobile). Pauses on hover or touch",
       "gallery_autoplay_speed": "Change image every",
       "gallery_autoplay_style": "Autoplay style",
+      "gallery_autoplay_style_info": "Marquee is only available with the Full screen layout",
       "gallery_autoplay_marquee": "Marquee (continuous)",
       "gallery_autoplay_slide": "One image at a time",
       "gallery_marquee_speed": "Marquee speed",
