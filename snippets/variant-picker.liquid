@@ -22,7 +22,7 @@
 
 <div
   id="VariantPicker-{{ section_id }}"
-  class="variant-picker"
+  class="variant-picker variant-picker--{{ block.settings.picker_type | default: 'pills' }}"
   data-variant-picker
   data-product-part
   {{ block.shopify_attributes }}

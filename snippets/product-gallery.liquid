@@ -7,6 +7,8 @@
   - carousel: main slider with arrows and a counter, no thumbnails
   - grid: two-column grid of every media on desktop
   - stacked: one full-width media after another on desktop
+  - overlay: full-screen, edge-to-edge row of images (about two visible),
+    with the product details on a translucent panel over the right side
   Below 990px every layout becomes a swipeable slider with a counter.
 
   Images can open in a full-screen zoom lightbox (Enable image zoom).
@@ -52,6 +54,11 @@
   # Grid: two columns, but the first media spans both, so it keeps the full
   # size (otherwise the browser picks a half-width file and it looks blurry).
   assign full_media_sizes = media_sizes
+  # Full screen: each image is about 42% of the screen width on desktop.
+  if layout == 'overlay'
+    assign media_sizes = '(min-width: 990px) 45vw, 100vw'
+    assign full_media_sizes = media_sizes
+  endif
   if layout == 'grid'
     assign media_sizes = media_sizes | replace: '62vw', '31vw' | replace: '52vw', '26vw' | replace: '40vw', '20vw'
   endif
@@ -82,6 +89,7 @@
   id="{{ gallery_id }}"
   class="product-gallery product-gallery--{{ layout }}{% if show_thumbs %} product-gallery--has-thumbs{% endif %}{% if product.media.size <= 1 %} product-gallery--single{% endif %}"
   data-start-index="{{ featured_index }}"
+  {% if section.settings.gallery_autoplay and product.media.size > 1 %}data-autoplay="{{ section.settings.gallery_autoplay_speed | times: 1000 }}" data-autoplay-style="{{ section.settings.gallery_autoplay_style | default: 'slide' }}" data-marquee-speed="{{ section.settings.gallery_marquee_speed | default: 40 }}"{% endif %}
   {% if ratio %}style="--media-ratio: {{ ratio }};"{% endif %}
 >
   <div class="product-gallery__viewport">

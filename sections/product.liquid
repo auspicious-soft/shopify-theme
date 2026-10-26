@@ -82,6 +82,89 @@
       {% render 'product-gallery', product: product, section: section, featured_media: featured_media %}
     </div>
 
+    {%- liquid
+      # Quantity block > Layout "Same line as Add to cart": the quantity is
+      # drawn inside the buy buttons row instead of where the block sits
+      # (only when there is a buy buttons block to put it in).
+      assign quantity_block = nil
+      assign has_buy_buttons = false
+      for b in section.blocks
+        if b.type == 'quantity'
+          assign quantity_block = b
+        elsif b.type == 'buy_buttons'
+          assign has_buy_buttons = true
+        endif
+      endfor
+      assign quantity_inline = false
+      if quantity_block and has_buy_buttons and quantity_block.settings.layout != 'stacked'
+        assign quantity_inline = true
+      endif
+    -%}
+    {%- capture quantity_markup -%}
+      {%- if quantity_block -%}
+        <div class="product__quantity{% if quantity_inline %} product__quantity--inline{% endif %}" {{ quantity_block.shopify_attributes }}>
+          <label class="variant-picker__label{% unless quantity_block.settings.show_label %} visually-hidden{% endunless %}" for="Quantity-{{ section.id }}">{{ 'cart.quantity' | t }}</label>
+          <div class="quantity-input">
+            <button type="button" class="quantity-input__button" data-quantity-step="-1" aria-label="{{ 'cart.decrease_quantity' | t }}">
+              {{ 'icon-minus.svg' | inline_asset_content }}
+            </button>
+            <input
+              id="Quantity-{{ section.id }}"
+              class="quantity-input__field"
+              type="number"
+              inputmode="numeric"
+              name="quantity"
+              min="1"
+              value="1"
+              form="{{ form_id }}"
+            >
+            <button type="button" class="quantity-input__button" data-quantity-step="1" aria-label="{{ 'cart.increase_quantity' | t }}">
+              {{ 'icon-plus.svg' | inline_asset_content }}
+            </button>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endcapture -%}
+
+    {%- liquid
+      # Content style "Tabs": every Collapsible tab block (and the
+      # description, when "Description as first tab" is on) joins one row of
+      # tabs, drawn above or below the buy buttons instead of where the
+      # blocks sit.
+      # Each Collapsible tab block can override this (Show as: tab / accordion).
+      assign section_tabs = false
+      if section.settings.content_style == 'tabs'
+        assign section_tabs = true
+      endif
+      assign tabs_mode = false
+      for b in section.blocks
+        if b.type == 'collapsible_tab'
+          assign b_mode = b.settings.display | default: 'section'
+          if b_mode == 'tab' or b_mode == 'section' and section_tabs
+            assign tabs_mode = true
+          endif
+        endif
+      endfor
+      assign tabs_with_description = false
+      if tabs_mode and section.settings.tabs_description and product.description != blank
+        assign tabs_with_description = true
+      endif
+      assign tabs_rendered = false
+    -%}
+    {%- capture tabs_markup -%}
+      {%- if tabs_mode -%}
+        {% render 'product-tabs', section: section, product: product, section_tabs: section_tabs, with_description: tabs_with_description, placeholder_heading: ph_heading %}
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- liquid
+      assign has_buy_block = false
+      for b in section.blocks
+        if b.type == 'buy_buttons'
+          assign has_buy_block = true
+        endif
+      endfor
+    -%}
+
     <div class="product__info{% if section.settings.sticky_info %} product__info--sticky{% endif %}">
       {% for block in section.blocks %}
     {%- liquid
@@ -214,37 +297,45 @@
             {%- endif -%}
 
           {% when 'quantity' %}
-            <div class="product__quantity" {{ block.shopify_attributes }}>
-              <label class="variant-picker__label" for="Quantity-{{ section.id }}">{{ 'cart.quantity' | t }}</label>
-              <div class="quantity-input">
-                <button type="button" class="quantity-input__button" data-quantity-step="-1" aria-label="{{ 'cart.decrease_quantity' | t }}">
-                  {{ 'icon-minus.svg' | inline_asset_content }}
-                </button>
-                <input
-                  id="Quantity-{{ section.id }}"
-                  class="quantity-input__field"
-                  type="number"
-                  inputmode="numeric"
-                  name="quantity"
-                  min="1"
-                  value="1"
-                  form="{{ form_id }}"
-                >
-                <button type="button" class="quantity-input__button" data-quantity-step="1" aria-label="{{ 'cart.increase_quantity' | t }}">
-                  {{ 'icon-plus.svg' | inline_asset_content }}
-                </button>
-              </div>
-            </div>
+            {%- unless quantity_inline -%}{{ quantity_markup }}{%- endunless -%}
 
           {% when 'buy_buttons' %}
-            {% render 'product-form', product: product, variant: current_variant, form_id: form_id, block: block, section_id: section.id %}
+            {%- liquid
+              assign inline_quantity = ''
+              if quantity_inline
+                assign inline_quantity = quantity_markup
+              endif
+            -%}
+            {%- if tabs_mode and section.settings.tabs_position == 'above' and tabs_rendered == false -%}
+              {{ tabs_markup }}
+              {%- assign tabs_rendered = true -%}
+            {%- endif -%}
+            {% render 'product-form', product: product, variant: current_variant, form_id: form_id, block: block, section_id: section.id, quantity: inline_quantity %}
+            {%- if tabs_mode and section.settings.tabs_position != 'above' and tabs_rendered == false -%}
+              {{ tabs_markup }}
+              {%- assign tabs_rendered = true -%}
+            {%- endif -%}
 
           {% when 'description' %}
-            {% if product.description != blank %}
+            {% if product.description != blank and tabs_with_description == false %}
               <div class="product__description rte" {{ block.shopify_attributes }}>{{ product.description }}</div>
             {% endif %}
 
           {% when 'collapsible_tab' %}
+            {%- liquid
+              assign block_mode = block.settings.display | default: 'section'
+              assign block_is_tab = false
+              if block_mode == 'tab' or block_mode == 'section' and section_tabs
+                assign block_is_tab = true
+              endif
+            -%}
+            {%- if block_is_tab -%}
+              {%- if has_buy_block == false and tabs_rendered == false -%}
+                {{ tabs_markup }}
+                {%- assign tabs_rendered = true -%}
+              {%- endif -%}
+              {%- continue -%}
+            {%- endif -%}
             {% if b_heading != blank %}
               <details class="product__accordion" {% if block.settings.open %}open{% endif %} {{ block.shopify_attributes }}>
                 <summary class="product__accordion-summary">
@@ -329,9 +420,61 @@
         {
           "value": "stacked",
           "label": "t:sections.product.gallery_stacked"
+        },
+        {
+          "value": "overlay",
+          "label": "t:sections.product.gallery_overlay"
         }
       ],
-      "default": "thumbnails"
+      "default": "thumbnails",
+      "info": "t:sections.product.gallery_layout_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "gallery_autoplay",
+      "label": "t:sections.product.gallery_autoplay",
+      "info": "t:sections.product.gallery_autoplay_info",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "gallery_autoplay_style",
+      "label": "t:sections.product.gallery_autoplay_style",
+      "default": "marquee",
+      "options": [
+        {
+          "value": "marquee",
+          "label": "t:sections.product.gallery_autoplay_marquee"
+        },
+        {
+          "value": "slide",
+          "label": "t:sections.product.gallery_autoplay_slide"
+        }
+      ],
+      "visible_if": "{{ section.settings.gallery_autoplay }}"
+    },
+    {
+      "type": "range",
+      "id": "gallery_autoplay_speed",
+      "label": "t:sections.product.gallery_autoplay_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5,
+      "visible_if": "{{ section.settings.gallery_autoplay and section.settings.gallery_autoplay_style == 'slide' }}"
+    },
+    {
+      "type": "range",
+      "id": "gallery_marquee_speed",
+      "label": "t:sections.product.gallery_marquee_speed",
+      "min": 10,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 40,
+      "info": "t:sections.product.gallery_marquee_speed_info",
+      "visible_if": "{{ section.settings.gallery_autoplay and section.settings.gallery_autoplay_style == 'marquee' }}"
     },
     {
       "type": "select",
@@ -398,6 +541,53 @@
       "id": "sticky_info",
       "label": "t:sections.product.sticky_info",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "content_style",
+      "label": "t:sections.product.content_style",
+      "info": "t:sections.product.content_style_info",
+      "default": "accordion",
+      "options": [
+        {
+          "value": "accordion",
+          "label": "t:sections.product.content_style_accordion"
+        },
+        {
+          "value": "tabs",
+          "label": "t:sections.product.content_style_tabs"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "tabs_position",
+      "label": "t:sections.product.tabs_position",
+      "default": "above",
+      "options": [
+        {
+          "value": "above",
+          "label": "t:sections.product.tabs_above"
+        },
+        {
+          "value": "below",
+          "label": "t:sections.product.tabs_below"
+        }
+      ],
+      "info": "t:sections.product.tabs_position_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "tabs_description",
+      "label": "t:sections.product.tabs_description",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tabs_description_label",
+      "label": "t:sections.product.tabs_description_label",
+      "default": "Overview",
+      "visible_if": "{{ section.settings.tabs_description }}"
     },
     {
       "type": "header",
@@ -909,6 +1099,10 @@
               "label": "t:sections.product.blocks.variant_picker.pills"
             },
             {
+              "value": "underline",
+              "label": "t:sections.product.blocks.variant_picker.underline"
+            },
+            {
               "value": "dropdown",
               "label": "t:sections.product.blocks.variant_picker.dropdown"
             }
@@ -928,7 +1122,31 @@
       "type": "quantity",
       "name": "t:sections.product.blocks.quantity.name",
       "limit": 1,
-      "settings": []
+      "settings": [
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "t:sections.product.blocks.quantity.layout",
+          "info": "t:sections.product.blocks.quantity.layout_info",
+          "default": "inline",
+          "options": [
+            {
+              "value": "inline",
+              "label": "t:sections.product.blocks.quantity.layout_inline"
+            },
+            {
+              "value": "stacked",
+              "label": "t:sections.product.blocks.quantity.layout_stacked"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_label",
+          "label": "t:sections.product.blocks.quantity.show_label",
+          "default": false
+        }
+      ]
     },
     {
       "type": "buy_buttons",
@@ -954,6 +1172,27 @@
       "type": "collapsible_tab",
       "name": "t:sections.product.blocks.collapsible_tab.name",
       "settings": [
+        {
+          "type": "select",
+          "id": "display",
+          "label": "t:sections.product.blocks.collapsible_tab.display",
+          "info": "t:sections.product.blocks.collapsible_tab.display_info",
+          "default": "section",
+          "options": [
+            {
+              "value": "section",
+              "label": "t:sections.product.blocks.collapsible_tab.display_section"
+            },
+            {
+              "value": "tab",
+              "label": "t:sections.product.blocks.collapsible_tab.display_tab"
+            },
+            {
+              "value": "accordion",
+              "label": "t:sections.product.blocks.collapsible_tab.display_accordion"
+            }
+          ]
+        },
         {
           "type": "text",
           "id": "heading",

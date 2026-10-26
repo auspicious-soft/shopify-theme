@@ -339,3 +339,17 @@
     transform: scale(1.03);
   }
 }
+
+/* Tag filter / pagination loading in place (assets/blog.js). */
+.blog .blog__grid,
+.blog .blog-feature,
+.blog .pagination {
+  transition: opacity 0.2s ease;
+}
+
+.blog.is-loading .blog__grid,
+.blog.is-loading .blog-feature,
+.blog.is-loading .pagination {
+  opacity: 0.45;
+  pointer-events: none;
+}

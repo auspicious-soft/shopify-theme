@@ -501,10 +501,16 @@
           "pills": "Pills",
           "dropdown": "Dropdown",
           "show_swatches": "Show color swatches",
-          "show_swatches_info": "For options named Color or Colour"
+          "show_swatches_info": "For options named Color or Colour",
+          "underline": "Underline"
         },
         "quantity": {
-          "name": "Quantity selector"
+          "name": "Quantity selector",
+          "layout": "Layout",
+          "layout_info": "Same line: the quantity sits beside Add to cart (needs a Buy buttons block)",
+          "layout_inline": "Same line as Add to cart",
+          "layout_stacked": "Own line, above the buttons",
+          "show_label": "Show \"Quantity\" label"
         },
         "buy_buttons": {
           "name": "Buy buttons",
@@ -518,7 +524,12 @@
           "name": "Collapsible tab",
           "content": "Content",
           "page": "Content from page",
-          "open": "Open by default"
+          "open": "Open by default",
+          "display": "Show as",
+          "display_info": "Tab: joins the row of tabs next to the buttons. Accordion: opens and closes where the block is",
+          "display_section": "Same as section",
+          "display_tab": "Tab",
+          "display_accordion": "Accordion"
         },
         "share": {
           "name": "Share"
@@ -568,7 +579,27 @@
         "picker_combined": "One dropdown (e.g. \"M / White\")",
         "picker_dropdowns": "Dropdown per option (Size, Color)",
         "picker_buttons": "Buttons (color swatches for color)"
-      }
+      },
+      "gallery_overlay": "Full screen with details over images",
+      "gallery_layout_info": "Full screen: images edge to edge at screen height, with the product details on a translucent panel. Works best with Section width set to Full",
+      "gallery_autoplay": "Autoplay images",
+      "gallery_autoplay_info": "Images slide by themselves in slider layouts (and on mobile). Pauses on hover or touch",
+      "gallery_autoplay_speed": "Change image every",
+      "gallery_autoplay_style": "Autoplay style",
+      "gallery_autoplay_marquee": "Marquee (continuous)",
+      "gallery_autoplay_slide": "One image at a time",
+      "gallery_marquee_speed": "Marquee speed",
+      "gallery_marquee_speed_info": "Pixels per second",
+      "content_style": "Collapsible content style",
+      "content_style_info": "Default for the Collapsible tab blocks; each block can choose Tab or Accordion itself",
+      "content_style_accordion": "Accordion (open / close)",
+      "content_style_tabs": "Tabs",
+      "tabs_position": "Tabs position",
+      "tabs_above": "Above the buttons",
+      "tabs_below": "Below the buttons",
+      "tabs_description": "Description as first tab",
+      "tabs_description_label": "Description tab label",
+      "tabs_position_info": "Used when any block shows as a tab"
     },
     "product_list": {
       "products_to_show": "Products to show",
@@ -1129,8 +1160,13 @@
       "comments_info": "Turn comments on per blog in Shopify admin > Content > Blog posts > Manage blogs",
       "show_comments": "Show comments",
       "comments_per_page": "Comments per page",
-      "width_info": "The text column keeps its own width",
-      "banner_color_scheme_info": "Text and overlay color on the banner"
+      "width_info": "Full width widens the section; use Text width to widen the text too",
+      "banner_color_scheme_info": "Text and overlay color on the banner",
+      "text_width": "Text width",
+      "text_width_info": "How wide the title, text and comments are",
+      "text_width_column": "Text column (set below)",
+      "text_width_image": "Same as the image",
+      "text_width_full": "Full section width"
     },
     "related_articles": {
       "name": "Related blog posts",

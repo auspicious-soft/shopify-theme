@@ -21,10 +21,151 @@ if (!customElements.get('product-gallery')) {
       requestAnimationFrame(() => (start > 0 ? this.goTo(start, 'instant') : this.setActive(0)));
 
       if (this.querySelector('model-viewer')) this.loadModelViewer();
+      this.setupAutoplay();
     }
 
+    disconnectedCallback() {
+      this.stopAutoplay();
+      document.removeEventListener('visibilitychange', this.onVisibility);
+    }
+
+    // Product section > Autoplay: the images slide by themselves, one at a
+    // time, back to the first after the last. Pauses while the shopper
+    // hovers, touches or tabs into the gallery, and while the tab is hidden;
+    // off for visitors who prefer reduced motion.
+    setupAutoplay() {
+      this.autoplayDelay = Number(this.dataset.autoplay || 0);
+      if (!this.autoplayDelay || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      this.paused = false;
+      const pause = () => {
+        this.paused = true;
+      };
+      const resume = () => {
+        this.paused = false;
+      };
+      if (this.dataset.autoplayStyle === 'marquee') {
+        this.setupMarquee();
+        return;
+      }
+
+      this.addEventListener('mouseenter', pause);
+      this.addEventListener('mouseleave', resume);
+      this.addEventListener('focusin', pause);
+      this.addEventListener('focusout', resume);
+      // A swipe or arrow click restarts the wait before the next slide.
+      this.addEventListener('pointerdown', () => this.startAutoplay());
+      this.onVisibility = () => (document.hidden ? this.stopAutoplay() : this.startAutoplay());
+      document.addEventListener('visibilitychange', this.onVisibility);
+      this.startAutoplay();
+    }
+
+    startAutoplay() {
+      if (!this.autoplayDelay) return;
+      this.stopAutoplay();
+      this.autoplayTimer = setInterval(() => {
+        if (this.paused || !this.isSlider || this.lightbox?.open) return;
+        const max = this.track.scrollWidth - this.track.clientWidth;
+        const atEnd = Math.abs(this.track.scrollLeft) >= max - 2 || this.activeIndex >= this.slides.length - 1;
+        this.goTo(atEnd ? 0 : this.activeIndex + 1);
+      }, this.autoplayDelay);
+    }
+
+    // A variant was picked: let the gallery settle on its image. The marquee
+    // stops for a few seconds (longer while hovered) and then glides on from
+    // there; the one-at-a-time autoplay restarts its wait.
+    holdAutoplay() {
+      if (!this.autoplayDelay) return;
+      if (!this.classList.contains('is-marquee')) {
+        this.startAutoplay();
+        return;
+      }
+      this.paused = true;
+      clearTimeout(this.resumeTimer);
+      const resume = () => {
+        if (this.matches(':hover')) {
+          this.resumeTimer = setTimeout(resume, 1000);
+          return;
+        }
+        this.paused = false;
+        this.position = Math.abs(this.track.scrollLeft);
+      };
+      this.resumeTimer = setTimeout(resume, 5000);
+    }
+
+    stopAutoplay() {
+      clearInterval(this.autoplayTimer);
+      cancelAnimationFrame(this.marqueeFrame);
+      this.marqueeFrame = null;
+    }
+
+    // Marquee: the row glides continuously (Marquee speed, px per second).
+    // A copy of the slides follows the real ones, and the position wraps
+    // back by one set's width, so the loop never jumps. Pauses while
+    // hovered / touched / focused; arrows and swiping still work.
+    setupMarquee() {
+      if (!this.isSlider) return;
+      this.speed = Number(this.dataset.marqueeSpeed || 40);
+
+      this.slides.forEach((slide) => {
+        const clone = slide.cloneNode(true);
+        clone.setAttribute('data-gallery-clone', '');
+        clone.setAttribute('aria-hidden', 'true');
+        clone.setAttribute('inert', '');
+        clone.classList.remove('is-active');
+        clone.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+        this.track.append(clone);
+      });
+      this.classList.add('is-marquee');
+
+      const hold = () => {
+        this.paused = true;
+        clearTimeout(this.resumeTimer);
+      };
+      const release = (delay = 0) => {
+        clearTimeout(this.resumeTimer);
+        this.resumeTimer = setTimeout(() => {
+          this.paused = false;
+          this.position = Math.abs(this.track.scrollLeft);
+        }, delay);
+      };
+      this.addEventListener('mouseenter', hold);
+      this.addEventListener('mouseleave', () => release(300));
+      this.addEventListener('focusin', hold);
+      this.addEventListener('focusout', () => release(300));
+      this.addEventListener('pointerdown', hold);
+      // Touch: wait a moment after a swipe or tap before gliding on.
+      this.addEventListener('pointerup', (event) => {
+        if (event.pointerType !== 'mouse') release(2500);
+      });
+
+      this.onVisibility = () => (document.hidden ? this.stopAutoplay() : this.runMarquee());
+      document.addEventListener('visibilitychange', this.onVisibility);
+      this.position = Math.abs(this.track.scrollLeft);
+      this.runMarquee();
+    }
+
+    runMarquee() {
+      cancelAnimationFrame(this.marqueeFrame);
+      let last = performance.now();
+      const step = (now) => {
+        const delta = Math.min(now - last, 64);
+        last = now;
+        const firstClone = this.track.querySelector('[data-gallery-clone]');
+        if (firstClone && !this.paused && !this.lightbox?.open && this.isSlider) {
+          const loop = firstClone.offsetLeft - this.slides[0].offsetLeft;
+          this.position += (this.speed * delta) / 1000;
+          if (this.position >= loop) this.position -= loop;
+          this.track.scrollLeft = document.dir === 'rtl' ? -this.position : this.position;
+        }
+        this.marqueeFrame = requestAnimationFrame(step);
+      };
+      this.marqueeFrame = requestAnimationFrame(step);
+    }
+
+    // Real slides only (not the marquee's copies).
     get slides() {
-      return [...this.track.children];
+      return [...this.track.children].filter((el) => !el.hasAttribute('data-gallery-clone'));
     }
 
     // True when the track scrolls sideways (all slider layouts, and every
@@ -60,9 +201,20 @@ if (!customElements.get('product-gallery')) {
       if (this.scrollFrame) return;
       this.scrollFrame = requestAnimationFrame(() => {
         this.scrollFrame = null;
-        const width = this.track.clientWidth || 1;
-        const index = Math.round(Math.abs(this.track.scrollLeft) / width);
+        // The slide whose start is nearest the scroll position (slides can
+        // be narrower than the track, e.g. the full-screen layout).
+        const position = Math.abs(this.track.scrollLeft);
+        let index = 0;
+        let best = Infinity;
+        this.slides.forEach((slide, i) => {
+          const distance = Math.abs(slide.offsetLeft - this.track.offsetLeft - position);
+          if (distance < best) {
+            best = distance;
+            index = i;
+          }
+        });
         if (index !== this.activeIndex) this.setActive(index);
+        else this.updateArrows();
       });
     }
 
@@ -88,6 +240,7 @@ if (!customElements.get('product-gallery')) {
       });
 
       if (this.counter) this.counter.textContent = index + 1;
+      this.updateArrows();
 
       if (this.thumbs) {
         this.thumbs.querySelectorAll('[data-thumb-index]').forEach((thumb) => {
@@ -109,6 +262,23 @@ if (!customElements.get('product-gallery')) {
       }
     }
 
+    // Previous is disabled on the first image, next once the last image is
+    // in view (the track can't scroll any further).
+    updateArrows() {
+      const prev = this.querySelector('[data-gallery-prev]');
+      const next = this.querySelector('[data-gallery-next]');
+      if (!prev || !next) return;
+      if (this.classList.contains('is-marquee')) {
+        prev.disabled = false;
+        next.disabled = false;
+        return;
+      }
+      const max = this.track.scrollWidth - this.track.clientWidth;
+      const position = Math.abs(this.track.scrollLeft);
+      prev.disabled = this.activeIndex <= 0 && position <= 2;
+      next.disabled = this.activeIndex >= this.slides.length - 1 || position >= max - 2;
+    }
+
     pauseMedia(slide) {
       slide.querySelectorAll('video').forEach((video) => video.pause());
       slide.querySelectorAll('iframe').forEach((frame) => {
@@ -125,6 +295,7 @@ if (!customElements.get('product-gallery')) {
       if (!slide) return;
 
       if (this.isSlider) {
+        this.holdAutoplay();
         this.goTo(this.slides.indexOf(slide));
       } else {
         this.track.prepend(slide);
