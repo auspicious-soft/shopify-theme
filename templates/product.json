@@ -279,7 +279,7 @@
           "type": "text",
           "settings": {
             "text": "<p>Some pieces become wardrobe essentials without asking for attention. The Oversized Cashmere Coat brings together a relaxed silhouette, understated elegance, and timeless appeal, creating a piece that feels as effortless as it looks. Thoughtfully designed for cooler days, it offers a refined balance of comfort, versatility, and everyday sophistication.</p><p>Layer it over fine knitwear for a relaxed daytime look, or pair it with tailored trousers and leather boots for a more polished expression. Its versatile design makes it easy to transition between occasions, while its understated character allows it to complement your wardrobe season after season.</p>",
-            "size": "small"
+            "size": "medium"
           }
         }
       },
@@ -301,7 +301,7 @@
         "alignment": "left",
         "mobile_alignment": "left",
         "mobile_image_position": "first",
-        "content_width": 520,
+        "content_width": 800,
         "gap": 48,
         "width": "full",
         "color_scheme": "",
