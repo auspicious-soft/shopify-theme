@@ -346,6 +346,23 @@
       "default": false
     },
     {
+      "type": "select",
+      "id": "gallery_autoplay_style",
+      "label": "t:sections.product.gallery_autoplay_style",
+      "default": "marquee",
+      "options": [
+        {
+          "value": "marquee",
+          "label": "t:sections.product.gallery_autoplay_marquee"
+        },
+        {
+          "value": "slide",
+          "label": "t:sections.product.gallery_autoplay_slide"
+        }
+      ],
+      "visible_if": "{{ section.settings.gallery_autoplay }}"
+    },
+    {
       "type": "range",
       "id": "gallery_autoplay_speed",
       "label": "t:sections.product.gallery_autoplay_speed",
@@ -354,7 +371,19 @@
       "step": 1,
       "unit": "s",
       "default": 5,
-      "visible_if": "{{ section.settings.gallery_autoplay }}"
+      "visible_if": "{{ section.settings.gallery_autoplay and section.settings.gallery_autoplay_style == 'slide' }}"
+    },
+    {
+      "type": "range",
+      "id": "gallery_marquee_speed",
+      "label": "t:sections.product.gallery_marquee_speed",
+      "min": 10,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 40,
+      "info": "t:sections.product.gallery_marquee_speed_info",
+      "visible_if": "{{ section.settings.gallery_autoplay and section.settings.gallery_autoplay_style == 'marquee' }}"
     },
     {
       "type": "select",

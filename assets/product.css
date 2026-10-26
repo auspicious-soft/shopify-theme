@@ -1162,3 +1162,12 @@
     scrollbar-width: thin;
   }
 }
+
+/* Autoplay > Marquee: no snapping while the row glides. */
+.product-gallery.is-marquee .product-gallery__track {
+  scroll-snap-type: none;
+}
+
+.product-gallery.is-marquee .product-gallery__slide {
+  scroll-snap-align: none;
+}

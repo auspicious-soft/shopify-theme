@@ -44,6 +44,11 @@ if (!customElements.get('product-gallery')) {
       const resume = () => {
         this.paused = false;
       };
+      if (this.dataset.autoplayStyle === 'marquee') {
+        this.setupMarquee();
+        return;
+      }
+
       this.addEventListener('mouseenter', pause);
       this.addEventListener('mouseleave', resume);
       this.addEventListener('focusin', pause);
@@ -68,10 +73,77 @@ if (!customElements.get('product-gallery')) {
 
     stopAutoplay() {
       clearInterval(this.autoplayTimer);
+      cancelAnimationFrame(this.marqueeFrame);
+      this.marqueeFrame = null;
     }
 
+    // Marquee: the row glides continuously (Marquee speed, px per second).
+    // A copy of the slides follows the real ones, and the position wraps
+    // back by one set's width, so the loop never jumps. Pauses while
+    // hovered / touched / focused; arrows and swiping still work.
+    setupMarquee() {
+      if (!this.isSlider) return;
+      this.speed = Number(this.dataset.marqueeSpeed || 40);
+
+      this.slides.forEach((slide) => {
+        const clone = slide.cloneNode(true);
+        clone.setAttribute('data-gallery-clone', '');
+        clone.setAttribute('aria-hidden', 'true');
+        clone.setAttribute('inert', '');
+        clone.classList.remove('is-active');
+        clone.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+        this.track.append(clone);
+      });
+      this.classList.add('is-marquee');
+
+      const hold = () => {
+        this.paused = true;
+        clearTimeout(this.resumeTimer);
+      };
+      const release = (delay = 0) => {
+        clearTimeout(this.resumeTimer);
+        this.resumeTimer = setTimeout(() => {
+          this.paused = false;
+          this.position = Math.abs(this.track.scrollLeft);
+        }, delay);
+      };
+      this.addEventListener('mouseenter', hold);
+      this.addEventListener('mouseleave', () => release(300));
+      this.addEventListener('focusin', hold);
+      this.addEventListener('focusout', () => release(300));
+      this.addEventListener('pointerdown', hold);
+      // Touch: wait a moment after a swipe or tap before gliding on.
+      this.addEventListener('pointerup', (event) => {
+        if (event.pointerType !== 'mouse') release(2500);
+      });
+
+      this.onVisibility = () => (document.hidden ? this.stopAutoplay() : this.runMarquee());
+      document.addEventListener('visibilitychange', this.onVisibility);
+      this.position = Math.abs(this.track.scrollLeft);
+      this.runMarquee();
+    }
+
+    runMarquee() {
+      cancelAnimationFrame(this.marqueeFrame);
+      let last = performance.now();
+      const step = (now) => {
+        const delta = Math.min(now - last, 64);
+        last = now;
+        const firstClone = this.track.querySelector('[data-gallery-clone]');
+        if (firstClone && !this.paused && !this.lightbox?.open && this.isSlider) {
+          const loop = firstClone.offsetLeft - this.slides[0].offsetLeft;
+          this.position += (this.speed * delta) / 1000;
+          if (this.position >= loop) this.position -= loop;
+          this.track.scrollLeft = document.dir === 'rtl' ? -this.position : this.position;
+        }
+        this.marqueeFrame = requestAnimationFrame(step);
+      };
+      this.marqueeFrame = requestAnimationFrame(step);
+    }
+
+    // Real slides only (not the marquee's copies).
     get slides() {
-      return [...this.track.children];
+      return [...this.track.children].filter((el) => !el.hasAttribute('data-gallery-clone'));
     }
 
     // True when the track scrolls sideways (all slider layouts, and every
@@ -174,6 +246,11 @@ if (!customElements.get('product-gallery')) {
       const prev = this.querySelector('[data-gallery-prev]');
       const next = this.querySelector('[data-gallery-next]');
       if (!prev || !next) return;
+      if (this.classList.contains('is-marquee')) {
+        prev.disabled = false;
+        next.disabled = false;
+        return;
+      }
       const max = this.track.scrollWidth - this.track.clientWidth;
       const position = Math.abs(this.track.scrollLeft);
       prev.disabled = this.activeIndex <= 0 && position <= 2;

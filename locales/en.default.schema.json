@@ -573,7 +573,12 @@
       "gallery_layout_info": "Full screen: images edge to edge at screen height, with the product details on a translucent panel. Works best with Section width set to Full",
       "gallery_autoplay": "Autoplay images",
       "gallery_autoplay_info": "Images slide by themselves in slider layouts (and on mobile). Pauses on hover or touch",
-      "gallery_autoplay_speed": "Change image every"
+      "gallery_autoplay_speed": "Change image every",
+      "gallery_autoplay_style": "Autoplay style",
+      "gallery_autoplay_marquee": "Marquee (continuous)",
+      "gallery_autoplay_slide": "One image at a time",
+      "gallery_marquee_speed": "Marquee speed",
+      "gallery_marquee_speed_info": "Pixels per second"
     },
     "product_list": {
       "products_to_show": "Products to show",
