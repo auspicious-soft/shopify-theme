@@ -286,7 +286,7 @@
 
           {% when 'size_guide' %}
             {%- if size_guide_block -%}
-              <div class="product__size-guide" {{ block.shopify_attributes }}>
+              <div class="product__size-guide{% if picker_size_guide %} product__size-guide--dialog-only{% endif %}" {{ block.shopify_attributes }}>
                 {%- if picker_size_guide -%}
                   {%- comment -%} The link sits next to the size option; only the drawer renders here. {%- endcomment -%}
                   {% render 'size-guide', product: product, block: block, section_id: section.id, part: 'dialog' %}

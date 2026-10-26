@@ -1,5 +1,13 @@
 /* Styles for snippets/size-guide.liquid (product page size guide). */
 
+/* Wrapper holds only the dialog; take it out of the flow so it doesn't add an extra grid/flex gap. */
+.product__size-guide--dialog-only {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: visible;
+}
+
 /* ---------- Trigger link ---------- */
 
 .size-guide__trigger {
