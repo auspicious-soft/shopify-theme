@@ -200,10 +200,10 @@
         "position": "center",
         "content_width": 760,
         "block_spacing": 20,
-        "width": "page",
+        "width": "full",
         "color_scheme": "",
         "padding_top": 24,
-        "padding_bottom": 24,
+        "padding_bottom": 0,
         "mobile_padding_custom": false,
         "mobile_padding_top": 64,
         "mobile_padding_bottom": 64,
@@ -212,49 +212,197 @@
         "button_case": "uppercase"
       }
     },
-    "collection_banner_UKKaPU": {
-      "type": "collection-banner",
-      "name": "t:sections.collection_banner.name",
+    "video_WgUWbe": {
+      "type": "video",
+      "name": "t:sections.video.name",
       "settings": {
-        "button_link": "shopify://collections/autumn-translation",
-        "image": "shopify://shop_images/image-with-text-overlay.png",
-        "media_type": "image",
-        "video_url": "",
-        "height": "large",
-        "mobile_height": "medium",
-        "width": "full_padded",
+        "video": "shopify://files/videos/6010467_4k_Beautiful_1920x1080 1.mp4",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "mode": "player",
+        "play_button_style": "circle",
+        "show_controls": true,
+        "loop": false,
+        "background_loop": true,
+        "aspect_ratio": "16-9",
+        "max_width": 2000,
         "corner_radius": 0,
-        "zoom_on_hover": true,
-        "parallax": false,
-        "overlay_color": "#000000",
-        "overlay_opacity": 20,
-        "subheading": "CRAFTED FOR A SLOWER TOMORROW",
-        "subheading_letter_spacing": "large",
-        "heading": "Timeless Pieces for everyday Life",
+        "width": "full_padded",
+        "content_position": "above",
+        "subheading": "",
+        "subheading_letter_spacing": "none",
+        "heading": "",
         "heading_tag": "h2",
-        "heading_class": "h2",
-        "heading_uppercase": true,
-        "text": "<p>Discover our collection of premium cashmere essentials,<br/>thoughtfully made for comfort, longevity and a more<br/>conscious wardrobe.</p>",
-        "text_color": "#ffffff",
-        "content_position_horizontal": "left",
+        "heading_class": "h3",
+        "description": "",
+        "heading_alignment": "center",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "content_position_horizontal": "center",
         "content_position_vertical": "middle",
-        "content_width": 520,
-        "button_label": "Explore",
-        "button_style": "secondary",
-        "button_size": "medium",
-        "button_color_scheme": "scheme-2",
-        "full_link": false,
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
         "color_scheme": "",
         "padding_top": 24,
         "padding_bottom": 24,
         "mobile_padding_custom": false,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0,
+        "mobile_padding_top": 56,
+        "mobile_padding_bottom": 56,
+        "button_size": "medium",
         "heading_case": "uppercase",
         "button_case": "uppercase"
       }
     },
-    "collection_banner_gUMLJF": {
+    "image_with_text_MEUBXB": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption_ihc4jE": {
+          "type": "caption",
+          "settings": {
+            "caption": "THE ART OF LAYERING",
+            "style": "uppercase",
+            "size": "small",
+            "letter_spacing": "large"
+          }
+        },
+        "heading_GEgAce": {
+          "type": "heading",
+          "settings": {
+            "heading": "A Softer Side of Everyday Luxury",
+            "heading_tag": "h2",
+            "heading_class": "h2",
+            "uppercase": false
+          }
+        },
+        "text_JkNEVj": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Some pieces become wardrobe essentials without asking for attention. The Oversized Cashmere Coat brings together a relaxed silhouette, understated elegance, and timeless appeal, creating a piece that feels as effortless as it looks. Thoughtfully designed for cooler days, it offers a refined balance of comfort, versatility, and everyday sophistication.</p><p>Layer it over fine knitwear for a relaxed daytime look, or pair it with tailored trousers and leather boots for a more polished expression. Its versatile design makes it easy to transition between occasions, while its understated character allows it to complement your wardrobe season after season.</p>",
+            "size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "caption_ihc4jE",
+        "heading_GEgAce",
+        "text_JkNEVj"
+      ],
+      "name": "t:sections.image_with_text.name",
+      "settings": {
+        "media_type": "image",
+        "image": "shopify://shop_images/Hero_Image_4.png",
+        "video_url": "",
+        "image_ratio": "adapt",
+        "corner_radius": 0,
+        "layout": "side",
+        "image_position": "right",
+        "image_width": "medium",
+        "content_position": "middle",
+        "alignment": "left",
+        "mobile_alignment": "left",
+        "mobile_image_position": "first",
+        "content_width": 800,
+        "gap": 48,
+        "width": "full",
+        "color_scheme": "",
+        "content_card": false,
+        "content_color_scheme": "",
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 56,
+        "mobile_padding_bottom": 56,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
+      }
+    },
+    "multicolumn_PdL3FA": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_cTDk4G": {
+          "type": "column",
+          "settings": {
+            "number": "",
+            "title": "<strong>A Refined Silhouette</strong>",
+            "title_uppercase": false,
+            "text": "<p>An oversized shape that brings relaxed proportions and effortless sophistication to everyday dressing.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_hCdFcP": {
+          "type": "column",
+          "settings": {
+            "number": "",
+            "title": "<strong>&nbsp;Effortless Layering</strong>",
+            "title_uppercase": false,
+            "text": "<p>Designed to complement fine knits, tailored trousers, and understated accessories.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_P9hznU": {
+          "type": "column",
+          "settings": {
+            "number": "",
+            "title": "<strong>Timeless Appeal</strong>",
+            "title_uppercase": false,
+            "text": "<p>A versatile outerwear essential that works beautifully across occasions and changing seasons.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_cTDk4G",
+        "column_hCdFcP",
+        "column_P9hznU"
+      ],
+      "name": "t:sections.multicolumn.name",
+      "settings": {
+        "subheading": "Product Highlights",
+        "subheading_style": "uppercase",
+        "subheading_size": "small",
+        "subheading_letter_spacing": "large",
+        "heading": "Considered in Every Detail",
+        "heading_tag": "h2",
+        "heading_class": "h3",
+        "description": "",
+        "heading_alignment": "left",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "mobile_layout": "grid",
+        "column_alignment": "left",
+        "mobile_column_alignment": "same",
+        "width": "full",
+        "title_size": "default",
+        "text_size": "medium",
+        "column_media": "number",
+        "number_format": "padded",
+        "number_size": "medium",
+        "image_ratio": "adapt",
+        "image_width": "full",
+        "corner_radius": 0,
+        "show_placeholders": false,
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "color_scheme": "scheme-1",
+        "card": true,
+        "card_color_scheme": "scheme-869fd07f-c7fd-47b7-9b47-86d04d72fa7f",
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 56,
+        "mobile_padding_bottom": 56,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
+      }
+    },
+    "collection_banner_cc9Pdx": {
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
@@ -270,7 +418,7 @@
         "parallax": false,
         "overlay_color": "#000000",
         "overlay_opacity": 20,
-        "subheading": "Crafted For Everyday Elegance",
+        "subheading": "CRAFTED FOR Everyday Elegance",
         "subheading_letter_spacing": "large",
         "heading": "THE ART OF EVERYDAY DRESSING",
         "heading_tag": "h2",
@@ -283,8 +431,8 @@
         "content_width": 520,
         "button_label": "Explore",
         "button_style": "secondary",
-        "button_size": "medium",
-        "button_color_scheme": "scheme-2",
+        "button_size": "small",
+        "button_color_scheme": "scheme-56590322-c170-4511-a8c5-0f7377624337",
         "full_link": false,
         "color_scheme": "",
         "padding_top": 24,
@@ -313,7 +461,7 @@
         "color_scheme": "scheme-1",
         "width": "full",
         "padding_top": 24,
-        "padding_bottom": 24,
+        "padding_bottom": 48,
         "mobile_padding_custom": false,
         "mobile_padding_top": 48,
         "mobile_padding_bottom": 64,
@@ -324,6 +472,7 @@
     },
     "recently_viewed": {
       "type": "recently-viewed",
+      "disabled": true,
       "settings": {
         "heading": "Recently viewed",
         "heading_tag": "h2",
@@ -352,8 +501,10 @@
   "order": [
     "main",
     "rich_text_Bzbhgi",
-    "collection_banner_UKKaPU",
-    "collection_banner_gUMLJF",
+    "video_WgUWbe",
+    "image_with_text_MEUBXB",
+    "multicolumn_PdL3FA",
+    "collection_banner_cc9Pdx",
     "related_products",
     "recently_viewed"
   ]
