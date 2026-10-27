@@ -1136,7 +1136,7 @@
     height: 100%;
     aspect-ratio: auto;
     border-radius: 0;
-  }
+  } 
 
   /* Prev / next arrows at the bottom left (one image per click), no counter. */
   .product--gallery-overlay .product-gallery__controls {
