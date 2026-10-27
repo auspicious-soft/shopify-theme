@@ -30,17 +30,10 @@
         "banner_color_scheme": "scheme-2",
         "collection_list": [
           "autumn-translation",
-          "bags",
-          "blazers",
-          "hats",
-          "hoodies",
-          "long-sleeves",
-          "shoes",
-          "skirts",
-          "suites",
-          "sweaters",
-          "t-shirts",
-          "trousers"
+          "the-core-wardrobe",
+          "the-evening-series",
+          "the-summer-edit",
+          "the-utility-capsule"
         ],
         "sort": "default",
         "hide_empty": true,
