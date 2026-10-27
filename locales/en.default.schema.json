@@ -765,7 +765,7 @@
       "block_social": "Social links",
       "social_links_info": "Leave a link empty to use the one from Theme settings > Social media. Remove this block to hide the social icons.",
       "contact_style": "Style",
-      "contact_style_info": "Style 2: heading, text and contact details on the left, the form in a card on the right",
+      "contact_style_info": "Style 2: heading, text and contact details on the left, the form in a card on the right. Settings only used by Style 1 are hidden",
       "style1": "Style 1",
       "style2": "Style 2"
     },
