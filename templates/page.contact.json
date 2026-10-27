@@ -127,7 +127,7 @@
         "heading": "&nbsp;Talk to our support team&nbsp;",
         "heading_tag": "h1",
         "heading_class": "h2",
-        "description": "",
+        "description": "<p>If you need assistance with your order or have any questions about your purchase, our team is always happy to help. Feel free to reach out to us for guidance, product information, or support with any concerns you may have.</p>",
         "heading_alignment": "center",
         "form_heading": "Send your question",
         "show_phone": true,
