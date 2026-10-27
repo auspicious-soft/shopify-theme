@@ -96,13 +96,22 @@
             "title": "Visit us",
             "text": "<p>123 Main Street<br>New York, NY 10001</p>"
           }
+        },
+        "info_8pxkn9": {
+          "type": "info",
+          "settings": {
+            "icon": "map_pin",
+            "title": "Address",
+            "text": "<p>725 5th Ave, New York, NY 10022, USA</p>"
+          }
         }
       },
       "block_order": [
         "email",
         "phone",
         "hours",
-        "address"
+        "address",
+        "info_8pxkn9"
       ],
       "settings": {
         "subheading": "",
