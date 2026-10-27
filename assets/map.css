@@ -1,0 +1,149 @@
+/* Styles for sections/map.liquid. */
+
+.map-section {
+  padding-block: var(--section-padding-top, 0px) var(--section-padding-bottom, 0px);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+.map-section__layout {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+/* ---------- Map ---------- */
+
+.map-section__map {
+  position: relative;
+  overflow: hidden;
+  height: var(--map-height-mobile, 360px);
+  border-radius: var(--map-radius, 0);
+  background-color: color-mix(in srgb, var(--color-foreground) 5%, var(--color-background));
+}
+
+@media screen and (min-width: 750px) {
+  .map-section__map {
+    height: var(--map-height, 480px);
+  }
+}
+
+.map-section__frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.map-section--grayscale .map-section__frame {
+  filter: grayscale(1);
+}
+
+.map-section__empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-section__placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: color-mix(in srgb, var(--color-foreground) 25%, transparent);
+}
+
+.map-section__empty-text {
+  position: relative;
+  margin: 0;
+  padding: 0.6rem 1rem;
+  background-color: var(--color-background);
+  font-size: 0.85rem;
+}
+
+/* ---------- Card ---------- */
+
+.map-section__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  border-radius: var(--map-radius, 0);
+}
+
+.map-section__caption {
+  margin: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
+}
+
+.map-section__heading {
+  margin: 0;
+}
+
+.map-section__text {
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--color-foreground) 80%, transparent);
+}
+
+.map-section__text > * {
+  margin: 0;
+}
+
+.map-section__text > * + * {
+  margin-top: 0.35em;
+}
+
+.map-section__button {
+  margin-top: 0.5rem;
+}
+
+@media screen and (min-width: 990px) {
+  /* Card over the map, vertically centred. */
+  .map-section--card-overlay-left .map-section__card,
+  .map-section--card-overlay-right .map-section__card {
+    position: absolute;
+    inset-block-start: 50%;
+    z-index: 1;
+    width: min(24rem, 40%);
+    box-shadow: 0 12px 40px -12px rgb(0 0 0 / 0.25);
+    transform: translateY(-50%);
+  }
+
+  .map-section--card-overlay-left .map-section__card {
+    inset-inline-start: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .map-section--card-overlay-right .map-section__card {
+    inset-inline-end: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  /* Card beside the map. */
+  .map-section--card-side-left .map-section__layout,
+  .map-section--card-side-right .map-section__layout {
+    grid-template-columns: minmax(18rem, 1fr) minmax(0, 2fr);
+    align-items: stretch;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .map-section--card-side-right .map-section__layout {
+    grid-template-columns: minmax(0, 2fr) minmax(18rem, 1fr);
+  }
+
+  .map-section--card-side-left .map-section__card {
+    order: -1;
+  }
+
+  .map-section--card-side-left .map-section__card,
+  .map-section--card-side-right .map-section__card {
+    justify-content: center;
+  }
+}

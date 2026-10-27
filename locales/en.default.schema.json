@@ -1346,6 +1346,27 @@
       "newsletter_button_info": "Leave empty for \"Notify me\"",
       "show_social": "Show social icons",
       "show_social_info": "Links from Theme settings > Social media"
+    },
+    "map": {
+      "name": "Map",
+      "header_map": "Map",
+      "address": "Address",
+      "address_info": "Any address or place Google Maps can find, e.g. 725 5th Ave, New York",
+      "zoom": "Zoom",
+      "height": "Map height",
+      "mobile_height": "Map height on mobile",
+      "corner_radius": "Corner radius",
+      "grayscale": "Black and white map",
+      "header_card": "Info card",
+      "card_position": "Card position",
+      "card_overlay_left": "Over the map, left",
+      "card_overlay_right": "Over the map, right",
+      "card_side_left": "Beside the map, left",
+      "card_side_right": "Beside the map, right",
+      "card_none": "Hidden",
+      "show_directions": "Show \"Get directions\" button",
+      "button_label": "Button label",
+      "card_color_scheme": "Card color scheme"
     }
   },
   "settings_schema": {

@@ -368,6 +368,10 @@
   "sections": {
     "contact_form": {
       "social_empty": "Add your social links in this block or in Theme settings > Social media."
+    },
+    "map": {
+      "map_of": "Map of {{ address }}",
+      "add_address": "Add an address in the section settings to show the map."
     }
   }
 }
