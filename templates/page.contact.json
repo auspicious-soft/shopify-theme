@@ -182,7 +182,7 @@
         "button_label": "Get directions",
         "button_style": "primary",
         "card_color_scheme": "",
-        "width": "page",
+        "width": "full",
         "color_scheme": "",
         "padding_top": 24,
         "padding_bottom": 48,
