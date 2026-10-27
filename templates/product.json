@@ -407,7 +407,7 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
-        "button_link": "shopify://collections/autumn-translation",
+        "button_link": "shopify://collections/the-autumn-translation",
         "image": "shopify://shop_images/image-with-text-overlay_1.png",
         "media_type": "image",
         "video_url": "",
