@@ -288,9 +288,10 @@
                   {%- if has_icon and icon_position == 'content' -%}
                     {%- comment -%} The icon goes before every line (paragraph) of the text. {%- endcomment -%}
                     <div class="contact__info-text contact__info-text--lines rte">
-                      {%- assign lines = b_text | split: '</p>' -%}
+                      {%- comment -%} New paragraphs and line breaks (Shift + Enter) both start a new line. {%- endcomment -%}
+                      {%- assign lines = b_text | replace: '<br />', '</p><p>' | replace: '<br/>', '</p><p>' | replace: '<br>', '</p><p>' | split: '</p>' -%}
                       {%- for line in lines -%}
-                        {%- assign line_text = line | remove_first: '<p>' | strip -%}
+                        {%- assign line_text = line | remove: '<p>' | strip -%}
                         {%- if line_text != blank -%}
                           <p class="contact__info-line">{{ item_icon }}<span>{{ line_text }}</span></p>
                         {%- endif -%}
