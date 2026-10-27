@@ -107,13 +107,13 @@
       "settings": {
         "subheading": "",
         "subheading_letter_spacing": "none",
-        "heading": "Get in touch",
+        "heading": "Send Your Question",
         "heading_tag": "h1",
         "heading_class": "h2",
-        "description": "<p>Questions about an order, sizing or anything else? Send us a message and we'll reply within one business day.</p>",
+        "description": "",
         "heading_alignment": "center",
-        "show_phone": true,
-        "extra_field": "order_number",
+        "show_phone": false,
+        "extra_field": "none",
         "button_label": "",
         "button_style": "primary",
         "success_display": "replace",
@@ -121,12 +121,12 @@
         "success_message": "",
         "success_style": "highlight",
         "privacy_note": "",
-        "info_position": "below",
+        "info_position": "left",
         "form_width": 680,
         "corner_radius": 0,
         "width": "page",
         "color_scheme": "scheme-1",
-        "info_style": "cards",
+        "info_style": "plain",
         "info_color_scheme": "scheme-869fd07f-c7fd-47b7-9b47-86d04d72fa7f",
         "info_bar": false,
         "info_bar_color_scheme": "scheme-869fd07f-c7fd-47b7-9b47-86d04d72fa7f",
@@ -139,80 +139,11 @@
         "heading_case": "uppercase",
         "button_case": "uppercase"
       }
-    },
-    "faq": {
-      "type": "collapsible-content",
-      "blocks": {
-        "shipping": {
-          "type": "row",
-          "settings": {
-            "heading": "Where is my order?",
-            "icon": "truck",
-            "content": "<p>You'll get an email with a tracking link as soon as your order ships. Orders usually ship within 1–2 business days.</p>",
-            "page": "",
-            "open": false
-          }
-        },
-        "returns": {
-          "type": "row",
-          "settings": {
-            "heading": "How do I return an item?",
-            "icon": "return",
-            "content": "<p>Return unworn items within 30 days. Include your order number in the message above and we'll send you a return label.</p>",
-            "page": "",
-            "open": false
-          }
-        },
-        "exchange": {
-          "type": "row",
-          "settings": {
-            "heading": "Can I change or cancel my order?",
-            "icon": "clock",
-            "content": "<p>Contact us within 12 hours of ordering and we'll do our best to update or cancel it before it ships.</p>",
-            "page": "",
-            "open": false
-          }
-        }
-      },
-      "block_order": [
-        "shipping",
-        "returns",
-        "exchange"
-      ],
-      "settings": {
-        "subheading": "",
-        "subheading_letter_spacing": "none",
-        "heading": "Before you write",
-        "heading_tag": "h2",
-        "heading_class": "h3",
-        "description": "",
-        "heading_alignment": "center",
-        "layout": "stacked",
-        "one_at_a_time": true,
-        "row_style": "lines",
-        "row_heading_size": "default",
-        "row_content_size": "medium",
-        "expand_icon": "plus",
-        "show_icons": true,
-        "icon_size": 18,
-        "content_width": 860,
-        "corner_radius": 0,
-        "width": "page",
-        "color_scheme": "",
-        "card_color_scheme": "",
-        "padding_top": 24,
-        "padding_bottom": 48,
-        "mobile_padding_custom": false,
-        "mobile_padding_top": 56,
-        "mobile_padding_bottom": 56,
-        "heading_case": "uppercase"
-      }
     }
   },
   "order": [
     "main",
     "page_header_GGWfAN",
-    "contact_form",
-    "faq"
+    "contact_form"
   ]
 }
