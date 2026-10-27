@@ -161,11 +161,44 @@
         "heading_case": "uppercase",
         "button_case": "uppercase"
       }
+    },
+    "map_ffgKbD": {
+      "type": "map",
+      "name": "t:sections.map.name",
+      "settings": {
+        "address": "725 5th Ave, New York, NY 10022, USA",
+        "zoom": 15,
+        "height": 480,
+        "mobile_height": 360,
+        "corner_radius": 0,
+        "grayscale": false,
+        "card_position": "none",
+        "caption": "Visit us",
+        "heading": "Our store",
+        "heading_tag": "h2",
+        "heading_class": "h4",
+        "text": "<p>725 5th Ave, New York, NY 10022, USA</p><p>Mon–Fri: 10:00 – 18:00</p>",
+        "show_directions": true,
+        "button_label": "Get directions",
+        "button_style": "primary",
+        "card_color_scheme": "",
+        "width": "page",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0,
+        "button_size": "medium",
+        "heading_case": "uppercase",
+        "button_case": "uppercase"
+      }
     }
   },
   "order": [
     "main",
     "page_header_GGWfAN",
-    "contact_form"
+    "contact_form",
+    "map_ffgKbD"
   ]
 }
