@@ -86,6 +86,13 @@
   "
 >
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+    {%- liquid
+      # Contact details: heading case / sizes and where each detail's icon goes.
+      assign details_class = 'contact__details--icon-' | append: section.settings.info_icon_position | append: ' contact__details--title-' | append: section.settings.info_heading_size | append: ' contact__details--text-' | append: section.settings.info_text_size
+      if section.settings.info_heading_uppercase
+        assign details_class = details_class | append: ' contact__details--upper'
+      endif
+    -%}
     {%- if s_heading != blank or section.settings.subheading != blank or s_description != blank -%}
       <div class="contact__header">
         {%- if section.settings.subheading != blank -%}
@@ -100,8 +107,12 @@
       </div>
     {%- endif -%}
 
-    <div class="contact__layout">
+    <div class="contact__layout{% if section.settings.boxed %} contact__layout--boxed{% endif %}">
       <div class="contact__form-wrap">
+        {%- comment -%} The form's own heading, lined up with the form only. {%- endcomment -%}
+        {%- if section.settings.form_heading != blank -%}
+          <h2 class="contact__form-heading{% if section.settings.info_heading_uppercase %} contact__form-heading--upper{% endif %} contact__form-heading--{{ section.settings.info_heading_size }}">{{ section.settings.form_heading | escape }}</h2>
+        {%- endif -%}
         {% form 'contact', id: form_id, class: 'contact__form' %}
           {%- if form.posted_successfully? -%}
             <div
@@ -234,26 +245,66 @@
       </div>
 
       {%- if info_position != 'none' -%}
-        <div class="contact__info{% if info_bar %} color-{{ section.settings.info_bar_color_scheme.id }}{% elsif info_style == 'panel' %} color-{{ section.settings.info_color_scheme.id }}{% endif %}">
+        <div class="contact__info {{ details_class }}{% if info_bar %} color-{{ section.settings.info_bar_color_scheme.id }}{% elsif info_style == 'panel' %} color-{{ section.settings.info_color_scheme.id }}{% endif %}">
           {%- for block in section.blocks -%}
+            {%- if block.type == 'social' -%}
+              {%- capture social_icons -%}{% render 'social-icons', class: 'contact__social-icons', links: block %}{%- endcapture -%}
+              <div class="contact__info-item contact__info-item--social{% if info_style == 'cards' %} color-{{ section.settings.info_color_scheme.id }}{% endif %}" {{ block.shopify_attributes }}>
+                <div class="contact__info-body">
+                  {%- if block.settings.heading != blank -%}
+                    <h3 class="contact__info-title"><span>{{ block.settings.heading | escape }}</span></h3>
+                  {%- endif -%}
+                  {%- if social_icons != blank -%}
+                    {{ social_icons }}
+                  {%- elsif request.design_mode -%}
+                    <p class="contact__info-text">{{ 'sections.contact_form.social_empty' | t }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+              {%- continue -%}
+            {%- endif -%}
     {%- liquid
       assign b_title = block.settings.title | default: ph_title
       assign b_text = block.settings.text | default: ph_text
     -%}
+            {%- liquid
+              assign icon_position = section.settings.info_icon_position | default: 'side'
+              assign has_icon = false
+              if block.settings.icon != 'none'
+                assign has_icon = true
+              endif
+            -%}
+            {%- capture item_icon -%}<span class="contact__info-icon" aria-hidden="true">{% render 'icon-library', icon: block.settings.icon %}</span>{%- endcapture -%}
             <div class="contact__info-item{% if info_style == 'cards' %} color-{{ section.settings.info_color_scheme.id }}{% endif %}" {{ block.shopify_attributes }}>
-              {%- if block.settings.icon != 'none' -%}
-                <span class="contact__info-icon">{% render 'icon-library', icon: block.settings.icon %}</span>
-              {%- endif -%}
+              {%- if has_icon and icon_position == 'side' -%}{{ item_icon }}{%- endif -%}
               <div class="contact__info-body">
                 {%- if b_title != blank -%}
-                  <h3 class="contact__info-title">{{ b_title | escape }}</h3>
+                  <h3 class="contact__info-title">
+                    {%- if has_icon and icon_position == 'heading' -%}{{ item_icon }}{%- endif -%}
+                    <span>{{ b_title | escape }}</span>
+                  </h3>
                 {%- endif -%}
                 {%- if b_text != blank -%}
-                  <div class="contact__info-text rte">{{ b_text }}</div>
+                  {%- if has_icon and icon_position == 'content' -%}
+                    {%- comment -%} The icon goes before every line (paragraph) of the text. {%- endcomment -%}
+                    <div class="contact__info-text contact__info-text--lines rte">
+                      {%- comment -%} New paragraphs and line breaks (Shift + Enter) both start a new line. {%- endcomment -%}
+                      {%- assign lines = b_text | replace: '<br />', '</p><p>' | replace: '<br/>', '</p><p>' | replace: '<br>', '</p><p>' | split: '</p>' -%}
+                      {%- for line in lines -%}
+                        {%- assign line_text = line | remove: '<p>' | strip -%}
+                        {%- if line_text != blank -%}
+                          <p class="contact__info-line">{{ item_icon }}<span>{{ line_text }}</span></p>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </div>
+                  {%- else -%}
+                    <div class="contact__info-text rte">{{ b_text }}</div>
+                  {%- endif -%}
                 {%- endif -%}
               </div>
             </div>
           {%- endfor -%}
+
         </div>
       {%- endif -%}
     </div>
@@ -398,6 +449,13 @@
     {
       "type": "header",
       "content": "t:sections.contact_form.header_form"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "t:sections.contact_form.form_heading",
+      "info": "t:sections.contact_form.form_heading_info",
+      "default": "Send your question"
     },
     {
       "type": "checkbox",
@@ -555,6 +613,13 @@
       "default": 0
     },
     {
+      "type": "checkbox",
+      "id": "boxed",
+      "label": "t:sections.contact_form.boxed",
+      "info": "t:sections.contact_form.boxed_info",
+      "default": false
+    },
+    {
       "type": "select",
       "id": "width",
       "label": "t:labels.section_width",
@@ -579,6 +644,76 @@
       "id": "color_scheme",
       "label": "t:sections.collection_banner.section_color_scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.contact_form.header_details"
+    },
+    {
+      "type": "checkbox",
+      "id": "info_heading_uppercase",
+      "label": "t:sections.contact_form.info_heading_uppercase",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "info_heading_size",
+      "label": "t:sections.contact_form.info_heading_size",
+      "default": "medium",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:options.size.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.size.large"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "info_text_size",
+      "label": "t:sections.contact_form.info_text_size",
+      "default": "small",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:options.size.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.size.large"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "info_icon_position",
+      "label": "t:sections.contact_form.info_icon_position",
+      "default": "content",
+      "options": [
+        {
+          "value": "content",
+          "label": "t:sections.contact_form.icon_content"
+        },
+        {
+          "value": "heading",
+          "label": "t:sections.contact_form.icon_heading"
+        },
+        {
+          "value": "side",
+          "label": "t:sections.contact_form.icon_side"
+        }
+      ]
     },
     {
       "type": "select",
@@ -853,6 +988,68 @@
           "type": "richtext",
           "id": "text",
           "label": "t:labels.text"
+        }
+      ]
+    },
+    {
+      "type": "social",
+      "name": "t:sections.contact_form.block_social",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:labels.heading",
+          "default": "Follow us"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.contact_form.social_links_info"
+        },
+        {
+          "type": "url",
+          "id": "social_instagram_link",
+          "label": "t:settings_schema.social-media.settings.social_instagram_link.label"
+        },
+        {
+          "type": "url",
+          "id": "social_facebook_link",
+          "label": "t:settings_schema.social-media.settings.social_facebook_link.label"
+        },
+        {
+          "type": "url",
+          "id": "social_tiktok_link",
+          "label": "t:settings_schema.social-media.settings.social_tiktok_link.label"
+        },
+        {
+          "type": "url",
+          "id": "social_youtube_link",
+          "label": "t:settings_schema.social-media.settings.social_youtube_link.label"
+        },
+        {
+          "type": "url",
+          "id": "social_twitter_link",
+          "label": "t:settings_schema.social-media.settings.social_twitter_link.label"
+        },
+        {
+          "type": "url",
+          "id": "social_pinterest_link",
+          "label": "t:settings_schema.social-media.settings.social_pinterest_link.label"
+        },
+        {
+          "type": "url",
+          "id": "social_snapchat_link",
+          "label": "t:settings_schema.social-media.settings.social_snapchat_link.label"
+        },
+        {
+          "type": "url",
+          "id": "social_tumblr_link",
+          "label": "t:settings_schema.social-media.settings.social_tumblr_link.label"
+        },
+        {
+          "type": "url",
+          "id": "social_vimeo_link",
+          "label": "t:settings_schema.social-media.settings.social_vimeo_link.label"
         }
       ]
     }

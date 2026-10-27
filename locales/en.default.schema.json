@@ -749,7 +749,21 @@
       "info_color_scheme_info": "Cards (or the panel) take this scheme's own colors when it differs from what's behind them",
       "info_bar": "Background behind cards",
       "info_bar_info": "A background bar behind all the cards",
-      "info_bar_color_scheme": "Background color scheme"
+      "info_bar_color_scheme": "Background color scheme",
+      "form_heading": "Form heading",
+      "form_heading_info": "Shown above the form, lined up with the form only",
+      "boxed": "Box the details and form",
+      "boxed_info": "One tinted box behind the contact details and the form",
+      "header_details": "Contact details",
+      "info_heading_uppercase": "Uppercase headings",
+      "info_heading_size": "Heading size",
+      "info_text_size": "Text size",
+      "info_icon_position": "Icon position",
+      "icon_content": "Before each line of text",
+      "icon_heading": "Before the heading",
+      "icon_side": "Beside the whole detail",
+      "block_social": "Social links",
+      "social_links_info": "Leave a link empty to use the one from Theme settings > Social media. Remove this block to hide the social icons."
     },
     "featured_product": {
       "name": "Featured product",

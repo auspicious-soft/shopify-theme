@@ -65,12 +65,12 @@
     "contact_form": {
       "type": "contact-form",
       "blocks": {
-        "email": {
+        "info_8pxkn9": {
           "type": "info",
           "settings": {
-            "icon": "mail",
-            "title": "Email",
-            "text": "<p><a href=\"mailto:hello@yourstore.com\">hello@yourstore.com</a></p>"
+            "icon": "map_pin",
+            "title": "Address",
+            "text": "<p>725 5th Ave, New York, NY 10022, USA</p>"
           }
         },
         "phone": {
@@ -81,138 +81,91 @@
             "text": "<p>+1 (555) 123-4567</p>"
           }
         },
+        "email": {
+          "type": "info",
+          "settings": {
+            "icon": "mail",
+            "title": "Email",
+            "text": "<p><a href=\"mailto:hello@yourstore.com\">hello@yourstore.com</a></p>"
+          }
+        },
         "hours": {
           "type": "info",
           "settings": {
             "icon": "clock",
-            "title": "Opening hours",
-            "text": "<p>Monday – Friday, 9am – 6pm<br>Saturday, 10am – 4pm</p>"
+            "title": "Working Hours",
+            "text": "<p>Monday – Friday, 9am – 6pm<br/>Saturday, 10am – 4pm</p>"
           }
         },
-        "address": {
-          "type": "info",
+        "social_links": {
+          "type": "social",
           "settings": {
-            "icon": "map_pin",
-            "title": "Visit us",
-            "text": "<p>123 Main Street<br>New York, NY 10001</p>"
+            "heading": "Follow us",
+            "social_instagram_link": "",
+            "social_facebook_link": "",
+            "social_tiktok_link": "",
+            "social_youtube_link": "",
+            "social_twitter_link": "",
+            "social_pinterest_link": "",
+            "social_snapchat_link": "",
+            "social_tumblr_link": "",
+            "social_vimeo_link": ""
           }
         }
       },
       "block_order": [
-        "email",
+        "info_8pxkn9",
         "phone",
+        "email",
         "hours",
-        "address"
+        "social_links"
       ],
       "settings": {
         "subheading": "",
         "subheading_letter_spacing": "none",
-        "heading": "Get in touch",
+        "heading": "",
         "heading_tag": "h1",
         "heading_class": "h2",
-        "description": "<p>Questions about an order, sizing or anything else? Send us a message and we'll reply within one business day.</p>",
+        "description": "",
         "heading_alignment": "center",
-        "show_phone": true,
-        "extra_field": "order_number",
-        "button_label": "",
+        "form_heading": "Send your question",
+        "show_phone": false,
+        "extra_field": "none",
+        "button_label": "Submit",
         "button_style": "primary",
         "success_display": "replace",
         "success_heading": "",
         "success_message": "",
         "success_style": "highlight",
         "privacy_note": "",
-        "info_position": "below",
+        "info_position": "left",
         "form_width": 680,
         "corner_radius": 0,
-        "width": "page",
+        "boxed": true,
+        "width": "full",
         "color_scheme": "scheme-1",
-        "info_style": "cards",
+        "info_heading_uppercase": true,
+        "info_heading_size": "medium",
+        "info_text_size": "small",
+        "info_icon_position": "content",
+        "info_style": "plain",
         "info_color_scheme": "scheme-869fd07f-c7fd-47b7-9b47-86d04d72fa7f",
         "info_bar": false,
         "info_bar_color_scheme": "scheme-869fd07f-c7fd-47b7-9b47-86d04d72fa7f",
-        "padding_top": 32,
+        "padding_top": 24,
         "padding_bottom": 24,
         "mobile_padding_custom": false,
         "mobile_padding_top": 56,
         "mobile_padding_bottom": 56,
-        "button_size": "small",
+        "button_size": "medium",
         "heading_case": "uppercase",
         "button_case": "uppercase"
-      }
-    },
-    "faq": {
-      "type": "collapsible-content",
-      "blocks": {
-        "shipping": {
-          "type": "row",
-          "settings": {
-            "heading": "Where is my order?",
-            "icon": "truck",
-            "content": "<p>You'll get an email with a tracking link as soon as your order ships. Orders usually ship within 1–2 business days.</p>",
-            "page": "",
-            "open": false
-          }
-        },
-        "returns": {
-          "type": "row",
-          "settings": {
-            "heading": "How do I return an item?",
-            "icon": "return",
-            "content": "<p>Return unworn items within 30 days. Include your order number in the message above and we'll send you a return label.</p>",
-            "page": "",
-            "open": false
-          }
-        },
-        "exchange": {
-          "type": "row",
-          "settings": {
-            "heading": "Can I change or cancel my order?",
-            "icon": "clock",
-            "content": "<p>Contact us within 12 hours of ordering and we'll do our best to update or cancel it before it ships.</p>",
-            "page": "",
-            "open": false
-          }
-        }
-      },
-      "block_order": [
-        "shipping",
-        "returns",
-        "exchange"
-      ],
-      "settings": {
-        "subheading": "",
-        "subheading_letter_spacing": "none",
-        "heading": "Before you write",
-        "heading_tag": "h2",
-        "heading_class": "h3",
-        "description": "",
-        "heading_alignment": "center",
-        "layout": "stacked",
-        "one_at_a_time": true,
-        "row_style": "lines",
-        "row_heading_size": "default",
-        "row_content_size": "medium",
-        "expand_icon": "plus",
-        "show_icons": true,
-        "icon_size": 18,
-        "content_width": 860,
-        "corner_radius": 0,
-        "width": "page",
-        "color_scheme": "",
-        "card_color_scheme": "",
-        "padding_top": 24,
-        "padding_bottom": 48,
-        "mobile_padding_custom": false,
-        "mobile_padding_top": 56,
-        "mobile_padding_bottom": 56,
-        "heading_case": "uppercase"
       }
     }
   },
   "order": [
     "main",
     "page_header_GGWfAN",
-    "contact_form",
-    "faq"
+    "contact_form"
   ]
 }
