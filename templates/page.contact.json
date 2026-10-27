@@ -137,7 +137,14 @@
         "mobile_padding_bottom": 56,
         "button_size": "small",
         "heading_case": "uppercase",
-        "button_case": "uppercase"
+        "button_case": "uppercase",
+        "boxed": true,
+        "info_icon_position": "content",
+        "info_heading_uppercase": true,
+        "info_heading_size": "medium",
+        "info_text_size": "small",
+        "form_heading": "Send your question",
+        "social_heading": "Follow us"
       }
     }
   },

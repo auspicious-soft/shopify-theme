@@ -402,3 +402,157 @@
   color: var(--color-foreground);
   border-radius: var(--contact-radius, 0);
 }
+
+/* ---------- Form look: small uppercase labels, full-width submit ---------- */
+.contact__label {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact__submit {
+  align-self: stretch;
+  width: 100%;
+  letter-spacing: 0.25em;
+}
+
+/* Form heading: inside the form column, lined up with the form. */
+.contact__form-heading {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-heading--family);
+  font-weight: var(--font-heading--weight);
+  line-height: 1.25;
+}
+
+.contact__form-heading--upper {
+  text-transform: uppercase;
+}
+
+.contact__form-heading--small {
+  font-size: 0.95rem;
+}
+
+.contact__form-heading--medium {
+  font-size: 1.15rem;
+}
+
+.contact__form-heading--large {
+  font-size: 1.4rem;
+}
+
+/* Boxed: the details and the form share one tinted box. */
+.contact__layout--boxed {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background-color: color-mix(in srgb, var(--color-foreground) 4%, var(--color-background));
+  border-radius: var(--contact-radius, 0);
+}
+
+.contact__layout--boxed .contact__input {
+  background-color: var(--color-background);
+}
+
+/* ---------- Contact details: typography and icon placement ---------- */
+.contact__details--upper .contact__info-title {
+  text-transform: uppercase;
+}
+
+.contact__info-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading--family);
+}
+
+.contact__details--title-small .contact__info-title {
+  font-size: 0.95rem;
+}
+
+.contact__details--title-medium .contact__info-title {
+  font-size: 1.15rem;
+}
+
+.contact__details--title-large .contact__info-title {
+  font-size: 1.4rem;
+}
+
+.contact__details--text-small .contact__info-text {
+  font-size: 0.75rem;
+}
+
+.contact__details--text-medium .contact__info-text {
+  font-size: 0.875rem;
+}
+
+.contact__details--text-large .contact__info-text {
+  font-size: 1rem;
+}
+
+.contact__info-text p {
+  font-size: inherit;
+}
+
+.contact__info-body {
+  gap: 0.6rem;
+}
+
+/* Icon before the heading / before each line: small, inline. */
+.contact__details--icon-heading .contact__info-icon,
+.contact__details--icon-content .contact__info-icon {
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+}
+
+.contact__details--icon-content .contact__info-icon {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.contact__info-text--lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.contact__info-line {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+}
+
+/* Details list on its own (no icon column): items stack with more air. */
+.contact__details--icon-heading,
+.contact__details--icon-content {
+  gap: 2rem;
+}
+
+/* Social icons */
+.contact__social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact__social-icons .social-icons__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: inherit;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.contact__social-icons .social-icons__link:hover {
+  opacity: 1;
+}
+
+.contact__social-icons svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
