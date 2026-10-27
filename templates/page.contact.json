@@ -96,13 +96,20 @@
             "title": "Working Hours",
             "text": "<p>Monday – Friday, 9am – 6pm<br/>Saturday, 10am – 4pm</p>"
           }
+        },
+        "social_links": {
+          "type": "social",
+          "settings": {
+            "heading": "Follow us"
+          }
         }
       },
       "block_order": [
         "info_8pxkn9",
         "phone",
         "email",
-        "hours"
+        "hours",
+        "social_links"
       ],
       "settings": {
         "subheading": "",
@@ -132,7 +139,6 @@
         "info_heading_size": "medium",
         "info_text_size": "small",
         "info_icon_position": "content",
-        "social_heading": "Follow us",
         "info_style": "plain",
         "info_color_scheme": "scheme-869fd07f-c7fd-47b7-9b47-86d04d72fa7f",
         "info_bar": false,

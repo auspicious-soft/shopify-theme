@@ -4,6 +4,8 @@
   no profile is set.
 
   @param {string} [class] - Extra class for the list
+  @param {object} [links] - A block whose social_<platform>_link settings replace
+    the theme's links (empty ones fall back to Theme settings > Social media)
 
   @example
   {% render 'social-icons', class: 'footer__social' %}
@@ -14,7 +16,7 @@
   assign has_any = false
   for platform in platforms
     assign key = 'social_' | append: platform | append: '_link'
-    if settings[key] != blank
+    if settings[key] != blank or links.settings[key] != blank
       assign has_any = true
       break
     endif
@@ -26,6 +28,7 @@
     {%- for platform in platforms -%}
       {%- assign key = 'social_' | append: platform | append: '_link' -%}
       {%- assign url = settings[key] -%}
+      {%- if links.settings[key] != blank -%}{%- assign url = links.settings[key] -%}{%- endif -%}
       {%- if url != blank -%}
         <li>
           <a href="{{ url }}" class="social-icons__link" target="_blank" rel="noopener">

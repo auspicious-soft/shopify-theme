@@ -364,5 +364,10 @@
     "text": "Add your text here",
     "tile_heading": "Add a tile heading",
     "video_heading": "Add a video heading"
+  },
+  "sections": {
+    "contact_form": {
+      "social_empty": "Add your social links in this block or in Theme settings > Social media."
+    }
   }
 }

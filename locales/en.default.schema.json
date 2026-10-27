@@ -762,8 +762,8 @@
       "icon_content": "Before each line of text",
       "icon_heading": "Before the heading",
       "icon_side": "Beside the whole detail",
-      "social_heading": "Social icons heading",
-      "social_heading_info": "Shows your social links (Theme settings > Social media). Leave empty to hide them"
+      "block_social": "Social links",
+      "social_links_info": "Leave a link empty to use the one from Theme settings > Social media. Remove this block to hide the social icons."
     },
     "featured_product": {
       "name": "Featured product",
