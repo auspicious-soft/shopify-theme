@@ -121,6 +121,7 @@
         "social_links"
       ],
       "settings": {
+        "contact_style": "style2",
         "subheading": "",
         "subheading_letter_spacing": "none",
         "heading": "",
@@ -129,7 +130,7 @@
         "description": "",
         "heading_alignment": "center",
         "form_heading": "Send your question",
-        "show_phone": false,
+        "show_phone": true,
         "extra_field": "none",
         "button_label": "Submit",
         "button_style": "primary",
