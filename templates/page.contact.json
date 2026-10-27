@@ -152,12 +152,12 @@
         "info_color_scheme": "scheme-869fd07f-c7fd-47b7-9b47-86d04d72fa7f",
         "info_bar": false,
         "info_bar_color_scheme": "scheme-869fd07f-c7fd-47b7-9b47-86d04d72fa7f",
-        "padding_top": 32,
+        "padding_top": 24,
         "padding_bottom": 24,
         "mobile_padding_custom": false,
         "mobile_padding_top": 56,
         "mobile_padding_bottom": 56,
-        "button_size": "small",
+        "button_size": "medium",
         "heading_case": "uppercase",
         "button_case": "uppercase"
       }
