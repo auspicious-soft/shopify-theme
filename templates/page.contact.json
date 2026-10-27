@@ -167,7 +167,7 @@
       "name": "t:sections.map.name",
       "settings": {
         "address": "725 5th Ave, New York, NY 10022, USA",
-        "zoom": 15,
+        "zoom": 13,
         "height": 480,
         "mobile_height": 360,
         "corner_radius": 0,
