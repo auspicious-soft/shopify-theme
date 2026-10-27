@@ -100,7 +100,16 @@
         "social_links": {
           "type": "social",
           "settings": {
-            "heading": "Follow us"
+            "heading": "Follow us",
+            "social_instagram_link": "",
+            "social_facebook_link": "",
+            "social_tiktok_link": "",
+            "social_youtube_link": "",
+            "social_twitter_link": "",
+            "social_pinterest_link": "",
+            "social_snapchat_link": "",
+            "social_tumblr_link": "",
+            "social_vimeo_link": ""
           }
         }
       },
@@ -133,7 +142,7 @@
         "form_width": 680,
         "corner_radius": 0,
         "boxed": true,
-        "width": "page",
+        "width": "full",
         "color_scheme": "scheme-1",
         "info_heading_uppercase": true,
         "info_heading_size": "medium",
