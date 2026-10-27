@@ -65,12 +65,12 @@
     "contact_form": {
       "type": "contact-form",
       "blocks": {
-        "email": {
+        "info_8pxkn9": {
           "type": "info",
           "settings": {
-            "icon": "mail",
-            "title": "Email",
-            "text": "<p><a href=\"mailto:hello@yourstore.com\">hello@yourstore.com</a></p>"
+            "icon": "map_pin",
+            "title": "Address",
+            "text": "<p>725 5th Ave, New York, NY 10022, USA</p>"
           }
         },
         "phone": {
@@ -81,37 +81,28 @@
             "text": "<p>+1 (555) 123-4567</p>"
           }
         },
+        "email": {
+          "type": "info",
+          "settings": {
+            "icon": "mail",
+            "title": "Email",
+            "text": "<p><a href=\"mailto:hello@yourstore.com\">hello@yourstore.com</a></p>"
+          }
+        },
         "hours": {
           "type": "info",
           "settings": {
             "icon": "clock",
-            "title": "Opening hours",
-            "text": "<p>Monday – Friday, 9am – 6pm<br>Saturday, 10am – 4pm</p>"
-          }
-        },
-        "address": {
-          "type": "info",
-          "settings": {
-            "icon": "map_pin",
-            "title": "Visit us",
-            "text": "<p>123 Main Street<br>New York, NY 10001</p>"
-          }
-        },
-        "info_8pxkn9": {
-          "type": "info",
-          "settings": {
-            "icon": "map_pin",
-            "title": "Address",
-            "text": "<p>725 5th Ave, New York, NY 10022, USA</p>"
+            "title": "Working Hours",
+            "text": "<p>Monday – Friday, 9am – 6pm<br/>Saturday, 10am – 4pm</p>"
           }
         }
       },
       "block_order": [
-        "email",
+        "info_8pxkn9",
         "phone",
-        "hours",
-        "address",
-        "info_8pxkn9"
+        "email",
+        "hours"
       ],
       "settings": {
         "subheading": "",
@@ -123,7 +114,7 @@
         "heading_alignment": "center",
         "show_phone": false,
         "extra_field": "none",
-        "button_label": "",
+        "button_label": "Submit",
         "button_style": "primary",
         "success_display": "replace",
         "success_heading": "",
