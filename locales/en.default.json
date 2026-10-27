@@ -212,7 +212,13 @@
       "success": "Thanks for contacting us. We'll get back to you as soon as possible.",
       "success_heading": "Message sent",
       "send_another": "Send another message",
-      "error_heading": "Please check the following:"
+      "error_heading": "Please check the following:",
+      "placeholder_name": "Enter your full name",
+      "placeholder_email": "Enter your email address",
+      "placeholder_phone": "Enter your phone number",
+      "placeholder_order_number": "Enter your order number",
+      "placeholder_subject": "Enter a subject",
+      "placeholder_message": "Write your message here"
     }
   },
   "video": {

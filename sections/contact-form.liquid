@@ -72,13 +72,21 @@
   endif
 
   assign extra_label = 'contact.form.order_number' | t
+  assign extra_placeholder = 'contact.form.placeholder_order_number' | t
   if section.settings.extra_field == 'subject'
     assign extra_label = 'contact.form.subject' | t
+    assign extra_placeholder = 'contact.form.placeholder_subject' | t
+  endif
+
+  # Style 2: placeholders in the fields, header + details in the left column.
+  assign style2 = false
+  if section.settings.contact_style == 'style2'
+    assign style2 = true
   endif
 -%}
 
 <div
-  class="contact contact--info-{{ info_position }} contact--align-{{ section.settings.heading_alignment }} contact--details-{{ info_style }}{% if info_style == 'panel' %} contact--info-card{% endif %}{% if info_solid %} contact--details-scheme{% endif %}{% if info_bar %} contact--details-bar{% endif %} color-{{ section.settings.color_scheme.id }}"
+  class="contact{% if style2 %} contact--style2{% endif %} contact--info-{{ info_position }} contact--align-{{ section.settings.heading_alignment }} contact--details-{{ info_style }}{% if info_style == 'panel' %} contact--info-card{% endif %}{% if info_solid %} contact--details-scheme{% endif %}{% if info_bar %} contact--details-bar{% endif %} color-{{ section.settings.color_scheme.id }}"
   style="
     {% render 'section-padding-vars', section: section %}
     --contact-form-width: {{ section.settings.form_width }}px;
@@ -93,6 +101,7 @@
         assign details_class = details_class | append: ' contact__details--upper'
       endif
     -%}
+    {%- capture contact_header -%}
     {%- if s_heading != blank or section.settings.subheading != blank or s_description != blank -%}
       <div class="contact__header">
         {%- if section.settings.subheading != blank -%}
@@ -106,8 +115,11 @@
         {%- endif -%}
       </div>
     {%- endif -%}
+    {%- endcapture -%}
+    {%- unless style2 -%}{{ contact_header }}{%- endunless -%}
 
-    <div class="contact__layout{% if section.settings.boxed %} contact__layout--boxed{% endif %}">
+    <div class="contact__layout{% if section.settings.boxed and style2 == false %} contact__layout--boxed{% endif %}">
+      {%- if style2 -%}{{ contact_header }}{%- endif -%}
       <div class="contact__form-wrap">
         {%- comment -%} The form's own heading, lined up with the form only. {%- endcomment -%}
         {%- if section.settings.form_heading != blank -%}
@@ -160,12 +172,13 @@
                 id="{{ form_id }}-name"
                 name="contact[{{ 'contact.form.name' | t }}]"
                 value="{{ form.name }}"
+                {% if style2 %}placeholder="{{ 'contact.form.placeholder_name' | t }}"{% endif %}
                 autocomplete="name"
               >
             </div>
 
             {%- if section.settings.show_phone -%}
-              <div class="contact__field contact__field--half">
+              <div class="contact__field contact__field--half contact__field--phone">
                 <label class="contact__label" for="{{ form_id }}-phone">{{ 'contact.form.phone' | t }}</label>
                 <input
                   class="contact__input"
@@ -174,6 +187,7 @@
                   name="contact[{{ 'contact.form.phone' | t }}]"
                   value="{{ form.phone }}"
                   autocomplete="tel"
+                  {% if style2 %}placeholder="{{ 'contact.form.placeholder_phone' | t }}"{% endif %}
                   pattern="[0-9\-\+\s\(\)]*"
                 >
               </div>
@@ -190,6 +204,7 @@
                 name="contact[email]"
                 value="{% if form.email != blank %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
                 autocomplete="email"
+                {% if style2 %}placeholder="{{ 'contact.form.placeholder_email' | t }}"{% endif %}
                 autocapitalize="off"
                 spellcheck="false"
                 required
@@ -204,18 +219,19 @@
             </div>
 
             {%- if section.settings.extra_field != 'none' -%}
-              <div class="contact__field">
+              <div class="contact__field contact__field--extra">
                 <label class="contact__label" for="{{ form_id }}-extra">{{ extra_label }}</label>
                 <input
                   class="contact__input"
                   type="text"
                   id="{{ form_id }}-extra"
                   name="contact[{{ extra_label }}]"
+                  {% if style2 %}placeholder="{{ extra_placeholder }}"{% endif %}
                 >
               </div>
             {%- endif -%}
 
-            <div class="contact__field">
+            <div class="contact__field contact__field--message">
               <label class="contact__label" for="{{ form_id }}-body">
                 {{- 'contact.form.message' | t }} <span class="contact__required" aria-hidden="true">*</span>
               </label>
@@ -224,6 +240,7 @@
                 id="{{ form_id }}-body"
                 name="contact[body]"
                 rows="6"
+                {% if style2 %}placeholder="{{ 'contact.form.placeholder_message' | t }}"{% endif %}
                 required
                 aria-required="true"
                 {% if form.errors contains 'body' %}
@@ -269,6 +286,9 @@
     -%}
             {%- liquid
               assign icon_position = section.settings.info_icon_position | default: 'side'
+              if style2
+                assign icon_position = 'side'
+              endif
               assign has_icon = false
               if block.settings.icon != 'none'
                 assign has_icon = true
@@ -323,6 +343,23 @@
     {
       "type": "header",
       "content": "t:labels.content_settings"
+    },
+    {
+      "type": "select",
+      "id": "contact_style",
+      "label": "t:sections.contact_form.contact_style",
+      "info": "t:sections.contact_form.contact_style_info",
+      "default": "style1",
+      "options": [
+        {
+          "value": "style1",
+          "label": "t:sections.contact_form.style1"
+        },
+        {
+          "value": "style2",
+          "label": "t:sections.contact_form.style2"
+        }
+      ]
     },
     {
       "type": "text",

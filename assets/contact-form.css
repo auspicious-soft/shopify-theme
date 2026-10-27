@@ -558,3 +558,126 @@
   width: 1.1rem;
   height: 1.1rem;
 }
+
+/* ---------- Style 2 (Style setting) ----------
+   Left: heading + description at the top, the contact details at the
+   bottom (one line each, icon in a small square, no detail headings).
+   Right: the form in a tinted card, fields stacked with placeholders and
+   a normal-width submit button. Style 1 is untouched. */
+.contact--style2 .contact__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'header'
+    'form'
+    'info';
+  gap: 2rem;
+}
+
+.contact--style2 .contact__header {
+  grid-area: header;
+  max-width: 30rem;
+  margin: 0;
+}
+
+.contact--style2 .contact__form-wrap {
+  grid-area: form;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  background-color: color-mix(in srgb, var(--color-foreground) 4%, var(--color-background));
+  border-radius: var(--contact-radius, 0);
+}
+
+.contact--style2 .contact__info {
+  grid-area: info;
+  align-self: end;
+  gap: 0.85rem;
+  padding: 0;
+  background: none;
+}
+
+@media screen and (min-width: 990px) {
+  .contact--style2 .contact__layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'header form'
+      'info form';
+    column-gap: clamp(3rem, 8vw, 8rem);
+    row-gap: 2.5rem;
+  }
+
+  .contact--style2 .contact__info {
+    order: 0;
+  }
+}
+
+.contact--style2 .contact__description {
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
+}
+
+/* Details: icon in a small tinted square, text on one line, no headings. */
+.contact--style2 .contact__info-item {
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.contact--style2 .contact__info-title {
+  display: none;
+}
+
+.contact--style2 .contact__info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  padding: 0.4rem;
+  border-radius: 4px;
+  background-color: color-mix(in srgb, var(--color-foreground) 6%, var(--color-background));
+}
+
+.contact--style2 .contact__info-text {
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+}
+
+/* Form: fields stacked (name, email, phone, extra, message). */
+.contact--style2 .contact__field--half {
+  flex-basis: 100%;
+}
+
+.contact--style2 .contact__field--phone,
+.contact--style2 .contact__field--extra {
+  order: 1;
+}
+
+.contact--style2 .contact__field--message {
+  order: 2;
+}
+
+.contact--style2 .contact__input {
+  border-color: transparent;
+  background-color: var(--color-background);
+  font-size: 0.8rem;
+}
+
+.contact--style2 .contact__input::placeholder {
+  color: color-mix(in srgb, var(--color-foreground) 45%, transparent);
+}
+
+.contact--style2 .contact__input:focus {
+  border-color: color-mix(in srgb, var(--color-foreground) 35%, transparent);
+}
+
+.contact--style2 .contact__submit {
+  align-self: flex-start;
+  width: auto;
+  letter-spacing: 0.06em;
+}
