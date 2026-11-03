@@ -20,7 +20,6 @@
   assign pickup_location = pickup.location.name | escape
 -%}
 
-<!-- PICKUP-DEBUG variant={{ variant.id }} available={{ variant.available }} requires_shipping={{ variant.requires_shipping }} inventory_management={{ variant.inventory_management }} inventory_quantity={{ variant.inventory_quantity }} country={{ localization.country.iso_code }} locations={{ variant.store_availabilities.size }} pickup_enabled={{ pickups.size }}{% for s in variant.store_availabilities %} [{{ s.location.name }} pickup={{ s.pick_up_enabled }} available={{ s.available }} time={{ s.pick_up_time }}]{% endfor %} -->
 <div id="Pickup-{{ section_id }}" class="pickup" data-product-part>
   {%- if pickups.size > 0 -%}
     <p class="pickup__status">
