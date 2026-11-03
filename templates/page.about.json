@@ -92,7 +92,7 @@
       "settings": {
         "alignment": "center",
         "mobile_alignment": "center",
-        "position": "left",
+        "position": "center",
         "content_width": 1080,
         "block_spacing": 20,
         "width": "page",
