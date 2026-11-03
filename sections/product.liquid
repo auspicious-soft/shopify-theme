@@ -310,7 +310,7 @@
               {{ tabs_markup }}
               {%- assign tabs_rendered = true -%}
             {%- endif -%}
-            {% render 'product-form', product: product, variant: current_variant, form_id: form_id, block: block, section_id: section.id, quantity: inline_quantity %}
+            {% render 'product-form', product: product, variant: current_variant, form_id: form_id, block: block, section_id: section.id, quantity: inline_quantity, show_pickup: true %}
             {%- if tabs_mode and section.settings.tabs_position != 'above' and tabs_rendered == false -%}
               {{ tabs_markup }}
               {%- assign tabs_rendered = true -%}

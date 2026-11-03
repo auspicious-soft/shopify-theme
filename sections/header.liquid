@@ -201,6 +201,7 @@
     {%- if enable_overlay %} header--overlay{% endif -%}
     {%- if swap_transparent_logo %} header--swap-logo{% endif -%}
     {%- if enable_overlay and section.settings.nav_hover_color_transparent != blank %} header--transparent-hover{% endif -%}
+    {%- if section.settings.sticky_text_color != blank %} header--sticky-text{% endif -%}
     {%- if enable_overlay and section.settings.overlay_hover_solid %} header--hover-solid{% endif -%}
   "
   id="Header-{{ section.id }}"
@@ -216,6 +217,9 @@
     --header-nav-hover-color: {{ section.settings.nav_hover_color }};
     {% if watch_scroll %}
       --header-sticky-bg: {{ section.settings.sticky_background_color }};
+      {%- if section.settings.sticky_text_color != blank %}
+      --header-sticky-text: {{ section.settings.sticky_text_color }};
+      {%- endif %}
     {% endif %}
     {% if show_hero %}
       --header-logo-reveal-speed: {{ section.settings.logo_reveal_speed }}ms;
@@ -490,6 +494,12 @@
       "label": "t:labels.sticky_background_color",
       "info": "t:labels.sticky_background_color_info",
       "default": "#ffffff",
+      "visible_if": "{{ section.settings.header_style == 'logo_reveal' or section.settings.sticky_header_type != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "sticky_text_color",
+      "label": "t:labels.sticky_text_color",
       "visible_if": "{{ section.settings.header_style == 'logo_reveal' or section.settings.sticky_header_type != 'none' }}"
     },
     {

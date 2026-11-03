@@ -51,6 +51,7 @@
               name="q"
               value="{{ search.terms }}"
               placeholder="{{ 'search.placeholder' | t }}"
+              aria-label="{{ 'search.placeholder' | t | strip }}"
               autocomplete="off"
               class="predictive-search__input{% if settings.predictive_search_reset_text != blank %} predictive-search__input--custom-reset{% endif %}"
               data-predictive-search-input
@@ -87,7 +88,7 @@
   </predictive-search>
 {% else %}
   <form action="{{ routes.search_url }}" method="get" role="search" class="predictive-search__form predictive-search__form--static">
-    <input type="search" name="q" value="{{ search.terms }}" placeholder="{{ 'search.placeholder' | t }}" class="predictive-search__input">
+    <input type="search" name="q" value="{{ search.terms }}" placeholder="{{ 'search.placeholder' | t }}" aria-label="{{ 'search.placeholder' | t | strip }}" class="predictive-search__input">
     <button type="submit" class="predictive-search__submit">
       {{ 'icon-search.svg' | inline_asset_content }}
       <span class="visually-hidden">{{ 'search.submit' | t }}</span>

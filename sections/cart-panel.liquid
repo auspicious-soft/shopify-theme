@@ -137,7 +137,11 @@
                   <span>{{ 'cart.subtotal' | t }}</span>
                   {% render 'price', price: cart.total_price %}
                 </div>
-                <p class="cart-drawer__taxes">{{ 'cart.taxes_and_shipping' | t }}</p>
+                {%- if cart.taxes_included -%}
+            <p class="cart-drawer__taxes">{{ 'cart.taxes_included_shipping_at_checkout' | t }}</p>
+          {%- else -%}
+            <p class="cart-drawer__taxes">{{ 'cart.taxes_and_shipping' | t }}</p>
+          {%- endif -%}
 
                 <button type="submit" name="checkout" class="button button--primary cart-drawer__checkout">
                   {{- 'cart.checkout' | t -}}

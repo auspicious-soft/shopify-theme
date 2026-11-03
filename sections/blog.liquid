@@ -183,7 +183,7 @@
               {%- endif -%}
               {%- comment -%} The description only shows when the post has no Excerpt. {%- endcomment -%}
               {%- if section.settings.featured_words > 0 and feature.excerpt == blank -%}
-                <p class="blog-feature__text">{{ feature.content | strip_html | truncatewords: section.settings.featured_words }}</p>
+                <p class="blog-feature__text">{{ feature.excerpt_or_content | strip_html | truncatewords: section.settings.featured_words }}</p>
               {%- endif -%}
               <p class="blog-feature__meta">
                 {%- if section.settings.show_date -%}
@@ -222,7 +222,6 @@
               show_date: section.settings.show_date,
               show_author: section.settings.show_author,
               show_excerpt: section.settings.show_excerpt,
-              excerpt_source: section.settings.excerpt_source,
               excerpt_words: section.settings.excerpt_words,
               show_tags: section.settings.show_card_tags,
               show_topic: section.settings.show_topic,
@@ -235,6 +234,7 @@
               card: section.settings.card,
               card_color_scheme: section.settings.card_color_scheme,
               card_background: section.settings.card_background,
+              card_text: section.settings.card_text_color,
               topic_letter_spacing: section.settings.topic_letter_spacing,
               zoom: section.settings.zoom_on_hover,
               eager: true
@@ -264,7 +264,6 @@
                 show_date: section.settings.show_date,
                 show_author: section.settings.show_author,
                 show_excerpt: section.settings.show_excerpt,
-              excerpt_source: section.settings.excerpt_source,
                 excerpt_words: section.settings.excerpt_words,
                 show_tags: section.settings.show_card_tags,
                 show_topic: section.settings.show_topic,
@@ -278,6 +277,7 @@
                 card: section.settings.card,
                 card_color_scheme: section.settings.card_color_scheme,
                 card_background: section.settings.card_background,
+              card_text: section.settings.card_text_color,
                 topic_letter_spacing: section.settings.topic_letter_spacing,
                 zoom: section.settings.zoom_on_hover,
                 eager: eager
@@ -687,6 +687,12 @@
       "visible_if": "{{ section.settings.card }}"
     },
     {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "t:sections.blog.card_text_color",
+      "visible_if": "{{ section.settings.card }}"
+    },
+    {
       "type": "select",
       "id": "card_title_size",
       "label": "t:sections.blog.card_title_size",
@@ -829,24 +835,6 @@
       "id": "show_excerpt",
       "label": "t:sections.blog.show_excerpt",
       "default": true
-    },
-    {
-      "type": "select",
-      "id": "excerpt_source",
-      "label": "t:sections.blog.excerpt_source",
-      "info": "t:sections.blog.excerpt_source_info",
-      "default": "excerpt",
-      "options": [
-        {
-          "value": "excerpt",
-          "label": "t:sections.blog.excerpt_source_excerpt"
-        },
-        {
-          "value": "content",
-          "label": "t:sections.blog.excerpt_source_content"
-        }
-      ],
-      "visible_if": "{{ section.settings.show_excerpt }}"
     },
     {
       "type": "range",

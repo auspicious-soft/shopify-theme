@@ -199,6 +199,9 @@
 }
 
 .cart-line__remove {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   font-size: 0.8125rem;
   color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
   text-decoration: underline;

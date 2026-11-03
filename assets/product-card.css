@@ -467,8 +467,14 @@
   font-size: var(--body-size, 0.9375rem);
 }
 
+.product-card__unit-price {
+  flex-basis: 100%;
+  font-size: 0.8em;
+  color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+}
+
 .product-card__compare {
-  color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
+  color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   font-size: 0.9em;
 }
 

@@ -36,7 +36,9 @@ if (!customElements.get('product-form')) {
         const data = await response.json();
 
         if (!response.ok) {
-          this.errorEl.textContent = data.description || data.message || '';
+          // Gift card recipient errors arrive as an object, one entry per field.
+          const fieldErrors = data.errors && typeof data.errors === 'object' ? Object.values(data.errors).flat().join(' ') : '';
+          this.errorEl.textContent = fieldErrors || data.description || data.message || '';
           this.errorEl.hidden = false;
           return;
         }

@@ -85,8 +85,7 @@ p:empty {
 /** Theme styles below */
 body {
   font-family: var(--font-primary--family);
-  /* Only set when a custom body font is active; otherwise keeps the default weight */
-  font-weight: var(--font-body--weight, normal);
+  font-weight: var(--font-primary--weight, normal);
   background-color: var(--color-background);
   color: var(--color-foreground);
 }

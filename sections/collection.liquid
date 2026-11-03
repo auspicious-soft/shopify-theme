@@ -106,7 +106,7 @@
         {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs', class: 'collection-banner__breadcrumbs', align: 'auto' %}{%- endif -%}
         <{{ heading_tag }} class="{{ heading_class }} collection-banner__title">{{ collection.title | escape }}</{{ heading_tag }}>
         {% if section.settings.show_description and collection.description != blank %}
-          <div class="collection-banner__description">{{ collection.description }}</div>
+          <div class="collection-banner__description rte">{{ collection.description }}</div>
         {% endif %}
       </div>
     </div>

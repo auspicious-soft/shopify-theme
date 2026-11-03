@@ -101,7 +101,6 @@
       {%- for block in section.blocks -%}
     {%- liquid
       assign b_subheading = block.settings.subheading | default: ph_subheading
-      assign b_heading = block.settings.heading | default: pb_heading
       assign b_button_label = block.settings.button_label | default: ph_button_label
     -%}
         {%- liquid

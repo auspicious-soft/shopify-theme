@@ -35,6 +35,15 @@
       </div>
       <div class="cart-item__price">
         {% render 'price', price: item.final_line_price, compare_at_price: item.original_line_price %}
+        {%- if item.unit_price_measurement -%}
+          <p class="cart-item__unit-price">
+            {{- item.unit_price | money }}/
+            {%- if item.unit_price_measurement.reference_value != 1 -%}
+              {{- item.unit_price_measurement.reference_value -}}
+            {%- endif -%}
+            {{- item.unit_price_measurement.reference_unit -}}
+          </p>
+        {%- endif -%}
       </div>
     </div>
 

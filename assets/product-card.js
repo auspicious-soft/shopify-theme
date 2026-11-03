@@ -151,6 +151,12 @@ if (!customElements.get('product-card')) {
         price.innerHTML = variant.compare
           ? `<span class="product-card__amount product-card__amount--sale">${variant.price}</span><s class="product-card__compare">${variant.compare}</s>`
           : `<span class="product-card__amount">${variant.price}</span>`;
+        if (variant.unit) {
+          const unit = document.createElement('span');
+          unit.className = 'product-card__unit-price';
+          unit.textContent = variant.unit;
+          price.append(unit);
+        }
       }
 
       const badge = this.querySelector('[data-card-badge]');

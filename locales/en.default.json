@@ -108,7 +108,8 @@
     "terms_html": "I agree to the <a href=\"{{ url }}\" target=\"_blank\">terms and conditions</a>",
     "terms_plain": "I agree to the terms and conditions",
     "terms_error": "Please agree to the terms and conditions to check out.",
-    "updated": "Your cart has been updated"
+    "updated": "Your cart has been updated",
+    "taxes_included_shipping_at_checkout": "Taxes included. Shipping calculated at checkout."
   },
   "customers": {
     "login": {
@@ -177,7 +178,8 @@
     "copied": "Copied",
     "scan_in_store": "Scan this code in store",
     "start_shopping": "Start shopping",
-    "print": "Print"
+    "print": "Print",
+    "send_on_date": "Scheduled to send on {{ date }}"
   },
   "password": {
     "title": "This shop is private",
@@ -268,7 +270,22 @@
     "placeholder_title": "Product title",
     "clear_history": "Clear",
     "size_guide": "Size guide",
-    "choose_variant": "Choose an option"
+    "choose_variant": "Choose an option",
+    "price_range": "{{ min }} – {{ max }}",
+    "pickup": {
+      "available_at": "Pickup available at {{ location }}",
+      "unavailable_at": "Pickup currently unavailable at {{ location }}",
+      "view_stores": "View store information",
+      "in_stock": "Pickup available",
+      "out_of_stock": "Pickup currently unavailable"
+    },
+    "gift_recipient": {
+      "send_to_someone": "Send as a gift to someone else",
+      "email": "Recipient email",
+      "name": "Recipient name (optional)",
+      "message": "Message (optional)",
+      "send_on": "Send on (optional)"
+    }
   },
   "search": {
     "title": "Search",

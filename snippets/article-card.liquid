@@ -13,8 +13,6 @@
   @param {boolean} [show_date] - Show the publish date (default true)
   @param {boolean} [show_author] - Show the author
   @param {boolean} [show_excerpt] - Show the excerpt (default true)
-  @param {string} [excerpt_source] - 'excerpt' (default): the post's Excerpt in full, else the description;
-    'content': the post's description (content), trimmed to excerpt_words
   @param {number} [excerpt_words] - Words to show when the article has no excerpt (default 30).
     The post's own Excerpt (admin > Blog posts > Excerpt) shows in full, with its formatting.
   @param {boolean} [show_tags] - Show the article's tags
@@ -30,6 +28,7 @@
   @param {boolean} [card] - Show as a card, overriding Theme settings > Blog cards
   @param {color_scheme} [card_color_scheme] - Card color scheme (background and text), used with `card`
   @param {color} [card_background] - Optional card background color, overrides the color scheme's background
+  @param {color} [card_text] - Optional card text color, overrides the color scheme's text
   @param {string} [topic_letter_spacing] - Topic label letter spacing: small, medium or large
   @param {boolean} [zoom] - Zoom the image on hover
   @param {boolean} [eager] - Load the image eagerly (first cards on the page)
@@ -102,17 +101,17 @@
   # The post's Excerpt field shows as written (paragraphs, italics, …);
   # without one, the start of the content is used, trimmed to excerpt_words.
   assign has_excerpt = false
-  if article.excerpt != blank and excerpt_source != 'content'
+  if article.excerpt != blank
     assign has_excerpt = true
-    assign excerpt = article.excerpt
+    assign excerpt = article.excerpt_or_content
   else
-    assign excerpt = article.content | strip_html | truncatewords: excerpt_words
+    assign excerpt = article.excerpt_or_content | strip_html | truncatewords: excerpt_words
   endif
 -%}
 
 <article
   class="article-card article-card--{{ card_style }} article-card--align-{{ settings.blog_card_text_alignment }}{% if featured %} article-card--featured{% endif %}{% if zoom %} article-card--zoom{% endif %}{% unless has_image %} article-card--no-image{% endunless %} color-{{ card_scheme_id }}"
-  style="--card-image-padding: {{ settings.blog_card_image_padding }}px; --card-ratio: {{ ratio }};{% if card and card_background != blank %} --card-background: {{ card_background }};{% endif %}"
+  style="--card-image-padding: {{ settings.blog_card_image_padding }}px; --card-ratio: {{ ratio }};{% if card and card_background != blank %} --card-background: {{ card_background }};{% endif %}{% if card and card_text != blank %} --color-foreground: {{ card_text }};{% endif %}"
   {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
 >
   {%- if has_image -%}

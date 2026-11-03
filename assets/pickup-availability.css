@@ -1,0 +1,52 @@
+/* Pickup availability (snippets/pickup-availability.liquid) */
+.pickup:not(:empty) {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+.pickup__status,
+.pickup__time,
+.pickup__store-name,
+.pickup__store-status {
+  margin: 0;
+}
+
+.pickup__time,
+.pickup__store-status,
+.pickup__store address {
+  font-size: 0.8125rem;
+  font-style: normal;
+  color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+}
+
+.pickup__stores {
+  margin-top: 0.35rem;
+}
+
+.pickup__stores summary {
+  display: inline-block;
+  min-height: 24px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.pickup__stores summary:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.pickup__stores ul {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pickup__store + .pickup__store {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-foreground) 12%, transparent);
+}
+
+.pickup__store-name {
+  font-weight: 600;
+}

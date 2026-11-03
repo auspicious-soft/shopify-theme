@@ -376,3 +376,21 @@ select {
     font-size: 1rem;
   }
 }
+
+/* Rich text (product and collection descriptions, sections): same lists and
+   quotes as blog articles (assets/article.css). */
+.rte ul,
+.rte ol {
+  padding-inline-start: 1.4em;
+}
+
+.rte li + li {
+  margin-top: 0.4em;
+}
+
+.rte blockquote {
+  margin-inline: 0;
+  padding: 0.25em 0 0.25em 1.25em;
+  font-style: italic;
+  border-inline-start: 3px solid var(--color-foreground);
+}

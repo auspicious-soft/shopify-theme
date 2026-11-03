@@ -1,0 +1,76 @@
+{% doc %}
+  Gift card products: lets the customer send the card to someone else, with
+  a name, message and send date. The fields stay disabled until the checkbox
+  is ticked, so a normal purchase doesn't submit them
+  (assets/gift-card-recipient.js).
+
+  @param {object} form - The product form
+  @param {string} section_id - The section id, for unique element ids
+
+  @example
+  {% render 'gift-card-recipient', form: form, section_id: section_id %}
+{% enddoc %}
+
+{{ 'gift-card-recipient.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'gift-card-recipient.js' | asset_url }}" defer></script>
+
+<gift-card-recipient class="gift-recipient">
+  <label class="gift-recipient__toggle" for="GiftRecipient-{{ section_id }}-send">
+    <input
+      type="checkbox"
+      id="GiftRecipient-{{ section_id }}-send"
+      name="properties[__shopify_send_gift_card_to_recipient]"
+      data-recipient-toggle
+    >
+    <span>{{ 'products.gift_recipient.send_to_someone' | t }}</span>
+  </label>
+
+  <div class="gift-recipient__fields" data-recipient-fields hidden>
+    <div class="gift-recipient__field">
+      <label for="GiftRecipient-{{ section_id }}-email">{{ 'products.gift_recipient.email' | t }}</label>
+      <input
+        type="email"
+        id="GiftRecipient-{{ section_id }}-email"
+        name="properties[Recipient email]"
+        value="{{ form.email }}"
+        autocomplete="off"
+        required
+        disabled
+      >
+    </div>
+    <div class="gift-recipient__field">
+      <label for="GiftRecipient-{{ section_id }}-name">{{ 'products.gift_recipient.name' | t }}</label>
+      <input
+        type="text"
+        id="GiftRecipient-{{ section_id }}-name"
+        name="properties[Recipient name]"
+        value="{{ form.name }}"
+        autocomplete="off"
+        disabled
+      >
+    </div>
+    <div class="gift-recipient__field">
+      <label for="GiftRecipient-{{ section_id }}-message">{{ 'products.gift_recipient.message' | t }}</label>
+      <textarea
+        id="GiftRecipient-{{ section_id }}-message"
+        name="properties[Message]"
+        rows="3"
+        maxlength="200"
+        disabled
+      >{{ form.message }}</textarea>
+    </div>
+    <div class="gift-recipient__field">
+      <label for="GiftRecipient-{{ section_id }}-send-on">{{ 'products.gift_recipient.send_on' | t }}</label>
+      <input
+        type="date"
+        id="GiftRecipient-{{ section_id }}-send-on"
+        name="properties[Send on]"
+        value="{{ form.send_on }}"
+        pattern="\d{4}-\d{2}-\d{2}"
+        data-recipient-date
+        disabled
+      >
+    </div>
+    <input type="hidden" name="properties[__shopify_offset]" data-recipient-offset disabled>
+  </div>
+</gift-card-recipient>

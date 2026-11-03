@@ -259,7 +259,11 @@
               <dd>{{ cart.total_price | money }}</dd>
             </div>
           </dl>
-          <p class="cart-summary__taxes">{{ 'cart.taxes_and_shipping' | t }}</p>
+          {%- if cart.taxes_included -%}
+            <p class="cart-summary__taxes">{{ 'cart.taxes_included_shipping_at_checkout' | t }}</p>
+          {%- else -%}
+            <p class="cart-summary__taxes">{{ 'cart.taxes_and_shipping' | t }}</p>
+          {%- endif -%}
 
           {%- if section.settings.show_terms -%}
             <label class="cart-summary__terms">
@@ -296,7 +300,11 @@
           {%- endif -%}
 
           {%- for block in section.blocks -%}
-            {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
+            {%- if block.type == '@app' -%}
+              {% render block %}
+            {%- elsif block.type == 'custom_liquid' -%}
+              <div {{ block.shopify_attributes }}>{{ block.settings.custom_liquid }}</div>
+            {%- endif -%}
           {%- endfor -%}
         </aside>
       </form>
@@ -313,6 +321,17 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "custom_liquid",
+      "name": "t:sections.product.blocks.custom_liquid.name",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "t:sections.product.blocks.custom_liquid.name"
+        }
+      ]
     }
   ],
   "settings": [

@@ -15,6 +15,7 @@
   @param {object} block - The buy buttons block (button_style, show_dynamic_checkout, buy_now_background, buy_now_text)
   @param {string} section_id - The section id, for unique element ids
   @param {string} [quantity] - Quantity selector markup shown on the same line as Add to cart
+  @param {boolean} [show_pickup] - Show pickup availability (the section must re-render it on variant change)
 
   @example
   {% render 'product-form', product: product, variant: current_variant, form_id: form_id, block: block, section_id: section.id %}
@@ -25,6 +26,12 @@
 <product-form class="product-form" data-cart-type="{{ settings.cart_type }}" {{ block.shopify_attributes }}>
   {% form 'product', product, id: form_id, class: 'product-form__form', novalidate: 'novalidate' %}
     <input type="hidden" name="id" value="{{ variant.id }}" data-variant-id-input>
+
+    <div class="product-form__installments">{{ form | payment_terms }}</div>
+
+    {%- if product.gift_card? -%}
+      {% render 'gift-card-recipient', form: form, section_id: section_id %}
+    {%- endif -%}
 
     <div class="product-form__buttons">
       <div class="product-form__row">
@@ -61,5 +68,9 @@
 
     <p class="product-form__error" role="alert" data-product-form-error hidden></p>
   {% endform %}
+
+  {%- if show_pickup -%}
+    {% render 'pickup-availability', variant: variant, section_id: section_id %}
+  {%- endif -%}
 </product-form>
 

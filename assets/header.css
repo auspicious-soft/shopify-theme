@@ -931,3 +931,9 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
     flex-shrink: 0;
   }
 }
+
+/* Header settings > Sticky header text color */
+.header.header--sticky-text.is-scrolled {
+  color: var(--header-sticky-text);
+  --header-text: var(--header-sticky-text);
+}

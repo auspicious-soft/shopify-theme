@@ -51,8 +51,13 @@
   outline: none;
 }
 
+.predictive-search__input:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
 .predictive-search__input::placeholder {
-  color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
+  color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
 }
 
 .predictive-search__submit {
@@ -81,6 +86,8 @@
 /* Close button (popup only): closes via theme-panel's `data-panel-close`
    handling; the cross spins a quarter turn on hover/focus. */
 .predictive-search__close {
+  min-width: 24px;
+  min-height: 24px;
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;

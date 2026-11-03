@@ -219,6 +219,10 @@
         {% endif %}
       </div>
 
+      {%- if section.settings.show_follow_on_shop and shop.features.follow_on_shop? -%}
+        <div class="footer__follow">{{ shop | login_button: action: 'follow' }}</div>
+      {%- endif -%}
+
       {% if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 %}
         <ul class="footer__payment" role="list" aria-label="{{ 'general.payment_methods' | t }}">
           {% for type in shop.enabled_payment_types %}
@@ -339,6 +343,13 @@
       "type": "checkbox",
       "id": "show_policies",
       "label": "t:sections.footer.show_policies",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_follow_on_shop",
+      "label": "t:sections.footer.show_follow_on_shop",
+      "info": "t:sections.footer.show_follow_on_shop_info",
       "default": true
     },
     {

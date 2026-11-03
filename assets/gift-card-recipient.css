@@ -1,0 +1,46 @@
+/* Gift card recipient form (snippets/gift-card-recipient.liquid) */
+.gift-recipient {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.gift-recipient__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 24px;
+  cursor: pointer;
+}
+
+.gift-recipient__fields {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.gift-recipient__fields[hidden] {
+  display: none;
+}
+
+.gift-recipient__field label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.gift-recipient__field input,
+.gift-recipient__field textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 30%, transparent);
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font: inherit;
+}
+
+.gift-recipient__field input:focus-visible,
+.gift-recipient__field textarea:focus-visible,
+.gift-recipient__toggle input:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}

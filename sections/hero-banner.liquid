@@ -73,7 +73,7 @@
   endif
 %}
 
-{%- if section.settings.width == 'page' -%}<div class="page-width">{%- elsif section.settings.width == 'full_padded' -%}<div class="page-width page-width--full">{%- endif -%}
+{%- unless section.settings.width == 'full' -%}<div class="page-width{% if section.settings.width == 'full_padded' %} page-width--full{% endif %}">{%- endunless -%}
 <div
   class="hero-banner{% if is_adapt %} hero-banner--adapt{% endif %}"
   style="

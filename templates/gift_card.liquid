@@ -115,6 +115,10 @@
         </figure>
       {%- endif -%}
 
+      {%- if gift_card.send_on != blank -%}
+        <p class="gift-card__send-on">{{ 'gift_card.send_on_date' | t: date: gift_card.send_on }}</p>
+      {%- endif -%}
+
       {%- if status == 'active' -%}
         <div class="gift-card__redeem">
           <p class="gift-card__redeem-label">{{ 'gift_card.use_at_checkout' | t }}</p>

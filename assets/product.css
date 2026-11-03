@@ -581,7 +581,7 @@
 }
 
 .product__price .price__compare-at {
-  color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
+  color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   font-size: 0.9em;
   opacity: 1;
 }
@@ -884,6 +884,11 @@
 
 .quantity-input__field:focus {
   outline: none;
+}
+
+.quantity-input__field:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
 }
 
 /* ---------- Buy buttons ---------- */
@@ -1361,4 +1366,10 @@
 .product-tabs__panel:focus-visible {
   outline: 1px solid currentColor;
   outline-offset: 4px;
+}
+
+/* Shop Pay Installments banner */
+.product-form__installments {
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
 }

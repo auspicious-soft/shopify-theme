@@ -1,0 +1,103 @@
+{% comment %}
+  "Custom Liquid": a Liquid setting for code, app snippets or embeds that
+  the theme doesn't cover, with the usual width, colors and spacing.
+
+  Styles live in assets/custom-liquid.css.
+{% endcomment %}
+{{ 'custom-liquid.css' | asset_url | stylesheet_tag }}
+
+<div class="custom-liquid color-{{ section.settings.color_scheme.id }}" style="{% render 'section-padding-vars', section: section %}">
+  <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
+    {{ section.settings.custom_liquid }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.custom_liquid.name",
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "t:sections.custom_liquid.name",
+      "info": "t:sections.custom_liquid.info"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:labels.section_width",
+      "options": [
+        {
+          "value": "full",
+          "label": "t:options.section_width.full"
+        },
+        {
+          "value": "page",
+          "label": "t:options.section_width.page"
+        }
+      ],
+      "default": "page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:labels.padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:labels.padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_padding_custom",
+      "label": "t:labels.mobile_padding_custom",
+      "info": "t:labels.mobile_padding_custom_info",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "t:labels.mobile_padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "t:labels.mobile_padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64,
+      "visible_if": "{{ section.settings.mobile_padding_custom }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.custom_liquid.name"
+    }
+  ]
+}
+{% endschema %}

@@ -136,7 +136,7 @@
 }
 
 .contact__input::placeholder {
-  color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
+  color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
 }
 
 .contact__input:hover {
@@ -669,7 +669,7 @@
 }
 
 .contact--style2 .contact__input::placeholder {
-  color: color-mix(in srgb, var(--color-foreground) 45%, transparent);
+  color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
 }
 
 .contact--style2 .contact__input:focus {

@@ -121,6 +121,8 @@
 }
 
 .cart-drawer__close {
+  min-width: 24px;
+  min-height: 24px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -373,6 +375,12 @@
   text-align: end;
 }
 
+.cart-item__unit-price {
+  margin: 0;
+  font-size: 0.8em;
+  color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+}
+
 .cart-item__price .price {
   flex-direction: column;
   align-items: flex-end;
@@ -478,6 +486,9 @@
 }
 
 .cart-item__remove {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   font-size: 0.8rem;
   text-decoration: underline;
   text-underline-offset: 0.25em;

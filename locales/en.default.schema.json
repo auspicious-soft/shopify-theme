@@ -74,7 +74,7 @@
     "button_corner_radius": "Button corner radius",
     "button_settings": "Button",
     "button_style": "Button style",
-    "button_text": "Button text",
+    "button_text": "Button label",
     "button_text_color": "Button text color",
     "button_url": "Button link",
     "content_position_horizontal": "Content horizontal position",
@@ -93,7 +93,7 @@
     "grid_item_width": "Grid item width",
     "hamburger_display": "Hamburger button",
     "hamburger_position": "Hamburger position (desktop)",
-    "hamburger_text": "Hamburger button text",
+    "hamburger_text": "Hamburger button label",
     "header_icons": "Icons",
     "header_options": "Header options",
     "header_style": "Header style",
@@ -142,7 +142,7 @@
     "navigation_settings_info": "Applies to the horizontal desktop menu",
     "open_in_new_tab": "Open link in new tab",
     "overlay_color": "Overlay color",
-    "overlay_on_blog": "Blog & article pages",
+    "overlay_on_blog": "Blog and article pages",
     "overlay_on_collection": "Collection pages",
     "overlay_on_list_collections": "Collection list page",
     "overlay_on_home": "Home page",
@@ -151,7 +151,7 @@
     "overlay_page_templates_info": "Optional. Template names separated by commas, e.g. about, contact. Use page for the default page template. Leave empty for every page template",
     "overlay_on_product": "Product pages",
     "overlay_opacity": "Overlay opacity",
-    "overlay_text_color": "Overlay text & icon color",
+    "overlay_text_color": "Overlay text and icon color",
     "padding": "Padding",
     "padding_bottom": "Padding bottom",
     "padding_top": "Padding top",
@@ -161,7 +161,7 @@
     "separator_style": "Separator style",
     "show_account": "Account icon",
     "account_display": "Account button",
-    "account_text": "Account button text",
+    "account_text": "Account button label",
     "localization_settings": "Country/language selector",
     "localization_settings_info": "Only shown when the store has more than one country or language enabled in Settings > Markets / Languages",
     "localization_selector": "Show selector",
@@ -171,7 +171,7 @@
     "show_search": "Search icon",
     "slide_duration": "Slide duration",
     "slider_direction": "Direction",
-    "slider_settings": "Slider settings",
+    "slider_settings": "Slideshow settings",
     "static_settings": "Static settings",
     "sticky_background_color": "Sticky header background",
     "sticky_background_color_info": "Only applies once the header becomes sticky/scrolled while transparent (see Transparent header below) — a header that was already solid keeps its normal color scheme instead",
@@ -203,7 +203,8 @@
     "nav_hover_color_transparent_info": "Used while the header stays transparent on hover (Standard style with \"Solid background on hover\" off). Leave empty to use the hover color above",
     "overlay_hover_solid": "Solid background on hover",
     "overlay_hover_solid_info": "Standard style: the transparent header turns solid while hovered. Logo reveal always does this",
-    "caption": "Caption"
+    "caption": "Caption",
+    "sticky_text_color": "Sticky header text color"
   },
   "options": {
     "section_width": {
@@ -219,7 +220,7 @@
     },
     "announcement_bar_mode": {
       "marquee": "Horizontal marquee",
-      "slider": "Vertical slider",
+      "slider": "Vertical slideshow",
       "static": "Static"
     },
     "button_style": {
@@ -445,7 +446,7 @@
       "filter_button_size": "Filter button size",
       "filter_button_size_info": "Clear all and View results buttons in the filter drawer",
       "filter_value_style": "Filter value style",
-      "filter_value_style_info": "Colour filters always show as swatches, and Availability as a checkbox list",
+      "filter_value_style_info": "Color filters always show as swatches, and Availability as a checkbox list",
       "filter_value_pills": "Pills",
       "filter_value_checkbox": "Checkbox list"
     },
@@ -521,7 +522,7 @@
           "buy_now_text": "Buy it now text",
           "buy_now_info": "Applies to the plain \"Buy it now\" button. Branded buttons like Shop Pay or PayPal keep their own colors",
           "show_dynamic_checkout": "Show dynamic checkout buttons",
-          "show_dynamic_checkout_info": "Lets customers check out directly with a payment method like Shop Pay or PayPal"
+          "show_dynamic_checkout_info": "Lets customers go straight to checkout with a payment method like Shop Pay or PayPal"
         },
         "description": {
           "name": "Description"
@@ -589,7 +590,7 @@
       "gallery_overlay": "Full screen with details over images",
       "gallery_layout_info": "Full screen: images edge to edge at screen height, with the product details on a translucent panel. Works best with Section width set to Full",
       "gallery_autoplay": "Autoplay images",
-      "gallery_autoplay_info": "Images slide by themselves in slider layouts (and on mobile). Pauses on hover or touch",
+      "gallery_autoplay_info": "Images slide by themselves in slideshow layouts (and on mobile). Pauses on hover or touch",
       "gallery_autoplay_speed": "Change image every",
       "gallery_autoplay_style": "Autoplay style",
       "gallery_autoplay_style_info": "Marquee is only available with the Full screen layout",
@@ -612,7 +613,7 @@
       "products_to_show": "Products to show",
       "layout": "Layout",
       "layout_grid": "Grid",
-      "layout_slider": "Slider"
+      "layout_slider": "Slideshow"
     },
     "related_products": {
       "name": "Related products",
@@ -764,12 +765,12 @@
       "icon_content": "Before each line of text",
       "icon_heading": "Before the heading",
       "icon_side": "Beside the whole detail",
-      "block_social": "Social links",
-      "social_links_info": "Leave a link empty to use the one from Theme settings > Social media. Remove this block to hide the social icons.",
+      "block_social": "Social media icons",
+      "social_links_info": "Leave a link empty to use the one from Theme settings > Social media. Remove this block to hide the social media icons.",
       "contact_style": "Style",
-      "contact_style_info": "Style 2: heading, text and contact details on the left, the form in a card on the right. Settings only used by Style 1 are hidden",
-      "style1": "Style 1",
-      "style2": "Style 2"
+      "contact_style_info": "Split: heading, text and contact details on the left, the form in a card on the right. Settings only used by Classic are hidden",
+      "style1": "Classic",
+      "style2": "Split"
     },
     "featured_product": {
       "name": "Featured product",
@@ -904,7 +905,7 @@
       "number_info": "Used when the section shows numbers. Leave empty to number columns automatically",
       "mobile_column_alignment": "Content alignment on mobile",
       "alignment_same": "Same as desktop",
-      "title_uppercase": "Uppercase title",
+      "title_uppercase": "Uppercase heading",
       "title_size": "Column heading size",
       "text_size": "Column text size",
       "text_size_info": "Small 12px, medium 14px, large 16px"
@@ -976,9 +977,9 @@
       "accessibility_label": "Slideshow description",
       "accessibility_label_info": "For screen readers, e.g. \"New arrivals\"",
       "block_name": "Slide",
-      "button_label": "First button text",
+      "button_label": "First button label",
       "button_link": "First button link",
-      "button_label_2": "Second button text",
+      "button_label_2": "Second button label",
       "button_link_2": "Second button link",
       "full_link": "Make whole slide clickable",
       "full_link_info": "Uses the first button link",
@@ -987,10 +988,10 @@
     },
     "newsletter": {
       "name": "Newsletter signup",
-      "title": "Title",
+      "title": "Heading",
       "subtitle": "Subtitle",
       "description": "Description",
-      "form": "Sign-up form",
+      "form": "Signup form",
       "form_position": "Form position",
       "form_position_info": "On mobile the form always sits below the text",
       "form_right": "Right of the text",
@@ -1038,7 +1039,7 @@
       "block_name": "Image",
       "mobile_layout": "Mobile layout",
       "mobile_stack": "Stacked",
-      "mobile_slider": "Swipe slider",
+      "mobile_slider": "Swipe slideshow",
       "image_ratio": "Image shape",
       "ratio_portrait": "Portrait (4:5)",
       "ratio_tall": "Tall (2:3)",
@@ -1080,7 +1081,7 @@
         },
         "newsletter": {
           "name": "Newsletter",
-          "info": "Sign-ups are added to Customers in your Shopify admin with the \"newsletter\" tag",
+          "info": "Signups are added to Customers in your Shopify admin with the \"newsletter\" tag",
           "button_label_info": "Leave blank to show an arrow only"
         },
         "social": {
@@ -1095,7 +1096,9 @@
       "heading_size": "Heading size",
       "heading_size_info": "Used by every footer heading",
       "heading_size_mobile": "Heading size on mobile",
-      "heading_case": "Heading case"
+      "heading_case": "Heading case",
+      "show_follow_on_shop": "Show Follow on Shop",
+      "show_follow_on_shop_info": "Customers can follow your store in the Shop app. Shop Pay must be turned on."
     },
     "blog": {
       "header_heading": "Heading",
@@ -1146,7 +1149,7 @@
       "featured_story": "Editorial story (text beside image)",
       "featured_image_position": "Featured image position",
       "featured_label": "Featured label",
-      "featured_uppercase": "Uppercase featured title",
+      "featured_uppercase": "Uppercase featured heading",
       "featured_words": "Featured text length (words)",
       "featured_words_info": "The article's excerpt shows as an italic quote; this sets how much of the article text follows it. 0 hides it",
       "show_topic": "Show topic above title",
@@ -1156,11 +1159,8 @@
       "featured_source_tag": "Article with a tag",
       "featured_tag": "Featured tag",
       "featured_tag_info": "The newest article with this tag is featured (falls back to the latest article). The tag is hidden from the filter and card topics",
-      "excerpt_source": "Excerpt source",
-      "excerpt_source_info": "Excerpt: the post's Excerpt field in full (posts without one use the description). Description: the start of the post, trimmed to Excerpt length",
-      "excerpt_source_excerpt": "Excerpt (full)",
-      "excerpt_source_content": "Description (trimmed)",
-      "show_read_more": "Show read more"
+      "show_read_more": "Show read more",
+      "card_text_color": "Card text color"
     },
     "article": {
       "eyebrow_letter_spacing": "Tag letter spacing",
@@ -1320,7 +1320,7 @@
     "password": {
       "background": "Background",
       "image": "Image",
-      "image_info": "Full-screen background. 2400 x 1600 px or larger recommended",
+      "image_info": "Full-screen background. 2400 x 1600px (recommended)",
       "mobile_image": "Mobile image",
       "mobile_image_info": "Optional. Used on screens under 750px (portrait works best)",
       "video": "Video",
@@ -1344,9 +1344,9 @@
       "countdown_date_info": "Format: YYYY-MM-DD HH:MM in your visitors’ local time, e.g. 2026-12-01 09:00",
       "countdown_done": "Text after launch",
       "countdown_done_info": "Shown when the countdown reaches zero",
-      "newsletter": "Email sign-up",
-      "show_newsletter": "Show email sign-up",
-      "show_newsletter_info": "Sign-ups are added to Customers with the tags \"newsletter\" and \"password page\"",
+      "newsletter": "Email signup",
+      "show_newsletter": "Show email signup",
+      "show_newsletter_info": "Signups are added to Customers with the tags \"newsletter\" and \"password page\"",
       "newsletter_heading": "Heading",
       "newsletter_button": "Button label",
       "newsletter_button_info": "Leave empty for \"Notify me\"",
@@ -1373,6 +1373,10 @@
       "show_directions": "Show \"Get directions\" button",
       "button_label": "Button label",
       "card_color_scheme": "Card color scheme"
+    },
+    "custom_liquid": {
+      "name": "Custom Liquid",
+      "info": "Add app snippets or other Liquid code"
     }
   },
   "settings_schema": {
@@ -1430,7 +1434,7 @@
         },
         "favicon": {
           "label": "Favicon",
-          "info": "Displayed at 32 x 32px"
+          "info": "32 x 32px (recommended)"
         }
       }
     },
@@ -1528,38 +1532,6 @@
         },
         "body_line_height_mobile": {
           "label": "Body line height – mobile"
-        },
-        "font_source": {
-          "label": "Font source",
-          "info": "Custom uses your own licensed font files. The font above is used as the fallback",
-          "options__theme": "Font library",
-          "options__custom": "Custom"
-        },
-        "custom_font_regular": {
-          "label": "Regular",
-          "info": "Upload .woff2 files in Content > Files, then paste each file link here. Leave a weight empty if you don't have it"
-        },
-        "custom_font_italic": {
-          "label": "Italic"
-        },
-        "custom_font_light": {
-          "label": "Light"
-        },
-        "custom_font_medium": {
-          "label": "Medium"
-        },
-        "custom_font_semibold": {
-          "label": "Semibold"
-        },
-        "custom_font_bold": {
-          "label": "Bold"
-        },
-        "type_header_custom_weight": {
-          "label": "Heading weight",
-          "info": "Choose a weight you added above"
-        },
-        "type_body_custom_weight": {
-          "label": "Body weight"
         }
       }
     },
@@ -1660,7 +1632,7 @@
         "image_fit_cover": "Fill (crop)",
         "image_fit_contain": "Fit (no crop)",
         "image_background": "Image background",
-        "image_slider": "Show image slider",
+        "image_slider": "Show image slideshow",
         "image_slider_info": "Arrows on hover to browse every product image; swipe on touch screens",
         "info_layout": "Title and price",
         "info_inline": "Same row",
@@ -1955,8 +1927,8 @@
       "menu_item_info": "Title of the top-level menu item to show this in, e.g. All Products",
       "show_image": "Show image",
       "image": "Image",
-      "show_title": "Show title",
-      "title": "Title",
+      "show_title": "Show heading",
+      "title": "Heading",
       "link": "Link",
       "link_info": "Makes the image and title clickable. Leave empty to link to the product",
       "product": "Product",

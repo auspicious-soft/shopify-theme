@@ -49,6 +49,9 @@
           {%- when '@app' -%}
             {% render block %}
 
+          {%- when 'custom_liquid' -%}
+            <div {{ block.shopify_attributes }}>{{ block.settings.custom_liquid }}</div>
+
           {%- when 'caption' -%}
             {%- if b_caption != blank -%}
               <p
@@ -348,6 +351,17 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "custom_liquid",
+      "name": "t:sections.product.blocks.custom_liquid.name",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "t:sections.product.blocks.custom_liquid.name"
+        }
+      ]
     },
     {
       "type": "caption",
