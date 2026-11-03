@@ -66,7 +66,7 @@
           {%- liquid
             assign image = block.settings.image
             assign link = block.settings.link
-            assign alt = block.settings.username | default: image.alt | escape
+            assign alt = block.settings.username | default: image.alt | default: section.settings.heading | default: shop.name | escape
           -%}
           <li class="social-marquee__item" {{ block.shopify_attributes }}>
             {%- if link != blank -%}

@@ -74,10 +74,11 @@
     >
       {% if show_promo_image %}
         <span class="header__mega-promo-image">
+          {%- assign promo_alt = promo_image.alt | default: shop.name -%}
           {{
             promo_image
             | image_url: width: 800
-            | image_tag: loading: 'lazy', widths: '300, 400, 600, 800', sizes: image_sizes, alt: promo_image.alt
+            | image_tag: loading: 'lazy', widths: '300, 400, 600, 800', sizes: image_sizes, alt: promo_alt
           }}
         </span>
       {% endif %}

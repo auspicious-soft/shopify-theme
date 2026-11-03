@@ -77,13 +77,14 @@
             {%- endif -%}
 
             {%- if logo != blank -%}
+              {%- assign logo_alt = alt | default: logo.alt | default: shop.name -%}
               {{
                 logo
                 | image_url: width: logo_width
                 | image_tag:
                   class: 'logo-marquee__image',
                   loading: 'lazy',
-                  alt: alt
+                  alt: logo_alt
               }}
             {%- elsif block.settings.alt != blank -%}
               <span class="logo-marquee__text">{{ block.settings.alt | escape }}</span>

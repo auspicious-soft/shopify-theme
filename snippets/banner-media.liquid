@@ -39,6 +39,8 @@
 
 {%- liquid
   assign image_sizes = sizes | default: '100vw'
+  # image_tag leaves out the alt attribute when it's blank.
+  assign alt = alt | default: image.alt | default: shop.name
   assign loop_video = true
   if loop == false
     assign loop_video = false

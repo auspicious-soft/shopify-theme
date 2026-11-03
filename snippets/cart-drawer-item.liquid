@@ -18,7 +18,7 @@
       {{
         item.image
         | image_url: width: 300
-        | image_tag: loading: 'lazy', widths: '150, 225, 300', sizes: '6rem', alt: item.image.alt
+        | image_tag: loading: 'lazy', widths: '150, 225, 300', sizes: '6rem', alt: item.product.title
       }}
     {%- else -%}
       {{ 'product-1' | placeholder_svg_tag: 'cart-item__placeholder' }}

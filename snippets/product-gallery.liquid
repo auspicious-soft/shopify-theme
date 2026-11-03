@@ -119,8 +119,8 @@
             data-media-id="{{ media.id }}"
             data-media-type="{{ media.media_type }}"
             style="--slide-ratio: {{ media_ratio }};"
-            {% unless forloop.index0 == featured_index %}aria-hidden="true"{% endunless %}
           >
+            {%- assign media_alt = media.alt | default: product.title -%}
             {% case media.media_type %}
               {% when 'image' %}
                 {%- capture image_markup -%}
@@ -132,7 +132,7 @@
                       loading: loading,
                       widths: '400, 600, 800, 1000, 1300, 1600, 2000, 2500, 3000',
                       sizes: slide_sizes,
-                      alt: media.alt
+                      alt: media_alt
                   }}
                 {%- endcapture -%}
                 {% if zoom %}
@@ -230,11 +230,12 @@
       <ul class="product-lightbox__track" role="list" data-lightbox-track>
         {% for media in product.media %}
           {% if media.media_type == 'image' %}
+            {%- assign media_alt = media.alt | default: product.title -%}
             <li class="product-lightbox__slide" data-media-id="{{ media.id }}">
               {{
                 media
                 | image_url: width: 3000
-                | image_tag: loading: 'lazy', widths: '1000, 1500, 2000, 3000', sizes: '100vw', alt: media.alt
+                | image_tag: loading: 'lazy', widths: '1000, 1500, 2000, 3000', sizes: '100vw', alt: media_alt
               }}
             </li>
           {% endif %}

@@ -25,6 +25,12 @@ if (!customElements.get('product-card')) {
       this.addEventListener('submit', this.onSubmit);
       this.slides?.addEventListener('scroll', this.updateArrows, { passive: true });
 
+      this.loadSlides = this.loadSlides.bind(this);
+      this.addEventListener('pointerenter', this.loadSlides, { once: true });
+      this.addEventListener('pointerdown', this.loadSlides, { once: true });
+      this.addEventListener('focusin', this.loadSlides, { once: true });
+      this.slides?.addEventListener('scroll', this.loadSlides, { once: true, passive: true });
+
       this.updateArrows();
       this.updateAvailability();
 
@@ -38,6 +44,11 @@ if (!customElements.get('product-card')) {
       this.removeEventListener('click', this.onClick);
       this.removeEventListener('submit', this.onSubmit);
       this.slides?.removeEventListener('scroll', this.updateArrows);
+    }
+
+    /** Puts the extra slides' images in the page (only the first loads up front). */
+    loadSlides() {
+      this.querySelectorAll('template[data-card-lazy]').forEach((template) => template.replaceWith(template.content));
     }
 
 
@@ -231,6 +242,7 @@ if (!customElements.get('product-card')) {
     }
 
     showSlide(index, behavior = 'smooth') {
+      this.loadSlides();
       const slide = this.slides?.children[index];
       if (!slide) return;
       this.slides.scrollTo({ left: slide.offsetLeft, behavior });

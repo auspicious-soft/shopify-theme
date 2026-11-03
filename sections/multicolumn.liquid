@@ -123,6 +123,7 @@
             {%- comment -%} No image or number. {%- endcomment -%}
           {%- elsif block.settings.image != blank -%}
             <div class="multicolumn__media{% if ratio == '' %} multicolumn__media--adapt{% endif %}">
+              {%- assign image_alt = block.settings.image.alt | default: block.settings.heading | default: shop.name -%}
               {{
                 block.settings.image
                 | image_url: width: 1200
@@ -131,7 +132,7 @@
                   loading: 'lazy',
                   widths: '165, 275, 360, 535, 750, 1000, 1200',
                   sizes: image_sizes,
-                  alt: block.settings.image.alt
+                  alt: image_alt
               }}
             </div>
           {%- elsif section.settings.show_placeholders -%}

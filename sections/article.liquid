@@ -24,6 +24,7 @@
   assign heading_class = section.settings.heading_class | default: heading_tag
 
   assign word_count = article.content | strip_html | split: ' ' | size
+  assign article_image_alt = article.image.alt | default: article.title
   assign reading_minutes = word_count | plus: 199 | divided_by: 200 | at_least: 1
 
   assign share_url = request.origin | append: article.url
@@ -71,7 +72,7 @@
         sizes: '(min-width: 1200px) 1100px, 100vw',
         loading: 'eager',
         fetchpriority: 'high',
-        alt: article.image.alt
+        alt: article_image_alt
     }}
   </div>
 {%- endcapture -%}
@@ -95,7 +96,7 @@
           sizes: '100vw',
           loading: 'eager',
           fetchpriority: 'high',
-          alt: article.image.alt
+          alt: article_image_alt
       }}
       <div class="article__banner-overlay" aria-hidden="true"></div>
       <div class="page-width article__banner-inner">

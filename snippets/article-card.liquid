@@ -100,6 +100,7 @@
 
   # The post's Excerpt field shows as written (paragraphs, italics, …);
   # without one, the start of the content is used, trimmed to excerpt_words.
+  assign image_alt = article.image.alt | default: article.title
   assign has_excerpt = false
   if article.excerpt != blank
     assign has_excerpt = true
@@ -124,7 +125,7 @@
           widths: '360, 540, 720, 960, 1200, 1600',
           sizes: image_sizes,
           loading: loading,
-          alt: article.image.alt
+          alt: image_alt
       }}
     </a>
   {%- endif -%}

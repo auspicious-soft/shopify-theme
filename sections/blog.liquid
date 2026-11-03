@@ -160,6 +160,7 @@
         {%- if featured_first and section.settings.featured_style == 'story' -%}
           {%- liquid
             assign feature_words = feature.content | strip_html | split: ' ' | size
+            assign feature_image_alt = feature.image.alt | default: feature.title
             assign feature_minutes = feature_words | plus: 199 | divided_by: 200 | at_least: 1
             # With the blog title hidden, the story title is the page's main heading.
             assign feature_tag = 'h2'
@@ -205,7 +206,7 @@
                     sizes: '(min-width: 750px) 60vw, 100vw',
                     loading: 'eager',
                     fetchpriority: 'high',
-                    alt: feature.image.alt
+                    alt: feature_image_alt
                 }}
               </a>
             {%- endif -%}

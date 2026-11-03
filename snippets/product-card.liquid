@@ -148,6 +148,8 @@
             tabindex="-1" aria-hidden="true"
           {% endunless %}
         >
+          {%- comment -%} Extra slides load on hover, focus or swipe (assets/product-card.js). {%- endcomment -%}
+          {%- unless forloop.first -%}<template data-card-lazy>{%- endunless -%}
           {{
             media.preview_image
             | image_url: width: 1000
@@ -158,6 +160,7 @@
               sizes: image_sizes,
               alt: slide_alt
           }}
+          {%- unless forloop.first -%}</template>{%- endunless -%}
         </a>
       {%- else -%}
         <a href="{{ product.url }}" class="product-card__slide" draggable="false">

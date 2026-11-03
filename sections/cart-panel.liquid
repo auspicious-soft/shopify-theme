@@ -80,7 +80,7 @@
                                 {{
                                   product.featured_image
                                   | image_url: width: 400
-                                  | image_tag: loading: 'lazy', widths: '200, 300, 400', sizes: '(min-width: 30rem) 12rem, 45vw', alt: product.featured_image.alt
+                                  | image_tag: loading: 'lazy', widths: '200, 300, 400', sizes: '(min-width: 30rem) 12rem, 45vw', alt: product.title
                                 }}
                               {%- else -%}
                                 {{ 'product-1' | placeholder_svg_tag }}

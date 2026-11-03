@@ -16,8 +16,7 @@ if (!customElements.get('product-gallery')) {
 
       const start = Number(this.dataset.startIndex || 0);
       this.activeIndex = start;
-      // Sync slides/thumbs/counter once layout is known (grid and stacked
-      // layouts show every slide on desktop, so none should stay aria-hidden).
+      // Sync slides/thumbs/counter once layout is known.
       requestAnimationFrame(() => (start > 0 ? this.goTo(start, 'instant') : this.setActive(0)));
 
       if (this.querySelector('model-viewer')) this.loadModelViewer();
@@ -26,6 +25,8 @@ if (!customElements.get('product-gallery')) {
 
     disconnectedCallback() {
       this.stopAutoplay();
+      this.marqueeResize?.disconnect();
+      this.marqueeView?.disconnect();
       document.removeEventListener('visibilitychange', this.onVisibility);
     }
 
@@ -142,20 +143,33 @@ if (!customElements.get('product-gallery')) {
       this.onVisibility = () => (document.hidden ? this.stopAutoplay() : this.runMarquee());
       document.addEventListener('visibilitychange', this.onVisibility);
       this.position = Math.abs(this.track.scrollLeft);
-      this.runMarquee();
+
+      this.measureMarquee = () => {
+        const firstClone = this.track.querySelector('[data-gallery-clone]');
+        this.marqueeLoop = firstClone ? firstClone.offsetLeft - this.slides[0].offsetLeft : 0;
+        this.marqueeCanRun = this.isSlider;
+      };
+      this.measureMarquee();
+      this.marqueeResize = new ResizeObserver(this.measureMarquee);
+      this.marqueeResize.observe(this.track);
+      this.marqueeView = new IntersectionObserver(([entry]) => {
+        this.marqueeInView = entry.isIntersecting;
+        if (this.marqueeInView) this.runMarquee();
+        else this.stopAutoplay();
+      });
+      this.marqueeView.observe(this);
     }
 
     runMarquee() {
       cancelAnimationFrame(this.marqueeFrame);
+      if (!this.marqueeInView || document.hidden) return;
       let last = performance.now();
       const step = (now) => {
         const delta = Math.min(now - last, 64);
         last = now;
-        const firstClone = this.track.querySelector('[data-gallery-clone]');
-        if (firstClone && !this.paused && !this.lightbox?.open && this.isSlider) {
-          const loop = firstClone.offsetLeft - this.slides[0].offsetLeft;
+        if (this.marqueeLoop && this.marqueeCanRun && !this.paused && !this.lightbox?.open) {
           this.position += (this.speed * delta) / 1000;
-          if (this.position >= loop) this.position -= loop;
+          if (this.position >= this.marqueeLoop) this.position -= this.marqueeLoop;
           this.track.scrollLeft = document.dir === 'rtl' ? -this.position : this.position;
         }
         this.marqueeFrame = requestAnimationFrame(step);
@@ -199,6 +213,12 @@ if (!customElements.get('product-gallery')) {
 
     onScroll() {
       if (this.scrollFrame) return;
+      // The marquee scrolls every frame: the active slide only needs an occasional sync.
+      if (this.marqueeFrame && !this.paused) {
+        const now = performance.now();
+        if (now - (this.lastMarqueeSync || 0) < 250) return;
+        this.lastMarqueeSync = now;
+      }
       this.scrollFrame = requestAnimationFrame(() => {
         this.scrollFrame = null;
         // The slide whose start is nearest the scroll position (slides can
@@ -233,9 +253,6 @@ if (!customElements.get('product-gallery')) {
       this.slides.forEach((slide, i) => {
         const active = i === index;
         slide.classList.toggle('is-active', active);
-        if (active) slide.removeAttribute('aria-hidden');
-        else if (this.isSlider) slide.setAttribute('aria-hidden', 'true');
-        else slide.removeAttribute('aria-hidden');
         if (!active) this.pauseMedia(slide);
       });
 

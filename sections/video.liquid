@@ -140,6 +140,7 @@
 
           <div class="video-section__cover">
             {%- if cover != blank -%}
+              {%- assign cover_alt = cover.alt | default: section.settings.heading | default: shop.name -%}
               {{
                 cover
                 | image_url: width: 2400
@@ -148,7 +149,7 @@
                   loading: 'lazy',
                   widths: '750, 1100, 1500, 1800, 2400',
                   sizes: '100vw',
-                  alt: cover.alt
+                  alt: cover_alt
               }}
             {%- elsif video == blank and video_url.type == 'youtube' -%}
               {%- comment -%}

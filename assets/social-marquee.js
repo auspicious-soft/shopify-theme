@@ -40,13 +40,28 @@ if (!customElements.get('social-marquee')) {
       this.resizeObserver.observe(this.group);
       this.fill();
 
+      this.viewObserver = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) this.start();
+        else this.stop();
+      });
+      this.viewObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+      this.stop();
+      this.resizeObserver?.disconnect();
+      this.viewObserver?.disconnect();
+    }
+
+    start() {
+      if (this.frame) return;
       this.lastTime = null;
       this.frame = requestAnimationFrame(this.tick);
     }
 
-    disconnectedCallback() {
+    stop() {
       cancelAnimationFrame(this.frame);
-      this.resizeObserver?.disconnect();
+      this.frame = null;
     }
 
     /** Clone the image group until the strip is wide enough to loop without gaps. */
