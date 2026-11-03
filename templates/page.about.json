@@ -110,6 +110,15 @@
     "image_with_text_7kC9T4": {
       "type": "image-with-text",
       "blocks": {
+        "caption_k7nm44": {
+          "type": "caption",
+          "settings": {
+            "caption": "Brand story",
+            "style": "uppercase",
+            "size": "small",
+            "letter_spacing": "large"
+          }
+        },
         "heading_e9Mfin": {
           "type": "heading",
           "settings": {
@@ -128,13 +137,14 @@
         }
       },
       "block_order": [
+        "caption_k7nm44",
         "heading_e9Mfin",
         "text_G96ND8"
       ],
       "name": "t:sections.image_with_text.name",
       "settings": {
         "media_type": "image",
-        "image": "shopify://shop_images/Hero_Image_2.png",
+        "image": "shopify://shop_images/Founders_Portrait_7b62ae28-5964-4269-b9b7-a545debf5689.png",
         "video_url": "",
         "image_ratio": "adapt",
         "corner_radius": 0,
