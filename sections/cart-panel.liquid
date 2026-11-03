@@ -53,7 +53,9 @@
               </button>
             </div>
 
-            {% render 'cart-free-shipping' %}
+            {%- if cart.item_count > 0 -%}
+              {% render 'cart-free-shipping' %}
+            {%- endif -%}
 
             {% if cart.item_count == 0 %}
               <div class="cart-drawer__body cart-drawer__body--empty">
