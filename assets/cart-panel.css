@@ -630,7 +630,16 @@
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  padding-block: 3rem 2rem;
+  padding-block: 2rem;
+}
+
+/* Centered in the drawer. Auto margins, so a tall list still scrolls from its top. */
+.cart-drawer__body--empty > :first-child {
+  margin-block-start: auto;
+}
+
+.cart-drawer__body--empty > :last-child {
+  margin-block-end: auto;
 }
 
 .cart-drawer__empty {
