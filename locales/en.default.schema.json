@@ -655,7 +655,8 @@
       "block_name": "Image",
       "image": "Image",
       "username": "Username",
-      "username_info": "Optional, shown over the top of the image"
+      "username_info": "Optional, shown over the top of the image",
+      "caption_info": "Short text above the heading, e.g. #yourbrand"
     },
     "featured_collection": {
       "name": "Featured products",

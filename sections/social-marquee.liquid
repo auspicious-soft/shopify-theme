@@ -45,11 +45,16 @@
     --social-marquee-ratio: {{ section.settings.aspect_ratio }};
   "
 >
-  {%- if s_heading != blank -%}
+  {%- if s_heading != blank or section.settings.caption != blank -%}
     <div class="page-width{% if section.settings.heading_width == 'full' %} page-width--full{% endif %} social-marquee__header social-marquee__header--{{ section.settings.heading_alignment }}">
       {%- assign heading_tag = section.settings.heading_tag | default: 'h2' -%}
       {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
-      <{{ heading_tag }} class="{{ heading_class }} social-marquee__heading">{{ s_heading | escape }}</{{ heading_tag }}>
+      {%- if section.settings.caption != blank -%}
+        <p class="social-marquee__caption{% if section.settings.caption_letter_spacing != blank and section.settings.caption_letter_spacing != 'none' %} letter-spacing--{{ section.settings.caption_letter_spacing }}{% endif %}">{{ section.settings.caption | escape }}</p>
+      {%- endif -%}
+      {%- if s_heading != blank -%}
+        <{{ heading_tag }} class="{{ heading_class }} social-marquee__heading">{{ s_heading | escape }}</{{ heading_tag }}>
+      {%- endif -%}
     </div>
   {%- endif -%}
 
@@ -135,6 +140,37 @@
     {
       "type": "paragraph",
       "content": "t:sections.social_marquee.info"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "t:labels.caption",
+      "info": "t:sections.social_marquee.caption_info"
+    },
+    {
+      "type": "select",
+      "id": "caption_letter_spacing",
+      "label": "t:labels.letter_spacing",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.letter_spacing.none"
+        },
+        {
+          "value": "small",
+          "label": "t:options.letter_spacing.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.letter_spacing.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.letter_spacing.large"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.caption != blank }}"
     },
     {
       "type": "text",

@@ -14,6 +14,13 @@
   text-align: center;
 }
 
+.social-marquee__caption {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: color-mix(in srgb, currentColor 70%, transparent);
+}
+
 .social-marquee__heading {
   margin: 0;
   text-transform: uppercase;
