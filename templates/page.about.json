@@ -54,7 +54,7 @@
         "width": "page",
         "color_scheme": "",
         "padding_top": 48,
-        "padding_bottom": 24,
+        "padding_bottom": 0,
         "mobile_padding_custom": false,
         "mobile_padding_top": 40,
         "mobile_padding_bottom": 64,
