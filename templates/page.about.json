@@ -301,7 +301,7 @@
         "heading_class": "h2",
         "heading_alignment": "center",
         "heading_width": "page",
-        "speed": 40,
+        "speed": 110,
         "direction": "left",
         "items_desktop": 4,
         "items_mobile": 2,
