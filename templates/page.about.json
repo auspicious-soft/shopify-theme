@@ -122,10 +122,10 @@
         "heading_e9Mfin": {
           "type": "heading",
           "settings": {
-            "heading": "<em>\"A garment should not merely occupy space in your wardrobe; it should bridge daily warmth with an elevated, sculptural presence.\"</em>",
+            "heading": "Thoughtfully made. Effortlessly worn.",
             "heading_tag": "h2",
-            "heading_class": "h6",
-            "uppercase": false
+            "heading_class": "h2",
+            "uppercase": true
           }
         },
         "text_G96ND8": {
