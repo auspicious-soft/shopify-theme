@@ -293,6 +293,8 @@
       ],
       "name": "t:sections.social_marquee.name",
       "settings": {
+        "caption": "THE ART OF EVERYDAY DRESSING",
+        "caption_letter_spacing": "large",
         "heading": "A wardrobe that feels like you.",
         "heading_tag": "h2",
         "heading_class": "h2",
