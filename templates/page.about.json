@@ -177,7 +177,7 @@
         "caption_a4QLtY": {
           "type": "caption",
           "settings": {
-            "caption": "THE ART OF BIELLESE WEAVING",
+            "caption": "A note from the founder",
             "style": "uppercase",
             "size": "medium",
             "letter_spacing": "large"
@@ -186,7 +186,7 @@
         "heading_VrtqxL": {
           "type": "heading",
           "settings": {
-            "heading": "Honoring Untreated Raw Cashmere",
+            "heading": "THE VISION BEHIND VERA",
             "heading_tag": "h2",
             "heading_class": "h3",
             "uppercase": true
@@ -195,8 +195,8 @@
         "text_47kki8": {
           "type": "text",
           "settings": {
-            "text": "<p>Biella, nestled at the foot of the Italian Alps, is renowned for its crystalline glacial waters—essential for washing raw wool without damaging its organic protective scales. Our partner mill has operated in this valley for over a century, passing down local secrets of slow tensioning.<br/><br/><strong>No Harsh Chemical Treatments<br/></strong>Our raw virgin cashmere is never exposed to acid stripping or aggressive bleaches, preserving the fibers' authentic loft and softness.<br/><br/><strong>Kyoto Slub Silk Lining<br/></strong>Each coat is lined with raw slub silk sourced from heritage weavers in Kyoto, offering a organic tactile friction that adapts beautifully to skin temperature.</p>",
-            "size": "medium"
+            "text": "<p><em><strong>“Creating a wardrobe that feels timeless, personal, and effortlessly yours.”</strong></em></p><p>Vera Studio began with a simple belief: what we wear should feel as good as it looks. Inspired by understated elegance and the beauty of everyday essentials, our vision is to bring together thoughtful design, considered details, and pieces you'll reach for season after season.<br/><br/>For us, style isn't about following every trend. It's about discovering what feels right, choosing with intention, and finding confidence in the simplicity of less.</p>",
+            "size": "small"
           }
         }
       },
