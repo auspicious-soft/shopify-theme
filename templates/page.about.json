@@ -293,10 +293,10 @@
       ],
       "name": "t:sections.social_marquee.name",
       "settings": {
-        "heading": "",
+        "heading": "A wardrobe that feels like you.",
         "heading_tag": "h2",
         "heading_class": "h2",
-        "heading_alignment": "left",
+        "heading_alignment": "center",
         "heading_width": "page",
         "speed": 40,
         "direction": "left",
