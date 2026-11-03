@@ -656,7 +656,8 @@
       "image": "Image",
       "username": "Username",
       "username_info": "Optional, shown over the top of the image",
-      "caption_info": "Short text above the heading, e.g. #yourbrand"
+      "caption_info": "Short text above the heading, e.g. #yourbrand",
+      "caption_size": "Caption size"
     },
     "featured_collection": {
       "name": "Featured products",

@@ -16,9 +16,20 @@
 
 .social-marquee__caption {
   margin: 0 0 0.5rem;
-  font-size: 0.75rem;
   text-transform: uppercase;
   color: color-mix(in srgb, currentColor 70%, transparent);
+}
+
+.social-marquee__caption--small {
+  font-size: 0.75rem;
+}
+
+.social-marquee__caption--medium {
+  font-size: 0.875rem;
+}
+
+.social-marquee__caption--large {
+  font-size: 1.0625rem;
 }
 
 .social-marquee__heading {

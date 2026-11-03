@@ -50,7 +50,7 @@
       {%- assign heading_tag = section.settings.heading_tag | default: 'h2' -%}
       {%- assign heading_class = section.settings.heading_class | default: heading_tag -%}
       {%- if section.settings.caption != blank -%}
-        <p class="social-marquee__caption{% if section.settings.caption_letter_spacing != blank and section.settings.caption_letter_spacing != 'none' %} letter-spacing--{{ section.settings.caption_letter_spacing }}{% endif %}">{{ section.settings.caption | escape }}</p>
+        <p class="social-marquee__caption social-marquee__caption--{{ section.settings.caption_size | default: 'small' }}{% if section.settings.caption_letter_spacing != blank and section.settings.caption_letter_spacing != 'none' %} letter-spacing--{{ section.settings.caption_letter_spacing }}{% endif %}">{{ section.settings.caption | escape }}</p>
       {%- endif -%}
       {%- if s_heading != blank -%}
         <{{ heading_tag }} class="{{ heading_class }} social-marquee__heading">{{ s_heading | escape }}</{{ heading_tag }}>
@@ -146,6 +146,27 @@
       "id": "caption",
       "label": "t:labels.caption",
       "info": "t:sections.social_marquee.caption_info"
+    },
+    {
+      "type": "select",
+      "id": "caption_size",
+      "label": "t:sections.social_marquee.caption_size",
+      "default": "small",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:options.size.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.size.large"
+        }
+      ],
+      "visible_if": "{{ section.settings.caption != blank }}"
     },
     {
       "type": "select",
