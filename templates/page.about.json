@@ -68,7 +68,7 @@
         "caption_yhcEXj": {
           "type": "caption",
           "settings": {
-            "caption": "OUR PHILOSOPHY & GENESIS",
+            "caption": "OUR PHILOSOPHY",
             "style": "uppercase",
             "size": "medium",
             "letter_spacing": "large"
@@ -77,9 +77,9 @@
         "heading_PThJEq": {
           "type": "heading",
           "settings": {
-            "heading": "Weaving Slow Stories: Our Mill Legacy&nbsp;",
+            "heading": "We believe the best style isn't about having more, but choosing better. Pieces made to be lived in, loved, and worn for years to come.&nbsp;",
             "heading_tag": "h1",
-            "heading_class": "h2",
+            "heading_class": "h3",
             "uppercase": true
           }
         }
@@ -90,8 +90,8 @@
       ],
       "name": "t:sections.rich_text.name",
       "settings": {
-        "alignment": "left",
-        "mobile_alignment": "left",
+        "alignment": "center",
+        "mobile_alignment": "center",
         "position": "left",
         "content_width": 1080,
         "block_spacing": 20,
