@@ -234,6 +234,90 @@
         "heading_case": "uppercase",
         "button_case": "uppercase"
       }
+    },
+    "social_marquee_qeVCBw": {
+      "type": "social-marquee",
+      "blocks": {
+        "image_3aenr9": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "new_tab": false,
+            "username": ""
+          }
+        },
+        "image_y93YnN": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "new_tab": false,
+            "username": ""
+          }
+        },
+        "image_7F7rNk": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "new_tab": false,
+            "username": ""
+          }
+        },
+        "image_H3a9PU": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "new_tab": false,
+            "username": ""
+          }
+        },
+        "image_xkdx7p": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "new_tab": false,
+            "username": ""
+          }
+        },
+        "image_wK3WwP": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "new_tab": false,
+            "username": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_3aenr9",
+        "image_y93YnN",
+        "image_7F7rNk",
+        "image_H3a9PU",
+        "image_xkdx7p",
+        "image_wK3WwP"
+      ],
+      "name": "t:sections.social_marquee.name",
+      "settings": {
+        "heading": "",
+        "heading_tag": "h2",
+        "heading_class": "h2",
+        "heading_alignment": "left",
+        "heading_width": "page",
+        "speed": 40,
+        "direction": "left",
+        "items_desktop": 5,
+        "items_mobile": 2,
+        "aspect_ratio": "9 / 16",
+        "gap": 16,
+        "corner_radius": 16,
+        "color_scheme": "",
+        "width": "full",
+        "padding_top": 32,
+        "padding_bottom": 48,
+        "mobile_padding_custom": false,
+        "mobile_padding_top": 32,
+        "mobile_padding_bottom": 48,
+        "heading_case": "uppercase"
+      }
     }
   },
   "order": [
@@ -241,6 +325,7 @@
     "page_header_F4kJbU",
     "rich_text_B3RJFD",
     "image_with_text_7kC9T4",
-    "image_with_text_aXk4fR"
+    "image_with_text_aXk4fR",
+    "social_marquee_qeVCBw"
   ]
 }
