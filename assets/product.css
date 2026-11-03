@@ -1131,8 +1131,9 @@
     scroll-padding-inline: 0;
   }
 
+  /* Grows only when the images don't fill the row (one image): no gap beside the panel. */
   .product--gallery-overlay .product-gallery__slide {
-    flex: 0 0 42vw;
+    flex: 1 0 42vw;
     height: 100%;
   }
 
