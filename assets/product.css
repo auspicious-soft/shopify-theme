@@ -1369,8 +1369,7 @@
   outline-offset: 4px;
 }
 
-/* Shop Pay Installments banner */
-.product-form__installments {
-  margin-bottom: 0.75rem;
+/* Shop Pay Installments banner (snippets/product-installments.liquid) */
+.product__installments {
   font-size: 0.85rem;
 }

@@ -236,6 +236,7 @@
                   </p>
                 {% endif %}
               </div>
+              {% render 'product-installments', product: product, variant: current_variant, section_id: section.id %}
               {% if block.settings.show_tax_note %}
                 <p class="product__tax">
                   {%- if cart.taxes_included -%}

@@ -1,0 +1,19 @@
+{% doc %}
+  Shop Pay Installments banner under the price. Shopify only fills it in when
+  Shop Pay and Installments are on and the product qualifies. It needs its own
+  product form; the id input follows the selected variant through
+  `data-variant-id-input` (assets/product.js, assets/featured-product.js).
+
+  @param {product} product - The product
+  @param {variant} variant - The selected variant
+  @param {string} section_id - The section id, for a unique form id
+
+  @example
+  {% render 'product-installments', product: product, variant: current_variant, section_id: section.id %}
+{% enddoc %}
+
+{%- assign installments_form_id = 'ProductInstallments-' | append: section_id -%}
+{% form 'product', product, id: installments_form_id, class: 'product__installments' %}
+  <input type="hidden" name="id" value="{{ variant.id }}" data-variant-id-input>
+  {{ form | payment_terms }}
+{% endform %}

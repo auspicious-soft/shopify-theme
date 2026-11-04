@@ -131,6 +131,7 @@
                 <div class="product__price" data-featured-price>
                   {% render 'featured-product-price', variant: current_variant, show_saving: show_saving %}
                 </div>
+                {% render 'product-installments', product: product, variant: current_variant, section_id: section.id %}
                 {% if block.settings.show_tax_note %}
                   <p class="product__tax">
                     {%- if cart.taxes_included -%}

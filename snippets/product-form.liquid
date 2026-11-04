@@ -27,8 +27,6 @@
   {% form 'product', product, id: form_id, class: 'product-form__form', novalidate: 'novalidate' %}
     <input type="hidden" name="id" value="{{ variant.id }}" data-variant-id-input>
 
-    <div class="product-form__installments">{{ form | payment_terms }}</div>
-
     {%- if product.gift_card? -%}
       {% render 'gift-card-recipient', form: form, section_id: section_id %}
     {%- endif -%}
