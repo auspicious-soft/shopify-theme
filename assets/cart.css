@@ -384,7 +384,6 @@
 .cart-summary .cart-shipping__track {
   position: relative;
   height: 4px;
-  overflow: hidden;
   border-radius: 999px;
   background-color: color-mix(in srgb, var(--color-foreground) 12%, transparent);
 }
