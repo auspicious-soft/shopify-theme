@@ -105,8 +105,16 @@
         {% for media in product.media %}
           {%- liquid
             assign loading = 'lazy'
+            assign priority = 'auto'
+            assign preload_image = false
             if forloop.index0 == featured_index
               assign loading = 'eager'
+              # The product page's main image: fetched first. Not in the Featured
+              # product section, which is usually further down its page.
+              if request.page_type == 'product'
+                assign priority = 'high'
+                assign preload_image = true
+              endif
             endif
             assign media_ratio = media.preview_image.aspect_ratio | default: 1
             assign slide_sizes = media_sizes
@@ -130,6 +138,8 @@
                     | image_tag:
                       class: 'product-gallery__image',
                       loading: loading,
+                      fetchpriority: priority,
+                      preload: preload_image,
                       widths: '400, 600, 800, 1000, 1300, 1600, 2000, 2500, 3000',
                       sizes: slide_sizes,
                       alt: media_alt

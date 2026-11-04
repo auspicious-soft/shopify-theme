@@ -23,6 +23,7 @@
   @param {product} product - The product to render
   @param {string} [sizes] - `sizes` attribute for the images
   @param {boolean} [eager] - Load the first image eagerly (above-the-fold cards)
+  @param {boolean} [high_priority] - Fetch the first image before other images (the first row on mobile)
   @param {string} [heading_tag] - Title tag, defaults to h3
 
   @example
@@ -129,15 +130,19 @@
   data-product-url="{{ product.url }}"
   data-price-range="{{ 'products.price_range' | t: min: '__MIN__', max: '__MAX__' | escape }}"
   style="--card-ratio: {{ ratio }}; --card-image-padding: {{ settings.card_image_padding }}px; --card-image-bg: {{ settings.card_image_background }}; --card-sale-color: {{ settings.card_sale_price_color }};"
-  {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
+  {% if settings.animations_reveal_on_scroll %}{% unless eager %}data-animate{% endunless %}{% endif %}
 >
   <div class="product-card__media product-card__media--{{ fit }}">
     <div class="product-card__slides" data-card-slides>
       {%- for media in media_list limit: 10 -%}
         {%- liquid
           assign slide_loading = 'lazy'
+          assign slide_priority = 'auto'
           if forloop.first
             assign slide_loading = loading
+            if high_priority
+              assign slide_priority = 'high'
+            endif
           endif
           assign slide_alt = media.preview_image.alt | default: product.title
         -%}
@@ -157,6 +162,7 @@
             | image_tag:
               class: 'product-card__image',
               loading: slide_loading,
+              fetchpriority: slide_priority,
               widths: '240, 360, 480, 640, 800, 1000',
               sizes: image_sizes,
               alt: slide_alt

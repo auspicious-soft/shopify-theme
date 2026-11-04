@@ -193,11 +193,15 @@
                 <li class="collection__item">
                   {%- liquid
                     assign eager = false
+                    assign high_priority = false
                     if paginate.current_page == 1 and forloop.index <= columns
                       assign eager = true
                     endif
+                    if paginate.current_page == 1 and forloop.index <= columns_mobile
+                      assign high_priority = true
+                    endif
                   -%}
-                  {% render 'product-card', product: product, sizes: card_sizes, eager: eager, heading_tag: 'h2' %}
+                  {% render 'product-card', product: product, sizes: card_sizes, eager: eager, high_priority: high_priority, heading_tag: 'h2' %}
                 </li>
               {% endfor %}
             </ul>

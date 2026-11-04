@@ -6,6 +6,11 @@
   overflow: hidden;
 }
 
+/* Only a wrapper: the image inside fills .banner-media as usual. */
+.banner-media__picture {
+  display: contents;
+}
+
 .banner-media__image,
 .banner-media__video {
   position: absolute;

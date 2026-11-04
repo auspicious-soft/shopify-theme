@@ -144,3 +144,10 @@
   });
   document.addEventListener('shopify:section:unload', updateAnnouncementBarHeight);
 })();
+
+// The menu drawer's account link goes into the page the first time the drawer opens.
+document.addEventListener('panel:opened', function (event) {
+  var panel = event.detail && document.getElementById(event.detail.id);
+  var template = panel && panel.querySelector('template[data-drawer-account]');
+  if (template) template.replaceWith(template.content);
+});

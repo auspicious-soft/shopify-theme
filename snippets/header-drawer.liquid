@@ -219,6 +219,8 @@
           {% render 'header-localization', section: section, placement: 'drawer' %}
         {% endif %}
         {% if show_drawer_account %}
+          {%- comment -%} Added when the drawer opens (assets/header.js): each one loads its own Shop sign-in frame. {%- endcomment -%}
+          <template data-drawer-account>
           <shopify-account menu="{{ settings.customer_account_menu }}" class="header__drawer-account">
             {% comment %}
               Follows Header settings > Account button: "Text" shows the
@@ -234,6 +236,7 @@
               {% endif %}
             </span>
           </shopify-account>
+          </template>
         {% endif %}
       </div>
     {% endif %}
