@@ -104,7 +104,10 @@ if (!customElements.get('product-page')) {
         const doc = new DOMParser().parseFromString(html, 'text/html');
         this.querySelectorAll('[data-product-part]').forEach((part) => {
           const fresh = doc.getElementById(part.id);
-          if (fresh) part.replaceWith(fresh);
+          if (!fresh) return;
+          // Keep an open panel open (Pickup > View store information).
+          if (part.querySelector('details')?.open) fresh.querySelector('details')?.setAttribute('open', '');
+          part.replaceWith(fresh);
         });
 
         if (focusId) document.getElementById(focusId)?.focus({ preventScroll: true });
