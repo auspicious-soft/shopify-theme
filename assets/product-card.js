@@ -156,12 +156,29 @@ if (!customElements.get('product-card')) {
       this.updateAvailability();
     }
 
+    /** The chosen color's price range, when its variants (e.g. sizes) differ in price. */
+    colorPriceRange(variant) {
+      if (this.colorIndex < 0) return '';
+      const prices = this.variants
+        .filter((other) => other.options[this.colorIndex] === variant.options[this.colorIndex])
+        .sort((a, b) => a.amount - b.amount);
+      const lowest = prices[0];
+      const highest = prices[prices.length - 1];
+      if (!lowest || lowest.amount === highest.amount) return '';
+      return this.dataset.priceRange.replace('__MIN__', lowest.price).replace('__MAX__', highest.price);
+    }
+
     renderVariant(variant) {
       const price = this.querySelector('[data-card-price]');
       if (price) {
-        price.innerHTML = variant.compare
-          ? `<span class="product-card__amount product-card__amount--sale">${variant.price}</span><s class="product-card__compare">${variant.compare}</s>`
-          : `<span class="product-card__amount">${variant.price}</span>`;
+        const range = this.colorPriceRange(variant);
+        if (range) {
+          price.innerHTML = `<span class="product-card__amount${variant.compare ? ' product-card__amount--sale' : ''}">${range}</span>`;
+        } else {
+          price.innerHTML = variant.compare
+            ? `<span class="product-card__amount product-card__amount--sale">${variant.price}</span><s class="product-card__compare">${variant.compare}</s>`
+            : `<span class="product-card__amount">${variant.price}</span>`;
+        }
         if (variant.unit) {
           const unit = document.createElement('span');
           unit.className = 'product-card__unit-price';

@@ -127,6 +127,7 @@
   data-selected="{{ current.options | json | escape }}"
   data-cart-type="{{ settings.cart_type }}"
   data-product-url="{{ product.url }}"
+  data-price-range="{{ 'products.price_range' | t: min: '__MIN__', max: '__MAX__' | escape }}"
   style="--card-ratio: {{ ratio }}; --card-image-padding: {{ settings.card_image_padding }}px; --card-image-bg: {{ settings.card_image_background }}; --card-sale-color: {{ settings.card_sale_price_color }};"
   {% if settings.animations_reveal_on_scroll %}data-animate{% endif %}
 >
@@ -391,6 +392,7 @@
           "options": {{ variant.options | json }},
           "available": {{ variant.available | json }},
           "price": {{ variant.price | money | json }},
+          "amount": {{ variant.price }},
           "compare": {% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money | json }}{% else %}null{% endif %},
           "unit": {{ variant_unit | json }},
           "badge": {{ variant_badge | json }},
