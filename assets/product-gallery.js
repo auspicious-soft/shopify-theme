@@ -157,9 +157,7 @@ if (!customElements.get('product-gallery')) {
         if (this.marqueeInView) this.runMarquee();
         else this.stopAutoplay();
       });
-      const begin = () => setTimeout(() => this.marqueeView?.observe(this), 1500);
-      if (document.readyState === 'complete') begin();
-      else window.addEventListener('load', begin, { once: true });
+      this.marqueeView.observe(this);
     }
 
     runMarquee() {
