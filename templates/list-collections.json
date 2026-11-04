@@ -38,9 +38,9 @@
           "long-sleeves",
           "hoodies",
           "accesories",
-          "new-arrivals",
           "trousers",
-          "womens"
+          "womens",
+          "shoes"
         ],
         "sort": "default",
         "hide_empty": true,
