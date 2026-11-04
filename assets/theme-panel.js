@@ -50,15 +50,23 @@ if (!customElements.get('theme-panel')) {
         if (!this.contains(event.target)) this.close();
       };
       this.boundKeydown = (event) => {
-        if (event.key === 'Escape') this.close();
+        if (event.key !== 'Escape') return;
+        const hadFocus = this.contains(document.activeElement);
+        this.close();
+        if (hadFocus) this.querySelector('summary')?.focus();
+      };
+      this.boundFocusOut = (event) => {
+        if (event.relatedTarget && !this.contains(event.relatedTarget)) this.close();
       };
       document.addEventListener('click', this.boundOutsideClick);
       document.addEventListener('keydown', this.boundKeydown);
+      this.addEventListener('focusout', this.boundFocusOut);
     }
 
     removeOutsideCloseListeners() {
       document.removeEventListener('click', this.boundOutsideClick);
       document.removeEventListener('keydown', this.boundKeydown);
+      this.removeEventListener('focusout', this.boundFocusOut);
     }
 
     static handleDocumentClick(event) {

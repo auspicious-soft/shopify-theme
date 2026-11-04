@@ -49,6 +49,16 @@
   transform: translateX(0);
 }
 
+/* Closed: out of the Tab order, once it has slid away. */
+.header__drawer:not([open]) {
+  visibility: hidden;
+  transition:
+    transform 400ms ease,
+    overlay 400ms ease allow-discrete,
+    display 400ms ease allow-discrete,
+    visibility 0s linear 400ms;
+}
+
 @starting-style {
   .header__drawer--right[open] {
     transform: translateX(100%);

@@ -130,18 +130,17 @@
    a mouse click on an arrow, swatch or size doesn't leave them stuck on
    screen after the pointer leaves. */
 @media (hover: hover) {
+  /* Opacity, not visibility: a hidden arrow can't take keyboard focus. */
   .product-card__arrow {
     opacity: 0;
-    visibility: hidden;
-    transition:
-      opacity 0.2s ease,
-      visibility 0.2s;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
   }
 
   .product-card:hover .product-card__arrow,
   .product-card:has(:focus-visible) .product-card__arrow {
     opacity: 1;
-    visibility: visible;
+    pointer-events: auto;
   }
 }
 

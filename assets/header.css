@@ -369,7 +369,8 @@
     opacity: 0;
 }
 .index .header--logo_reveal.header--overlay:hover .header__logo.header__logo--default,
-.index .header--logo_reveal.header--overlay:has(.predictive-search[open]) .header__logo.header__logo--default {
+.index .header--logo_reveal.header--overlay:has(.predictive-search[open]) .header__logo.header__logo--default,
+.index .header--logo_reveal.header--overlay .header__logo.header__logo--default:focus-visible {
     opacity: 1;
 }
 .index .header--logo_reveal.header--overlay.is-scrolled .header__logo.header__logo--default {
@@ -936,4 +937,10 @@ a.header__mega-promo:focus-visible .header__mega-promo-title {
 .header.header--sticky-text.is-scrolled {
   color: var(--header-sticky-text);
   --header-text: var(--header-sticky-text);
+}
+
+/* <shopify-account> keeps its button in a shadow root, so show focus on the element itself. */
+shopify-account:focus-within {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
 }

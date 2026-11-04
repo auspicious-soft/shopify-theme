@@ -273,8 +273,12 @@ if (!customElements.get('product-card')) {
       // At the first image "previous" is disabled, at the last "next" is.
       const max = this.slides.scrollWidth - this.slides.clientWidth;
       const position = Math.abs(this.slides.scrollLeft);
+      const focused = document.activeElement;
       this.prev.disabled = position <= 2;
       this.next.disabled = position >= max - 2;
+      // An arrow that was just disabled loses focus: hand it to the other one.
+      if (focused === this.next && this.next.disabled) this.prev.focus();
+      if (focused === this.prev && this.prev.disabled) this.next.focus();
     }
   }
 
