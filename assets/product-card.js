@@ -158,14 +158,17 @@ if (!customElements.get('product-card')) {
 
     /** The chosen color's price range, when its variants (e.g. sizes) differ in price. */
     colorPriceRange(variant) {
-      if (this.colorIndex < 0) return '';
+      if (this.colorIndex < 0) return null;
       const prices = this.variants
         .filter((other) => other.options[this.colorIndex] === variant.options[this.colorIndex])
         .sort((a, b) => a.amount - b.amount);
       const lowest = prices[0];
       const highest = prices[prices.length - 1];
-      if (!lowest || lowest.amount === highest.amount) return '';
-      return this.dataset.priceRange.replace('__MIN__', lowest.price).replace('__MAX__', highest.price);
+      if (!lowest || lowest.amount === highest.amount) return null;
+      return {
+        text: this.dataset.priceRange.replace('__MIN__', lowest.price).replace('__MAX__', highest.price),
+        onSale: prices.some((other) => other.compare),
+      };
     }
 
     renderVariant(variant) {
@@ -173,7 +176,7 @@ if (!customElements.get('product-card')) {
       if (price) {
         const range = this.colorPriceRange(variant);
         if (range) {
-          price.innerHTML = `<span class="product-card__amount${variant.compare ? ' product-card__amount--sale' : ''}">${range}</span>`;
+          price.innerHTML = `<span class="product-card__amount${range.onSale ? ' product-card__amount--sale' : ''}">${range.text}</span>`;
         } else {
           price.innerHTML = variant.compare
             ? `<span class="product-card__amount product-card__amount--sale">${variant.price}</span><s class="product-card__compare">${variant.compare}</s>`
