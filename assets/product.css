@@ -1373,3 +1373,8 @@
 .product__installments {
   font-size: 0.85rem;
 }
+
+/* Only hidden inputs: Shopify has no banner to show, so no gap under the price. */
+.product__installments:not(:has(> :not(input))) {
+  display: none;
+}
