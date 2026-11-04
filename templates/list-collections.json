@@ -33,7 +33,14 @@
           "the-core-wardrobe",
           "the-evening-series",
           "the-summer-edit",
-          "the-utility-capsule"
+          "the-utility-capsule",
+          "mens",
+          "long-sleeves",
+          "hoodies",
+          "accesories",
+          "new-arrivals",
+          "trousers",
+          "womens"
         ],
         "sort": "default",
         "hide_empty": true,
