@@ -18,7 +18,7 @@
           "type": "announcement-item",
           "settings": {
             "enabled": true,
-            "text": "Free shipping on orders above $50",
+            "text": "Free shipping on orders above $1000",
             "link": "",
             "open_in_new_tab": false
           },
@@ -65,7 +65,7 @@
         "slider_direction": "up",
         "slider_pause_on_hover": true,
         "slider_text_alignment": "center",
-        "static_text": "Free shipping on orders above $50",
+        "static_text": "Free shipping on orders above $1000",
         "static_enable_button": false,
         "static_button_text": "Shop now",
         "static_button_url": "shopify://collections",
