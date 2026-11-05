@@ -37,7 +37,7 @@
         "announcement_item_g4EMQ8": {
           "type": "announcement-item",
           "settings": {
-            "enabled": true,
+            "enabled": false,
             "text": "Get 10% off today",
             "link": "",
             "open_in_new_tab": false
