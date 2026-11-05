@@ -26,6 +26,7 @@
         "heading_tag": "h1",
         "heading_class": "h2",
         "subheading": "Up to 40% off",
+        "subheading_letter_spacing": "large",
         "text_color": "#ffffff",
         "content_position_horizontal": "center",
         "content_position_vertical": "bottom",
@@ -53,6 +54,7 @@
         "heading_tag": "h2",
         "heading_class": "h3",
         "subheading": "",
+        "subheading_letter_spacing": "none",
         "heading_alignment": "left",
         "collection": "new-arrivals",
         "products_to_show": 8,
@@ -84,6 +86,7 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
+        "button_link": "shopify://collections/long-sleeves",
         "image": "shopify://shop_images/Banner_2_9a71e6ed-6bac-405d-9534-73d91e01f56f_4000x1562_crop_center.jpg_1.png",
         "mobile_image": "shopify://shop_images/iPhone_13_14_-_2.jpg",
         "media_type": "image",
@@ -97,6 +100,7 @@
         "overlay_color": "#000000",
         "overlay_opacity": 20,
         "subheading": "New items",
+        "subheading_letter_spacing": "large",
         "heading": "Long shirts",
         "heading_tag": "h2",
         "heading_class": "h3",
@@ -107,7 +111,6 @@
         "content_position_vertical": "top",
         "content_width": 520,
         "button_label": "View products",
-        "button_link": "shopify://collections/long-sleeves",
         "button_style": "secondary",
         "button_size": "medium",
         "button_color_scheme": "scheme-2",
@@ -128,27 +131,29 @@
         "collection_kahEbC": {
           "type": "collection",
           "settings": {
+            "link": "shopify://collections/mens",
             "image": "shopify://shop_images/Image_54_4e5d7bbe-6533-44a2-b908-9b4088fad1e1.png",
             "media_type": "image",
             "video_url": "",
             "subheading": "Men's",
+            "subheading_letter_spacing": "large",
             "heading": "Shop the latest drops",
             "text": "",
-            "button_label": "Explore Men's",
-            "link": "shopify://collections/mens"
+            "button_label": "Explore Men's"
           }
         },
         "collection_fGPGma": {
           "type": "collection",
           "settings": {
+            "link": "shopify://collections/womens",
             "image": "shopify://shop_images/Image_55.png",
             "media_type": "image",
             "video_url": "",
             "subheading": "Women's",
+            "subheading_letter_spacing": "large",
             "heading": "Discover new silhouettes",
             "text": "",
-            "button_label": "Explore Women's",
-            "link": "shopify://collections/womens"
+            "button_label": "Explore Women's"
           }
         }
       },
@@ -162,6 +167,7 @@
         "heading_tag": "h2",
         "heading_class": "h3",
         "subheading": "",
+        "subheading_letter_spacing": "none",
         "heading_alignment": "left",
         "columns_desktop": 2,
         "columns_mobile": "1",
@@ -195,6 +201,7 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
+        "button_link": "shopify://collections/hoodies",
         "image": "shopify://shop_images/Container_2_bce84f09-8eed-44cd-8125-0015b1d919c9.png",
         "mobile_image": "shopify://shop_images/iPhone_13_14_-_3_1_86a0b6bb-b902-499b-8dd6-1d6f9d8811d5.png",
         "media_type": "image",
@@ -208,6 +215,7 @@
         "overlay_color": "#000000",
         "overlay_opacity": 30,
         "subheading": "New items",
+        "subheading_letter_spacing": "large",
         "heading": "Hoodies",
         "heading_tag": "h2",
         "heading_class": "h3",
@@ -218,7 +226,6 @@
         "content_position_vertical": "top",
         "content_width": 520,
         "button_label": "View products",
-        "button_link": "shopify://collections/hoodies",
         "button_style": "secondary",
         "button_size": "medium",
         "button_color_scheme": "scheme-2",
@@ -237,6 +244,7 @@
       "type": "collection-banner",
       "name": "t:sections.collection_banner.name",
       "settings": {
+        "button_link": "shopify://collections/accesories",
         "image": "shopify://shop_images/Banner_5_4000x1562_crop_center.jpg_1.png",
         "mobile_image": "shopify://shop_images/iPhone_13_14_-_4.png",
         "media_type": "image",
@@ -250,6 +258,7 @@
         "overlay_color": "#000000",
         "overlay_opacity": 20,
         "subheading": "New items",
+        "subheading_letter_spacing": "large",
         "heading": "Accessories",
         "heading_tag": "h2",
         "heading_class": "h3",
@@ -260,7 +269,6 @@
         "content_position_vertical": "top",
         "content_width": 520,
         "button_label": "View products",
-        "button_link": "shopify://collections/accesories",
         "button_style": "secondary",
         "button_size": "medium",
         "button_color_scheme": "scheme-2",
@@ -343,7 +351,10 @@
       ],
       "name": "t:sections.social_marquee.name",
       "settings": {
-        "heading": "As seen on #yourbrand",
+        "caption": "",
+        "caption_size": "small",
+        "caption_letter_spacing": "none",
+        "heading": "As seen on #VeraStudio",
         "heading_tag": "h2",
         "heading_class": "h3",
         "heading_alignment": "left",
