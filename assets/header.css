@@ -638,7 +638,7 @@ header.is-scrolled img.header__hero-logo-image {
   flex: 1 1 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-  gap: 2rem 2.5rem;
+  gap: 2rem 1rem;
   list-style: none;
   margin: 0;
   padding: 0;
