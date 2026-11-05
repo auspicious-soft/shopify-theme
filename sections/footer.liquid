@@ -109,6 +109,7 @@
                             href="{{ link.url }}"
                             class="footer__link"
                             {% if link.current %}aria-current="page"{% endif %}
+                            {% if link.url contains 'shopify.com' %}rel="nofollow"{% endif %}
                           >
                             {{- link.title | escape -}}
                           </a>
