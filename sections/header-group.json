@@ -36,6 +36,7 @@
         },
         "announcement_item_g4EMQ8": {
           "type": "announcement-item",
+          "disabled": true,
           "settings": {
             "enabled": false,
             "text": "Get 10% off today",
@@ -145,6 +146,7 @@
         "logo_reveal_speed": 400,
         "sticky_header_type": "always",
         "sticky_background_color": "#ffffff",
+        "sticky_text_color": "",
         "desktop_logo_width": 160,
         "mobile_logo_width": 90,
         "overlay_on_home": true,
