@@ -624,6 +624,11 @@
   text-underline-offset: 0.25em;
 }
 
+/* Sits under Checkout, so it follows the section's Button labels setting. */
+.shopify-section:has(.text-case--buttons-upper) .cart-drawer__view-cart {
+  text-transform: uppercase;
+}
+
 /* ---------- Empty state ---------- */
 
 .cart-drawer__body--empty {

@@ -21,6 +21,7 @@
   {{ 'cart-panel.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'cart-panel.js' | asset_url }}" defer></script>
   {% render 'theme-panel' %}
+  {% render 'text-case', section: section %}
 
   <cart-panel
     data-cart-type="{{ settings.cart_type }}"
@@ -197,6 +198,26 @@
       "id": "continue_url",
       "label": "t:sections.cart.continue_url",
       "info": "t:sections.cart.continue_url_info"
+    },
+    {
+      "type": "header",
+      "content": "t:labels.text_case"
+    },
+    {
+      "type": "select",
+      "id": "button_case",
+      "label": "t:labels.button_case",
+      "options": [
+        {
+          "value": "uppercase",
+          "label": "t:options.text_case.uppercase"
+        },
+        {
+          "value": "none",
+          "label": "t:options.text_case.none"
+        }
+      ],
+      "default": "uppercase"
     }
   ]
 }
