@@ -342,11 +342,7 @@
 @media (min-width: 990px) {
   .collection__grid {
     grid-template-columns: repeat(var(--grid-columns, 4), minmax(0, 1fr));
-  }
-
-  .collection__layout--sidebar .collection__grid {
-    grid-template-columns: repeat(max(calc(var(--grid-columns, 4) - 1), 2), minmax(0, 1fr));
-  }
+  }  
 }
 
 @media (min-width: 1400px) {
@@ -691,6 +687,7 @@
     max-height: calc(100vh - 7rem);
     overflow-y: auto;
     scrollbar-width: thin;
+    padding-right: 14px;
   }
 
   .facets--sidebar .facets__backdrop,
