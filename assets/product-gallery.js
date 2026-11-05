@@ -195,9 +195,9 @@ if (!customElements.get('product-gallery')) {
         return;
       }
       if (event.target.closest('[data-gallery-prev]')) {
-        this.goTo(Math.max(0, this.activeIndex - 1));
+        this.step(-1);
       } else if (event.target.closest('[data-gallery-next]')) {
-        this.goTo(Math.min(this.slides.length - 1, this.activeIndex + 1));
+        this.step(1);
       } else if (event.target.closest('[data-open-lightbox]')) {
         this.openLightbox(event.target.closest('[data-open-lightbox]').dataset.mediaId);
       } else if (event.target.closest('[data-lightbox-close]')) {
@@ -236,6 +236,46 @@ if (!customElements.get('product-gallery')) {
         if (index !== this.activeIndex) this.setActive(index);
         else this.updateArrows();
       });
+    }
+
+    // Arrows: on to the next image start from where the row is now, which can
+    // be between images after the marquee or a swipe. The marquee has no end:
+    // from the copies it jumps back by one set (they look identical), so the
+    // arrows keep going round like the row does.
+    step(direction) {
+      const dir = document.dir === 'rtl' ? -1 : 1;
+      let target = this.stepTarget ?? Math.abs(this.track.scrollLeft);
+
+      if (this.classList.contains('is-marquee') && this.marqueeLoop) {
+        let shift = 0;
+        if (direction > 0 && target >= this.marqueeLoop - 2) shift = -this.marqueeLoop;
+        if (direction < 0 && target <= 2) shift = this.marqueeLoop;
+        if (shift) {
+          this.track.scrollTo({ left: dir * (Math.abs(this.track.scrollLeft) + shift), behavior: 'instant' });
+          target += shift;
+        }
+      }
+
+      const trackBox = this.track.getBoundingClientRect();
+      const position = Math.abs(this.track.scrollLeft);
+      const stops = [...this.track.children].map((slide) => {
+        const box = slide.getBoundingClientRect();
+        return { slide, left: position + (dir > 0 ? box.left - trackBox.left : trackBox.right - box.right) };
+      });
+      const stop =
+        direction > 0
+          ? stops.find(({ left }) => left > target + 2)
+          : stops.findLast(({ left }) => left < target - 2);
+      if (!stop) return;
+
+      const max = this.track.scrollWidth - this.track.clientWidth;
+      this.stepTarget = Math.min(stop.left, max);
+      clearTimeout(this.stepTimer);
+      this.stepTimer = setTimeout(() => {
+        this.stepTarget = null;
+      }, 600);
+      this.track.scrollTo({ left: dir * stop.left, behavior: 'smooth' });
+      this.setActive(stops.indexOf(stop) % this.slides.length);
     }
 
     goTo(index, behavior = 'smooth') {
