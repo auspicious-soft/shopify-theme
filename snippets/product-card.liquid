@@ -185,17 +185,6 @@
       </button>
     {%- endif -%}
 
-    <span
-      class="badge product-card__badge color-{% if current.available %}{{ settings.sale_badge_color_scheme.id }}{% else %}{{ settings.sold_out_badge_color_scheme.id }}{% endif %} badge--{{ settings.badge_position | handleize }}"
-      style="--badge-radius: {{ settings.badge_corner_radius }}px;"
-      data-sale-scheme="color-{{ settings.sale_badge_color_scheme.id }}"
-      data-sold-out-scheme="color-{{ settings.sold_out_badge_color_scheme.id }}"
-      data-card-badge
-      {% if badge_for_current == blank %}hidden{% endif %}
-    >
-      {{- badge_for_current | strip -}}
-    </span>
-
     {%- liquid
       # Best seller: products tagged with Theme settings > Badges > Product tag.
       assign is_best_seller = false
@@ -210,19 +199,46 @@
         endfor
       endif
     -%}
-    {%- if is_best_seller -%}
-      {%- liquid
-        assign best_seller_text = settings.best_seller_badge_text
-        if best_seller_text == blank
-          assign best_seller_text = 'badges.best_seller' | t
-        endif
-      -%}
+    {%- liquid
+      assign best_seller_text = settings.best_seller_badge_text
+      if best_seller_text == blank
+        assign best_seller_text = 'badges.best_seller' | t
+      endif
+      # Each corner holds its badges in a row, so a sale or sold-out badge and
+      # the best seller badge set to the same corner sit side by side instead
+      # of on top of each other.
+      assign status_position = settings.badge_position | handleize
+      assign best_seller_position = settings.best_seller_badge_position | handleize
+    -%}
+    {%- capture status_badge_markup -%}
       <span
-        class="badge product-card__badge product-card__badge--best-seller color-{{ settings.best_seller_badge_color_scheme.id }} badge--{{ settings.best_seller_badge_position | handleize }}"
-        style="--badge-radius: {{ settings.badge_corner_radius }}px;"
+        class="badge product-card__badge color-{% if current.available %}{{ settings.sale_badge_color_scheme.id }}{% else %}{{ settings.sold_out_badge_color_scheme.id }}{% endif %}"
+        data-sale-scheme="color-{{ settings.sale_badge_color_scheme.id }}"
+        data-sold-out-scheme="color-{{ settings.sold_out_badge_color_scheme.id }}"
+        data-card-badge
+        {% if badge_for_current == blank %}hidden{% endif %}
       >
-        {{- best_seller_text | escape -}}
+        {{- badge_for_current | strip -}}
       </span>
+    {%- endcapture -%}
+    {%- capture best_seller_markup -%}
+      {%- if is_best_seller -%}
+        <span class="badge product-card__badge product-card__badge--best-seller color-{{ settings.best_seller_badge_color_scheme.id }}">
+          {{- best_seller_text | escape -}}
+        </span>
+      {%- endif -%}
+    {%- endcapture -%}
+
+    <div class="product-card__badges badge--{{ status_position }}" style="--badge-radius: {{ settings.badge_corner_radius }}px;">
+      {{- status_badge_markup -}}
+      {%- if best_seller_position == status_position -%}
+        {{- best_seller_markup -}}
+      {%- endif -%}
+    </div>
+    {%- if best_seller_position != status_position and is_best_seller -%}
+      <div class="product-card__badges badge--{{ best_seller_position }}" style="--badge-radius: {{ settings.badge_corner_radius }}px;">
+        {{- best_seller_markup -}}
+      </div>
     {%- endif -%}
 
     {%- liquid

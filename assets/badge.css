@@ -31,6 +31,30 @@
   inset-inline-end: 1.5em;
 }
 
+/* Product card: one row per corner, so badges set to the same corner sit
+   side by side. The row takes the corner position; the badges inside are in
+   flow, at the same size and offset as a single badge. */
+.product-card__badges {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  max-width: calc(100% - 3em);
+  font-size: 0.8em;
+  pointer-events: none;
+}
+
+.product-card__badges.badge--top-right,
+.product-card__badges.badge--bottom-right {
+  justify-content: flex-end;
+}
+
+.product-card__badges > .badge {
+  position: static;
+  font-size: 1em;
+}
+
 /* In-flow badges (product page, featured product): same look as the card badges. */
 .product-badges {
   display: flex;
