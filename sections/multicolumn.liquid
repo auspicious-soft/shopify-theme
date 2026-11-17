@@ -66,13 +66,18 @@
     assign image_sizes = icon_width | append: 'px'
   endif
 
-  # Image background: written as rgb(r g b / alpha), so a see-through color
-  # keeps its opacity (printing the color directly gives a hex code without
-  # it). Fully transparent counts as no background.
+  # Image background: the picked color with the opacity slider applied,
+  # written as rgb(r g b / a%) so see-through colors work. Empty color or 0%
+  # opacity means no background.
   assign image_bg = section.settings.image_background
+  assign image_bg_opacity = section.settings.image_background_opacity | default: 100
   assign show_image_bg = false
-  if image_bg != blank and image_bg.alpha > 0
-    assign show_image_bg = true
+  if image_bg != blank
+    assign image_bg_alpha = image_bg.alpha | times: image_bg_opacity | round: 1
+    if image_bg_alpha > 0
+      assign show_image_bg = true
+      assign image_bg_css = 'rgb(' | append: image_bg.red | append: ' ' | append: image_bg.green | append: ' ' | append: image_bg.blue | append: ' / ' | append: image_bg_alpha | append: '%)'
+    endif
   endif
 
   assign heading_tag = section.settings.heading_tag | default: 'h2'
@@ -88,7 +93,7 @@
     --mc-radius: {{ section.settings.corner_radius }}px;
     {% if ratio != '' %}--mc-ratio: {{ ratio }};{% endif %}
     {% if section.settings.image_width == 'custom' %}--mc-image-width: {{ icon_width }}px;{% endif %}
-    {% if show_image_bg %}--mc-image-bg: rgb({{ image_bg.rgba }});{% endif %}
+    {% if show_image_bg %}--mc-image-bg: {{ image_bg_css }};{% endif %}
   "
 >
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
@@ -676,8 +681,19 @@
       "type": "color",
       "id": "image_background",
       "label": "t:sections.multicolumn.image_background",
-      "info": "t:sections.multicolumn.image_background_rgba_info",
+      "info": "t:sections.multicolumn.image_background_picker_info",
       "visible_if": "{{ section.settings.column_media == 'image' }}"
+    },
+    {
+      "type": "range",
+      "id": "image_background_opacity",
+      "label": "t:sections.multicolumn.image_background_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ section.settings.column_media == 'image' and section.settings.image_background != blank }}"
     },
     {
       "type": "range",

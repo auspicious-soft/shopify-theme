@@ -914,8 +914,8 @@
       "media_position": "Image position",
       "media_position_side_info": "Left places the image or number beside the text",
       "image_background": "Image background",
-      "image_background_info": "Shows behind each image with some space around it, e.g. for transparent icons. Leave empty for none",
-      "image_background_rgba_info": "Shows behind each image with some space around it, e.g. for transparent icons. See-through colors keep their opacity. Leave empty or fully transparent for none",
+      "image_background_picker_info": "Shows behind each image with some space around it, e.g. for transparent icons. Clear it for no background",
+      "image_background_opacity": "Background opacity",
       "media_position_top": "Above the text",
       "media_position_left": "Left of the text"
     },
