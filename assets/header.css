@@ -460,7 +460,7 @@ header.is-scrolled img.header__hero-logo-image {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  padding-block: 1.5rem;
+  padding-block: 1rem;
   position: relative;
 }
 
