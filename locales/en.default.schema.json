@@ -912,7 +912,9 @@
       "image_custom": "Custom width",
       "icon_width": "Image width",
       "media_position": "Image position",
-      "media_position_info": "Left places the image or number beside the text, with a divider line between them",
+      "media_position_side_info": "Left places the image or number beside the text",
+      "image_background": "Image background",
+      "image_background_info": "Shows behind each image with some space around it, e.g. for transparent icons. Leave empty for none",
       "media_position_top": "Above the text",
       "media_position_left": "Left of the text"
     },

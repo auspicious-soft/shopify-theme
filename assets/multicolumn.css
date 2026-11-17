@@ -193,6 +193,27 @@
   max-width: 100%;
 }
 
+/* Image background (e.g. a tinted square behind a transparent icon): the
+   image shrinks to 70% and sits centered on it. Margins in % follow the
+   background's width, so the space stays even at every size. */
+.multicolumn--image-bg .multicolumn__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--mc-image-bg);
+}
+
+.multicolumn--image-bg .multicolumn__image {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
+.multicolumn--image-bg .multicolumn__media--adapt .multicolumn__image {
+  height: auto;
+  margin-block: 15%;
+}
+
 .multicolumn--circle .multicolumn__media {
   border-radius: 50%;
 }
@@ -258,8 +279,8 @@
 }
 
 /* ---------- Image position: left of the text ----------
-   The image (or number) sits beside the text, centered on it, with a
-   divider line between them. The text keeps the column's alignment. */
+   The image (or number) sits beside the text, centered on it. The text
+   keeps the column's alignment. */
 .multicolumn--media-left .multicolumn__item,
 .multicolumn--media-left.multicolumn--align-right .multicolumn__item {
   flex-direction: row;
@@ -284,13 +305,6 @@
 .multicolumn--media-left .multicolumn__body {
   flex: 1 1 0;
   min-width: 0;
-}
-
-.multicolumn--media-left :is(.multicolumn__media, .multicolumn__number) + .multicolumn__body {
-  align-self: stretch;
-  justify-content: center;
-  padding-inline-start: 1.25rem;
-  border-inline-start: 1px solid color-mix(in srgb, var(--color-foreground) 20%, transparent);
 }
 
 .multicolumn__title {

@@ -7,8 +7,8 @@
   - Columns per row on desktop and mobile; on mobile a grid or a swipe slider.
   - Image shape (adapt, square, portrait, landscape, circle) and image size
     (full, half or a third of the column, or a custom width in px for icons).
-  - Image position: above the text, or to its left with a divider line
-    between the image (or number) and the text.
+  - Image position: above the text, or to its left.
+  - Optional image background, e.g. a tinted square behind transparent icons.
   - Column text alignment and an optional card background per column.
   - Optional button under the columns.
 
@@ -71,7 +71,7 @@
 -%}
 
 <div
-  class="multicolumn multicolumn--align-{{ section.settings.column_alignment }} multicolumn--mobile-align-{{ section.settings.mobile_column_alignment | default: 'same' }} multicolumn--header-{{ section.settings.heading_alignment }} multicolumn--mobile-{{ section.settings.mobile_layout }} multicolumn--image-{{ section.settings.image_width }}{% if media_position == 'left' and section.settings.column_media != 'none' %} multicolumn--media-left{% endif %}{% if section.settings.image_ratio == 'circle' %} multicolumn--circle{% endif %}{% if section.settings.card %} multicolumn--card{% endif %} color-{{ section.settings.color_scheme.id }}"
+  class="multicolumn multicolumn--align-{{ section.settings.column_alignment }} multicolumn--mobile-align-{{ section.settings.mobile_column_alignment | default: 'same' }} multicolumn--header-{{ section.settings.heading_alignment }} multicolumn--mobile-{{ section.settings.mobile_layout }} multicolumn--image-{{ section.settings.image_width }}{% if media_position == 'left' and section.settings.column_media != 'none' %} multicolumn--media-left{% endif %}{% if section.settings.image_ratio == 'circle' %} multicolumn--circle{% endif %}{% if section.settings.image_background != blank %} multicolumn--image-bg{% endif %}{% if section.settings.card %} multicolumn--card{% endif %} color-{{ section.settings.color_scheme.id }}"
   style="
     {% render 'section-padding-vars', section: section %}
     --mc-columns: {{ columns }};
@@ -79,6 +79,7 @@
     --mc-radius: {{ section.settings.corner_radius }}px;
     {% if ratio != '' %}--mc-ratio: {{ ratio }};{% endif %}
     {% if section.settings.image_width == 'custom' %}--mc-image-width: {{ icon_width }}px;{% endif %}
+    {% if section.settings.image_background != blank %}--mc-image-bg: {{ section.settings.image_background }};{% endif %}
   "
 >
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
@@ -648,7 +649,7 @@
       "type": "select",
       "id": "media_position",
       "label": "t:sections.multicolumn.media_position",
-      "info": "t:sections.multicolumn.media_position_info",
+      "info": "t:sections.multicolumn.media_position_side_info",
       "options": [
         {
           "value": "top",
@@ -661,6 +662,13 @@
       ],
       "default": "top",
       "visible_if": "{{ section.settings.column_media != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "image_background",
+      "label": "t:sections.multicolumn.image_background",
+      "info": "t:sections.multicolumn.image_background_info",
+      "visible_if": "{{ section.settings.column_media == 'image' }}"
     },
     {
       "type": "range",
@@ -814,35 +822,27 @@
     },
     {
       "type": "select",
-      "id": "heading_case",
-      "label": "t:labels.heading_case",
+      "id": "text_case",
+      "label": "t:labels.text_case_combined",
       "options": [
         {
-          "value": "uppercase",
-          "label": "t:options.text_case.uppercase"
+          "value": "all",
+          "label": "t:options.text_case.all"
+        },
+        {
+          "value": "headings",
+          "label": "t:options.text_case.headings"
+        },
+        {
+          "value": "buttons",
+          "label": "t:options.text_case.buttons"
         },
         {
           "value": "none",
           "label": "t:options.text_case.none"
         }
       ],
-      "default": "uppercase"
-    },
-    {
-      "type": "select",
-      "id": "button_case",
-      "label": "t:labels.button_case",
-      "options": [
-        {
-          "value": "uppercase",
-          "label": "t:options.text_case.uppercase"
-        },
-        {
-          "value": "none",
-          "label": "t:options.text_case.none"
-        }
-      ],
-      "default": "uppercase"
+      "default": "all"
     }
   ],
   "blocks": [
