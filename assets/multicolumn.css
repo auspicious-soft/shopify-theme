@@ -187,6 +187,12 @@
   min-width: 3.5rem;
 }
 
+/* Custom width in px (Image size > Custom width), for icons. */
+.multicolumn--image-custom .multicolumn__media {
+  width: var(--mc-image-width, 80px);
+  max-width: 100%;
+}
+
 .multicolumn--circle .multicolumn__media {
   border-radius: 50%;
 }
@@ -249,6 +255,42 @@
     align-items: flex-end;
     text-align: right;
   }
+}
+
+/* ---------- Image position: left of the text ----------
+   The image (or number) sits beside the text, centered on it, with a
+   divider line between them. The text keeps the column's alignment. */
+.multicolumn--media-left .multicolumn__item,
+.multicolumn--media-left.multicolumn--align-right .multicolumn__item {
+  flex-direction: row;
+  align-items: center;
+}
+
+@media screen and (max-width: 749px) {
+  .multicolumn--media-left[class*='multicolumn--mobile-align-'] .multicolumn__item {
+    align-items: center;
+  }
+}
+
+.multicolumn--media-left .multicolumn__media,
+.multicolumn--media-left .multicolumn__number {
+  flex: 0 0 auto;
+}
+
+.multicolumn--media-left.multicolumn--image-full .multicolumn__media {
+  width: 40%;
+}
+
+.multicolumn--media-left .multicolumn__body {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.multicolumn--media-left :is(.multicolumn__media, .multicolumn__number) + .multicolumn__body {
+  align-self: stretch;
+  justify-content: center;
+  padding-inline-start: 1.25rem;
+  border-inline-start: 1px solid color-mix(in srgb, var(--color-foreground) 20%, transparent);
 }
 
 .multicolumn__title {

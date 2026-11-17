@@ -6,7 +6,9 @@
 
   - Columns per row on desktop and mobile; on mobile a grid or a swipe slider.
   - Image shape (adapt, square, portrait, landscape, circle) and image size
-    (full, half or a third of the column, for icons).
+    (full, half or a third of the column, or a custom width in px for icons).
+  - Image position: above the text, or to its left with a divider line
+    between the image (or number) and the text.
   - Column text alignment and an optional card background per column.
   - Optional button under the columns.
 
@@ -53,20 +55,30 @@
     else
       assign image_share = 100
   endcase
+  # Beside the text, a full-width image takes 40% of the column.
+  assign media_position = section.settings.media_position | default: 'top'
+  if media_position == 'left' and section.settings.image_width == 'full'
+    assign image_share = 40
+  endif
   assign image_sizes = '(min-width: 990px) calc(100vw / ' | append: columns | append: ' * ' | append: image_share | append: ' / 100), calc(100vw / ' | append: columns_mobile | append: ' * ' | append: image_share | append: ' / 100)'
+  assign icon_width = section.settings.icon_width | default: 80
+  if section.settings.image_width == 'custom'
+    assign image_sizes = icon_width | append: 'px'
+  endif
 
   assign heading_tag = section.settings.heading_tag | default: 'h2'
   assign heading_class = section.settings.heading_class | default: heading_tag
 -%}
 
 <div
-  class="multicolumn multicolumn--align-{{ section.settings.column_alignment }} multicolumn--mobile-align-{{ section.settings.mobile_column_alignment | default: 'same' }} multicolumn--header-{{ section.settings.heading_alignment }} multicolumn--mobile-{{ section.settings.mobile_layout }} multicolumn--image-{{ section.settings.image_width }}{% if section.settings.image_ratio == 'circle' %} multicolumn--circle{% endif %}{% if section.settings.card %} multicolumn--card{% endif %} color-{{ section.settings.color_scheme.id }}"
+  class="multicolumn multicolumn--align-{{ section.settings.column_alignment }} multicolumn--mobile-align-{{ section.settings.mobile_column_alignment | default: 'same' }} multicolumn--header-{{ section.settings.heading_alignment }} multicolumn--mobile-{{ section.settings.mobile_layout }} multicolumn--image-{{ section.settings.image_width }}{% if media_position == 'left' and section.settings.column_media != 'none' %} multicolumn--media-left{% endif %}{% if section.settings.image_ratio == 'circle' %} multicolumn--circle{% endif %}{% if section.settings.card %} multicolumn--card{% endif %} color-{{ section.settings.color_scheme.id }}"
   style="
     {% render 'section-padding-vars', section: section %}
     --mc-columns: {{ columns }};
     --mc-columns-mobile: {{ columns_mobile }};
     --mc-radius: {{ section.settings.corner_radius }}px;
     {% if ratio != '' %}--mc-ratio: {{ ratio }};{% endif %}
+    {% if section.settings.image_width == 'custom' %}--mc-image-width: {{ icon_width }}px;{% endif %}
   "
 >
   <div class="page-width{% if section.settings.width == 'full' %} page-width--full{% endif %}">
@@ -612,10 +624,43 @@
         {
           "value": "third",
           "label": "t:sections.multicolumn.image_third"
+        },
+        {
+          "value": "custom",
+          "label": "t:sections.multicolumn.image_custom"
         }
       ],
       "default": "full",
       "visible_if": "{{ section.settings.column_media == 'image' }}"
+    },
+    {
+      "type": "range",
+      "id": "icon_width",
+      "label": "t:sections.multicolumn.icon_width",
+      "min": 24,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "default": 80,
+      "visible_if": "{{ section.settings.column_media == 'image' and section.settings.image_width == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "media_position",
+      "label": "t:sections.multicolumn.media_position",
+      "info": "t:sections.multicolumn.media_position_info",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:sections.multicolumn.media_position_top"
+        },
+        {
+          "value": "left",
+          "label": "t:sections.multicolumn.media_position_left"
+        }
+      ],
+      "default": "top",
+      "visible_if": "{{ section.settings.column_media != 'none' }}"
     },
     {
       "type": "range",
