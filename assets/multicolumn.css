@@ -203,11 +203,11 @@
   background-color: var(--mc-image-bg);
 }
 
-.multicolumn--image-bg .multicolumn__image {
+/* .multicolumn--image-bg .multicolumn__image {
   width: 70%;
   height: 70%;
   object-fit: contain;
-}
+} */
 
 .multicolumn--image-bg .multicolumn__media--adapt .multicolumn__image {
   height: auto;
