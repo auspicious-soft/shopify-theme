@@ -432,6 +432,33 @@ header.is-scrolled img.header__hero-logo-image {
     transform: translate3d(0px, -10px, 0) scale(0.2);
     opacity: 0;
 }
+
+/* No hero logo image: the store name in large type, easing out on scroll
+   like the image so it never sits on top of the compact sticky logo. */
+.header__hero-logo-text {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(2.5rem, 11vw, 10rem);
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    transform: translate3d(0px, 80px, 0) scale(1);
+    transform-origin: top center;
+    transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+    will-change: transform;
+}
+header.is-scrolled .header__hero-logo-text {
+    transform: translate3d(0px, -10px, 0) scale(0.2);
+    opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+    .header__hero-logo-text {
+        transition: none;
+    }
+}
 /* ---------- Desktop navigation ----------
    Markup: snippets/header-navigation.liquid. Dropdowns and mega menu
    panels carry their own color scheme class (Theme settings > Colors >
