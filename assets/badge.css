@@ -12,23 +12,23 @@
 }
 
 .badge--bottom-left {
-  inset-block-end: 1.5em;
-  inset-inline-start: 1.5em;
+  inset-block-end:1em;
+  inset-inline-start: 1em;
 }
 
 .badge--bottom-right {
-  inset-block-end: 1.5em;
-  inset-inline-end: 1.5em;
+  inset-block-end: 1em;
+  inset-inline-end: 1em;
 } 
 
 .badge--top-left {
-  inset-block-start: 1.5em; 
-  inset-inline-start: 1.5em;
+  inset-block-start: 1em; 
+  inset-inline-start: 1em;
 }
 
 .badge--top-right {
-  inset-block-start: 1.5em;    
-  inset-inline-end: 1.5em;
+  inset-block-start: 1em;    
+  inset-inline-end: 1em;
 }
 
 /* Product card: one row per corner, so badges set to the same corner sit
@@ -43,6 +43,7 @@
   max-width: calc(100% - 3em);
   font-size: 0.8em;
   pointer-events: none;
+  flex-direction: column;
 }
 
 .product-card__badges.badge--top-right,
