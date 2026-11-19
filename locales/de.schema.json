@@ -1055,7 +1055,7 @@
       "column_gap": "Abstand zwischen Spalten",
       "bottom_bar": "Untere Leiste",
       "copyright_text": "Copyright-Text",
-      "copyright_text_info": "Ein © wird automatisch vorangestellt. Verwenden Sie [year] für das aktuelle Jahr, z. B. zeigt „[year] Vera Studio“ „© 2026 Vera Studio“. Leer lassen für „© Jahr Shopname“",
+      "copyright_text_info": "Ein © wird automatisch vorangestellt. Verwenden Sie [year] für das aktuelle Jahr, z. B. zeigt „[year] My Store“ „© 2026 My Store“. Leer lassen für „© Jahr Shopname“",
       "show_powered_by": "„Powered by Shopify“ anzeigen",
       "show_policies": "Richtlinien-Links anzeigen",
       "show_divider": "Trennlinie anzeigen",

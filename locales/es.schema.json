@@ -1055,7 +1055,7 @@
       "column_gap": "Espacio entre columnas",
       "bottom_bar": "Barra inferior",
       "copyright_text": "Texto de copyright",
-      "copyright_text_info": "Se añade un © delante automáticamente. Usa [year] para el año actual, p. ej. «[year] Vera Studio» muestra «© 2026 Vera Studio». Déjalo vacío para «© año Nombre de la tienda»",
+      "copyright_text_info": "Se añade un © delante automáticamente. Usa [year] para el año actual, p. ej. «[year] My Store» muestra «© 2026 My Store». Déjalo vacío para «© año Nombre de la tienda»",
       "show_powered_by": "Mostrar «Con tecnología de Shopify»",
       "show_policies": "Mostrar los enlaces de políticas",
       "show_divider": "Mostrar una línea divisoria",

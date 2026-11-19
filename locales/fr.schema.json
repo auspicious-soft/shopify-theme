@@ -1055,7 +1055,7 @@
       "column_gap": "Espace entre les colonnes",
       "bottom_bar": "Barre inférieure",
       "copyright_text": "Texte du copyright",
-      "copyright_text_info": "Un © est ajouté automatiquement devant. Utilisez [year] pour l’année en cours, par ex. « [year] Vera Studio » affiche « © 2026 Vera Studio ». Laissez vide pour « © année Nom de la boutique »",
+      "copyright_text_info": "Un © est ajouté automatiquement devant. Utilisez [year] pour l’année en cours, par ex. « [year] My Store » affiche « © 2026 My Store ». Laissez vide pour « © année Nom de la boutique »",
       "show_powered_by": "Afficher « Propulsé par Shopify »",
       "show_policies": "Afficher les liens des politiques",
       "show_divider": "Afficher une ligne de séparation",
