@@ -18,7 +18,7 @@
           "type": "announcement-item",
           "settings": {
             "enabled": true,
-            "text": "Free shipping on orders above $1000",
+            "text": "Welcome to our store",
             "link": "",
             "open_in_new_tab": false
           },
@@ -28,7 +28,7 @@
           "type": "announcement-item",
           "settings": {
             "enabled": true,
-            "text": "New collection available",
+            "text": "Free shipping on qualifying orders",
             "link": "",
             "open_in_new_tab": false
           },
@@ -39,7 +39,7 @@
           "disabled": true,
           "settings": {
             "enabled": false,
-            "text": "Get 10% off today",
+            "text": "Sign up for 10% off your first order",
             "link": "",
             "open_in_new_tab": false
           },
