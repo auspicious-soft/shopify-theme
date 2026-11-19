@@ -70,7 +70,7 @@
           "settings": {
             "icon": "map_pin",
             "title": "Address",
-            "text": "<p>725 5th Ave, New York, NY 10022, USA</p>"
+            "text": "<p>123 Main Street, Anytown, NY 10001, USA</p>"
           }
         },
         "phone": {
@@ -167,7 +167,7 @@
       "type": "map",
       "name": "t:sections.map.name",
       "settings": {
-        "address": "725 5th Ave, New York, NY 10022, USA",
+        "address": "New York, NY, USA",
         "zoom": 13,
         "height": 480,
         "mobile_height": 360,
@@ -178,7 +178,7 @@
         "heading": "Our store",
         "heading_tag": "h2",
         "heading_class": "h4",
-        "text": "<p>725 5th Ave, New York, NY 10022, USA</p><p>Mon–Fri: 10:00 – 18:00</p>",
+        "text": "<p>123 Main Street, Anytown, NY 10001, USA</p><p>Mon–Fri: 10:00 – 18:00</p>",
         "show_directions": true,
         "button_label": "Get directions",
         "button_style": "primary",

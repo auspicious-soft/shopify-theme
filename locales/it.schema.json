@@ -1357,7 +1357,7 @@
       "name": "Mappa",
       "header_map": "Mappa",
       "address": "Indirizzo",
-      "address_info": "Qualsiasi indirizzo o luogo che Google Maps può trovare, ad es. 725 5th Ave, New York",
+      "address_info": "Qualsiasi indirizzo o luogo che Google Maps può trovare, ad es. New York, NY",
       "zoom": "Zoom",
       "height": "Altezza della mappa",
       "mobile_height": "Altezza della mappa su mobile",
