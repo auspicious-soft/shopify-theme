@@ -8,7 +8,7 @@
   - "View all": a button under the products or a link beside the heading.
   - Items shown per row on desktop and on mobile (with an optional peek of
     the next card in the mobile carousel).
-  Shows placeholder cards in the theme editor until a collection is chosen.
+  Shows placeholder cards until a collection is chosen.
 {% endcomment %}
 {%- liquid
   # Theme editor only: guidance for empty fields. request.design_mode is false
@@ -40,11 +40,15 @@
   endif
   assign view_all_label = section.settings.view_all_label | default: 'View all'
 
+  # Placeholder cards: always when no collection is chosen yet (a new store
+  # sees the section's layout, like the other banners' placeholder images);
+  # for a chosen but empty collection only in the theme editor, so shoppers
+  # never see sample products in place of a real collection.
   assign placeholder_count = 0
-  if collection == blank or collection.products_count == 0
-    if request.design_mode
-      assign placeholder_count = limit | at_most: 8
-    endif
+  if collection == blank
+    assign placeholder_count = limit | at_most: 8
+  elsif collection.products_count == 0 and request.design_mode
+    assign placeholder_count = limit | at_most: 8
   endif
 
   assign peek = 0
