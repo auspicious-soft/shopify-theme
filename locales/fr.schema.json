@@ -1,0 +1,1984 @@
+{
+  "general": {
+    "404": "Page 404",
+    "announcement_bar": "Barre d’annonces",
+    "announcement_item": "Annonce",
+    "article": "Article de blog",
+    "block": "Bloc",
+    "blog": "Liste d’articles de blog",
+    "cart": "Page du panier",
+    "collection": "Page de collection",
+    "collections": "Collections",
+    "collection_card": "Carte de collection",
+    "collections_grid": "Grille de collections",
+    "colors": "Couleurs",
+    "column": "Colonne",
+    "content": "Contenu",
+    "custom_section": "Contenu personnalisé",
+    "fonts": "Polices",
+    "footer": "Pied de page",
+    "group": "Groupe",
+    "heading": "Titre",
+    "header": "En-tête",
+    "hero_banner": "Bannière principale",
+    "layout": "Mise en page",
+    "main": "Principal",
+    "page": "Contenu de la page",
+    "password": "Page de mot de passe",
+    "primary": "Principal",
+    "product": "Page produit",
+    "row": "Ligne",
+    "search": "Résultats de recherche",
+    "secondary": "Secondaire",
+    "section": "Section",
+    "settings": "Paramètres",
+    "sidebar": "Barre latérale",
+    "text": "Texte",
+    "theme": "Thème",
+    "typography": "Typographie"
+  },
+  "labels": {
+    "alignment": "Alignement",
+    "letter_spacing": "Espacement des lettres",
+    "media": "Média",
+    "media_type": "Type de média",
+    "mobile_image": "Image mobile",
+    "mobile_image_info": "Facultatif, affiché sur les écrans de moins de 750 px",
+    "background_image_video_info": "Avec une vidéo, affichée pendant son chargement et aux visiteurs qui préfèrent réduire les animations",
+    "video": "Vidéo",
+    "video_info": "Importez un fichier MP4. Lecture en sourdine et en boucle, sans commandes",
+    "mobile_video": "Vidéo mobile",
+    "mobile_video_info": "Facultatif, affiché sur les écrans de moins de 750 px",
+    "video_url": "Lien YouTube ou Vimeo",
+    "video_url_info": "Utilisé lorsqu’aucune vidéo n’est importée ci-dessus",
+    "announcement_bar_mode": "Mise en page",
+    "announcement_text": "Texte de l’annonce",
+    "appearance": "Apparence",
+    "autoplay": "Défilement automatique",
+    "background": "Arrière-plan",
+    "background_color": "Couleur d’arrière-plan",
+    "background_image": "Image d’arrière-plan",
+    "boxed": "Encadré",
+    "border": "Bordure",
+    "button_background": "Arrière-plan du bouton",
+    "button_border_color": "Couleur de bordure du bouton",
+    "button_corner_radius": "Arrondi des angles du bouton",
+    "button_settings": "Bouton",
+    "button_style": "Style du bouton",
+    "button_text": "Texte du bouton",
+    "button_text_color": "Couleur du texte du bouton",
+    "button_url": "Lien du bouton",
+    "content_position_horizontal": "Position horizontale du contenu",
+    "content_position_vertical": "Position verticale du contenu",
+    "content_settings": "Contenu",
+    "desktop_logo_width": "Largeur du logo sur ordinateur",
+    "drawer_position": "Position du tiroir",
+    "drawer_settings": "Tiroir du menu",
+    "drawer_submenu_style": "Style du sous-menu",
+    "enable": "Activer",
+    "enable_button": "Afficher le bouton",
+    "font_size": "Taille de police",
+    "font_weight": "Graisse de police",
+    "foreground": "Premier plan",
+    "grid_gap": "Espacement de la grille",
+    "grid_item_width": "Largeur des éléments de la grille",
+    "hamburger_display": "Bouton hamburger",
+    "hamburger_position": "Position du hamburger (ordinateur)",
+    "hamburger_text": "Texte du bouton hamburger",
+    "header_icons": "Icônes",
+    "header_options": "Options de l’en-tête",
+    "header_style": "Style de l’en-tête",
+    "heading": "Titre",
+    "section_width": "Largeur",
+    "heading_width": "Largeur du titre",
+    "mega_menu_width": "Largeur du méga-menu",
+    "heading_tag": "Balise du titre",
+    "heading_tag_info": "Le niveau du titre, pour le SEO et les lecteurs d’écran. N’utilisez H1 que pour un seul titre par page.",
+    "heading_class": "Taille du titre",
+    "heading_class_info": "La taille d’affichage du titre, indépendamment de sa balise",
+    "height_type": "Hauteur",
+    "hero_background_color_info": "Affiché derrière l’image pendant son chargement, et si aucune image n’est définie",
+    "hero_logo": "Logo de la bannière",
+    "hero_logo_info": "Utilise Paramètres du thème > Logo s’il est vide",
+    "hover_logo": "Logo au survol",
+    "hover_logo_info": "Facultatif. Remplace le logo principal au survol ou à la sélection. Même taille que le logo principal (largeur du logo ordinateur/mobile ci-dessous) : utilisez une image de forme similaire pour une transition nette.",
+    "horizontal_spacing": "Espace entre le texte et le bouton",
+    "icon": "Icône",
+    "input_corner_radius": "Arrondi des angles des champs",
+    "item_gap": "Espacement des éléments",
+    "layout_direction": "Sens de la mise en page",
+    "link": "Lien",
+    "logo_position": "Position du logo",
+    "logo_reveal_settings": "Style d’apparition du logo",
+    "logo_reveal_settings_info": "S’applique uniquement lorsque le style d’en-tête est Apparition du logo",
+    "logo_reveal_speed": "Vitesse du fondu du logo",
+    "marquee_alignment_info": "Alignement de repli lorsque l’animation est en pause ou que la réduction des animations est activée",
+    "marquee_direction": "Direction",
+    "marquee_settings": "Paramètres du défilement",
+    "marquee_speed": "Vitesse de l’animation",
+    "menu": "Menu",
+    "menu_type": "Menu ordinateur",
+    "mobile_font_size": "Taille de police sur mobile",
+    "mobile_logo_width": "Largeur du logo sur mobile",
+    "mobile_padding_bottom": "Marge intérieure inférieure sur mobile",
+    "mobile_padding_custom": "Marges intérieures mobiles séparées",
+    "mobile_padding_custom_info": "Si désactivé, le mobile utilise les marges intérieures ci-dessus",
+    "mobile_padding_inline": "Marge intérieure horizontale sur mobile",
+    "mobile_padding_top": "Marge intérieure supérieure sur mobile",
+    "mobile_settings": "Mobile",
+    "mobile_settings_info": "S’appliquent uniquement aux écrans mobiles et n’affectent pas les paramètres ordinateur ci-dessus",
+    "nav_hover_color": "Couleur au survol",
+    "nav_item_spacing": "Espacement des éléments",
+    "navigation_settings": "Navigation",
+    "navigation_settings_info": "S’applique au menu horizontal sur ordinateur",
+    "open_in_new_tab": "Ouvrir le lien dans un nouvel onglet",
+    "overlay_color": "Couleur de superposition",
+    "overlay_on_blog": "Pages du blog et des articles",
+    "overlay_on_collection": "Pages de collection",
+    "overlay_on_list_collections": "Page de la liste des collections",
+    "overlay_on_home": "Page d’accueil",
+    "overlay_on_page": "Modèle de page",
+    "overlay_page_templates": "Uniquement ces modèles de page",
+    "overlay_page_templates_info": "Facultatif. Noms de modèles séparés par des virgules, par ex. about, contact. Utilisez page pour le modèle de page par défaut. Laissez vide pour tous les modèles de page",
+    "overlay_on_product": "Pages produit",
+    "overlay_opacity": "Opacité de la superposition",
+    "overlay_text_color": "Couleur du texte et des icônes sur la superposition",
+    "padding": "Marge intérieure",
+    "padding_bottom": "Marge intérieure inférieure",
+    "padding_top": "Marge intérieure supérieure",
+    "page_margin": "Marge de la page",
+    "page_width": "Largeur de la page",
+    "pause_on_hover": "Pause au survol",
+    "separator_style": "Style du séparateur",
+    "show_account": "Icône du compte",
+    "account_display": "Bouton du compte",
+    "account_text": "Texte du bouton du compte",
+    "localization_settings": "Sélecteur de pays/langue",
+    "localization_settings_info": "Affiché uniquement si la boutique a plus d’un pays ou d’une langue activés dans Paramètres > Marchés / Langues",
+    "localization_selector": "Afficher le sélecteur",
+    "show_cart": "Icône du panier",
+    "show_cart_count": "Nombre d’articles du panier",
+    "show_payment_icons": "Afficher les icônes de paiement",
+    "show_search": "Icône de recherche",
+    "slide_duration": "Durée de la diapositive",
+    "slider_direction": "Direction",
+    "slider_settings": "Paramètres du diaporama",
+    "static_settings": "Paramètres statiques",
+    "sticky_background_color": "Arrière-plan de l’en-tête fixe",
+    "sticky_background_color_info": "S’applique uniquement lorsque l’en-tête transparent devient fixe en défilant (voir En-tête transparent ci-dessous). Un en-tête déjà opaque conserve son jeu de couleurs habituel",
+    "sticky_header": "En-tête fixe",
+    "sticky_header_info": "S’applique à toutes les pages, pour les deux styles d’en-tête. « Au défilement vers le haut » masque l’en-tête en descendant et le réaffiche en remontant.",
+    "sticky_logo": "Logo de l’en-tête fixe",
+    "sticky_logo_info": "Affiché dans l’en-tête une fois le logo de la bannière dépassé. Utilise Paramètres du thème > Logo s’il est vide",
+    "subheading": "Sous-titre",
+    "transparent_header": "En-tête transparent",
+    "transparent_header_info": "Choisissez les modèles qui affichent un en-tête transparent au-dessus du contenu au lieu d’un arrière-plan opaque",
+    "transparent_logo": "Logo de l’en-tête transparent",
+    "transparent_logo_info": "Facultatif. Remplace le logo par défaut tant que l’en-tête est transparent (style Standard uniquement) ; le logo par défaut revient lorsque l’en-tête devient opaque. Utilise le logo par défaut s’il est vide",
+    "text_style": "Style du texte",
+    "text_color": "Couleur du texte",
+    "text": "Texte",
+    "transition_speed": "Vitesse de transition",
+    "desktop_submenu_type": "Type de sous-menu",
+    "desktop_submenu_type_info": "Le méga-menu affiche les liens de 2e niveau comme titres de colonnes, avec leurs liens de 3e niveau en dessous. Ajoutez un bloc Promo du méga-menu pour afficher une image et un titre à droite.",
+    "text_case": "Casse du texte",
+    "text_case_combined": "Majuscules",
+    "heading_case": "Titres",
+    "button_case": "Textes des boutons",
+    "overlay_content_color": "Couleur du contenu de l’en-tête transparent",
+    "overlay_content_color_info": "Texte du logo, menu et icônes tant que l’en-tête est transparent",
+    "buttons": "Boutons",
+    "button_size": "Taille du bouton",
+    "banner_color_scheme": "Jeu de couleurs de la bannière",
+    "nav_hover_color_transparent": "Couleur au survol (en-tête transparent)",
+    "nav_hover_color_transparent_info": "Utilisée tant que l’en-tête reste transparent au survol (style Standard avec « Arrière-plan opaque au survol » désactivé). Laissez vide pour utiliser la couleur au survol ci-dessus",
+    "overlay_hover_solid": "Arrière-plan opaque au survol",
+    "overlay_hover_solid_info": "Style Standard : l’en-tête transparent devient opaque au survol. L’apparition du logo le fait toujours",
+    "caption": "Légende",
+    "sticky_text_color": "Couleur du texte de l’en-tête fixe"
+  },
+  "options": {
+    "section_width": {
+      "full": "Pleine largeur",
+      "full_no_padding": "Pleine largeur, sans marge",
+      "full_padded": "Pleine largeur avec marge",
+      "page": "Largeur de la page"
+    },
+    "alignment": {
+      "left": "Gauche",
+      "center": "Centre",
+      "right": "Droite"
+    },
+    "announcement_bar_mode": {
+      "marquee": "Défilement horizontal",
+      "slider": "Diaporama vertical",
+      "static": "Statique"
+    },
+    "button_style": {
+      "primary": "Principal",
+      "secondary": "Secondaire"
+    },
+    "direction": {
+      "horizontal": "Horizontal",
+      "vertical": "Vertical"
+    },
+    "font_weight": {
+      "regular": "Normal",
+      "medium": "Moyen",
+      "semibold": "Demi-gras",
+      "bold": "Gras"
+    },
+    "letter_spacing": {
+      "none": "Aucun",
+      "small": "Petit",
+      "medium": "Moyen",
+      "large": "Grand"
+    },
+    "heading_size": {
+      "default": "Par défaut",
+      "extra_small": "Très petit",
+      "small": "Petit",
+      "medium": "Moyen",
+      "large": "Grand",
+      "extra_large": "Très grand",
+      "huge": "Énorme"
+    },
+    "media_type": {
+      "image": "Image",
+      "video": "Vidéo"
+    },
+    "height_type": {
+      "adapt": "Adapter à l’image",
+      "small": "Petit",
+      "medium": "Moyen",
+      "large": "Grand",
+      "fullscreen": "Plein écran"
+    },
+    "hamburger_display": {
+      "icon": "Icône",
+      "text": "Texte"
+    },
+    "account_display": {
+      "icon": "Icône",
+      "text": "Texte"
+    },
+    "drawer_submenu_style": {
+      "accordion": "Déroulant (plus/moins)",
+      "slide": "Diapositive"
+    },
+    "localization_selector": {
+      "none": "Masqué",
+      "country": "Pays/région uniquement",
+      "language": "Langue uniquement",
+      "both": "Pays/région et langue"
+    },
+    "header_style": {
+      "standard": "Standard",
+      "logo_reveal": "Apparition du logo"
+    },
+    "left_right": {
+      "left": "Gauche",
+      "right": "Droite"
+    },
+    "menu_type": {
+      "horizontal": "Menu horizontal",
+      "hamburger": "Menu hamburger"
+    },
+    "separator_style": {
+      "none": "Aucun",
+      "dot": "Point (•)",
+      "line": "Trait (—)",
+      "slash": "Barre oblique (/)",
+      "pipe": "Barre verticale (|)"
+    },
+    "sticky_header_type": {
+      "none": "Aucun",
+      "always": "Toujours",
+      "on_scroll_up": "Au défilement vers le haut"
+    },
+    "vertical_position": {
+      "top": "Haut",
+      "middle": "Milieu",
+      "bottom": "Bas"
+    },
+    "up_down": {
+      "up": "Haut",
+      "down": "Bas"
+    },
+    "page_width": {
+      "narrow": "Étroit",
+      "wide": "Large"
+    },
+    "size": {
+      "large": "Grand",
+      "small": "Petit"
+    },
+    "text_style": {
+      "title": "Titre",
+      "subtitle": "Sous-titre",
+      "normal": "Texte normal"
+    },
+    "desktop_submenu_type": {
+      "dropdown": "Liste déroulante",
+      "mega": "Méga-menu"
+    },
+    "text_case": {
+      "uppercase": "MAJUSCULES",
+      "none": "Tel que saisi",
+      "all": "Titres et boutons en MAJUSCULES",
+      "headings": "Titres en MAJUSCULES uniquement",
+      "buttons": "Boutons en MAJUSCULES uniquement"
+    },
+    "button_size": {
+      "small": "Petit",
+      "medium": "Moyen",
+      "large": "Grand"
+    }
+  },
+  "sections": {
+    "cart_drawer": {
+      "name": "Tiroir du panier"
+    },
+    "page_header": {
+      "name": "Bannière d’en-tête de page",
+      "heading_info": "Laissez vide pour utiliser le titre de la page",
+      "button_info": "Laissez vide pour masquer le bouton",
+      "transparent_info": "Pour afficher l’en-tête transparent sur cette bannière, activez-le dans la section En-tête (En-tête transparent) et placez cette section en premier sur la page"
+    },
+    "all": {
+      "colors": {
+        "label": "Jeu de couleurs"
+      },
+      "layout": "Mise en page",
+      "columns_desktop": "Colonnes sur ordinateur",
+      "columns_mobile": "Colonnes sur mobile",
+      "medium": "Moyen",
+      "ratio_adapt": "Adapter à l’image",
+      "ratio_square": "Carré (1:1)",
+      "ratio_portrait": "Portrait (4:5)",
+      "ratio_tall": "Haut (2:3)",
+      "ratio_landscape": "Paysage (4:3)"
+    },
+    "collections": {
+      "show_heading": "Afficher le titre",
+      "heading_info": "Laissez vide pour utiliser « Collections »",
+      "collection_list": "Collections",
+      "collection_list_info": "Laissez vide pour afficher toutes les collections de la boutique. Les collections choisies s’affichent sans pagination",
+      "header_collections": "Collections",
+      "sort": "Trier par",
+      "sort_info": "Trie les collections sur chaque page",
+      "sort_default": "Par défaut (ordre de la boutique, ou tel que choisi)",
+      "sort_title_asc": "Alphabétique, de A à Z",
+      "sort_title_desc": "Alphabétique, de Z à A",
+      "sort_count_desc": "Plus de produits en premier",
+      "sort_count_asc": "Moins de produits en premier",
+      "hide_empty": "Masquer les collections vides",
+      "layout_grid": "Grille",
+      "layout_mosaic": "Mosaïque (première collection en grand)",
+      "layout_index": "Index A–Z",
+      "card_info": "Design des cartes (format d’image, texte sur ou sous l’image, nombre de produits, description) : Paramètres du thème > Cartes de collection",
+      "per_page": "Collections par page",
+      "per_page_info": "Pour des lignes complètes, utilisez un multiple du nombre de colonnes",
+      "index_show_count": "Afficher le nombre de produits",
+      "show_banner": "Afficher la bannière",
+      "show_banner_info": "Affiche le titre, le fil d’Ariane et le sous-titre sur une bannière image",
+      "banner_image": "Image",
+      "banner_mobile_image": "Image mobile",
+      "banner_mobile_image_info": "Facultatif. Utilisé sur les écrans de moins de 750 px",
+      "banner_color_scheme_info": "Couleur du texte et de la superposition",
+      "card_image_source": "Image de carte",
+      "card_image_source_info": "« Image de carte » utilise le métachamp custom.card_image de chaque collection, ou l’image de la collection à défaut",
+      "card_image_banner": "Image de la collection (bannière)",
+      "card_image_card": "Image de carte (métachamp)",
+      "caption_info": "Texte court au-dessus du titre, par ex. Acheter par collection",
+      "banner_content_position": "Position du contenu",
+      "banner_content_position_info": "Emplacement du titre, de la légende, du fil d’Ariane et du sous-titre sur la bannière",
+      "position": {
+        "top_left": "En haut à gauche",
+        "top_center": "En haut au centre",
+        "top_right": "En haut à droite",
+        "middle_left": "Au milieu à gauche",
+        "middle_center": "Au milieu au centre",
+        "middle_right": "Au milieu à droite",
+        "bottom_left": "En bas à gauche",
+        "bottom_center": "En bas au centre",
+        "bottom_right": "En bas à droite"
+      }
+    },
+    "collection": {
+      "banner": "Bannière",
+      "show_banner": "Afficher la bannière",
+      "banner_style": "Style de la bannière",
+      "banner_style_info": "« Sur image » utilise l’image de la collection, ou le style minimal s’il n’y en a pas",
+      "banner_style_minimal": "Minimal",
+      "banner_style_image": "Sur image",
+      "banner_height": "Hauteur de la bannière",
+      "show_description": "Afficher la description de la collection",
+      "product_grid": "Grille de produits",
+      "products_per_page": "Produits par page",
+      "products_per_page_info": "Pour des lignes complètes, utilisez un multiple du nombre de colonnes : par ex. 12, 15 ou 18 pour 3 colonnes, 16 ou 20 pour 4",
+      "show_count": "Afficher le nombre de produits",
+      "pagination_type": "Pagination",
+      "pagination_numbers": "Numéros de page",
+      "pagination_load_more": "Bouton Afficher plus",
+      "filtering": "Filtres et tri",
+      "enable_filtering": "Activer les filtres",
+      "enable_filtering_info": "Personnalisez les filtres avec l’application Search & Discovery",
+      "filter_layout": "Disposition des filtres",
+      "filter_layout_info": "Sur mobile, les filtres s’ouvrent toujours dans un tiroir",
+      "filter_layout_sidebar": "Barre latérale",
+      "filter_layout_drawer": "Tiroir",
+      "enable_sorting": "Activer le tri",
+      "banner_placeholder": "Afficher une image de remplacement pour les collections sans image",
+      "banner_placeholder_info": "Si désactivé, ces collections affichent la bannière minimale",
+      "banner_placeholder_image": "Image de remplacement",
+      "banner_placeholder_image_info": "Laissez vide pour utiliser une illustration de remplacement",
+      "banner_color_scheme_info": "Couleur du texte et de la superposition sur les bannières image, arrière-plan sur les bannières minimales",
+      "filter_button_size": "Taille des boutons de filtre",
+      "filter_button_size_info": "Boutons Tout effacer et Voir les résultats dans le tiroir des filtres",
+      "filter_value_style": "Style des valeurs de filtre",
+      "filter_value_style_info": "Les filtres de couleur s’affichent toujours en pastilles, et la disponibilité en liste de cases à cocher",
+      "filter_value_pills": "Pastilles",
+      "filter_value_checkbox": "Liste de cases à cocher"
+    },
+    "product": {
+      "media": "Média",
+      "gallery_layout": "Disposition de la galerie",
+      "gallery_thumbnails": "Miniatures en dessous",
+      "gallery_thumbnails_left": "Miniatures à gauche",
+      "gallery_carousel": "Carrousel",
+      "gallery_grid": "Grille (2 colonnes)",
+      "gallery_stacked": "Empilé",
+      "media_size": "Largeur des médias sur ordinateur",
+      "media_ratio": "Format des médias",
+      "enable_zoom": "Activer le zoom plein écran sur les images",
+      "video_loop": "Lire les vidéos en boucle et en sourdine",
+      "info": "Infos produit",
+      "sticky_info": "Garder les infos produit visibles pendant le défilement",
+      "blocks": {
+        "text": {
+          "name": "Texte",
+          "style_body": "Corps de texte",
+          "style_subtle": "Discret",
+          "style_uppercase": "Libellé en majuscules"
+        },
+        "vendor": {
+          "name": "Fournisseur"
+        },
+        "title": {
+          "name": "Titre",
+          "size": "Taille"
+        },
+        "rating": {
+          "name": "Note",
+          "info": "Affiche les étoiles d’une application d’avis produits qui enregistre les notes dans le métachamp standard reviews.rating"
+        },
+        "price": {
+          "name": "Prix",
+          "show_saving": "Afficher les badges",
+          "show_saving_info": "Badges promo, épuisé et meilleure vente. Texte, couleurs et arrondi des angles : Paramètres du thème > Badges",
+          "show_tax_note": "Afficher la mention taxes et expédition"
+        },
+        "sku": {
+          "name": "SKU"
+        },
+        "inventory": {
+          "name": "État du stock",
+          "low_threshold": "Seuil de stock faible",
+          "low_threshold_info": "Affiche « Plus que X » à partir de cette quantité ou en dessous (pour les stocks suivis)"
+        },
+        "variant_picker": {
+          "name": "Sélecteur de variantes",
+          "picker_type": "Style",
+          "pills": "Pastilles",
+          "dropdown": "Liste déroulante",
+          "show_swatches": "Afficher les pastilles de couleur",
+          "show_swatches_info": "Pour les options nommées Color ou Colour",
+          "underline": "Souligné"
+        },
+        "quantity": {
+          "name": "Sélecteur de quantité",
+          "layout": "Mise en page",
+          "layout_info": "Même ligne : la quantité est à côté d’Ajouter au panier (nécessite un bloc Boutons d’achat)",
+          "layout_inline": "Même ligne qu’Ajouter au panier",
+          "layout_stacked": "Ligne séparée, au-dessus des boutons",
+          "show_label": "Afficher le libellé « Quantité »"
+        },
+        "buy_buttons": {
+          "name": "Boutons d’achat",
+          "button_style": "Style du bouton Ajouter au panier",
+          "button_style_primary": "Principal",
+          "button_style_secondary": "Secondaire",
+          "buy_now_background": "Arrière-plan du bouton Acheter maintenant",
+          "buy_now_text": "Texte du bouton Acheter maintenant",
+          "buy_now_info": "S’applique au bouton simple « Acheter maintenant ». Les boutons de marque comme Shop Pay ou PayPal gardent leurs propres couleurs",
+          "show_dynamic_checkout": "Afficher les boutons de paiement dynamique",
+          "show_dynamic_checkout_info": "Permet aux clients d’aller directement au paiement avec un moyen comme Shop Pay ou PayPal"
+        },
+        "description": {
+          "name": "Description"
+        },
+        "collapsible_tab": {
+          "name": "Onglet repliable",
+          "content": "Contenu",
+          "page": "Contenu d’une page",
+          "open": "Ouvert par défaut",
+          "display": "Afficher comme",
+          "display_info": "Onglet : rejoint la rangée d’onglets à côté des boutons. Accordéon : s’ouvre et se ferme à l’emplacement du bloc",
+          "display_section": "Comme la section",
+          "display_tab": "Onglet",
+          "display_accordion": "Accordéon"
+        },
+        "share": {
+          "name": "Partager"
+        },
+        "custom_liquid": {
+          "name": "Liquid personnalisé"
+        },
+        "divider": {
+          "name": "Séparateur"
+        }
+      },
+      "size_guide": {
+        "name": "Guide des tailles",
+        "show": "Afficher le guide des tailles",
+        "label": "Texte du lien",
+        "show_icon": "Afficher l’icône règle",
+        "placement": "Position du lien",
+        "placement_info": "Les produits sans option de taille affichent toujours le lien à l’emplacement de ce bloc",
+        "placement_size_option": "À côté de l’option de taille",
+        "placement_block": "À l’emplacement de ce bloc",
+        "only_with_size": "Uniquement pour les produits avec une option de taille",
+        "only_with_size_info": "Le nom de l’option de taille se définit dans Paramètres du thème > Cartes produit",
+        "style": "Ouvrir comme",
+        "style_drawer": "Tiroir latéral",
+        "style_popup": "Fenêtre contextuelle",
+        "header_content": "Contenu du guide",
+        "metafield_info": "Pour un guide différent par produit, ajoutez un métachamp produit « custom.size_guide » (référence de page ou texte enrichi). Il remplace la page et le texte ci-dessous",
+        "heading": "Titre",
+        "heading_info": "Laissez vide pour utiliser le titre de la page",
+        "page": "Page",
+        "page_info": "Idéal pour les tableaux de tailles : créez une page avec un tableau dans Boutique en ligne > Pages",
+        "content": "Texte",
+        "content_info": "Utilisé lorsqu’aucune page n’est sélectionnée"
+      },
+      "sticky_atc": {
+        "header": "Ajout au panier fixe",
+        "enable": "Afficher la barre d’ajout au panier fixe",
+        "enable_info": "Apparaît en bas de l’écran lorsque le bouton Ajouter au panier n’est plus visible. Nécessite le bloc Boutons d’achat",
+        "devices": "Afficher sur",
+        "devices_all": "Ordinateur et mobile",
+        "devices_desktop": "Ordinateur uniquement",
+        "devices_mobile": "Mobile uniquement",
+        "show_image": "Afficher l’image du produit",
+        "show_variants": "Afficher les options de variante",
+        "show_variants_info": "Permet de changer de variante depuis la barre ; la page se met à jour en conséquence",
+        "picker": "Style des variantes",
+        "picker_combined": "Une liste déroulante (par ex. « M / Blanc »)",
+        "picker_dropdowns": "Une liste par option (Taille, Couleur)",
+        "picker_buttons": "Boutons (pastilles pour la couleur)"
+      },
+      "gallery_overlay": "Plein écran avec détails sur les images",
+      "gallery_layout_info": "Plein écran : images bord à bord à hauteur d’écran, avec les détails du produit sur un panneau translucide. Fonctionne mieux avec la largeur de section Pleine",
+      "gallery_autoplay": "Lecture automatique des images",
+      "gallery_autoplay_info": "Les images défilent d’elles-mêmes dans les dispositions en diaporama (et sur mobile). Pause au survol ou au toucher",
+      "gallery_autoplay_speed": "Changer d’image toutes les",
+      "gallery_autoplay_style": "Style de lecture automatique",
+      "gallery_autoplay_style_info": "Le défilement continu n’est disponible qu’avec la disposition Plein écran",
+      "gallery_autoplay_marquee": "Défilement (continu)",
+      "gallery_autoplay_slide": "Une image à la fois",
+      "gallery_marquee_speed": "Vitesse du défilement",
+      "gallery_marquee_speed_info": "Pixels par seconde",
+      "content_style": "Style du contenu repliable",
+      "content_style_info": "Par défaut pour les blocs Onglet repliable ; chaque bloc peut choisir Onglet ou Accordéon",
+      "content_style_accordion": "Accordéon (ouvrir / fermer)",
+      "content_style_tabs": "Onglets",
+      "tabs_position": "Position des onglets",
+      "tabs_above": "Au-dessus des boutons",
+      "tabs_below": "Sous les boutons",
+      "tabs_description": "Description en premier onglet",
+      "tabs_description_label": "Libellé de l’onglet Description",
+      "tabs_position_info": "Utilisé lorsqu’un bloc s’affiche en onglet"
+    },
+    "product_list": {
+      "products_to_show": "Produits à afficher",
+      "layout": "Mise en page",
+      "layout_grid": "Grille",
+      "layout_slider": "Diaporama"
+    },
+    "related_products": {
+      "name": "Produits associés",
+      "info": "Les recommandations sont choisies automatiquement par Shopify et s’améliorent à mesure que votre boutique reçoit des commandes. Personnalisez-les avec l’application Search & Discovery.",
+      "intent": "Type de recommandation",
+      "intent_info": "« Se marie bien avec » affiche les produits complémentaires configurés dans l’application Search & Discovery",
+      "intent_related": "Produits associés",
+      "intent_complementary": "Se marie bien avec"
+    },
+    "recommended_products": {
+      "name": "Produits recommandés",
+      "products": "Produits",
+      "product_list": "Produits",
+      "product_list_info": "Choisissez les produits manuellement. Prioritaire sur la collection",
+      "collection": "Collection",
+      "collection_info": "Utilisée lorsqu’aucun produit n’est choisi ci-dessus",
+      "show_view_all": "Afficher le lien « Tout voir »",
+      "show_view_all_info": "Renvoie vers la collection sélectionnée"
+    },
+    "recently_viewed": {
+      "name": "Produits consultés récemment",
+      "card_name": "Carte de produit consulté récemment",
+      "info": "Affiche les produits que chaque client a consultés le plus récemment, enregistrés dans son propre navigateur. Masqué tant qu’il n’a consulté aucun produit (le produit actuel est exclu).",
+      "show_clear": "Afficher le lien « Effacer »"
+    },
+    "social_marquee": {
+      "name": "Images sociales défilantes",
+      "info": "Les images défilent d’elles-mêmes. Les clients peuvent faire glisser la bande ; un glissement arrête le mouvement et le suivant le relance.",
+      "speed_info": "Pixels parcourus par seconde",
+      "direction_left": "De droite à gauche",
+      "direction_right": "De gauche à droite",
+      "items_desktop": "Images affichées sur ordinateur",
+      "items_mobile": "Images affichées sur mobile",
+      "items_info": "Nombre d’images visibles à la fois sur la bande ; leur largeur s’ajuste",
+      "aspect_ratio": "Forme de l’image",
+      "ratio_story": "Story (9:16)",
+      "ratio_portrait": "Portrait (4:5)",
+      "ratio_square": "Carré (1:1)",
+      "corner_radius": "Arrondi des angles",
+      "block_name": "Image",
+      "image": "Image",
+      "username": "Nom d’utilisateur",
+      "username_info": "Facultatif, affiché en haut de l’image",
+      "caption_info": "Texte court au-dessus du titre, par ex. #votremarque",
+      "caption_size": "Taille de la légende"
+    },
+    "featured_collection": {
+      "name": "Produits en vedette",
+      "products": "Produits",
+      "collection": "Collection",
+      "layout_carousel": "Carrousel",
+      "columns_desktop": "Produits par ligne sur ordinateur",
+      "columns_mobile": "Produits par ligne sur mobile",
+      "mobile_peek": "Afficher une partie du produit suivant sur mobile",
+      "mobile_peek_info": "Indique que le carrousel peut être balayé",
+      "products_width": "Largeur des produits",
+      "products_width_info": "Largeur du carrousel ou de la grille de produits. Pleine largeur affiche les cartes bord à bord, jusqu’aux côtés de l’écran. La largeur ci-dessus définit le titre et le bouton Tout voir",
+      "arrow_position": "Position des flèches",
+      "arrow_top": "En haut, à côté du titre",
+      "arrow_sides": "Sur les côtés du carrousel",
+      "show_progress": "Afficher la barre de progression",
+      "view_all": "« Tout voir »",
+      "show_view_all": "Afficher « Tout voir »",
+      "view_all_style": "Style",
+      "view_all_button": "Bouton sous les produits",
+      "view_all_link": "Lien à côté du titre",
+      "cards": "Cartes produit",
+      "cards_info": "Le design des cartes (image, badge, pastilles, tailles, ajout rapide) se définit dans Paramètres du thème > Cartes produit, afin que toutes les cartes de la boutique soient identiques",
+      "desktop_peek": "Afficher une partie de la carte suivante sur ordinateur",
+      "desktop_peek_info": "La moitié du produit suivant apparaît en fin de ligne (Largeur des produits : Page). En pleine largeur, une portion du produit suivant apparaît au bord de l’écran"
+    },
+    "collection_banner": {
+      "name": "Bannière image",
+      "collection": "Collection",
+      "collection_info": "Facultatif. Remplit l’image, le titre et le lien s’ils sont vides. Pour renvoyer vers une autre page, utilisez le paramètre de lien ci-dessous",
+      "header_image": "Image",
+      "image": "Image",
+      "image_info": "Laissez vide pour utiliser l’image de la collection",
+      "mobile_image": "Image mobile",
+      "mobile_image_info": "Facultatif, affiché sur les écrans de moins de 750 px",
+      "height": "Hauteur sur ordinateur",
+      "mobile_height": "Hauteur sur mobile",
+      "corner_radius": "Arrondi des angles",
+      "zoom_on_hover": "Zoom sur l’image au survol",
+      "full_link_info": "Si désactivé, seul le bouton est un lien",
+      "parallax": "Effet parallaxe",
+      "parallax_info": "Le texte est fixe dans la bannière : il reste à l’écran pendant que l’image défile, puis part avec la fin de la bannière. Le texte commence en haut de la bannière",
+      "heading_info": "Laissez vide pour utiliser le titre de la collection",
+      "heading_size": "Taille du titre",
+      "heading_uppercase": "Titre en majuscules",
+      "size_small": "Petit",
+      "size_medium": "Moyen",
+      "size_large": "Grand",
+      "content_width": "Largeur maximale du contenu",
+      "button_label_info": "Laissez vide pour masquer le bouton",
+      "button_link_info": "N’importe quelle page, produit, collection, article ou adresse web. Laissez vide pour renvoyer vers la collection",
+      "link_info": "N’importe quelle page, produit, collection, article ou adresse web. Pour une collection, son image et son titre remplissent l’image et le titre vides",
+      "button_size": "Taille du bouton",
+      "button_color_scheme": "Jeu de couleurs du bouton",
+      "full_link": "Rendre toute la bannière cliquable",
+      "section_color_scheme": "Jeu de couleurs de la section"
+    },
+    "contact_form": {
+      "name": "Formulaire de contact",
+      "header_form": "Formulaire",
+      "show_phone": "Afficher le champ téléphone",
+      "extra_field": "Champ supplémentaire",
+      "extra_order_number": "Numéro de commande",
+      "extra_subject": "Objet",
+      "extra_none": "Aucun",
+      "button_label_info": "Laissez vide pour « Envoyer le message »",
+      "success_message_info": "Laissez vide pour « Merci de nous avoir contactés. Nous vous répondrons dans les plus brefs délais. »",
+      "info_position": "Coordonnées",
+      "info_position_info": "Emplacement des blocs de coordonnées. Masqués s’il n’y a aucun bloc",
+      "info_right": "À droite du formulaire",
+      "info_left": "À gauche du formulaire",
+      "info_below": "Sous le formulaire",
+      "info_none": "Masqué",
+      "block_name": "Coordonnée",
+      "header_success": "Après l’envoi",
+      "success_display": "Afficher",
+      "success_replace": "Le message à la place du formulaire",
+      "success_above": "Le message au-dessus du formulaire",
+      "success_heading": "Titre de confirmation",
+      "success_heading_info": "Laissez vide pour « Message envoyé »",
+      "success_style": "Style du message",
+      "success_highlight": "Mis en évidence (vert)",
+      "success_plain": "Simple (jeu de couleurs)",
+      "header_more": "Note sous le formulaire",
+      "info_style": "Style des coordonnées",
+      "info_style_info": "Les cartes séparées s’alignent en ligne sous le formulaire, ou s’empilent à côté",
+      "info_style_plain": "Simple",
+      "info_style_panel": "Panneau unique",
+      "info_style_cards": "Cartes séparées",
+      "info_color_scheme": "Jeu de couleurs des cartes",
+      "info_color_scheme_info": "Les cartes (ou le panneau) prennent les couleurs de ce jeu lorsqu’il diffère de l’arrière-plan",
+      "info_bar": "Arrière-plan derrière les cartes",
+      "info_bar_info": "Une bande d’arrière-plan derrière toutes les cartes",
+      "info_bar_color_scheme": "Jeu de couleurs de l’arrière-plan",
+      "form_heading": "Titre du formulaire",
+      "form_heading_info": "Affiché au-dessus du formulaire, aligné uniquement avec celui-ci",
+      "boxed": "Encadrer les coordonnées et le formulaire",
+      "boxed_info": "Un cadre teinté derrière les coordonnées et le formulaire",
+      "header_details": "Coordonnées",
+      "info_heading_uppercase": "Titres en majuscules",
+      "info_heading_size": "Taille du titre",
+      "info_text_size": "Taille du texte",
+      "info_icon_position": "Position de l’icône",
+      "icon_content": "Avant chaque ligne de texte",
+      "icon_heading": "Avant le titre",
+      "icon_side": "À côté de toute la coordonnée",
+      "block_social": "Icônes des réseaux sociaux",
+      "social_links_info": "Laissez un lien vide pour utiliser celui de Paramètres du thème > Réseaux sociaux. Supprimez ce bloc pour masquer les icônes des réseaux sociaux.",
+      "contact_style": "Style",
+      "contact_style_info": "Divisé : titre, texte et coordonnées à gauche, le formulaire dans une carte à droite. Les paramètres propres au style Classique sont masqués",
+      "style1": "Classique",
+      "style2": "Divisé"
+    },
+    "featured_product": {
+      "name": "Produit en vedette",
+      "product": "Produit",
+      "media_position": "Position de l’image",
+      "link_title": "Lier le titre à la page produit",
+      "truncate": "Afficher une courte description",
+      "truncate_info": "Affiche le début de la description en texte brut",
+      "words": "Nombre de mots",
+      "view_details": "Voir tous les détails",
+      "view_details_label": "Texte du lien",
+      "view_details_label_info": "Laissez vide pour « Voir tous les détails »"
+    },
+    "collapsible": {
+      "name": "FAQ / lignes repliables",
+      "layout_stacked": "Titre au-dessus des lignes",
+      "layout_side": "Titre à côté des lignes",
+      "one_at_a_time": "Ouvrir une ligne à la fois",
+      "one_at_a_time_info": "Ouvrir une ligne ferme celle qui était ouverte",
+      "row_style": "Style des lignes",
+      "row_lines": "Lignes",
+      "row_cards": "Cartes",
+      "row_heading_size": "Taille du titre des lignes",
+      "row_heading_default": "Par défaut",
+      "row_content_size": "Taille du contenu des lignes",
+      "size_xlarge": "Très grand",
+      "expand_icon": "Icône de dépliage",
+      "expand_plus": "Plus / moins",
+      "expand_chevron": "Chevron",
+      "show_icons": "Afficher les icônes",
+      "show_icons_info": "Si désactivé, masque toutes les icônes des lignes. Chaque ligne garde son choix d’icône pour la réactivation",
+      "icon_size": "Taille de l’icône",
+      "content_width": "Largeur maximale",
+      "block_name": "Ligne repliable",
+      "row_heading_info": "Laissez vide pour utiliser le titre de la page",
+      "icon_image": "Icône personnalisée",
+      "icon_image_info": "Facultatif. Remplace l’icône ci-dessus. Utilisez une petite image carrée ou un SVG",
+      "row_content": "Contenu",
+      "row_page": "Contenu de la page",
+      "row_page_info": "Facultatif. Ajoute le texte d’une page (par ex. votre politique d’expédition) sous le contenu ci-dessus",
+      "row_open": "Ouvert par défaut",
+      "icons": {
+        "none": "Aucun",
+        "truck": "Camion (livraison)",
+        "return": "Flèche de retour",
+        "lock": "Cadenas (sécurisé)",
+        "credit_card": "Carte bancaire",
+        "box": "Boîte (colis)",
+        "gift": "Cadeau",
+        "leaf": "Feuille (éco)",
+        "recycle": "Recyclage",
+        "star": "Étoile",
+        "heart": "Cœur",
+        "check": "Coche",
+        "question": "Point d’interrogation",
+        "chat": "Discussion",
+        "phone": "Téléphone",
+        "mail": "E-mail",
+        "clock": "Horloge",
+        "calendar": "Calendrier",
+        "ruler": "Règle (taille)",
+        "shirt": "Chemise",
+        "washing": "Lavage (entretien)",
+        "globe": "Globe",
+        "map_pin": "Repère",
+        "sparkle": "Étincelle"
+      }
+    },
+    "video": {
+      "name": "Vidéo",
+      "video": "Vidéo importée",
+      "video_info": "Importez un fichier MP4 dans Shopify. Prioritaire sur un lien YouTube ou Vimeo",
+      "mode": "Affichage",
+      "mode_info": "Cliquer pour lire charge la vidéo uniquement au clic du client, avec le son et les commandes. Arrière-plan lit la vidéo en sourdine et en boucle, comme une bannière animée",
+      "mode_player": "Cliquer pour lire",
+      "mode_background": "Arrière-plan (sourdine, en boucle)",
+      "cover_image": "Image de couverture",
+      "cover_image_info": "Affichée avant la lecture de la vidéo. Par défaut, l’aperçu de la vidéo ou la miniature YouTube",
+      "play_button_style": "Bouton de lecture",
+      "play_circle": "Cercle plein",
+      "play_outline": "Cercle vide",
+      "play_text": "Icône avec texte",
+      "show_controls": "Afficher les commandes vidéo",
+      "show_controls_info": "Barre de lecture, volume et plein écran. Si masquées, cliquer sur la vidéo la met en pause et la relance. Vimeo ne les masque qu’avec les abonnements Vimeo payants",
+      "loop": "Lire la vidéo en boucle",
+      "background_loop_info": "Si désactivé, la vidéo est lue une fois et s’arrête sur sa dernière image",
+      "aspect_ratio": "Format",
+      "ratio_16_9": "Écran large (16:9)",
+      "ratio_21_9": "Cinéma (21:9)",
+      "ratio_4_3": "Standard (4:3)",
+      "ratio_1_1": "Carré (1:1)",
+      "ratio_4_5": "Portrait (4:5)",
+      "ratio_9_16": "Vertical (9:16)",
+      "max_width": "Largeur maximale de la vidéo",
+      "max_width_info": "Utile pour les vidéos verticales ou carrées sur grand écran",
+      "content_position": "Position du texte",
+      "content_position_info": "En mode Cliquer pour lire, le texte est toujours au-dessus de la vidéo",
+      "content_above": "Au-dessus de la vidéo",
+      "content_over": "Sur la vidéo",
+      "header_over": "Texte sur la vidéo",
+      "over_info": "S’appliquent en mode Arrière-plan avec la position du texte Sur la vidéo"
+    },
+    "multicolumn": {
+      "name": "Contenu multicolonne",
+      "heading_alignment": "Alignement du titre",
+      "mobile_grid": "Grille",
+      "column_alignment": "Alignement du contenu",
+      "ratio_circle": "Cercle",
+      "image_width": "Taille de l’image",
+      "image_width_info": "Les petites tailles conviennent aux icônes et aux logos",
+      "image_full": "Toute la largeur de la colonne",
+      "image_half": "La moitié de la colonne",
+      "image_third": "Un tiers de la colonne",
+      "show_placeholders": "Afficher les images de remplacement",
+      "show_placeholders_info": "Affiche une image de remplacement lorsqu’une colonne n’a pas d’image. Laissez désactivé pour les colonnes en texte seul",
+      "card": "Afficher les colonnes en cartes",
+      "card_info": "Donne à chaque colonne son propre arrière-plan et sa marge intérieure",
+      "block_name": "Colonne",
+      "image": "Image ou icône",
+      "image_info": "Facultatif. Utilisez une petite image ou icône avec une taille d’image plus petite",
+      "link_label": "Texte du lien",
+      "link_label_info": "Affiché comme lien texte avec une flèche. Laissez vide pour rendre toute la colonne cliquable",
+      "column_media": "Haut de la colonne",
+      "column_media_image": "Image",
+      "column_media_number": "Numéro",
+      "column_media_none": "Aucun",
+      "number_format": "Style des numéros",
+      "number_padded": "01, 02, 03",
+      "number_plain": "1, 2, 3",
+      "number_size": "Taille des numéros",
+      "number": "Numéro personnalisé",
+      "number_info": "Utilisé lorsque la section affiche des numéros. Laissez vide pour numéroter les colonnes automatiquement",
+      "mobile_column_alignment": "Alignement du contenu sur mobile",
+      "alignment_same": "Comme sur ordinateur",
+      "title_uppercase": "Titre en majuscules",
+      "title_size": "Taille du titre des colonnes",
+      "text_size": "Taille du texte des colonnes",
+      "text_size_info": "Petit 12 px, moyen 14 px, grand 16 px",
+      "image_custom": "Largeur personnalisée",
+      "icon_width": "Largeur de l’image",
+      "media_position": "Position de l’image",
+      "media_position_side_info": "À gauche place l’image ou le numéro à côté du texte",
+      "image_background": "Arrière-plan de l’image",
+      "image_background_picker_info": "S’affiche derrière chaque image avec un peu d’espace autour, par ex. pour les icônes transparentes. Effacez-le pour ne pas avoir d’arrière-plan",
+      "image_background_opacity": "Opacité de l’arrière-plan",
+      "media_position_top": "Au-dessus du texte",
+      "media_position_left": "À gauche du texte"
+    },
+    "image_with_text": {
+      "name": "Image avec texte",
+      "layout": "Mise en page",
+      "layout_info": "Chevauchement place le texte dans une carte sur le bord de l’image",
+      "layout_side": "Côte à côte",
+      "layout_overlap": "Chevauchement",
+      "image_position": "Position de l’image",
+      "image_width": "Largeur de l’image",
+      "width_small": "Petite (1/3)",
+      "width_medium": "Moyenne (1/2)",
+      "width_large": "Grande (2/3)",
+      "mobile_image_position": "Sur mobile",
+      "mobile_image_first": "Image en premier",
+      "mobile_image_last": "Texte en premier",
+      "gap": "Espace entre l’image et le texte",
+      "content_card": "Afficher le texte dans une carte",
+      "content_card_info": "Donne au texte son propre arrière-plan et sa marge intérieure. Toujours activé pour la disposition Chevauchement",
+      "content_color_scheme": "Jeu de couleurs des cartes"
+    },
+    "rich_text": {
+      "name": "Contenu textuel",
+      "alignment": "Alignement du texte",
+      "mobile_alignment": "Alignement du texte sur mobile",
+      "position": "Position du contenu",
+      "position_info": "Position du texte dans la largeur de la page sur ordinateur",
+      "block_spacing": "Espace entre les blocs",
+      "caption_style": "Style de la légende",
+      "caption_uppercase": "Petit libellé en majuscules",
+      "caption_subtitle": "Sous-titre",
+      "text_size": "Taille du texte",
+      "blocks": {
+        "caption": "Légende",
+        "buttons": "Boutons"
+      }
+    },
+    "slideshow": {
+      "name": "Diaporama d’images",
+      "header_layout": "Mise en page",
+      "header_motion": "Mouvement",
+      "transition": "Transition",
+      "transition_slide": "Diapositive",
+      "transition_fade": "Fondu",
+      "transition_speed": "Vitesse de transition",
+      "image_zoom": "Zoom lent sur les images",
+      "image_zoom_info": "L’image de la diapositive active zoome lentement pendant son affichage",
+      "autoplay": "Rotation automatique des diapositives",
+      "autoplay_speed": "Changer de diapositive toutes les",
+      "header_navigation": "Navigation",
+      "pagination_type": "Pagination",
+      "pagination_type_info": "Les barres et la ligne de progression se remplissent pendant l’affichage de chaque diapositive lorsque la rotation automatique est activée",
+      "pagination_dots": "Points",
+      "pagination_numbers": "Numéros (01 02 03)",
+      "pagination_fraction": "Fraction (1 / 3)",
+      "pagination_bars": "Barres",
+      "pagination_progress": "Ligne de progression",
+      "pagination_none": "Aucun",
+      "pagination_position": "Position de la pagination",
+      "show_arrows": "Afficher les flèches",
+      "arrows_sides": "Sur les côtés de la diapositive",
+      "arrows_bottom": "À côté de la pagination",
+      "controls_color": "Couleur des flèches et de la pagination",
+      "controls_color_info": "Choisissez une couleur qui ressort sur vos images",
+      "button_style": "Style du premier bouton",
+      "button_style_2": "Style du second bouton",
+      "accessibility_label": "Description du diaporama",
+      "accessibility_label_info": "Pour les lecteurs d’écran, par ex. « Nouveautés »",
+      "block_name": "Diapositive",
+      "button_label": "Texte du premier bouton",
+      "button_link": "Lien du premier bouton",
+      "button_label_2": "Texte du second bouton",
+      "button_link_2": "Lien du second bouton",
+      "full_link": "Rendre toute la diapositive cliquable",
+      "full_link_info": "Utilise le lien du premier bouton",
+      "slide_color_scheme": "Jeu de couleurs",
+      "slide_color_scheme_info": "Couleurs du texte et des boutons de cette diapositive, et arrière-plan derrière l’image. Choisissez un jeu avec un texte clair pour les images sombres"
+    },
+    "newsletter": {
+      "name": "Inscription à la newsletter",
+      "title": "Titre",
+      "subtitle": "Sous-titre",
+      "description": "Description",
+      "form": "Formulaire d’inscription",
+      "form_position": "Position du formulaire",
+      "form_position_info": "Sur mobile, le formulaire est toujours sous le texte",
+      "form_right": "À droite du texte",
+      "form_below": "Sous le texte",
+      "form_width": "Largeur maximale du formulaire",
+      "field_style": "Style du champ",
+      "field_boxed": "Encadré (champ et bouton)",
+      "field_underline": "Souligné (bouton texte avec flèche)",
+      "placeholder": "Texte indicatif de l’e-mail",
+      "placeholder_info": "Laissez vide pour « Adresse e-mail »",
+      "button_label_info": "Laissez vide pour n’afficher qu’une flèche",
+      "success_message": "Message de confirmation",
+      "success_message_info": "Laissez vide pour « Merci pour votre inscription ! »",
+      "note": "Note sous le formulaire",
+      "note_info": "Facultatif, par ex. une mention de confidentialité avec un lien",
+      "divider": "Séparateur",
+      "show_divider": "Afficher un séparateur en bas",
+      "divider_width": "Largeur du séparateur",
+      "divider_page": "Comme le contenu",
+      "divider_full": "Toute la largeur de l’écran",
+      "divider_thickness": "Épaisseur",
+      "divider_opacity": "Opacité"
+    },
+    "logo_marquee": {
+      "name": "Logos défilants",
+      "header_logos": "Logos",
+      "items_desktop": "Logos affichés sur ordinateur",
+      "items_mobile": "Logos affichés sur mobile",
+      "items_info": "Nombre de logos visibles à la fois sur la bande. Chaque logo s’adapte à son espace, jusqu’à la hauteur de logo ci-dessous",
+      "logo_height": "Hauteur du logo sur ordinateur",
+      "logo_height_mobile": "Hauteur du logo sur mobile",
+      "logo_opacity": "Opacité des logos",
+      "logo_opacity_info": "Les logos avec lien deviennent entièrement visibles au survol",
+      "grayscale": "Afficher les logos en niveaux de gris",
+      "grayscale_info": "Les logos avec lien affichent leur couleur au survol",
+      "show_dividers": "Afficher des séparateurs entre les logos",
+      "fade_edges": "Estomper les bords gauche et droit",
+      "block_name": "Logo",
+      "logo": "Image du logo",
+      "alt": "Nom de la marque",
+      "alt_info": "Utilisé comme texte alternatif de l’image, et affiché en texte s’il n’y a pas d’image"
+    },
+    "collection_banners": {
+      "name": "Grille de bannières image",
+      "block_name": "Image",
+      "mobile_layout": "Disposition sur mobile",
+      "mobile_stack": "Empilé",
+      "mobile_slider": "Diaporama à balayer",
+      "image_ratio": "Forme de l’image",
+      "ratio_portrait": "Portrait (4:5)",
+      "ratio_tall": "Haut (2:3)",
+      "ratio_square": "Carré (1:1)",
+      "ratio_landscape": "Paysage (4:3)",
+      "ratio_wide": "Large (16:9)",
+      "position_split": "Divisé (titre en haut, bouton en bas)"
+    },
+    "footer": {
+      "mobile_menu_style": "Style du menu mobile",
+      "mobile_accordion": "Accordéon",
+      "mobile_simple": "Liste simple",
+      "column_gap": "Espace entre les colonnes",
+      "bottom_bar": "Barre inférieure",
+      "copyright_text": "Texte du copyright",
+      "copyright_text_info": "Un © est ajouté automatiquement devant. Utilisez [year] pour l’année en cours, par ex. « [year] Vera Studio » affiche « © 2026 Vera Studio ». Laissez vide pour « © année Nom de la boutique »",
+      "show_powered_by": "Afficher « Propulsé par Shopify »",
+      "show_policies": "Afficher les liens des politiques",
+      "show_divider": "Afficher une ligne de séparation",
+      "column_width": "Largeur de la colonne sur ordinateur",
+      "column_width_info": "Part de la ligne occupée par cette colonne. Les colonnes passent à la ligne suivante dès que leur total dépasse 100 %",
+      "show_social": "Afficher les icônes sociales",
+      "show_social_info": "Ajoutez les liens de vos profils sociaux dans Paramètres du thème > Réseaux sociaux",
+      "blocks": {
+        "brand": {
+          "name": "Informations sur la marque",
+          "info": "Les champs vides utilisent Paramètres du thème > Informations sur la marque",
+          "image": "Logo",
+          "image_width": "Largeur du logo",
+          "show_shop_name": "Afficher le nom de la boutique s’il n’y a pas de logo",
+          "headline": "Accroche"
+        },
+        "menu": {
+          "name": "Menu",
+          "heading_info": "Laissez vide pour utiliser le nom du menu"
+        },
+        "text": {
+          "name": "Texte"
+        },
+        "newsletter": {
+          "name": "Newsletter",
+          "info": "Les inscriptions sont ajoutées aux Clients dans votre interface Shopify avec la balise « newsletter »",
+          "button_label_info": "Laissez vide pour n’afficher qu’une flèche"
+        },
+        "social": {
+          "name": "Icônes sociales"
+        }
+      },
+      "footer_width": "Largeur du pied de page",
+      "footer_width_info": "Conteneur aligne le pied de page sur le contenu de la page ; pleine largeur l’étire bord à bord",
+      "footer_width_page": "Conteneur (largeur de la page)",
+      "footer_width_full": "Pleine largeur",
+      "headings": "Titres",
+      "heading_size": "Taille du titre",
+      "heading_size_info": "Utilisé par tous les titres du pied de page",
+      "heading_size_mobile": "Taille du titre sur mobile",
+      "heading_case": "Casse des titres",
+      "show_follow_on_shop": "Afficher Suivre sur Shop",
+      "show_follow_on_shop_info": "Les clients peuvent suivre votre boutique dans l’application Shop. Shop Pay doit être activé."
+    },
+    "blog": {
+      "header_heading": "Titre",
+      "show_title": "Afficher le titre du blog",
+      "show_title_info": "Lorsqu’une balise est sélectionnée, elle s’affiche comme titre",
+      "description": "Texte d’introduction",
+      "description_info": "Affiché sous le titre sur la page principale du blog",
+      "show_tag_filter": "Afficher le filtre par balise",
+      "show_tag_filter_info": "Permet de filtrer les articles par balise. Ajoutez des balises aux articles dans l’interface Shopify",
+      "layout_grid": "Grille",
+      "layout_list": "Liste",
+      "feature_first": "Mettre en avant le premier article",
+      "feature_first_info": "Affiche l’article le plus récent en grande carte sur la page 1 (disposition en grille)",
+      "articles_per_page": "Articles par page",
+      "articles_per_page_info": "Avec un article mis en avant, utilisez un multiple du nombre de colonnes plus 1 pour des lignes complètes : par ex. 7 ou 10 pour 3 colonnes",
+      "columns_info": "Disposition en grille uniquement",
+      "header_card": "Cartes d’article",
+      "card_style_info": "Style, bordure, arrondi et ombre des cartes : Paramètres du thème > Cartes de blog",
+      "card": "Afficher les articles en cartes",
+      "card_info": "Ajoute un arrière-plan et une marge intérieure de 16 px autour de chaque article. Si désactivé, Paramètres du thème > Cartes de blog est utilisé",
+      "card_color_scheme": "Jeu de couleurs des cartes",
+      "card_background": "Couleur d’arrière-plan des cartes",
+      "card_background_info": "Facultatif. Laissez vide pour utiliser l’arrière-plan du jeu de couleurs",
+      "featured_label_letter_spacing": "Espacement des lettres du libellé",
+      "featured_title_size": "Taille du titre de l’article mis en avant",
+      "topic_letter_spacing": "Espacement des lettres du thème",
+      "card_title_size": "Taille du titre des cartes",
+      "show_image": "Afficher l’image",
+      "image_ratio": "Format de l’image",
+      "ratio_wide": "Large (16:9)",
+      "show_date": "Afficher la date",
+      "show_author": "Afficher l’auteur",
+      "show_excerpt": "Afficher l’extrait",
+      "excerpt_words": "Longueur de l’extrait (mots)",
+      "excerpt_words_info": "Utilise l’extrait de l’article s’il est défini, sinon le début de l’article",
+      "show_card_tags": "Afficher les balises",
+      "read_more": "Libellé « Lire la suite »",
+      "read_more_info": "Laissez vide pour masquer",
+      "read_more_style": "Style de « Lire la suite »",
+      "read_more_text": "Lien texte",
+      "tag_style": "Style du filtre par balise",
+      "tag_style_pills": "Pastilles",
+      "tag_style_tabs": "Onglets texte (soulignés)",
+      "all_label": "Libellé « Tout »",
+      "all_label_info": "Par ex. « Toutes les histoires ». Laissez vide pour utiliser « Tout »",
+      "featured_style": "Style de l’article mis en avant",
+      "featured_card": "Grande carte",
+      "featured_story": "Récit éditorial (texte à côté de l’image)",
+      "featured_image_position": "Position de l’image mise en avant",
+      "featured_label": "Libellé de mise en avant",
+      "featured_uppercase": "Titre mis en avant en majuscules",
+      "featured_words": "Longueur du texte mis en avant (mots)",
+      "featured_words_info": "L’extrait de l’article s’affiche en citation italique ; ce réglage définit la quantité de texte qui suit. 0 le masque",
+      "show_topic": "Afficher le thème au-dessus du titre",
+      "show_topic_info": "La première balise de l’article",
+      "featured_source": "Article mis en avant",
+      "featured_source_latest": "Dernier article",
+      "featured_source_tag": "Article avec une balise",
+      "featured_tag": "Balise mise en avant",
+      "featured_tag_info": "L’article le plus récent avec cette balise est mis en avant (sinon le dernier article). La balise est masquée du filtre et des thèmes des cartes",
+      "show_read_more": "Afficher Lire la suite",
+      "card_text_color": "Couleur du texte des cartes"
+    },
+    "article": {
+      "eyebrow_letter_spacing": "Espacement des lettres des balises",
+      "header_image": "Image mise en avant",
+      "image_layout": "Position de l’image",
+      "image_above": "Au-dessus du titre",
+      "image_below": "Sous le titre",
+      "image_banner": "Bannière derrière le titre",
+      "image_hidden": "Masqué",
+      "banner_height": "Hauteur de la bannière",
+      "banner_info": "Position de la bannière uniquement",
+      "header_title": "Titre",
+      "show_back_link": "Afficher le lien « Retour au blog »",
+      "show_tags_top": "Afficher le thème au-dessus du titre",
+      "show_tags_top_info": "La première balise de l’article",
+      "show_reading_time": "Afficher le temps de lecture",
+      "header_content": "Contenu",
+      "content_width": "Largeur de la colonne de texte",
+      "text_size": "Taille du texte",
+      "show_tags": "Afficher les balises",
+      "show_share": "Afficher les boutons de partage",
+      "show_prev_next": "Afficher l’article précédent / suivant",
+      "header_comments": "Commentaires",
+      "comments_info": "Activez les commentaires par blog dans l’interface Shopify > Contenu > Articles de blog > Gérer les blogs",
+      "show_comments": "Afficher les commentaires",
+      "comments_per_page": "Commentaires par page",
+      "width_info": "Pleine largeur élargit la section ; utilisez Largeur du texte pour élargir aussi le texte",
+      "banner_color_scheme_info": "Couleur du texte et de la superposition sur la bannière",
+      "text_width": "Largeur du texte",
+      "text_width_info": "Largeur du titre, du texte et des commentaires",
+      "text_width_column": "Colonne de texte (définie ci-dessous)",
+      "text_width_image": "Comme l’image",
+      "text_width_full": "Toute la largeur de la section"
+    },
+    "related_articles": {
+      "name": "Articles de blog associés",
+      "show_view_all": "Afficher le lien « Voir tous les articles »",
+      "articles_to_show": "Articles à afficher",
+      "layout_slider": "Carrousel",
+      "columns_mobile_info": "Le carrousel montre une partie de l’article suivant",
+      "meta_position": "Position de la date",
+      "meta_top": "Au-dessus du titre",
+      "meta_bottom": "Bas de la carte",
+      "title_uppercase": "Titres en majuscules",
+      "hide_featured": "Masquer l’article mis en avant",
+      "hide_featured_info": "Faites correspondre le paramètre « Article mis en avant » de la section Blog pour ne pas répéter l’article mis en avant ici",
+      "hide_featured_none": "Ne pas masquer",
+      "hide_featured_latest": "L’article le plus récent",
+      "hide_featured_tag": "Article avec une balise"
+    },
+    "breadcrumbs": {
+      "show": "Afficher le fil d’Ariane",
+      "show_info": "Style : Paramètres du thème > Fil d’Ariane"
+    },
+    "multirow": {
+      "name": "Lignes d’images et de texte",
+      "description": "Description",
+      "heading_alignment": "Alignement du titre",
+      "header_rows": "Lignes",
+      "image_position": "Position de l’image",
+      "image_position_info": "Chaque ligne peut remplacer ce réglage dans ses propres paramètres",
+      "position_alternate_left": "Alterné, en commençant à gauche",
+      "position_alternate_right": "Alterné, en commençant à droite",
+      "position_left": "Gauche",
+      "position_right": "Droite",
+      "image_width": "Largeur de l’image",
+      "width_small": "Petite (1/3)",
+      "width_medium": "Moyenne (1/2)",
+      "width_large": "Grande (2/3)",
+      "image_ratio": "Forme de l’image",
+      "corner_radius": "Arrondi des angles",
+      "row_gap": "Espace entre les lignes",
+      "content_style": "Style du contenu",
+      "content_plain": "Simple",
+      "content_card": "Carte",
+      "card_color_scheme": "Jeu de couleurs des cartes",
+      "alignment": "Alignement du texte",
+      "content_width": "Largeur maximale du contenu",
+      "row_heading_size": "Taille du titre des lignes",
+      "text_size": "Taille du texte",
+      "button_link_style": "Lien texte",
+      "mobile_image_position": "Image sur mobile",
+      "mobile_image_first": "Au-dessus du texte",
+      "mobile_image_last": "Sous le texte",
+      "mobile_alignment": "Alignement du texte sur mobile",
+      "row": "Ligne",
+      "image": "Image",
+      "row_image_position": "Position de l’image",
+      "row_position_auto": "Suivre le paramètre de la section",
+      "caption": "Légende",
+      "button_label": "Texte du bouton",
+      "button_link": "Lien du bouton"
+    },
+    "page": {
+      "show_title": "Afficher le titre de la page",
+      "show_title_info": "Si désactivé, le titre reste lu par les moteurs de recherche et les lecteurs d’écran",
+      "title_alignment": "Alignement du titre"
+    },
+    "cart": {
+      "show_continue_shopping": "Afficher le lien Continuer vos achats",
+      "continue_url": "Lien Continuer vos achats",
+      "continue_url_info": "Laissez vide pour renvoyer vers tous les produits",
+      "summary": "Récapitulatif de la commande",
+      "sticky_summary": "Fixe sur ordinateur",
+      "summary_color_scheme": "Jeu de couleurs du récapitulatif",
+      "show_free_shipping": "Afficher la barre de livraison gratuite",
+      "show_free_shipping_info": "Utilise le seuil de livraison gratuite de Paramètres du thème > Panier",
+      "show_terms": "Exiger l’acceptation des conditions",
+      "show_terms_info": "Les clients doivent cocher une case avant le paiement. Les boutons de paiement express l’ignorent",
+      "terms_page": "Page des conditions",
+      "show_dynamic_checkout": "Afficher les boutons de paiement express",
+      "show_dynamic_checkout_info": "Par ex. Shop Pay, PayPal, Apple Pay, selon vos paramètres de paiement",
+      "show_payment_icons": "Afficher les icônes de paiement",
+      "summary_text": "Texte sous le paiement",
+      "summary_text_info": "Par ex. retours ou promesse de livraison",
+      "empty_cart": "Panier vide",
+      "empty_collection": "Suggestions de produits",
+      "empty_collection_info": "Produits affichés lorsque le panier est vide",
+      "empty_products_count": "Nombre de produits"
+    },
+    "search": {
+      "results": "Résultats",
+      "result_types": "Rechercher dans",
+      "result_types_all": "Produits, articles et pages",
+      "result_types_products": "Produits uniquement",
+      "show_type_tabs": "Afficher les onglets de type",
+      "results_per_page": "Résultats par page",
+      "enable_filtering_info": "Filtres de produits de Search & Discovery",
+      "suggestions": "Suggestions de produits",
+      "suggestions_collection": "Collection",
+      "suggestions_collection_info": "Affichés avant une recherche et lorsqu’aucun résultat n’est trouvé",
+      "suggestions_heading": "Titre",
+      "suggestions_heading_info": "Laissez vide pour « Produits populaires »",
+      "suggestions_count": "Nombre de produits"
+    },
+    "not_found": {
+      "show_code": "Afficher un grand « 404 »",
+      "heading_info": "Laissez vide pour « Page introuvable »",
+      "text_info": "Laissez vide pour le message par défaut",
+      "actions": "Recherche et boutons",
+      "show_search": "Afficher le champ de recherche",
+      "button_label": "Texte du bouton",
+      "button_label_info": "Laissez vide pour « Retour à la boutique »",
+      "button_url": "Lien du bouton",
+      "button_url_info": "Laissez vide pour renvoyer vers tous les produits",
+      "show_home_button": "Afficher le bouton « Retour à l’accueil »",
+      "menu": "Menu de liens rapides",
+      "menu_info": "Facultatif. Affiché en liens sous les boutons",
+      "menu_heading": "Titre des liens rapides",
+      "products": "Suggestions de produits",
+      "products_collection": "Collection",
+      "products_collection_info": "Facultatif. Produits affichés en dessous",
+      "products_heading": "Titre",
+      "products_heading_info": "Laissez vide pour « Produits populaires »",
+      "products_count": "Nombre de produits"
+    },
+    "password": {
+      "background": "Arrière-plan",
+      "image": "Image",
+      "image_info": "Arrière-plan plein écran. 2400 x 1600 px (recommandé)",
+      "mobile_image": "Image mobile",
+      "mobile_image_info": "Facultatif. Utilisé sur les écrans de moins de 750 px (le format portrait fonctionne mieux)",
+      "video": "Vidéo",
+      "video_info": "Facultatif. Lecture en sourdine et en boucle à la place de l’image (l’image s’affiche pendant le chargement)",
+      "video_url": "Vidéo YouTube ou Vimeo",
+      "layout": "Mise en page",
+      "content_position": "Position du contenu",
+      "content_style": "Style du contenu",
+      "content_style_plain": "Simple",
+      "content_style_card": "Carte givrée",
+      "dialog_color_scheme": "Jeu de couleurs de la fenêtre du mot de passe",
+      "content": "Contenu",
+      "logo": "Logo",
+      "logo_info": "Facultatif, par ex. un logo blanc pour un arrière-plan sombre. Laissez vide pour utiliser Paramètres du thème > Logo",
+      "logo_width": "Largeur du logo",
+      "heading_info": "Laissez vide pour « Quelque chose de nouveau arrive bientôt »",
+      "text_info": "Laissez vide pour utiliser le message de Boutique en ligne > Préférences > Protection par mot de passe",
+      "countdown": "Compte à rebours du lancement",
+      "show_countdown": "Afficher le compte à rebours",
+      "countdown_date": "Date et heure du lancement",
+      "countdown_date_info": "Format : AAAA-MM-JJ HH:MM dans l’heure locale de vos visiteurs, par ex. 2026-12-01 09:00",
+      "countdown_done": "Texte après le lancement",
+      "countdown_done_info": "Affiché lorsque le compte à rebours atteint zéro",
+      "newsletter": "Inscription par e-mail",
+      "show_newsletter": "Afficher l’inscription par e-mail",
+      "show_newsletter_info": "Les inscriptions sont ajoutées aux Clients avec les balises « newsletter » et « password page »",
+      "newsletter_heading": "Titre",
+      "newsletter_button": "Texte du bouton",
+      "newsletter_button_info": "Laissez vide pour « Me prévenir »",
+      "show_social": "Afficher les icônes sociales",
+      "show_social_info": "Liens de Paramètres du thème > Réseaux sociaux"
+    },
+    "map": {
+      "name": "Carte",
+      "header_map": "Carte",
+      "address": "Adresse",
+      "address_info": "Toute adresse ou tout lieu que Google Maps peut trouver, par ex. 725 5th Ave, New York",
+      "zoom": "Zoom",
+      "height": "Hauteur de la carte",
+      "mobile_height": "Hauteur de la carte sur mobile",
+      "corner_radius": "Arrondi des angles",
+      "grayscale": "Carte en noir et blanc",
+      "header_card": "Carte d’informations",
+      "card_position": "Position de la carte",
+      "card_overlay_left": "Sur la carte, à gauche",
+      "card_overlay_right": "Sur la carte, à droite",
+      "card_side_left": "À côté de la carte, à gauche",
+      "card_side_right": "À côté de la carte, à droite",
+      "card_none": "Masqué",
+      "show_directions": "Afficher le bouton « Itinéraire »",
+      "button_label": "Texte du bouton",
+      "card_color_scheme": "Jeu de couleurs des cartes"
+    },
+    "custom_liquid": {
+      "name": "Liquid personnalisé",
+      "info": "Ajoutez des extraits d’applications ou tout autre code Liquid"
+    }
+  },
+  "settings_schema": {
+    "global": {
+      "settings": {
+        "header__border": {
+          "content": "Bordure"
+        },
+        "header__shadow": {
+          "content": "Ombre"
+        },
+        "blur": {
+          "label": "Flou"
+        },
+        "corner_radius": {
+          "label": "Arrondi des angles"
+        },
+        "horizontal_offset": {
+          "label": "Décalage horizontal"
+        },
+        "vertical_offset": {
+          "label": "Décalage vertical"
+        },
+        "thickness": {
+          "label": "Épaisseur"
+        },
+        "opacity": {
+          "label": "Opacité"
+        },
+        "image_padding": {
+          "label": "Marge intérieure de l’image"
+        },
+        "text_alignment": {
+          "options__1": {
+            "label": "Gauche"
+          },
+          "options__2": {
+            "label": "Centre"
+          },
+          "options__3": {
+            "label": "Droite"
+          },
+          "label": "Alignement du texte"
+        }
+      }
+    },
+    "logo": {
+      "name": "Logo",
+      "settings": {
+        "logo_image": {
+          "label": "Logo"
+        },
+        "logo_width": {
+          "label": "Largeur"
+        },
+        "favicon": {
+          "label": "Favicon",
+          "info": "32 x 32 px (recommandé)"
+        }
+      }
+    },
+    "colors": {
+      "name": "Couleurs",
+      "settings": {
+        "background": {
+          "label": "Arrière-plan"
+        },
+        "background_gradient": {
+          "label": "Dégradé d’arrière-plan",
+          "info": "Le dégradé d’arrière-plan remplace l’arrière-plan lorsque c’est possible."
+        },
+        "text": {
+          "label": "Texte"
+        },
+        "button_background": {
+          "label": "Arrière-plan du bouton plein"
+        },
+        "button_label": {
+          "label": "Texte du bouton plein"
+        },
+        "secondary_button_label": {
+          "label": "Bouton contour"
+        },
+        "shadow": {
+          "label": "Ombre"
+        },
+        "popup_color_scheme": {
+          "label": "Jeu de couleurs des fenêtres contextuelles",
+          "info": "Utilisé par toutes les fenêtres contextuelles (recherche, sélecteur de pays/langue) au lieu du jeu de couleurs de l’en-tête, afin que leur texte reste lisible même sur un en-tête transparent"
+        },
+        "menu_drawer_color_scheme": {
+          "label": "Jeu de couleurs du menu",
+          "info": "Utilisé par le tiroir du menu et les menus déroulants / méga-menus sur ordinateur, indépendamment du jeu de couleurs de l’en-tête"
+        }
+      }
+    },
+    "typography": {
+      "name": "Typographie",
+      "settings": {
+        "type_header_font": {
+          "label": "Police"
+        },
+        "heading_scale": {
+          "label": "Échelle"
+        },
+        "heading_h1": {
+          "content": "Titre énorme (H1)"
+        },
+        "heading_h2": {
+          "content": "Titre très grand (H2)"
+        },
+        "heading_h3": {
+          "content": "Grand titre (H3)"
+        },
+        "heading_h4": {
+          "content": "Titre moyen (H4)"
+        },
+        "heading_h5": {
+          "content": "Petit titre (H5)"
+        },
+        "heading_h6": {
+          "content": "Très petit titre (H6)"
+        },
+        "heading_size_desktop": {
+          "label": "Taille – ordinateur"
+        },
+        "heading_line_height_desktop": {
+          "label": "Interligne – ordinateur"
+        },
+        "heading_size_mobile": {
+          "label": "Taille – mobile"
+        },
+        "heading_line_height_mobile": {
+          "label": "Interligne – mobile"
+        },
+        "header__1": {
+          "content": "Titres"
+        },
+        "header__2": {
+          "content": "Corps de texte"
+        },
+        "type_body_font": {
+          "label": "Police"
+        },
+        "body_size_desktop": {
+          "label": "Taille du texte – ordinateur"
+        },
+        "body_size_mobile": {
+          "label": "Taille du texte – mobile"
+        },
+        "body_line_height": {
+          "label": "Interligne du texte – ordinateur"
+        },
+        "body_line_height_mobile": {
+          "label": "Interligne du texte – mobile"
+        }
+      }
+    },
+    "layout": {
+      "name": "Mise en page",
+      "settings": {
+        "page_width": {
+          "label": "Largeur de la page"
+        },
+        "page_margin": {
+          "label": "Marge de la page (ordinateur)",
+          "info": "Espace entre le bord de l’écran et le contenu. Utilisé par toutes les sections, pleine largeur ou non, pour que tout s’aligne"
+        },
+        "page_margin_mobile": {
+          "label": "Marge de la page (mobile)"
+        },
+        "spacing_sections": {
+          "label": "Espace entre les sections du modèle"
+        },
+        "header__grid": {
+          "content": "Grille"
+        },
+        "paragraph__grid": {
+          "content": "Concerne les zones à plusieurs colonnes ou lignes"
+        },
+        "spacing_grid_horizontal": {
+          "label": "Espace horizontal – ordinateur"
+        },
+        "spacing_grid_vertical": {
+          "label": "Espace vertical – ordinateur"
+        },
+        "spacing_grid_horizontal_mobile": {
+          "label": "Espace horizontal – mobile"
+        },
+        "spacing_grid_vertical_mobile": {
+          "label": "Espace vertical – mobile"
+        }
+      }
+    },
+    "animations": {
+      "name": "Animations",
+      "settings": {
+        "animations_reveal_on_scroll": {
+          "label": "Faire apparaître les sections au défilement"
+        },
+        "animations_hover_elements": {
+          "options__1": {
+            "label": "Aucun"
+          },
+          "options__2": {
+            "label": "Élévation verticale"
+          },
+          "options__3": {
+            "label": "Élévation 3D"
+          },
+          "label": "Effet au survol",
+          "info": "Concerne les cartes et les boutons"
+        }
+      }
+    },
+    "buttons": {
+      "name": "Boutons",
+      "header_text": "Texte",
+      "letter_spacing": "Espacement des lettres"
+    },
+    "variant_pills": {
+      "name": "Pastilles de variante",
+      "paragraph": "Les pastilles de variante sont une façon d’afficher les variantes de vos produits"
+    },
+    "inputs": {
+      "name": "Champs de saisie"
+    },
+    "swatches": {
+      "name": "Pastilles",
+      "settings": {
+        "info": "Les pastilles de couleur proviennent normalement de la catégorie de produit (Admin > produit > option Couleur > Connecter). Les produits importés sans catégorie ne peuvent pas les utiliser : indiquez leurs couleurs ici. Les pastilles de Shopify restent prioritaires là où elles sont définies.",
+        "swatch_colors": {
+          "label": "Couleurs des pastilles",
+          "info": "Une par ligne : Nom: valeur. La valeur est une couleur (#556b2f, rgb(85 107 47), navy), une URL d’image ou une image importée dans Contenu > Fichiers (leopard.png). Les noms correspondent à la valeur de l’option, sans tenir compte des majuscules."
+        }
+      }
+    },
+    "cards": {
+      "name": "Cartes produit",
+      "settings": {
+        "style": {
+          "options__1": {
+            "label": "Standard"
+          },
+          "options__2": {
+            "label": "Carte"
+          },
+          "label": "Style"
+        },
+        "header_image": "Image",
+        "image_ratio": "Format de l’image",
+        "image_fit": "Ajustement de l’image",
+        "image_fit_cover": "Remplir (recadrer)",
+        "image_fit_contain": "Ajuster (sans recadrage)",
+        "image_background": "Arrière-plan de l’image",
+        "image_slider": "Afficher le diaporama d’images",
+        "image_slider_info": "Flèches au survol pour parcourir toutes les images du produit ; balayage sur les écrans tactiles",
+        "info_layout": "Titre et prix",
+        "info_inline": "Même ligne",
+        "info_stacked": "Prix sous le titre",
+        "badge_style": "Badge promo",
+        "badge_style_info": "Les couleurs et la position se trouvent dans Paramètres du thème > Badges",
+        "badge_amount": "Montant économisé (Économisez 53 €)",
+        "badge_percent": "Pourcentage économisé (Économisez 20 %)",
+        "badge_text": "Texte (Promo)",
+        "sale_price_color": "Couleur du prix promo",
+        "color_option_name": "Nom de l’option de couleur",
+        "quick_add_hover": "Au survol",
+        "quick_add_always": "Toujours",
+        "size_option_name": "Nom de l’option de taille",
+        "size_option_name_info": "L’option produit affichée en boutons de taille pour ajouter directement au panier, par ex. Taille",
+        "header_content": "Contenu",
+        "show_vendor": "Afficher le fournisseur",
+        "show_rating": "Afficher la note du produit",
+        "show_rating_info": "Nécessite une application d’avis produits qui enregistre les notes dans le métachamp standard reviews.rating",
+        "show_swatches": "Afficher les pastilles de couleur",
+        "show_swatches_info": "Choisir une couleur affiche son image, son prix et les tailles en stock. Utilise la pastille définie pour chaque valeur d’option, ou le nom de la valeur comme couleur",
+        "quick_add": "Ajout rapide",
+        "quick_add_info": "Une grille de tailles à ajouter directement au panier, ou un bouton « Ajouter au panier » pour les produits sans taille",
+        "quick_add_none": "Masqué",
+        "header_colors": "Couleurs",
+        "color_scheme": "Jeu de couleurs des cartes",
+        "color_scheme_info": "Couleurs d’arrière-plan, du texte, du prix et du bouton d’ajout rapide pour toutes les cartes produit (pages de collection, recherche et listes de produits)"
+      }
+    },
+    "collection_cards": {
+      "name": "Cartes de collection",
+      "settings": {
+        "style": {
+          "options__1": {
+            "label": "Standard"
+          },
+          "options__2": {
+            "label": "Carte"
+          },
+          "label": "Style"
+        },
+        "header_layout": "Mise en page",
+        "layout": "Position du texte",
+        "layout_below": "Sous l’image",
+        "layout_overlay": "Sur image",
+        "heading_size": "Taille du titre des cartes",
+        "overlay_color": "Couleur de superposition",
+        "overlay_opacity": "Opacité de la superposition",
+        "overlay_text_color": "Couleur du texte en superposition",
+        "image_ratio": "Format de l’image",
+        "show_count": "Afficher le nombre de produits",
+        "show_description": "Afficher la description",
+        "header_colors": "Couleurs",
+        "color_scheme": "Jeu de couleurs des cartes",
+        "color_scheme_info": "Couleurs d’arrière-plan et du texte pour toutes les cartes de collection. Avec le texte sur l’image, il reste blanc pour le contraste"
+      }
+    },
+    "blog_cards": {
+      "name": "Cartes de blog",
+      "settings": {
+        "style": {
+          "options__1": {
+            "label": "Standard"
+          },
+          "options__2": {
+            "label": "Carte"
+          },
+          "label": "Style"
+        }
+      }
+    },
+    "content_containers": {
+      "name": "Conteneurs de contenu"
+    },
+    "media": {
+      "name": "Média"
+    },
+    "popups": {
+      "name": "Menus déroulants et fenêtres contextuelles",
+      "paragraph": "Concerne les zones comme les menus déroulants de navigation, les fenêtres modales et les fenêtres du panier"
+    },
+    "drawers": {
+      "name": "Tiroirs"
+    },
+    "badges": {
+      "name": "Badges",
+      "settings": {
+        "position": {
+          "options__1": {
+            "label": "En bas à gauche"
+          },
+          "options__2": {
+            "label": "En bas à droite"
+          },
+          "options__3": {
+            "label": "En haut à gauche"
+          },
+          "options__4": {
+            "label": "En haut à droite"
+          },
+          "label": "Position sur les cartes"
+        },
+        "sale_badge_color_scheme": {
+          "label": "Jeu de couleurs du badge promo"
+        },
+        "sold_out_badge_color_scheme": {
+          "label": "Jeu de couleurs du badge épuisé"
+        },
+        "best_seller": {
+          "header": "Badge meilleure vente",
+          "show": "Afficher le badge meilleure vente",
+          "tag": "Balise de produit",
+          "tag_info": "Les produits avec cette balise reçoivent le badge (sans tenir compte des majuscules)",
+          "text": "Texte du badge",
+          "text_info": "Laissez vide pour utiliser « Meilleure vente »",
+          "position": "Position sur les cartes",
+          "position_info": "Utilisez une position différente de celle du badge promo pour qu’ils ne se chevauchent pas",
+          "color_scheme": "Jeu de couleurs du badge meilleure vente"
+        },
+        "trending": {
+          "header": "Badge tendance",
+          "show": "Afficher le badge tendance",
+          "tag": "Balise de produit",
+          "tag_info": "Les produits avec cette balise reçoivent le badge (sans tenir compte des majuscules)",
+          "text": "Texte du badge",
+          "text_info": "Laissez vide pour utiliser « Tendance »",
+          "position": "Position sur les cartes",
+          "position_info": "Les badges placés à la même position s’affichent côte à côte",
+          "color_scheme": "Jeu de couleurs du badge tendance"
+        }
+      }
+    },
+    "brand_information": {
+      "name": "Informations sur la marque",
+      "settings": {
+        "paragraph": {
+          "content": "S’affiche dans le bloc d’informations sur la marque du pied de page"
+        },
+        "brand_headline": {
+          "label": "Accroche"
+        },
+        "brand_description": {
+          "label": "Description"
+        },
+        "brand_image": {
+          "label": "Image"
+        },
+        "brand_image_width": {
+          "label": "Largeur de l’image"
+        }
+      }
+    },
+    "social-media": {
+      "name": "Réseaux sociaux",
+      "settings": {
+        "header": {
+          "content": "Comptes sociaux"
+        },
+        "social_twitter_link": {
+          "label": "X / Twitter",
+          "info": "https://x.com/yourstore"
+        },
+        "social_facebook_link": {
+          "label": "Facebook",
+          "info": "https://facebook.com/yourstore"
+        },
+        "social_pinterest_link": {
+          "label": "Pinterest",
+          "info": "https://pinterest.com/yourstore"
+        },
+        "social_instagram_link": {
+          "label": "Instagram",
+          "info": "https://instagram.com/yourstore"
+        },
+        "social_tiktok_link": {
+          "label": "TikTok",
+          "info": "https://tiktok.com/@yourstore"
+        },
+        "social_tumblr_link": {
+          "label": "Tumblr",
+          "info": "https://yourstore.tumblr.com"
+        },
+        "social_snapchat_link": {
+          "label": "Snapchat",
+          "info": "https://www.snapchat.com/add/yourstore"
+        },
+        "social_youtube_link": {
+          "label": "YouTube",
+          "info": "https://www.youtube.com/yourstore"
+        },
+        "social_vimeo_link": {
+          "label": "Vimeo",
+          "info": "https://vimeo.com/yourstore"
+        }
+      }
+    },
+    "search_input": {
+      "name": "Comportement de la recherche",
+      "settings": {
+        "predictive_search_enabled": {
+          "label": "Suggestions de recherche"
+        },
+        "predictive_search_show_vendor": {
+          "label": "Fournisseur du produit",
+          "info": "Affiché lorsque les suggestions de recherche sont activées"
+        },
+        "predictive_search_show_price": {
+          "label": "Prix du produit",
+          "info": "Affiché lorsque les suggestions de recherche sont activées"
+        },
+        "predictive_search_reset_text": {
+          "label": "Effacer le texte de recherche",
+          "info": "Remplace l’icône d’effacement (X) du navigateur dans le champ de recherche dès qu’un texte est saisi ; un clic vide le champ. Laissez vide pour garder l’icône X du navigateur."
+        }
+      }
+    },
+    "currency_format": {
+      "name": "Format des devises",
+      "settings": {
+        "paragraph": "Les prix du panier et du paiement affichent toujours les codes de devise",
+        "currency_code_enabled": {
+          "label": "Codes de devise"
+        }
+      }
+    },
+    "cart": {
+      "name": "Panier",
+      "settings": {
+        "cart_type": {
+          "label": "Type",
+          "drawer": {
+            "label": "Tiroir"
+          },
+          "page": {
+            "label": "Page"
+          },
+          "notification": {
+            "label": "Notification contextuelle"
+          }
+        },
+        "show_vendor": {
+          "label": "Fournisseur"
+        },
+        "show_cart_note": {
+          "label": "Note du panier"
+        },
+        "cart_drawer": {
+          "header": "Tiroir du panier",
+          "collection": {
+            "label": "Collection",
+            "info": "Affiché lorsque le tiroir du panier est vide"
+          },
+          "free_shipping_bar": {
+            "label": "Barre de livraison gratuite dans le tiroir du panier"
+          },
+          "free_shipping_threshold": {
+            "label": "Seuil de livraison gratuite",
+            "info": "Sous-total de commande requis pour la livraison gratuite, dans la devise par défaut de votre boutique. Converti automatiquement pour les autres devises. Utilisé par le tiroir du panier et la barre de la page panier. Vérifiez qu’il correspond à vos tarifs dans Paramètres > Expédition et livraison."
+          }
+        }
+      }
+    },
+    "customer_accounts": {
+      "name": "Comptes clients",
+      "settings": {
+        "paragraph": {
+          "content": "[Gérer la visibilité](/admin/settings/customer_accounts) dans les paramètres des comptes clients."
+        },
+        "customer_account_menu": {
+          "label": "Menu"
+        }
+      }
+    },
+    "breadcrumbs": {
+      "name": "Fil d’Ariane",
+      "info": "Le fil d’Ariane s’affiche sous le titre de la page (au-dessus des images sur les pages produit). Activez-le ou désactivez-le dans la section principale de chaque page",
+      "show_mobile": "Afficher le fil d’Ariane sur mobile",
+      "separator": "Séparateur du fil d’Ariane",
+      "separator_chevron": "Chevron (›)",
+      "home_icon": "Fil d’Ariane : afficher « Accueil » sous forme d’icône",
+      "product_collection": "Fil d’Ariane : inclure la collection sur les pages produit",
+      "product_collection_info": "Accueil › Collection › Produit. Utilise la collection d’où vient le client, ou la première collection du produit",
+      "collections_link": "Fil d’Ariane : inclure « Collections » sur les pages de collection",
+      "collections_link_info": "Accueil › Collections › Collection",
+      "show_desktop": "Afficher le fil d’Ariane sur ordinateur",
+      "alignment": "Alignement du fil d’Ariane",
+      "alignment_auto": "Comme le titre de la page"
+    },
+    "gift_card": {
+      "name": "Carte-cadeau",
+      "info": "La page que les clients ouvrent depuis l’e-mail de leur carte-cadeau. Le logo provient de Paramètres du thème > Logo.",
+      "page_color_scheme": "Jeu de couleurs de la page",
+      "card_color_scheme": "Jeu de couleurs des cartes",
+      "card_image": "Image de carte",
+      "card_image_info": "Arrière-plan facultatif pour la carte. Le texte utilise le jeu de couleurs de la carte"
+    }
+  },
+  "blocks": {
+    "mega_menu_promo": {
+      "name": "Promo du méga-menu",
+      "info": "Ajoute une image et/ou un titre avec lien à un méga-menu. Affiché uniquement lorsque Navigation > Type de sous-menu est Méga-menu.",
+      "menu_item": "Élément de menu",
+      "menu_item_info": "Titre de l’élément de menu principal où l’afficher, par ex. Tous les produits",
+      "show_image": "Afficher l’image",
+      "image": "Image",
+      "show_title": "Afficher le titre",
+      "title": "Titre",
+      "link": "Lien",
+      "link_info": "Rend l’image et le titre cliquables. Laissez vide pour renvoyer vers le produit",
+      "product": "Produit",
+      "product_info": "Facultatif. Si l’image, le titre ou le lien ci-dessous est vide, l’image principale, le titre et la page du produit sont utilisés",
+      "image_info": "Laissez vide pour utiliser l’image principale du produit",
+      "title_info": "Laissez vide pour utiliser le titre du produit"
+    }
+  },
+  "editor_placeholders": {
+    "announcement": "Ajoutez votre annonce",
+    "answer": "Ajoutez votre réponse",
+    "banner_heading": "Ajoutez le titre de votre bannière",
+    "banner_text": "Ajoutez la description de votre bannière",
+    "button": "Texte du bouton",
+    "caption": "Ajoutez une légende",
+    "column_heading": "Ajoutez un titre de colonne",
+    "column_text": "Ajoutez une courte description pour cette colonne",
+    "contact_details": "Ajoutez vos coordonnées",
+    "contact_intro": "Ajoutez une courte introduction",
+    "contact_title": "Ajoutez un titre, par ex. E-mail",
+    "content": "Ajoutez votre contenu ici",
+    "description": "Ajoutez une courte description",
+    "grid_heading": "Ajoutez un titre pour cette grille",
+    "heading": "Ajoutez un titre",
+    "label": "Ajoutez un court libellé",
+    "logos_heading": "Ajoutez un titre pour les logos de vos marques",
+    "newsletter_heading": "Ajoutez un titre pour la newsletter",
+    "newsletter_text": "Ajoutez une courte phrase sur votre newsletter",
+    "products_heading": "Ajoutez un titre pour vos produits en vedette",
+    "question": "Ajoutez votre question",
+    "row_heading": "Ajoutez un titre de ligne",
+    "section_heading": "Ajoutez un titre de section",
+    "row_text": "Ajoutez du texte pour cette ligne",
+    "slide_heading": "Ajoutez un titre de diapositive",
+    "slide_text": "Ajoutez le texte de la diapositive",
+    "social_heading": "Ajoutez un titre pour vos images sociales",
+    "tab_heading": "Ajoutez un titre d’onglet",
+    "text": "Ajoutez votre texte ici",
+    "tile_heading": "Ajoutez un titre de vignette",
+    "video_heading": "Ajoutez un titre de vidéo"
+  }
+}

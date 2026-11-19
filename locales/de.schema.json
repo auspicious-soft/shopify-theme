@@ -1,0 +1,1984 @@
+{
+  "general": {
+    "404": "404-Seite",
+    "announcement_bar": "Ankündigungsleiste",
+    "announcement_item": "Ankündigung",
+    "article": "Blogbeitrag",
+    "block": "Block",
+    "blog": "Blogbeitragsliste",
+    "cart": "Warenkorbseite",
+    "collection": "Kategorieseite",
+    "collections": "Kategorien",
+    "collection_card": "Kategoriekarte",
+    "collections_grid": "Kategorieraster",
+    "colors": "Farben",
+    "column": "Spalte",
+    "content": "Inhalt",
+    "custom_section": "Benutzerdefinierter Inhalt",
+    "fonts": "Schriftarten",
+    "footer": "Fußzeile",
+    "group": "Gruppe",
+    "heading": "Überschrift",
+    "header": "Header",
+    "hero_banner": "Hero-Banner",
+    "layout": "Layout",
+    "main": "Haupt",
+    "page": "Seiteninhalt",
+    "password": "Passwortseite",
+    "primary": "Primär",
+    "product": "Produktseite",
+    "row": "Zeile",
+    "search": "Suchergebnisse",
+    "secondary": "Sekundär",
+    "section": "Abschnitt",
+    "settings": "Einstellungen",
+    "sidebar": "Seitenleiste",
+    "text": "Text",
+    "theme": "Theme",
+    "typography": "Typografie"
+  },
+  "labels": {
+    "alignment": "Ausrichtung",
+    "letter_spacing": "Buchstabenabstand",
+    "media": "Medien",
+    "media_type": "Medientyp",
+    "mobile_image": "Mobiles Bild",
+    "mobile_image_info": "Optional, wird auf Bildschirmen unter 750 px angezeigt",
+    "background_image_video_info": "Bei einem Video wird es während des Ladens und für Besucher mit reduzierter Bewegung angezeigt",
+    "video": "Video",
+    "video_info": "Laden Sie eine MP4-Datei hoch. Wird stumm und in Schleife ohne Steuerelemente abgespielt",
+    "mobile_video": "Mobiles Video",
+    "mobile_video_info": "Optional, wird auf Bildschirmen unter 750 px angezeigt",
+    "video_url": "YouTube- oder Vimeo-Link",
+    "video_url_info": "Wird verwendet, wenn oben kein Video hochgeladen ist",
+    "announcement_bar_mode": "Layout",
+    "announcement_text": "Ankündigungstext",
+    "appearance": "Darstellung",
+    "autoplay": "Automatisch weiterblättern",
+    "background": "Hintergrund",
+    "background_color": "Hintergrundfarbe",
+    "background_image": "Hintergrundbild",
+    "boxed": "Umrahmt",
+    "border": "Rahmen",
+    "button_background": "Button-Hintergrund",
+    "button_border_color": "Button-Rahmenfarbe",
+    "button_corner_radius": "Eckenradius des Buttons",
+    "button_settings": "Button",
+    "button_style": "Button-Stil",
+    "button_text": "Button-Beschriftung",
+    "button_text_color": "Button-Textfarbe",
+    "button_url": "Button-Link",
+    "content_position_horizontal": "Horizontale Position des Inhalts",
+    "content_position_vertical": "Vertikale Position des Inhalts",
+    "content_settings": "Inhalt",
+    "desktop_logo_width": "Logobreite auf dem Desktop",
+    "drawer_position": "Position der Schublade",
+    "drawer_settings": "Menü-Schublade",
+    "drawer_submenu_style": "Untermenü-Stil",
+    "enable": "Aktivieren",
+    "enable_button": "Button anzeigen",
+    "font_size": "Schriftgröße",
+    "font_weight": "Schriftstärke",
+    "foreground": "Vordergrund",
+    "grid_gap": "Rasterabstand",
+    "grid_item_width": "Breite der Rasterelemente",
+    "hamburger_display": "Hamburger-Button",
+    "hamburger_position": "Hamburger-Position (Desktop)",
+    "hamburger_text": "Beschriftung des Hamburger-Buttons",
+    "header_icons": "Symbole",
+    "header_options": "Header-Optionen",
+    "header_style": "Header-Stil",
+    "heading": "Überschrift",
+    "section_width": "Breite",
+    "heading_width": "Breite der Überschrift",
+    "mega_menu_width": "Breite des Mega-Menüs",
+    "heading_tag": "Überschrift-Tag",
+    "heading_tag_info": "Die Überschriftenebene für SEO und Screenreader. Verwenden Sie H1 nur für eine Überschrift pro Seite.",
+    "heading_class": "Größe der Überschrift",
+    "heading_class_info": "Wie groß die Überschrift aussieht, unabhängig vom Tag",
+    "height_type": "Höhe",
+    "hero_background_color_info": "Wird hinter dem Bild angezeigt, während es lädt, und wenn kein Bild festgelegt ist",
+    "hero_logo": "Hero-Logo",
+    "hero_logo_info": "Verwendet Theme-Einstellungen > Logo, wenn leer",
+    "hover_logo": "Logo beim Hovern",
+    "hover_logo_info": "Optional. Ersetzt das Hauptlogo beim Hovern oder Fokussieren. Gleiche Größe wie das Hauptlogo (Logobreite Desktop/Mobil unten), verwenden Sie also ein Bild mit ähnlicher Form für einen sauberen Wechsel.",
+    "horizontal_spacing": "Abstand zwischen Text und Button",
+    "icon": "Symbol",
+    "input_corner_radius": "Eckenradius der Eingabefelder",
+    "item_gap": "Abstand der Elemente",
+    "layout_direction": "Layout-Richtung",
+    "link": "Link",
+    "logo_position": "Logo-Position",
+    "logo_reveal_settings": "Stil der Logo-Einblendung",
+    "logo_reveal_settings_info": "Gilt nur, wenn der Header-Stil auf Logo-Einblendung gesetzt ist",
+    "logo_reveal_speed": "Geschwindigkeit der Logo-Überblendung",
+    "marquee_alignment_info": "Wird als Ersatzausrichtung verwendet, wenn die Animation pausiert oder reduzierte Bewegung aktiviert ist",
+    "marquee_direction": "Richtung",
+    "marquee_settings": "Laufband-Einstellungen",
+    "marquee_speed": "Animationsgeschwindigkeit",
+    "menu": "Menü",
+    "menu_type": "Desktop-Menü",
+    "mobile_font_size": "Schriftgröße auf Mobilgeräten",
+    "mobile_logo_width": "Logobreite auf Mobilgeräten",
+    "mobile_padding_bottom": "Innenabstand unten (mobil)",
+    "mobile_padding_custom": "Separater Innenabstand für Mobilgeräte",
+    "mobile_padding_custom_info": "Wenn deaktiviert, verwenden Mobilgeräte den Innenabstand oben",
+    "mobile_padding_inline": "Horizontaler Innenabstand (mobil)",
+    "mobile_padding_top": "Innenabstand oben (mobil)",
+    "mobile_settings": "Mobil",
+    "mobile_settings_info": "Gilt nur für mobile Bildschirme und wirkt sich nicht auf die Desktop-Einstellungen oben aus",
+    "nav_hover_color": "Hover-Farbe",
+    "nav_item_spacing": "Abstand der Elemente",
+    "navigation_settings": "Navigation",
+    "navigation_settings_info": "Gilt für das horizontale Desktop-Menü",
+    "open_in_new_tab": "Link in neuem Tab öffnen",
+    "overlay_color": "Overlay-Farbe",
+    "overlay_on_blog": "Blog- und Beitragsseiten",
+    "overlay_on_collection": "Kategorieseiten",
+    "overlay_on_list_collections": "Kategorielistenseite",
+    "overlay_on_home": "Startseite",
+    "overlay_on_page": "Seitenvorlage",
+    "overlay_page_templates": "Nur diese Seitenvorlagen",
+    "overlay_page_templates_info": "Optional. Vorlagennamen durch Kommas getrennt, z. B. about, contact. Verwenden Sie page für die Standard-Seitenvorlage. Leer lassen für alle Seitenvorlagen",
+    "overlay_on_product": "Produktseiten",
+    "overlay_opacity": "Overlay-Deckkraft",
+    "overlay_text_color": "Text- und Symbolfarbe auf dem Overlay",
+    "padding": "Innenabstand",
+    "padding_bottom": "Innenabstand unten",
+    "padding_top": "Innenabstand oben",
+    "page_margin": "Seitenrand",
+    "page_width": "Seitenbreite",
+    "pause_on_hover": "Beim Hovern pausieren",
+    "separator_style": "Trennzeichen-Stil",
+    "show_account": "Konto-Symbol",
+    "account_display": "Konto-Button",
+    "account_text": "Beschriftung des Konto-Buttons",
+    "localization_settings": "Länder-/Sprachauswahl",
+    "localization_settings_info": "Wird nur angezeigt, wenn im Shop unter Einstellungen > Märkte / Sprachen mehr als ein Land oder eine Sprache aktiviert ist",
+    "localization_selector": "Auswahl anzeigen",
+    "show_cart": "Warenkorb-Symbol",
+    "show_cart_count": "Anzahl der Artikel im Warenkorb",
+    "show_payment_icons": "Zahlungssymbole anzeigen",
+    "show_search": "Such-Symbol",
+    "slide_duration": "Dauer der Folie",
+    "slider_direction": "Richtung",
+    "slider_settings": "Diashow-Einstellungen",
+    "static_settings": "Statische Einstellungen",
+    "sticky_background_color": "Hintergrund des fixierten Headers",
+    "sticky_background_color_info": "Gilt nur, wenn ein transparenter Header beim Scrollen fixiert wird (siehe Transparenter Header unten). Ein bereits deckender Header behält sein normales Farbschema",
+    "sticky_header": "Fixierter Header",
+    "sticky_header_info": "Gilt auf jeder Seite für beide Header-Stile. „Beim Hochscrollen“ blendet den Header beim Herunterscrollen aus und beim Hochscrollen wieder ein.",
+    "sticky_logo": "Logo im fixierten Header",
+    "sticky_logo_info": "Wird im Header angezeigt, sobald am Hero-Logo vorbeigescrollt wurde. Verwendet Theme-Einstellungen > Logo, wenn leer",
+    "subheading": "Unterüberschrift",
+    "transparent_header": "Transparenter Header",
+    "transparent_header_info": "Wählen Sie, welche Vorlagen einen transparenten Header über dem Seiteninhalt statt eines deckenden Hintergrunds zeigen",
+    "transparent_logo": "Logo für transparenten Header",
+    "transparent_logo_info": "Optional. Ersetzt das Standardlogo, solange der Header transparent ist (nur Stil Standard); wechselt zurück zum Standardlogo, sobald der Header deckend wird. Verwendet das Standardlogo, wenn leer",
+    "text_style": "Textstil",
+    "text_color": "Textfarbe",
+    "text": "Text",
+    "transition_speed": "Übergangsgeschwindigkeit",
+    "desktop_submenu_type": "Untermenü-Typ",
+    "desktop_submenu_type_info": "Das Mega-Menü zeigt Links der 2. Ebene als Spaltenüberschriften mit den Links der 3. Ebene darunter. Fügen Sie einen Mega-Menü-Promo-Block hinzu, um rechts ein Bild und einen Titel anzuzeigen.",
+    "text_case": "Groß-/Kleinschreibung",
+    "text_case_combined": "Großschreibung",
+    "heading_case": "Überschriften",
+    "button_case": "Button-Beschriftungen",
+    "overlay_content_color": "Inhaltsfarbe des transparenten Headers",
+    "overlay_content_color_info": "Logotext, Menü und Symbole, solange der Header transparent ist",
+    "buttons": "Buttons",
+    "button_size": "Button-Größe",
+    "banner_color_scheme": "Farbschema des Banners",
+    "nav_hover_color_transparent": "Hover-Farbe (transparenter Header)",
+    "nav_hover_color_transparent_info": "Wird verwendet, solange der Header beim Hovern transparent bleibt (Stil Standard mit deaktiviertem „Deckender Hintergrund beim Hovern“). Leer lassen, um die Hover-Farbe oben zu verwenden",
+    "overlay_hover_solid": "Deckender Hintergrund beim Hovern",
+    "overlay_hover_solid_info": "Stil Standard: Der transparente Header wird beim Hovern deckend. Bei der Logo-Einblendung geschieht dies immer",
+    "caption": "Bildunterschrift",
+    "sticky_text_color": "Textfarbe des fixierten Headers"
+  },
+  "options": {
+    "section_width": {
+      "full": "Volle Breite",
+      "full_no_padding": "Volle Breite, ohne Innenabstand",
+      "full_padded": "Volle Breite mit Innenabstand",
+      "page": "Seitenbreite"
+    },
+    "alignment": {
+      "left": "Links",
+      "center": "Mitte",
+      "right": "Rechts"
+    },
+    "announcement_bar_mode": {
+      "marquee": "Horizontales Laufband",
+      "slider": "Vertikale Diashow",
+      "static": "Statisch"
+    },
+    "button_style": {
+      "primary": "Primär",
+      "secondary": "Sekundär"
+    },
+    "direction": {
+      "horizontal": "Horizontal",
+      "vertical": "Vertikal"
+    },
+    "font_weight": {
+      "regular": "Normal",
+      "medium": "Mittel",
+      "semibold": "Halbfett",
+      "bold": "Fett"
+    },
+    "letter_spacing": {
+      "none": "Keine",
+      "small": "Klein",
+      "medium": "Mittel",
+      "large": "Groß"
+    },
+    "heading_size": {
+      "default": "Standard",
+      "extra_small": "Sehr klein",
+      "small": "Klein",
+      "medium": "Mittel",
+      "large": "Groß",
+      "extra_large": "Sehr groß",
+      "huge": "Riesig"
+    },
+    "media_type": {
+      "image": "Bild",
+      "video": "Video"
+    },
+    "height_type": {
+      "adapt": "An Bild anpassen",
+      "small": "Klein",
+      "medium": "Mittel",
+      "large": "Groß",
+      "fullscreen": "Vollbild"
+    },
+    "hamburger_display": {
+      "icon": "Symbol",
+      "text": "Text"
+    },
+    "account_display": {
+      "icon": "Symbol",
+      "text": "Text"
+    },
+    "drawer_submenu_style": {
+      "accordion": "Aufklappbar (Plus/Minus)",
+      "slide": "Folie"
+    },
+    "localization_selector": {
+      "none": "Ausgeblendet",
+      "country": "Nur Land/Region",
+      "language": "Nur Sprache",
+      "both": "Land/Region und Sprache"
+    },
+    "header_style": {
+      "standard": "Standard",
+      "logo_reveal": "Logo-Einblendung"
+    },
+    "left_right": {
+      "left": "Links",
+      "right": "Rechts"
+    },
+    "menu_type": {
+      "horizontal": "Horizontales Menü",
+      "hamburger": "Hamburger-Menü"
+    },
+    "separator_style": {
+      "none": "Keine",
+      "dot": "Punkt (•)",
+      "line": "Strich (—)",
+      "slash": "Schrägstrich (/)",
+      "pipe": "Senkrechter Strich (|)"
+    },
+    "sticky_header_type": {
+      "none": "Keine",
+      "always": "Immer",
+      "on_scroll_up": "Beim Hochscrollen"
+    },
+    "vertical_position": {
+      "top": "Oben",
+      "middle": "Mitte",
+      "bottom": "Unten"
+    },
+    "up_down": {
+      "up": "Nach oben",
+      "down": "Nach unten"
+    },
+    "page_width": {
+      "narrow": "Schmal",
+      "wide": "Breit"
+    },
+    "size": {
+      "large": "Groß",
+      "small": "Klein"
+    },
+    "text_style": {
+      "title": "Titel",
+      "subtitle": "Untertitel",
+      "normal": "Normaler Text"
+    },
+    "desktop_submenu_type": {
+      "dropdown": "Dropdown",
+      "mega": "Mega-Menü"
+    },
+    "text_case": {
+      "uppercase": "GROSSBUCHSTABEN",
+      "none": "Wie eingegeben",
+      "all": "Überschriften und Buttons in GROSSBUCHSTABEN",
+      "headings": "Nur Überschriften in GROSSBUCHSTABEN",
+      "buttons": "Nur Buttons in GROSSBUCHSTABEN"
+    },
+    "button_size": {
+      "small": "Klein",
+      "medium": "Mittel",
+      "large": "Groß"
+    }
+  },
+  "sections": {
+    "cart_drawer": {
+      "name": "Warenkorb-Schublade"
+    },
+    "page_header": {
+      "name": "Seitenkopf-Banner",
+      "heading_info": "Leer lassen, um den Seitentitel zu verwenden",
+      "button_info": "Leer lassen, um den Button auszublenden",
+      "transparent_info": "Um den Header transparent über diesem Banner anzuzeigen, aktivieren Sie ihn im Header-Abschnitt (Transparenter Header) und fügen Sie diesen Abschnitt als ersten auf der Seite ein"
+    },
+    "all": {
+      "colors": {
+        "label": "Farbschema"
+      },
+      "layout": "Layout",
+      "columns_desktop": "Spalten auf dem Desktop",
+      "columns_mobile": "Spalten auf Mobilgeräten",
+      "medium": "Mittel",
+      "ratio_adapt": "An Bild anpassen",
+      "ratio_square": "Quadratisch (1:1)",
+      "ratio_portrait": "Hochformat (4:5)",
+      "ratio_tall": "Hoch (2:3)",
+      "ratio_landscape": "Querformat (4:3)"
+    },
+    "collections": {
+      "show_heading": "Überschrift anzeigen",
+      "heading_info": "Leer lassen, um „Kategorien“ zu verwenden",
+      "collection_list": "Kategorien",
+      "collection_list_info": "Leer lassen, um alle Kategorien des Shops anzuzeigen. Ausgewählte Kategorien werden ohne Seitennummerierung angezeigt",
+      "header_collections": "Kategorien",
+      "sort": "Sortieren nach",
+      "sort_info": "Sortiert die Kategorien auf jeder Seite",
+      "sort_default": "Standard (Shop-Reihenfolge oder wie ausgewählt)",
+      "sort_title_asc": "Alphabetisch, A–Z",
+      "sort_title_desc": "Alphabetisch, Z–A",
+      "sort_count_desc": "Meiste Produkte zuerst",
+      "sort_count_asc": "Wenigste Produkte zuerst",
+      "hide_empty": "Leere Kategorien ausblenden",
+      "layout_grid": "Raster",
+      "layout_mosaic": "Mosaik (erste Kategorie groß)",
+      "layout_index": "A–Z-Index",
+      "card_info": "Kartendesign (Bildformat, Text über oder unter dem Bild, Produktanzahl, Beschreibung): Theme-Einstellungen > Kategoriekarten",
+      "per_page": "Kategorien pro Seite",
+      "per_page_info": "Für volle Reihen ein Vielfaches der Spaltenanzahl verwenden",
+      "index_show_count": "Produktanzahl anzeigen",
+      "show_banner": "Banner anzeigen",
+      "show_banner_info": "Zeigt Überschrift, Brotkrümelnavigation und Unterüberschrift auf einem Bildbanner",
+      "banner_image": "Bild",
+      "banner_mobile_image": "Mobiles Bild",
+      "banner_mobile_image_info": "Optional. Wird auf Bildschirmen unter 750 px verwendet",
+      "banner_color_scheme_info": "Text- und Overlay-Farbe",
+      "card_image_source": "Kartenbild",
+      "card_image_source_info": "„Kartenbild“ verwendet das Metafeld custom.card_image jeder Kategorie und ersatzweise das Kategoriebild",
+      "card_image_banner": "Kategoriebild (Banner)",
+      "card_image_card": "Kartenbild (Metafeld)",
+      "caption_info": "Kurzer Text über der Überschrift, z. B. Nach Kategorie einkaufen",
+      "banner_content_position": "Position des Inhalts",
+      "banner_content_position_info": "Wo Überschrift, Bildunterschrift, Brotkrümelnavigation und Unterüberschrift auf dem Banner stehen",
+      "position": {
+        "top_left": "Oben links",
+        "top_center": "Oben zentriert",
+        "top_right": "Oben rechts",
+        "middle_left": "Mitte links",
+        "middle_center": "Mitte zentriert",
+        "middle_right": "Mitte rechts",
+        "bottom_left": "Unten links",
+        "bottom_center": "Unten zentriert",
+        "bottom_right": "Unten rechts"
+      }
+    },
+    "collection": {
+      "banner": "Banner",
+      "show_banner": "Banner anzeigen",
+      "banner_style": "Banner-Stil",
+      "banner_style_info": "„Auf Bild“ verwendet das Kategoriebild und ersatzweise Minimal, wenn keines vorhanden ist",
+      "banner_style_minimal": "Minimal",
+      "banner_style_image": "Auf Bild",
+      "banner_height": "Banner-Höhe",
+      "show_description": "Kategoriebeschreibung anzeigen",
+      "product_grid": "Produktraster",
+      "products_per_page": "Produkte pro Seite",
+      "products_per_page_info": "Für volle Reihen ein Vielfaches der Spaltenanzahl verwenden: z. B. 12, 15 oder 18 bei 3 Spalten, 16 oder 20 bei 4",
+      "show_count": "Produktanzahl anzeigen",
+      "pagination_type": "Seitennummerierung",
+      "pagination_numbers": "Seitenzahlen",
+      "pagination_load_more": "Button „Mehr laden“",
+      "filtering": "Filtern und Sortieren",
+      "enable_filtering": "Filter aktivieren",
+      "enable_filtering_info": "Passen Sie die Filter mit der App Search & Discovery an",
+      "filter_layout": "Filter-Layout",
+      "filter_layout_info": "Auf Mobilgeräten öffnen sich Filter immer in einer Schublade",
+      "filter_layout_sidebar": "Seitenleiste",
+      "filter_layout_drawer": "Schublade",
+      "enable_sorting": "Sortieren aktivieren",
+      "banner_placeholder": "Platzhalter für Kategorien ohne Bild anzeigen",
+      "banner_placeholder_info": "Wenn deaktiviert, zeigen diese Kategorien das minimale Banner",
+      "banner_placeholder_image": "Platzhalterbild",
+      "banner_placeholder_image_info": "Leer lassen, um eine Platzhalter-Illustration zu verwenden",
+      "banner_color_scheme_info": "Text- und Overlay-Farbe auf Bildbannern, Hintergrund auf minimalen Bannern",
+      "filter_button_size": "Größe der Filter-Buttons",
+      "filter_button_size_info": "Buttons „Alle löschen“ und „Ergebnisse anzeigen“ in der Filter-Schublade",
+      "filter_value_style": "Stil der Filterwerte",
+      "filter_value_style_info": "Farbfilter werden immer als Farbfelder angezeigt und die Verfügbarkeit als Checkbox-Liste",
+      "filter_value_pills": "Pillen",
+      "filter_value_checkbox": "Checkbox-Liste"
+    },
+    "product": {
+      "media": "Medien",
+      "gallery_layout": "Galerie-Layout",
+      "gallery_thumbnails": "Miniaturen unten",
+      "gallery_thumbnails_left": "Miniaturen links",
+      "gallery_carousel": "Karussell",
+      "gallery_grid": "Raster (2 Spalten)",
+      "gallery_stacked": "Gestapelt",
+      "media_size": "Medienbreite auf dem Desktop",
+      "media_ratio": "Medienformat",
+      "enable_zoom": "Vollbild-Bildzoom aktivieren",
+      "video_loop": "Videos in Schleife und stumm abspielen",
+      "info": "Produktinfos",
+      "sticky_info": "Produktinfos beim Scrollen sichtbar halten",
+      "blocks": {
+        "text": {
+          "name": "Text",
+          "style_body": "Fließtext",
+          "style_subtle": "Dezent",
+          "style_uppercase": "Beschriftung in Großbuchstaben"
+        },
+        "vendor": {
+          "name": "Anbieter"
+        },
+        "title": {
+          "name": "Titel",
+          "size": "Größe"
+        },
+        "rating": {
+          "name": "Bewertung",
+          "info": "Zeigt Sterne aus einer Produktbewertungs-App, die Bewertungen im Standard-Metafeld reviews.rating speichert"
+        },
+        "price": {
+          "name": "Preis",
+          "show_saving": "Badges anzeigen",
+          "show_saving_info": "Badges für Sale, ausverkauft und Bestseller. Text, Farben und Eckenradius: Theme-Einstellungen > Badges",
+          "show_tax_note": "Hinweis zu Steuern und Versand anzeigen"
+        },
+        "sku": {
+          "name": "Artikelnummer"
+        },
+        "inventory": {
+          "name": "Lagerstatus",
+          "low_threshold": "Schwellenwert für niedrigen Bestand",
+          "low_threshold_info": "Zeigt „Nur noch X“ ab dieser Menge oder darunter (bei verfolgtem Lagerbestand)"
+        },
+        "variant_picker": {
+          "name": "Variantenauswahl",
+          "picker_type": "Stil",
+          "pills": "Pillen",
+          "dropdown": "Dropdown",
+          "show_swatches": "Farbfelder anzeigen",
+          "show_swatches_info": "Für Optionen mit dem Namen Color oder Colour",
+          "underline": "Unterstrichen"
+        },
+        "quantity": {
+          "name": "Mengenauswahl",
+          "layout": "Layout",
+          "layout_info": "Gleiche Zeile: Die Menge steht neben „In den Warenkorb“ (erfordert einen Kauf-Buttons-Block)",
+          "layout_inline": "Gleiche Zeile wie „In den Warenkorb“",
+          "layout_stacked": "Eigene Zeile über den Buttons",
+          "show_label": "Beschriftung „Menge“ anzeigen"
+        },
+        "buy_buttons": {
+          "name": "Kauf-Buttons",
+          "button_style": "Stil des Buttons „In den Warenkorb“",
+          "button_style_primary": "Primär",
+          "button_style_secondary": "Sekundär",
+          "buy_now_background": "Hintergrund von „Jetzt kaufen“",
+          "buy_now_text": "Text von „Jetzt kaufen“",
+          "buy_now_info": "Gilt für den einfachen Button „Jetzt kaufen“. Markenbuttons wie Shop Pay oder PayPal behalten ihre eigenen Farben",
+          "show_dynamic_checkout": "Dynamische Checkout-Buttons anzeigen",
+          "show_dynamic_checkout_info": "Ermöglicht Kunden, direkt mit einer Zahlungsmethode wie Shop Pay oder PayPal zur Kasse zu gehen"
+        },
+        "description": {
+          "name": "Beschreibung"
+        },
+        "collapsible_tab": {
+          "name": "Aufklappbarer Tab",
+          "content": "Inhalt",
+          "page": "Inhalt aus Seite",
+          "open": "Standardmäßig geöffnet",
+          "display": "Anzeigen als",
+          "display_info": "Tab: reiht sich in die Tab-Leiste neben den Buttons ein. Akkordeon: öffnet und schließt sich dort, wo der Block steht",
+          "display_section": "Wie Abschnitt",
+          "display_tab": "Tab",
+          "display_accordion": "Akkordeon"
+        },
+        "share": {
+          "name": "Teilen"
+        },
+        "custom_liquid": {
+          "name": "Benutzerdefiniertes Liquid"
+        },
+        "divider": {
+          "name": "Trennlinie"
+        }
+      },
+      "size_guide": {
+        "name": "Größentabelle",
+        "show": "Größentabelle anzeigen",
+        "label": "Link-Beschriftung",
+        "show_icon": "Lineal-Symbol anzeigen",
+        "placement": "Link-Position",
+        "placement_info": "Produkte ohne Größenoption zeigen den Link immer dort, wo dieser Block platziert ist",
+        "placement_size_option": "Neben der Größenoption",
+        "placement_block": "Wo dieser Block platziert ist",
+        "only_with_size": "Nur für Produkte mit Größenoption",
+        "only_with_size_info": "Der Name der Größenoption wird unter Theme-Einstellungen > Produktkarten festgelegt",
+        "style": "Öffnen als",
+        "style_drawer": "Seitliche Schublade",
+        "style_popup": "Pop-up",
+        "header_content": "Inhalt der Tabelle",
+        "metafield_info": "Für eine eigene Tabelle pro Produkt fügen Sie ein Produkt-Metafeld „custom.size_guide“ (Seitenreferenz oder Rich Text) hinzu. Es ersetzt die Seite und den Text unten",
+        "heading": "Überschrift",
+        "heading_info": "Leer lassen, um den Seitentitel zu verwenden",
+        "page": "Seite",
+        "page_info": "Ideal für Größentabellen: Erstellen Sie unter Onlineshop > Seiten eine Seite mit einer Tabelle",
+        "content": "Text",
+        "content_info": "Wird verwendet, wenn keine Seite ausgewählt ist"
+      },
+      "sticky_atc": {
+        "header": "Fixierter Warenkorb-Button",
+        "enable": "Fixierte Warenkorb-Leiste anzeigen",
+        "enable_info": "Erscheint unten auf dem Bildschirm, sobald der Button „In den Warenkorb“ aus dem Sichtbereich scrollt. Erfordert den Kauf-Buttons-Block",
+        "devices": "Anzeigen auf",
+        "devices_all": "Desktop und Mobilgeräte",
+        "devices_desktop": "Nur Desktop",
+        "devices_mobile": "Nur Mobilgeräte",
+        "show_image": "Produktbild anzeigen",
+        "show_variants": "Variantenoptionen anzeigen",
+        "show_variants_info": "Kunden können die Variante in der Leiste ändern; die Seite wird entsprechend aktualisiert",
+        "picker": "Variantenstil",
+        "picker_combined": "Ein Dropdown (z. B. „M / Weiß“)",
+        "picker_dropdowns": "Ein Dropdown pro Option (Größe, Farbe)",
+        "picker_buttons": "Buttons (Farbfelder für Farbe)"
+      },
+      "gallery_overlay": "Vollbild mit Details über den Bildern",
+      "gallery_layout_info": "Vollbild: Bilder randlos in Bildschirmhöhe, Produktdetails auf einem durchscheinenden Panel. Funktioniert am besten mit Abschnittsbreite Voll",
+      "gallery_autoplay": "Bilder automatisch abspielen",
+      "gallery_autoplay_info": "Bilder wechseln in Diashow-Layouts (und auf Mobilgeräten) von selbst. Pausiert beim Hovern oder Berühren",
+      "gallery_autoplay_speed": "Bild wechseln alle",
+      "gallery_autoplay_style": "Autoplay-Stil",
+      "gallery_autoplay_style_info": "Das Laufband ist nur mit dem Vollbild-Layout verfügbar",
+      "gallery_autoplay_marquee": "Laufband (durchgehend)",
+      "gallery_autoplay_slide": "Ein Bild nach dem anderen",
+      "gallery_marquee_speed": "Laufband-Geschwindigkeit",
+      "gallery_marquee_speed_info": "Pixel pro Sekunde",
+      "content_style": "Stil des aufklappbaren Inhalts",
+      "content_style_info": "Standard für die Blöcke „Aufklappbarer Tab“; jeder Block kann selbst Tab oder Akkordeon wählen",
+      "content_style_accordion": "Akkordeon (öffnen / schließen)",
+      "content_style_tabs": "Tabs",
+      "tabs_position": "Position der Tabs",
+      "tabs_above": "Über den Buttons",
+      "tabs_below": "Unter den Buttons",
+      "tabs_description": "Beschreibung als erster Tab",
+      "tabs_description_label": "Beschriftung des Beschreibungs-Tabs",
+      "tabs_position_info": "Wird verwendet, wenn ein Block als Tab angezeigt wird"
+    },
+    "product_list": {
+      "products_to_show": "Anzuzeigende Produkte",
+      "layout": "Layout",
+      "layout_grid": "Raster",
+      "layout_slider": "Diashow"
+    },
+    "related_products": {
+      "name": "Ähnliche Produkte",
+      "info": "Empfehlungen werden automatisch von Shopify ausgewählt und verbessern sich mit der Zeit, wenn Ihr Shop Bestellungen erhält. Passen Sie sie mit der App Search & Discovery an.",
+      "intent": "Empfehlungstyp",
+      "intent_info": "„Passt gut zu“ zeigt ergänzende Produkte, die Sie in der App Search & Discovery eingerichtet haben",
+      "intent_related": "Ähnliche Produkte",
+      "intent_complementary": "Passt gut zu"
+    },
+    "recommended_products": {
+      "name": "Empfohlene Produkte",
+      "products": "Produkte",
+      "product_list": "Produkte",
+      "product_list_info": "Produkte manuell auswählen. Hat Vorrang vor der Kategorie",
+      "collection": "Kategorie",
+      "collection_info": "Wird verwendet, wenn oben keine Produkte ausgewählt sind",
+      "show_view_all": "Link „Alle ansehen“ anzeigen",
+      "show_view_all_info": "Verlinkt auf die ausgewählte Kategorie"
+    },
+    "recently_viewed": {
+      "name": "Zuletzt angesehene Produkte",
+      "card_name": "Karte für zuletzt angesehene Produkte",
+      "info": "Zeigt die Produkte, die jeder Kunde zuletzt angesehen hat, gespeichert in seinem eigenen Browser. Ausgeblendet, bis ein Produkt angesehen wurde (das aktuelle Produkt wird ausgelassen).",
+      "show_clear": "Link „Löschen“ anzeigen"
+    },
+    "social_marquee": {
+      "name": "Laufende Social-Media-Bilder",
+      "info": "Die Bilder laufen von selbst. Kunden können den Streifen ziehen; ein Ziehen stoppt die Bewegung, das nächste startet sie wieder.",
+      "speed_info": "Pixel pro Sekunde",
+      "direction_left": "Von rechts nach links",
+      "direction_right": "Von links nach rechts",
+      "items_desktop": "Angezeigte Bilder auf dem Desktop",
+      "items_mobile": "Angezeigte Bilder auf Mobilgeräten",
+      "items_info": "Wie viele Bilder gleichzeitig in den Streifen passen; die Bildbreite passt sich an",
+      "aspect_ratio": "Bildform",
+      "ratio_story": "Story (9:16)",
+      "ratio_portrait": "Hochformat (4:5)",
+      "ratio_square": "Quadratisch (1:1)",
+      "corner_radius": "Eckenradius",
+      "block_name": "Bild",
+      "image": "Bild",
+      "username": "Benutzername",
+      "username_info": "Optional, wird oben auf dem Bild angezeigt",
+      "caption_info": "Kurzer Text über der Überschrift, z. B. #ihremarke",
+      "caption_size": "Größe der Bildunterschrift"
+    },
+    "featured_collection": {
+      "name": "Vorgestellte Produkte",
+      "products": "Produkte",
+      "collection": "Kategorie",
+      "layout_carousel": "Karussell",
+      "columns_desktop": "Produkte pro Reihe auf dem Desktop",
+      "columns_mobile": "Produkte pro Reihe auf Mobilgeräten",
+      "mobile_peek": "Teil des nächsten Produkts auf Mobilgeräten anzeigen",
+      "mobile_peek_info": "Zeigt an, dass das Karussell gewischt werden kann",
+      "products_width": "Breite der Produkte",
+      "products_width_info": "Breite des Produktkarussells oder -rasters. Volle Breite lässt die Karten randlos bis an die Bildschirmseiten laufen. Die Breite oben gilt für Überschrift und „Alle ansehen“-Button",
+      "arrow_position": "Pfeilposition",
+      "arrow_top": "Oben, neben der Überschrift",
+      "arrow_sides": "Seitlich am Karussell",
+      "show_progress": "Fortschrittsbalken anzeigen",
+      "view_all": "„Alle ansehen“",
+      "show_view_all": "„Alle ansehen“ anzeigen",
+      "view_all_style": "Stil",
+      "view_all_button": "Button unter den Produkten",
+      "view_all_link": "Link neben der Überschrift",
+      "cards": "Produktkarten",
+      "cards_info": "Das Kartendesign (Bild, Badge, Farbfelder, Größen, Schnell hinzufügen) wird unter Theme-Einstellungen > Produktkarten festgelegt, sodass alle Produktkarten im Shop einheitlich sind",
+      "desktop_peek": "Teil der nächsten Karte auf dem Desktop anzeigen",
+      "desktop_peek_info": "Die Hälfte des nächsten Produkts erscheint am Ende der Reihe (Breite der Produkte: Seite). Bei voller Breite erscheint stattdessen ein Teil des nächsten Produkts am Bildschirmrand"
+    },
+    "collection_banner": {
+      "name": "Bildbanner",
+      "collection": "Kategorie",
+      "collection_info": "Optional. Füllt Bild, Überschrift und Link aus, wenn diese leer sind. Um auf eine andere Seite zu verlinken, verwenden Sie die Link-Einstellung unten",
+      "header_image": "Bild",
+      "image": "Bild",
+      "image_info": "Leer lassen, um das Kategoriebild zu verwenden",
+      "mobile_image": "Mobiles Bild",
+      "mobile_image_info": "Optional, wird auf Bildschirmen unter 750 px angezeigt",
+      "height": "Höhe auf dem Desktop",
+      "mobile_height": "Höhe auf Mobilgeräten",
+      "corner_radius": "Eckenradius",
+      "zoom_on_hover": "Bild beim Hovern zoomen",
+      "full_link_info": "Wenn deaktiviert, ist nur der Button ein Link",
+      "parallax": "Parallax-Effekt",
+      "parallax_info": "Der Text ist im Banner fixiert: Er bleibt auf dem Bildschirm, während das Bannerbild vorbeiscrollt, und verschwindet mit dem Ende des Banners. Der Text beginnt oben im Banner",
+      "heading_info": "Leer lassen, um den Kategorietitel zu verwenden",
+      "heading_size": "Größe der Überschrift",
+      "heading_uppercase": "Überschrift in Großbuchstaben",
+      "size_small": "Klein",
+      "size_medium": "Mittel",
+      "size_large": "Groß",
+      "content_width": "Maximale Inhaltsbreite",
+      "button_label_info": "Leer lassen, um den Button auszublenden",
+      "button_link_info": "Beliebige Seite, Produkt, Kategorie, Blogbeitrag oder Webadresse. Leer lassen, um auf die Kategorie zu verlinken",
+      "link_info": "Beliebige Seite, Produkt, Kategorie, Blogbeitrag oder Webadresse. Bei einer Kategorie füllen deren Bild und Titel ein leeres Bild und eine leere Überschrift aus",
+      "button_size": "Button-Größe",
+      "button_color_scheme": "Farbschema des Buttons",
+      "full_link": "Gesamtes Banner anklickbar machen",
+      "section_color_scheme": "Farbschema des Abschnitts"
+    },
+    "contact_form": {
+      "name": "Kontaktformular",
+      "header_form": "Formular",
+      "show_phone": "Telefonfeld anzeigen",
+      "extra_field": "Zusätzliches Feld",
+      "extra_order_number": "Bestellnummer",
+      "extra_subject": "Betreff",
+      "extra_none": "Keine",
+      "button_label_info": "Leer lassen für „Nachricht senden“",
+      "success_message_info": "Leer lassen für „Danke für Ihre Nachricht. Wir melden uns so schnell wie möglich bei Ihnen.“",
+      "info_position": "Kontaktdaten",
+      "info_position_info": "Wo die Kontaktdaten-Blöcke angezeigt werden. Ausgeblendet, wenn es keine Blöcke gibt",
+      "info_right": "Rechts vom Formular",
+      "info_left": "Links vom Formular",
+      "info_below": "Unter dem Formular",
+      "info_none": "Ausgeblendet",
+      "block_name": "Kontaktangabe",
+      "header_success": "Nach dem Senden",
+      "success_display": "Anzeigen",
+      "success_replace": "Die Nachricht statt des Formulars",
+      "success_above": "Die Nachricht über dem Formular",
+      "success_heading": "Bestätigungsüberschrift",
+      "success_heading_info": "Leer lassen für „Nachricht gesendet“",
+      "success_style": "Nachrichtenstil",
+      "success_highlight": "Hervorgehoben (grün)",
+      "success_plain": "Schlicht (Farbschema)",
+      "header_more": "Hinweis unter dem Formular",
+      "info_style": "Stil der Kontaktdaten",
+      "info_style_info": "Separate Karten stehen in einer Reihe unter dem Formular oder gestapelt daneben",
+      "info_style_plain": "Schlicht",
+      "info_style_panel": "Einzelnes Panel",
+      "info_style_cards": "Separate Karten",
+      "info_color_scheme": "Farbschema der Karten",
+      "info_color_scheme_info": "Karten (oder das Panel) übernehmen die Farben dieses Schemas, wenn es sich vom Hintergrund unterscheidet",
+      "info_bar": "Hintergrund hinter den Karten",
+      "info_bar_info": "Ein Hintergrundbalken hinter allen Karten",
+      "info_bar_color_scheme": "Farbschema des Hintergrunds",
+      "form_heading": "Formularüberschrift",
+      "form_heading_info": "Wird über dem Formular angezeigt und nur am Formular ausgerichtet",
+      "boxed": "Kontaktdaten und Formular umrahmen",
+      "boxed_info": "Ein getönter Rahmen hinter Kontaktdaten und Formular",
+      "header_details": "Kontaktdaten",
+      "info_heading_uppercase": "Überschriften in Großbuchstaben",
+      "info_heading_size": "Größe der Überschrift",
+      "info_text_size": "Textgröße",
+      "info_icon_position": "Symbolposition",
+      "icon_content": "Vor jeder Textzeile",
+      "icon_heading": "Vor der Überschrift",
+      "icon_side": "Neben der gesamten Angabe",
+      "block_social": "Social-Media-Symbole",
+      "social_links_info": "Lassen Sie einen Link leer, um den aus Theme-Einstellungen > Social Media zu verwenden. Entfernen Sie diesen Block, um die Social-Media-Symbole auszublenden.",
+      "contact_style": "Stil",
+      "contact_style_info": "Geteilt: Überschrift, Text und Kontaktdaten links, das Formular in einer Karte rechts. Nur für Klassisch genutzte Einstellungen sind ausgeblendet",
+      "style1": "Klassisch",
+      "style2": "Geteilt"
+    },
+    "featured_product": {
+      "name": "Vorgestelltes Produkt",
+      "product": "Produkt",
+      "media_position": "Bildposition",
+      "link_title": "Titel mit der Produktseite verlinken",
+      "truncate": "Kurzbeschreibung anzeigen",
+      "truncate_info": "Zeigt den Anfang der Beschreibung als einfachen Text",
+      "words": "Anzahl der Wörter",
+      "view_details": "Alle Details ansehen",
+      "view_details_label": "Linktext",
+      "view_details_label_info": "Leer lassen für „Alle Details ansehen“"
+    },
+    "collapsible": {
+      "name": "FAQ / aufklappbare Zeilen",
+      "layout_stacked": "Überschrift über den Zeilen",
+      "layout_side": "Überschrift neben den Zeilen",
+      "one_at_a_time": "Nur eine Zeile gleichzeitig öffnen",
+      "one_at_a_time_info": "Beim Öffnen einer Zeile wird die bisher geöffnete geschlossen",
+      "row_style": "Zeilenstil",
+      "row_lines": "Linien",
+      "row_cards": "Karten",
+      "row_heading_size": "Größe der Zeilenüberschrift",
+      "row_heading_default": "Standard",
+      "row_content_size": "Größe des Zeileninhalts",
+      "size_xlarge": "Sehr groß",
+      "expand_icon": "Aufklapp-Symbol",
+      "expand_plus": "Plus / Minus",
+      "expand_chevron": "Chevron",
+      "show_icons": "Symbole anzeigen",
+      "show_icons_info": "Blendet bei Deaktivierung alle Zeilensymbole aus. Jede Zeile behält ihre Symbolwahl für das erneute Aktivieren",
+      "icon_size": "Symbolgröße",
+      "content_width": "Maximale Breite",
+      "block_name": "Aufklappbare Zeile",
+      "row_heading_info": "Leer lassen, um den Seitentitel zu verwenden",
+      "icon_image": "Benutzerdefiniertes Symbol",
+      "icon_image_info": "Optional. Ersetzt das Symbol oben. Verwenden Sie ein kleines quadratisches Bild oder SVG",
+      "row_content": "Inhalt",
+      "row_page": "Seiteninhalt",
+      "row_page_info": "Optional. Fügt den Text einer Seite (z. B. Ihre Versandrichtlinie) unter dem Inhalt oben hinzu",
+      "row_open": "Standardmäßig geöffnet",
+      "icons": {
+        "none": "Keine",
+        "truck": "LKW (Versand)",
+        "return": "Rückgabepfeil",
+        "lock": "Schloss (sicher)",
+        "credit_card": "Kreditkarte",
+        "box": "Karton (Paket)",
+        "gift": "Geschenk",
+        "leaf": "Blatt (öko)",
+        "recycle": "Recycling",
+        "star": "Stern",
+        "heart": "Herz",
+        "check": "Häkchen",
+        "question": "Fragezeichen",
+        "chat": "Chat",
+        "phone": "Telefon",
+        "mail": "E-Mail",
+        "clock": "Uhr",
+        "calendar": "Kalender",
+        "ruler": "Lineal (Größe)",
+        "shirt": "Hemd",
+        "washing": "Waschen (Pflege)",
+        "globe": "Globus",
+        "map_pin": "Kartenpin",
+        "sparkle": "Funkeln"
+      }
+    },
+    "video": {
+      "name": "Video",
+      "video": "Hochgeladenes Video",
+      "video_info": "Laden Sie eine MP4-Datei in Shopify hoch. Hat Vorrang vor einem YouTube- oder Vimeo-Link",
+      "mode": "Anzeige",
+      "mode_info": "„Zum Abspielen klicken“ lädt das Video erst, wenn ein Kunde klickt, mit Ton und Steuerelementen. „Hintergrund“ spielt es stumm in Schleife ab, wie ein bewegtes Banner",
+      "mode_player": "Zum Abspielen klicken",
+      "mode_background": "Hintergrund (stumm, in Schleife)",
+      "cover_image": "Titelbild",
+      "cover_image_info": "Wird vor dem Abspielen angezeigt. Standardmäßig die Vorschau des Videos oder das YouTube-Vorschaubild",
+      "play_button_style": "Abspiel-Button",
+      "play_circle": "Gefüllter Kreis",
+      "play_outline": "Kreis mit Umriss",
+      "play_text": "Symbol mit Text",
+      "show_controls": "Video-Steuerelemente anzeigen",
+      "show_controls_info": "Wiedergabeleiste, Lautstärke und Vollbild. Wenn ausgeblendet, pausiert ein Klick auf das Video und setzt es fort. Vimeo blendet sie nur bei kostenpflichtigen Vimeo-Tarifen aus",
+      "loop": "Video in Schleife abspielen",
+      "background_loop_info": "Wenn deaktiviert, wird das Video einmal abgespielt und stoppt beim letzten Bild",
+      "aspect_ratio": "Seitenverhältnis",
+      "ratio_16_9": "Breitbild (16:9)",
+      "ratio_21_9": "Kino (21:9)",
+      "ratio_4_3": "Standard (4:3)",
+      "ratio_1_1": "Quadratisch (1:1)",
+      "ratio_4_5": "Hochformat (4:5)",
+      "ratio_9_16": "Vertikal (9:16)",
+      "max_width": "Maximale Videobreite",
+      "max_width_info": "Nützlich für vertikale oder quadratische Videos auf breiten Bildschirmen",
+      "content_position": "Textposition",
+      "content_position_info": "Im Modus „Zum Abspielen klicken“ steht der Text immer über dem Video",
+      "content_above": "Über dem Video",
+      "content_over": "Auf dem Video",
+      "header_over": "Text auf dem Video",
+      "over_info": "Gilt im Modus „Hintergrund“ mit Textposition „Auf dem Video“"
+    },
+    "multicolumn": {
+      "name": "Mehrspaltiger Inhalt",
+      "heading_alignment": "Ausrichtung der Überschrift",
+      "mobile_grid": "Raster",
+      "column_alignment": "Ausrichtung des Inhalts",
+      "ratio_circle": "Kreis",
+      "image_width": "Bildgröße",
+      "image_width_info": "Kleinere Größen eignen sich für Symbole und Logos",
+      "image_full": "Volle Spaltenbreite",
+      "image_half": "Hälfte der Spalte",
+      "image_third": "Ein Drittel der Spalte",
+      "show_placeholders": "Platzhalterbilder anzeigen",
+      "show_placeholders_info": "Zeigt einen Platzhalter, wenn eine Spalte kein Bild hat. Für reine Textspalten deaktiviert lassen",
+      "card": "Spalten als Karten anzeigen",
+      "card_info": "Gibt jeder Spalte einen eigenen Hintergrund und Innenabstand",
+      "block_name": "Spalte",
+      "image": "Bild oder Symbol",
+      "image_info": "Optional. Verwenden Sie ein kleines Bild oder Symbol mit einer kleineren Bildgröße",
+      "link_label": "Linktext",
+      "link_label_info": "Wird als Textlink mit Pfeil angezeigt. Leer lassen, um stattdessen die ganze Spalte anklickbar zu machen",
+      "column_media": "Spaltenkopf",
+      "column_media_image": "Bild",
+      "column_media_number": "Nummer",
+      "column_media_none": "Keine",
+      "number_format": "Nummernstil",
+      "number_padded": "01, 02, 03",
+      "number_plain": "1, 2, 3",
+      "number_size": "Nummerngröße",
+      "number": "Benutzerdefinierte Nummer",
+      "number_info": "Wird verwendet, wenn der Abschnitt Nummern zeigt. Leer lassen, um Spalten automatisch zu nummerieren",
+      "mobile_column_alignment": "Ausrichtung des Inhalts auf Mobilgeräten",
+      "alignment_same": "Wie auf dem Desktop",
+      "title_uppercase": "Überschrift in Großbuchstaben",
+      "title_size": "Größe der Spaltenüberschrift",
+      "text_size": "Größe des Spaltentexts",
+      "text_size_info": "Klein 12 px, mittel 14 px, groß 16 px",
+      "image_custom": "Benutzerdefinierte Breite",
+      "icon_width": "Bildbreite",
+      "media_position": "Bildposition",
+      "media_position_side_info": "„Links“ platziert Bild oder Nummer neben dem Text",
+      "image_background": "Bildhintergrund",
+      "image_background_picker_info": "Wird hinter jedem Bild mit etwas Abstand angezeigt, z. B. für transparente Symbole. Zum Entfernen des Hintergrunds leeren",
+      "image_background_opacity": "Deckkraft des Hintergrunds",
+      "media_position_top": "Über dem Text",
+      "media_position_left": "Links vom Text"
+    },
+    "image_with_text": {
+      "name": "Bild mit Text",
+      "layout": "Layout",
+      "layout_info": "„Überlappend“ platziert den Text in einer Karte über dem Bildrand",
+      "layout_side": "Nebeneinander",
+      "layout_overlap": "Überlappend",
+      "image_position": "Bildposition",
+      "image_width": "Bildbreite",
+      "width_small": "Klein (1/3)",
+      "width_medium": "Mittel (1/2)",
+      "width_large": "Groß (2/3)",
+      "mobile_image_position": "Auf Mobilgeräten",
+      "mobile_image_first": "Bild zuerst",
+      "mobile_image_last": "Text zuerst",
+      "gap": "Abstand zwischen Bild und Text",
+      "content_card": "Text in einer Karte anzeigen",
+      "content_card_info": "Gibt dem Text einen eigenen Hintergrund und Innenabstand. Beim Layout „Überlappend“ immer aktiv",
+      "content_color_scheme": "Farbschema der Karten"
+    },
+    "rich_text": {
+      "name": "Textinhalt",
+      "alignment": "Textausrichtung",
+      "mobile_alignment": "Textausrichtung auf Mobilgeräten",
+      "position": "Position des Inhalts",
+      "position_info": "Wo der Text auf dem Desktop über die Seitenbreite steht",
+      "block_spacing": "Abstand zwischen Blöcken",
+      "caption_style": "Stil der Bildunterschrift",
+      "caption_uppercase": "Kleine Beschriftung in Großbuchstaben",
+      "caption_subtitle": "Untertitel",
+      "text_size": "Textgröße",
+      "blocks": {
+        "caption": "Bildunterschrift",
+        "buttons": "Buttons"
+      }
+    },
+    "slideshow": {
+      "name": "Bild-Diashow",
+      "header_layout": "Layout",
+      "header_motion": "Bewegung",
+      "transition": "Übergang",
+      "transition_slide": "Folie",
+      "transition_fade": "Überblenden",
+      "transition_speed": "Übergangsgeschwindigkeit",
+      "image_zoom": "Langsamer Zoom auf Bilder",
+      "image_zoom_info": "Das Bild der aktiven Folie zoomt langsam heran, während sie angezeigt wird",
+      "autoplay": "Folien automatisch wechseln",
+      "autoplay_speed": "Folien wechseln alle",
+      "header_navigation": "Navigation",
+      "pagination_type": "Seitennummerierung",
+      "pagination_type_info": "Balken und Fortschrittslinie füllen sich während jeder Folie, wenn der automatische Wechsel aktiv ist",
+      "pagination_dots": "Punkte",
+      "pagination_numbers": "Nummern (01 02 03)",
+      "pagination_fraction": "Bruch (1 / 3)",
+      "pagination_bars": "Balken",
+      "pagination_progress": "Fortschrittslinie",
+      "pagination_none": "Keine",
+      "pagination_position": "Position der Seitennummerierung",
+      "show_arrows": "Pfeile anzeigen",
+      "arrows_sides": "Seitlich an der Folie",
+      "arrows_bottom": "Neben der Seitennummerierung",
+      "controls_color": "Farbe von Pfeilen und Seitennummerierung",
+      "controls_color_info": "Wählen Sie eine Farbe, die sich von Ihren Bildern abhebt",
+      "button_style": "Stil des ersten Buttons",
+      "button_style_2": "Stil des zweiten Buttons",
+      "accessibility_label": "Beschreibung der Diashow",
+      "accessibility_label_info": "Für Screenreader, z. B. „Neuheiten“",
+      "block_name": "Folie",
+      "button_label": "Beschriftung des ersten Buttons",
+      "button_link": "Link des ersten Buttons",
+      "button_label_2": "Beschriftung des zweiten Buttons",
+      "button_link_2": "Link des zweiten Buttons",
+      "full_link": "Gesamte Folie anklickbar machen",
+      "full_link_info": "Verwendet den Link des ersten Buttons",
+      "slide_color_scheme": "Farbschema",
+      "slide_color_scheme_info": "Text- und Button-Farben für diese Folie sowie der Hintergrund hinter dem Bild. Wählen Sie für dunkle Bilder ein Schema mit hellem Text"
+    },
+    "newsletter": {
+      "name": "Newsletter-Anmeldung",
+      "title": "Überschrift",
+      "subtitle": "Untertitel",
+      "description": "Beschreibung",
+      "form": "Anmeldeformular",
+      "form_position": "Formularposition",
+      "form_position_info": "Auf Mobilgeräten steht das Formular immer unter dem Text",
+      "form_right": "Rechts vom Text",
+      "form_below": "Unter dem Text",
+      "form_width": "Maximale Formularbreite",
+      "field_style": "Feldstil",
+      "field_boxed": "Umrahmt (Feld und Button)",
+      "field_underline": "Unterstrichen (Text-Button mit Pfeil)",
+      "placeholder": "Platzhalter für E-Mail",
+      "placeholder_info": "Leer lassen für „E-Mail-Adresse“",
+      "button_label_info": "Leer lassen, um nur einen Pfeil anzuzeigen",
+      "success_message": "Bestätigungsnachricht",
+      "success_message_info": "Leer lassen für „Danke für Ihre Anmeldung!“",
+      "note": "Hinweis unter dem Formular",
+      "note_info": "Optional, z. B. ein Datenschutzhinweis mit Link",
+      "divider": "Trennlinie",
+      "show_divider": "Trennlinie unten anzeigen",
+      "divider_width": "Breite der Trennlinie",
+      "divider_page": "Wie der Inhalt",
+      "divider_full": "Volle Bildschirmbreite",
+      "divider_thickness": "Stärke",
+      "divider_opacity": "Deckkraft"
+    },
+    "logo_marquee": {
+      "name": "Laufende Logos",
+      "header_logos": "Logos",
+      "items_desktop": "Angezeigte Logos auf dem Desktop",
+      "items_mobile": "Angezeigte Logos auf Mobilgeräten",
+      "items_info": "Wie viele Logos gleichzeitig in den Streifen passen. Jedes Logo wird bis zur Logohöhe unten an seinen Platz angepasst",
+      "logo_height": "Logohöhe auf dem Desktop",
+      "logo_height_mobile": "Logohöhe auf Mobilgeräten",
+      "logo_opacity": "Logo-Deckkraft",
+      "logo_opacity_info": "Verlinkte Logos werden beim Hovern voll sichtbar",
+      "grayscale": "Logos in Graustufen anzeigen",
+      "grayscale_info": "Verlinkte Logos zeigen beim Hovern ihre Farbe",
+      "show_dividers": "Trennlinien zwischen Logos anzeigen",
+      "fade_edges": "Linken und rechten Rand ausblenden",
+      "block_name": "Logo",
+      "logo": "Logobild",
+      "alt": "Markenname",
+      "alt_info": "Wird als Alt-Text des Bildes verwendet und als Text angezeigt, wenn kein Bild vorhanden ist"
+    },
+    "collection_banners": {
+      "name": "Bildbanner-Raster",
+      "block_name": "Bild",
+      "mobile_layout": "Mobiles Layout",
+      "mobile_stack": "Gestapelt",
+      "mobile_slider": "Wisch-Diashow",
+      "image_ratio": "Bildform",
+      "ratio_portrait": "Hochformat (4:5)",
+      "ratio_tall": "Hoch (2:3)",
+      "ratio_square": "Quadratisch (1:1)",
+      "ratio_landscape": "Querformat (4:3)",
+      "ratio_wide": "Breit (16:9)",
+      "position_split": "Geteilt (Überschrift oben, Button unten)"
+    },
+    "footer": {
+      "mobile_menu_style": "Stil des mobilen Menüs",
+      "mobile_accordion": "Akkordeon",
+      "mobile_simple": "Einfache Liste",
+      "column_gap": "Abstand zwischen Spalten",
+      "bottom_bar": "Untere Leiste",
+      "copyright_text": "Copyright-Text",
+      "copyright_text_info": "Ein © wird automatisch vorangestellt. Verwenden Sie [year] für das aktuelle Jahr, z. B. zeigt „[year] Vera Studio“ „© 2026 Vera Studio“. Leer lassen für „© Jahr Shopname“",
+      "show_powered_by": "„Powered by Shopify“ anzeigen",
+      "show_policies": "Richtlinien-Links anzeigen",
+      "show_divider": "Trennlinie anzeigen",
+      "column_width": "Spaltenbreite auf dem Desktop",
+      "column_width_info": "Anteil der Reihe, den diese Spalte einnimmt. Spalten brechen in eine neue Reihe um, sobald sie zusammen mehr als 100 % ergeben",
+      "show_social": "Social-Media-Symbole anzeigen",
+      "show_social_info": "Fügen Sie Ihre Social-Media-Profillinks unter Theme-Einstellungen > Social Media hinzu",
+      "blocks": {
+        "brand": {
+          "name": "Markeninformationen",
+          "info": "Leere Felder verwenden Theme-Einstellungen > Markeninformationen",
+          "image": "Logo",
+          "image_width": "Logobreite",
+          "show_shop_name": "Shopnamen anzeigen, wenn kein Logo vorhanden ist",
+          "headline": "Schlagzeile"
+        },
+        "menu": {
+          "name": "Menü",
+          "heading_info": "Leer lassen, um den Menünamen zu verwenden"
+        },
+        "text": {
+          "name": "Text"
+        },
+        "newsletter": {
+          "name": "Newsletter",
+          "info": "Anmeldungen werden in Ihrem Shopify-Adminbereich mit dem Tag „newsletter“ zu Kunden hinzugefügt",
+          "button_label_info": "Leer lassen, um nur einen Pfeil anzuzeigen"
+        },
+        "social": {
+          "name": "Social-Media-Symbole"
+        }
+      },
+      "footer_width": "Breite der Fußzeile",
+      "footer_width_info": "„Container“ richtet die Fußzeile am Seiteninhalt aus; volle Breite streckt sie randlos",
+      "footer_width_page": "Container (Seitenbreite)",
+      "footer_width_full": "Volle Breite",
+      "headings": "Überschriften",
+      "heading_size": "Größe der Überschrift",
+      "heading_size_info": "Wird von allen Überschriften der Fußzeile verwendet",
+      "heading_size_mobile": "Überschriftgröße auf Mobilgeräten",
+      "heading_case": "Schreibweise der Überschriften",
+      "show_follow_on_shop": "„Auf Shop folgen“ anzeigen",
+      "show_follow_on_shop_info": "Kunden können Ihrem Shop in der Shop-App folgen. Shop Pay muss aktiviert sein."
+    },
+    "blog": {
+      "header_heading": "Überschrift",
+      "show_title": "Blogtitel anzeigen",
+      "show_title_info": "Wenn ein Tag ausgewählt ist, wird er als Titel angezeigt",
+      "description": "Einleitungstext",
+      "description_info": "Wird auf der Hauptseite des Blogs unter dem Titel angezeigt",
+      "show_tag_filter": "Tag-Filter anzeigen",
+      "show_tag_filter_info": "Ermöglicht das Filtern von Beiträgen nach Tag. Fügen Sie Beiträgen im Shopify-Adminbereich Tags hinzu",
+      "layout_grid": "Raster",
+      "layout_list": "Liste",
+      "feature_first": "Ersten Beitrag hervorheben",
+      "feature_first_info": "Zeigt den neuesten Beitrag als große Karte auf Seite 1 (Raster-Layout)",
+      "articles_per_page": "Beiträge pro Seite",
+      "articles_per_page_info": "Mit hervorgehobenem Beitrag für volle Reihen ein Vielfaches der Spaltenanzahl plus 1 verwenden: z. B. 7 oder 10 bei 3 Spalten",
+      "columns_info": "Nur Raster-Layout",
+      "header_card": "Beitragskarten",
+      "card_style_info": "Kartenstil, Rahmen, Radius und Schatten: Theme-Einstellungen > Blogkarten",
+      "card": "Beiträge als Karten anzeigen",
+      "card_info": "Fügt jedem Beitrag einen Hintergrund und 16 px Innenabstand hinzu. Wenn deaktiviert, wird Theme-Einstellungen > Blogkarten verwendet",
+      "card_color_scheme": "Farbschema der Karten",
+      "card_background": "Hintergrundfarbe der Karten",
+      "card_background_info": "Optional. Leer lassen, um den Hintergrund des Farbschemas zu verwenden",
+      "featured_label_letter_spacing": "Buchstabenabstand der Beschriftung",
+      "featured_title_size": "Überschriftgröße des hervorgehobenen Beitrags",
+      "topic_letter_spacing": "Buchstabenabstand des Themas",
+      "card_title_size": "Überschriftgröße der Karten",
+      "show_image": "Bild anzeigen",
+      "image_ratio": "Bildformat",
+      "ratio_wide": "Breit (16:9)",
+      "show_date": "Datum anzeigen",
+      "show_author": "Autor anzeigen",
+      "show_excerpt": "Auszug anzeigen",
+      "excerpt_words": "Länge des Auszugs (Wörter)",
+      "excerpt_words_info": "Verwendet den Auszug des Beitrags, falls vorhanden, sonst den Anfang des Beitrags",
+      "show_card_tags": "Tags anzeigen",
+      "read_more": "Beschriftung „Weiterlesen“",
+      "read_more_info": "Leer lassen zum Ausblenden",
+      "read_more_style": "Stil von „Weiterlesen“",
+      "read_more_text": "Textlink",
+      "tag_style": "Stil des Tag-Filters",
+      "tag_style_pills": "Pillen",
+      "tag_style_tabs": "Text-Tabs (unterstrichen)",
+      "all_label": "Beschriftung „Alle“",
+      "all_label_info": "Z. B. „Alle Geschichten“. Leer lassen, um „Alle“ zu verwenden",
+      "featured_style": "Stil des hervorgehobenen Beitrags",
+      "featured_card": "Große Karte",
+      "featured_story": "Redaktionelle Story (Text neben dem Bild)",
+      "featured_image_position": "Position des Beitragsbilds",
+      "featured_label": "Hervorhebungs-Beschriftung",
+      "featured_uppercase": "Hervorgehobene Überschrift in Großbuchstaben",
+      "featured_words": "Länge des hervorgehobenen Texts (Wörter)",
+      "featured_words_info": "Der Auszug des Beitrags erscheint als kursives Zitat; dies legt fest, wie viel Beitragstext folgt. 0 blendet ihn aus",
+      "show_topic": "Thema über dem Titel anzeigen",
+      "show_topic_info": "Der erste Tag des Beitrags",
+      "featured_source": "Hervorgehobener Beitrag",
+      "featured_source_latest": "Neuester Beitrag",
+      "featured_source_tag": "Beitrag mit Tag",
+      "featured_tag": "Hervorgehobener Tag",
+      "featured_tag_info": "Der neueste Beitrag mit diesem Tag wird hervorgehoben (ersatzweise der neueste Beitrag). Der Tag wird im Filter und bei den Kartenthemen ausgeblendet",
+      "show_read_more": "„Weiterlesen“ anzeigen",
+      "card_text_color": "Textfarbe der Karten"
+    },
+    "article": {
+      "eyebrow_letter_spacing": "Buchstabenabstand der Tags",
+      "header_image": "Beitragsbild",
+      "image_layout": "Bildposition",
+      "image_above": "Über dem Titel",
+      "image_below": "Unter dem Titel",
+      "image_banner": "Banner hinter dem Titel",
+      "image_hidden": "Ausgeblendet",
+      "banner_height": "Banner-Höhe",
+      "banner_info": "Nur Bannerposition",
+      "header_title": "Titel",
+      "show_back_link": "Link „Zurück zum Blog“ anzeigen",
+      "show_tags_top": "Thema über dem Titel anzeigen",
+      "show_tags_top_info": "Der erste Tag des Beitrags",
+      "show_reading_time": "Lesezeit anzeigen",
+      "header_content": "Inhalt",
+      "content_width": "Breite der Textspalte",
+      "text_size": "Textgröße",
+      "show_tags": "Tags anzeigen",
+      "show_share": "Teilen-Buttons anzeigen",
+      "show_prev_next": "Vorherigen / nächsten Beitrag anzeigen",
+      "header_comments": "Kommentare",
+      "comments_info": "Aktivieren Sie Kommentare pro Blog im Shopify-Adminbereich > Inhalte > Blogbeiträge > Blogs verwalten",
+      "show_comments": "Kommentare anzeigen",
+      "comments_per_page": "Kommentare pro Seite",
+      "width_info": "Volle Breite verbreitert den Abschnitt; verwenden Sie „Textbreite“, um auch den Text zu verbreitern",
+      "banner_color_scheme_info": "Text- und Overlay-Farbe auf dem Banner",
+      "text_width": "Textbreite",
+      "text_width_info": "Wie breit Titel, Text und Kommentare sind",
+      "text_width_column": "Textspalte (unten festgelegt)",
+      "text_width_image": "Wie das Bild",
+      "text_width_full": "Volle Abschnittsbreite"
+    },
+    "related_articles": {
+      "name": "Ähnliche Blogbeiträge",
+      "show_view_all": "Link „Alle Beiträge ansehen“ anzeigen",
+      "articles_to_show": "Anzuzeigende Beiträge",
+      "layout_slider": "Karussell",
+      "columns_mobile_info": "Das Karussell zeigt einen Teil des nächsten Beitrags",
+      "meta_position": "Position des Datums",
+      "meta_top": "Über dem Titel",
+      "meta_bottom": "Unten auf der Karte",
+      "title_uppercase": "Titel in Großbuchstaben",
+      "hide_featured": "Hervorgehobene Story ausblenden",
+      "hide_featured_info": "An die Einstellung „Hervorgehobener Beitrag“ des Blog-Abschnitts anpassen, damit die Story hier nicht wiederholt wird",
+      "hide_featured_none": "Nicht ausblenden",
+      "hide_featured_latest": "Der neueste Beitrag",
+      "hide_featured_tag": "Beitrag mit Tag"
+    },
+    "breadcrumbs": {
+      "show": "Brotkrümelnavigation anzeigen",
+      "show_info": "Stil: Theme-Einstellungen > Brotkrümelnavigation"
+    },
+    "multirow": {
+      "name": "Bild- und Textzeilen",
+      "description": "Beschreibung",
+      "heading_alignment": "Ausrichtung der Überschrift",
+      "header_rows": "Zeilen",
+      "image_position": "Bildposition",
+      "image_position_info": "Jede Zeile kann dies in ihren eigenen Einstellungen überschreiben",
+      "position_alternate_left": "Abwechselnd, links beginnend",
+      "position_alternate_right": "Abwechselnd, rechts beginnend",
+      "position_left": "Links",
+      "position_right": "Rechts",
+      "image_width": "Bildbreite",
+      "width_small": "Klein (1/3)",
+      "width_medium": "Mittel (1/2)",
+      "width_large": "Groß (2/3)",
+      "image_ratio": "Bildform",
+      "corner_radius": "Eckenradius",
+      "row_gap": "Abstand zwischen Zeilen",
+      "content_style": "Inhaltsstil",
+      "content_plain": "Schlicht",
+      "content_card": "Karte",
+      "card_color_scheme": "Farbschema der Karten",
+      "alignment": "Textausrichtung",
+      "content_width": "Maximale Inhaltsbreite",
+      "row_heading_size": "Größe der Zeilenüberschrift",
+      "text_size": "Textgröße",
+      "button_link_style": "Textlink",
+      "mobile_image_position": "Bild auf Mobilgeräten",
+      "mobile_image_first": "Über dem Text",
+      "mobile_image_last": "Unter dem Text",
+      "mobile_alignment": "Textausrichtung auf Mobilgeräten",
+      "row": "Zeile",
+      "image": "Bild",
+      "row_image_position": "Bildposition",
+      "row_position_auto": "Abschnittseinstellung folgen",
+      "caption": "Bildunterschrift",
+      "button_label": "Button-Beschriftung",
+      "button_link": "Button-Link"
+    },
+    "page": {
+      "show_title": "Seitentitel anzeigen",
+      "show_title_info": "Wenn deaktiviert, wird der Titel trotzdem von Suchmaschinen und Screenreadern gelesen",
+      "title_alignment": "Ausrichtung des Titels"
+    },
+    "cart": {
+      "show_continue_shopping": "Link „Weiter einkaufen“ anzeigen",
+      "continue_url": "Link „Weiter einkaufen“",
+      "continue_url_info": "Leer lassen, um auf alle Produkte zu verlinken",
+      "summary": "Bestellübersicht",
+      "sticky_summary": "Auf dem Desktop fixiert",
+      "summary_color_scheme": "Farbschema der Übersicht",
+      "show_free_shipping": "Leiste für kostenlosen Versand anzeigen",
+      "show_free_shipping_info": "Verwendet den Schwellenwert für kostenlosen Versand aus Theme-Einstellungen > Warenkorb",
+      "show_terms": "Zustimmung zu den AGB verlangen",
+      "show_terms_info": "Kunden müssen vor dem Checkout ein Kästchen ankreuzen. Express-Checkout-Buttons überspringen dies",
+      "terms_page": "AGB-Seite",
+      "show_dynamic_checkout": "Express-Checkout-Buttons anzeigen",
+      "show_dynamic_checkout_info": "Z. B. Shop Pay, PayPal, Apple Pay, je nach Ihren Zahlungseinstellungen",
+      "show_payment_icons": "Zahlungssymbole anzeigen",
+      "summary_text": "Text unter dem Checkout",
+      "summary_text_info": "Z. B. Rücksendungen oder Lieferversprechen",
+      "empty_cart": "Leerer Warenkorb",
+      "empty_collection": "Produktvorschläge",
+      "empty_collection_info": "Produkte, die bei leerem Warenkorb angezeigt werden",
+      "empty_products_count": "Anzahl der Produkte"
+    },
+    "search": {
+      "results": "Ergebnisse",
+      "result_types": "Suchen in",
+      "result_types_all": "Produkte, Beiträge und Seiten",
+      "result_types_products": "Nur Produkte",
+      "show_type_tabs": "Typ-Tabs anzeigen",
+      "results_per_page": "Ergebnisse pro Seite",
+      "enable_filtering_info": "Produktfilter aus Search & Discovery",
+      "suggestions": "Produktvorschläge",
+      "suggestions_collection": "Kategorie",
+      "suggestions_collection_info": "Wird vor einer Suche und bei fehlenden Ergebnissen angezeigt",
+      "suggestions_heading": "Überschrift",
+      "suggestions_heading_info": "Leer lassen für „Beliebte Produkte“",
+      "suggestions_count": "Anzahl der Produkte"
+    },
+    "not_found": {
+      "show_code": "Großes „404“ anzeigen",
+      "heading_info": "Leer lassen für „Seite nicht gefunden“",
+      "text_info": "Leer lassen für die Standardnachricht",
+      "actions": "Suche und Buttons",
+      "show_search": "Suchfeld anzeigen",
+      "button_label": "Button-Beschriftung",
+      "button_label_info": "Leer lassen für „Zurück zum Shop“",
+      "button_url": "Button-Link",
+      "button_url_info": "Leer lassen, um auf alle Produkte zu verlinken",
+      "show_home_button": "Button „Zur Startseite“ anzeigen",
+      "menu": "Menü mit Schnelllinks",
+      "menu_info": "Optional. Wird als Links unter den Buttons angezeigt",
+      "menu_heading": "Überschrift der Schnelllinks",
+      "products": "Produktvorschläge",
+      "products_collection": "Kategorie",
+      "products_collection_info": "Optional. Produkte, die darunter angezeigt werden",
+      "products_heading": "Überschrift",
+      "products_heading_info": "Leer lassen für „Beliebte Produkte“",
+      "products_count": "Anzahl der Produkte"
+    },
+    "password": {
+      "background": "Hintergrund",
+      "image": "Bild",
+      "image_info": "Vollbild-Hintergrund. 2400 x 1600 px (empfohlen)",
+      "mobile_image": "Mobiles Bild",
+      "mobile_image_info": "Optional. Wird auf Bildschirmen unter 750 px verwendet (Hochformat eignet sich am besten)",
+      "video": "Video",
+      "video_info": "Optional. Wird statt des Bildes stumm in Schleife abgespielt (das Bild erscheint während des Ladens)",
+      "video_url": "YouTube- oder Vimeo-Video",
+      "layout": "Layout",
+      "content_position": "Position des Inhalts",
+      "content_style": "Inhaltsstil",
+      "content_style_plain": "Schlicht",
+      "content_style_card": "Milchglas-Karte",
+      "dialog_color_scheme": "Farbschema des Passwort-Pop-ups",
+      "content": "Inhalt",
+      "logo": "Logo",
+      "logo_info": "Optional, z. B. ein weißes Logo für einen dunklen Hintergrund. Leer lassen, um Theme-Einstellungen > Logo zu verwenden",
+      "logo_width": "Logobreite",
+      "heading_info": "Leer lassen für „Bald gibt es etwas Neues“",
+      "text_info": "Leer lassen, um die Nachricht aus Onlineshop > Einstellungen > Passwortschutz zu verwenden",
+      "countdown": "Countdown bis zum Start",
+      "show_countdown": "Countdown anzeigen",
+      "countdown_date": "Datum und Uhrzeit des Starts",
+      "countdown_date_info": "Format: JJJJ-MM-TT HH:MM in der Ortszeit Ihrer Besucher, z. B. 2026-12-01 09:00",
+      "countdown_done": "Text nach dem Start",
+      "countdown_done_info": "Wird angezeigt, wenn der Countdown null erreicht",
+      "newsletter": "E-Mail-Anmeldung",
+      "show_newsletter": "E-Mail-Anmeldung anzeigen",
+      "show_newsletter_info": "Anmeldungen werden mit den Tags „newsletter“ und „password page“ zu Kunden hinzugefügt",
+      "newsletter_heading": "Überschrift",
+      "newsletter_button": "Button-Beschriftung",
+      "newsletter_button_info": "Leer lassen für „Benachrichtigen“",
+      "show_social": "Social-Media-Symbole anzeigen",
+      "show_social_info": "Links aus Theme-Einstellungen > Social Media"
+    },
+    "map": {
+      "name": "Karte",
+      "header_map": "Karte",
+      "address": "Adresse",
+      "address_info": "Jede Adresse oder jeder Ort, den Google Maps finden kann, z. B. 725 5th Ave, New York",
+      "zoom": "Zoom",
+      "height": "Kartenhöhe",
+      "mobile_height": "Kartenhöhe auf Mobilgeräten",
+      "corner_radius": "Eckenradius",
+      "grayscale": "Schwarz-Weiß-Karte",
+      "header_card": "Infokarte",
+      "card_position": "Kartenposition",
+      "card_overlay_left": "Auf der Karte, links",
+      "card_overlay_right": "Auf der Karte, rechts",
+      "card_side_left": "Neben der Karte, links",
+      "card_side_right": "Neben der Karte, rechts",
+      "card_none": "Ausgeblendet",
+      "show_directions": "Button „Route berechnen“ anzeigen",
+      "button_label": "Button-Beschriftung",
+      "card_color_scheme": "Farbschema der Karten"
+    },
+    "custom_liquid": {
+      "name": "Benutzerdefiniertes Liquid",
+      "info": "Fügen Sie App-Snippets oder anderen Liquid-Code hinzu"
+    }
+  },
+  "settings_schema": {
+    "global": {
+      "settings": {
+        "header__border": {
+          "content": "Rahmen"
+        },
+        "header__shadow": {
+          "content": "Schatten"
+        },
+        "blur": {
+          "label": "Weichzeichnung"
+        },
+        "corner_radius": {
+          "label": "Eckenradius"
+        },
+        "horizontal_offset": {
+          "label": "Horizontaler Versatz"
+        },
+        "vertical_offset": {
+          "label": "Vertikaler Versatz"
+        },
+        "thickness": {
+          "label": "Stärke"
+        },
+        "opacity": {
+          "label": "Deckkraft"
+        },
+        "image_padding": {
+          "label": "Innenabstand des Bildes"
+        },
+        "text_alignment": {
+          "options__1": {
+            "label": "Links"
+          },
+          "options__2": {
+            "label": "Mitte"
+          },
+          "options__3": {
+            "label": "Rechts"
+          },
+          "label": "Textausrichtung"
+        }
+      }
+    },
+    "logo": {
+      "name": "Logo",
+      "settings": {
+        "logo_image": {
+          "label": "Logo"
+        },
+        "logo_width": {
+          "label": "Breite"
+        },
+        "favicon": {
+          "label": "Favicon",
+          "info": "32 x 32 px (empfohlen)"
+        }
+      }
+    },
+    "colors": {
+      "name": "Farben",
+      "settings": {
+        "background": {
+          "label": "Hintergrund"
+        },
+        "background_gradient": {
+          "label": "Hintergrundverlauf",
+          "info": "Der Hintergrundverlauf ersetzt den Hintergrund, wo möglich."
+        },
+        "text": {
+          "label": "Text"
+        },
+        "button_background": {
+          "label": "Hintergrund des gefüllten Buttons"
+        },
+        "button_label": {
+          "label": "Beschriftung des gefüllten Buttons"
+        },
+        "secondary_button_label": {
+          "label": "Button mit Umriss"
+        },
+        "shadow": {
+          "label": "Schatten"
+        },
+        "popup_color_scheme": {
+          "label": "Farbschema der Pop-ups",
+          "info": "Wird für alle Pop-ups (Suche, Länder-/Sprachauswahl) statt des Farbschemas des Headers verwendet, damit ihr Text auch über einem transparenten Header lesbar bleibt"
+        },
+        "menu_drawer_color_scheme": {
+          "label": "Farbschema des Menüs",
+          "info": "Wird für die Menü-Schublade und die Desktop-Dropdowns / Mega-Menüs verwendet, unabhängig vom Farbschema des Headers"
+        }
+      }
+    },
+    "typography": {
+      "name": "Typografie",
+      "settings": {
+        "type_header_font": {
+          "label": "Schriftart"
+        },
+        "heading_scale": {
+          "label": "Skalierung"
+        },
+        "heading_h1": {
+          "content": "Riesige Überschrift (H1)"
+        },
+        "heading_h2": {
+          "content": "Sehr große Überschrift (H2)"
+        },
+        "heading_h3": {
+          "content": "Große Überschrift (H3)"
+        },
+        "heading_h4": {
+          "content": "Mittlere Überschrift (H4)"
+        },
+        "heading_h5": {
+          "content": "Kleine Überschrift (H5)"
+        },
+        "heading_h6": {
+          "content": "Sehr kleine Überschrift (H6)"
+        },
+        "heading_size_desktop": {
+          "label": "Größe – Desktop"
+        },
+        "heading_line_height_desktop": {
+          "label": "Zeilenhöhe – Desktop"
+        },
+        "heading_size_mobile": {
+          "label": "Größe – mobil"
+        },
+        "heading_line_height_mobile": {
+          "label": "Zeilenhöhe – mobil"
+        },
+        "header__1": {
+          "content": "Überschriften"
+        },
+        "header__2": {
+          "content": "Fließtext"
+        },
+        "type_body_font": {
+          "label": "Schriftart"
+        },
+        "body_size_desktop": {
+          "label": "Fließtextgröße – Desktop"
+        },
+        "body_size_mobile": {
+          "label": "Fließtextgröße – mobil"
+        },
+        "body_line_height": {
+          "label": "Zeilenhöhe des Fließtexts – Desktop"
+        },
+        "body_line_height_mobile": {
+          "label": "Zeilenhöhe des Fließtexts – mobil"
+        }
+      }
+    },
+    "layout": {
+      "name": "Layout",
+      "settings": {
+        "page_width": {
+          "label": "Seitenbreite"
+        },
+        "page_margin": {
+          "label": "Seitenrand (Desktop)",
+          "info": "Abstand zwischen Bildschirmrand und Inhalt. Wird von jedem Abschnitt verwendet, ob volle Breite oder nicht, damit alles bündig ist"
+        },
+        "page_margin_mobile": {
+          "label": "Seitenrand (mobil)"
+        },
+        "spacing_sections": {
+          "label": "Abstand zwischen Vorlagenabschnitten"
+        },
+        "header__grid": {
+          "content": "Raster"
+        },
+        "paragraph__grid": {
+          "content": "Betrifft Bereiche mit mehreren Spalten oder Zeilen"
+        },
+        "spacing_grid_horizontal": {
+          "label": "Horizontaler Abstand – Desktop"
+        },
+        "spacing_grid_vertical": {
+          "label": "Vertikaler Abstand – Desktop"
+        },
+        "spacing_grid_horizontal_mobile": {
+          "label": "Horizontaler Abstand – mobil"
+        },
+        "spacing_grid_vertical_mobile": {
+          "label": "Vertikaler Abstand – mobil"
+        }
+      }
+    },
+    "animations": {
+      "name": "Animationen",
+      "settings": {
+        "animations_reveal_on_scroll": {
+          "label": "Abschnitte beim Scrollen einblenden"
+        },
+        "animations_hover_elements": {
+          "options__1": {
+            "label": "Keine"
+          },
+          "options__2": {
+            "label": "Vertikales Anheben"
+          },
+          "options__3": {
+            "label": "3D-Anheben"
+          },
+          "label": "Hover-Effekt",
+          "info": "Betrifft Karten und Buttons"
+        }
+      }
+    },
+    "buttons": {
+      "name": "Buttons",
+      "header_text": "Text",
+      "letter_spacing": "Buchstabenabstand"
+    },
+    "variant_pills": {
+      "name": "Varianten-Pillen",
+      "paragraph": "Varianten-Pillen sind eine Möglichkeit, Ihre Produktvarianten darzustellen"
+    },
+    "inputs": {
+      "name": "Eingabefelder"
+    },
+    "swatches": {
+      "name": "Farbfelder",
+      "settings": {
+        "info": "Farbfelder stammen normalerweise aus der Produktkategorie (Admin > Produkt > Farboption > Verbinden). Ohne Kategorie importierte Produkte können diese nicht nutzen, listen Sie ihre Farben daher hier auf. Shopifys eigene Farbfelder haben dort, wo sie festgelegt sind, Vorrang.",
+        "swatch_colors": {
+          "label": "Farben der Farbfelder",
+          "info": "Eine pro Zeile: Name: Wert. Der Wert ist eine Farbe (#556b2f, rgb(85 107 47), navy), eine Bild-URL oder ein unter Inhalte > Dateien hochgeladenes Bild (leopard.png). Namen entsprechen dem Optionswert, Groß-/Kleinschreibung wird ignoriert."
+        }
+      }
+    },
+    "cards": {
+      "name": "Produktkarten",
+      "settings": {
+        "style": {
+          "options__1": {
+            "label": "Standard"
+          },
+          "options__2": {
+            "label": "Karte"
+          },
+          "label": "Stil"
+        },
+        "header_image": "Bild",
+        "image_ratio": "Bildformat",
+        "image_fit": "Bildanpassung",
+        "image_fit_cover": "Füllen (zuschneiden)",
+        "image_fit_contain": "Einpassen (nicht zuschneiden)",
+        "image_background": "Bildhintergrund",
+        "image_slider": "Bild-Diashow anzeigen",
+        "image_slider_info": "Pfeile beim Hovern, um alle Produktbilder durchzublättern; Wischen auf Touchscreens",
+        "info_layout": "Titel und Preis",
+        "info_inline": "Gleiche Zeile",
+        "info_stacked": "Preis unter dem Titel",
+        "badge_style": "Sale-Badge",
+        "badge_style_info": "Farben und Position finden Sie unter Theme-Einstellungen > Badges",
+        "badge_amount": "Gesparter Betrag (53 € sparen)",
+        "badge_percent": "Gesparter Prozentsatz (20 % sparen)",
+        "badge_text": "Text (Sale)",
+        "sale_price_color": "Farbe des Sale-Preises",
+        "color_option_name": "Name der Farboption",
+        "quick_add_hover": "Beim Hovern",
+        "quick_add_always": "Immer",
+        "size_option_name": "Name der Größenoption",
+        "size_option_name_info": "Die Produktoption, die als Größen-Buttons zum direkten Hinzufügen in den Warenkorb angezeigt wird, z. B. Größe",
+        "header_content": "Inhalt",
+        "show_vendor": "Anbieter anzeigen",
+        "show_rating": "Produktbewertung anzeigen",
+        "show_rating_info": "Erfordert eine Produktbewertungs-App, die Bewertungen im Standard-Metafeld reviews.rating speichert",
+        "show_swatches": "Farbfelder anzeigen",
+        "show_swatches_info": "Die Auswahl einer Farbe zeigt ihr Bild, ihren Preis und die verfügbaren Größen. Verwendet das für jeden Optionswert festgelegte Farbfeld oder den Wertnamen als Farbe",
+        "quick_add": "Schnell hinzufügen",
+        "quick_add_info": "Ein Raster mit Größen zum direkten Hinzufügen in den Warenkorb oder ein Button „In den Warenkorb“ für Produkte ohne Größen",
+        "quick_add_none": "Ausgeblendet",
+        "header_colors": "Farben",
+        "color_scheme": "Farbschema der Karten",
+        "color_scheme_info": "Hintergrund-, Text-, Preis- und Schnell-hinzufügen-Farben für alle Produktkarten (Kategorieseiten, Suche und Produktlisten)"
+      }
+    },
+    "collection_cards": {
+      "name": "Kategoriekarten",
+      "settings": {
+        "style": {
+          "options__1": {
+            "label": "Standard"
+          },
+          "options__2": {
+            "label": "Karte"
+          },
+          "label": "Stil"
+        },
+        "header_layout": "Layout",
+        "layout": "Textposition",
+        "layout_below": "Unter dem Bild",
+        "layout_overlay": "Auf Bild",
+        "heading_size": "Überschriftgröße der Karten",
+        "overlay_color": "Overlay-Farbe",
+        "overlay_opacity": "Overlay-Deckkraft",
+        "overlay_text_color": "Textfarbe auf dem Overlay",
+        "image_ratio": "Bildformat",
+        "show_count": "Produktanzahl anzeigen",
+        "show_description": "Beschreibung anzeigen",
+        "header_colors": "Farben",
+        "color_scheme": "Farbschema der Karten",
+        "color_scheme_info": "Hintergrund- und Textfarben für alle Kategoriekarten. Bei Text auf dem Bild bleibt der Text für den Kontrast weiß"
+      }
+    },
+    "blog_cards": {
+      "name": "Blogkarten",
+      "settings": {
+        "style": {
+          "options__1": {
+            "label": "Standard"
+          },
+          "options__2": {
+            "label": "Karte"
+          },
+          "label": "Stil"
+        }
+      }
+    },
+    "content_containers": {
+      "name": "Inhaltscontainer"
+    },
+    "media": {
+      "name": "Medien"
+    },
+    "popups": {
+      "name": "Dropdowns und Pop-ups",
+      "paragraph": "Betrifft Bereiche wie Navigations-Dropdowns, Pop-up-Fenster und Warenkorb-Pop-ups"
+    },
+    "drawers": {
+      "name": "Schubladen"
+    },
+    "badges": {
+      "name": "Badges",
+      "settings": {
+        "position": {
+          "options__1": {
+            "label": "Unten links"
+          },
+          "options__2": {
+            "label": "Unten rechts"
+          },
+          "options__3": {
+            "label": "Oben links"
+          },
+          "options__4": {
+            "label": "Oben rechts"
+          },
+          "label": "Position auf Karten"
+        },
+        "sale_badge_color_scheme": {
+          "label": "Farbschema des Sale-Badges"
+        },
+        "sold_out_badge_color_scheme": {
+          "label": "Farbschema des Ausverkauft-Badges"
+        },
+        "best_seller": {
+          "header": "Bestseller-Badge",
+          "show": "Bestseller-Badge anzeigen",
+          "tag": "Produkt-Tag",
+          "tag_info": "Produkte mit diesem Tag erhalten das Badge (Groß-/Kleinschreibung egal)",
+          "text": "Badge-Text",
+          "text_info": "Leer lassen, um „Bestseller“ zu verwenden",
+          "position": "Position auf Karten",
+          "position_info": "Verwenden Sie eine andere Position als beim Sale-Badge, damit sie sich nicht überlappen",
+          "color_scheme": "Farbschema des Bestseller-Badges"
+        },
+        "trending": {
+          "header": "Trend-Badge",
+          "show": "Trend-Badge anzeigen",
+          "tag": "Produkt-Tag",
+          "tag_info": "Produkte mit diesem Tag erhalten das Badge (Groß-/Kleinschreibung egal)",
+          "text": "Badge-Text",
+          "text_info": "Leer lassen, um „Im Trend“ zu verwenden",
+          "position": "Position auf Karten",
+          "position_info": "Badges an derselben Position stehen nebeneinander",
+          "color_scheme": "Farbschema des Trend-Badges"
+        }
+      }
+    },
+    "brand_information": {
+      "name": "Markeninformationen",
+      "settings": {
+        "paragraph": {
+          "content": "Wird im Markeninformationen-Block der Fußzeile angezeigt"
+        },
+        "brand_headline": {
+          "label": "Schlagzeile"
+        },
+        "brand_description": {
+          "label": "Beschreibung"
+        },
+        "brand_image": {
+          "label": "Bild"
+        },
+        "brand_image_width": {
+          "label": "Bildbreite"
+        }
+      }
+    },
+    "social-media": {
+      "name": "Social Media",
+      "settings": {
+        "header": {
+          "content": "Social-Media-Konten"
+        },
+        "social_twitter_link": {
+          "label": "X / Twitter",
+          "info": "https://x.com/yourstore"
+        },
+        "social_facebook_link": {
+          "label": "Facebook",
+          "info": "https://facebook.com/yourstore"
+        },
+        "social_pinterest_link": {
+          "label": "Pinterest",
+          "info": "https://pinterest.com/yourstore"
+        },
+        "social_instagram_link": {
+          "label": "Instagram",
+          "info": "https://instagram.com/yourstore"
+        },
+        "social_tiktok_link": {
+          "label": "TikTok",
+          "info": "https://tiktok.com/@yourstore"
+        },
+        "social_tumblr_link": {
+          "label": "Tumblr",
+          "info": "https://yourstore.tumblr.com"
+        },
+        "social_snapchat_link": {
+          "label": "Snapchat",
+          "info": "https://www.snapchat.com/add/yourstore"
+        },
+        "social_youtube_link": {
+          "label": "YouTube",
+          "info": "https://www.youtube.com/yourstore"
+        },
+        "social_vimeo_link": {
+          "label": "Vimeo",
+          "info": "https://vimeo.com/yourstore"
+        }
+      }
+    },
+    "search_input": {
+      "name": "Suchverhalten",
+      "settings": {
+        "predictive_search_enabled": {
+          "label": "Suchvorschläge"
+        },
+        "predictive_search_show_vendor": {
+          "label": "Produktanbieter",
+          "info": "Wird angezeigt, wenn Suchvorschläge aktiviert sind"
+        },
+        "predictive_search_show_price": {
+          "label": "Produktpreis",
+          "info": "Wird angezeigt, wenn Suchvorschläge aktiviert sind"
+        },
+        "predictive_search_reset_text": {
+          "label": "Suchtext löschen",
+          "info": "Ersetzt das Lösch-Symbol (X) des Browsers im Suchfeld, sobald etwas eingegeben wurde; ein Klick leert das Feld. Leer lassen, um das X-Symbol des Browsers zu behalten."
+        }
+      }
+    },
+    "currency_format": {
+      "name": "Währungsformat",
+      "settings": {
+        "paragraph": "Preise im Warenkorb und an der Kasse zeigen immer Währungscodes",
+        "currency_code_enabled": {
+          "label": "Währungscodes"
+        }
+      }
+    },
+    "cart": {
+      "name": "Warenkorb",
+      "settings": {
+        "cart_type": {
+          "label": "Typ",
+          "drawer": {
+            "label": "Schublade"
+          },
+          "page": {
+            "label": "Seite"
+          },
+          "notification": {
+            "label": "Pop-up-Benachrichtigung"
+          }
+        },
+        "show_vendor": {
+          "label": "Anbieter"
+        },
+        "show_cart_note": {
+          "label": "Warenkorbnotiz"
+        },
+        "cart_drawer": {
+          "header": "Warenkorb-Schublade",
+          "collection": {
+            "label": "Kategorie",
+            "info": "Wird angezeigt, wenn die Warenkorb-Schublade leer ist"
+          },
+          "free_shipping_bar": {
+            "label": "Leiste für kostenlosen Versand in der Warenkorb-Schublade"
+          },
+          "free_shipping_threshold": {
+            "label": "Schwellenwert für kostenlosen Versand",
+            "info": "Bestellzwischensumme für kostenlosen Versand in der Standardwährung Ihres Shops. Wird für andere Währungen automatisch umgerechnet. Wird von der Warenkorb-Schublade und der Leiste auf der Warenkorbseite verwendet. Stellen Sie sicher, dass er zu Ihren Versandtarifen unter Einstellungen > Versand und Zustellung passt."
+          }
+        }
+      }
+    },
+    "customer_accounts": {
+      "name": "Kundenkonten",
+      "settings": {
+        "paragraph": {
+          "content": "[Sichtbarkeit verwalten](/admin/settings/customer_accounts) in den Einstellungen für Kundenkonten."
+        },
+        "customer_account_menu": {
+          "label": "Menü"
+        }
+      }
+    },
+    "breadcrumbs": {
+      "name": "Brotkrümelnavigation",
+      "info": "Die Brotkrümelnavigation erscheint unter dem Seitentitel (auf Produktseiten über den Bildern). Aktivieren oder deaktivieren Sie sie im Hauptabschnitt jeder Seite",
+      "show_mobile": "Brotkrümelnavigation auf Mobilgeräten anzeigen",
+      "separator": "Trennzeichen der Brotkrümelnavigation",
+      "separator_chevron": "Chevron (›)",
+      "home_icon": "Brotkrümelnavigation: „Startseite“ als Symbol anzeigen",
+      "product_collection": "Brotkrümelnavigation: Kategorie auf Produktseiten einbeziehen",
+      "product_collection_info": "Startseite › Kategorie › Produkt. Verwendet die Kategorie, von der der Kunde kam, oder die erste Kategorie des Produkts",
+      "collections_link": "Brotkrümelnavigation: „Kategorien“ auf Kategorieseiten einbeziehen",
+      "collections_link_info": "Startseite › Kategorien › Kategorie",
+      "show_desktop": "Brotkrümelnavigation auf dem Desktop anzeigen",
+      "alignment": "Ausrichtung der Brotkrümelnavigation",
+      "alignment_auto": "Wie der Seitentitel"
+    },
+    "gift_card": {
+      "name": "Geschenkkarte",
+      "info": "Die Seite, die Kunden über die E-Mail mit ihrer Geschenkkarte öffnen. Das Logo stammt aus Theme-Einstellungen > Logo.",
+      "page_color_scheme": "Farbschema der Seite",
+      "card_color_scheme": "Farbschema der Karten",
+      "card_image": "Kartenbild",
+      "card_image_info": "Optionaler Hintergrund für die Karte. Der Text verwendet das Farbschema der Karte"
+    }
+  },
+  "blocks": {
+    "mega_menu_promo": {
+      "name": "Mega-Menü-Promo",
+      "info": "Fügt einem Mega-Menü ein Bild und/oder einen Titel mit Link hinzu. Wird nur angezeigt, wenn Navigation > Untermenü-Typ auf Mega-Menü steht.",
+      "menu_item": "Menüpunkt",
+      "menu_item_info": "Titel des Hauptmenüpunkts, in dem dies angezeigt wird, z. B. Alle Produkte",
+      "show_image": "Bild anzeigen",
+      "image": "Bild",
+      "show_title": "Überschrift anzeigen",
+      "title": "Überschrift",
+      "link": "Link",
+      "link_info": "Macht Bild und Titel anklickbar. Leer lassen, um auf das Produkt zu verlinken",
+      "product": "Produkt",
+      "product_info": "Optional. Wenn Bild, Titel oder Link unten leer sind, werden Hauptbild, Titel und Seite des Produkts verwendet",
+      "image_info": "Leer lassen, um das Hauptbild des Produkts zu verwenden",
+      "title_info": "Leer lassen, um den Produkttitel zu verwenden"
+    }
+  },
+  "editor_placeholders": {
+    "announcement": "Ankündigung hinzufügen",
+    "answer": "Antwort hinzufügen",
+    "banner_heading": "Banner-Überschrift hinzufügen",
+    "banner_text": "Banner-Beschreibung hinzufügen",
+    "button": "Button-Beschriftung",
+    "caption": "Bildunterschrift hinzufügen",
+    "column_heading": "Spaltenüberschrift hinzufügen",
+    "column_text": "Kurze Beschreibung für diese Spalte hinzufügen",
+    "contact_details": "Kontaktdaten hinzufügen",
+    "contact_intro": "Kurze Einleitung hinzufügen",
+    "contact_title": "Titel hinzufügen, z. B. E-Mail",
+    "content": "Inhalt hier hinzufügen",
+    "description": "Kurze Beschreibung hinzufügen",
+    "grid_heading": "Überschrift für dieses Raster hinzufügen",
+    "heading": "Überschrift hinzufügen",
+    "label": "Kurze Beschriftung hinzufügen",
+    "logos_heading": "Überschrift für Ihre Markenlogos hinzufügen",
+    "newsletter_heading": "Newsletter-Überschrift hinzufügen",
+    "newsletter_text": "Kurzen Satz zu Ihrem Newsletter hinzufügen",
+    "products_heading": "Überschrift für Ihre vorgestellten Produkte hinzufügen",
+    "question": "Frage hinzufügen",
+    "row_heading": "Zeilenüberschrift hinzufügen",
+    "section_heading": "Abschnittsüberschrift hinzufügen",
+    "row_text": "Text für diese Zeile hinzufügen",
+    "slide_heading": "Folienüberschrift hinzufügen",
+    "slide_text": "Folientext hinzufügen",
+    "social_heading": "Überschrift für Ihre Social-Media-Bilder hinzufügen",
+    "tab_heading": "Tab-Überschrift hinzufügen",
+    "text": "Text hier hinzufügen",
+    "tile_heading": "Kachelüberschrift hinzufügen",
+    "video_heading": "Video-Überschrift hinzufügen"
+  }
+}
