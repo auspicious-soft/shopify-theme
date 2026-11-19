@@ -1,6 +1,6 @@
 {% doc %}
   Renders a product's badges inline (product page price block): sale or sold
-  out for the given variant, plus best seller. Text, colors and corner radius
+  out for the given variant, plus best seller and trending. Text, colors and corner radius
   come from Theme settings > Badges, the same as the product card badges.
   Styles: assets/badge.css (.badge, .badge--inline).
 
@@ -25,6 +25,18 @@
       endif
     endfor
   endif
+
+  assign is_trending = false
+  if settings.trending_badge_show and settings.trending_badge_tag != blank
+    assign trending_tag = settings.trending_badge_tag | handleize
+    for tag in product.tags
+      assign tag_handle = tag | handleize
+      if tag_handle == trending_tag
+        assign is_trending = true
+        break
+      endif
+    endfor
+  endif
 -%}
 
 {%- capture status_badge -%}
@@ -44,7 +56,7 @@
   {%- endif -%}
 {%- endcapture -%}
 
-{%- if status_badge != blank or is_best_seller -%}
+{%- if status_badge != blank or is_best_seller or is_trending -%}
   <div class="product-badges" style="--badge-radius: {{ settings.badge_corner_radius }}px;">
     {%- if status_badge != blank -%}
       <span class="badge badge--inline color-{% if variant.available %}{{ settings.sale_badge_color_scheme.id }}{% else %}{{ settings.sold_out_badge_color_scheme.id }}{% endif %}">
@@ -60,6 +72,17 @@
       -%}
       <span class="badge badge--inline color-{{ settings.best_seller_badge_color_scheme.id }}">
         {{- best_seller_text | escape -}}
+      </span>
+    {%- endif -%}
+    {%- if is_trending -%}
+      {%- liquid
+        assign trending_text = settings.trending_badge_text
+        if trending_text == blank
+          assign trending_text = 'badges.trending' | t
+        endif
+      -%}
+      <span class="badge badge--inline color-{{ settings.trending_badge_color_scheme.id }}">
+        {{- trending_text | escape -}}
       </span>
     {%- endif -%}
   </div>

@@ -1760,6 +1760,17 @@
           "position": "Position on cards",
           "position_info": "Use a different position from the sale badge so they don't overlap",
           "color_scheme": "Best seller badge color scheme"
+        },
+        "trending": {
+          "header": "Trending badge",
+          "show": "Show trending badge",
+          "tag": "Product tag",
+          "tag_info": "Products with this tag get the badge (not case sensitive)",
+          "text": "Badge text",
+          "text_info": "Leave empty to use \"Trending\"",
+          "position": "Position on cards",
+          "position_info": "Badges set to the same position sit side by side",
+          "color_scheme": "Trending badge color scheme"
         }
       }
     },

@@ -198,17 +198,35 @@
           endif
         endfor
       endif
+
+      # Trending: products tagged with Theme settings > Badges > Trending tag.
+      assign is_trending = false
+      if settings.trending_badge_show and settings.trending_badge_tag != blank
+        assign trending_tag = settings.trending_badge_tag | handleize
+        for tag in product.tags
+          assign tag_handle = tag | handleize
+          if tag_handle == trending_tag
+            assign is_trending = true
+            break
+          endif
+        endfor
+      endif
     -%}
     {%- liquid
       assign best_seller_text = settings.best_seller_badge_text
       if best_seller_text == blank
         assign best_seller_text = 'badges.best_seller' | t
       endif
-      # Each corner holds its badges in a row, so a sale or sold-out badge and
-      # the best seller badge set to the same corner sit side by side instead
-      # of on top of each other.
+      assign trending_text = settings.trending_badge_text
+      if trending_text == blank
+        assign trending_text = 'badges.trending' | t
+      endif
+      # Each corner holds its badges in a row, so badges set to the same
+      # corner (sale or sold out, best seller, trending) sit side by side
+      # instead of on top of each other.
       assign status_position = settings.badge_position | handleize
       assign best_seller_position = settings.best_seller_badge_position | handleize
+      assign trending_position = settings.trending_badge_position | handleize
     -%}
     {%- capture status_badge_markup -%}
       <span
@@ -229,17 +247,31 @@
       {%- endif -%}
     {%- endcapture -%}
 
-    <div class="product-card__badges badge--{{ status_position }}" style="--badge-radius: {{ settings.badge_corner_radius }}px;">
-      {{- status_badge_markup -}}
-      {%- if best_seller_position == status_position -%}
-        {{- best_seller_markup -}}
+    {%- capture trending_markup -%}
+      {%- if is_trending -%}
+        <span class="badge product-card__badge product-card__badge--trending color-{{ settings.trending_badge_color_scheme.id }}">
+          {{- trending_text | escape -}}
+        </span>
       {%- endif -%}
-    </div>
-    {%- if best_seller_position != status_position and is_best_seller -%}
-      <div class="product-card__badges badge--{{ best_seller_position }}" style="--badge-radius: {{ settings.badge_corner_radius }}px;">
-        {{- best_seller_markup -}}
-      </div>
-    {%- endif -%}
+    {%- endcapture -%}
+
+    {%- liquid
+      # One container per corner. The sale / sold-out badge is always output
+      # in its corner (hidden when empty) so variant changes can fill it.
+      assign badge_corners = 'top-left,top-right,bottom-left,bottom-right' | split: ','
+    -%}
+    {%- for corner in badge_corners -%}
+      {%- capture corner_badges -%}
+        {%- if corner == best_seller_position -%}{{- best_seller_markup -}}{%- endif -%}
+        {%- if corner == trending_position -%}{{- trending_markup -}}{%- endif -%}
+      {%- endcapture -%}
+      {%- if corner == status_position or corner_badges != blank -%}
+        <div class="product-card__badges badge--{{ corner }}" style="--badge-radius: {{ settings.badge_corner_radius }}px;">
+          {%- if corner == status_position -%}{{- status_badge_markup -}}{%- endif -%}
+          {{- corner_badges -}}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
 
     {%- liquid
       # Sold-out products still show their sizes (struck through, disabled).

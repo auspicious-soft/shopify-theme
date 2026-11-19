@@ -2076,6 +2076,64 @@
         "label": "t:settings_schema.badges.settings.best_seller.color_scheme",
         "default": "scheme-1",
         "visible_if": "{{ settings.best_seller_badge_show }}"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.badges.settings.trending.header"
+      },
+      {
+        "type": "checkbox",
+        "id": "trending_badge_show",
+        "label": "t:settings_schema.badges.settings.trending.show",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "trending_badge_tag",
+        "label": "t:settings_schema.badges.settings.trending.tag",
+        "info": "t:settings_schema.badges.settings.trending.tag_info",
+        "default": "trending",
+        "visible_if": "{{ settings.trending_badge_show }}"
+      },
+      {
+        "type": "text",
+        "id": "trending_badge_text",
+        "label": "t:settings_schema.badges.settings.trending.text",
+        "info": "t:settings_schema.badges.settings.trending.text_info",
+        "visible_if": "{{ settings.trending_badge_show }}"
+      },
+      {
+        "type": "select",
+        "id": "trending_badge_position",
+        "label": "t:settings_schema.badges.settings.trending.position",
+        "info": "t:settings_schema.badges.settings.trending.position_info",
+        "options": [
+          {
+            "value": "bottom left",
+            "label": "t:settings_schema.badges.settings.position.options__1.label"
+          },
+          {
+            "value": "bottom right",
+            "label": "t:settings_schema.badges.settings.position.options__2.label"
+          },
+          {
+            "value": "top left",
+            "label": "t:settings_schema.badges.settings.position.options__3.label"
+          },
+          {
+            "value": "top right",
+            "label": "t:settings_schema.badges.settings.position.options__4.label"
+          }
+        ],
+        "default": "top left",
+        "visible_if": "{{ settings.trending_badge_show }}"
+      },
+      {
+        "type": "color_scheme",
+        "id": "trending_badge_color_scheme",
+        "label": "t:settings_schema.badges.settings.trending.color_scheme",
+        "default": "scheme-1",
+        "visible_if": "{{ settings.trending_badge_show }}"
       }
     ]
   },
