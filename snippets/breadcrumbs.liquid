@@ -41,8 +41,15 @@
   case request.page_type
     when 'product'
       assign trail_collection = collection
+      # Skip Shopify's automatic "Home page" collection (handle frontpage):
+      # Home / Home page / Product would repeat the first step.
       if trail_collection == blank and product_collection
-        assign trail_collection = product.collections.first
+        for c in product.collections
+          if c.handle != 'frontpage'
+            assign trail_collection = c
+            break
+          endif
+        endfor
       endif
       if trail_collection != blank
         assign names = names | append: sep | append: trail_collection.title
