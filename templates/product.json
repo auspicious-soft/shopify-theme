@@ -79,8 +79,8 @@
           "type": "collapsible_tab",
           "settings": {
             "display": "section",
-            "heading": "Material",
-            "content": "<p>This garment is spun and woven in the Biella mill region of northern Italy, tracing back to ethical sheep ranches certified in sustainable farming. Finished using historic slow-weaving looms that respect the natural breath of raw, untreated cashmere fibers.</p>",
+            "heading": "Materials",
+            "content": "<p>Use this tab to describe what the product is made of, where it comes from, and what makes its materials special.</p>",
             "page": "",
             "open": false
           }
@@ -89,8 +89,8 @@
           "type": "collapsible_tab",
           "settings": {
             "display": "section",
-            "heading": "Instructions",
-            "content": "<p>Dry clean only. Store on a contoured wooden hanger to maintain shoulder drape. Gently brush with a soft garment comb after wear to remove loose fibers.</p>",
+            "heading": "Care instructions",
+            "content": "<p>Share how to care for the product so it lasts, such as cleaning, storage, and everyday handling tips.</p>",
             "page": "",
             "open": false
           }
@@ -99,8 +99,8 @@
           "type": "collapsible_tab",
           "settings": {
             "display": "section",
-            "heading": "Delivery + returns",
-            "content": "<p>Enjoy next day carbon-neutral delivery across NL, BE, & DE if ordered before 6 PM. Standard international delivery takes 3-5 working days. Returns are accepted within 14 days of delivery.</p>",
+            "heading": "Shipping and returns",
+            "content": "<p>Add your shipping times, delivery options, and return policy so customers know what to expect.</p>",
             "page": "",
             "open": false
           }
@@ -166,7 +166,7 @@
         "caption_BH3wWb": {
           "type": "caption",
           "settings": {
-            "caption": "Editorial Product",
+            "caption": "Product story",
             "style": "uppercase",
             "size": "small",
             "letter_spacing": "large"
@@ -175,7 +175,7 @@
         "heading_bhKJVD": {
           "type": "heading",
           "settings": {
-            "heading": "The Art of Timeless Dressing and Everyday Elegance",
+            "heading": "Tell the story behind your product",
             "heading_tag": "h2",
             "heading_class": "h2",
             "uppercase": false
@@ -184,7 +184,7 @@
         "text_jU8iPf": {
           "type": "text",
           "settings": {
-            "text": "<p>Designed to complement the rhythm of everyday life, it layers naturally over fine knitwear for relaxed afternoons or pairs beautifully with tailored separates for more considered occasions. Its versatile character makes it an easy addition to a thoughtfully curated wardrobe, season after season.&nbsp;</p><p>Because true style isn't about having more. It's about choosing pieces that feel right, every time.</p>",
+            "text": "<p>Use this space to share what inspired the product, how it is made, and why your customers will love it. A short story helps shoppers connect with your brand.</p>",
             "size": "small"
           }
         }
@@ -261,7 +261,7 @@
         "caption_ihc4jE": {
           "type": "caption",
           "settings": {
-            "caption": "THE ART OF LAYERING",
+            "caption": "Why you will love it",
             "style": "uppercase",
             "size": "small",
             "letter_spacing": "large"
@@ -270,7 +270,7 @@
         "heading_GEgAce": {
           "type": "heading",
           "settings": {
-            "heading": "A Softer Side of Everyday Luxury",
+            "heading": "Made for everyday life",
             "heading_tag": "h2",
             "heading_class": "h2",
             "uppercase": false
@@ -279,7 +279,7 @@
         "text_JkNEVj": {
           "type": "text",
           "settings": {
-            "text": "<p>Some pieces become wardrobe essentials without asking for attention. The Oversized Cashmere Coat brings together a relaxed silhouette, understated elegance, and timeless appeal, creating a piece that feels as effortless as it looks. Thoughtfully designed for cooler days, it offers a refined balance of comfort, versatility, and everyday sophistication.</p><p>Layer it over fine knitwear for a relaxed daytime look, or pair it with tailored trousers and leather boots for a more polished expression. Its versatile design makes it easy to transition between occasions, while its understated character allows it to complement your wardrobe season after season.</p>",
+            "text": "<p>Pair an image with text to highlight a key feature of your product, such as its design, quality, or the way it fits into everyday routines.</p><p>Add details that help customers picture themselves using it and feel confident about their purchase.</p>",
             "size": "medium"
           }
         }
@@ -326,9 +326,9 @@
           "type": "column",
           "settings": {
             "number": "",
-            "title": "<strong>A Refined Silhouette</strong>",
+            "title": "<strong>Quality materials</strong>",
             "title_uppercase": false,
-            "text": "<p>An oversized shape that brings relaxed proportions and effortless sophistication to everyday dressing.</p>",
+            "text": "<p>Describe the materials and craftsmanship that set your product apart.</p>",
             "link_label": "",
             "link": ""
           }
@@ -337,9 +337,9 @@
           "type": "column",
           "settings": {
             "number": "",
-            "title": "<strong>&nbsp;Effortless Layering</strong>",
+            "title": "<strong>Easy to use</strong>",
             "title_uppercase": false,
-            "text": "<p>Designed to complement fine knits, tailored trousers, and understated accessories.</p>",
+            "text": "<p>Explain how the product fits naturally into your customers’ daily lives.</p>",
             "link_label": "",
             "link": ""
           }
@@ -348,9 +348,9 @@
           "type": "column",
           "settings": {
             "number": "",
-            "title": "<strong>Timeless Appeal</strong>",
+            "title": "<strong>Made to last</strong>",
             "title_uppercase": false,
-            "text": "<p>A versatile outerwear essential that works beautifully across occasions and changing seasons.</p>",
+            "text": "<p>Share why your product is built to be enjoyed for years to come.</p>",
             "link_label": "",
             "link": ""
           }
@@ -363,11 +363,11 @@
       ],
       "name": "t:sections.multicolumn.name",
       "settings": {
-        "subheading": "Product Highlights",
+        "subheading": "Product highlights",
         "subheading_style": "uppercase",
         "subheading_size": "small",
         "subheading_letter_spacing": "large",
-        "heading": "Considered in Every Detail",
+        "heading": "Thoughtful in every detail",
         "heading_tag": "h2",
         "heading_class": "h3",
         "description": "",
@@ -418,18 +418,18 @@
         "parallax": false,
         "overlay_color": "#000000",
         "overlay_opacity": 20,
-        "subheading": "CRAFTED FOR Everyday Elegance",
+        "subheading": "Discover more",
         "subheading_letter_spacing": "large",
-        "heading": "THE ART OF EVERYDAY DRESSING",
+        "heading": "Explore the collection",
         "heading_tag": "h2",
         "heading_class": "h2",
         "heading_uppercase": true,
-        "text": "<p>Discover refined essentials for every occasion, from tailored coats and effortless knitwear to elegant trousers, silk blouses, and timeless leather accessories. Designed to bring comfort, quality, and understated elegance to your everyday wardrobe.</p>",
+        "text": "<p>Feature a collection that pairs well with this product and invite customers to keep browsing.</p>",
         "text_color": "#ffffff",
         "content_position_horizontal": "left",
         "content_position_vertical": "middle",
         "content_width": 520,
-        "button_label": "Explore",
+        "button_label": "Shop now",
         "button_style": "secondary",
         "button_size": "small",
         "button_color_scheme": "scheme-56590322-c170-4511-a8c5-0f7377624337",
@@ -448,7 +448,7 @@
       "type": "related-products",
       "settings": {
         "intent": "related",
-        "heading": "Complete The Look",
+        "heading": "You may also like",
         "heading_tag": "h2",
         "heading_class": "h3",
         "subheading": "",

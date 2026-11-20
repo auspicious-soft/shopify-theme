@@ -33,7 +33,7 @@
       "settings": {
         "show_breadcrumbs": false,
         "show_heading": true,
-        "caption": "THE ART OF STYLE",
+        "caption": "Our story",
         "caption_letter_spacing": "large",
         "heading": "About Us",
         "heading_tag": "h1",
@@ -68,7 +68,7 @@
         "caption_yhcEXj": {
           "type": "caption",
           "settings": {
-            "caption": "OUR PHILOSOPHY",
+            "caption": "Our philosophy",
             "style": "uppercase",
             "size": "medium",
             "letter_spacing": "large"
@@ -77,7 +77,7 @@
         "heading_PThJEq": {
           "type": "heading",
           "settings": {
-            "heading": "We believe the best style isn't about having more, but choosing better. Pieces made to be lived in, loved, and worn for years to come.&nbsp;",
+            "heading": "Share the beliefs that guide your brand and what makes it different.",
             "heading_tag": "h1",
             "heading_class": "h3",
             "uppercase": true
@@ -122,7 +122,7 @@
         "heading_e9Mfin": {
           "type": "heading",
           "settings": {
-            "heading": "Thoughtfully made. Effortlessly worn.",
+            "heading": "How it all began",
             "heading_tag": "h2",
             "heading_class": "h2",
             "uppercase": true
@@ -131,7 +131,7 @@
         "text_G96ND8": {
           "type": "text",
           "settings": {
-            "text": "<p>Our studio was born from a love for thoughtful design, timeless silhouettes, and the little details that make everyday dressing feel special. We believe a wardrobe should feel personal, effortless, and entirely your own. Our approach to fashion is rooted in simplicity. We bring together considered fabrics, refined shapes, and versatile essentials that move naturally with you. Each piece is designed to feel comfortable, look beautiful, and find its place in your everyday life.</p><p><em><strong>“Less, but considered. Simple, but never ordinary. Made for the moments that make up a life.”</strong></em></p><p>We believe the most meaningful wardrobes aren't built overnight. They're collected over time, shaped by personal style, familiar favourites, and pieces that feel just as relevant season after season. For us, getting dressed is about choosing well, wearing often, and finding confidence in the understated.&nbsp;</p><p>Here, we celebrate quality over quantity, intention over impulse, and timeless design over passing trends. Because the pieces we return to most often are usually the ones that feel the most like us.</p>",
+            "text": "<p>Tell customers how your brand started, what inspired it, and the people behind it. A personal story builds trust and helps shoppers connect with what you do.</p><p><em><strong>“Add a quote that captures what your brand stands for.”</strong></em></p><p>Describe what you make, how you make it, and the care that goes into every product. Highlight the details that set you apart, from materials and craftsmanship to the way you work with customers.</p>",
             "size": "medium"
           }
         }
@@ -186,7 +186,7 @@
         "heading_VrtqxL": {
           "type": "heading",
           "settings": {
-            "heading": "THE VISION BEHIND OUR STUDIO",
+            "heading": "The vision behind our brand",
             "heading_tag": "h2",
             "heading_class": "h3",
             "uppercase": true
@@ -195,7 +195,7 @@
         "text_47kki8": {
           "type": "text",
           "settings": {
-            "text": "<p><em><strong>“Creating a wardrobe that feels timeless, personal, and effortlessly yours.”</strong></em></p><p>Our studio began with a simple belief: what we wear should feel as good as it looks. Inspired by understated elegance and the beauty of everyday essentials, our vision is to bring together thoughtful design, considered details, and pieces you'll reach for season after season.<br/><br/>For us, style isn't about following every trend. It's about discovering what feels right, choosing with intention, and finding confidence in the simplicity of less.</p>",
+            "text": "<p><em><strong>“Share a short message from the founder.”</strong></em></p><p>Explain the vision that drives your brand and where you are headed next. Let customers know what they can expect from you and why you do what you do.</p>",
             "size": "medium"
           }
         }
@@ -293,10 +293,10 @@
       ],
       "name": "t:sections.social_marquee.name",
       "settings": {
-        "caption": "THE ART OF EVERYDAY DRESSING",
+        "caption": "Follow along",
         "caption_size": "small",
         "caption_letter_spacing": "large",
-        "heading": "A wardrobe that feels like you.",
+        "heading": "Share your community",
         "heading_tag": "h2",
         "heading_class": "h2",
         "heading_alignment": "center",

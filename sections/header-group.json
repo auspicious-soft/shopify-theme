@@ -66,7 +66,7 @@
         "slider_direction": "up",
         "slider_pause_on_hover": true,
         "slider_text_alignment": "center",
-        "static_text": "Free shipping on orders above $1000",
+        "static_text": "Welcome to our store",
         "static_enable_button": false,
         "static_button_text": "Shop now",
         "static_button_url": "shopify://collections",
